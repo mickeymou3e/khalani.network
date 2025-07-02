@@ -1,0 +1,33 @@
+{
+    "kind": "update",
+    "startTime": 1693232921,
+    "message": "feat: fix deployment",
+    "environment": {
+        "exec.kind": "cli",
+        "git.author": "Samuel Dare",
+        "git.author.email": "sam@tunnelvisionlabs.xyz",
+        "git.committer": "Samuel Dare",
+        "git.committer.email": "sam@tunnelvisionlabs.xyz",
+        "git.dirty": "true",
+        "git.head": "27018dfdf91e84b3982367aa437b7698e348d362",
+        "git.headName": "refs/heads/lambda",
+        "pulumi.arch": "amd64",
+        "pulumi.env.PULUMI_CONFIG_PASSPHRASE": "set",
+        "pulumi.os": "linux",
+        "pulumi.version": "v3.78.1",
+        "updatePlan": "false",
+        "vcs.kind": "github.com",
+        "vcs.owner": "samtvlabs",
+        "vcs.repo": "zeth",
+        "vcs.root": "infrastructure"
+    },
+    "config": {},
+    "version": 0,
+    "result": "failed",
+    "endTime": 1693233267,
+    "resourceChanges": {
+        "create": 1,
+        "replace": 1,
+        "same": 49
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "kind": "update",
+    "startTime": 1693180570,
+    "message": "chore: refactor",
+    "environment": {
+        "exec.kind": "cli",
+        "git.author": "Samuel Dare",
+        "git.author.email": "sam@tunnelvisionlabs.xyz",
+        "git.committer": "Samuel Dare",
+        "git.committer.email": "sam@tunnelvisionlabs.xyz",
+        "git.dirty": "true",
+        "git.head": "1f4947ac1bfec1c3776ebe8da6ce5b7ece71697f",
+        "git.headName": "refs/heads/lambda",
+        "pulumi.arch": "amd64",
+        "pulumi.env.PULUMI_CONFIG_PASSPHRASE": "set",
+        "pulumi.os": "linux",
+        "pulumi.version": "v3.78.1",
+        "updatePlan": "false",
+        "vcs.kind": "github.com",
+        "vcs.owner": "samtvlabs",
+        "vcs.repo": "zeth",
+        "vcs.root": "infrastructure"
+    },
+    "config": {},
+    "version": 0,
+    "result": "failed",
+    "endTime": 1693182049,
+    "resourceChanges": {
+        "create": 48,
+        "same": 8
+    }
+}

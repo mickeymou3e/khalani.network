@@ -1,0 +1,14 @@
+{
+  "value": {
+    "validator": "0x4bd9babc9efdbfbf3527082431e17ed63818132a",
+    "mailbox_address": "0x000000000000000000000000d8e78417e8c8d672258bbcb8ec078e15eb419730",
+    "mailbox_domain": 10012,
+    "storage_location": "s3://khala-validator-signatures-1/us-east-1"
+  },
+  "signature": {
+    "r": "0xdadf1d4303d3977596c8b52c2a0a7145c11952d71015060c4ee190c1fba6f8e3",
+    "s": "0x242d185a893b5db6e39f464e4431f2b599f9d51875be3d40b78e503a989c9ac8",
+    "v": 28
+  },
+  "serialized_signature": "0xdadf1d4303d3977596c8b52c2a0a7145c11952d71015060c4ee190c1fba6f8e3242d185a893b5db6e39f464e4431f2b599f9d51875be3d40b78e503a989c9ac81c"
+}

@@ -1,0 +1,32 @@
+{
+    "kind": "update",
+    "startTime": 1693377433,
+    "message": "chore: add mermaid diagram",
+    "environment": {
+        "exec.kind": "cli",
+        "git.author": "samtvlabs",
+        "git.author.email": "fatheroffire@proton.me",
+        "git.committer": "samtvlabs",
+        "git.committer.email": "fatheroffire@proton.me",
+        "git.dirty": "true",
+        "git.head": "e5a9862b8917e6f6317d993b258c14abfee21bfc",
+        "git.headName": "refs/heads/lambda",
+        "pulumi.arch": "amd64",
+        "pulumi.env.PULUMI_CONFIG_PASSPHRASE": "set",
+        "pulumi.os": "linux",
+        "pulumi.version": "v3.78.1",
+        "updatePlan": "false",
+        "vcs.kind": "github.com",
+        "vcs.owner": "samtvlabs",
+        "vcs.repo": "zeth",
+        "vcs.root": "infrastructure"
+    },
+    "config": {},
+    "version": 0,
+    "result": "failed",
+    "endTime": 1693377443,
+    "resourceChanges": {
+        "create": 2,
+        "same": 53
+    }
+}

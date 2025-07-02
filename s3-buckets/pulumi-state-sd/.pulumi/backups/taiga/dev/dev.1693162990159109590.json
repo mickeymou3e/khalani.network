@@ -1,0 +1,19 @@
+{
+    "version": 3,
+    "checkpoint": {
+        "stack": "organization/taiga/dev",
+        "latest": {
+            "manifest": {
+                "time": "2023-08-27T19:03:09.81705145Z",
+                "magic": "7f5ec831fbfcaaafb30fe1f9dd0eebc4a62372e9fda10d9bab6256b2deca869d",
+                "version": "v3.78.1"
+            },
+            "secrets_providers": {
+                "type": "passphrase",
+                "state": {
+                    "salt": "v1:pJ2FI1Niy78=:v1:dRTpfsjQpyNuc7BI:J3WmqVsSI361MwEunLYm118HlkEykw=="
+                }
+            }
+        }
+    }
+}

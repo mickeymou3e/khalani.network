@@ -1,0 +1,567 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Container service on ECS cluster
+Parameters:
+  Environment:
+    Type: String
+  ApplicationName:
+    Type: String
+  ServiceName:
+    Type: String
+  LogGroupName:
+    Type: String
+  VpcId:
+    Type: String
+  Subnets:
+    Type: String
+  GraphNodeName:
+    Type: String
+  IPFSName:
+    Type: String
+  GraphNodeAdminPort:
+    Type: Number
+    Default: 8020
+  GraphNodeHttpGraphQLPort:
+    Type: Number
+    Default: 8000
+  GraphNodeWsGraphQLPort:
+    Type: Number
+    Default: 8001
+  GraphNodeIndexerPort:
+    Type: Number
+    Default: 8030
+  IPFSPort:
+    Type: Number
+    Default: 5001
+  GraphNodeAdminRoute:
+    Description: Graph Node Admin Route
+    Type: String
+  GraphNodeIndexerRoute:
+    Description: Graph Node Indexer Route
+    Type: String
+  GraphNodeHttpClientRoute:
+    Description: Graph Node HTTP Client Route
+    Type: String
+  GraphNodeWsClientRoute:
+    Description: Graph Node HTTP Client Route
+    Type: String
+  IPFSRoute:
+    Description: IPFS Route
+    Type: String
+  GraphNodeGraphQLHealthCheckPath:
+    Type: String
+    Default: /subgraphs/name/example/graphql
+  IPFSHealthCheckPath:
+    Type: String
+    Default: /webui/
+  LoadBalancerSecurityGroup:
+    Type: String
+  LoadBalancerListenerArn:
+    Type: String
+  IPFSImageTag:
+    Type: String
+    Description: IPFS docker image tag
+  GraphNodeImageTag:
+    Type: String
+    Description: Graph node docker image tag
+  JsonRpc:
+    Description: Address of Ethereum JSON Rpc
+    Type: String
+  DBHost:
+    Type: String
+  DBName:
+    Type: String
+  DBSecret:
+    Type: String
+Resources:
+  ECSCluster:
+    Type: AWS::ECS::Cluster
+    Properties:
+      ClusterName:
+        Fn::Join:
+        - ''
+        - - Ref: ApplicationName
+          - ECSCluster
+    Metadata:
+      SamResourceId: ECSCluster
+  ContainerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId:
+        Ref: VpcId
+      GroupDescription: ECS Containers Security Group
+      SecurityGroupIngress:
+      - SourceSecurityGroupId:
+          Ref: LoadBalancerSecurityGroup
+        IpProtocol: -1
+    Metadata:
+      SamResourceId: ContainerSecurityGroup
+  ECSTaskExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service: ecs-tasks.amazonaws.com
+          Action: sts:AssumeRole
+      Path: /
+      ManagedPolicyArns:
+      - arn:aws:iam::aws:policy/CloudWatchFullAccess
+      Policies:
+      - PolicyName: AmazonECSTaskExecutionRolePolicy
+        PolicyDocument:
+          Statement:
+          - Effect: Allow
+            Action:
+            - ecr:GetAuthorizationToken
+            - ecr:BatchCheckLayerAvailability
+            - ecr:GetDownloadUrlForLayer
+            - ecr:BatchGetImage
+            - ecs:DescribeTasks
+            - logs:CreateLogStream
+            - logs:PutLogEvents
+            Resource: '*'
+          - Effect: Allow
+            Action:
+            - secretsmanager:GetSecretValue
+            Resource:
+            - Fn::Sub: arn:aws:secretsmanager:*:*:secret:/${ApplicationName}/${Environment}/*
+    Metadata:
+      SamResourceId: ECSTaskExecutionRole
+  IPFSFileSystem:
+    Type: AWS::EFS::FileSystem
+    Properties:
+      FileSystemTags:
+      - Key: Name
+        Value:
+          Ref: ECSCluster
+    Metadata:
+      SamResourceId: IPFSFileSystem
+  IPFSFileSystemSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId:
+        Ref: VpcId
+      GroupDescription: EFS Security Group
+      SecurityGroupIngress:
+      - SourceSecurityGroupId:
+          Ref: ContainerSecurityGroup
+        IpProtocol: -1
+    Metadata:
+      SamResourceId: IPFSFileSystemSecurityGroup
+  MountTargetSubnet0:
+    Type: AWS::EFS::MountTarget
+    DependsOn:
+    - IPFSFileSystem
+    - IPFSFileSystemSecurityGroup
+    Properties:
+      FileSystemId:
+        Ref: IPFSFileSystem
+      SecurityGroups:
+      - Ref: IPFSFileSystemSecurityGroup
+      SubnetId:
+        Fn::Select:
+        - 0
+        - Fn::Split:
+          - ','
+          - Ref: Subnets
+    Metadata:
+      SamResourceId: MountTargetSubnet0
+  MountTargetSubnet1:
+    Type: AWS::EFS::MountTarget
+    DependsOn:
+    - IPFSFileSystem
+    - IPFSFileSystemSecurityGroup
+    Properties:
+      FileSystemId:
+        Ref: IPFSFileSystem
+      SecurityGroups:
+      - Ref: IPFSFileSystemSecurityGroup
+      SubnetId:
+        Fn::Select:
+        - 1
+        - Fn::Split:
+          - ','
+          - Ref: Subnets
+    Metadata:
+      SamResourceId: MountTargetSubnet1
+  TaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    DependsOn:
+    - IPFSFileSystem
+    Properties:
+      NetworkMode: awsvpc
+      Cpu: 1024
+      Memory: 3072
+      RequiresCompatibilities:
+      - FARGATE
+      ExecutionRoleArn:
+        Fn::GetAtt:
+        - ECSTaskExecutionRole
+        - Arn
+      ContainerDefinitions:
+      - Image:
+          Ref: IPFSImageTag
+        Name:
+          Ref: IPFSName
+        Essential: true
+        Memory: 1024
+        MemoryReservation: 1024
+        PortMappings:
+        - ContainerPort:
+            Ref: IPFSPort
+          Protocol: tcp
+        MountPoints:
+        - SourceVolume:
+            Fn::Sub: ${IPFSName}-efs
+          ContainerPath: /data/ipfs
+          ReadOnly: false
+        LogConfiguration:
+          LogDriver: awslogs
+          Options:
+            awslogs-group:
+              Ref: LogGroupName
+            awslogs-region:
+              Ref: AWS::Region
+            awslogs-stream-prefix:
+              Ref: IPFSName
+      - Image:
+          Ref: GraphNodeImageTag
+        Name:
+          Ref: GraphNodeName
+        Essential: true
+        Memory: 2048
+        MemoryReservation: 2048
+        DependsOn:
+        - Condition: START
+          ContainerName:
+            Ref: IPFSName
+        Environment:
+        - Name: postgres_host
+          Value:
+            Ref: DBHost
+        - Name: postgres_user
+          Value:
+            Fn::Join:
+            - ''
+            - - '{{resolve:secretsmanager:'
+              - Ref: DBSecret
+              - :SecretString:username}}
+        - Name: postgres_pass
+          Value:
+            Fn::Join:
+            - ''
+            - - '{{resolve:secretsmanager:'
+              - Ref: DBSecret
+              - :SecretString:password}}
+        - Name: postgres_db
+          Value:
+            Ref: DBName
+        - Name: ipfs
+          Value:
+            Fn::Sub: 127.0.0.1:${IPFSPort}
+        - Name: ethereum
+          Value:
+            Fn::Sub: mainnet:no_eip1898,archive,traces:${JsonRpc}
+        - Name: GRAPH_LOG
+          Value: info
+        PortMappings:
+        - ContainerPort:
+            Ref: GraphNodeHttpGraphQLPort
+          Protocol: tcp
+        - ContainerPort:
+            Ref: GraphNodeWsGraphQLPort
+          Protocol: tcp
+        - ContainerPort:
+            Ref: GraphNodeAdminPort
+          Protocol: tcp
+        - ContainerPort:
+            Ref: GraphNodeIndexerPort
+          Protocol: tcp
+        - ContainerPort: 8040
+          Protocol: tcp
+        LogConfiguration:
+          LogDriver: awslogs
+          Options:
+            awslogs-group:
+              Ref: LogGroupName
+            awslogs-region:
+              Ref: AWS::Region
+            awslogs-stream-prefix:
+              Ref: GraphNodeName
+      Volumes:
+      - Name:
+          Fn::Sub: ${IPFSName}-efs
+        EFSVolumeConfiguration:
+          FilesystemId:
+            Ref: IPFSFileSystem
+          RootDirectory: /
+    Metadata:
+      SamResourceId: TaskDefinition
+  Service:
+    Type: AWS::ECS::Service
+    DependsOn:
+    - GraphNodeAdminListenerRule
+    - GraphNodeIndexerListenerRule
+    - GraphNodeHttpGraphQLListenerRule
+    - GraphNodeWsGraphQLListenerRule
+    - IPFSListenerRule
+    Properties:
+      ServiceName:
+        Fn::Join:
+        - ''
+        - - Ref: ServiceName
+          - Service
+      TaskDefinition:
+        Ref: TaskDefinition
+      Cluster:
+        Ref: ECSCluster
+      LaunchType: FARGATE
+      DesiredCount: 1
+      DeploymentConfiguration:
+        MaximumPercent: 100
+        MinimumHealthyPercent: 0
+      LoadBalancers:
+      - TargetGroupArn:
+          Ref: GraphNodeHttpGraphQLTargetGroup
+        ContainerName:
+          Ref: GraphNodeName
+        ContainerPort:
+          Ref: GraphNodeHttpGraphQLPort
+      - TargetGroupArn:
+          Ref: GraphNodeWsGraphQLTargetGroup
+        ContainerName:
+          Ref: GraphNodeName
+        ContainerPort:
+          Ref: GraphNodeWsGraphQLPort
+      - TargetGroupArn:
+          Ref: GraphNodeAdminTargetGroup
+        ContainerName:
+          Ref: GraphNodeName
+        ContainerPort:
+          Ref: GraphNodeAdminPort
+      - TargetGroupArn:
+          Ref: GraphNodeIndexerTargetGroup
+        ContainerName:
+          Ref: GraphNodeName
+        ContainerPort:
+          Ref: GraphNodeIndexerPort
+      - TargetGroupArn:
+          Ref: IPFSTargetGroup
+        ContainerName:
+          Ref: IPFSName
+        ContainerPort:
+          Ref: IPFSPort
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: ENABLED
+          Subnets:
+            Fn::Split:
+            - ','
+            - Ref: Subnets
+          SecurityGroups:
+          - Ref: ContainerSecurityGroup
+    Metadata:
+      SamResourceId: Service
+  GraphNodeAdminTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Name:
+        Fn::Sub: ${GraphNodeName}-admin-tg
+      VpcId:
+        Ref: VpcId
+      Port:
+        Ref: GraphNodeAdminPort
+      Protocol: HTTP
+      TargetType: ip
+      TargetGroupAttributes:
+      - Key: deregistration_delay.timeout_seconds
+        Value: 10
+      HealthCheckPath: /
+      HealthCheckProtocol: HTTP
+      HealthyThresholdCount: 5
+      HealthCheckIntervalSeconds: 5
+      HealthCheckTimeoutSeconds: 2
+      Matcher:
+        HttpCode: 405
+    Metadata:
+      SamResourceId: GraphNodeAdminTargetGroup
+  GraphNodeHttpGraphQLTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Name:
+        Fn::Sub: ${GraphNodeName}-http-graphql-tg
+      VpcId:
+        Ref: VpcId
+      Port:
+        Ref: GraphNodeHttpGraphQLPort
+      Protocol: HTTP
+      TargetType: ip
+      TargetGroupAttributes:
+      - Key: deregistration_delay.timeout_seconds
+        Value: 10
+      HealthCheckPort:
+        Ref: GraphNodeHttpGraphQLPort
+      HealthCheckPath:
+        Ref: GraphNodeGraphQLHealthCheckPath
+      HealthCheckProtocol: HTTP
+      HealthyThresholdCount: 5
+      HealthCheckIntervalSeconds: 5
+      HealthCheckTimeoutSeconds: 2
+      Matcher:
+        HttpCode: 200
+    Metadata:
+      SamResourceId: GraphNodeHttpGraphQLTargetGroup
+  GraphNodeWsGraphQLTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Name:
+        Fn::Sub: ${GraphNodeName}-ws-graphql-tg
+      VpcId:
+        Ref: VpcId
+      Port:
+        Ref: GraphNodeWsGraphQLPort
+      Protocol: HTTP
+      TargetType: ip
+      TargetGroupAttributes:
+      - Key: deregistration_delay.timeout_seconds
+        Value: 10
+      HealthCheckPort:
+        Ref: GraphNodeHttpGraphQLPort
+      HealthCheckPath:
+        Ref: GraphNodeGraphQLHealthCheckPath
+      HealthCheckProtocol: HTTP
+      HealthyThresholdCount: 5
+      HealthCheckIntervalSeconds: 5
+      HealthCheckTimeoutSeconds: 2
+      Matcher:
+        HttpCode: 200
+    Metadata:
+      SamResourceId: GraphNodeWsGraphQLTargetGroup
+  GraphNodeIndexerTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Name:
+        Fn::Sub: ${GraphNodeName}-indexer-tg
+      VpcId:
+        Ref: VpcId
+      HealthCheckPath: /
+      HealthCheckProtocol: HTTP
+      HealthyThresholdCount: 5
+      HealthCheckIntervalSeconds: 5
+      HealthCheckTimeoutSeconds: 2
+      Port:
+        Ref: GraphNodeIndexerPort
+      Protocol: HTTP
+      Matcher:
+        HttpCode: 200
+      TargetType: ip
+      TargetGroupAttributes:
+      - Key: deregistration_delay.timeout_seconds
+        Value: 10
+    Metadata:
+      SamResourceId: GraphNodeIndexerTargetGroup
+  IPFSTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Name:
+        Fn::Sub: ${IPFSName}-tg
+      VpcId:
+        Ref: VpcId
+      HealthCheckPath:
+        Ref: IPFSHealthCheckPath
+      HealthCheckProtocol: HTTP
+      HealthyThresholdCount: 5
+      HealthCheckIntervalSeconds: 5
+      HealthCheckTimeoutSeconds: 2
+      Port:
+        Ref: IPFSPort
+      Protocol: HTTP
+      Matcher:
+        HttpCode: 302
+      TargetType: ip
+      TargetGroupAttributes:
+      - Key: deregistration_delay.timeout_seconds
+        Value: 10
+    Metadata:
+      SamResourceId: IPFSTargetGroup
+  GraphNodeAdminListenerRule:
+    Type: AWS::ElasticLoadBalancingV2::ListenerRule
+    Properties:
+      ListenerArn:
+        Ref: LoadBalancerListenerArn
+      Priority: 1
+      Conditions:
+      - Field: host-header
+        Values:
+        - Ref: GraphNodeAdminRoute
+      Actions:
+      - TargetGroupArn:
+          Ref: GraphNodeAdminTargetGroup
+        Type: forward
+    Metadata:
+      SamResourceId: GraphNodeAdminListenerRule
+  GraphNodeHttpGraphQLListenerRule:
+    Type: AWS::ElasticLoadBalancingV2::ListenerRule
+    Properties:
+      ListenerArn:
+        Ref: LoadBalancerListenerArn
+      Priority: 2
+      Conditions:
+      - Field: host-header
+        Values:
+        - Ref: GraphNodeHttpClientRoute
+      Actions:
+      - TargetGroupArn:
+          Ref: GraphNodeHttpGraphQLTargetGroup
+        Type: forward
+    Metadata:
+      SamResourceId: GraphNodeHttpGraphQLListenerRule
+  GraphNodeWsGraphQLListenerRule:
+    Type: AWS::ElasticLoadBalancingV2::ListenerRule
+    Properties:
+      ListenerArn:
+        Ref: LoadBalancerListenerArn
+      Priority: 3
+      Conditions:
+      - Field: host-header
+        Values:
+        - Ref: GraphNodeWsClientRoute
+      Actions:
+      - TargetGroupArn:
+          Ref: GraphNodeWsGraphQLTargetGroup
+        Type: forward
+    Metadata:
+      SamResourceId: GraphNodeWsGraphQLListenerRule
+  GraphNodeIndexerListenerRule:
+    Type: AWS::ElasticLoadBalancingV2::ListenerRule
+    Properties:
+      ListenerArn:
+        Ref: LoadBalancerListenerArn
+      Priority: 4
+      Conditions:
+      - Field: host-header
+        Values:
+        - Ref: GraphNodeIndexerRoute
+      Actions:
+      - TargetGroupArn:
+          Ref: GraphNodeIndexerTargetGroup
+        Type: forward
+    Metadata:
+      SamResourceId: GraphNodeIndexerListenerRule
+  IPFSListenerRule:
+    Type: AWS::ElasticLoadBalancingV2::ListenerRule
+    Properties:
+      ListenerArn:
+        Ref: LoadBalancerListenerArn
+      Priority: 5
+      Conditions:
+      - Field: host-header
+        Values:
+        - Ref: IPFSRoute
+      Actions:
+      - TargetGroupArn:
+          Ref: IPFSTargetGroup
+        Type: forward
+    Metadata:
+      SamResourceId: IPFSListenerRule

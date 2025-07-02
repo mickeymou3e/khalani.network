@@ -1,0 +1,193 @@
+{
+    "version": 3,
+    "checkpoint": {
+        "stack": "organization/taiga/dev",
+        "latest": {
+            "manifest": {
+                "time": "2023-08-28T06:23:12.036763638Z",
+                "magic": "7f5ec831fbfcaaafb30fe1f9dd0eebc4a62372e9fda10d9bab6256b2deca869d",
+                "version": "v3.78.1"
+            },
+            "secrets_providers": {
+                "type": "passphrase",
+                "state": {
+                    "salt": "v1:Ac2v8PSZJTI=:v1:H9dN7pTpsL/3P9+i:pGxxx232rMNeMAGDMN6mFWgUJdoHLQ=="
+                }
+            },
+            "pending_operations": [
+                {
+                    "resource": {
+                        "urn": "urn:pulumi:dev::taiga::awsx:ecs:FargateService$aws:ecs/service:Service::zethService",
+                        "custom": true,
+                        "type": "aws:ecs/service:Service",
+                        "inputs": {
+                            "__defaults": [
+                                "deploymentMaximumPercent",
+                                "deploymentMinimumHealthyPercent",
+                                "enableEcsManagedTags",
+                                "enableExecuteCommand",
+                                "name",
+                                "schedulingStrategy"
+                            ],
+                            "cluster": "arn:aws:ecs:us-east-1:803035318642:cluster/cluster-1886a73",
+                            "deploymentMaximumPercent": 200,
+                            "deploymentMinimumHealthyPercent": 100,
+                            "desiredCount": 2,
+                            "enableEcsManagedTags": false,
+                            "enableExecuteCommand": false,
+                            "launchType": "FARGATE",
+                            "loadBalancers": [],
+                            "name": "zethService-50b2b54",
+                            "networkConfiguration": {
+                                "__defaults": [],
+                                "assignPublicIp": true,
+                                "securityGroups": [
+                                    "sg-0a3d52c0503a66480"
+                                ],
+                                "subnets": [
+                                    "subnet-076091c9b18ea385a",
+                                    "subnet-03403daba0832a3e7",
+                                    "subnet-00b2f8f3d1903387f"
+                                ]
+                            },
+                            "schedulingStrategy": "REPLICA",
+                            "taskDefinition": "arn:aws:ecs:us-east-1:803035318642:task-definition/zethService-4ffd2db9:1",
+                            "waitForSteadyState": true
+                        },
+                        "parent": "urn:pulumi:dev::taiga::awsx:ecs:FargateService::zethService",
+                        "dependencies": [
+                            "urn:pulumi:dev::taiga::aws:ecs/cluster:Cluster::cluster",
+                            "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:lb/targetGroup:TargetGroup::lb",
+                            "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer::lb",
+                            "urn:pulumi:dev::taiga::aws:ec2/securityGroup:SecurityGroup::securityGroup",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-1",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-2",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-3",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-1",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-2",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-3",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc::vpc",
+                            "urn:pulumi:dev::taiga::awsx:ecs:FargateService$awsx:ecs:FargateTaskDefinition$aws:ecs/taskDefinition:TaskDefinition::zethService"
+                        ],
+                        "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                        "propertyDependencies": {
+                            "cluster": [
+                                "urn:pulumi:dev::taiga::aws:ecs/cluster:Cluster::cluster"
+                            ],
+                            "desiredCount": null,
+                            "launchType": null,
+                            "loadBalancers": [
+                                "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:lb/targetGroup:TargetGroup::lb",
+                                "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer::lb"
+                            ],
+                            "networkConfiguration": [
+                                "urn:pulumi:dev::taiga::aws:ec2/securityGroup:SecurityGroup::securityGroup",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-1",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-2",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-3",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-1",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-2",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-3",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc::vpc"
+                            ],
+                            "taskDefinition": [
+                                "urn:pulumi:dev::taiga::awsx:ecs:FargateService$awsx:ecs:FargateTaskDefinition$aws:ecs/taskDefinition:TaskDefinition::zethService"
+                            ],
+                            "waitForSteadyState": null
+                        }
+                    },
+                    "type": "creating"
+                },
+                {
+                    "resource": {
+                        "urn": "urn:pulumi:dev::taiga::awsx:ecs:FargateService$aws:ecs/service:Service::zethService",
+                        "custom": true,
+                        "type": "aws:ecs/service:Service",
+                        "inputs": {
+                            "__defaults": [
+                                "deploymentMaximumPercent",
+                                "deploymentMinimumHealthyPercent",
+                                "enableEcsManagedTags",
+                                "enableExecuteCommand",
+                                "name",
+                                "schedulingStrategy"
+                            ],
+                            "cluster": "arn:aws:ecs:us-east-1:803035318642:cluster/cluster-1886a73",
+                            "deploymentMaximumPercent": 200,
+                            "deploymentMinimumHealthyPercent": 100,
+                            "desiredCount": 2,
+                            "enableEcsManagedTags": false,
+                            "enableExecuteCommand": false,
+                            "launchType": "FARGATE",
+                            "loadBalancers": [],
+                            "name": "zethService-7a761be",
+                            "networkConfiguration": {
+                                "__defaults": [
+                                    "assignPublicIp"
+                                ],
+                                "assignPublicIp": false,
+                                "securityGroups": [
+                                    "sg-0a3d52c0503a66480"
+                                ],
+                                "subnets": [
+                                    "subnet-076091c9b18ea385a",
+                                    "subnet-03403daba0832a3e7",
+                                    "subnet-00b2f8f3d1903387f"
+                                ]
+                            },
+                            "schedulingStrategy": "REPLICA",
+                            "taskDefinition": "arn:aws:ecs:us-east-1:803035318642:task-definition/zethService-4ffd2db9:1",
+                            "waitForSteadyState": true
+                        },
+                        "parent": "urn:pulumi:dev::taiga::awsx:ecs:FargateService::zethService",
+                        "dependencies": [
+                            "urn:pulumi:dev::taiga::aws:ecs/cluster:Cluster::cluster",
+                            "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:lb/targetGroup:TargetGroup::lb",
+                            "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer::lb",
+                            "urn:pulumi:dev::taiga::aws:ec2/securityGroup:SecurityGroup::securityGroup",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-1",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-2",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-3",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-1",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-2",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-3",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc::vpc",
+                            "urn:pulumi:dev::taiga::awsx:ecs:FargateService$awsx:ecs:FargateTaskDefinition$aws:ecs/taskDefinition:TaskDefinition::zethService"
+                        ],
+                        "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                        "propertyDependencies": {
+                            "cluster": [
+                                "urn:pulumi:dev::taiga::aws:ecs/cluster:Cluster::cluster"
+                            ],
+                            "desiredCount": null,
+                            "launchType": null,
+                            "loadBalancers": [
+                                "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:lb/targetGroup:TargetGroup::lb",
+                                "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer::lb"
+                            ],
+                            "networkConfiguration": [
+                                "urn:pulumi:dev::taiga::aws:ec2/securityGroup:SecurityGroup::securityGroup",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-1",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-2",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-3",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-1",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-2",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-3",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc::vpc"
+                            ],
+                            "taskDefinition": [
+                                "urn:pulumi:dev::taiga::awsx:ecs:FargateService$awsx:ecs:FargateTaskDefinition$aws:ecs/taskDefinition:TaskDefinition::zethService"
+                            ],
+                            "waitForSteadyState": null
+                        }
+                    },
+                    "type": "creating"
+                }
+            ]
+        }
+    }
+}

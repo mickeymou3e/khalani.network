@@ -1,0 +1,832 @@
+{
+    "version": 3,
+    "checkpoint": {
+        "stack": "organization/taiga/dev",
+        "latest": {
+            "manifest": {
+                "time": "2023-08-27T10:54:52.304099838Z",
+                "magic": "7f5ec831fbfcaaafb30fe1f9dd0eebc4a62372e9fda10d9bab6256b2deca869d",
+                "version": "v3.78.1"
+            },
+            "secrets_providers": {
+                "type": "passphrase",
+                "state": {
+                    "salt": "v1:pJ2FI1Niy78=:v1:dRTpfsjQpyNuc7BI:J3WmqVsSI361MwEunLYm118HlkEykw=="
+                }
+            },
+            "resources": [
+                {
+                    "urn": "urn:pulumi:dev::taiga::pulumi:pulumi:Stack::taiga-dev",
+                    "custom": false,
+                    "type": "pulumi:pulumi:Stack",
+                    "created": "2023-08-27T10:52:37.668459412Z",
+                    "modified": "2023-08-27T10:52:37.668459412Z",
+                    "sourcePosition": "project:///node_modules/@pulumi/runtime/stack.ts#36,23"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::pulumi:providers:awsx::default_1_0_5",
+                    "custom": true,
+                    "id": "fce99783-921a-4b17-bbd9-0c1623610781",
+                    "type": "pulumi:providers:awsx",
+                    "inputs": {
+                        "version": "1.0.5"
+                    },
+                    "outputs": {
+                        "version": "1.0.5"
+                    },
+                    "created": "2023-08-27T10:52:39.195306469Z",
+                    "modified": "2023-08-27T10:52:39.195306469Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_42_0",
+                    "custom": true,
+                    "id": "4653b2ba-c9b8-475d-938c-4decfb8d6e6e",
+                    "type": "pulumi:providers:aws",
+                    "inputs": {
+                        "version": "5.42.0"
+                    },
+                    "outputs": {
+                        "version": "5.42.0"
+                    },
+                    "created": "2023-08-27T10:52:39.865281319Z",
+                    "modified": "2023-08-27T10:52:39.865281319Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository::app_repository",
+                    "custom": false,
+                    "type": "awsx:ecr:Repository",
+                    "outputs": {
+                        "lifecyclePolicy": {
+                            "4dabf18193072939515e22adb298388d": "5cf8f73096256a8f31e491e813e4eb8e",
+                            "id": "app_repository-a3d385f",
+                            "packageVersion": "",
+                            "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/lifecyclePolicy:LifecyclePolicy::app_repository"
+                        },
+                        "repository": {
+                            "4dabf18193072939515e22adb298388d": "5cf8f73096256a8f31e491e813e4eb8e",
+                            "id": "app_repository-a3d385f",
+                            "packageVersion": "",
+                            "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/repository:Repository::app_repository"
+                        }
+                    },
+                    "parent": "urn:pulumi:dev::taiga::pulumi:pulumi:Stack::taiga-dev",
+                    "created": "2023-08-27T10:52:39.992683082Z",
+                    "modified": "2023-08-27T10:52:39.992683082Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0",
+                    "custom": true,
+                    "id": "b28735a3-1ada-4c84-8dd0-0f555db3d41b",
+                    "type": "pulumi:providers:aws",
+                    "inputs": {
+                        "version": "5.35.0"
+                    },
+                    "outputs": {
+                        "version": "5.35.0"
+                    },
+                    "created": "2023-08-27T10:52:40.42720147Z",
+                    "modified": "2023-08-27T10:52:40.42720147Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/repository:Repository::app_repository",
+                    "custom": true,
+                    "id": "app_repository-a3d385f",
+                    "type": "aws:ecr/repository:Repository",
+                    "inputs": {
+                        "__defaults": [
+                            "imageTagMutability",
+                            "name"
+                        ],
+                        "imageTagMutability": "MUTABLE",
+                        "name": "app_repository-a3d385f"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"delete\":1200000000000}}",
+                        "arn": "arn:aws:ecr:us-east-1:803035318642:repository/app_repository-a3d385f",
+                        "encryptionConfigurations": [
+                            {
+                                "encryptionType": "AES256",
+                                "kmsKey": ""
+                            }
+                        ],
+                        "id": "app_repository-a3d385f",
+                        "imageScanningConfiguration": {
+                            "scanOnPush": false
+                        },
+                        "imageTagMutability": "MUTABLE",
+                        "name": "app_repository-a3d385f",
+                        "registryId": "803035318642",
+                        "repositoryUrl": "803035318642.dkr.ecr.us-east-1.amazonaws.com/app_repository-a3d385f",
+                        "tags": {},
+                        "tagsAll": {}
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ecr:Repository::app_repository",
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::b28735a3-1ada-4c84-8dd0-0f555db3d41b",
+                    "created": "2023-08-27T10:52:40.986810656Z",
+                    "modified": "2023-08-27T10:52:40.986810656Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/lifecyclePolicy:LifecyclePolicy::app_repository",
+                    "custom": true,
+                    "id": "app_repository-a3d385f",
+                    "type": "aws:ecr/lifecyclePolicy:LifecyclePolicy",
+                    "inputs": {
+                        "__defaults": [],
+                        "policy": "{\"rules\":[{\"action\":{\"type\":\"expire\"},\"description\":\"remove untagged images\",\"rulePriority\":1,\"selection\":{\"countNumber\":1,\"countType\":\"imageCountMoreThan\",\"tagStatus\":\"untagged\"}}]}",
+                        "repository": "app_repository-a3d385f"
+                    },
+                    "outputs": {
+                        "id": "app_repository-a3d385f",
+                        "policy": "{\"rules\":[{\"action\":{\"type\":\"expire\"},\"description\":\"remove untagged images\",\"rulePriority\":1,\"selection\":{\"countNumber\":1,\"countType\":\"imageCountMoreThan\",\"tagStatus\":\"untagged\"}}]}",
+                        "registryId": "803035318642",
+                        "repository": "app_repository-a3d385f"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ecr:Repository::app_repository",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/repository:Repository::app_repository"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::b28735a3-1ada-4c84-8dd0-0f555db3d41b",
+                    "propertyDependencies": {
+                        "policy": null,
+                        "repository": [
+                            "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/repository:Repository::app_repository"
+                        ]
+                    },
+                    "created": "2023-08-27T10:52:41.26984589Z",
+                    "modified": "2023-08-27T10:52:41.26984589Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer::lb",
+                    "custom": false,
+                    "type": "awsx:lb:ApplicationLoadBalancer",
+                    "parent": "urn:pulumi:dev::taiga::pulumi:pulumi:Stack::taiga-dev",
+                    "created": "2023-08-27T10:52:41.947549745Z",
+                    "modified": "2023-08-27T10:52:41.947549745Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:lb/targetGroup:TargetGroup::lb",
+                    "custom": true,
+                    "id": "arn:aws:elasticloadbalancing:us-east-1:803035318642:targetgroup/lb-aef5fa4/23acae58e1b91138",
+                    "type": "aws:lb/targetGroup:TargetGroup",
+                    "inputs": {
+                        "__defaults": [
+                            "connectionTermination",
+                            "lambdaMultiValueHeadersEnabled",
+                            "name",
+                            "proxyProtocolV2",
+                            "slowStart"
+                        ],
+                        "connectionTermination": false,
+                        "lambdaMultiValueHeadersEnabled": false,
+                        "name": "lb-aef5fa4",
+                        "port": 80,
+                        "protocol": "HTTP",
+                        "proxyProtocolV2": false,
+                        "slowStart": 0,
+                        "targetType": "ip",
+                        "vpcId": "vpc-0d75975d3e2183c38"
+                    },
+                    "outputs": {
+                        "arn": "arn:aws:elasticloadbalancing:us-east-1:803035318642:targetgroup/lb-aef5fa4/23acae58e1b91138",
+                        "arnSuffix": "targetgroup/lb-aef5fa4/23acae58e1b91138",
+                        "connectionTermination": false,
+                        "deregistrationDelay": 300,
+                        "healthCheck": {
+                            "enabled": true,
+                            "healthyThreshold": 5,
+                            "interval": 30,
+                            "matcher": "200",
+                            "path": "/",
+                            "port": "traffic-port",
+                            "protocol": "HTTP",
+                            "timeout": 5,
+                            "unhealthyThreshold": 2
+                        },
+                        "id": "arn:aws:elasticloadbalancing:us-east-1:803035318642:targetgroup/lb-aef5fa4/23acae58e1b91138",
+                        "ipAddressType": "ipv4",
+                        "lambdaMultiValueHeadersEnabled": false,
+                        "loadBalancingAlgorithmType": "round_robin",
+                        "loadBalancingCrossZoneEnabled": "use_load_balancer_configuration",
+                        "name": "lb-aef5fa4",
+                        "port": 80,
+                        "protocol": "HTTP",
+                        "protocolVersion": "HTTP1",
+                        "proxyProtocolV2": false,
+                        "slowStart": 0,
+                        "stickiness": {
+                            "cookieDuration": 86400,
+                            "cookieName": "",
+                            "enabled": false,
+                            "type": "lb_cookie"
+                        },
+                        "tags": {},
+                        "tagsAll": {},
+                        "targetFailovers": [
+                            null
+                        ],
+                        "targetType": "ip",
+                        "vpcId": "vpc-0d75975d3e2183c38"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer::lb",
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::b28735a3-1ada-4c84-8dd0-0f555db3d41b",
+                    "propertyDependencies": {
+                        "port": null,
+                        "protocol": null,
+                        "targetType": null,
+                        "vpcId": null
+                    },
+                    "created": "2023-08-27T10:52:42.972416555Z",
+                    "modified": "2023-08-27T10:52:42.972416555Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:ec2/securityGroup:SecurityGroup::lb",
+                    "custom": true,
+                    "id": "sg-030d2e8dc6b2d4594",
+                    "type": "aws:ec2/securityGroup:SecurityGroup",
+                    "inputs": {
+                        "__defaults": [
+                            "name",
+                            "revokeRulesOnDelete"
+                        ],
+                        "description": "Managed by Pulumi",
+                        "egress": [
+                            {
+                                "__defaults": [
+                                    "self"
+                                ],
+                                "cidrBlocks": [
+                                    "0.0.0.0/0"
+                                ],
+                                "fromPort": 0,
+                                "ipv6CidrBlocks": [
+                                    "::/0"
+                                ],
+                                "protocol": "tcp",
+                                "self": false,
+                                "toPort": 65535
+                            }
+                        ],
+                        "ingress": [
+                            {
+                                "__defaults": [
+                                    "self"
+                                ],
+                                "cidrBlocks": [
+                                    "0.0.0.0/0"
+                                ],
+                                "fromPort": 0,
+                                "ipv6CidrBlocks": [
+                                    "::/0"
+                                ],
+                                "protocol": "-1",
+                                "self": false,
+                                "toPort": 0
+                            }
+                        ],
+                        "name": "lb-72eafdb",
+                        "revokeRulesOnDelete": false,
+                        "vpcId": "vpc-0d75975d3e2183c38"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":600000000000,\"delete\":900000000000},\"schema_version\":\"1\"}",
+                        "arn": "arn:aws:ec2:us-east-1:803035318642:security-group/sg-030d2e8dc6b2d4594",
+                        "description": "Managed by Pulumi",
+                        "egress": [
+                            {
+                                "cidrBlocks": [
+                                    "0.0.0.0/0"
+                                ],
+                                "description": "",
+                                "fromPort": 0,
+                                "ipv6CidrBlocks": [
+                                    "::/0"
+                                ],
+                                "prefixListIds": [],
+                                "protocol": "tcp",
+                                "securityGroups": [],
+                                "self": false,
+                                "toPort": 65535
+                            }
+                        ],
+                        "id": "sg-030d2e8dc6b2d4594",
+                        "ingress": [
+                            {
+                                "cidrBlocks": [
+                                    "0.0.0.0/0"
+                                ],
+                                "description": "",
+                                "fromPort": 0,
+                                "ipv6CidrBlocks": [
+                                    "::/0"
+                                ],
+                                "prefixListIds": [],
+                                "protocol": "-1",
+                                "securityGroups": [],
+                                "self": false,
+                                "toPort": 0
+                            }
+                        ],
+                        "name": "lb-72eafdb",
+                        "namePrefix": "",
+                        "ownerId": "803035318642",
+                        "revokeRulesOnDelete": false,
+                        "tags": {},
+                        "tagsAll": {},
+                        "vpcId": "vpc-0d75975d3e2183c38"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer::lb",
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::b28735a3-1ada-4c84-8dd0-0f555db3d41b",
+                    "propertyDependencies": {
+                        "description": null,
+                        "egress": null,
+                        "ingress": null,
+                        "vpcId": null
+                    },
+                    "created": "2023-08-27T10:52:44.566053665Z",
+                    "modified": "2023-08-27T10:52:44.566053665Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::aws:ecs/cluster:Cluster::cluster",
+                    "custom": true,
+                    "id": "arn:aws:ecs:us-east-1:803035318642:cluster/cluster-cd1320a",
+                    "type": "aws:ecs/cluster:Cluster",
+                    "inputs": {
+                        "__defaults": [
+                            "name"
+                        ],
+                        "name": "cluster-cd1320a"
+                    },
+                    "outputs": {
+                        "arn": "arn:aws:ecs:us-east-1:803035318642:cluster/cluster-cd1320a",
+                        "capacityProviders": [],
+                        "defaultCapacityProviderStrategies": [],
+                        "id": "arn:aws:ecs:us-east-1:803035318642:cluster/cluster-cd1320a",
+                        "name": "cluster-cd1320a",
+                        "serviceConnectDefaults": null,
+                        "settings": [
+                            {
+                                "name": "containerInsights",
+                                "value": "disabled"
+                            }
+                        ],
+                        "tags": {},
+                        "tagsAll": {}
+                    },
+                    "parent": "urn:pulumi:dev::taiga::pulumi:pulumi:Stack::taiga-dev",
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_42_0::4653b2ba-c9b8-475d-938c-4decfb8d6e6e",
+                    "created": "2023-08-27T10:52:50.525629878Z",
+                    "modified": "2023-08-27T10:52:50.525629878Z",
+                    "sourcePosition": "project:///index.ts#45,17"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:lb/loadBalancer:LoadBalancer::lb",
+                    "custom": true,
+                    "id": "arn:aws:elasticloadbalancing:us-east-1:803035318642:loadbalancer/app/lb-1d0d066/d79c453965da7830",
+                    "type": "aws:lb/loadBalancer:LoadBalancer",
+                    "inputs": {
+                        "__defaults": [
+                            "desyncMitigationMode",
+                            "dropInvalidHeaderFields",
+                            "enableCrossZoneLoadBalancing",
+                            "enableDeletionProtection",
+                            "enableHttp2",
+                            "enableTlsVersionAndCipherSuiteHeaders",
+                            "enableWafFailOpen",
+                            "enableXffClientPort",
+                            "idleTimeout",
+                            "name",
+                            "preserveHostHeader",
+                            "xffHeaderProcessingMode"
+                        ],
+                        "desyncMitigationMode": "defensive",
+                        "dropInvalidHeaderFields": false,
+                        "enableCrossZoneLoadBalancing": false,
+                        "enableDeletionProtection": false,
+                        "enableHttp2": true,
+                        "enableTlsVersionAndCipherSuiteHeaders": false,
+                        "enableWafFailOpen": false,
+                        "enableXffClientPort": false,
+                        "idleTimeout": 60,
+                        "loadBalancerType": "application",
+                        "name": "lb-1d0d066",
+                        "preserveHostHeader": false,
+                        "securityGroups": [
+                            "sg-030d2e8dc6b2d4594"
+                        ],
+                        "subnets": [
+                            "subnet-00001f8497a52625d",
+                            "subnet-0362627b3aeb01569",
+                            "subnet-09bda2a7d18967f02",
+                            "subnet-04c16c6f41e95f5d5",
+                            "subnet-0acba8a1c57a969bb",
+                            "subnet-0d2a287134907af48"
+                        ],
+                        "xffHeaderProcessingMode": "append"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":600000000000,\"delete\":600000000000,\"update\":600000000000}}",
+                        "accessLogs": {
+                            "bucket": "",
+                            "enabled": false,
+                            "prefix": ""
+                        },
+                        "arn": "arn:aws:elasticloadbalancing:us-east-1:803035318642:loadbalancer/app/lb-1d0d066/d79c453965da7830",
+                        "arnSuffix": "app/lb-1d0d066/d79c453965da7830",
+                        "customerOwnedIpv4Pool": "",
+                        "desyncMitigationMode": "defensive",
+                        "dnsName": "lb-1d0d066-1799581435.us-east-1.elb.amazonaws.com",
+                        "dropInvalidHeaderFields": false,
+                        "enableCrossZoneLoadBalancing": true,
+                        "enableDeletionProtection": false,
+                        "enableHttp2": true,
+                        "enableTlsVersionAndCipherSuiteHeaders": false,
+                        "enableWafFailOpen": false,
+                        "enableXffClientPort": false,
+                        "id": "arn:aws:elasticloadbalancing:us-east-1:803035318642:loadbalancer/app/lb-1d0d066/d79c453965da7830",
+                        "idleTimeout": 60,
+                        "internal": false,
+                        "ipAddressType": "ipv4",
+                        "loadBalancerType": "application",
+                        "name": "lb-1d0d066",
+                        "preserveHostHeader": false,
+                        "securityGroups": [
+                            "sg-030d2e8dc6b2d4594"
+                        ],
+                        "subnetMappings": [
+                            {
+                                "allocationId": "",
+                                "ipv6Address": "",
+                                "outpostId": "",
+                                "privateIpv4Address": "",
+                                "subnetId": "subnet-0acba8a1c57a969bb"
+                            },
+                            {
+                                "allocationId": "",
+                                "ipv6Address": "",
+                                "outpostId": "",
+                                "privateIpv4Address": "",
+                                "subnetId": "subnet-09bda2a7d18967f02"
+                            },
+                            {
+                                "allocationId": "",
+                                "ipv6Address": "",
+                                "outpostId": "",
+                                "privateIpv4Address": "",
+                                "subnetId": "subnet-0d2a287134907af48"
+                            },
+                            {
+                                "allocationId": "",
+                                "ipv6Address": "",
+                                "outpostId": "",
+                                "privateIpv4Address": "",
+                                "subnetId": "subnet-00001f8497a52625d"
+                            },
+                            {
+                                "allocationId": "",
+                                "ipv6Address": "",
+                                "outpostId": "",
+                                "privateIpv4Address": "",
+                                "subnetId": "subnet-04c16c6f41e95f5d5"
+                            },
+                            {
+                                "allocationId": "",
+                                "ipv6Address": "",
+                                "outpostId": "",
+                                "privateIpv4Address": "",
+                                "subnetId": "subnet-0362627b3aeb01569"
+                            }
+                        ],
+                        "subnets": [
+                            "subnet-04c16c6f41e95f5d5",
+                            "subnet-0d2a287134907af48",
+                            "subnet-0acba8a1c57a969bb",
+                            "subnet-09bda2a7d18967f02",
+                            "subnet-0362627b3aeb01569",
+                            "subnet-00001f8497a52625d"
+                        ],
+                        "tags": {},
+                        "tagsAll": {},
+                        "vpcId": "vpc-0d75975d3e2183c38",
+                        "xffHeaderProcessingMode": "append",
+                        "zoneId": "Z35SXDOTRQ7X7K"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer::lb",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:ec2/securityGroup:SecurityGroup::lb"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::b28735a3-1ada-4c84-8dd0-0f555db3d41b",
+                    "propertyDependencies": {
+                        "loadBalancerType": null,
+                        "securityGroups": [
+                            "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:ec2/securityGroup:SecurityGroup::lb"
+                        ],
+                        "subnets": null
+                    },
+                    "created": "2023-08-27T10:54:46.328334798Z",
+                    "modified": "2023-08-27T10:54:46.328334798Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:lb/listener:Listener::lb-0",
+                    "custom": true,
+                    "id": "arn:aws:elasticloadbalancing:us-east-1:803035318642:listener/app/lb-1d0d066/d79c453965da7830/2ac7e19f2c4749fc",
+                    "type": "aws:lb/listener:Listener",
+                    "inputs": {
+                        "__defaults": [],
+                        "defaultActions": [
+                            {
+                                "__defaults": [],
+                                "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:803035318642:targetgroup/lb-aef5fa4/23acae58e1b91138",
+                                "type": "forward"
+                            }
+                        ],
+                        "loadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:803035318642:loadbalancer/app/lb-1d0d066/d79c453965da7830",
+                        "port": 80,
+                        "protocol": "HTTP"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"read\":600000000000}}",
+                        "arn": "arn:aws:elasticloadbalancing:us-east-1:803035318642:listener/app/lb-1d0d066/d79c453965da7830/2ac7e19f2c4749fc",
+                        "defaultActions": [
+                            {
+                                "authenticateCognito": null,
+                                "authenticateOidc": null,
+                                "fixedResponse": null,
+                                "forward": null,
+                                "order": 1,
+                                "redirect": null,
+                                "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:803035318642:targetgroup/lb-aef5fa4/23acae58e1b91138",
+                                "type": "forward"
+                            }
+                        ],
+                        "id": "arn:aws:elasticloadbalancing:us-east-1:803035318642:listener/app/lb-1d0d066/d79c453965da7830/2ac7e19f2c4749fc",
+                        "loadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:803035318642:loadbalancer/app/lb-1d0d066/d79c453965da7830",
+                        "port": 80,
+                        "protocol": "HTTP",
+                        "sslPolicy": "",
+                        "tags": {},
+                        "tagsAll": {}
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer::lb",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:lb/targetGroup:TargetGroup::lb",
+                        "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:lb/loadBalancer:LoadBalancer::lb"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::b28735a3-1ada-4c84-8dd0-0f555db3d41b",
+                    "propertyDependencies": {
+                        "defaultActions": [
+                            "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:lb/targetGroup:TargetGroup::lb"
+                        ],
+                        "loadBalancerArn": [
+                            "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:lb/loadBalancer:LoadBalancer::lb"
+                        ],
+                        "port": null,
+                        "protocol": null
+                    },
+                    "created": "2023-08-27T10:54:46.823920335Z",
+                    "modified": "2023-08-27T10:54:46.823920335Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository::zeth_repository",
+                    "custom": false,
+                    "type": "awsx:ecr:Repository",
+                    "outputs": {
+                        "lifecyclePolicy": {
+                            "4dabf18193072939515e22adb298388d": "5cf8f73096256a8f31e491e813e4eb8e",
+                            "id": "zeth_repository-6596498",
+                            "packageVersion": "",
+                            "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/lifecyclePolicy:LifecyclePolicy::zeth_repository"
+                        },
+                        "repository": {
+                            "4dabf18193072939515e22adb298388d": "5cf8f73096256a8f31e491e813e4eb8e",
+                            "id": "zeth_repository-6596498",
+                            "packageVersion": "",
+                            "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/repository:Repository::zeth_repository"
+                        }
+                    },
+                    "parent": "urn:pulumi:dev::taiga::pulumi:pulumi:Stack::taiga-dev",
+                    "created": "2023-08-27T10:54:47.24852229Z",
+                    "modified": "2023-08-27T10:54:47.24852229Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::pulumi:providers:pulumi::default",
+                    "custom": true,
+                    "id": "13c24809-f005-4668-9989-551bc9730b7d",
+                    "type": "pulumi:providers:pulumi",
+                    "created": "2023-08-27T10:54:47.414617477Z",
+                    "modified": "2023-08-27T10:54:47.414617477Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::pulumi:providers:aws-apigateway::default_1_0_1",
+                    "custom": true,
+                    "id": "4402d050-3801-4ca8-bce4-0a72d200b4d1",
+                    "type": "pulumi:providers:aws-apigateway",
+                    "inputs": {
+                        "version": "1.0.1"
+                    },
+                    "outputs": {
+                        "version": "1.0.1"
+                    },
+                    "created": "2023-08-27T10:54:48.574624953Z",
+                    "modified": "2023-08-27T10:54:48.574624953Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/repository:Repository::zeth_repository",
+                    "custom": true,
+                    "id": "zeth_repository-6596498",
+                    "type": "aws:ecr/repository:Repository",
+                    "inputs": {
+                        "__defaults": [
+                            "imageTagMutability",
+                            "name"
+                        ],
+                        "imageTagMutability": "MUTABLE",
+                        "name": "zeth_repository-6596498"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"delete\":1200000000000}}",
+                        "arn": "arn:aws:ecr:us-east-1:803035318642:repository/zeth_repository-6596498",
+                        "encryptionConfigurations": [
+                            {
+                                "encryptionType": "AES256",
+                                "kmsKey": ""
+                            }
+                        ],
+                        "id": "zeth_repository-6596498",
+                        "imageScanningConfiguration": {
+                            "scanOnPush": false
+                        },
+                        "imageTagMutability": "MUTABLE",
+                        "name": "zeth_repository-6596498",
+                        "registryId": "803035318642",
+                        "repositoryUrl": "803035318642.dkr.ecr.us-east-1.amazonaws.com/zeth_repository-6596498",
+                        "tags": {},
+                        "tagsAll": {}
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ecr:Repository::zeth_repository",
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::b28735a3-1ada-4c84-8dd0-0f555db3d41b",
+                    "created": "2023-08-27T10:54:49.073651576Z",
+                    "modified": "2023-08-27T10:54:49.073651576Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::aws-apigateway:index:RestAPI::api",
+                    "custom": false,
+                    "type": "aws-apigateway:index:RestAPI",
+                    "parent": "urn:pulumi:dev::taiga::pulumi:pulumi:Stack::taiga-dev",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer::lb",
+                        "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:lb/loadBalancer:LoadBalancer::lb"
+                    ],
+                    "created": "2023-08-27T10:54:49.242533132Z",
+                    "modified": "2023-08-27T10:54:49.242533132Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/lifecyclePolicy:LifecyclePolicy::zeth_repository",
+                    "custom": true,
+                    "id": "zeth_repository-6596498",
+                    "type": "aws:ecr/lifecyclePolicy:LifecyclePolicy",
+                    "inputs": {
+                        "__defaults": [],
+                        "policy": "{\"rules\":[{\"action\":{\"type\":\"expire\"},\"description\":\"remove untagged images\",\"rulePriority\":1,\"selection\":{\"countNumber\":1,\"countType\":\"imageCountMoreThan\",\"tagStatus\":\"untagged\"}}]}",
+                        "repository": "zeth_repository-6596498"
+                    },
+                    "outputs": {
+                        "id": "zeth_repository-6596498",
+                        "policy": "{\"rules\":[{\"action\":{\"type\":\"expire\"},\"description\":\"remove untagged images\",\"rulePriority\":1,\"selection\":{\"countNumber\":1,\"countType\":\"imageCountMoreThan\",\"tagStatus\":\"untagged\"}}]}",
+                        "registryId": "803035318642",
+                        "repository": "zeth_repository-6596498"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ecr:Repository::zeth_repository",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/repository:Repository::zeth_repository"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::b28735a3-1ada-4c84-8dd0-0f555db3d41b",
+                    "propertyDependencies": {
+                        "policy": null,
+                        "repository": [
+                            "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/repository:Repository::zeth_repository"
+                        ]
+                    },
+                    "created": "2023-08-27T10:54:49.844061641Z",
+                    "modified": "2023-08-27T10:54:49.844061641Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_16_2",
+                    "custom": true,
+                    "id": "04b429e6-1577-4df0-990e-d76fdfe84bb1",
+                    "type": "pulumi:providers:aws",
+                    "inputs": {
+                        "version": "5.16.2"
+                    },
+                    "outputs": {
+                        "version": "5.16.2"
+                    },
+                    "created": "2023-08-27T10:54:50.055463069Z",
+                    "modified": "2023-08-27T10:54:50.055463069Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc::vpc",
+                    "custom": false,
+                    "type": "awsx:ec2:Vpc",
+                    "parent": "urn:pulumi:dev::taiga::pulumi:pulumi:Stack::taiga-dev",
+                    "created": "2023-08-27T10:54:50.850815501Z",
+                    "modified": "2023-08-27T10:54:50.850815501Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::aws-apigateway:index:RestAPI$aws:apigateway/restApi:RestApi::api",
+                    "custom": true,
+                    "id": "jtcxdp20y4",
+                    "type": "aws:apigateway/restApi:RestApi",
+                    "inputs": {
+                        "__defaults": [
+                            "minimumCompressionSize",
+                            "putRestApiMode"
+                        ],
+                        "binaryMediaTypes": [
+                            "*/*"
+                        ],
+                        "body": "{\"swagger\":\"2.0\",\"info\":{\"title\":\"api\",\"version\":\"1.0\"},\"paths\":{\"/app/\":{\"x-amazon-apigateway-any-method\":{\"x-amazon-apigateway-integration\":{\"responses\":{\"default\":{\"statusCode\":\"200\"}},\"uri\":\"http://undefined:3000/\",\"type\":\"http_proxy\",\"passthroughBehavior\":\"when_no_match\",\"httpMethod\":\"ANY\"}}},\"/app/{proxy+}\":{\"x-amazon-apigateway-any-method\":{\"x-amazon-apigateway-integration\":{\"responses\":{\"default\":{\"statusCode\":\"200\"}},\"uri\":\"http://undefined:3000/{proxy}\",\"type\":\"http_proxy\",\"passthroughBehavior\":\"when_no_match\",\"httpMethod\":\"ANY\",\"requestParameters\":{\"integration.request.path.proxy\":\"method.request.path.proxy\"}},\"parameters\":[{\"name\":\"proxy\",\"in\":\"path\",\"required\":true,\"type\":\"string\"}]}},\"/zeth/\":{\"x-amazon-apigateway-any-method\":{\"x-amazon-apigateway-integration\":{\"responses\":{\"default\":{\"statusCode\":\"200\"}},\"uri\":\"http://undefined:8000/\",\"type\":\"http_proxy\",\"passthroughBehavior\":\"when_no_match\",\"httpMethod\":\"ANY\"}}},\"/zeth/{proxy+}\":{\"x-amazon-apigateway-any-method\":{\"x-amazon-apigateway-integration\":{\"responses\":{\"default\":{\"statusCode\":\"200\"}},\"uri\":\"http://undefined:8000/{proxy}\",\"type\":\"http_proxy\",\"passthroughBehavior\":\"when_no_match\",\"httpMethod\":\"ANY\",\"requestParameters\":{\"integration.request.path.proxy\":\"method.request.path.proxy\"}},\"parameters\":[{\"name\":\"proxy\",\"in\":\"path\",\"required\":true,\"type\":\"string\"}]}}},\"x-amazon-apigateway-binary-media-types\":[\"*/*\"],\"x-amazon-apigateway-gateway-responses\":{\"MISSING_AUTHENTICATION_TOKEN\":{\"statusCode\":404,\"responseTemplates\":{\"application/json\":\"{\\\"message\\\": \\\"404 Not found\\\" }\"}},\"ACCESS_DENIED\":{\"statusCode\":404,\"responseTemplates\":{\"application/json\":\"{\\\"message\\\": \\\"404 Not found\\\" }\"}}},\"x-amazon-apigateway-api-key-source\":\"HEADER\"}",
+                        "minimumCompressionSize": -1,
+                        "name": "api",
+                        "putRestApiMode": "overwrite"
+                    },
+                    "outputs": {
+                        "binaryMediaTypes": [
+                            "*/*"
+                        ],
+                        "body": "{\"swagger\":\"2.0\",\"info\":{\"title\":\"api\",\"version\":\"1.0\"},\"paths\":{\"/app/\":{\"x-amazon-apigateway-any-method\":{\"x-amazon-apigateway-integration\":{\"responses\":{\"default\":{\"statusCode\":\"200\"}},\"uri\":\"http://undefined:3000/\",\"type\":\"http_proxy\",\"passthroughBehavior\":\"when_no_match\",\"httpMethod\":\"ANY\"}}},\"/app/{proxy+}\":{\"x-amazon-apigateway-any-method\":{\"x-amazon-apigateway-integration\":{\"responses\":{\"default\":{\"statusCode\":\"200\"}},\"uri\":\"http://undefined:3000/{proxy}\",\"type\":\"http_proxy\",\"passthroughBehavior\":\"when_no_match\",\"httpMethod\":\"ANY\",\"requestParameters\":{\"integration.request.path.proxy\":\"method.request.path.proxy\"}},\"parameters\":[{\"name\":\"proxy\",\"in\":\"path\",\"required\":true,\"type\":\"string\"}]}},\"/zeth/\":{\"x-amazon-apigateway-any-method\":{\"x-amazon-apigateway-integration\":{\"responses\":{\"default\":{\"statusCode\":\"200\"}},\"uri\":\"http://undefined:8000/\",\"type\":\"http_proxy\",\"passthroughBehavior\":\"when_no_match\",\"httpMethod\":\"ANY\"}}},\"/zeth/{proxy+}\":{\"x-amazon-apigateway-any-method\":{\"x-amazon-apigateway-integration\":{\"responses\":{\"default\":{\"statusCode\":\"200\"}},\"uri\":\"http://undefined:8000/{proxy}\",\"type\":\"http_proxy\",\"passthroughBehavior\":\"when_no_match\",\"httpMethod\":\"ANY\",\"requestParameters\":{\"integration.request.path.proxy\":\"method.request.path.proxy\"}},\"parameters\":[{\"name\":\"proxy\",\"in\":\"path\",\"required\":true,\"type\":\"string\"}]}}},\"x-amazon-apigateway-binary-media-types\":[\"*/*\"],\"x-amazon-apigateway-gateway-responses\":{\"MISSING_AUTHENTICATION_TOKEN\":{\"statusCode\":404,\"responseTemplates\":{\"application/json\":\"{\\\"message\\\": \\\"404 Not found\\\" }\"}},\"ACCESS_DENIED\":{\"statusCode\":404,\"responseTemplates\":{\"application/json\":\"{\\\"message\\\": \\\"404 Not found\\\" }\"}}},\"x-amazon-apigateway-api-key-source\":\"HEADER\"}",
+                        "id": "jtcxdp20y4",
+                        "minimumCompressionSize": -1,
+                        "name": "api"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::aws-apigateway:index:RestAPI::api",
+                    "initErrors": [
+                        "creating urn:pulumi:dev::taiga::aws-apigateway:index:RestAPI$aws:apigateway/restApi:RestApi::api: 1 error occurred:\n\t* error creating API Gateway specification: BadRequestException: Errors found during import:\n\tUnable to put integration on 'ANY' for resource at path '/app': Invalid HTTP endpoint specified for URI\n\tUnable to put integration on 'ANY' for resource at path '/app/{proxy+}': Invalid HTTP endpoint specified for URI\n\tUnable to put integration on 'ANY' for resource at path '/zeth': Invalid HTTP endpoint specified for URI\n\tUnable to put integration on 'ANY' for resource at path '/zeth/{proxy+}': Invalid HTTP endpoint specified for URI\n\n"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_16_2::04b429e6-1577-4df0-990e-d76fdfe84bb1",
+                    "propertyDependencies": {
+                        "binaryMediaTypes": null,
+                        "body": null,
+                        "name": null
+                    },
+                    "created": "2023-08-27T10:54:51.207175051Z",
+                    "modified": "2023-08-27T10:54:51.207175051Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc",
+                    "custom": true,
+                    "id": "vpc-0c7fa7f1152a7dd45",
+                    "type": "aws:ec2/vpc:Vpc",
+                    "inputs": {
+                        "__defaults": [
+                            "enableDnsSupport",
+                            "instanceTenancy"
+                        ],
+                        "cidrBlock": "10.0.0.0/16",
+                        "enableDnsSupport": true,
+                        "instanceTenancy": "default",
+                        "tags": {
+                            "Name": "vpc",
+                            "__defaults": []
+                        }
+                    },
+                    "outputs": {
+                        "__meta": "{\"schema_version\":\"1\"}",
+                        "arn": "arn:aws:ec2:us-east-1:803035318642:vpc/vpc-0c7fa7f1152a7dd45",
+                        "assignGeneratedIpv6CidrBlock": false,
+                        "cidrBlock": "10.0.0.0/16",
+                        "defaultNetworkAclId": "acl-0d1fe9baaf7444677",
+                        "defaultRouteTableId": "rtb-0c7f4be3907e66c16",
+                        "defaultSecurityGroupId": "sg-0174380d2c160ee5d",
+                        "dhcpOptionsId": "dopt-0ba5706a9c47f7960",
+                        "enableClassiclink": false,
+                        "enableClassiclinkDnsSupport": false,
+                        "enableDnsHostnames": false,
+                        "enableDnsSupport": true,
+                        "enableNetworkAddressUsageMetrics": false,
+                        "id": "vpc-0c7fa7f1152a7dd45",
+                        "instanceTenancy": "default",
+                        "ipv6AssociationId": "",
+                        "ipv6CidrBlock": "",
+                        "ipv6CidrBlockNetworkBorderGroup": "",
+                        "ipv6IpamPoolId": "",
+                        "ipv6NetmaskLength": 0,
+                        "mainRouteTableId": "rtb-0c7f4be3907e66c16",
+                        "ownerId": "803035318642",
+                        "tags": {
+                            "Name": "vpc"
+                        },
+                        "tagsAll": {
+                            "Name": "vpc"
+                        }
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc::vpc",
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::b28735a3-1ada-4c84-8dd0-0f555db3d41b",
+                    "propertyDependencies": {
+                        "cidrBlock": null,
+                        "tags": null
+                    }
+                }
+            ]
+        }
+    }
+}

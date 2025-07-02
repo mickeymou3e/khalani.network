@@ -1,0 +1,2467 @@
+{
+    "version": 3,
+    "checkpoint": {
+        "stack": "organization/taiga/dev",
+        "latest": {
+            "manifest": {
+                "time": "2023-08-27T19:08:25.303621889Z",
+                "magic": "7f5ec831fbfcaaafb30fe1f9dd0eebc4a62372e9fda10d9bab6256b2deca869d",
+                "version": "v3.78.1"
+            },
+            "secrets_providers": {
+                "type": "passphrase",
+                "state": {
+                    "salt": "v1:Ac2v8PSZJTI=:v1:H9dN7pTpsL/3P9+i:pGxxx232rMNeMAGDMN6mFWgUJdoHLQ=="
+                }
+            },
+            "resources": [
+                {
+                    "urn": "urn:pulumi:dev::taiga::pulumi:pulumi:Stack::taiga-dev",
+                    "custom": false,
+                    "type": "pulumi:pulumi:Stack",
+                    "created": "2023-08-27T19:03:47.159547766Z",
+                    "modified": "2023-08-27T19:03:47.159547766Z",
+                    "sourcePosition": "project:///node_modules/@pulumi/runtime/stack.ts#36,23"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::pulumi:providers:awsx::default_1_0_5",
+                    "custom": true,
+                    "id": "b68a1103-f6c3-47cb-86cc-1918404e9d3e",
+                    "type": "pulumi:providers:awsx",
+                    "inputs": {
+                        "version": "1.0.5"
+                    },
+                    "outputs": {
+                        "version": "1.0.5"
+                    },
+                    "created": "2023-08-27T19:03:48.647721995Z",
+                    "modified": "2023-08-27T19:03:48.647721995Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc::vpc",
+                    "custom": false,
+                    "type": "awsx:ec2:Vpc",
+                    "parent": "urn:pulumi:dev::taiga::pulumi:pulumi:Stack::taiga-dev",
+                    "created": "2023-08-27T19:03:49.268477417Z",
+                    "modified": "2023-08-27T19:03:49.268477417Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_42_0",
+                    "custom": true,
+                    "id": "2d418aa8-f51c-425a-8ea1-45b8e36bbd79",
+                    "type": "pulumi:providers:aws",
+                    "inputs": {
+                        "version": "5.42.0"
+                    },
+                    "outputs": {
+                        "version": "5.42.0"
+                    },
+                    "created": "2023-08-27T19:03:49.445237602Z",
+                    "modified": "2023-08-27T19:03:49.445237602Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0",
+                    "custom": true,
+                    "id": "93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "type": "pulumi:providers:aws",
+                    "inputs": {
+                        "version": "5.35.0"
+                    },
+                    "outputs": {
+                        "version": "5.35.0"
+                    },
+                    "created": "2023-08-27T19:03:49.932581842Z",
+                    "modified": "2023-08-27T19:03:49.932581842Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc",
+                    "custom": true,
+                    "id": "vpc-02d3055c474d4899e",
+                    "type": "aws:ec2/vpc:Vpc",
+                    "inputs": {
+                        "__defaults": [
+                            "enableDnsSupport",
+                            "instanceTenancy"
+                        ],
+                        "cidrBlock": "10.0.0.0/16",
+                        "enableDnsSupport": true,
+                        "instanceTenancy": "default",
+                        "tags": {
+                            "Name": "vpc",
+                            "__defaults": []
+                        }
+                    },
+                    "outputs": {
+                        "__meta": "{\"schema_version\":\"1\"}",
+                        "arn": "arn:aws:ec2:us-east-1:803035318642:vpc/vpc-02d3055c474d4899e",
+                        "assignGeneratedIpv6CidrBlock": false,
+                        "cidrBlock": "10.0.0.0/16",
+                        "defaultNetworkAclId": "acl-0a30b60c7981aa525",
+                        "defaultRouteTableId": "rtb-0aa0ada720c191a1f",
+                        "defaultSecurityGroupId": "sg-09c8e80f4a0aadc2e",
+                        "dhcpOptionsId": "dopt-0ba5706a9c47f7960",
+                        "enableClassiclink": false,
+                        "enableClassiclinkDnsSupport": false,
+                        "enableDnsHostnames": false,
+                        "enableDnsSupport": true,
+                        "enableNetworkAddressUsageMetrics": false,
+                        "id": "vpc-02d3055c474d4899e",
+                        "instanceTenancy": "default",
+                        "ipv6AssociationId": "",
+                        "ipv6CidrBlock": "",
+                        "ipv6CidrBlockNetworkBorderGroup": "",
+                        "ipv6IpamPoolId": "",
+                        "ipv6NetmaskLength": 0,
+                        "mainRouteTableId": "rtb-0aa0ada720c191a1f",
+                        "ownerId": "803035318642",
+                        "tags": {
+                            "Name": "vpc"
+                        },
+                        "tagsAll": {
+                            "Name": "vpc"
+                        }
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc::vpc",
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "cidrBlock": null,
+                        "tags": null
+                    },
+                    "created": "2023-08-27T19:03:51.784513763Z",
+                    "modified": "2023-08-27T19:03:51.784513763Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-1",
+                    "custom": true,
+                    "id": "subnet-05b988bfe5eefff84",
+                    "type": "aws:ec2/subnet:Subnet",
+                    "inputs": {
+                        "__defaults": [
+                            "assignIpv6AddressOnCreation",
+                            "enableDns64",
+                            "enableResourceNameDnsARecordOnLaunch",
+                            "enableResourceNameDnsAaaaRecordOnLaunch",
+                            "ipv6Native"
+                        ],
+                        "assignIpv6AddressOnCreation": false,
+                        "availabilityZone": "us-east-1a",
+                        "cidrBlock": "10.0.0.0/19",
+                        "enableDns64": false,
+                        "enableResourceNameDnsARecordOnLaunch": false,
+                        "enableResourceNameDnsAaaaRecordOnLaunch": false,
+                        "ipv6Native": false,
+                        "mapPublicIpOnLaunch": false,
+                        "tags": {
+                            "Name": "vpc-private-1",
+                            "SubnetType": "Private",
+                            "__defaults": []
+                        },
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":600000000000,\"delete\":1200000000000},\"schema_version\":\"1\"}",
+                        "arn": "arn:aws:ec2:us-east-1:803035318642:subnet/subnet-05b988bfe5eefff84",
+                        "assignIpv6AddressOnCreation": false,
+                        "availabilityZone": "us-east-1a",
+                        "availabilityZoneId": "use1-az6",
+                        "cidrBlock": "10.0.0.0/19",
+                        "customerOwnedIpv4Pool": "",
+                        "enableDns64": false,
+                        "enableResourceNameDnsARecordOnLaunch": false,
+                        "enableResourceNameDnsAaaaRecordOnLaunch": false,
+                        "id": "subnet-05b988bfe5eefff84",
+                        "ipv6CidrBlock": "",
+                        "ipv6CidrBlockAssociationId": "",
+                        "ipv6Native": false,
+                        "mapCustomerOwnedIpOnLaunch": false,
+                        "mapPublicIpOnLaunch": false,
+                        "outpostArn": "",
+                        "ownerId": "803035318642",
+                        "privateDnsHostnameTypeOnLaunch": "ip-name",
+                        "tags": {
+                            "Name": "vpc-private-1",
+                            "SubnetType": "Private"
+                        },
+                        "tagsAll": {
+                            "Name": "vpc-private-1",
+                            "SubnetType": "Private"
+                        },
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "availabilityZone": null,
+                        "cidrBlock": null,
+                        "mapPublicIpOnLaunch": null,
+                        "tags": null,
+                        "vpcId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc"
+                        ]
+                    },
+                    "created": "2023-08-27T19:03:53.193521028Z",
+                    "modified": "2023-08-27T19:03:53.193521028Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/internetGateway:InternetGateway::vpc",
+                    "custom": true,
+                    "id": "igw-0e7385890014e3639",
+                    "type": "aws:ec2/internetGateway:InternetGateway",
+                    "inputs": {
+                        "__defaults": [],
+                        "tags": {
+                            "Name": "vpc",
+                            "__defaults": []
+                        },
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":1200000000000,\"delete\":1200000000000,\"update\":1200000000000}}",
+                        "arn": "arn:aws:ec2:us-east-1:803035318642:internet-gateway/igw-0e7385890014e3639",
+                        "id": "igw-0e7385890014e3639",
+                        "ownerId": "803035318642",
+                        "tags": {
+                            "Name": "vpc"
+                        },
+                        "tagsAll": {
+                            "Name": "vpc"
+                        },
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "tags": null,
+                        "vpcId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc"
+                        ]
+                    },
+                    "created": "2023-08-27T19:03:53.311377041Z",
+                    "modified": "2023-08-27T19:03:53.311377041Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-3",
+                    "custom": true,
+                    "id": "subnet-015cbe9583ad3caab",
+                    "type": "aws:ec2/subnet:Subnet",
+                    "inputs": {
+                        "__defaults": [
+                            "assignIpv6AddressOnCreation",
+                            "enableDns64",
+                            "enableResourceNameDnsARecordOnLaunch",
+                            "enableResourceNameDnsAaaaRecordOnLaunch",
+                            "ipv6Native"
+                        ],
+                        "assignIpv6AddressOnCreation": false,
+                        "availabilityZone": "us-east-1c",
+                        "cidrBlock": "10.0.128.0/19",
+                        "enableDns64": false,
+                        "enableResourceNameDnsARecordOnLaunch": false,
+                        "enableResourceNameDnsAaaaRecordOnLaunch": false,
+                        "ipv6Native": false,
+                        "mapPublicIpOnLaunch": false,
+                        "tags": {
+                            "Name": "vpc-private-3",
+                            "SubnetType": "Private",
+                            "__defaults": []
+                        },
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":600000000000,\"delete\":1200000000000},\"schema_version\":\"1\"}",
+                        "arn": "arn:aws:ec2:us-east-1:803035318642:subnet/subnet-015cbe9583ad3caab",
+                        "assignIpv6AddressOnCreation": false,
+                        "availabilityZone": "us-east-1c",
+                        "availabilityZoneId": "use1-az2",
+                        "cidrBlock": "10.0.128.0/19",
+                        "customerOwnedIpv4Pool": "",
+                        "enableDns64": false,
+                        "enableResourceNameDnsARecordOnLaunch": false,
+                        "enableResourceNameDnsAaaaRecordOnLaunch": false,
+                        "id": "subnet-015cbe9583ad3caab",
+                        "ipv6CidrBlock": "",
+                        "ipv6CidrBlockAssociationId": "",
+                        "ipv6Native": false,
+                        "mapCustomerOwnedIpOnLaunch": false,
+                        "mapPublicIpOnLaunch": false,
+                        "outpostArn": "",
+                        "ownerId": "803035318642",
+                        "privateDnsHostnameTypeOnLaunch": "ip-name",
+                        "tags": {
+                            "Name": "vpc-private-3",
+                            "SubnetType": "Private"
+                        },
+                        "tagsAll": {
+                            "Name": "vpc-private-3",
+                            "SubnetType": "Private"
+                        },
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "availabilityZone": null,
+                        "cidrBlock": null,
+                        "mapPublicIpOnLaunch": null,
+                        "tags": null,
+                        "vpcId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc"
+                        ]
+                    },
+                    "created": "2023-08-27T19:03:53.443163259Z",
+                    "modified": "2023-08-27T19:03:53.443163259Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-2",
+                    "custom": true,
+                    "id": "subnet-0e857df4c0d48c8fc",
+                    "type": "aws:ec2/subnet:Subnet",
+                    "inputs": {
+                        "__defaults": [
+                            "assignIpv6AddressOnCreation",
+                            "enableDns64",
+                            "enableResourceNameDnsARecordOnLaunch",
+                            "enableResourceNameDnsAaaaRecordOnLaunch",
+                            "ipv6Native"
+                        ],
+                        "assignIpv6AddressOnCreation": false,
+                        "availabilityZone": "us-east-1b",
+                        "cidrBlock": "10.0.64.0/19",
+                        "enableDns64": false,
+                        "enableResourceNameDnsARecordOnLaunch": false,
+                        "enableResourceNameDnsAaaaRecordOnLaunch": false,
+                        "ipv6Native": false,
+                        "mapPublicIpOnLaunch": false,
+                        "tags": {
+                            "Name": "vpc-private-2",
+                            "SubnetType": "Private",
+                            "__defaults": []
+                        },
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":600000000000,\"delete\":1200000000000},\"schema_version\":\"1\"}",
+                        "arn": "arn:aws:ec2:us-east-1:803035318642:subnet/subnet-0e857df4c0d48c8fc",
+                        "assignIpv6AddressOnCreation": false,
+                        "availabilityZone": "us-east-1b",
+                        "availabilityZoneId": "use1-az1",
+                        "cidrBlock": "10.0.64.0/19",
+                        "customerOwnedIpv4Pool": "",
+                        "enableDns64": false,
+                        "enableResourceNameDnsARecordOnLaunch": false,
+                        "enableResourceNameDnsAaaaRecordOnLaunch": false,
+                        "id": "subnet-0e857df4c0d48c8fc",
+                        "ipv6CidrBlock": "",
+                        "ipv6CidrBlockAssociationId": "",
+                        "ipv6Native": false,
+                        "mapCustomerOwnedIpOnLaunch": false,
+                        "mapPublicIpOnLaunch": false,
+                        "outpostArn": "",
+                        "ownerId": "803035318642",
+                        "privateDnsHostnameTypeOnLaunch": "ip-name",
+                        "tags": {
+                            "Name": "vpc-private-2",
+                            "SubnetType": "Private"
+                        },
+                        "tagsAll": {
+                            "Name": "vpc-private-2",
+                            "SubnetType": "Private"
+                        },
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "availabilityZone": null,
+                        "cidrBlock": null,
+                        "mapPublicIpOnLaunch": null,
+                        "tags": null,
+                        "vpcId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc"
+                        ]
+                    },
+                    "created": "2023-08-27T19:03:53.593691407Z",
+                    "modified": "2023-08-27T19:03:53.593691407Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-private-1",
+                    "custom": true,
+                    "id": "rtb-075764311c239673f",
+                    "type": "aws:ec2/routeTable:RouteTable",
+                    "inputs": {
+                        "__defaults": [],
+                        "tags": {
+                            "Name": "vpc-private-1",
+                            "SubnetType": "Private",
+                            "__defaults": []
+                        },
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":300000000000,\"delete\":300000000000,\"update\":120000000000}}",
+                        "arn": "arn:aws:ec2:us-east-1:803035318642:route-table/rtb-075764311c239673f",
+                        "id": "rtb-075764311c239673f",
+                        "ownerId": "803035318642",
+                        "propagatingVgws": [],
+                        "routes": [],
+                        "tags": {
+                            "Name": "vpc-private-1",
+                            "SubnetType": "Private"
+                        },
+                        "tagsAll": {
+                            "Name": "vpc-private-1",
+                            "SubnetType": "Private"
+                        },
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-1",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-1",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "tags": null,
+                        "vpcId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc"
+                        ]
+                    },
+                    "created": "2023-08-27T19:03:54.33031537Z",
+                    "modified": "2023-08-27T19:03:54.33031537Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-private-3",
+                    "custom": true,
+                    "id": "rtb-08f381571e6f15ba9",
+                    "type": "aws:ec2/routeTable:RouteTable",
+                    "inputs": {
+                        "__defaults": [],
+                        "tags": {
+                            "Name": "vpc-private-3",
+                            "SubnetType": "Private",
+                            "__defaults": []
+                        },
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":300000000000,\"delete\":300000000000,\"update\":120000000000}}",
+                        "arn": "arn:aws:ec2:us-east-1:803035318642:route-table/rtb-08f381571e6f15ba9",
+                        "id": "rtb-08f381571e6f15ba9",
+                        "ownerId": "803035318642",
+                        "propagatingVgws": [],
+                        "routes": [],
+                        "tags": {
+                            "Name": "vpc-private-3",
+                            "SubnetType": "Private"
+                        },
+                        "tagsAll": {
+                            "Name": "vpc-private-3",
+                            "SubnetType": "Private"
+                        },
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-3",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-3",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "tags": null,
+                        "vpcId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc"
+                        ]
+                    },
+                    "created": "2023-08-27T19:03:54.826347913Z",
+                    "modified": "2023-08-27T19:03:54.826347913Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-private-2",
+                    "custom": true,
+                    "id": "rtb-01b66f255c6ad2b2f",
+                    "type": "aws:ec2/routeTable:RouteTable",
+                    "inputs": {
+                        "__defaults": [],
+                        "tags": {
+                            "Name": "vpc-private-2",
+                            "SubnetType": "Private",
+                            "__defaults": []
+                        },
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":300000000000,\"delete\":300000000000,\"update\":120000000000}}",
+                        "arn": "arn:aws:ec2:us-east-1:803035318642:route-table/rtb-01b66f255c6ad2b2f",
+                        "id": "rtb-01b66f255c6ad2b2f",
+                        "ownerId": "803035318642",
+                        "propagatingVgws": [],
+                        "routes": [],
+                        "tags": {
+                            "Name": "vpc-private-2",
+                            "SubnetType": "Private"
+                        },
+                        "tagsAll": {
+                            "Name": "vpc-private-2",
+                            "SubnetType": "Private"
+                        },
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-2",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-2",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "tags": null,
+                        "vpcId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc"
+                        ]
+                    },
+                    "created": "2023-08-27T19:03:55.063324401Z",
+                    "modified": "2023-08-27T19:03:55.063324401Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable$aws:ec2/routeTableAssociation:RouteTableAssociation::vpc-private-1",
+                    "custom": true,
+                    "id": "rtbassoc-0ddc03b793f83f7ee",
+                    "type": "aws:ec2/routeTableAssociation:RouteTableAssociation",
+                    "inputs": {
+                        "__defaults": [],
+                        "routeTableId": "rtb-075764311c239673f",
+                        "subnetId": "subnet-05b988bfe5eefff84"
+                    },
+                    "outputs": {
+                        "gatewayId": "",
+                        "id": "rtbassoc-0ddc03b793f83f7ee",
+                        "routeTableId": "rtb-075764311c239673f",
+                        "subnetId": "subnet-05b988bfe5eefff84"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-private-1",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-private-1",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-1"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "routeTableId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-private-1"
+                        ],
+                        "subnetId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-1"
+                        ]
+                    },
+                    "created": "2023-08-27T19:03:55.440499735Z",
+                    "modified": "2023-08-27T19:03:55.440499735Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable$aws:ec2/routeTableAssociation:RouteTableAssociation::vpc-private-3",
+                    "custom": true,
+                    "id": "rtbassoc-0ee00c97e2a92eb2d",
+                    "type": "aws:ec2/routeTableAssociation:RouteTableAssociation",
+                    "inputs": {
+                        "__defaults": [],
+                        "routeTableId": "rtb-08f381571e6f15ba9",
+                        "subnetId": "subnet-015cbe9583ad3caab"
+                    },
+                    "outputs": {
+                        "gatewayId": "",
+                        "id": "rtbassoc-0ee00c97e2a92eb2d",
+                        "routeTableId": "rtb-08f381571e6f15ba9",
+                        "subnetId": "subnet-015cbe9583ad3caab"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-private-3",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-private-3",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-3"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "routeTableId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-private-3"
+                        ],
+                        "subnetId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-3"
+                        ]
+                    },
+                    "created": "2023-08-27T19:03:55.805044643Z",
+                    "modified": "2023-08-27T19:03:55.805044643Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable$aws:ec2/routeTableAssociation:RouteTableAssociation::vpc-private-2",
+                    "custom": true,
+                    "id": "rtbassoc-0875afd1407795271",
+                    "type": "aws:ec2/routeTableAssociation:RouteTableAssociation",
+                    "inputs": {
+                        "__defaults": [],
+                        "routeTableId": "rtb-01b66f255c6ad2b2f",
+                        "subnetId": "subnet-0e857df4c0d48c8fc"
+                    },
+                    "outputs": {
+                        "gatewayId": "",
+                        "id": "rtbassoc-0875afd1407795271",
+                        "routeTableId": "rtb-01b66f255c6ad2b2f",
+                        "subnetId": "subnet-0e857df4c0d48c8fc"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-private-2",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-private-2",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-2"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "routeTableId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-private-2"
+                        ],
+                        "subnetId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-2"
+                        ]
+                    },
+                    "created": "2023-08-27T19:03:56.085799495Z",
+                    "modified": "2023-08-27T19:03:56.085799495Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::aws:ecs/cluster:Cluster::cluster",
+                    "custom": true,
+                    "id": "arn:aws:ecs:us-east-1:803035318642:cluster/cluster-1886a73",
+                    "type": "aws:ecs/cluster:Cluster",
+                    "inputs": {
+                        "__defaults": [
+                            "name"
+                        ],
+                        "name": "cluster-1886a73"
+                    },
+                    "outputs": {
+                        "arn": "arn:aws:ecs:us-east-1:803035318642:cluster/cluster-1886a73",
+                        "capacityProviders": [],
+                        "defaultCapacityProviderStrategies": [],
+                        "id": "arn:aws:ecs:us-east-1:803035318642:cluster/cluster-1886a73",
+                        "name": "cluster-1886a73",
+                        "serviceConnectDefaults": null,
+                        "settings": [
+                            {
+                                "name": "containerInsights",
+                                "value": "disabled"
+                            }
+                        ],
+                        "tags": {},
+                        "tagsAll": {}
+                    },
+                    "parent": "urn:pulumi:dev::taiga::pulumi:pulumi:Stack::taiga-dev",
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_42_0::2d418aa8-f51c-425a-8ea1-45b8e36bbd79",
+                    "created": "2023-08-27T19:03:59.99037959Z",
+                    "modified": "2023-08-27T19:03:59.99037959Z",
+                    "sourcePosition": "project:///index.ts#46,17"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-2",
+                    "custom": true,
+                    "id": "subnet-03403daba0832a3e7",
+                    "type": "aws:ec2/subnet:Subnet",
+                    "inputs": {
+                        "__defaults": [
+                            "assignIpv6AddressOnCreation",
+                            "enableDns64",
+                            "enableResourceNameDnsARecordOnLaunch",
+                            "enableResourceNameDnsAaaaRecordOnLaunch",
+                            "ipv6Native"
+                        ],
+                        "assignIpv6AddressOnCreation": false,
+                        "availabilityZone": "us-east-1b",
+                        "cidrBlock": "10.0.96.0/20",
+                        "enableDns64": false,
+                        "enableResourceNameDnsARecordOnLaunch": false,
+                        "enableResourceNameDnsAaaaRecordOnLaunch": false,
+                        "ipv6Native": false,
+                        "mapPublicIpOnLaunch": true,
+                        "tags": {
+                            "Name": "vpc-public-2",
+                            "SubnetType": "Public",
+                            "__defaults": []
+                        },
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":600000000000,\"delete\":1200000000000},\"schema_version\":\"1\"}",
+                        "arn": "arn:aws:ec2:us-east-1:803035318642:subnet/subnet-03403daba0832a3e7",
+                        "assignIpv6AddressOnCreation": false,
+                        "availabilityZone": "us-east-1b",
+                        "availabilityZoneId": "use1-az1",
+                        "cidrBlock": "10.0.96.0/20",
+                        "customerOwnedIpv4Pool": "",
+                        "enableDns64": false,
+                        "enableResourceNameDnsARecordOnLaunch": false,
+                        "enableResourceNameDnsAaaaRecordOnLaunch": false,
+                        "id": "subnet-03403daba0832a3e7",
+                        "ipv6CidrBlock": "",
+                        "ipv6CidrBlockAssociationId": "",
+                        "ipv6Native": false,
+                        "mapCustomerOwnedIpOnLaunch": false,
+                        "mapPublicIpOnLaunch": true,
+                        "outpostArn": "",
+                        "ownerId": "803035318642",
+                        "privateDnsHostnameTypeOnLaunch": "ip-name",
+                        "tags": {
+                            "Name": "vpc-public-2",
+                            "SubnetType": "Public"
+                        },
+                        "tagsAll": {
+                            "Name": "vpc-public-2",
+                            "SubnetType": "Public"
+                        },
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "availabilityZone": null,
+                        "cidrBlock": null,
+                        "mapPublicIpOnLaunch": null,
+                        "tags": null,
+                        "vpcId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc"
+                        ]
+                    },
+                    "created": "2023-08-27T19:04:03.323870729Z",
+                    "modified": "2023-08-27T19:04:03.323870729Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-3",
+                    "custom": true,
+                    "id": "subnet-00b2f8f3d1903387f",
+                    "type": "aws:ec2/subnet:Subnet",
+                    "inputs": {
+                        "__defaults": [
+                            "assignIpv6AddressOnCreation",
+                            "enableDns64",
+                            "enableResourceNameDnsARecordOnLaunch",
+                            "enableResourceNameDnsAaaaRecordOnLaunch",
+                            "ipv6Native"
+                        ],
+                        "assignIpv6AddressOnCreation": false,
+                        "availabilityZone": "us-east-1c",
+                        "cidrBlock": "10.0.160.0/20",
+                        "enableDns64": false,
+                        "enableResourceNameDnsARecordOnLaunch": false,
+                        "enableResourceNameDnsAaaaRecordOnLaunch": false,
+                        "ipv6Native": false,
+                        "mapPublicIpOnLaunch": true,
+                        "tags": {
+                            "Name": "vpc-public-3",
+                            "SubnetType": "Public",
+                            "__defaults": []
+                        },
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":600000000000,\"delete\":1200000000000},\"schema_version\":\"1\"}",
+                        "arn": "arn:aws:ec2:us-east-1:803035318642:subnet/subnet-00b2f8f3d1903387f",
+                        "assignIpv6AddressOnCreation": false,
+                        "availabilityZone": "us-east-1c",
+                        "availabilityZoneId": "use1-az2",
+                        "cidrBlock": "10.0.160.0/20",
+                        "customerOwnedIpv4Pool": "",
+                        "enableDns64": false,
+                        "enableResourceNameDnsARecordOnLaunch": false,
+                        "enableResourceNameDnsAaaaRecordOnLaunch": false,
+                        "id": "subnet-00b2f8f3d1903387f",
+                        "ipv6CidrBlock": "",
+                        "ipv6CidrBlockAssociationId": "",
+                        "ipv6Native": false,
+                        "mapCustomerOwnedIpOnLaunch": false,
+                        "mapPublicIpOnLaunch": true,
+                        "outpostArn": "",
+                        "ownerId": "803035318642",
+                        "privateDnsHostnameTypeOnLaunch": "ip-name",
+                        "tags": {
+                            "Name": "vpc-public-3",
+                            "SubnetType": "Public"
+                        },
+                        "tagsAll": {
+                            "Name": "vpc-public-3",
+                            "SubnetType": "Public"
+                        },
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "availabilityZone": null,
+                        "cidrBlock": null,
+                        "mapPublicIpOnLaunch": null,
+                        "tags": null,
+                        "vpcId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc"
+                        ]
+                    },
+                    "created": "2023-08-27T19:04:03.532664008Z",
+                    "modified": "2023-08-27T19:04:03.532664008Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-1",
+                    "custom": true,
+                    "id": "subnet-076091c9b18ea385a",
+                    "type": "aws:ec2/subnet:Subnet",
+                    "inputs": {
+                        "__defaults": [
+                            "assignIpv6AddressOnCreation",
+                            "enableDns64",
+                            "enableResourceNameDnsARecordOnLaunch",
+                            "enableResourceNameDnsAaaaRecordOnLaunch",
+                            "ipv6Native"
+                        ],
+                        "assignIpv6AddressOnCreation": false,
+                        "availabilityZone": "us-east-1a",
+                        "cidrBlock": "10.0.32.0/20",
+                        "enableDns64": false,
+                        "enableResourceNameDnsARecordOnLaunch": false,
+                        "enableResourceNameDnsAaaaRecordOnLaunch": false,
+                        "ipv6Native": false,
+                        "mapPublicIpOnLaunch": true,
+                        "tags": {
+                            "Name": "vpc-public-1",
+                            "SubnetType": "Public",
+                            "__defaults": []
+                        },
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":600000000000,\"delete\":1200000000000},\"schema_version\":\"1\"}",
+                        "arn": "arn:aws:ec2:us-east-1:803035318642:subnet/subnet-076091c9b18ea385a",
+                        "assignIpv6AddressOnCreation": false,
+                        "availabilityZone": "us-east-1a",
+                        "availabilityZoneId": "use1-az6",
+                        "cidrBlock": "10.0.32.0/20",
+                        "customerOwnedIpv4Pool": "",
+                        "enableDns64": false,
+                        "enableResourceNameDnsARecordOnLaunch": false,
+                        "enableResourceNameDnsAaaaRecordOnLaunch": false,
+                        "id": "subnet-076091c9b18ea385a",
+                        "ipv6CidrBlock": "",
+                        "ipv6CidrBlockAssociationId": "",
+                        "ipv6Native": false,
+                        "mapCustomerOwnedIpOnLaunch": false,
+                        "mapPublicIpOnLaunch": true,
+                        "outpostArn": "",
+                        "ownerId": "803035318642",
+                        "privateDnsHostnameTypeOnLaunch": "ip-name",
+                        "tags": {
+                            "Name": "vpc-public-1",
+                            "SubnetType": "Public"
+                        },
+                        "tagsAll": {
+                            "Name": "vpc-public-1",
+                            "SubnetType": "Public"
+                        },
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "availabilityZone": null,
+                        "cidrBlock": null,
+                        "mapPublicIpOnLaunch": null,
+                        "tags": null,
+                        "vpcId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc"
+                        ]
+                    },
+                    "created": "2023-08-27T19:04:04.508433952Z",
+                    "modified": "2023-08-27T19:04:04.508433952Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-public-2",
+                    "custom": true,
+                    "id": "rtb-05bae9b277b115251",
+                    "type": "aws:ec2/routeTable:RouteTable",
+                    "inputs": {
+                        "__defaults": [],
+                        "tags": {
+                            "Name": "vpc-public-2",
+                            "SubnetType": "Public",
+                            "__defaults": []
+                        },
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":300000000000,\"delete\":300000000000,\"update\":120000000000}}",
+                        "arn": "arn:aws:ec2:us-east-1:803035318642:route-table/rtb-05bae9b277b115251",
+                        "id": "rtb-05bae9b277b115251",
+                        "ownerId": "803035318642",
+                        "propagatingVgws": [],
+                        "routes": [],
+                        "tags": {
+                            "Name": "vpc-public-2",
+                            "SubnetType": "Public"
+                        },
+                        "tagsAll": {
+                            "Name": "vpc-public-2",
+                            "SubnetType": "Public"
+                        },
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-2",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-2",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "tags": null,
+                        "vpcId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc"
+                        ]
+                    },
+                    "created": "2023-08-27T19:04:04.705922156Z",
+                    "modified": "2023-08-27T19:04:04.705922156Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/eip:Eip::vpc-2",
+                    "custom": true,
+                    "id": "eipalloc-0693fd9f6affd0a0c",
+                    "type": "aws:ec2/eip:Eip",
+                    "inputs": {
+                        "__defaults": []
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"delete\":180000000000,\"read\":900000000000,\"update\":300000000000}}",
+                        "allocationId": "eipalloc-0693fd9f6affd0a0c",
+                        "associationId": "",
+                        "carrierIp": "",
+                        "customerOwnedIp": "",
+                        "customerOwnedIpv4Pool": "",
+                        "domain": "vpc",
+                        "id": "eipalloc-0693fd9f6affd0a0c",
+                        "instance": "",
+                        "networkBorderGroup": "us-east-1",
+                        "networkInterface": "",
+                        "privateIp": "",
+                        "publicDns": "ec2-54-159-122-122.compute-1.amazonaws.com",
+                        "publicIp": "54.159.122.122",
+                        "publicIpv4Pool": "amazon",
+                        "tags": {},
+                        "tagsAll": {},
+                        "vpc": true
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-2",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-2"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "created": "2023-08-27T19:04:04.915859458Z",
+                    "modified": "2023-08-27T19:04:04.915859458Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-public-3",
+                    "custom": true,
+                    "id": "rtb-0bbf97a1eace1b2a5",
+                    "type": "aws:ec2/routeTable:RouteTable",
+                    "inputs": {
+                        "__defaults": [],
+                        "tags": {
+                            "Name": "vpc-public-3",
+                            "SubnetType": "Public",
+                            "__defaults": []
+                        },
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":300000000000,\"delete\":300000000000,\"update\":120000000000}}",
+                        "arn": "arn:aws:ec2:us-east-1:803035318642:route-table/rtb-0bbf97a1eace1b2a5",
+                        "id": "rtb-0bbf97a1eace1b2a5",
+                        "ownerId": "803035318642",
+                        "propagatingVgws": [],
+                        "routes": [],
+                        "tags": {
+                            "Name": "vpc-public-3",
+                            "SubnetType": "Public"
+                        },
+                        "tagsAll": {
+                            "Name": "vpc-public-3",
+                            "SubnetType": "Public"
+                        },
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-3",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-3",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "tags": null,
+                        "vpcId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc"
+                        ]
+                    },
+                    "created": "2023-08-27T19:04:05.113154057Z",
+                    "modified": "2023-08-27T19:04:05.113154057Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/eip:Eip::vpc-3",
+                    "custom": true,
+                    "id": "eipalloc-0672093231a71df46",
+                    "type": "aws:ec2/eip:Eip",
+                    "inputs": {
+                        "__defaults": []
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"delete\":180000000000,\"read\":900000000000,\"update\":300000000000}}",
+                        "allocationId": "eipalloc-0672093231a71df46",
+                        "associationId": "",
+                        "carrierIp": "",
+                        "customerOwnedIp": "",
+                        "customerOwnedIpv4Pool": "",
+                        "domain": "vpc",
+                        "id": "eipalloc-0672093231a71df46",
+                        "instance": "",
+                        "networkBorderGroup": "us-east-1",
+                        "networkInterface": "",
+                        "privateIp": "",
+                        "publicDns": "ec2-44-218-130-107.compute-1.amazonaws.com",
+                        "publicIp": "44.218.130.107",
+                        "publicIpv4Pool": "amazon",
+                        "tags": {},
+                        "tagsAll": {},
+                        "vpc": true
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-3",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-3"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "created": "2023-08-27T19:04:06.31330949Z",
+                    "modified": "2023-08-27T19:04:06.31330949Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-public-1",
+                    "custom": true,
+                    "id": "rtb-090be28763b9c5525",
+                    "type": "aws:ec2/routeTable:RouteTable",
+                    "inputs": {
+                        "__defaults": [],
+                        "tags": {
+                            "Name": "vpc-public-1",
+                            "SubnetType": "Public",
+                            "__defaults": []
+                        },
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":300000000000,\"delete\":300000000000,\"update\":120000000000}}",
+                        "arn": "arn:aws:ec2:us-east-1:803035318642:route-table/rtb-090be28763b9c5525",
+                        "id": "rtb-090be28763b9c5525",
+                        "ownerId": "803035318642",
+                        "propagatingVgws": [],
+                        "routes": [],
+                        "tags": {
+                            "Name": "vpc-public-1",
+                            "SubnetType": "Public"
+                        },
+                        "tagsAll": {
+                            "Name": "vpc-public-1",
+                            "SubnetType": "Public"
+                        },
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-1",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-1",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "tags": null,
+                        "vpcId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc"
+                        ]
+                    },
+                    "created": "2023-08-27T19:04:06.812534665Z",
+                    "modified": "2023-08-27T19:04:06.812534665Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable$aws:ec2/routeTableAssociation:RouteTableAssociation::vpc-public-2",
+                    "custom": true,
+                    "id": "rtbassoc-0844563ae836f18fe",
+                    "type": "aws:ec2/routeTableAssociation:RouteTableAssociation",
+                    "inputs": {
+                        "__defaults": [],
+                        "routeTableId": "rtb-05bae9b277b115251",
+                        "subnetId": "subnet-03403daba0832a3e7"
+                    },
+                    "outputs": {
+                        "gatewayId": "",
+                        "id": "rtbassoc-0844563ae836f18fe",
+                        "routeTableId": "rtb-05bae9b277b115251",
+                        "subnetId": "subnet-03403daba0832a3e7"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-public-2",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-public-2",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-2"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "routeTableId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-public-2"
+                        ],
+                        "subnetId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-2"
+                        ]
+                    },
+                    "created": "2023-08-27T19:04:06.920464219Z",
+                    "modified": "2023-08-27T19:04:06.920464219Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/eip:Eip::vpc-1",
+                    "custom": true,
+                    "id": "eipalloc-02f817fafd4e8d1cb",
+                    "type": "aws:ec2/eip:Eip",
+                    "inputs": {
+                        "__defaults": []
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"delete\":180000000000,\"read\":900000000000,\"update\":300000000000}}",
+                        "allocationId": "eipalloc-02f817fafd4e8d1cb",
+                        "associationId": "",
+                        "carrierIp": "",
+                        "customerOwnedIp": "",
+                        "customerOwnedIpv4Pool": "",
+                        "domain": "vpc",
+                        "id": "eipalloc-02f817fafd4e8d1cb",
+                        "instance": "",
+                        "networkBorderGroup": "us-east-1",
+                        "networkInterface": "",
+                        "privateIp": "",
+                        "publicDns": "ec2-52-54-189-120.compute-1.amazonaws.com",
+                        "publicIp": "52.54.189.120",
+                        "publicIpv4Pool": "amazon",
+                        "tags": {},
+                        "tagsAll": {},
+                        "vpc": true
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-1",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-1"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "created": "2023-08-27T19:04:07.142518944Z",
+                    "modified": "2023-08-27T19:04:07.142518944Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable$aws:ec2/route:Route::vpc-public-2",
+                    "custom": true,
+                    "id": "r-rtb-05bae9b277b1152511080289494",
+                    "type": "aws:ec2/route:Route",
+                    "inputs": {
+                        "__defaults": [],
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": "igw-0e7385890014e3639",
+                        "routeTableId": "rtb-05bae9b277b115251"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":300000000000,\"delete\":300000000000,\"update\":120000000000}}",
+                        "carrierGatewayId": "",
+                        "coreNetworkArn": "",
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "destinationIpv6CidrBlock": "",
+                        "destinationPrefixListId": "",
+                        "egressOnlyGatewayId": "",
+                        "gatewayId": "igw-0e7385890014e3639",
+                        "id": "r-rtb-05bae9b277b1152511080289494",
+                        "instanceId": "",
+                        "instanceOwnerId": "",
+                        "localGatewayId": "",
+                        "natGatewayId": "",
+                        "networkInterfaceId": "",
+                        "origin": "CreateRoute",
+                        "routeTableId": "rtb-05bae9b277b115251",
+                        "state": "active",
+                        "transitGatewayId": "",
+                        "vpcEndpointId": "",
+                        "vpcPeeringConnectionId": ""
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-public-2",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-public-2",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/internetGateway:InternetGateway::vpc"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "destinationCidrBlock": null,
+                        "gatewayId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/internetGateway:InternetGateway::vpc"
+                        ],
+                        "routeTableId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-public-2"
+                        ]
+                    },
+                    "created": "2023-08-27T19:04:07.33852266Z",
+                    "modified": "2023-08-27T19:04:07.33852266Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable$aws:ec2/routeTableAssociation:RouteTableAssociation::vpc-public-3",
+                    "custom": true,
+                    "id": "rtbassoc-0486d8e200f14fb5b",
+                    "type": "aws:ec2/routeTableAssociation:RouteTableAssociation",
+                    "inputs": {
+                        "__defaults": [],
+                        "routeTableId": "rtb-0bbf97a1eace1b2a5",
+                        "subnetId": "subnet-00b2f8f3d1903387f"
+                    },
+                    "outputs": {
+                        "gatewayId": "",
+                        "id": "rtbassoc-0486d8e200f14fb5b",
+                        "routeTableId": "rtb-0bbf97a1eace1b2a5",
+                        "subnetId": "subnet-00b2f8f3d1903387f"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-public-3",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-public-3",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-3"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "routeTableId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-public-3"
+                        ],
+                        "subnetId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-3"
+                        ]
+                    },
+                    "created": "2023-08-27T19:04:07.606588116Z",
+                    "modified": "2023-08-27T19:04:07.606588116Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable$aws:ec2/route:Route::vpc-public-3",
+                    "custom": true,
+                    "id": "r-rtb-0bbf97a1eace1b2a51080289494",
+                    "type": "aws:ec2/route:Route",
+                    "inputs": {
+                        "__defaults": [],
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": "igw-0e7385890014e3639",
+                        "routeTableId": "rtb-0bbf97a1eace1b2a5"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":300000000000,\"delete\":300000000000,\"update\":120000000000}}",
+                        "carrierGatewayId": "",
+                        "coreNetworkArn": "",
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "destinationIpv6CidrBlock": "",
+                        "destinationPrefixListId": "",
+                        "egressOnlyGatewayId": "",
+                        "gatewayId": "igw-0e7385890014e3639",
+                        "id": "r-rtb-0bbf97a1eace1b2a51080289494",
+                        "instanceId": "",
+                        "instanceOwnerId": "",
+                        "localGatewayId": "",
+                        "natGatewayId": "",
+                        "networkInterfaceId": "",
+                        "origin": "CreateRoute",
+                        "routeTableId": "rtb-0bbf97a1eace1b2a5",
+                        "state": "active",
+                        "transitGatewayId": "",
+                        "vpcEndpointId": "",
+                        "vpcPeeringConnectionId": ""
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-public-3",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-public-3",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/internetGateway:InternetGateway::vpc"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "destinationCidrBlock": null,
+                        "gatewayId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/internetGateway:InternetGateway::vpc"
+                        ],
+                        "routeTableId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-public-3"
+                        ]
+                    },
+                    "created": "2023-08-27T19:04:08.211973006Z",
+                    "modified": "2023-08-27T19:04:08.211973006Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable$aws:ec2/routeTableAssociation:RouteTableAssociation::vpc-public-1",
+                    "custom": true,
+                    "id": "rtbassoc-03220e64a010c62cf",
+                    "type": "aws:ec2/routeTableAssociation:RouteTableAssociation",
+                    "inputs": {
+                        "__defaults": [],
+                        "routeTableId": "rtb-090be28763b9c5525",
+                        "subnetId": "subnet-076091c9b18ea385a"
+                    },
+                    "outputs": {
+                        "gatewayId": "",
+                        "id": "rtbassoc-03220e64a010c62cf",
+                        "routeTableId": "rtb-090be28763b9c5525",
+                        "subnetId": "subnet-076091c9b18ea385a"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-public-1",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-public-1",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-1"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "routeTableId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-public-1"
+                        ],
+                        "subnetId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-1"
+                        ]
+                    },
+                    "created": "2023-08-27T19:04:08.553564743Z",
+                    "modified": "2023-08-27T19:04:08.553564743Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable$aws:ec2/route:Route::vpc-public-1",
+                    "custom": true,
+                    "id": "r-rtb-090be28763b9c55251080289494",
+                    "type": "aws:ec2/route:Route",
+                    "inputs": {
+                        "__defaults": [],
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": "igw-0e7385890014e3639",
+                        "routeTableId": "rtb-090be28763b9c5525"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":300000000000,\"delete\":300000000000,\"update\":120000000000}}",
+                        "carrierGatewayId": "",
+                        "coreNetworkArn": "",
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "destinationIpv6CidrBlock": "",
+                        "destinationPrefixListId": "",
+                        "egressOnlyGatewayId": "",
+                        "gatewayId": "igw-0e7385890014e3639",
+                        "id": "r-rtb-090be28763b9c55251080289494",
+                        "instanceId": "",
+                        "instanceOwnerId": "",
+                        "localGatewayId": "",
+                        "natGatewayId": "",
+                        "networkInterfaceId": "",
+                        "origin": "CreateRoute",
+                        "routeTableId": "rtb-090be28763b9c5525",
+                        "state": "active",
+                        "transitGatewayId": "",
+                        "vpcEndpointId": "",
+                        "vpcPeeringConnectionId": ""
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-public-1",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-public-1",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/internetGateway:InternetGateway::vpc"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "destinationCidrBlock": null,
+                        "gatewayId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/internetGateway:InternetGateway::vpc"
+                        ],
+                        "routeTableId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-public-1"
+                        ]
+                    },
+                    "created": "2023-08-27T19:04:08.741776268Z",
+                    "modified": "2023-08-27T19:04:08.741776268Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/natGateway:NatGateway::vpc-2",
+                    "custom": true,
+                    "id": "nat-0b017f4ae2258bd76",
+                    "type": "aws:ec2/natGateway:NatGateway",
+                    "inputs": {
+                        "__defaults": [
+                            "connectivityType"
+                        ],
+                        "allocationId": "eipalloc-0693fd9f6affd0a0c",
+                        "connectivityType": "public",
+                        "subnetId": "subnet-03403daba0832a3e7",
+                        "tags": {
+                            "Name": "vpc-2",
+                            "__defaults": []
+                        }
+                    },
+                    "outputs": {
+                        "allocationId": "eipalloc-0693fd9f6affd0a0c",
+                        "connectivityType": "public",
+                        "id": "nat-0b017f4ae2258bd76",
+                        "networkInterfaceId": "eni-0b367e5d3fce98ca0",
+                        "privateIp": "10.0.97.94",
+                        "publicIp": "54.159.122.122",
+                        "subnetId": "subnet-03403daba0832a3e7",
+                        "tags": {
+                            "Name": "vpc-2"
+                        },
+                        "tagsAll": {
+                            "Name": "vpc-2"
+                        }
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-2",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-2",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/eip:Eip::vpc-2"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "allocationId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/eip:Eip::vpc-2"
+                        ],
+                        "subnetId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-2"
+                        ],
+                        "tags": null
+                    },
+                    "created": "2023-08-27T19:05:49.962904808Z",
+                    "modified": "2023-08-27T19:05:49.962904808Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable$aws:ec2/route:Route::vpc-private-2",
+                    "custom": true,
+                    "id": "r-rtb-01b66f255c6ad2b2f1080289494",
+                    "type": "aws:ec2/route:Route",
+                    "inputs": {
+                        "__defaults": [],
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "natGatewayId": "nat-0b017f4ae2258bd76",
+                        "routeTableId": "rtb-01b66f255c6ad2b2f"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":300000000000,\"delete\":300000000000,\"update\":120000000000}}",
+                        "carrierGatewayId": "",
+                        "coreNetworkArn": "",
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "destinationIpv6CidrBlock": "",
+                        "destinationPrefixListId": "",
+                        "egressOnlyGatewayId": "",
+                        "gatewayId": "",
+                        "id": "r-rtb-01b66f255c6ad2b2f1080289494",
+                        "instanceId": "",
+                        "instanceOwnerId": "",
+                        "localGatewayId": "",
+                        "natGatewayId": "nat-0b017f4ae2258bd76",
+                        "networkInterfaceId": "",
+                        "origin": "CreateRoute",
+                        "routeTableId": "rtb-01b66f255c6ad2b2f",
+                        "state": "active",
+                        "transitGatewayId": "",
+                        "vpcEndpointId": "",
+                        "vpcPeeringConnectionId": ""
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-private-2",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-private-2",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/natGateway:NatGateway::vpc-2"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "destinationCidrBlock": null,
+                        "natGatewayId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/natGateway:NatGateway::vpc-2"
+                        ],
+                        "routeTableId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-private-2"
+                        ]
+                    },
+                    "created": "2023-08-27T19:05:51.283825684Z",
+                    "modified": "2023-08-27T19:05:51.283825684Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/natGateway:NatGateway::vpc-3",
+                    "custom": true,
+                    "id": "nat-049791c487e5695b0",
+                    "type": "aws:ec2/natGateway:NatGateway",
+                    "inputs": {
+                        "__defaults": [
+                            "connectivityType"
+                        ],
+                        "allocationId": "eipalloc-0672093231a71df46",
+                        "connectivityType": "public",
+                        "subnetId": "subnet-00b2f8f3d1903387f",
+                        "tags": {
+                            "Name": "vpc-3",
+                            "__defaults": []
+                        }
+                    },
+                    "outputs": {
+                        "allocationId": "eipalloc-0672093231a71df46",
+                        "connectivityType": "public",
+                        "id": "nat-049791c487e5695b0",
+                        "networkInterfaceId": "eni-0eb8a3a70daa8788a",
+                        "privateIp": "10.0.170.232",
+                        "publicIp": "44.218.130.107",
+                        "subnetId": "subnet-00b2f8f3d1903387f",
+                        "tags": {
+                            "Name": "vpc-3"
+                        },
+                        "tagsAll": {
+                            "Name": "vpc-3"
+                        }
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-3",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-3",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/eip:Eip::vpc-3"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "allocationId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/eip:Eip::vpc-3"
+                        ],
+                        "subnetId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-3"
+                        ],
+                        "tags": null
+                    },
+                    "created": "2023-08-27T19:06:11.452037838Z",
+                    "modified": "2023-08-27T19:06:11.452037838Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/natGateway:NatGateway::vpc-1",
+                    "custom": true,
+                    "id": "nat-0720b63fb6e6f1bf2",
+                    "type": "aws:ec2/natGateway:NatGateway",
+                    "inputs": {
+                        "__defaults": [
+                            "connectivityType"
+                        ],
+                        "allocationId": "eipalloc-02f817fafd4e8d1cb",
+                        "connectivityType": "public",
+                        "subnetId": "subnet-076091c9b18ea385a",
+                        "tags": {
+                            "Name": "vpc-1",
+                            "__defaults": []
+                        }
+                    },
+                    "outputs": {
+                        "allocationId": "eipalloc-02f817fafd4e8d1cb",
+                        "connectivityType": "public",
+                        "id": "nat-0720b63fb6e6f1bf2",
+                        "networkInterfaceId": "eni-0de106528a54c2f76",
+                        "privateIp": "10.0.33.254",
+                        "publicIp": "52.54.189.120",
+                        "subnetId": "subnet-076091c9b18ea385a",
+                        "tags": {
+                            "Name": "vpc-1"
+                        },
+                        "tagsAll": {
+                            "Name": "vpc-1"
+                        }
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-1",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-1",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/eip:Eip::vpc-1"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "allocationId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/eip:Eip::vpc-1"
+                        ],
+                        "subnetId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-1"
+                        ],
+                        "tags": null
+                    },
+                    "created": "2023-08-27T19:06:12.438554937Z",
+                    "modified": "2023-08-27T19:06:12.438554937Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable$aws:ec2/route:Route::vpc-private-3",
+                    "custom": true,
+                    "id": "r-rtb-08f381571e6f15ba91080289494",
+                    "type": "aws:ec2/route:Route",
+                    "inputs": {
+                        "__defaults": [],
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "natGatewayId": "nat-049791c487e5695b0",
+                        "routeTableId": "rtb-08f381571e6f15ba9"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":300000000000,\"delete\":300000000000,\"update\":120000000000}}",
+                        "carrierGatewayId": "",
+                        "coreNetworkArn": "",
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "destinationIpv6CidrBlock": "",
+                        "destinationPrefixListId": "",
+                        "egressOnlyGatewayId": "",
+                        "gatewayId": "",
+                        "id": "r-rtb-08f381571e6f15ba91080289494",
+                        "instanceId": "",
+                        "instanceOwnerId": "",
+                        "localGatewayId": "",
+                        "natGatewayId": "nat-049791c487e5695b0",
+                        "networkInterfaceId": "",
+                        "origin": "CreateRoute",
+                        "routeTableId": "rtb-08f381571e6f15ba9",
+                        "state": "active",
+                        "transitGatewayId": "",
+                        "vpcEndpointId": "",
+                        "vpcPeeringConnectionId": ""
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-private-3",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-private-3",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/natGateway:NatGateway::vpc-3"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "destinationCidrBlock": null,
+                        "natGatewayId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/natGateway:NatGateway::vpc-3"
+                        ],
+                        "routeTableId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-private-3"
+                        ]
+                    },
+                    "created": "2023-08-27T19:06:12.836036421Z",
+                    "modified": "2023-08-27T19:06:12.836036421Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable$aws:ec2/route:Route::vpc-private-1",
+                    "custom": true,
+                    "id": "r-rtb-075764311c239673f1080289494",
+                    "type": "aws:ec2/route:Route",
+                    "inputs": {
+                        "__defaults": [],
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "natGatewayId": "nat-0720b63fb6e6f1bf2",
+                        "routeTableId": "rtb-075764311c239673f"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":300000000000,\"delete\":300000000000,\"update\":120000000000}}",
+                        "carrierGatewayId": "",
+                        "coreNetworkArn": "",
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "destinationIpv6CidrBlock": "",
+                        "destinationPrefixListId": "",
+                        "egressOnlyGatewayId": "",
+                        "gatewayId": "",
+                        "id": "r-rtb-075764311c239673f1080289494",
+                        "instanceId": "",
+                        "instanceOwnerId": "",
+                        "localGatewayId": "",
+                        "natGatewayId": "nat-0720b63fb6e6f1bf2",
+                        "networkInterfaceId": "",
+                        "origin": "CreateRoute",
+                        "routeTableId": "rtb-075764311c239673f",
+                        "state": "active",
+                        "transitGatewayId": "",
+                        "vpcEndpointId": "",
+                        "vpcPeeringConnectionId": ""
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-private-1",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-private-1",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/natGateway:NatGateway::vpc-1"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "destinationCidrBlock": null,
+                        "natGatewayId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/natGateway:NatGateway::vpc-1"
+                        ],
+                        "routeTableId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet$aws:ec2/routeTable:RouteTable::vpc-private-1"
+                        ]
+                    },
+                    "created": "2023-08-27T19:06:13.730495744Z",
+                    "modified": "2023-08-27T19:06:13.730495744Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository::zeth_repository",
+                    "custom": false,
+                    "type": "awsx:ecr:Repository",
+                    "outputs": {
+                        "lifecyclePolicy": {
+                            "4dabf18193072939515e22adb298388d": "5cf8f73096256a8f31e491e813e4eb8e",
+                            "id": "zeth_repository-23c3d9d",
+                            "packageVersion": "",
+                            "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/lifecyclePolicy:LifecyclePolicy::zeth_repository"
+                        },
+                        "repository": {
+                            "4dabf18193072939515e22adb298388d": "5cf8f73096256a8f31e491e813e4eb8e",
+                            "id": "zeth_repository-23c3d9d",
+                            "packageVersion": "",
+                            "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/repository:Repository::zeth_repository"
+                        }
+                    },
+                    "parent": "urn:pulumi:dev::taiga::pulumi:pulumi:Stack::taiga-dev",
+                    "created": "2023-08-27T19:06:14.096232212Z",
+                    "modified": "2023-08-27T19:06:14.096232212Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/repository:Repository::zeth_repository",
+                    "custom": true,
+                    "id": "zeth_repository-23c3d9d",
+                    "type": "aws:ecr/repository:Repository",
+                    "inputs": {
+                        "__defaults": [
+                            "imageTagMutability",
+                            "name"
+                        ],
+                        "imageTagMutability": "MUTABLE",
+                        "name": "zeth_repository-23c3d9d"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"delete\":1200000000000}}",
+                        "arn": "arn:aws:ecr:us-east-1:803035318642:repository/zeth_repository-23c3d9d",
+                        "encryptionConfigurations": [
+                            {
+                                "encryptionType": "AES256",
+                                "kmsKey": ""
+                            }
+                        ],
+                        "id": "zeth_repository-23c3d9d",
+                        "imageScanningConfiguration": {
+                            "scanOnPush": false
+                        },
+                        "imageTagMutability": "MUTABLE",
+                        "name": "zeth_repository-23c3d9d",
+                        "registryId": "803035318642",
+                        "repositoryUrl": "803035318642.dkr.ecr.us-east-1.amazonaws.com/zeth_repository-23c3d9d",
+                        "tags": {},
+                        "tagsAll": {}
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ecr:Repository::zeth_repository",
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "created": "2023-08-27T19:06:14.679976705Z",
+                    "modified": "2023-08-27T19:06:14.679976705Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::pulumi:providers:pulumi::default",
+                    "custom": true,
+                    "id": "a0cfd7af-4f9f-4174-b989-0085d82ffae3",
+                    "type": "pulumi:providers:pulumi",
+                    "created": "2023-08-27T19:06:14.868647771Z",
+                    "modified": "2023-08-27T19:06:14.868647771Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/lifecyclePolicy:LifecyclePolicy::zeth_repository",
+                    "custom": true,
+                    "id": "zeth_repository-23c3d9d",
+                    "type": "aws:ecr/lifecyclePolicy:LifecyclePolicy",
+                    "inputs": {
+                        "__defaults": [],
+                        "policy": "{\"rules\":[{\"action\":{\"type\":\"expire\"},\"description\":\"remove untagged images\",\"rulePriority\":1,\"selection\":{\"countNumber\":1,\"countType\":\"imageCountMoreThan\",\"tagStatus\":\"untagged\"}}]}",
+                        "repository": "zeth_repository-23c3d9d"
+                    },
+                    "outputs": {
+                        "id": "zeth_repository-23c3d9d",
+                        "policy": "{\"rules\":[{\"action\":{\"type\":\"expire\"},\"description\":\"remove untagged images\",\"rulePriority\":1,\"selection\":{\"countNumber\":1,\"countType\":\"imageCountMoreThan\",\"tagStatus\":\"untagged\"}}]}",
+                        "registryId": "803035318642",
+                        "repository": "zeth_repository-23c3d9d"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ecr:Repository::zeth_repository",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/repository:Repository::zeth_repository"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "policy": null,
+                        "repository": [
+                            "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/repository:Repository::zeth_repository"
+                        ]
+                    },
+                    "created": "2023-08-27T19:06:15.436637662Z",
+                    "modified": "2023-08-27T19:06:15.436637662Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer::lb",
+                    "custom": false,
+                    "type": "awsx:lb:ApplicationLoadBalancer",
+                    "parent": "urn:pulumi:dev::taiga::pulumi:pulumi:Stack::taiga-dev",
+                    "created": "2023-08-27T19:06:16.110480133Z",
+                    "modified": "2023-08-27T19:06:16.110480133Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::aws:ec2/securityGroup:SecurityGroup::securityGroup",
+                    "custom": true,
+                    "id": "sg-0a3d52c0503a66480",
+                    "type": "aws:ec2/securityGroup:SecurityGroup",
+                    "inputs": {
+                        "__defaults": [
+                            "name",
+                            "revokeRulesOnDelete"
+                        ],
+                        "description": "Managed by Pulumi",
+                        "egress": [
+                            {
+                                "__defaults": [
+                                    "self"
+                                ],
+                                "cidrBlocks": [
+                                    "0.0.0.0/0"
+                                ],
+                                "fromPort": 0,
+                                "ipv6CidrBlocks": [
+                                    "::/0"
+                                ],
+                                "protocol": "-1",
+                                "self": false,
+                                "toPort": 0
+                            }
+                        ],
+                        "name": "securityGroup-f4128ce",
+                        "revokeRulesOnDelete": false,
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":600000000000,\"delete\":900000000000},\"schema_version\":\"1\"}",
+                        "arn": "arn:aws:ec2:us-east-1:803035318642:security-group/sg-0a3d52c0503a66480",
+                        "description": "Managed by Pulumi",
+                        "egress": [
+                            {
+                                "cidrBlocks": [
+                                    "0.0.0.0/0"
+                                ],
+                                "description": "",
+                                "fromPort": 0,
+                                "ipv6CidrBlocks": [
+                                    "::/0"
+                                ],
+                                "prefixListIds": [],
+                                "protocol": "-1",
+                                "securityGroups": [],
+                                "self": false,
+                                "toPort": 0
+                            }
+                        ],
+                        "id": "sg-0a3d52c0503a66480",
+                        "ingress": [],
+                        "name": "securityGroup-f4128ce",
+                        "namePrefix": "",
+                        "ownerId": "803035318642",
+                        "revokeRulesOnDelete": false,
+                        "tags": {},
+                        "tagsAll": {},
+                        "vpcId": "vpc-02d3055c474d4899e"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::pulumi:pulumi:Stack::taiga-dev",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-1",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-2",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-3",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-1",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-2",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-3",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc",
+                        "urn:pulumi:dev::taiga::awsx:ec2:Vpc::vpc"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_42_0::2d418aa8-f51c-425a-8ea1-45b8e36bbd79",
+                    "propertyDependencies": {
+                        "description": null,
+                        "egress": null,
+                        "vpcId": [
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-1",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-2",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-3",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-1",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-2",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-3",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc::vpc"
+                        ]
+                    },
+                    "created": "2023-08-27T19:06:16.871245354Z",
+                    "modified": "2023-08-27T19:06:16.871245354Z",
+                    "sourcePosition": "project:///index.ts#34,23"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:lb/targetGroup:TargetGroup::lb",
+                    "custom": true,
+                    "id": "arn:aws:elasticloadbalancing:us-east-1:803035318642:targetgroup/lb-9495a69/02dc6f063caf1101",
+                    "type": "aws:lb/targetGroup:TargetGroup",
+                    "inputs": {
+                        "__defaults": [
+                            "connectionTermination",
+                            "lambdaMultiValueHeadersEnabled",
+                            "name",
+                            "proxyProtocolV2",
+                            "slowStart"
+                        ],
+                        "connectionTermination": false,
+                        "lambdaMultiValueHeadersEnabled": false,
+                        "name": "lb-9495a69",
+                        "port": 80,
+                        "protocol": "HTTP",
+                        "proxyProtocolV2": false,
+                        "slowStart": 0,
+                        "targetType": "ip",
+                        "vpcId": "vpc-0d75975d3e2183c38"
+                    },
+                    "outputs": {
+                        "arn": "arn:aws:elasticloadbalancing:us-east-1:803035318642:targetgroup/lb-9495a69/02dc6f063caf1101",
+                        "arnSuffix": "targetgroup/lb-9495a69/02dc6f063caf1101",
+                        "connectionTermination": false,
+                        "deregistrationDelay": 300,
+                        "healthCheck": {
+                            "enabled": true,
+                            "healthyThreshold": 5,
+                            "interval": 30,
+                            "matcher": "200",
+                            "path": "/",
+                            "port": "traffic-port",
+                            "protocol": "HTTP",
+                            "timeout": 5,
+                            "unhealthyThreshold": 2
+                        },
+                        "id": "arn:aws:elasticloadbalancing:us-east-1:803035318642:targetgroup/lb-9495a69/02dc6f063caf1101",
+                        "ipAddressType": "ipv4",
+                        "lambdaMultiValueHeadersEnabled": false,
+                        "loadBalancingAlgorithmType": "round_robin",
+                        "loadBalancingCrossZoneEnabled": "use_load_balancer_configuration",
+                        "name": "lb-9495a69",
+                        "port": 80,
+                        "protocol": "HTTP",
+                        "protocolVersion": "HTTP1",
+                        "proxyProtocolV2": false,
+                        "slowStart": 0,
+                        "stickiness": {
+                            "cookieDuration": 86400,
+                            "cookieName": "",
+                            "enabled": false,
+                            "type": "lb_cookie"
+                        },
+                        "tags": {},
+                        "tagsAll": {},
+                        "targetFailovers": [
+                            null
+                        ],
+                        "targetType": "ip",
+                        "vpcId": "vpc-0d75975d3e2183c38"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer::lb",
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "port": null,
+                        "protocol": null,
+                        "targetType": null,
+                        "vpcId": null
+                    },
+                    "created": "2023-08-27T19:06:17.257861345Z",
+                    "modified": "2023-08-27T19:06:17.257861345Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:ec2/securityGroup:SecurityGroup::lb",
+                    "custom": true,
+                    "id": "sg-09a84903f5e913c04",
+                    "type": "aws:ec2/securityGroup:SecurityGroup",
+                    "inputs": {
+                        "__defaults": [
+                            "name",
+                            "revokeRulesOnDelete"
+                        ],
+                        "description": "Managed by Pulumi",
+                        "egress": [
+                            {
+                                "__defaults": [
+                                    "self"
+                                ],
+                                "cidrBlocks": [
+                                    "0.0.0.0/0"
+                                ],
+                                "fromPort": 0,
+                                "ipv6CidrBlocks": [
+                                    "::/0"
+                                ],
+                                "protocol": "tcp",
+                                "self": false,
+                                "toPort": 65535
+                            }
+                        ],
+                        "ingress": [
+                            {
+                                "__defaults": [
+                                    "self"
+                                ],
+                                "cidrBlocks": [
+                                    "0.0.0.0/0"
+                                ],
+                                "fromPort": 0,
+                                "ipv6CidrBlocks": [
+                                    "::/0"
+                                ],
+                                "protocol": "-1",
+                                "self": false,
+                                "toPort": 0
+                            }
+                        ],
+                        "name": "lb-a51b5be",
+                        "revokeRulesOnDelete": false,
+                        "vpcId": "vpc-0d75975d3e2183c38"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":600000000000,\"delete\":900000000000},\"schema_version\":\"1\"}",
+                        "arn": "arn:aws:ec2:us-east-1:803035318642:security-group/sg-09a84903f5e913c04",
+                        "description": "Managed by Pulumi",
+                        "egress": [
+                            {
+                                "cidrBlocks": [
+                                    "0.0.0.0/0"
+                                ],
+                                "description": "",
+                                "fromPort": 0,
+                                "ipv6CidrBlocks": [
+                                    "::/0"
+                                ],
+                                "prefixListIds": [],
+                                "protocol": "tcp",
+                                "securityGroups": [],
+                                "self": false,
+                                "toPort": 65535
+                            }
+                        ],
+                        "id": "sg-09a84903f5e913c04",
+                        "ingress": [
+                            {
+                                "cidrBlocks": [
+                                    "0.0.0.0/0"
+                                ],
+                                "description": "",
+                                "fromPort": 0,
+                                "ipv6CidrBlocks": [
+                                    "::/0"
+                                ],
+                                "prefixListIds": [],
+                                "protocol": "-1",
+                                "securityGroups": [],
+                                "self": false,
+                                "toPort": 0
+                            }
+                        ],
+                        "name": "lb-a51b5be",
+                        "namePrefix": "",
+                        "ownerId": "803035318642",
+                        "revokeRulesOnDelete": false,
+                        "tags": {},
+                        "tagsAll": {},
+                        "vpcId": "vpc-0d75975d3e2183c38"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer::lb",
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "description": null,
+                        "egress": null,
+                        "ingress": null,
+                        "vpcId": null
+                    },
+                    "created": "2023-08-27T19:06:18.839222968Z",
+                    "modified": "2023-08-27T19:06:18.839222968Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:lb/loadBalancer:LoadBalancer::lb",
+                    "custom": true,
+                    "id": "arn:aws:elasticloadbalancing:us-east-1:803035318642:loadbalancer/app/lb-d3beaef/5ac5c763e95f2a30",
+                    "type": "aws:lb/loadBalancer:LoadBalancer",
+                    "inputs": {
+                        "__defaults": [
+                            "desyncMitigationMode",
+                            "dropInvalidHeaderFields",
+                            "enableCrossZoneLoadBalancing",
+                            "enableDeletionProtection",
+                            "enableHttp2",
+                            "enableTlsVersionAndCipherSuiteHeaders",
+                            "enableWafFailOpen",
+                            "enableXffClientPort",
+                            "idleTimeout",
+                            "name",
+                            "preserveHostHeader",
+                            "xffHeaderProcessingMode"
+                        ],
+                        "desyncMitigationMode": "defensive",
+                        "dropInvalidHeaderFields": false,
+                        "enableCrossZoneLoadBalancing": false,
+                        "enableDeletionProtection": false,
+                        "enableHttp2": true,
+                        "enableTlsVersionAndCipherSuiteHeaders": false,
+                        "enableWafFailOpen": false,
+                        "enableXffClientPort": false,
+                        "idleTimeout": 60,
+                        "loadBalancerType": "application",
+                        "name": "lb-d3beaef",
+                        "preserveHostHeader": false,
+                        "securityGroups": [
+                            "sg-09a84903f5e913c04"
+                        ],
+                        "subnets": [
+                            "subnet-00001f8497a52625d",
+                            "subnet-0362627b3aeb01569",
+                            "subnet-09bda2a7d18967f02",
+                            "subnet-04c16c6f41e95f5d5",
+                            "subnet-0acba8a1c57a969bb",
+                            "subnet-0d2a287134907af48"
+                        ],
+                        "xffHeaderProcessingMode": "append"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"create\":600000000000,\"delete\":600000000000,\"update\":600000000000}}",
+                        "accessLogs": {
+                            "bucket": "",
+                            "enabled": false,
+                            "prefix": ""
+                        },
+                        "arn": "arn:aws:elasticloadbalancing:us-east-1:803035318642:loadbalancer/app/lb-d3beaef/5ac5c763e95f2a30",
+                        "arnSuffix": "app/lb-d3beaef/5ac5c763e95f2a30",
+                        "customerOwnedIpv4Pool": "",
+                        "desyncMitigationMode": "defensive",
+                        "dnsName": "lb-d3beaef-990329416.us-east-1.elb.amazonaws.com",
+                        "dropInvalidHeaderFields": false,
+                        "enableCrossZoneLoadBalancing": true,
+                        "enableDeletionProtection": false,
+                        "enableHttp2": true,
+                        "enableTlsVersionAndCipherSuiteHeaders": false,
+                        "enableWafFailOpen": false,
+                        "enableXffClientPort": false,
+                        "id": "arn:aws:elasticloadbalancing:us-east-1:803035318642:loadbalancer/app/lb-d3beaef/5ac5c763e95f2a30",
+                        "idleTimeout": 60,
+                        "internal": false,
+                        "ipAddressType": "ipv4",
+                        "loadBalancerType": "application",
+                        "name": "lb-d3beaef",
+                        "preserveHostHeader": false,
+                        "securityGroups": [
+                            "sg-09a84903f5e913c04"
+                        ],
+                        "subnetMappings": [
+                            {
+                                "allocationId": "",
+                                "ipv6Address": "",
+                                "outpostId": "",
+                                "privateIpv4Address": "",
+                                "subnetId": "subnet-0acba8a1c57a969bb"
+                            },
+                            {
+                                "allocationId": "",
+                                "ipv6Address": "",
+                                "outpostId": "",
+                                "privateIpv4Address": "",
+                                "subnetId": "subnet-09bda2a7d18967f02"
+                            },
+                            {
+                                "allocationId": "",
+                                "ipv6Address": "",
+                                "outpostId": "",
+                                "privateIpv4Address": "",
+                                "subnetId": "subnet-0d2a287134907af48"
+                            },
+                            {
+                                "allocationId": "",
+                                "ipv6Address": "",
+                                "outpostId": "",
+                                "privateIpv4Address": "",
+                                "subnetId": "subnet-00001f8497a52625d"
+                            },
+                            {
+                                "allocationId": "",
+                                "ipv6Address": "",
+                                "outpostId": "",
+                                "privateIpv4Address": "",
+                                "subnetId": "subnet-04c16c6f41e95f5d5"
+                            },
+                            {
+                                "allocationId": "",
+                                "ipv6Address": "",
+                                "outpostId": "",
+                                "privateIpv4Address": "",
+                                "subnetId": "subnet-0362627b3aeb01569"
+                            }
+                        ],
+                        "subnets": [
+                            "subnet-04c16c6f41e95f5d5",
+                            "subnet-0d2a287134907af48",
+                            "subnet-0acba8a1c57a969bb",
+                            "subnet-09bda2a7d18967f02",
+                            "subnet-0362627b3aeb01569",
+                            "subnet-00001f8497a52625d"
+                        ],
+                        "tags": {},
+                        "tagsAll": {},
+                        "vpcId": "vpc-0d75975d3e2183c38",
+                        "xffHeaderProcessingMode": "append",
+                        "zoneId": "Z35SXDOTRQ7X7K"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer::lb",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:ec2/securityGroup:SecurityGroup::lb"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "loadBalancerType": null,
+                        "securityGroups": [
+                            "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:ec2/securityGroup:SecurityGroup::lb"
+                        ],
+                        "subnets": null
+                    },
+                    "created": "2023-08-27T19:08:20.739618813Z",
+                    "modified": "2023-08-27T19:08:20.739618813Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:lb/listener:Listener::lb-0",
+                    "custom": true,
+                    "id": "arn:aws:elasticloadbalancing:us-east-1:803035318642:listener/app/lb-d3beaef/5ac5c763e95f2a30/ce615d36967aab5e",
+                    "type": "aws:lb/listener:Listener",
+                    "inputs": {
+                        "__defaults": [],
+                        "defaultActions": [
+                            {
+                                "__defaults": [],
+                                "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:803035318642:targetgroup/lb-9495a69/02dc6f063caf1101",
+                                "type": "forward"
+                            }
+                        ],
+                        "loadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:803035318642:loadbalancer/app/lb-d3beaef/5ac5c763e95f2a30",
+                        "port": 80,
+                        "protocol": "HTTP"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"read\":600000000000}}",
+                        "arn": "arn:aws:elasticloadbalancing:us-east-1:803035318642:listener/app/lb-d3beaef/5ac5c763e95f2a30/ce615d36967aab5e",
+                        "defaultActions": [
+                            {
+                                "authenticateCognito": null,
+                                "authenticateOidc": null,
+                                "fixedResponse": null,
+                                "forward": null,
+                                "order": 1,
+                                "redirect": null,
+                                "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:803035318642:targetgroup/lb-9495a69/02dc6f063caf1101",
+                                "type": "forward"
+                            }
+                        ],
+                        "id": "arn:aws:elasticloadbalancing:us-east-1:803035318642:listener/app/lb-d3beaef/5ac5c763e95f2a30/ce615d36967aab5e",
+                        "loadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:803035318642:loadbalancer/app/lb-d3beaef/5ac5c763e95f2a30",
+                        "port": 80,
+                        "protocol": "HTTP",
+                        "sslPolicy": "",
+                        "tags": {},
+                        "tagsAll": {}
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer::lb",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:lb/targetGroup:TargetGroup::lb",
+                        "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:lb/loadBalancer:LoadBalancer::lb"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "defaultActions": [
+                            "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:lb/targetGroup:TargetGroup::lb"
+                        ],
+                        "loadBalancerArn": [
+                            "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:lb/loadBalancer:LoadBalancer::lb"
+                        ],
+                        "port": null,
+                        "protocol": null
+                    },
+                    "created": "2023-08-27T19:08:21.171003361Z",
+                    "modified": "2023-08-27T19:08:21.171003361Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository::app_repository",
+                    "custom": false,
+                    "type": "awsx:ecr:Repository",
+                    "outputs": {
+                        "lifecyclePolicy": {
+                            "4dabf18193072939515e22adb298388d": "5cf8f73096256a8f31e491e813e4eb8e",
+                            "id": "app_repository-a65abbd",
+                            "packageVersion": "",
+                            "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/lifecyclePolicy:LifecyclePolicy::app_repository"
+                        },
+                        "repository": {
+                            "4dabf18193072939515e22adb298388d": "5cf8f73096256a8f31e491e813e4eb8e",
+                            "id": "app_repository-a65abbd",
+                            "packageVersion": "",
+                            "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/repository:Repository::app_repository"
+                        }
+                    },
+                    "parent": "urn:pulumi:dev::taiga::pulumi:pulumi:Stack::taiga-dev",
+                    "created": "2023-08-27T19:08:21.535014807Z",
+                    "modified": "2023-08-27T19:08:21.535014807Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::pulumi:providers:aws-apigateway::default_1_0_1",
+                    "custom": true,
+                    "id": "792bbccf-00c0-48ab-bf0b-eedaf848e05f",
+                    "type": "pulumi:providers:aws-apigateway",
+                    "inputs": {
+                        "version": "1.0.1"
+                    },
+                    "outputs": {
+                        "version": "1.0.1"
+                    },
+                    "created": "2023-08-27T19:08:22.368653372Z",
+                    "modified": "2023-08-27T19:08:22.368653372Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/repository:Repository::app_repository",
+                    "custom": true,
+                    "id": "app_repository-a65abbd",
+                    "type": "aws:ecr/repository:Repository",
+                    "inputs": {
+                        "__defaults": [
+                            "imageTagMutability",
+                            "name"
+                        ],
+                        "imageTagMutability": "MUTABLE",
+                        "name": "app_repository-a65abbd"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"delete\":1200000000000}}",
+                        "arn": "arn:aws:ecr:us-east-1:803035318642:repository/app_repository-a65abbd",
+                        "encryptionConfigurations": [
+                            {
+                                "encryptionType": "AES256",
+                                "kmsKey": ""
+                            }
+                        ],
+                        "id": "app_repository-a65abbd",
+                        "imageScanningConfiguration": {
+                            "scanOnPush": false
+                        },
+                        "imageTagMutability": "MUTABLE",
+                        "name": "app_repository-a65abbd",
+                        "registryId": "803035318642",
+                        "repositoryUrl": "803035318642.dkr.ecr.us-east-1.amazonaws.com/app_repository-a65abbd",
+                        "tags": {},
+                        "tagsAll": {}
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ecr:Repository::app_repository",
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "created": "2023-08-27T19:08:23.006934667Z",
+                    "modified": "2023-08-27T19:08:23.006934667Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::aws-apigateway:index:RestAPI::api",
+                    "custom": false,
+                    "type": "aws-apigateway:index:RestAPI",
+                    "parent": "urn:pulumi:dev::taiga::pulumi:pulumi:Stack::taiga-dev",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer::lb",
+                        "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:lb/loadBalancer:LoadBalancer::lb"
+                    ],
+                    "created": "2023-08-27T19:08:23.206075424Z",
+                    "modified": "2023-08-27T19:08:23.206075424Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/lifecyclePolicy:LifecyclePolicy::app_repository",
+                    "custom": true,
+                    "id": "app_repository-a65abbd",
+                    "type": "aws:ecr/lifecyclePolicy:LifecyclePolicy",
+                    "inputs": {
+                        "__defaults": [],
+                        "policy": "{\"rules\":[{\"action\":{\"type\":\"expire\"},\"description\":\"remove untagged images\",\"rulePriority\":1,\"selection\":{\"countNumber\":1,\"countType\":\"imageCountMoreThan\",\"tagStatus\":\"untagged\"}}]}",
+                        "repository": "app_repository-a65abbd"
+                    },
+                    "outputs": {
+                        "id": "app_repository-a65abbd",
+                        "policy": "{\"rules\":[{\"action\":{\"type\":\"expire\"},\"description\":\"remove untagged images\",\"rulePriority\":1,\"selection\":{\"countNumber\":1,\"countType\":\"imageCountMoreThan\",\"tagStatus\":\"untagged\"}}]}",
+                        "registryId": "803035318642",
+                        "repository": "app_repository-a65abbd"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ecr:Repository::app_repository",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/repository:Repository::app_repository"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "propertyDependencies": {
+                        "policy": null,
+                        "repository": [
+                            "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/repository:Repository::app_repository"
+                        ]
+                    },
+                    "created": "2023-08-27T19:08:23.794788913Z",
+                    "modified": "2023-08-27T19:08:23.794788913Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_16_2",
+                    "custom": true,
+                    "id": "fb38f3a7-5911-4aad-b8be-b5e06f70cc25",
+                    "type": "pulumi:providers:aws",
+                    "inputs": {
+                        "version": "5.16.2"
+                    },
+                    "outputs": {
+                        "version": "5.16.2"
+                    },
+                    "created": "2023-08-27T19:08:23.993574951Z",
+                    "modified": "2023-08-27T19:08:23.993574951Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ecr:Image::zeth",
+                    "custom": false,
+                    "type": "awsx:ecr:Image",
+                    "parent": "urn:pulumi:dev::taiga::pulumi:pulumi:Stack::taiga-dev",
+                    "dependencies": [
+                        "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/repository:Repository::zeth_repository",
+                        "urn:pulumi:dev::taiga::awsx:ecr:Repository::zeth_repository"
+                    ],
+                    "created": "2023-08-27T19:08:24.910229063Z",
+                    "modified": "2023-08-27T19:08:24.910229063Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::aws-apigateway:index:RestAPI$aws:apigateway/restApi:RestApi::api",
+                    "custom": true,
+                    "id": "j60oh6v8m5",
+                    "type": "aws:apigateway/restApi:RestApi",
+                    "inputs": {
+                        "__defaults": [
+                            "minimumCompressionSize",
+                            "putRestApiMode"
+                        ],
+                        "binaryMediaTypes": [
+                            "*/*"
+                        ],
+                        "body": "{\"swagger\":\"2.0\",\"info\":{\"title\":\"api\",\"version\":\"1.0\"},\"paths\":{\"/app/\":{\"x-amazon-apigateway-any-method\":{\"x-amazon-apigateway-integration\":{\"responses\":{\"default\":{\"statusCode\":\"200\"}},\"uri\":\"http://undefined:3000/\",\"type\":\"http_proxy\",\"passthroughBehavior\":\"when_no_match\",\"httpMethod\":\"ANY\"}}},\"/app/{proxy+}\":{\"x-amazon-apigateway-any-method\":{\"x-amazon-apigateway-integration\":{\"responses\":{\"default\":{\"statusCode\":\"200\"}},\"uri\":\"http://undefined:3000/{proxy}\",\"type\":\"http_proxy\",\"passthroughBehavior\":\"when_no_match\",\"httpMethod\":\"ANY\",\"requestParameters\":{\"integration.request.path.proxy\":\"method.request.path.proxy\"}},\"parameters\":[{\"name\":\"proxy\",\"in\":\"path\",\"required\":true,\"type\":\"string\"}]}},\"/zeth/\":{\"x-amazon-apigateway-any-method\":{\"x-amazon-apigateway-integration\":{\"responses\":{\"default\":{\"statusCode\":\"200\"}},\"uri\":\"http://undefined:8000/\",\"type\":\"http_proxy\",\"passthroughBehavior\":\"when_no_match\",\"httpMethod\":\"ANY\"}}},\"/zeth/{proxy+}\":{\"x-amazon-apigateway-any-method\":{\"x-amazon-apigateway-integration\":{\"responses\":{\"default\":{\"statusCode\":\"200\"}},\"uri\":\"http://undefined:8000/{proxy}\",\"type\":\"http_proxy\",\"passthroughBehavior\":\"when_no_match\",\"httpMethod\":\"ANY\",\"requestParameters\":{\"integration.request.path.proxy\":\"method.request.path.proxy\"}},\"parameters\":[{\"name\":\"proxy\",\"in\":\"path\",\"required\":true,\"type\":\"string\"}]}}},\"x-amazon-apigateway-binary-media-types\":[\"*/*\"],\"x-amazon-apigateway-gateway-responses\":{\"MISSING_AUTHENTICATION_TOKEN\":{\"statusCode\":404,\"responseTemplates\":{\"application/json\":\"{\\\"message\\\": \\\"404 Not found\\\" }\"}},\"ACCESS_DENIED\":{\"statusCode\":404,\"responseTemplates\":{\"application/json\":\"{\\\"message\\\": \\\"404 Not found\\\" }\"}}},\"x-amazon-apigateway-api-key-source\":\"HEADER\"}",
+                        "minimumCompressionSize": -1,
+                        "name": "api",
+                        "putRestApiMode": "overwrite"
+                    },
+                    "outputs": {
+                        "binaryMediaTypes": [
+                            "*/*"
+                        ],
+                        "body": "{\"swagger\":\"2.0\",\"info\":{\"title\":\"api\",\"version\":\"1.0\"},\"paths\":{\"/app/\":{\"x-amazon-apigateway-any-method\":{\"x-amazon-apigateway-integration\":{\"responses\":{\"default\":{\"statusCode\":\"200\"}},\"uri\":\"http://undefined:3000/\",\"type\":\"http_proxy\",\"passthroughBehavior\":\"when_no_match\",\"httpMethod\":\"ANY\"}}},\"/app/{proxy+}\":{\"x-amazon-apigateway-any-method\":{\"x-amazon-apigateway-integration\":{\"responses\":{\"default\":{\"statusCode\":\"200\"}},\"uri\":\"http://undefined:3000/{proxy}\",\"type\":\"http_proxy\",\"passthroughBehavior\":\"when_no_match\",\"httpMethod\":\"ANY\",\"requestParameters\":{\"integration.request.path.proxy\":\"method.request.path.proxy\"}},\"parameters\":[{\"name\":\"proxy\",\"in\":\"path\",\"required\":true,\"type\":\"string\"}]}},\"/zeth/\":{\"x-amazon-apigateway-any-method\":{\"x-amazon-apigateway-integration\":{\"responses\":{\"default\":{\"statusCode\":\"200\"}},\"uri\":\"http://undefined:8000/\",\"type\":\"http_proxy\",\"passthroughBehavior\":\"when_no_match\",\"httpMethod\":\"ANY\"}}},\"/zeth/{proxy+}\":{\"x-amazon-apigateway-any-method\":{\"x-amazon-apigateway-integration\":{\"responses\":{\"default\":{\"statusCode\":\"200\"}},\"uri\":\"http://undefined:8000/{proxy}\",\"type\":\"http_proxy\",\"passthroughBehavior\":\"when_no_match\",\"httpMethod\":\"ANY\",\"requestParameters\":{\"integration.request.path.proxy\":\"method.request.path.proxy\"}},\"parameters\":[{\"name\":\"proxy\",\"in\":\"path\",\"required\":true,\"type\":\"string\"}]}}},\"x-amazon-apigateway-binary-media-types\":[\"*/*\"],\"x-amazon-apigateway-gateway-responses\":{\"MISSING_AUTHENTICATION_TOKEN\":{\"statusCode\":404,\"responseTemplates\":{\"application/json\":\"{\\\"message\\\": \\\"404 Not found\\\" }\"}},\"ACCESS_DENIED\":{\"statusCode\":404,\"responseTemplates\":{\"application/json\":\"{\\\"message\\\": \\\"404 Not found\\\" }\"}}},\"x-amazon-apigateway-api-key-source\":\"HEADER\"}",
+                        "id": "j60oh6v8m5",
+                        "minimumCompressionSize": -1,
+                        "name": "api"
+                    },
+                    "parent": "urn:pulumi:dev::taiga::aws-apigateway:index:RestAPI::api",
+                    "initErrors": [
+                        "creating urn:pulumi:dev::taiga::aws-apigateway:index:RestAPI$aws:apigateway/restApi:RestApi::api: 1 error occurred:\n\t* error creating API Gateway specification: BadRequestException: Errors found during import:\n\tUnable to put integration on 'ANY' for resource at path '/app': Invalid HTTP endpoint specified for URI\n\tUnable to put integration on 'ANY' for resource at path '/app/{proxy+}': Invalid HTTP endpoint specified for URI\n\tUnable to put integration on 'ANY' for resource at path '/zeth': Invalid HTTP endpoint specified for URI\n\tUnable to put integration on 'ANY' for resource at path '/zeth/{proxy+}': Invalid HTTP endpoint specified for URI\n\n"
+                    ],
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_16_2::fb38f3a7-5911-4aad-b8be-b5e06f70cc25",
+                    "propertyDependencies": {
+                        "binaryMediaTypes": null,
+                        "body": null,
+                        "name": null
+                    },
+                    "created": "2023-08-27T19:08:25.303642987Z",
+                    "modified": "2023-08-27T19:08:25.303642987Z"
+                }
+            ]
+        }
+    }
+}

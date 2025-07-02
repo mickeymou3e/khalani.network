@@ -1,0 +1,450 @@
+{
+    "version": 3,
+    "checkpoint": {
+        "stack": "organization/taiga/dev",
+        "latest": {
+            "manifest": {
+                "time": "2023-08-28T06:02:16.339301014Z",
+                "magic": "7f5ec831fbfcaaafb30fe1f9dd0eebc4a62372e9fda10d9bab6256b2deca869d",
+                "version": "v3.78.1"
+            },
+            "secrets_providers": {
+                "type": "passphrase",
+                "state": {
+                    "salt": "v1:Ac2v8PSZJTI=:v1:H9dN7pTpsL/3P9+i:pGxxx232rMNeMAGDMN6mFWgUJdoHLQ=="
+                }
+            },
+            "resources": [
+                {
+                    "urn": "urn:pulumi:dev::taiga::pulumi:pulumi:Stack::taiga-dev",
+                    "custom": false,
+                    "type": "pulumi:pulumi:Stack",
+                    "created": "2023-08-27T19:03:47.159547766Z",
+                    "modified": "2023-08-27T19:03:47.159547766Z",
+                    "sourcePosition": "project:///node_modules/@pulumi/runtime/stack.ts#36,23"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::pulumi:providers:awsx::default_1_0_5",
+                    "custom": true,
+                    "id": "b68a1103-f6c3-47cb-86cc-1918404e9d3e",
+                    "type": "pulumi:providers:awsx",
+                    "inputs": {
+                        "version": "1.0.5"
+                    },
+                    "outputs": {
+                        "version": "1.0.5"
+                    },
+                    "created": "2023-08-27T19:03:48.647721995Z",
+                    "modified": "2023-08-27T19:03:48.647721995Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository::app_repository",
+                    "custom": false,
+                    "type": "awsx:ecr:Repository",
+                    "outputs": {
+                        "lifecyclePolicy": {
+                            "4dabf18193072939515e22adb298388d": "5cf8f73096256a8f31e491e813e4eb8e",
+                            "id": "app_repository-a65abbd",
+                            "packageVersion": "",
+                            "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/lifecyclePolicy:LifecyclePolicy::app_repository"
+                        },
+                        "repository": {
+                            "4dabf18193072939515e22adb298388d": "5cf8f73096256a8f31e491e813e4eb8e",
+                            "id": "app_repository-a65abbd",
+                            "packageVersion": "",
+                            "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/repository:Repository::app_repository"
+                        }
+                    },
+                    "parent": "urn:pulumi:dev::taiga::pulumi:pulumi:Stack::taiga-dev",
+                    "created": "2023-08-27T19:08:21.535014807Z",
+                    "modified": "2023-08-27T19:08:21.535014807Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_42_0",
+                    "custom": true,
+                    "id": "2d418aa8-f51c-425a-8ea1-45b8e36bbd79",
+                    "type": "pulumi:providers:aws",
+                    "inputs": {
+                        "version": "5.42.0"
+                    },
+                    "outputs": {
+                        "version": "5.42.0"
+                    },
+                    "created": "2023-08-27T19:03:49.445237602Z",
+                    "modified": "2023-08-27T19:03:49.445237602Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::aws:ecs/cluster:Cluster::cluster",
+                    "custom": true,
+                    "id": "arn:aws:ecs:us-east-1:803035318642:cluster/cluster-1886a73",
+                    "type": "aws:ecs/cluster:Cluster",
+                    "inputs": {
+                        "__defaults": [
+                            "name"
+                        ],
+                        "name": "cluster-1886a73"
+                    },
+                    "outputs": {
+                        "arn": "arn:aws:ecs:us-east-1:803035318642:cluster/cluster-1886a73",
+                        "capacityProviders": [],
+                        "defaultCapacityProviderStrategies": [],
+                        "id": "arn:aws:ecs:us-east-1:803035318642:cluster/cluster-1886a73",
+                        "name": "cluster-1886a73",
+                        "serviceConnectDefaults": null,
+                        "settings": [
+                            {
+                                "name": "containerInsights",
+                                "value": "disabled"
+                            }
+                        ],
+                        "tags": {},
+                        "tagsAll": {}
+                    },
+                    "parent": "urn:pulumi:dev::taiga::pulumi:pulumi:Stack::taiga-dev",
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_42_0::2d418aa8-f51c-425a-8ea1-45b8e36bbd79",
+                    "created": "2023-08-27T19:03:59.99037959Z",
+                    "modified": "2023-08-27T19:03:59.99037959Z",
+                    "sourcePosition": "project:///index.ts#45,17"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0",
+                    "custom": true,
+                    "id": "93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "type": "pulumi:providers:aws",
+                    "inputs": {
+                        "version": "5.35.0"
+                    },
+                    "outputs": {
+                        "version": "5.35.0"
+                    },
+                    "created": "2023-08-27T19:03:49.932581842Z",
+                    "modified": "2023-08-27T19:03:49.932581842Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/repository:Repository::app_repository",
+                    "custom": true,
+                    "id": "app_repository-a65abbd",
+                    "type": "aws:ecr/repository:Repository",
+                    "inputs": {
+                        "__defaults": [
+                            "imageTagMutability",
+                            "name"
+                        ],
+                        "imageTagMutability": "MUTABLE",
+                        "name": "app_repository-a65abbd"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"delete\":1200000000000}}",
+                        "arn": "arn:aws:ecr:us-east-1:803035318642:repository/app_repository-a65abbd",
+                        "encryptionConfigurations": [
+                            {
+                                "encryptionType": "AES256",
+                                "kmsKey": ""
+                            }
+                        ],
+                        "id": "app_repository-a65abbd",
+                        "imageScanningConfiguration": {
+                            "scanOnPush": false
+                        },
+                        "imageTagMutability": "MUTABLE",
+                        "name": "app_repository-a65abbd",
+                        "registryId": "803035318642",
+                        "repositoryUrl": "803035318642.dkr.ecr.us-east-1.amazonaws.com/app_repository-a65abbd",
+                        "tags": {},
+                        "tagsAll": {}
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ecr:Repository::app_repository",
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "created": "2023-08-27T19:08:23.006934667Z",
+                    "modified": "2023-08-27T19:08:23.006934667Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository::zeth_repository",
+                    "custom": false,
+                    "type": "awsx:ecr:Repository",
+                    "outputs": {
+                        "lifecyclePolicy": {
+                            "4dabf18193072939515e22adb298388d": "5cf8f73096256a8f31e491e813e4eb8e",
+                            "id": "zeth_repository-23c3d9d",
+                            "packageVersion": "",
+                            "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/lifecyclePolicy:LifecyclePolicy::zeth_repository"
+                        },
+                        "repository": {
+                            "4dabf18193072939515e22adb298388d": "5cf8f73096256a8f31e491e813e4eb8e",
+                            "id": "zeth_repository-23c3d9d",
+                            "packageVersion": "",
+                            "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/repository:Repository::zeth_repository"
+                        }
+                    },
+                    "parent": "urn:pulumi:dev::taiga::pulumi:pulumi:Stack::taiga-dev",
+                    "created": "2023-08-27T19:06:14.096232212Z",
+                    "modified": "2023-08-27T19:06:14.096232212Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ecr:Repository$aws:ecr/repository:Repository::zeth_repository",
+                    "custom": true,
+                    "id": "zeth_repository-23c3d9d",
+                    "type": "aws:ecr/repository:Repository",
+                    "inputs": {
+                        "__defaults": [
+                            "imageTagMutability",
+                            "name"
+                        ],
+                        "imageTagMutability": "MUTABLE",
+                        "name": "zeth_repository-23c3d9d"
+                    },
+                    "outputs": {
+                        "__meta": "{\"e2bfb730-ecaa-11e6-8f88-34363bc7c4c0\":{\"delete\":1200000000000}}",
+                        "arn": "arn:aws:ecr:us-east-1:803035318642:repository/zeth_repository-23c3d9d",
+                        "encryptionConfigurations": [
+                            {
+                                "encryptionType": "AES256",
+                                "kmsKey": ""
+                            }
+                        ],
+                        "id": "zeth_repository-23c3d9d",
+                        "imageScanningConfiguration": {
+                            "scanOnPush": false
+                        },
+                        "imageTagMutability": "MUTABLE",
+                        "name": "zeth_repository-23c3d9d",
+                        "registryId": "803035318642",
+                        "repositoryUrl": "803035318642.dkr.ecr.us-east-1.amazonaws.com/zeth_repository-23c3d9d",
+                        "tags": {},
+                        "tagsAll": {}
+                    },
+                    "parent": "urn:pulumi:dev::taiga::awsx:ecr:Repository::zeth_repository",
+                    "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                    "created": "2023-08-27T19:06:14.679976705Z",
+                    "modified": "2023-08-27T19:06:14.679976705Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer::lb",
+                    "custom": false,
+                    "type": "awsx:lb:ApplicationLoadBalancer",
+                    "parent": "urn:pulumi:dev::taiga::pulumi:pulumi:Stack::taiga-dev",
+                    "created": "2023-08-27T19:06:16.110480133Z",
+                    "modified": "2023-08-27T19:06:16.110480133Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::awsx:ec2:Vpc::vpc",
+                    "custom": false,
+                    "type": "awsx:ec2:Vpc",
+                    "parent": "urn:pulumi:dev::taiga::pulumi:pulumi:Stack::taiga-dev",
+                    "created": "2023-08-27T19:03:49.268477417Z",
+                    "modified": "2023-08-27T19:03:49.268477417Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::pulumi:providers:pulumi::default",
+                    "custom": true,
+                    "id": "a0cfd7af-4f9f-4174-b989-0085d82ffae3",
+                    "type": "pulumi:providers:pulumi",
+                    "created": "2023-08-27T19:06:14.868647771Z",
+                    "modified": "2023-08-27T19:06:14.868647771Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::pulumi:providers:aws-apigateway::default_1_0_1",
+                    "custom": true,
+                    "id": "792bbccf-00c0-48ab-bf0b-eedaf848e05f",
+                    "type": "pulumi:providers:aws-apigateway",
+                    "inputs": {
+                        "version": "1.0.1"
+                    },
+                    "outputs": {
+                        "version": "1.0.1"
+                    },
+                    "created": "2023-08-27T19:08:22.368653372Z",
+                    "modified": "2023-08-27T19:08:22.368653372Z"
+                },
+                {
+                    "urn": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_16_2",
+                    "custom": true,
+                    "id": "fb38f3a7-5911-4aad-b8be-b5e06f70cc25",
+                    "type": "pulumi:providers:aws",
+                    "inputs": {
+                        "version": "5.16.2"
+                    },
+                    "outputs": {
+                        "version": "5.16.2"
+                    },
+                    "created": "2023-08-27T19:08:23.993574951Z",
+                    "modified": "2023-08-27T19:08:23.993574951Z"
+                }
+            ],
+            "pending_operations": [
+                {
+                    "resource": {
+                        "urn": "urn:pulumi:dev::taiga::awsx:ecs:FargateService$aws:ecs/service:Service::zethService",
+                        "custom": true,
+                        "type": "aws:ecs/service:Service",
+                        "inputs": {
+                            "__defaults": [
+                                "deploymentMaximumPercent",
+                                "deploymentMinimumHealthyPercent",
+                                "enableEcsManagedTags",
+                                "enableExecuteCommand",
+                                "name",
+                                "schedulingStrategy"
+                            ],
+                            "cluster": "arn:aws:ecs:us-east-1:803035318642:cluster/cluster-1886a73",
+                            "deploymentMaximumPercent": 200,
+                            "deploymentMinimumHealthyPercent": 100,
+                            "desiredCount": 2,
+                            "enableEcsManagedTags": false,
+                            "enableExecuteCommand": false,
+                            "launchType": "FARGATE",
+                            "loadBalancers": [],
+                            "name": "zethService-50b2b54",
+                            "networkConfiguration": {
+                                "__defaults": [],
+                                "assignPublicIp": true,
+                                "securityGroups": [
+                                    "sg-0a3d52c0503a66480"
+                                ],
+                                "subnets": [
+                                    "subnet-076091c9b18ea385a",
+                                    "subnet-03403daba0832a3e7",
+                                    "subnet-00b2f8f3d1903387f"
+                                ]
+                            },
+                            "schedulingStrategy": "REPLICA",
+                            "taskDefinition": "arn:aws:ecs:us-east-1:803035318642:task-definition/zethService-4ffd2db9:1",
+                            "waitForSteadyState": true
+                        },
+                        "parent": "urn:pulumi:dev::taiga::awsx:ecs:FargateService::zethService",
+                        "dependencies": [
+                            "urn:pulumi:dev::taiga::aws:ecs/cluster:Cluster::cluster",
+                            "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:lb/targetGroup:TargetGroup::lb",
+                            "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer::lb",
+                            "urn:pulumi:dev::taiga::aws:ec2/securityGroup:SecurityGroup::securityGroup",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-1",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-2",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-3",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-1",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-2",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-3",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc::vpc",
+                            "urn:pulumi:dev::taiga::awsx:ecs:FargateService$awsx:ecs:FargateTaskDefinition$aws:ecs/taskDefinition:TaskDefinition::zethService"
+                        ],
+                        "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                        "propertyDependencies": {
+                            "cluster": [
+                                "urn:pulumi:dev::taiga::aws:ecs/cluster:Cluster::cluster"
+                            ],
+                            "desiredCount": null,
+                            "launchType": null,
+                            "loadBalancers": [
+                                "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:lb/targetGroup:TargetGroup::lb",
+                                "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer::lb"
+                            ],
+                            "networkConfiguration": [
+                                "urn:pulumi:dev::taiga::aws:ec2/securityGroup:SecurityGroup::securityGroup",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-1",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-2",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-3",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-1",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-2",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-3",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc::vpc"
+                            ],
+                            "taskDefinition": [
+                                "urn:pulumi:dev::taiga::awsx:ecs:FargateService$awsx:ecs:FargateTaskDefinition$aws:ecs/taskDefinition:TaskDefinition::zethService"
+                            ],
+                            "waitForSteadyState": null
+                        }
+                    },
+                    "type": "creating"
+                },
+                {
+                    "resource": {
+                        "urn": "urn:pulumi:dev::taiga::awsx:ecs:FargateService$aws:ecs/service:Service::zethService",
+                        "custom": true,
+                        "type": "aws:ecs/service:Service",
+                        "inputs": {
+                            "__defaults": [
+                                "deploymentMaximumPercent",
+                                "deploymentMinimumHealthyPercent",
+                                "enableEcsManagedTags",
+                                "enableExecuteCommand",
+                                "name",
+                                "schedulingStrategy"
+                            ],
+                            "cluster": "arn:aws:ecs:us-east-1:803035318642:cluster/cluster-1886a73",
+                            "deploymentMaximumPercent": 200,
+                            "deploymentMinimumHealthyPercent": 100,
+                            "desiredCount": 2,
+                            "enableEcsManagedTags": false,
+                            "enableExecuteCommand": false,
+                            "launchType": "FARGATE",
+                            "loadBalancers": [],
+                            "name": "zethService-7a761be",
+                            "networkConfiguration": {
+                                "__defaults": [
+                                    "assignPublicIp"
+                                ],
+                                "assignPublicIp": false,
+                                "securityGroups": [
+                                    "sg-0a3d52c0503a66480"
+                                ],
+                                "subnets": [
+                                    "subnet-076091c9b18ea385a",
+                                    "subnet-03403daba0832a3e7",
+                                    "subnet-00b2f8f3d1903387f"
+                                ]
+                            },
+                            "schedulingStrategy": "REPLICA",
+                            "taskDefinition": "arn:aws:ecs:us-east-1:803035318642:task-definition/zethService-4ffd2db9:1",
+                            "waitForSteadyState": true
+                        },
+                        "parent": "urn:pulumi:dev::taiga::awsx:ecs:FargateService::zethService",
+                        "dependencies": [
+                            "urn:pulumi:dev::taiga::aws:ecs/cluster:Cluster::cluster",
+                            "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:lb/targetGroup:TargetGroup::lb",
+                            "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer::lb",
+                            "urn:pulumi:dev::taiga::aws:ec2/securityGroup:SecurityGroup::securityGroup",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-1",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-2",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-3",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-1",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-2",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-3",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc",
+                            "urn:pulumi:dev::taiga::awsx:ec2:Vpc::vpc",
+                            "urn:pulumi:dev::taiga::awsx:ecs:FargateService$awsx:ecs:FargateTaskDefinition$aws:ecs/taskDefinition:TaskDefinition::zethService"
+                        ],
+                        "provider": "urn:pulumi:dev::taiga::pulumi:providers:aws::default_5_35_0::93dbe3ee-eca9-4bbe-a8e7-b4c5ac95ca87",
+                        "propertyDependencies": {
+                            "cluster": [
+                                "urn:pulumi:dev::taiga::aws:ecs/cluster:Cluster::cluster"
+                            ],
+                            "desiredCount": null,
+                            "launchType": null,
+                            "loadBalancers": [
+                                "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer$aws:lb/targetGroup:TargetGroup::lb",
+                                "urn:pulumi:dev::taiga::awsx:lb:ApplicationLoadBalancer::lb"
+                            ],
+                            "networkConfiguration": [
+                                "urn:pulumi:dev::taiga::aws:ec2/securityGroup:SecurityGroup::securityGroup",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-1",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-2",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-private-3",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-1",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-2",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc$aws:ec2/subnet:Subnet::vpc-public-3",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc",
+                                "urn:pulumi:dev::taiga::awsx:ec2:Vpc::vpc"
+                            ],
+                            "taskDefinition": [
+                                "urn:pulumi:dev::taiga::awsx:ecs:FargateService$awsx:ecs:FargateTaskDefinition$aws:ecs/taskDefinition:TaskDefinition::zethService"
+                            ],
+                            "waitForSteadyState": null
+                        }
+                    },
+                    "type": "creating"
+                }
+            ]
+        }
+    }
+}

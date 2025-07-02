@@ -1,0 +1,153 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: DB
+Parameters:
+  ApplicationName:
+    Type: String
+  Environment:
+    Type: String
+  VpcId:
+    Type: String
+  Subnets:
+    Type: String
+  DBInstanceClass:
+    Type: String
+    Default: db.t2.micro
+  DBAllocatedStorage:
+    Type: Number
+    Default: 10
+  DBStorageType:
+    Type: String
+    Default: gp2
+  DBName:
+    Type: String
+    Default: graphnode
+  DBUserName:
+    Type: String
+    Default: graphnode
+  AccessSecurityGroupId:
+    Type: String
+    Default: public
+Conditions:
+  PublicAccess:
+    Fn::Equals:
+    - public
+    - Ref: AccessSecurityGroupId
+Resources:
+  DBSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: Postgres subnet group
+      SubnetIds:
+        Fn::Split:
+        - ','
+        - Ref: Subnets
+    Metadata:
+      SamResourceId: DBSubnetGroup
+  DBSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Name:
+        Fn::Sub:
+        - /${ApplicationName}/${Environment}/db-secret
+        - ApplicationName:
+            Ref: ApplicationName
+          Environment:
+            Ref: Environment
+      Description: Database Master Password
+      GenerateSecretString:
+        SecretStringTemplate:
+          Fn::Join:
+          - ''
+          - - '{"username": "'
+            - Ref: DBUserName
+            - '"}'
+        GenerateStringKey: password
+        ExcludeCharacters: '"@/\'
+        ExcludePunctuation: true
+        PasswordLength: 16
+    Metadata:
+      SamResourceId: DBSecret
+  DBInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBName:
+        Ref: DBName
+      AllocatedStorage:
+        Ref: DBAllocatedStorage
+      DBInstanceClass:
+        Ref: DBInstanceClass
+      StorageType:
+        Ref: DBStorageType
+      DBSubnetGroupName:
+        Ref: DBSubnetGroup
+      Engine: postgres
+      EngineVersion: 10.18
+      MasterUsername:
+        Fn::Join:
+        - ''
+        - - '{{resolve:secretsmanager:'
+          - Ref: DBSecret
+          - :SecretString:username}}
+      MasterUserPassword:
+        Fn::Join:
+        - ''
+        - - '{{resolve:secretsmanager:'
+          - Ref: DBSecret
+          - :SecretString:password}}
+      VPCSecurityGroups:
+      - Ref: DBSecurityGroup
+      PubliclyAccessible:
+        Fn::If:
+        - PublicAccess
+        - true
+        - false
+    Metadata:
+      SamResourceId: DBInstance
+  DBSecretInstanceAttachment:
+    Type: AWS::SecretsManager::SecretTargetAttachment
+    Properties:
+      SecretId:
+        Ref: DBSecret
+      TargetId:
+        Ref: DBInstance
+      TargetType: AWS::RDS::DBInstance
+    Metadata:
+      SamResourceId: DBSecretInstanceAttachment
+  DBSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: DB security group
+      VpcId:
+        Ref: VpcId
+      SecurityGroupIngress:
+      - Fn::If:
+        - PublicAccess
+        - FromPort: 5432
+          ToPort: 5432
+          CidrIp: '0.0.0.0/0'
+          IpProtocol: tcp
+        - FromPort: 5432
+          ToPort: 5432
+          SourceSecurityGroupId:
+            Ref: AccessSecurityGroupId
+          IpProtocol: tcp
+    Metadata:
+      SamResourceId: DBSecurityGroup
+Outputs:
+  Name:
+    Value:
+      Ref: DBName
+  Host:
+    Description: output of database endpoint
+    Value:
+      Fn::GetAtt:
+      - DBInstance
+      - Endpoint.Address
+  Secret:
+    Description: Credentials for Indexer DB
+    Value:
+      Ref: DBSecret
+  SecurityGroup:
+    Description: Security group of postgres instance
+    Value:
+      Ref: DBSecurityGroup

@@ -1,0 +1,232 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Container cluster on ECS, Load Balancer, Security Groups and Cloudwatch
+Parameters:
+  Environment:
+    Type: String
+  ApplicationName:
+    Type: String
+  DomainName:
+    Type: String
+  CertificateArn:
+    Type: String
+  HostedZoneId:
+    Type: String
+  VpcId:
+    Type: String
+  Subnets:
+    Type: String
+  LogGroupName:
+    Type: String
+  GraphNodeName:
+    Type: String
+  IPFSName:
+    Type: String
+  LoadBalancerPort:
+    Type: Number
+    Default: 443
+Mappings:
+  ELBAccountId:
+    us-east-1:
+      AccountId: '033677994240'
+Resources:
+  LoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name:
+        Fn::Sub: ${ApplicationName}-${Environment}
+      Subnets:
+        Fn::Split:
+        - ','
+        - Ref: Subnets
+      SecurityGroups:
+      - Ref: LoadBalancerSecurityGroup
+    Metadata:
+      SamResourceId: LoadBalancer
+  LoadBalancerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security Group for Load Balancer to services on ECS
+      VpcId:
+        Ref: VpcId
+      SecurityGroupIngress:
+      - CidrIp: '0.0.0.0/0'
+        IpProtocol: -1
+    Metadata:
+      SamResourceId: LoadBalancerSecurityGroup
+  LoadBalancerLogsBucket:
+    Type: AWS::S3::Bucket
+    Metadata:
+      SamResourceId: LoadBalancerLogsBucket
+  LoadBalancerLogsBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket:
+        Ref: LoadBalancerLogsBucket
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+        - Sid: GraphNodeELBAccessLogs
+          Effect: Allow
+          Resource:
+            Fn::Sub: arn:aws:s3:::${LoadBalancerLogsBucket}/AWSLogs/${AWS::AccountId}/*
+          Principal:
+            AWS: arn:aws:iam::033677994240:root
+          Action:
+          - s3:PutObject
+    Metadata:
+      SamResourceId: LoadBalancerLogsBucketPolicy
+  LoadBalancerListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      LoadBalancerArn:
+        Ref: LoadBalancer
+      Protocol: HTTPS
+      Certificates:
+      - CertificateArn:
+          Ref: CertificateArn
+      Port:
+        Ref: LoadBalancerPort
+      DefaultActions:
+      - Type: fixed-response
+        FixedResponseConfig:
+          ContentType: text/plain
+          MessageBody: You've reached the Load Balancer Listener! Congratulation!
+          StatusCode: 503
+    Metadata:
+      SamResourceId: LoadBalancerListener
+  LoadBalancerRoute53RecordAdmin:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      Name:
+        Fn::Sub: ${GraphNodeName}-admin-${ApplicationName}.${Environment}.${DomainName}
+      HostedZoneId:
+        Ref: HostedZoneId
+      Type: A
+      AliasTarget:
+        HostedZoneId:
+          Fn::GetAtt:
+          - LoadBalancer
+          - CanonicalHostedZoneID
+        DNSName:
+          Fn::GetAtt:
+          - LoadBalancer
+          - DNSName
+    Metadata:
+      SamResourceId: LoadBalancerRoute53RecordAdmin
+  LoadBalancerRoute53RecordIndexer:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      Name:
+        Fn::Sub: ${GraphNodeName}-indexer-${ApplicationName}.${Environment}.${DomainName}
+      HostedZoneId:
+        Ref: HostedZoneId
+      Type: A
+      AliasTarget:
+        HostedZoneId:
+          Fn::GetAtt:
+          - LoadBalancer
+          - CanonicalHostedZoneID
+        DNSName:
+          Fn::GetAtt:
+          - LoadBalancer
+          - DNSName
+    Metadata:
+      SamResourceId: LoadBalancerRoute53RecordIndexer
+  LoadBalancerRoute53RecordHttp:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      Name:
+        Fn::Sub: ${GraphNodeName}-http-${ApplicationName}.${Environment}.${DomainName}
+      HostedZoneId:
+        Ref: HostedZoneId
+      Type: A
+      AliasTarget:
+        HostedZoneId:
+          Fn::GetAtt:
+          - LoadBalancer
+          - CanonicalHostedZoneID
+        DNSName:
+          Fn::GetAtt:
+          - LoadBalancer
+          - DNSName
+    Metadata:
+      SamResourceId: LoadBalancerRoute53RecordHttp
+  LoadBalancerRoute53RecordWS:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      Name:
+        Fn::Sub: ${GraphNodeName}-ws-${ApplicationName}.${Environment}.${DomainName}
+      HostedZoneId:
+        Ref: HostedZoneId
+      Type: A
+      AliasTarget:
+        HostedZoneId:
+          Fn::GetAtt:
+          - LoadBalancer
+          - CanonicalHostedZoneID
+        DNSName:
+          Fn::GetAtt:
+          - LoadBalancer
+          - DNSName
+    Metadata:
+      SamResourceId: LoadBalancerRoute53RecordWS
+  LoadBalancerRoute53RecordIPFS:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      Name:
+        Fn::Sub: ${IPFSName}-${ApplicationName}.${Environment}.${DomainName}
+      HostedZoneId:
+        Ref: HostedZoneId
+      Type: A
+      AliasTarget:
+        HostedZoneId:
+          Fn::GetAtt:
+          - LoadBalancer
+          - CanonicalHostedZoneID
+        DNSName:
+          Fn::GetAtt:
+          - LoadBalancer
+          - DNSName
+    Metadata:
+      SamResourceId: LoadBalancerRoute53RecordIPFS
+  LogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName:
+        Ref: LogGroupName
+      RetentionInDays: 30
+    Metadata:
+      SamResourceId: LogGroup
+Outputs:
+  LoadBalancer:
+    Description: Load Balancer
+    Value:
+      Ref: LoadBalancer
+  LoadBalancerSecurityGroup:
+    Description: Load Balancer Security Group
+    Value:
+      Ref: LoadBalancerSecurityGroup
+  LoadBalancerListenerArn:
+    Description: Load Balancer Listener
+    Value:
+      Ref: LoadBalancerListener
+  GraphNodeAdminRoute:
+    Description: Graph Node Admin Route
+    Value:
+      Ref: LoadBalancerRoute53RecordAdmin
+  GraphNodeIndexerRoute:
+    Description: Graph Node Indexer Route
+    Value:
+      Ref: LoadBalancerRoute53RecordIndexer
+  GraphNodeHttpClientRoute:
+    Description: Graph Node HTTP Client Route
+    Value:
+      Ref: LoadBalancerRoute53RecordHttp
+  GraphNodeWsClientRoute:
+    Description: Graph Node WebSocket Client Route
+    Value:
+      Ref: LoadBalancerRoute53RecordWS
+  IPFSRoute:
+    Description: IPFS Route
+    Value:
+      Ref: LoadBalancerRoute53RecordIPFS

@@ -1,0 +1,17 @@
+{
+  "value": {
+    "checkpoint": {
+      "mailbox_address": "0x000000000000000000000000cf239718b22e4df02bea0e138efd7886951a918b",
+      "mailbox_domain": 10012,
+      "root": "0xa4ce332194376b62012cef1bc0b69795bae5b1743d4524e673d212adc9abd2f5",
+      "index": 1168
+    },
+    "message_id": "0x1e59c847a0c9109b7e5287a338c8c2dda32f0f4591dedd9e45eaddcb86e237f7"
+  },
+  "signature": {
+    "r": "0x2560895db3d2348218919ab24dc5f75de18ee8386c19add00f8dafe9ae7937d2",
+    "s": "0x2cac9f62d9b6cf3cc32001af0a8a41f42dffe0670fc7e14e404116bad9eeb8a1",
+    "v": 28
+  },
+  "serialized_signature": "0x2560895db3d2348218919ab24dc5f75de18ee8386c19add00f8dafe9ae7937d22cac9f62d9b6cf3cc32001af0a8a41f42dffe0670fc7e14e404116bad9eeb8a11c"
+}

@@ -1,0 +1,14 @@
+{
+  "value": {
+    "validator": "0xc840a82208c2822e6af18cbca807c12dc522cd01",
+    "mailbox_address": "0x000000000000000000000000f0462a31fe1e075283ea07a3c5204841e39d7143",
+    "mailbox_domain": 10012,
+    "storage_location": "s3://khalani-validator-signatures-0/us-east-1"
+  },
+  "signature": {
+    "r": "0x24524c3f729b5807a7c21516b92190cbf3b35e339c4d3c7e6c185a63e467c59f",
+    "s": "0x6e513b595fc1dc4ec31fcfbf996d764fa026955ee1c92818be97b9a5e302f481",
+    "v": 28
+  },
+  "serialized_signature": "0x24524c3f729b5807a7c21516b92190cbf3b35e339c4d3c7e6c185a63e467c59f6e513b595fc1dc4ec31fcfbf996d764fa026955ee1c92818be97b9a5e302f4811c"
+}

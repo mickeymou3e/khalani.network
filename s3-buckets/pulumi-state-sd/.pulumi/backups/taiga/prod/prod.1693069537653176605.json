@@ -1,0 +1,243 @@
+{
+    "version": 3,
+    "checkpoint": {
+        "stack": "organization/taiga/prod",
+        "latest": {
+            "manifest": {
+                "time": "2023-08-26T17:05:37.171208088Z",
+                "magic": "7f5ec831fbfcaaafb30fe1f9dd0eebc4a62372e9fda10d9bab6256b2deca869d",
+                "version": "v3.78.1"
+            },
+            "secrets_providers": {
+                "type": "passphrase",
+                "state": {
+                    "salt": "v1:zm3I4Uv4rss=:v1:M4UBvpXEmuVmR79I:vOiEWL+gfyHHaJtN+Jp9CdJhz0AVUQ=="
+                }
+            },
+            "resources": [
+                {
+                    "urn": "urn:pulumi:prod::taiga::pulumi:pulumi:Stack::taiga-prod",
+                    "custom": false,
+                    "type": "pulumi:pulumi:Stack",
+                    "created": "2023-08-26T17:05:24.655363788Z",
+                    "modified": "2023-08-26T17:05:24.655363788Z",
+                    "sourcePosition": "project:///node_modules/@pulumi/runtime/stack.ts#36,23"
+                },
+                {
+                    "urn": "urn:pulumi:prod::taiga::pulumi:providers:awsx::default_1_0_5",
+                    "custom": true,
+                    "id": "18ab8db3-51e1-4f00-ba0f-4b038ca1c16b",
+                    "type": "pulumi:providers:awsx",
+                    "inputs": {
+                        "version": "1.0.5"
+                    },
+                    "outputs": {
+                        "version": "1.0.5"
+                    },
+                    "created": "2023-08-26T17:05:25.996069326Z",
+                    "modified": "2023-08-26T17:05:25.996069326Z"
+                },
+                {
+                    "urn": "urn:pulumi:prod::taiga::pulumi:providers:aws::default_5_42_0",
+                    "custom": true,
+                    "id": "422d9749-a31e-4094-b5ae-b3ec69cef5ec",
+                    "type": "pulumi:providers:aws",
+                    "inputs": {
+                        "version": "5.42.0"
+                    },
+                    "outputs": {
+                        "version": "5.42.0"
+                    },
+                    "created": "2023-08-26T17:05:26.654226422Z",
+                    "modified": "2023-08-26T17:05:26.654226422Z"
+                },
+                {
+                    "urn": "urn:pulumi:prod::taiga::awsx:ec2:Vpc::vpc",
+                    "custom": false,
+                    "type": "awsx:ec2:Vpc",
+                    "parent": "urn:pulumi:prod::taiga::pulumi:pulumi:Stack::taiga-prod",
+                    "created": "2023-08-26T17:05:26.801141811Z",
+                    "modified": "2023-08-26T17:05:26.801141811Z"
+                },
+                {
+                    "urn": "urn:pulumi:prod::taiga::pulumi:providers:aws-apigateway::default_1_0_1",
+                    "custom": true,
+                    "id": "921eb571-39d8-4d37-90c3-bdfbb4bdb387",
+                    "type": "pulumi:providers:aws-apigateway",
+                    "inputs": {
+                        "version": "1.0.1"
+                    },
+                    "outputs": {
+                        "version": "1.0.1"
+                    },
+                    "created": "2023-08-26T17:05:27.622407161Z",
+                    "modified": "2023-08-26T17:05:27.622407161Z"
+                },
+                {
+                    "urn": "urn:pulumi:prod::taiga::pulumi:providers:aws::default_5_35_0",
+                    "custom": true,
+                    "id": "8dcdc272-26aa-44d7-9ed5-8566b092ee88",
+                    "type": "pulumi:providers:aws",
+                    "inputs": {
+                        "version": "5.35.0"
+                    },
+                    "outputs": {
+                        "version": "5.35.0"
+                    },
+                    "created": "2023-08-26T17:05:28.164280037Z",
+                    "modified": "2023-08-26T17:05:28.164280037Z"
+                },
+                {
+                    "urn": "urn:pulumi:prod::taiga::aws-apigateway:index:RestAPI::api",
+                    "custom": false,
+                    "type": "aws-apigateway:index:RestAPI",
+                    "parent": "urn:pulumi:prod::taiga::pulumi:pulumi:Stack::taiga-prod",
+                    "created": "2023-08-26T17:05:28.292873827Z",
+                    "modified": "2023-08-26T17:05:28.292873827Z"
+                },
+                {
+                    "urn": "urn:pulumi:prod::taiga::pulumi:providers:aws::default_5_16_2",
+                    "custom": true,
+                    "id": "fe427c0d-ca01-4c1b-9f06-fd8004af2e21",
+                    "type": "pulumi:providers:aws",
+                    "inputs": {
+                        "version": "5.16.2"
+                    },
+                    "outputs": {
+                        "version": "5.16.2"
+                    },
+                    "created": "2023-08-26T17:05:28.710788717Z",
+                    "modified": "2023-08-26T17:05:28.710788717Z"
+                },
+                {
+                    "urn": "urn:pulumi:prod::taiga::aws-apigateway:index:RestAPI$aws:apigateway/restApi:RestApi::api",
+                    "custom": true,
+                    "id": "0awz4adzqd",
+                    "type": "aws:apigateway/restApi:RestApi",
+                    "inputs": {
+                        "__defaults": [
+                            "minimumCompressionSize",
+                            "putRestApiMode"
+                        ],
+                        "binaryMediaTypes": [
+                            "*/*"
+                        ],
+                        "body": "{\"swagger\":\"2.0\",\"info\":{\"title\":\"api\",\"version\":\"1.0\"},\"paths\":{\"/app/\":{\"x-amazon-apigateway-any-method\":{\"x-amazon-apigateway-integration\":{\"responses\":{\"default\":{\"statusCode\":\"200\"}},\"uri\":\"http://Calling [toString] on an [Output<T>] is not supported.\\n\\nTo get the value of an Output<T> as an Output<string> consider either:\\n1: o.apply(v => `prefix${v}suffix`)\\n2: pulumi.interpolate `prefix${v}suffix`\\n\\nSee https://www.pulumi.com/docs/concepts/inputs-outputs for more details.\\nThis function may throw in a future version of @pulumi/pulumi.:3000/\",\"type\":\"http_proxy\",\"passthroughBehavior\":\"when_no_match\",\"httpMethod\":\"ANY\"}}},\"/app/{proxy+}\":{\"x-amazon-apigateway-any-method\":{\"x-amazon-apigateway-integration\":{\"responses\":{\"default\":{\"statusCode\":\"200\"}},\"uri\":\"http://Calling [toString] on an [Output<T>] is not supported.\\n\\nTo get the value of an Output<T> as an Output<string> consider either:\\n1: o.apply(v => `prefix${v}suffix`)\\n2: pulumi.interpolate `prefix${v}suffix`\\n\\nSee https://www.pulumi.com/docs/concepts/inputs-outputs for more details.\\nThis function may throw in a future version of @pulumi/pulumi.:3000/{proxy}\",\"type\":\"http_proxy\",\"passthroughBehavior\":\"when_no_match\",\"httpMethod\":\"ANY\",\"requestParameters\":{\"integration.request.path.proxy\":\"method.request.path.proxy\"}},\"parameters\":[{\"name\":\"proxy\",\"in\":\"path\",\"required\":true,\"type\":\"string\"}]}},\"/zeth/\":{\"x-amazon-apigateway-any-method\":{\"x-amazon-apigateway-integration\":{\"responses\":{\"default\":{\"statusCode\":\"200\"}},\"uri\":\"http://Calling [toString] on an [Output<T>] is not supported.\\n\\nTo get the value of an Output<T> as an Output<string> consider either:\\n1: o.apply(v => `prefix${v}suffix`)\\n2: pulumi.interpolate `prefix${v}suffix`\\n\\nSee https://www.pulumi.com/docs/concepts/inputs-outputs for more details.\\nThis function may throw in a future version of @pulumi/pulumi.:8000/\",\"type\":\"http_proxy\",\"passthroughBehavior\":\"when_no_match\",\"httpMethod\":\"ANY\"}}},\"/zeth/{proxy+}\":{\"x-amazon-apigateway-any-method\":{\"x-amazon-apigateway-integration\":{\"responses\":{\"default\":{\"statusCode\":\"200\"}},\"uri\":\"http://Calling [toString] on an [Output<T>] is not supported.\\n\\nTo get the value of an Output<T> as an Output<string> consider either:\\n1: o.apply(v => `prefix${v}suffix`)\\n2: pulumi.interpolate `prefix${v}suffix`\\n\\nSee https://www.pulumi.com/docs/concepts/inputs-outputs for more details.\\nThis function may throw in a future version of @pulumi/pulumi.:8000/{proxy}\",\"type\":\"http_proxy\",\"passthroughBehavior\":\"when_no_match\",\"httpMethod\":\"ANY\",\"requestParameters\":{\"integration.request.path.proxy\":\"method.request.path.proxy\"}},\"parameters\":[{\"name\":\"proxy\",\"in\":\"path\",\"required\":true,\"type\":\"string\"}]}}},\"x-amazon-apigateway-binary-media-types\":[\"*/*\"],\"x-amazon-apigateway-gateway-responses\":{\"MISSING_AUTHENTICATION_TOKEN\":{\"statusCode\":404,\"responseTemplates\":{\"application/json\":\"{\\\"message\\\": \\\"404 Not found\\\" }\"}},\"ACCESS_DENIED\":{\"statusCode\":404,\"responseTemplates\":{\"application/json\":\"{\\\"message\\\": \\\"404 Not found\\\" }\"}}},\"x-amazon-apigateway-api-key-source\":\"HEADER\"}",
+                        "minimumCompressionSize": -1,
+                        "name": "api",
+                        "putRestApiMode": "overwrite"
+                    },
+                    "outputs": {
+                        "binaryMediaTypes": [
+                            "*/*"
+                        ],
+                        "body": "{\"swagger\":\"2.0\",\"info\":{\"title\":\"api\",\"version\":\"1.0\"},\"paths\":{\"/app/\":{\"x-amazon-apigateway-any-method\":{\"x-amazon-apigateway-integration\":{\"responses\":{\"default\":{\"statusCode\":\"200\"}},\"uri\":\"http://Calling [toString] on an [Output<T>] is not supported.\\n\\nTo get the value of an Output<T> as an Output<string> consider either:\\n1: o.apply(v => `prefix${v}suffix`)\\n2: pulumi.interpolate `prefix${v}suffix`\\n\\nSee https://www.pulumi.com/docs/concepts/inputs-outputs for more details.\\nThis function may throw in a future version of @pulumi/pulumi.:3000/\",\"type\":\"http_proxy\",\"passthroughBehavior\":\"when_no_match\",\"httpMethod\":\"ANY\"}}},\"/app/{proxy+}\":{\"x-amazon-apigateway-any-method\":{\"x-amazon-apigateway-integration\":{\"responses\":{\"default\":{\"statusCode\":\"200\"}},\"uri\":\"http://Calling [toString] on an [Output<T>] is not supported.\\n\\nTo get the value of an Output<T> as an Output<string> consider either:\\n1: o.apply(v => `prefix${v}suffix`)\\n2: pulumi.interpolate `prefix${v}suffix`\\n\\nSee https://www.pulumi.com/docs/concepts/inputs-outputs for more details.\\nThis function may throw in a future version of @pulumi/pulumi.:3000/{proxy}\",\"type\":\"http_proxy\",\"passthroughBehavior\":\"when_no_match\",\"httpMethod\":\"ANY\",\"requestParameters\":{\"integration.request.path.proxy\":\"method.request.path.proxy\"}},\"parameters\":[{\"name\":\"proxy\",\"in\":\"path\",\"required\":true,\"type\":\"string\"}]}},\"/zeth/\":{\"x-amazon-apigateway-any-method\":{\"x-amazon-apigateway-integration\":{\"responses\":{\"default\":{\"statusCode\":\"200\"}},\"uri\":\"http://Calling [toString] on an [Output<T>] is not supported.\\n\\nTo get the value of an Output<T> as an Output<string> consider either:\\n1: o.apply(v => `prefix${v}suffix`)\\n2: pulumi.interpolate `prefix${v}suffix`\\n\\nSee https://www.pulumi.com/docs/concepts/inputs-outputs for more details.\\nThis function may throw in a future version of @pulumi/pulumi.:8000/\",\"type\":\"http_proxy\",\"passthroughBehavior\":\"when_no_match\",\"httpMethod\":\"ANY\"}}},\"/zeth/{proxy+}\":{\"x-amazon-apigateway-any-method\":{\"x-amazon-apigateway-integration\":{\"responses\":{\"default\":{\"statusCode\":\"200\"}},\"uri\":\"http://Calling [toString] on an [Output<T>] is not supported.\\n\\nTo get the value of an Output<T> as an Output<string> consider either:\\n1: o.apply(v => `prefix${v}suffix`)\\n2: pulumi.interpolate `prefix${v}suffix`\\n\\nSee https://www.pulumi.com/docs/concepts/inputs-outputs for more details.\\nThis function may throw in a future version of @pulumi/pulumi.:8000/{proxy}\",\"type\":\"http_proxy\",\"passthroughBehavior\":\"when_no_match\",\"httpMethod\":\"ANY\",\"requestParameters\":{\"integration.request.path.proxy\":\"method.request.path.proxy\"}},\"parameters\":[{\"name\":\"proxy\",\"in\":\"path\",\"required\":true,\"type\":\"string\"}]}}},\"x-amazon-apigateway-binary-media-types\":[\"*/*\"],\"x-amazon-apigateway-gateway-responses\":{\"MISSING_AUTHENTICATION_TOKEN\":{\"statusCode\":404,\"responseTemplates\":{\"application/json\":\"{\\\"message\\\": \\\"404 Not found\\\" }\"}},\"ACCESS_DENIED\":{\"statusCode\":404,\"responseTemplates\":{\"application/json\":\"{\\\"message\\\": \\\"404 Not found\\\" }\"}}},\"x-amazon-apigateway-api-key-source\":\"HEADER\"}",
+                        "id": "0awz4adzqd",
+                        "minimumCompressionSize": -1,
+                        "name": "api"
+                    },
+                    "parent": "urn:pulumi:prod::taiga::aws-apigateway:index:RestAPI::api",
+                    "initErrors": [
+                        "creating urn:pulumi:prod::taiga::aws-apigateway:index:RestAPI$aws:apigateway/restApi:RestApi::api: 1 error occurred:\n\t* error creating API Gateway specification: BadRequestException: Errors found during import:\n\tUnable to put integration on 'ANY' for resource at path '/app': Invalid HTTP endpoint specified for URI\n\tUnable to put integration on 'ANY' for resource at path '/app/{proxy+}': Invalid HTTP endpoint specified for URI\n\tUnable to put integration on 'ANY' for resource at path '/zeth': Invalid HTTP endpoint specified for URI\n\tUnable to put integration on 'ANY' for resource at path '/zeth/{proxy+}': Invalid HTTP endpoint specified for URI\n\n"
+                    ],
+                    "provider": "urn:pulumi:prod::taiga::pulumi:providers:aws::default_5_16_2::fe427c0d-ca01-4c1b-9f06-fd8004af2e21",
+                    "propertyDependencies": {
+                        "binaryMediaTypes": null,
+                        "body": null,
+                        "name": null
+                    },
+                    "created": "2023-08-26T17:05:29.887133595Z",
+                    "modified": "2023-08-26T17:05:29.887133595Z"
+                },
+                {
+                    "urn": "urn:pulumi:prod::taiga::awsx:ec2:Vpc$aws:ec2/vpc:Vpc::vpc",
+                    "custom": true,
+                    "id": "vpc-0b81824b63d3eef37",
+                    "type": "aws:ec2/vpc:Vpc",
+                    "inputs": {
+                        "__defaults": [
+                            "enableDnsSupport",
+                            "instanceTenancy"
+                        ],
+                        "cidrBlock": "10.0.0.0/16",
+                        "enableDnsSupport": true,
+                        "instanceTenancy": "default",
+                        "tags": {
+                            "Name": "vpc",
+                            "__defaults": []
+                        }
+                    },
+                    "outputs": {
+                        "__meta": "{\"schema_version\":\"1\"}",
+                        "arn": "arn:aws:ec2:us-east-1:803035318642:vpc/vpc-0b81824b63d3eef37",
+                        "assignGeneratedIpv6CidrBlock": false,
+                        "cidrBlock": "10.0.0.0/16",
+                        "defaultNetworkAclId": "acl-0a8b48de8fa1d805d",
+                        "defaultRouteTableId": "rtb-00c7562927c17e312",
+                        "defaultSecurityGroupId": "sg-0a56cd906ac89fd13",
+                        "dhcpOptionsId": "dopt-0ba5706a9c47f7960",
+                        "enableClassiclink": false,
+                        "enableClassiclinkDnsSupport": false,
+                        "enableDnsHostnames": false,
+                        "enableDnsSupport": true,
+                        "enableNetworkAddressUsageMetrics": false,
+                        "id": "vpc-0b81824b63d3eef37",
+                        "instanceTenancy": "default",
+                        "ipv6AssociationId": "",
+                        "ipv6CidrBlock": "",
+                        "ipv6CidrBlockNetworkBorderGroup": "",
+                        "ipv6IpamPoolId": "",
+                        "ipv6NetmaskLength": 0,
+                        "mainRouteTableId": "rtb-00c7562927c17e312",
+                        "ownerId": "803035318642",
+                        "tags": {
+                            "Name": "vpc"
+                        },
+                        "tagsAll": {
+                            "Name": "vpc"
+                        }
+                    },
+                    "parent": "urn:pulumi:prod::taiga::awsx:ec2:Vpc::vpc",
+                    "provider": "urn:pulumi:prod::taiga::pulumi:providers:aws::default_5_35_0::8dcdc272-26aa-44d7-9ed5-8566b092ee88",
+                    "propertyDependencies": {
+                        "cidrBlock": null,
+                        "tags": null
+                    },
+                    "created": "2023-08-26T17:05:30.022039432Z",
+                    "modified": "2023-08-26T17:05:30.022039432Z"
+                },
+                {
+                    "urn": "urn:pulumi:prod::taiga::aws:ecs/cluster:Cluster::cluster",
+                    "custom": true,
+                    "id": "arn:aws:ecs:us-east-1:803035318642:cluster/cluster-93f89d9",
+                    "type": "aws:ecs/cluster:Cluster",
+                    "inputs": {
+                        "__defaults": [
+                            "name"
+                        ],
+                        "name": "cluster-93f89d9"
+                    },
+                    "outputs": {
+                        "arn": "arn:aws:ecs:us-east-1:803035318642:cluster/cluster-93f89d9",
+                        "capacityProviders": [],
+                        "defaultCapacityProviderStrategies": [],
+                        "id": "arn:aws:ecs:us-east-1:803035318642:cluster/cluster-93f89d9",
+                        "name": "cluster-93f89d9",
+                        "serviceConnectDefaults": null,
+                        "settings": [
+                            {
+                                "name": "containerInsights",
+                                "value": "disabled"
+                            }
+                        ],
+                        "tags": {},
+                        "tagsAll": {}
+                    },
+                    "parent": "urn:pulumi:prod::taiga::pulumi:pulumi:Stack::taiga-prod",
+                    "provider": "urn:pulumi:prod::taiga::pulumi:providers:aws::default_5_42_0::422d9749-a31e-4094-b5ae-b3ec69cef5ec",
+                    "sourcePosition": "project:///index.ts#43,17"
+                }
+            ]
+        }
+    }
+}
