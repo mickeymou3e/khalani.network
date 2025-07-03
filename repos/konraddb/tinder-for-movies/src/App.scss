@@ -1,0 +1,10 @@
+@import "./styles/Card.scss";
+@import "./styles/Grid.scss";
+
+body {
+  background: linear-gradient(rgba(30, 27, 38, 0.95), rgba(30, 27, 38, 0.95)),
+    url("https://www.learner.org/wp-content/uploads/2019/01/American-Cinema-main-fig1.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: repeat;
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "id": "0xa86a:0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
+    "address": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
+    "decimals": 6,
+    "name": "USDC | avax",
+    "symbol": "USDC.avax",
+    "chainId": "0xa86a"
+  },
+  {
+    "id": "0xa86a:0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7",
+    "address": "0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7",
+    "decimals": 6,
+    "name": "USDT | avax",
+    "symbol": "USDT.avax",
+    "chainId": "0xa86a"
+  },
+  {
+    "id": "0xa86a:0xd586E7F844cEa2F87f50152665BCbc2C279D8d70",
+    "address": "0xd586E7F844cEa2F87f50152665BCbc2C279D8d70",
+    "decimals": 18,
+    "name": "DAI | avax",
+    "symbol": "DAI.avax",
+    "chainId": "0xa86a"
+  },
+  {
+    "id": "0xa86a:0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB",
+    "address": "0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB",
+    "decimals": 18,
+    "name": "WETH | avax",
+    "symbol": "WETH.avax",
+    "chainId": "0xa86a"
+  }
+]

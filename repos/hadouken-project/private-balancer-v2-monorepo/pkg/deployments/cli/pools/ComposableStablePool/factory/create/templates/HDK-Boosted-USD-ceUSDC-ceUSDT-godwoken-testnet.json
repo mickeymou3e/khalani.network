@@ -1,0 +1,32 @@
+{
+    "name": "Celer USD Stable Pool",
+    "symbol": "HDK-Boosted-USD-ceUSDC-ceUSDT",
+    "tokens": [
+      "0xccffa4fff6dab00a69778cb574044245b9de4fec",
+      "0x4Ea08DCA142F103ac2D5FF95F1d376712C5EF5a9",
+      "0xCdb3D2dC427A5BC9aF54a9c2Ed2F5950619184BF"
+    ],
+    "rateProviders": [
+      "0xccffa4fff6dab00a69778cb574044245b9de4fec",
+      "0x0000000000000000000000000000000000000000",
+      "0x0000000000000000000000000000000000000000"
+    ],
+    "priceRateCacheDuration": [
+      "0",
+      "0",
+      "0"
+    ],
+    "amplificationParameter": "300",
+    "swapFeePercentage": "100000000000000",
+    "exemptFromYieldProtocolFeeFlags": [
+      false,
+      false,
+      false
+    ],
+    "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+    "initialLiquidity": {
+      "0xccffa4fff6dab00a69778cb574044245b9de4fec": "1000000000000000000",
+      "0x4Ea08DCA142F103ac2D5FF95F1d376712C5EF5a9": "1000000",
+      "0xCdb3D2dC427A5BC9aF54a9c2Ed2F5950619184BF": "1000000"
+    }
+  }

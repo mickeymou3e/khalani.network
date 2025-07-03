@@ -1,0 +1,40 @@
+import React from 'react'
+
+import { IIcon } from '@interfaces/core'
+import { styled } from '@mui/material'
+import { keyframes } from '@mui/system'
+
+const spin = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`
+
+const SvgInfiniteSpin = styled('svg')({
+  animation: `${spin} 1s infinite linear`,
+})
+
+const PendingIcon: React.FC<IIcon> = ({ fill = '#1E2032', ...rest }) => (
+  <SvgInfiniteSpin
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...rest}
+  >
+    <path
+      d="M24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0C18.6274 0 24 5.37258 24 12ZM3.49632 12C3.49632 16.6965 7.30355 20.5037 12 20.5037C16.6965 20.5037 20.5037 16.6965 20.5037 12C20.5037 7.30355 16.6965 3.49632 12 3.49632C7.30355 3.49632 3.49632 7.30355 3.49632 12Z"
+      fill={fill}
+    />
+    <path
+      d="M22.812 6.79421C21.6146 4.30732 19.5965 2.30923 17.0978 1.13667C14.5991 -0.0358965 11.7726 -0.311242 9.0946 0.357034C6.41658 1.02531 4.0508 2.59635 2.39596 4.80539C0.741115 7.01443 -0.10162 9.72642 0.00977716 12.4843L3.50325 12.3432C3.42431 10.3889 4.02151 8.46703 5.1942 6.90161C6.36689 5.3362 8.04337 4.2229 9.94112 3.74933C11.8389 3.27577 13.8419 3.47089 15.6125 4.30181C17.3832 5.13274 18.8133 6.54866 19.6618 8.31097L22.812 6.79421Z"
+      fill="#0094FF"
+    />
+  </SvgInfiniteSpin>
+)
+
+export default PendingIcon

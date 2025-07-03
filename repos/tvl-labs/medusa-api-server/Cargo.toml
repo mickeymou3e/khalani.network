@@ -1,0 +1,91 @@
+[package]
+name = "medusa-service"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+members = ["crates/*"]
+
+[[bin]]
+name = "medusa"
+path = "src/main.rs"
+
+# [[bin]]
+# name = "medusa-dev-net"
+# path = "src/dev_net/bin.rs"
+
+# [[bin]]
+# name = "run-multi-chain"
+# path = "src/dev_net/chain.rs"
+
+# [[bin]]
+# name = "deploy-contracts"
+# path = "src/dev_net/deploy.rs"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+rustc-hash = "2.1"
+alloy = { version = "0.4.2", features = [
+    "rlp",
+    "getrandom",
+    "serde",
+    "signers",
+    "signer-keystore",
+    "signer-mnemonic",
+    "providers",
+    "provider-http",
+    "provider-ws",
+    "transports",
+    "transport-ws",
+    "network",
+    "node-bindings",
+    "consensus",
+    "contract",
+    "rpc-client",
+    "rpc-client-ws",
+    "rpc-types-eth",
+    "eips",
+] }
+anyhow = { version = "1.0.91", features = ["backtrace"] }
+apm = { path = "crates/apm" }
+backtrace = "0.3"
+bcs = "0.1.6"
+config = "0.14.1"
+env_logger = "0.11"
+ethers = { version = "2.0", features = ["ws"] }
+futures = "0.3.31"
+futures-util = { version = "0.3", default-features = false, features = [
+    "sink",
+    "std",
+] }
+jsonrpsee = { version = "0.24.7", features = ["macros", "server"] }
+log = "0.4"
+prometheus = { version = "0.13", features = ["protobuf"] }
+reqwest = "0.12"
+protobuf = "2.28"
+medusa-types = { path = "crates/types" }
+rocksdb = { version = "0.22", default-features = false, features = [
+    "lz4",
+    "snappy",
+] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_yaml = "0.9.33"
+tokio = { version = "1.41", features = ["full"] }
+tokio-tungstenite = "0.24.0"
+toml = "0.8"
+tracing = "0.1.41"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+uuid = { version = "1.11", features = ["v4", "serde"] }
+hex = "0.4"
+rand = "0.8"
+base64 = "0.22"
+aws-config = "1.0"
+aws-sdk-secretsmanager = "1.0"
+aws-types = "1.0"
+async-trait = "0.1"
+[dev-dependencies]
+mockall = "0.13"
+tempfile = "3.8"

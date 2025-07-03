@@ -1,0 +1,27 @@
+{
+  "transaction": {
+    "hash": "0xc3aa4d2a0d0bde722dedbca87b2f592e3b4500c95c90d442ec6f1d6ee1665552",
+    "blockNumber": null
+  },
+  "data": {
+    "AaveLinearPoolFactory": {
+      "create": {
+        "input": {
+          "name": "Linear CKB",
+          "symbol": "HDK-LNR-CKB",
+          "underlyingToken": "0x7538C85caE4E4673253fFd2568c1F1b48A71558a",
+          "wrappedToken": "0x4Edc8690D6c2636CfAA5Df7A4F0013F20AEB9223",
+          "upperTarget": "666666660000000000000000000",
+          "swapFeePercentage": "1500000000000000",
+          "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0x7538C85caE4E4673253fFd2568c1F1b48A71558a": "100000000000000000000",
+            "0x4Edc8690D6c2636CfAA5Df7A4F0013F20AEB9223": "100000000000000000000"
+          }
+        },
+        "output": "0x3718e79A9ef7B2970AfD5053ce1F6a4C3043Af5a"
+      }
+    }
+  },
+  "timestamp": 1678720766262
+}

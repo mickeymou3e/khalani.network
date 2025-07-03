@@ -1,0 +1,13 @@
+# Visual Studio Code
+#
+.vscode/
+.idea/
+
+# node.js
+
+node_modules/
+build/
+static-storybook/
+
+npm-debug.log
+yarn-error.log

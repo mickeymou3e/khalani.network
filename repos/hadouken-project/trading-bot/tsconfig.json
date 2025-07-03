@@ -1,0 +1,35 @@
+{
+  "ts-node": {
+    // Do not forget to `npm i -D tsconfig-paths`
+    "require": ["tsconfig-paths/register"]
+  },
+
+  "include": ["**/*.ts"],
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2017",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "resolveJsonModule": true,
+    "paths": {
+      "@yokai-sdk/*": ["./src/yokai-sdk/*"],
+      "@config/*": ["./src/config/*"],
+      "@pool/*": ["./src/pool/*"],
+      "@opportunity/*": ["./src/opportunity/*"],
+      "@abi/*": ["./types/ethers-contracts/*"]
+    }
+  }
+}

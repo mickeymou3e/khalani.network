@@ -1,0 +1,51 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "axi",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#keywords"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line",
+          "match": "#.*$"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control",
+          "match": "\\b(assume|pick_any|pick_witness|by_induction|let|const|match|if|else)\\b"
+        },
+        {
+          "name": "storage.type",
+          "match": "\\b(inductive|domain|struct)\\b"
+        },
+        {
+          "name": "keyword",
+          "match": "\\b(function|proc)\\b"
+        },
+        {
+          "name": "keyword.operator",
+          "match": "\\b(forall|exists|and|or|not|implies|bicond)\\b"
+        },
+        {
+          "name": "keyword.operator",
+          "match": "==>|=>|=|&|\\||~"
+        },
+        {
+          "name": "entity.name.function",
+          "match": "![a-zA-Z0-9_]+"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.axi"
+}

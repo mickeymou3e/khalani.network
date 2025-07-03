@@ -1,0 +1,14 @@
+{
+  "name": "Linear ETH",
+  "symbol": "HDK-LNR-ETH",
+  "underlyingToken": "0xfF900E1436cBCd25d72B7DafE6Ef4d569405cc05",
+  "wrappedToken": "0x6B6BceB1f7E1F6efB203D7F75bEb34BEaC62fE43",
+  "upperTarget": "125000000000000000000",
+  "lowerTarget": "0",
+  "swapFeePercentage": "1500000000000000",
+  "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+  "initialLiquidity": {
+    "0xfF900E1436cBCd25d72B7DafE6Ef4d569405cc05": "1000000000000000000",
+    "0x6B6BceB1f7E1F6efB203D7F75bEb34BEaC62fE43": "1000000000000000000"
+  }
+}

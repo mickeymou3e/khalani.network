@@ -1,0 +1,27 @@
+{
+  "name": "USDT.bsc/KAI",
+  "symbol": "balUSDTbscKAI",
+  "tokens": [
+    "0x62d7c7361ad7d7b56f09d2084b82a88599b35fe6",
+    "0x1fa37818ae2710c23301d94d2bee37951c2dd55b"
+  ],
+  "rateProviders": [
+    "0x0000000000000000000000000000000000000000",
+    "0x0000000000000000000000000000000000000000"
+  ],
+  "priceRateCacheDuration": [
+    "0",
+    "0"
+  ],
+  "amplificationParameter": "300",
+  "swapFeePercentage": "100000000000000",
+  "exemptFromYieldProtocolFeeFlags": [
+    false,
+    false
+  ],
+  "owner": "0x73B31aC967f46dB2C45280C7f5d1D3ee7F38E122",
+  "initialLiquidity": {
+    "0x62D7c7361ad7D7b56f09D2084B82a88599B35fe6": "150000000000",
+    "0x1Fa37818ae2710C23301D94d2BeE37951C2DD55b": "150000000000000000000000"
+  }
+}

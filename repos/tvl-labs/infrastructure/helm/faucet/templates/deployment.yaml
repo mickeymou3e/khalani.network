@@ -1,0 +1,135 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "faucet.fullname" . }}
+  labels:
+    {{- include "faucet.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "faucet.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "faucet.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "faucet.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: CONFIG_FILE
+              value: "/config/config.json"
+            - name: PORT
+              value: {{ .Values.service.port | quote }}
+            - name: CAPTCHA_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: khalani-faucet-google-captcha-v3
+                  key: KHALANI_FAUCET_GOOGLE_CAPTCHA_V3_SECRET
+            - name: V2_CAPTCHA_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: khalani-faucet-google-captcha-v3
+                  key: KHALANI_FAUCET_GOOGLE_CAPTCHA_V3_SECRET
+            - name: AWS_REGION
+              value: "us-east-1"
+            - name: AWS_KMS_KEY_KHALANITESTNET
+              value: "63b0217e-68cf-4e4d-9269-b292765b8ae9"
+            - name: AWS_KMS_KEY_SEPOLIA
+              value: "63b0217e-68cf-4e4d-9269-b292765b8ae9"
+            - name: AWS_KMS_KEY_FUJI
+              value: "63b0217e-68cf-4e4d-9269-b292765b8ae9"
+            - name: EVM_CHAINS_KHALANITESTNET_RPC
+              valueFrom:
+                secretKeyRef:
+                  name: hyperlane-connection-urls
+                  key: HYP_CHAINS_KHALANITESTNET_TRIAL_CUSTOMRPCURLS
+            - name: EVM_CHAINS_SEPOLIA_RPC
+              valueFrom:
+                secretKeyRef:
+                  name: hyperlane-connection-urls
+                  key: HYP_CHAINS_SEPOLIA_CUSTOMRPCURLS
+            - name: EVM_CHAINS_FUJI_RPC
+              valueFrom:
+                secretKeyRef:
+                  name: hyperlane-connection-urls
+                  key: HYP_CHAINS_FUJI_CUSTOMRPCURLS
+            - name: DISABLE_CAPTCHA
+              value: "true"
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /config/config.json
+              name: faucet-config
+              readOnly: true
+              subPath: config.json
+            - name: secrets-store-inline # The volume mount is required for the Sync With Kubernetes Secrets
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
+            - name: secrets-store-inline-captcha-secret # The volume mount is required for the Sync With Kubernetes Secrets
+              mountPath: "/mnt/secrets-store-captcha-secret"
+              readOnly: true
+            - name: secrets-store-inline-ghcr # The volume mount is required for the Sync With Kubernetes Secrets
+              mountPath: "/mnt/secrets-store-inline-ghcr"
+              readOnly: true
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+        - name: faucet-config
+          configMap:
+            name: {{ include "faucet.configMapName" . }}
+        - name: secrets-store-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "blockchain-rpcs-aws-secret-class"
+        - name: secrets-store-inline-captcha-secret
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "khalani-faucet-captcha-secret-class"
+        - name: secrets-store-inline-ghcr
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "tvl-docker-ghcr-login-secret-aws-secret-class"
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

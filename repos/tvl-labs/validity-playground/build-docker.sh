@@ -1,0 +1,1 @@
+docker build -f ./Dockerfile.validity -t validity_runtime .

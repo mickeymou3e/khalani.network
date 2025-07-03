@@ -1,0 +1,15 @@
+{
+  "name": "Multichain WBTC Stable Pool",
+  "symbol": "HDK-Boosted-WBTC-multiWBTC",
+  "tokens": ["0xa7b28ddf165FF3Bcd698E33924Fb09dcD881FE0e", "0xb44a9b6905af7c801311e8f4e76932ee959c663c"],
+  "rateProviders": ["0xa7b28ddf165FF3Bcd698E33924Fb09dcD881FE0e", "0x0000000000000000000000000000000000000000"],
+  "priceRateCacheDuration": ["0", "0"],
+  "amplificationParameter": "300",
+  "swapFeePercentage": "100000000000000",
+  "exemptFromYieldProtocolFeeFlags": [false, false],
+  "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+  "initialLiquidity": {
+    "0xa7b28ddf165FF3Bcd698E33924Fb09dcD881FE0e": "300000000000000",
+    "0xb44a9b6905af7c801311e8f4e76932ee959c663c": "28000"
+  }
+}

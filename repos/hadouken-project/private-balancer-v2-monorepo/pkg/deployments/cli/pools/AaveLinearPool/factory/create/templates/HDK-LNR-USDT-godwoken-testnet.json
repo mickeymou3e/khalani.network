@@ -1,0 +1,14 @@
+{
+  "name": "Linear USDT",
+  "symbol": "HDK-LNR-USDT",
+  "underlyingToken": "0x30b0A247DE59a1CDF44329b756d3343E5afEd7f9",
+  "wrappedToken": "0x4Fa5AD2756ac3C62285ec896acc2d514c65F3ed3",
+  "upperTarget": "2100000000000000000000000",
+  "lowerTarget": "0",
+  "swapFeePercentage": "1500000000000000",
+  "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+  "initialLiquidity": {
+    "0x30b0A247DE59a1CDF44329b756d3343E5afEd7f9": "1000000000",
+    "0x4Fa5AD2756ac3C62285ec896acc2d514c65F3ed3": "1000000000"
+  }
+}

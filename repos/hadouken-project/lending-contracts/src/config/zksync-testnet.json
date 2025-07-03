@@ -1,0 +1,49 @@
+{
+  "env": "testnet",
+  "network": "zksync-testnet",
+  "marketId": "zkSync",
+  "chainId": "0x118",
+  "delay": "5000",
+  "gasLimit": 12500000,
+  "rpcUrl": "https://testnet.era.zksync.dev",
+  "readOnlyRpcUrl": "https://testnet.era.zksync.dev",
+  "wsUrl": "",
+  "explorer": "https://goerli.explorer.zksync.io",
+  "nativeToken": {
+    "address": "0x0000000000000000000000000000000000000000",
+    "symbol": "ETH",
+    "wrapAddress": "0x20b28B1e4665FFf290650586ad76E977EAb90c5D"
+  },
+  "tokens": [
+    {
+      "symbol": "WETH.e",
+      "address": "0x20b28B1e4665FFf290650586ad76E977EAb90c5D",
+      "displaySymbol": "ETH",
+      "name": "Wrapped ETH",
+      "decimals": 18
+    },
+    {
+      "symbol": "WBTC.e",
+      "displaySymbol": "WBTC",
+      "name": "Wrapped Bitcoin",
+      "decimals": 8
+    },
+    {
+      "symbol": "USDT.e",
+      "displaySymbol": "USDT",
+      "name": "Tether USDT",
+      "decimals": 6
+    },
+    {
+      "symbol": "USDC.e",
+      "displaySymbol": "USDC",
+      "name": "USD Coin",
+      "decimals": 6
+    }
+  ],
+  "bandOracleStdReference": "",
+  "diaOracleV2": "",
+  "gnosisApi": "",
+  "gnosisSafe": "",
+  "isGnosisSafe": false
+}

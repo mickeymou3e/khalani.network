@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: safe-txs-khalani-testnet
+data:
+  PYTHONPATH: "/app/"
+  DJANGO_SETTINGS_MODULE: "config.settings.production"
+  DEBUG: "0"
+  ETHEREUM_NODE_URL: "https://testnet.khalani.network"
+  ETH_L2_NETWORK: "1"
+  REDIS_URL: "redis://safe-txs-khalani-testnet.applications.svc.cluster.local:6379/0"
+  CELERY_BROKER_URL: "amqp://guest:guest@safe-txs-khalani-testnet.applications.svc.cluster.local/"
+  DJANGO_ALLOWED_HOSTS: "*"
+  FORCE_SCRIPT_NAME: "/txs-khalani-testnet/"
+  CSRF_TRUSTED_ORIGINS: "https://localhost.{{ .Values.domainName }}"

@@ -1,0 +1,20 @@
+{
+  "transaction": {
+    "hash": "0x2d57c77a836404633071b330c8fd04c3c67b309bbfaed8b9d7f9b90841e280b0",
+    "blockNumber": 4544365
+  },
+  "data": {
+    "StaticAToken": {
+      "deploy": {
+        "input": {
+          "name": "Wrapped HBNB",
+          "symbol": "hBNB",
+          "lendingPool": "0x72ddd1eca2af73024e0823C9a80B00de8e3f0070",
+          "aToken": "0x642f29D70DeBa6038e36E5a024173450A2366F89"
+        },
+        "output": "0x603a7a9a6421556c4C6F58d2C5C016d523A52878"
+      }
+    }
+  },
+  "timestamp": 1698408978143
+}

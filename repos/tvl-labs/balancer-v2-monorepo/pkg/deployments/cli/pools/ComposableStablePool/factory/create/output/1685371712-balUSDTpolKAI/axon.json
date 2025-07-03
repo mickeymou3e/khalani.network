@@ -1,0 +1,41 @@
+{
+  "transaction": {
+    "hash": "0x17f219466cfbeb8adec0e1d6c68dfd32fa22920cab8c7993607329fc868066aa",
+    "blockNumber": 117666
+  },
+  "data": {
+    "ComposableStablePoolFactory": {
+      "create": {
+        "input": {
+          "name": "USDT.pol/KAI",
+          "symbol": "balUSDTpolKAI",
+          "tokens": [
+            "0x1fa37818ae2710c23301d94d2bee37951c2dd55b",
+            "0x45ae659493c7c106727b44bb537f4712b0a604c8"
+          ],
+          "rateProviders": [
+            "0x0000000000000000000000000000000000000000",
+            "0x0000000000000000000000000000000000000000"
+          ],
+          "priceRateCacheDuration": [
+            "0",
+            "0"
+          ],
+          "amplificationParameter": "300",
+          "swapFeePercentage": "100000000000000",
+          "exemptFromYieldProtocolFeeFlags": [
+            false,
+            false
+          ],
+          "owner": "0x73B31aC967f46dB2C45280C7f5d1D3ee7F38E122",
+          "initialLiquidity": {
+            "0x45Ae659493c7c106727b44bB537f4712b0a604C8": "150000000000",
+            "0x1Fa37818ae2710C23301D94d2BeE37951C2DD55b": "150000000000000000000000"
+          }
+        },
+        "output": "0x8EB52F072763Acfeb82437E73D1eaD9536F49dA3"
+      }
+    }
+  },
+  "timestamp": 1685371712032
+}

@@ -1,0 +1,95 @@
+Transform: AWS::Serverless-2016-10-31
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  Environment:
+    Type: String
+  ApplicationName:
+    Type: String
+  ServiceName:
+    Type: String
+  VpcId:
+    Type: String
+  Subnets:
+    Type: String
+  CertificateArn:
+    Type: String
+  DomainName:
+    Type: String
+  HostedZoneId:
+    Type: String
+
+  GraphNodeName:
+    Type: String
+    Default: graph-node
+  IPFSName:
+    Type: String
+    Default: ipfs
+  DBName:
+    Type: String
+    Default: graphnode
+  ChainsNames:
+    Type: String
+  ChainsRpcUrls:
+    Type: String
+
+  IPFSImageTag:
+    Type: String
+  GraphNodeImageTag:
+    Type: String
+
+Resources:
+  Database:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: ./db.yaml
+      Parameters:
+        ApplicationName: !Ref ApplicationName
+        Environment: !Ref Environment
+        DBName: !Ref DBName
+        VpcId: !Ref VpcId
+        Subnets: !Ref Subnets
+
+  LoadBalancer:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: ./load-balancer.yaml
+      Parameters:
+        ApplicationName: !Ref ApplicationName
+        LogGroupName: !Ref ApplicationName
+        Environment: !Ref Environment
+        DomainName: !Ref DomainName
+        HostedZoneId: !Ref HostedZoneId
+        CertificateArn: !Ref CertificateArn
+        VpcId: !Ref VpcId
+        Subnets: !Ref Subnets
+        GraphNodeName: !Ref GraphNodeName
+        IPFSName: !Ref IPFSName
+
+  GraphNode:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: ./graph-node.yaml
+      Parameters:
+        ApplicationName: !Ref ApplicationName
+        LogGroupName: !Ref ApplicationName
+        Environment: !Ref Environment
+        ServiceName: !Ref ServiceName
+        VpcId: !Ref VpcId
+        Subnets: !Ref Subnets
+        GraphNodeName: !Ref GraphNodeName
+        IPFSName: !Ref IPFSName
+        ChainsNames: !Ref ChainsNames
+        ChainsRpcUrls: !Ref ChainsRpcUrls
+        IPFSImageTag: !Ref IPFSImageTag
+        GraphNodeImageTag: !Ref GraphNodeImageTag
+        DBHost: !GetAtt Database.Outputs.Host
+        DBName: !GetAtt Database.Outputs.Name
+        DBSecret: !GetAtt Database.Outputs.Secret
+        LoadBalancerListenerArn: !GetAtt LoadBalancer.Outputs.LoadBalancerListenerArn
+        LoadBalancerSecurityGroup: !GetAtt LoadBalancer.Outputs.LoadBalancerSecurityGroup
+        GraphNodeAdminRoute: !GetAtt LoadBalancer.Outputs.GraphNodeAdminRoute
+        GraphNodeIndexerRoute: !GetAtt LoadBalancer.Outputs.GraphNodeIndexerRoute
+        GraphNodeHttpClientRoute: !GetAtt LoadBalancer.Outputs.GraphNodeHttpClientRoute
+        GraphNodeWsClientRoute: !GetAtt LoadBalancer.Outputs.GraphNodeWsClientRoute
+        IPFSRoute: !GetAtt LoadBalancer.Outputs.IPFSRoute

@@ -1,0 +1,15 @@
+FROM node:lts-alpine
+
+WORKDIR /app
+COPY package.json yarn.lock ./
+
+RUN yarn install
+
+COPY . .
+
+RUN yarn build
+
+# replace .env file values in actual files with environment variables (if defined) in runtime
+ENTRYPOINT ["/bin/sh", "entrypoint.sh"]
+
+CMD ["yarn", "start"]

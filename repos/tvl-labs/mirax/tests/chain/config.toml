@@ -1,0 +1,32 @@
+# DO NOT USE this private key in any production environment!
+private_path = "private_key_0.key"
+
+data_path = "./tests/free-space/data"
+
+[api.rpc]
+http_listening_address = "127.0.0.1:8081"
+max_payload_size = 10_000_000
+max_conn = 1000
+
+[api.graphql]
+http_listening_address = "127.0.0.1:8082"
+
+[consensus]
+gc_depth = 15
+min_propose_interval = 2000
+max_propose_interval = 20000
+
+
+[storage]
+option_path = "default-db-options"
+# cache_size = 200
+
+[network]
+listen_port = 8712
+bootstrap = []
+
+[logger]
+filter = "info"
+log_path = "./tests/free-space/logs"
+
+[devops]

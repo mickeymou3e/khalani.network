@@ -1,0 +1,91 @@
+load "nat-plus"
+load "list"
+load "list-of"
+
+define + := N.+
+module Asset {
+    structure Token := (token tok_id:Ide amt:N owner:Ide)
+    structure TokenData := (tokData ide:Ide amt:N)
+    structure LimitOrder := (order base:TokenData quote:TokenData author:Ide)
+    structure StateItem := (token_state Token) | (order_state LimitOrder)
+    define-sort State := (List StateItem)
+    define state_item->tok := lambda (si)
+            match si {
+                (token_state t) => (SOME t)
+                | _ => NONE
+            }
+    datatype StateTransition := (state prev:State next:State) 
+
+  
+    
+    declare sum_balances : [(List (Option Token)) Ide] -> N 
+    declare sum_balances_prev, sum_balances_next : [StateTransition Ide] -> N 
+    declare state_to_token_list : [State] -> (List (Option Token)) [[(alist->list id)]]
+    declare token-in?: [(List (Option Token)) Ide] -> Boolean [[(alist->list id) id]]
+    declare token-in-tx?: [StateTransition Ide] -> Boolean
+    declare token-ids: [(List (Option Token))] -> (List Ide)
+    declare is-token: [(Option StateItem)] -> Boolean
+
+    assert* is-token-def := [
+        (is-token (SOME token_state _))
+        (~ (is-token (SOME order_state _)))
+        (~ (is-token NONE))
+    ]
+
+    assert* token-ids-def := [
+        ((token-ids nil) = nil)
+        ((token-ids NONE::?ls) = (token-ids ?ls))
+        ((token-ids (SOME ?tok)::?ls) = (tok_id ?tok)::(token-ids ?ls))
+    ]
+
+    assert* token-in-def := [
+        ((token-in? ?ls ?tokid) <==> 
+        (?tokid List.in (token-ids ?ls)))
+    ]
+
+    assert* token-in-tx-def := [
+        ((token-in-tx? ?st ?tokid ) <==> 
+        (token-in? (state_to_token_list (prev ?st)) ?tokid) |
+        (token-in? (state_to_token_list (next ?st)) ?tokid))
+      
+    ]
+    
+    expand-input sum_balances [(alist->list state_item->tok) id]
+    expand-input state [(alist->list id) (alist->list id)]
+   # expand-input token-in-tx? [(lambda(st)(eval (state_to_token_list st))) (lambda(st)(eval (state_to_token_list st))) id]
+  
+    transform-output sum_balances [nat->int]
+    transform-output eval [nat->int]
+
+    assert* sum_balances_def := [
+        ((sum_balances nil _) = N.zero)
+        ((sum_balances NONE:(Option Token)::?ls:(List (Option Token)) ?tok_id) = (sum_balances ?ls ?tok_id))
+        (((tok_id ?t) = ?tokid) ==> ((sum_balances (SOME ?t)::?ls ?tokid) = (amt ?t) + (sum_balances ?ls ?tokid)))
+        (((tok_id ?t) =/= ?tokid) ==> ((sum_balances (SOME ?t)::?ls ?tokid) = (sum_balances ?ls ?tokid)))
+    ]
+
+    assert* state_to_token_list_def := [
+        (state_to_token_list (token_state ?t)::?ls = (SOME ?t)::(state_to_token_list ?ls))
+        ((state_to_token_list nil) = nil)
+        ((state_to_token_list (order_state ?o)::?ls) = NONE::(state_to_token_list ?ls))
+    ]
+
+    assert* sum_balances_prev_def := [
+        ((sum_balances_prev ?st ?tokid) = (sum_balances (state_to_token_list (prev ?st)) ?tokid))
+    ]
+
+    assert* sum_balances_next_def := [
+        ((sum_balances_next ?st ?tokid) = (sum_balances (state_to_token_list (next ?st)) ?tokid))
+    ]
+
+
+    # Invariants
+     define (conservation-property state_transition) := 
+        (forall ?id . (((token-in? (state_to_token_list (prev state_transition)) ?id) | (token-in? (state_to_token_list (next state_transition)) ?id)) 
+                                                            ==>
+                                                            ((sum_balances_prev state_transition ?id) = (sum_balances_next state_transition ?id)))
+                                                        )
+   
+    
+}
+

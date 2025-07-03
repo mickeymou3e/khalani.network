@@ -1,0 +1,17 @@
+[package]
+name = "medusa-tx-worker"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+alloy.workspace = true
+anyhow.workspace = true
+async-trait.workspace = true
+ethers.workspace = true
+hex.workspace = true
+medusa-config.workspace = true
+medusa-storage.workspace = true
+medusa-types.workspace = true
+rustc-hash.workspace = true
+tokio.workspace = true
+tracing.workspace = true

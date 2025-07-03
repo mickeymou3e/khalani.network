@@ -1,0 +1,45 @@
+name: 'Deploy Storybook'
+
+on:
+  push:
+    branches:
+      - develop
+
+env:
+  NODE_VERSION: '16.x'
+  AWS_EC2_METADATA_DISABLED: true
+
+jobs:
+  storybook_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v2.3.1
+        with:
+          persist-credentials: false
+
+      - name: 'Use Node.js v${{ env.NODE_VERSION }}'
+        uses: actions/setup-node@master
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: 'https://npm.pkg.github.com'
+
+      - name: Cache NPM dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.OS }}-npm-cache-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-npm-cache-
+
+      - run: yarn
+      - run: yarn storybook:build
+
+      - name: 'Deploy'
+        run: |
+          aws s3 sync static-storybook s3://${{ secrets.STORYBOOK_S3_BUCKET }} --delete --exact-timestamps
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.STORYBOOK_DISTRIBUTION_ID }} --paths "/*"
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

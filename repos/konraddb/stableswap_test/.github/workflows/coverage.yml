@@ -1,0 +1,34 @@
+name: Code Coverage
+
+on:
+  push:
+    branches: ['develop']
+
+env:
+  NODE_VERSION: '16.x'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v2.3.1
+        with:
+          persist-credentials: false
+
+      - name: Install yarn dependencies
+        run: |
+          yarn config set //npm.pkg.github.com/:_authToken ${{ env.NODE_AUTH_TOKEN }}
+          yarn config set @tvl-labs:registry https://npm.pkg.github.com
+          yarn --frozen-lockfile
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PACKAGES_READ_TOKEN }}
+
+      - name: Run the tests
+        run: yarn test --coverage
+
+      - name: Report coverage
+        uses: romeovs/lcov-reporter-action@v0.2.21
+        with:
+          lcov-file: coverage/cov.info
+          github-token: ${{ secrets.GITHUB_TOKEN }}

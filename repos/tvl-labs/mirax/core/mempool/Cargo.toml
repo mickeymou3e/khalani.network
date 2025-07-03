@@ -1,0 +1,30 @@
+[package]
+name = "mirax-mempool"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+async-lock.workspace = true
+flume.workspace = true
+serde.workspace = true
+smol_str.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+
+mirax-codec.workspace = true
+mirax-consensus-traits.workspace = true
+mirax-crypto.workspace = true
+mirax-db.workspace = true
+mirax-error.workspace = true
+mirax-hasher.workspace = true
+mirax-network.workspace = true
+mirax-storage.workspace = true
+mirax-storage-traits.workspace = true
+mirax-types.workspace = true
+mirax-verification.workspace = true
+
+[dev-dependencies.mirax-types]
+workspace = true
+features = ["random"]

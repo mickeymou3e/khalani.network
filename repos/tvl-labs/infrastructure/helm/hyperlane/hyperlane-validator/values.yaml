@@ -1,0 +1,59 @@
+# Default values for hyperlane-validator.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: gcr.io/abacus-labs-dev/hyperlane-agent
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "f44589e-20231130-114734"
+
+validator:
+  originChain: "" # Required
+  originChainName: "" # Required
+  originChainEnvName: "" # Required
+  kmsKeyId: "" # Required
+  s3Bucket: "" # Required
+  iamRoleArn: "" # Required
+  reorgPeriod: 10
+  interval: 10
+  storage:
+    size: 10Gi
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+podAnnotations: {}
+podSecurityContext:
+  fsGroup: 2000
+
+securityContext: {}
+
+serviceAccount:
+  create: true
+
+service:
+  type: ClusterIP
+  metrics:
+    port: 9090
+
+resources: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+storage:
+  storageClass: gp2
+  accessModes: ReadWriteOnce

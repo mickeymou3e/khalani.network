@@ -1,0 +1,19 @@
+{
+  "transaction": {
+    "hash": "0x5e01d121999320d2641030aea7eb403d461b95e9a9099844659a5b5084ea501b",
+    "blockNumber": 6933883
+  },
+  "data": {
+    "TestToken": {
+      "deploy": {
+        "input": {
+          "name": "test token",
+          "symbol": "tst",
+          "decimals": 18
+        },
+        "output": "0x1ab0E14FF56b6473EcDBB10C219A555E94D7B027"
+      }
+    }
+  },
+  "timestamp": 1685954364830
+}

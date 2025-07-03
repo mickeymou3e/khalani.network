@@ -1,0 +1,86 @@
+{
+  "CKB": {
+    "name": "pCKB",
+    "symbol": "pCKB",
+    "decimals": 18,
+    "address": ""
+  },
+  "ETH-eth": {
+    "name": "ETH",
+    "symbol": "ETH",
+    "decimals": 18,
+    "address": ""
+  },
+  "USDT-eth": {
+    "name": "USDT",
+    "symbol": "USDT",
+    "decimals": 6,
+    "address": ""
+  },
+  "DAI-eth": {
+    "name": "DAI",
+    "symbol": "DAI",
+    "decimals": 18,
+    "address": ""
+  },
+  "USDC-eth": {
+    "name": "USDC",
+    "symbol": "USDC",
+    "decimals": 6,
+    "address": ""
+  },
+  "BNB-bsc": {
+    "name": "Wrapped BNB (ForceBridge from BSC)",
+    "symbol": "BNB|bsc",
+    "decimals": 18,
+    "address": ""
+  },
+  "BUSD-bsc": {
+    "name": "Wrapped BUSD (ForceBridge from BSC)",
+    "symbol": "BUSD|bsc",
+    "decimals": 18,
+    "address": ""
+  },
+  "USDT-bsc": {
+    "name": "Wrapped USDT (ForceBridge from BSC)",
+    "symbol": "USDT|bsc",
+    "decimals": 18,
+    "address": ""
+  },
+  "ETH-bsc": {
+    "name": "Wrapped ETH (ForceBridge from BSC)",
+    "symbol": "ETH|bsc",
+    "decimals": 18,
+    "address": ""
+  },
+  "USDC-bsc": {
+    "name": "Wrapped USDC (ForceBridge from BSC)",
+    "symbol": "USDC|bsc",
+    "decimals": 18,
+    "address": ""
+  },
+  "WBTC-eth": {
+    "name": "Wrapped WBTC (ForceBridge from Ethereum)",
+    "symbol": "WBTC|eth",
+    "decimals": 8,
+    "address": ""
+  },
+  "BUSD-eth": {
+    "name": "BUSD",
+    "symbol": "BUSD",
+    "decimals": 18,
+    "address": ""
+  },
+  "hUSDC": {
+    "name": "Wrapped hUSDC",
+    "symbol": "hUSDC",
+    "decimals": 18,
+    "address": ""
+  },
+  "hUSDT": {
+    "name": "Wrapped hUSDC",
+    "symbol": "hUSDC",
+    "decimals": 18,
+    "address": ""
+  }
+}

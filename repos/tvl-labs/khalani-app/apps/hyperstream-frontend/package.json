@@ -1,0 +1,13 @@
+{
+  "name": "hyperstream-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "webpack serve --config ./webpack.dev.js --hot",
+    "build": "webpack --config ./webpack.config.js",
+    "lint": "eslint . --ext .ts,.tsx --fix",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

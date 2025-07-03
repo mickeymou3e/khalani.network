@@ -1,0 +1,14 @@
+{
+  "name": "Linear USDC",
+  "symbol": "HDK-LNR-USDC",
+  "underlyingToken": "0x186181e225dc1ad85a4a94164232bd261e351c33",
+  "wrappedToken": "0xE16AE54fd2b74D92F9FeD49Bf7fA20aaB003DD60",
+  "upperTarget": "20000000000000000000000000",
+  "lowerTarget": "0",
+  "swapFeePercentage": "1500000000000000",
+  "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+  "initialLiquidity": {
+    "0x186181e225dc1ad85a4a94164232bd261e351c33": "1000000",
+    "0xE16AE54fd2b74D92F9FeD49Bf7fA20aaB003DD60": "1000000"
+  }
+}

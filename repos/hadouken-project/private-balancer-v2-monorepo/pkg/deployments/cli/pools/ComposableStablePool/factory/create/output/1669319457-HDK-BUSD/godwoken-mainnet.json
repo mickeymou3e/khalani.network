@@ -1,0 +1,41 @@
+{
+  "transaction": {
+    "hash": "0xf6701467771ccd137a665927ee0492b484bd837fee68c2228999f45aaaee0fcf",
+    "blockNumber": null
+  },
+  "data": {
+    "ComposableStablePoolFactory": {
+      "create": {
+        "input": {
+          "name": "BUSD",
+          "symbol": "HDK-BUSD",
+          "tokens": [
+            "0x9dC5014998b6A7351d75D731263199D31feb4474",
+            "0xa04b5B5A11A04773064d8Ca9a28d51a3176F3B02"
+          ],
+          "rateProviders": [
+            "0x0000000000000000000000000000000000000000",
+            "0xa04b5B5A11A04773064d8Ca9a28d51a3176F3B02"
+          ],
+          "priceRateCacheDuration": [
+            "0",
+            "0"
+          ],
+          "amplificationParameter": "300",
+          "swapFeePercentage": "100000000000000",
+          "exemptFromYieldProtocolFeeFlags": [
+            false,
+            false
+          ],
+          "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0xa04b5B5A11A04773064d8Ca9a28d51a3176F3B02": "999999999999000000",
+            "0x9dC5014998b6A7351d75D731263199D31feb4474": "999999999999000000"
+          }
+        },
+        "output": "0xcD8fDd6deBc178F2bD743FDc31E211F19484D549"
+      }
+    }
+  },
+  "timestamp": 1669319457638
+}

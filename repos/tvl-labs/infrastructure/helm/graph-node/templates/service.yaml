@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: graph-node
+  labels:
+    app: graph-node
+spec:
+  clusterIP: None
+  selector:
+    app: graph-node
+  ports:
+    - name: admin
+      port: 8020
+      targetPort: 8020
+    - name: index-node
+      port: 8030
+      targetPort: 8030
+    - name: metrics
+      port: 8040
+      targetPort: 8040

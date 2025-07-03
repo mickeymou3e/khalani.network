@@ -1,0 +1,24 @@
+{
+  "signup": {
+    "signup": "Sign up",
+    "firstName": "First name",
+    "firstNamePlaceholder": "John",
+    "email": "Email",
+    "emailPlaceholder": "john.doe@mail.com",
+    "password": "Password",
+    "passwordPlaceholder": "Enter password",
+    "confirmPassword": "Confirm password",
+    "confirmPasswordPlaceholder": "Repeat password",
+    "passwordHintText": "Password must contain 8 characters, at least one uppercase letter and one number.",
+    "next": "Next",
+    "enableAuthenticatorTitle": "Enable authenticator",
+    "enableAuthenticatorSubtitle": "In order to create your account you need to be validated with two factor authentication.",
+    "qrCodeText": "Scan this QR code with your authenticator app.",
+    "authenticatorCode": "Authenticator code",
+    "authenticatorCodeHint": "If you need to repeat this step, please remove your previously linked QR code first, as old codes won't be valid for authentication.",
+    "accountCreatedTitle": "Account created",
+    "accountCreatedSubtitle": "You can now start trading on the Neutral platform",
+    "close": "Close",
+    "login": "Login"
+  }
+}

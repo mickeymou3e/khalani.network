@@ -1,0 +1,39 @@
+name: Publish to Github Packages
+
+on:
+  release:
+    types: [created]
+env:
+  NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  DEPLOYMENT_NETWORK: godwoken
+  DEPLOYMENT_ENV: prod
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install wheel
+          pip install -r requirements.txt
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@hadouken-project'
+          always-auth: true
+      - run: yarn
+      - run: yarn build
+      - run: yarn config set //npm.pkg.github.com/:_authToken ${{ secrets.GITHUB_TOKEN }}
+      - run: yarn config set @hadouken-project:registry https://npm.pkg.github.com
+      - run: yarn publish

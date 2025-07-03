@@ -1,0 +1,2 @@
+- deploy ipfs and graph node for mainnet
+- replace `arcadiamainnet` config

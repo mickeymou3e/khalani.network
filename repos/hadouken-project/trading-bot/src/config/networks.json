@@ -1,0 +1,40 @@
+{
+  "networks": [
+    {
+      "chainId": "0x116e9",
+      "lendingSubgraphAddress": "https://graph-dev-http-hadouken-dev.hadouken.finance/subgraphs/name/lending-godwoken-testnet",
+      "balancerSubgraphAddress": "https://graph-dev-http-hadouken-dev.hadouken.finance/subgraphs/name/balancer-godwoken-testnet",
+      "rpcUrl": "https://godwoken-testnet-v1.ckbapp.dev"
+    },
+    {
+      "chainId": "0x116ea",
+      "lendingSubgraphAddress": "https://graph-prod-http-hadouken-prod.hadouken.finance/subgraphs/name/lending-godwoken-mainnet",
+      "balancerSubgraphAddress": "https://graph-prod-http-hadouken-prod.hadouken.finance/subgraphs/name/balancer-godwoken-mainnet",
+      "rpcUrl": "https://v1.mainnet.godwoken.io/rpc"
+    },
+    {
+      "chainId": "0x118",
+      "lendingSubgraphAddress": "https://graph-dev-http-hadouken-dev.hadouken.finance/subgraphs/name/lending-zksync-testnet",
+      "balancerSubgraphAddress": "https://graph-dev-http-hadouken-dev.hadouken.finance/subgraphs/name/balancer-zksync-testnet",
+      "rpcUrl": "https://testnet.era.zksync.dev"
+    },
+    {
+      "chainId": "0x144",
+      "lendingSubgraphAddress": "",
+      "balancerSubgraphAddress": "",
+      "rpcUrl": "https://mainnet.era.zksync.io"
+    },
+    {
+      "chainId": "0x1389",
+      "lendingSubgraphAddress": "https://graph-dev-http-hadouken-dev.hadouken.finance/subgraphs/name/lending-mantle-testnet",
+      "balancerSubgraphAddress": "https://graph-dev-http-hadouken-dev.hadouken.finance/subgraphs/name/balancer-mantle-testnet",
+      "rpcUrl": "https://rpc.testnet.mantle.xyz"
+    },
+    {
+      "chainId": "0x1388",
+      "lendingSubgraphAddress": "",
+      "balancerSubgraphAddress": "",
+      "rpcUrl": "https://rpc.mantle.xyz"
+    }
+  ]
+}

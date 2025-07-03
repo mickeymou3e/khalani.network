@@ -1,0 +1,154 @@
+[
+  {
+    "id": "0x271c:0x7A59a2D8E2A42C73aaa99E809CFe7816F786A3F7",
+    "address": "0x7A59a2D8E2A42C73aaa99E809CFe7816F786A3F7",
+    "decimals": 6,
+    "name": "USDT | sepolia",
+    "symbol": "USDT.sepolia",
+    "chainId": "0x271c",
+    "sourceChainId": "0xaa36a7"
+  },
+  {
+    "id": "0x271c:0x1Db42728c12043B4a88ed30E0c7AA04Ac32cD70a",
+    "address": "0x1Db42728c12043B4a88ed30E0c7AA04Ac32cD70a",
+    "decimals": 6,
+    "name": "USDC | sepolia",
+    "symbol": "USDC.sepolia",
+    "chainId": "0x271c",
+    "sourceChainId": "0xaa36a7"
+  },
+  {
+    "id": "0x271c:0x1536Ab28180C16C7d20A0bf66F3966F571aAd528",
+    "address": "0x1536Ab28180C16C7d20A0bf66F3966F571aAd528",
+    "decimals": 18,
+    "name": "BUSD | sepolia",
+    "symbol": "BUSD.sepolia",
+    "chainId": "0x271c",
+    "sourceChainId": "0xaa36a7"
+  },
+  {
+    "id": "0x271c:0x390882C237BDB20eDb843D95635966ab5feD33BD",
+    "address": "0x390882C237BDB20eDb843D95635966ab5feD33BD",
+    "decimals": 6,
+    "name": "USDT | fuji",
+    "symbol": "USDT.fuji",
+    "chainId": "0x271c",
+    "sourceChainId": "0xa869"
+  },
+  {
+    "id": "0x271c:0x88aa6C2584b2095CFa0e0cD3234B738125F77354",
+    "address": "0x88aa6C2584b2095CFa0e0cD3234B738125F77354",
+    "decimals": 6,
+    "name": "USDC | fuji",
+    "symbol": "USDC.fuji",
+    "chainId": "0x271c",
+    "sourceChainId": "0xa869"
+  },
+  {
+    "id": "0x271c:0x99232fE0C3C8EAc7884366ea9aC4f97F776564A6",
+    "address": "0x99232fE0C3C8EAc7884366ea9aC4f97F776564A6",
+    "decimals": 6,
+    "name": "USDT | mumbai",
+    "symbol": "USDT.mumbai",
+    "chainId": "0x271c",
+    "sourceChainId": "0x13881"
+  },
+  {
+    "id": "0x271c:0xf828fDf6d715bed0b58b9DB7228e60da9a1ae067",
+    "address": "0xf828fDf6d715bed0b58b9DB7228e60da9a1ae067",
+    "decimals": 6,
+    "name": "USDC | mumbai",
+    "symbol": "USDC.mumbai",
+    "chainId": "0x271c",
+    "sourceChainId": "0x13881"
+  },
+  {
+    "id": "0x271c:0x23A943314b9696b4eeB375fad7F8aa87FA016d75",
+    "address": "0x23A943314b9696b4eeB375fad7F8aa87FA016d75",
+    "decimals": 6,
+    "name": "USDT | bsctestnet",
+    "symbol": "USDT.bsctestnet",
+    "chainId": "0x271c",
+    "sourceChainId": "0x61"
+  },
+  {
+    "id": "0x271c:0x37F48DE5f397Bb540F9362268c1D6A7290276aEc",
+    "address": "0x37F48DE5f397Bb540F9362268c1D6A7290276aEc",
+    "decimals": 6,
+    "name": "USDC | bsctestnet",
+    "symbol": "USDC.bsctestnet",
+    "chainId": "0x271c",
+    "sourceChainId": "0x61"
+  },
+  {
+    "id": "0x271c:0xa5ea35F24F606D1DCF81789afd0c929EdE488fe8",
+    "address": "0xa5ea35F24F606D1DCF81789afd0c929EdE488fe8",
+    "decimals": 18,
+    "name": "BUSD | bsctestnet",
+    "symbol": "BUSD.bsctestnet",
+    "chainId": "0x271c",
+    "sourceChainId": "0x61"
+  },
+  {
+    "id": "0x271c:0x0D8907264689635Be91d3dB316FFd594a0a1C681",
+    "address": "0x0D8907264689635Be91d3dB316FFd594a0a1C681",
+    "decimals": 6,
+    "name": "USDT | arbitrumgoerli",
+    "symbol": "USDT.arbitrumgoerli",
+    "chainId": "0x271c",
+    "sourceChainId": "0x66eed"
+  },
+  {
+    "id": "0x271c:0xC2D1E226f087C1138AB0C6cE63E2F67B50B8a614",
+    "address": "0xC2D1E226f087C1138AB0C6cE63E2F67B50B8a614",
+    "decimals": 6,
+    "name": "USDC | arbitrumgoerli",
+    "symbol": "USDC.arbitrumgoerli",
+    "chainId": "0x271c",
+    "sourceChainId": "0x66eed"
+  },
+  {
+    "id": "0x271c:0x905046B0aDa864A0fAA3Ce99a037cb874241a6D1",
+    "address": "0x905046B0aDa864A0fAA3Ce99a037cb874241a6D1",
+    "decimals": 6,
+    "name": "USDT | optimismgoerli",
+    "symbol": "USDT.optimismgoerli",
+    "chainId": "0x271c",
+    "sourceChainId": "0x1a4"
+  },
+  {
+    "id": "0x271c:0xCB29e94DA3C89c923547ed3890C9B5d8420e9819",
+    "address": "0xCB29e94DA3C89c923547ed3890C9B5d8420e9819",
+    "decimals": 6,
+    "name": "USDC | optimismgoerli",
+    "symbol": "USDC.optimismgoerli",
+    "chainId": "0x271c",
+    "sourceChainId": "0x1a4"
+  },
+  {
+    "id": "0x271c:0x70E6224536Bf7C65cc79d7a23f77a77c5caB06fa",
+    "address": "0x70E6224536Bf7C65cc79d7a23f77a77c5caB06fa",
+    "decimals": 6,
+    "name": "USDT | godwoken-testnet",
+    "symbol": "USDT.godwoken-testnet",
+    "chainId": "0x271c",
+    "sourceChainId": "0x116e9"
+  },
+  {
+    "id": "0x271c:0x7CdeAEFe272e174259F49F6765ADC6B0756ea349",
+    "address": "0x7CdeAEFe272e174259F49F6765ADC6B0756ea349",
+    "decimals": 6,
+    "name": "USDC | godwoken-testnet",
+    "symbol": "USDC.godwoken-testnet",
+    "chainId": "0x271c",
+    "sourceChainId": "0x116e9"
+  },
+  {
+    "id": "0x271c:0x477b4198Edd0ED573E900db7e9925FC7bbA35395",
+    "address": "0x477b4198Edd0ED573E900db7e9925FC7bbA35395",
+    "decimals": 18,
+    "name": "KAI",
+    "symbol": "KAI",
+    "chainId": "0x271c"
+  }
+]

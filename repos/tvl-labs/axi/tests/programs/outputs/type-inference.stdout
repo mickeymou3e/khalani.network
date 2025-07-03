@@ -1,0 +1,10 @@
+Result: Nothing
+Result: Nothing
+Result: Nothing
+Result: Proposition(forall Nat. f[@0:Nat])
+Result: Proposition(forall Nat. forall Nat. and(=[@1:Nat, @0:Nat], f[@0:Nat]))
+Result: Proposition(exists Nat. exists Nat. and(=[@1:Nat, @0:Nat], f[@1:Nat]))
+Result: Proposition(forall Nat. and(exists Nat. =[@0:Nat, @1:Nat], f[@0:Nat]))
+Result: Nothing
+Result: Nothing
+Result: Proposition(forall Point. and(fp[@0:Point], =[Point.x[@0:Point]):Nat, 1]))

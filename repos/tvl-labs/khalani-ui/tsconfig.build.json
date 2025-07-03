@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "types": ["jest", "node"],
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "downlevelIteration": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "module": "ES2020",
+    "target": "ES2020",
+    "jsx": "react",
+    "allowJs": true,
+    "baseUrl": "./",
+    "plugins": [
+      {
+        "transform": "@zerollup/ts-transform-paths"
+      }
+    ],
+    "paths": {
+      "@components/*": ["./src/components/*"],
+      "@interfaces/*": ["./src/interfaces/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@tests/*": ["./testUtils/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@images/*": ["./src/images/*"],
+      "@constants/*": ["./src/constants/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": [
+    "node_modules",
+    "babel.config.js",
+    "jest.config.js",
+    "src/**/*.test.ts*",
+    "src/**/*.stories.ts*"
+  ]
+}

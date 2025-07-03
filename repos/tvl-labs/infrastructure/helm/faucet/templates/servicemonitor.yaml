@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "faucet.fullname" . }}
+  namespace: monitoring
+  labels:
+    metrics: "true"
+spec:
+  selector:
+    matchLabels:
+      {{- include "faucet.selectorLabels" . | nindent 6 }}
+  namespaceSelector:
+    matchNames:
+      - applications
+  endpoints:
+    - port: http
+      path: /metrics
+      honorLabels: true

@@ -1,0 +1,137 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "hyperlane-validator.fullname" . }}
+  labels:
+    {{- include "hyperlane-validator.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "hyperlane-validator.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "hyperlane-validator.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "hyperlane-validator.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: CONFIG_FILES
+              value: /app/config/config.json
+            - name: HYP_DB
+              value: /usr/share/hyperlane
+            - name: HYP_ORIGINCHAINNAME
+              value: {{ required "Validator chain" .Values.validator.originChain }}
+            - name: "HYP_CHAIN_{{ .Values.validator.originChainEnvName }}_NAME"
+              value: {{ required "Validator chain" .Values.validator.originChain }}
+            # Use AWS KMS key for signing.
+            - name: HYP_VALIDATOR_TYPE
+              value: aws
+            - name: HYP_VALIDATOR_ID
+              value: {{ required "Validator KMS key ID" .Values.validator.kmsKeyId }}
+            - name: HYP_VALIDATOR_REGION
+              value: us-east-1
+
+            # Save checkpoints to S3 bucket.
+            - name: HYP_CHECKPOINTSYNCER_TYPE
+              value: s3
+            - name: HYP_CHECKPOINTSYNCER_BUCKET
+              value: {{ required "Validator S3 bucket" .Values.validator.s3Bucket }}
+            - name: HYP_CHECKPOINTSYNCER_REGION
+              value: us-east-1
+              # TODO: Remove , doesnt seem to be used anymore
+            - name: HYP_VALIDATOR_REORGPERIOD
+              value: {{ .Values.validator.reorgPeriod | quote }}
+            - name: HYP_INTERVAL
+              value: {{ .Values.validator.interval | quote }}
+            - name: HYP_METRICS
+              value: "9090"
+            - name: HYP_TRACING_LEVEL
+              value: info
+            - name: HYP_TRACING_FMT
+              value: pretty
+
+            {{- if or (eq .Values.validator.connection.type "httpQuorum") (eq .Values.validator.connection.type "httpFallback") }}
+            - name: "HYP_CHAINS_{{ .Values.validator.originChainEnvName }}_CUSTOMRPCURLS"
+              valueFrom:
+                secretKeyRef:
+                  name: hyperlane-connection-urls
+                  key: "HYP_CHAINS_{{ .Values.validator.originChainEnvName }}_CUSTOMRPCURLS"
+            {{- else }}
+            - name: "HYP_CHAINS_{{ .Values.validator.originChainEnvName }}_CUSTOMRPCURLS"
+              valueFrom:
+                secretKeyRef:
+                  name: hyperlane-connection-urls
+                  key: "HYP_CHAINS_{{ .Values.validator.originChainEnvName }}_CUSTOMRPCURLS"
+            {{- end }}
+            
+            - name: "HYP_CHAINS_{{ .Values.validator.originChainEnvName }}_CONNECTION_TYPE"
+              value: {{ .Values.validator.connection.type }}
+          ports:
+            - name: metrics
+              containerPort: 9090
+          volumeMounts:
+            - name: state
+              mountPath: /usr/share/hyperlane
+            - name: config-json
+              mountPath: /app/config/config.json
+              subPath: config.json
+            - name: secrets-store-inline # The volume mount is required for the Sync With Kubernetes Secrets
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+      volumes:
+        - name: state
+        - name: config-json
+          configMap:
+            name: config-json
+            items:
+              - key: config.json
+                path: config.json
+        - name: secrets-store-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "blockchain-rpcs-aws-secret-class"
+  volumeClaimTemplates:
+    - metadata:
+        name: state
+      spec:
+        storageClassName: {{ .Values.storage.storageClass }}
+        accessModes: [ {{ .Values.storage.accessModes }} ]
+        resources:
+          requests:
+            storage: {{ .Values.validator.storage.size }}

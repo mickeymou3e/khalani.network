@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "strict": true,
+    "target": "ESNext",
+    "rootDir": "."
+  },
+  "include": [
+    "src",
+    "cli",
+    "contracts",
+    "scripts/godwoken"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "migrations"
+  ]
+}

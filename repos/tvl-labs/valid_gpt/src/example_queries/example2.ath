@@ -1,0 +1,23 @@
+declare A,B,C,D,E,F,G,H,I: Boolean
+
+assert p1 := (A | B ==> C & D )
+assert p2 := (C | E ==> ~ F & G)
+assert p3 := (F | H ==> A & I)
+
+# We will show that the negation of F is a logical consequence
+# of these 3 premises. We'll derive (~ F) by contradiction, by
+# assuming F: 
+
+(!by-contradiction (~ F)
+assume F
+  (!chain-> [F
+         ==> (F | H)   [alternate]
+         ==> (A & I)   [p3]
+         ==> A         [left-and]
+         ==> (A | B)   [alternate]
+         ==> (C & D)   [p1]
+         ==> C         [left-and]
+         ==> (C | E)   [alternate]
+         ==> (~ F & G) [p2]
+         ==> (~ F)     [left-and]
+         ==> false     [(absurd with F)]]))

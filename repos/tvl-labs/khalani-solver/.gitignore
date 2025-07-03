@@ -1,0 +1,8 @@
+/target
+.idea
+.local.config.json
+crates/bindings-khalani/Cargo.lock
+/crates/bindings-khalani/target
+.vscode
+.env
+/config/local.toml

@@ -1,0 +1,29 @@
+[package]
+name = "mirax-api"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+async-graphql.workspace = true
+async-graphql-axum.workspace = true
+axum.workspace = true
+jsonrpsee.workspace = true
+serde.workspace = true
+smol_str.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+trait-variant.workspace = true
+
+mirax-config.workspace = true
+mirax-crypto.workspace = true
+mirax-db.workspace = true
+mirax-error.workspace = true
+mirax-graphql-types.workspace = true
+mirax-jsonrpc-types.workspace = true
+mirax-mempool.workspace = true
+mirax-signal.workspace = true
+mirax-storage-traits.workspace = true
+mirax-types.workspace = true
+mirax-verification.workspace = true

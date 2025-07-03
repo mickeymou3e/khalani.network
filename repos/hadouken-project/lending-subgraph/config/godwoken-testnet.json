@@ -1,0 +1,15 @@
+{
+  "network": "lending-godwoken-testnet",
+  "startBlock": 691878,
+  "contracts": {
+    "poolProxy": {
+      "address": "0x72ddd1eca2af73024e0823C9a80B00de8e3f0070"
+    },
+    "poolConfiguratorProxy": {
+      "address": "0x7E77b58B8FD83Ce4762C6e0fE858bBC787c69772"
+    },
+    "DIAOracle": {
+      "address": "0x96C5F1E50c4393EFa890699cD9AeCf3FB58dcB99"
+    }
+  }
+}

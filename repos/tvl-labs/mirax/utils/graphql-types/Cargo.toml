@@ -1,0 +1,10 @@
+[package]
+name = "mirax-graphql-types"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+async-graphql.workspace = true
+serde.workspace = true
+
+mirax-types.workspace = true

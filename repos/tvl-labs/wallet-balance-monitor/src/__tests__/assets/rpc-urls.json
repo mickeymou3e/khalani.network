@@ -1,0 +1,12 @@
+{
+  "rpcUrls": [
+    {
+      "chain": "mainnet",
+      "url": "https://eth.llamarpc.com"
+    },
+    {
+      "chain": "goerli",
+      "url": "https://rpc.ankr.com/eth_goerli"
+    }
+  ]
+}

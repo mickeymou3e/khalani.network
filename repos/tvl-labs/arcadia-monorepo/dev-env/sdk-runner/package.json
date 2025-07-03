@@ -1,0 +1,19 @@
+{
+  "name": "sdk-runner",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "simulation": "tsx ./simulation.ts",
+    "set-config": "tsx ./config.ts"
+  },
+  "dependencies": {
+    "@mysten/bcs": "^1.6.3",
+    "@tvl-labs/arcadia-sdk": "^0.0.11"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "tsx": "^4.19.4",
+    "typescript": "^5.1.6"
+  }
+}

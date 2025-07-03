@@ -1,0 +1,79 @@
+{
+    "name": "@hadouken-project/sor",
+    "version": "4.1.1-beta.2",
+    "license": "GPL-3.0-only",
+    "main": "dist/index.js",
+    "module": "dist/index.esm.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "rollup -c",
+        "prepack": "yarn build",
+        "test": "TS_NODE_PROJECT='tsconfig.testing.json' nyc mocha -r ts-node/register test/*.spec.ts --timeout 20000",
+        "coverage": "nyc report --reporter=text-lcov | coveralls",
+        "lint": "eslint ./src ./test --ext .ts --max-warnings 0",
+        "node": "npx hardhat node --fork $(grep ALCHEMY_URL .env | cut -d '=' -f2) --fork-block-number 14828550"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "pretty-quick --staged"
+        }
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com"
+    },
+    "files": [
+        "dist"
+    ],
+    "devDependencies": {
+        "@balancer-labs/typechain": "^1.0.0",
+        "@ethersproject/abi": "^5.4.1",
+        "@ethersproject/address": "^5.4.0",
+        "@ethersproject/bignumber": "^5.4.2",
+        "@ethersproject/constants": "^5.4.0",
+        "@ethersproject/contracts": "^5.4.1",
+        "@ethersproject/providers": "^5.4.4",
+        "@ethersproject/wallet": "^5.4.0",
+        "@georgeroman/balancer-v2-pools": "0.0.7",
+        "@nomiclabs/hardhat-ethers": "^2.0.6",
+        "@rollup/plugin-commonjs": "^20.0.0",
+        "@rollup/plugin-json": "^4.1.0",
+        "@rollup/plugin-node-resolve": "^13.0.4",
+        "@rollup/plugin-typescript": "^8.2.5",
+        "@types/chai": "^4.2.10",
+        "@types/lodash.clonedeep": "^4.5.6",
+        "@types/mocha": "^7.0.2",
+        "@types/node": "^14.0.20",
+        "@typescript-eslint/eslint-plugin": "^4.29.2",
+        "@typescript-eslint/parser": "^4.29.2",
+        "bignumber.js": "^9.0.1",
+        "chai": "^4.2.0",
+        "dotenv": "^8.2.0",
+        "eslint": "^7.32.0",
+        "eslint-plugin-mocha-no-only": "^1.1.1",
+        "eslint-plugin-prettier": "^3.4.1",
+        "hardhat": "^2.9.9",
+        "husky": "^4.2.1",
+        "lodash.clonedeep": "^4.5.0",
+        "lodash.set": "^4.3.2",
+        "mocha": "8.2.1",
+        "nyc": "^15.0.0",
+        "perf_hooks": "^0.0.1",
+        "prettier": "^2.3.2",
+        "pretty-quick": "^2.0.1",
+        "rollup": "^2.56.3",
+        "rollup-plugin-dts": "^4.0.0",
+        "ts-node": "^10.0.0",
+        "typescript": "^4.3.5"
+    },
+    "dependencies": {
+        "isomorphic-fetch": "^2.2.1"
+    },
+    "peerDependencies": {
+        "@ethersproject/abi": "^5.4.1",
+        "@ethersproject/address": "^5.4.0",
+        "@ethersproject/bignumber": "^5.4.2",
+        "@ethersproject/constants": "^5.4.0",
+        "@ethersproject/contracts": "^5.4.1",
+        "@ethersproject/providers": "^5.4.4"
+    }
+}

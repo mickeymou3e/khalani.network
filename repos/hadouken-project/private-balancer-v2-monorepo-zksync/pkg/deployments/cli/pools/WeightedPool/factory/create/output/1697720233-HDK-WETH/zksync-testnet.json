@@ -1,0 +1,36 @@
+{
+  "transaction": {
+    "hash": "0x8a0c7ef00dfac374511c4d30a21888ed7361222676b75164bf7ec314394f7cfe",
+    "blockNumber": 12752248
+  },
+  "data": {
+    "WeightedPoolFactory": {
+      "create": {
+        "input": {
+          "name": "HDK/WETH",
+          "symbol": "HDK-WETH",
+          "tokens": [
+            "0x20b28B1e4665FFf290650586ad76E977EAb90c5D",
+            "0xcdEc6D5199695cff259FBd4e3C0176456293deCc"
+          ],
+          "weights": [
+            "200000000000000000",
+            "800000000000000000"
+          ],
+          "rateProviders": [
+            "0x0000000000000000000000000000000000000000",
+            "0x0000000000000000000000000000000000000000"
+          ],
+          "swapFeePercentage": "3000000000000000",
+          "delegate": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0xcdEc6D5199695cff259FBd4e3C0176456293deCc": "0",
+            "0x20b28B1e4665FFf290650586ad76E977EAb90c5D": "0"
+          }
+        },
+        "output": "0x45b55cBb920aB422CbBEe8fbc18caeB881c46289"
+      }
+    }
+  },
+  "timestamp": 1697720233290
+}

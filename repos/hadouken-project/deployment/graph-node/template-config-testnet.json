@@ -1,0 +1,21 @@
+{
+  "Parameters": {
+    "Environment": "testnet",
+    "ApplicationName": "hadouken-dev",
+    "ServiceName": "graph-node-dev",
+    "DomainName": "hadouken.finance",
+    "GraphNodeCleanupBlocks": true,
+    "CertificateArn": "arn:aws:acm:us-east-1:803035318642:certificate/65327719-d178-4f19-9ad3-8bba9ae9651a",
+    "HostedZoneId": "Z04824873RDBS62LIUZQ7",
+    "VpcId": "vpc-0d75975d3e2183c38",
+    "Subnets": "subnet-09bda2a7d18967f02,subnet-0d2a287134907af48",
+    "GraphNodeImageTag": "graphprotocol/graph-node:v0.27.0",
+    "DBName": "graphnode_dev",
+    "DBUserName": "graphnode",
+    "IPFSImageTag": "803035318642.dkr.ecr.us-east-1.amazonaws.com/hadouken/ipfs",
+    "IPFSName": "ipfs-dev",
+    "GraphNodeName": "graph-dev",
+    "ChainsNames": "godwoken-testnet,zksync-testnet,mantle-testnet",
+    "ChainsRpcUrls": "https://v1.testnet.godwoken.io/rpc,https://testnet.era.zksync.dev,https://rpc.testnet.mantle.xyz"
+  }
+}

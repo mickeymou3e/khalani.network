@@ -1,0 +1,34 @@
+# OSX
+#
+.DS_Store
+
+# Visual Studio Code
+#
+.vscode/
+.idea/
+
+# node.js
+
+node_modules/
+dist/
+static-storybook/
+
+npm-debug.log
+yarn-error.log
+
+# env config
+.yarnrc
+.npmrc
+.env
+.yarnrc.yml
+
+# app
+config.json
+config.local.json
+out.svg
+
+# tests
+coverage/
+
+# generated
+gasOutput/

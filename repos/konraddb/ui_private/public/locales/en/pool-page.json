@@ -1,0 +1,107 @@
+{
+  "common": {
+    "pageTitle": "Pool and redeem",
+    "modes": {
+      "deposit": "Pool",
+      "redeem": "Redeem"
+    },
+    "assetSelector": {
+      "maxAmount": "Max. amount",
+      "search": "Search",
+      "available": "Available",
+      "info": "Your pool balance remains separate from your trading activity and is available for use at any time.",
+      "placeholder": "Select asset",
+      "assetInfo": "The list will only display assets eligible for pooling.",
+      "generator": "Generator",
+      "vintage": "Vintage",
+      "region": "Region",
+      "techType": "Tech type",
+      "registry": "Registry",
+      "total": "Total"
+    },
+    "poolSelector": {
+      "placeholder": "Select pool",
+      "info": "Your redemption balance depends on amounts settled in your wallet. Settlement cycles happen daily at end of CET business day (GMT+1)",
+      "underlyingAssets": "Underlying Assets",
+      "techType": "Tech Type",
+      "vintage": "Vintage",
+      "search": "Search",
+      "currency": "Currency",
+      "available": "Available",
+      "total": "Total"
+    },
+    "remove": "Remove"
+  },
+  "deposit": {
+    "assetSelectorLabel": "You pool",
+    "poolSelectorLabel": "Pool into",
+    "placeholder": "Select asset",
+    "amount": "Amount",
+    "remaining": "Remaining for pooling",
+    "max": "Max",
+    "info_one": "You will receive <strong>{{poolAssetValue}}</strong> {{poolAssetName}} token for pooling <strong>{{assetValue}}</strong> {{assetName}} token.",
+    "info_other": "You will receive <strong>{{poolAssetValue}}</strong> {{poolAssetName}} tokens for pooling <strong>{{assetValue}}</strong> {{assetName}} tokens.",
+    "submitForm": "Add to pool list",
+    "asset": "Asset",
+    "fee": "Fee",
+    "summary": {
+      "summary": "Summary",
+      "title": "You pool",
+      "clearList": "Clear pool list",
+      "placeholderText": "Add assets to the pool list",
+      "resultText": "You receive",
+      "feesDescription": "Fees equivalent to 0.5% of the pooled amount are deducted from your EUR balance."
+    },
+    "execute": "Pool",
+    "loadingTitle": "Pooling",
+    "loadingSubtitle": "Your assets are being pooled.",
+    "loadingHint": "<strong>Pooling may take up to 1 min.</strong> Please wait for the process to complete.",
+    "successTitle": "Credits pooled",
+    "successSubtitle": "Your balances are now updated. Please note that there might be delays in reflecting transactions in your transaction history.",
+    "back": "Back to pool"
+  },
+  "redeem": {
+    "assetSelectorLabel": "You redeem",
+    "poolSelectorLabel": "Redeem from",
+    "amount": "Amount",
+    "remaining": "Remaining for redeeming",
+    "max": "Max",
+    "info_one": "You will receive <strong>{{assetValue}}</strong> {{assetName}} token for redeeming <strong>{{poolAssetValue}}</strong> {{poolAssetName}} token.",
+    "info_other": "You will receive <strong>{{assetValue}}</strong> {{assetName}} tokens for redeeming <strong>{{poolAssetValue}}</strong> {{poolAssetName}} tokens.",
+    "submitForm": "Add to redemption list",
+    "asset": "Asset",
+    "fee": "Fee",
+    "summary": {
+      "summary": "Summary",
+      "title": "You redeem",
+      "clearList": "Clear redemption list",
+      "placeholderText": "Add assets to the redemption list",
+      "resultText": "You receive",
+      "feesDescription": "Fees equivalent to 0.5% of the redeemed amount are deducted from your EUR balance."
+    },
+    "execute": "Redeem",
+    "loadingTitle": "Redeeming",
+    "loadingSubtitle": "Your assets are being redeemed.",
+    "loadingHint": "<strong>Redeeming may take up to 1 min.</strong> Please wait until the process is completed.",
+    "successTitle": "Credits Redeemed",
+    "successSubtitle": "Your balances are now updated. Please note that there might be delays in reflecting transactions in your transaction history.",
+    "back": "Back to redeem"
+  },
+  "history": {
+    "title": "History",
+    "searchTooltip": "Search",
+    "date": "Date",
+    "creditPooled": "Credit pooled",
+    "redeemedFrom": "Redeemed from",
+    "amountPooled": "Amt. pooled",
+    "amountRedeemed": "Amt. redeemed",
+    "pooledInto": "Pooled into",
+    "redeemedInto": "Redeemed into",
+    "amountReceived": "Amt. received",
+    "fee": "Fee",
+    "status": "Status",
+    "noHistory": "No history yet",
+    "loginToStartPooling": "Login to start pooling",
+    "login": "Login"
+  }
+}

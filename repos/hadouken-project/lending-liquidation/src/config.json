@@ -1,0 +1,13 @@
+{
+  "subgraph": "https://graph-multi-http-hadouken.hadouken.finance/subgraphs/name/lending-mainnet",
+  "receiveAToken": true,
+  "gasLimit": 12000000,
+  "gasPrice": 40000000000000,
+  "chainId": "0x116ea",
+  "nervos": {
+    "godwoken": {
+      "rpcUrl": "https://v1.mainnet.godwoken.io/rpc"
+    }
+  },
+  "environment": "Mainnet"
+}

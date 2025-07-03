@@ -1,0 +1,19 @@
+{
+  "transaction": {
+    "hash": "0x545c898021ef01b4d4eb054d70b2568975534f8b1ea6eb1e12b548367fb13965",
+    "blockNumber": 636597
+  },
+  "data": {
+    "TestToken": {
+      "deploy": {
+        "input": {
+          "name": "Wrapped BUSD (ForceBridge from BSC)",
+          "symbol": "BUSD|bsc",
+          "decimals": 18
+        },
+        "output": "0x437F3A7E7Af6c611CDbbd33cE79c56aa7B6F7001"
+      }
+    }
+  },
+  "timestamp": 1666951832782
+}

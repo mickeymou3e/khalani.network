@@ -1,0 +1,100 @@
+name: 'Deploy Mainnet'
+
+on:
+  push:
+    branches:
+      - mainnet
+
+env:
+  NODE_VERSION: '18.x'
+  AWS_EC2_METADATA_DISABLED: true
+  NETWORK: 'mainnet'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v2.3.1
+        with:
+          fetch-depth: 2
+          persist-credentials: true
+
+      - name: 'Set up Node.js v${{ env.NODE_VERSION }}'
+        uses: actions/setup-node@master
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: 'https://npm.pkg.github.com'
+
+      - name: Cache NPM dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.OS }}-npm-cache-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-npm-cache-
+
+      - name: Write .npmrc for GitHub Packages
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
+          echo "@tvl-labs:registry=https://npm.pkg.github.com/" >> .npmrc
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PACKAGES_READ_TOKEN }}
+
+      - name: Install yarn dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Determine Changed Workspaces
+        id: changed_workspaces
+        run: |
+          # Get the list of changed files between the last two commits
+          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+          echo "Changed files: $CHANGED_FILES"
+
+          # Initialize an empty string to collect changed workspaces
+          CHANGED_WORKSPACES=""
+
+          # Determine if Solver workspace has changed
+          if echo "$CHANGED_FILES" | grep -q "^apps/solver-frontend/"; then
+            CHANGED_WORKSPACES="solver-frontend"
+          fi
+
+          # Determine if Hyperstream workspace has changed
+          if echo "$CHANGED_FILES" | grep -q "^apps/hyperstream-frontend/"; then
+            if [ -n "$CHANGED_WORKSPACES" ]; then
+              CHANGED_WORKSPACES="$CHANGED_WORKSPACES,hyperstream-frontend"
+            else
+              CHANGED_WORKSPACES="hyperstream-frontend"
+            fi
+          fi
+
+          # Check for changes in root or shared code and deploy both workspaces
+          if echo "$CHANGED_FILES" | grep -q "^src/" || echo "$CHANGED_FILES" | grep -q "^shared/"; then
+            if [ -n "$CHANGED_WORKSPACES" ]; then
+              CHANGED_WORKSPACES="$CHANGED_WORKSPACES,solver-frontend,hyperstream-frontend"
+            else
+              CHANGED_WORKSPACES="solver-frontend,hyperstream-frontend"
+            fi
+          fi
+
+          # Set the changed workspaces environment variable
+          echo "changed_workspaces=$CHANGED_WORKSPACES" >> $GITHUB_ENV
+
+      - name: Build and Deploy Solver Workspace
+        run: |
+          yarn lerna run build --scope=solver-frontend
+          aws s3 sync apps/solver-frontend/dist s3://${{ secrets.SOLVER_MAINNET_S3_BUCKET }} --delete --exact-timestamps
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.SOLVER_MAINNET_DISTRIBUTION_ID }} --paths "/*"
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Build and Deploy Hyperstream Workspace
+        run: |
+          yarn lerna run build --scope=hyperstream-frontend
+          aws s3 sync apps/hyperstream-frontend/dist s3://${{ secrets.HYPERSTREAM_MAINNET_S3_BUCKET }} --delete --exact-timestamps
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.HYPERSTREAM_MAINNET_DISTRIBUTION_ID }} --paths "/*"
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

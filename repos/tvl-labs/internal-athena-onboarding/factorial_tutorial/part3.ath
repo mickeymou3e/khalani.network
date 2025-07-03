@@ -1,0 +1,41 @@
+load "nat-less"
+
+define [* < <=] := [N.*  N.< N.<=]
+define [zero one two] := [N.zero N.one (S N.one)]
+define [n m x y z] := [?n ?m ?x ?y ?z]
+
+
+declare fact: [N] -> N [[int->nat]]
+
+assert fact-def := [
+    (fact zero = one)
+    (fact one = one)
+    (forall n . fact (S n) = (S n) * (fact n))
+]
+
+transform-output eval [nat->int]
+
+# (eval (fact 3)) # 6
+# (eval (fact 9)) # 362880
+
+
+define proof-goal := (forall n m . n < m <==> (fact n) < (fact m))
+
+
+# -------------------------------- Part 3 --------------------------------
+
+# First, let's see if it can be auto-proven. If it can be proven, this should be quick. If it is taking a while for
+# something this simple, it is likely that the prover is not going to generate a proof.
+# If it does generate the proof, then we know that it is provable from the current set of assumptions in scope.
+# In this case, we can then attempt to prove it inline and perhaps extract the proof to a reusable proof method, which often
+# can reduce proving time.
+
+# Go ahead and try it then move to part 4
+
+# NOTICE: If you do not have the vampire automated theorem prover installed, then `vprove-from` should be replaced with `prove` (which uses SPASS by default)
+# if you have neither installed, copy this and follow along through the athena playground at https://tryathena.org (which has both automated theorem provers installed)
+conclude proof-goal
+    (!vprove-from proof-goal (ab))
+
+
+

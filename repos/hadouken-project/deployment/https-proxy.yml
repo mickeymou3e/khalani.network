@@ -1,0 +1,109 @@
+Transform: AWS::Serverless-2016-10-31
+Description: CKB rpc bridge
+
+Parameters:
+  DomainName:
+    Description: DomainName
+    Type: String
+  Environment:
+    Description: Environment
+    Type: String
+  CertificateArn:
+    Description: CertificateArn
+    Type: String
+  HostedZoneId:
+    Description: HostedZoneId
+    Type: String
+  RpcUrl:
+    Description: RPcUrl
+    Type: String
+
+Resources:
+  Api:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: !Ref Environment
+      MethodSettings:
+        - ResourcePath: "/*"
+          HttpMethod: "*"
+      Domain:
+        DomainName: !Ref DomainName
+        CertificateArn: !Ref CertificateArn
+        Route53:
+          HostedZoneId: !Ref HostedZoneId
+
+  HttpsProxy:
+    Type: AWS::Serverless::Function
+
+    Properties:
+      InlineCode: !Sub |
+        const https = require('https')
+        exports.handler = async function (event, context) {
+          function httpRequest() {
+            if (event.httpMethod === 'OPTIONS') {
+              return {
+                statusCode: 200,
+                headers: {
+                  'Access-Control-Allow-Origin': '*',
+                  'Access-Control-Allow-Headers': '*',
+                },
+              }
+            }
+            const postData = event.body
+            return new Promise((resolve, reject) => {
+              const options = {
+                hostname: '${RpcUrl}',
+                path: '/',
+                method: 'POST',
+                headers: {
+                  Accept: '*/*',
+                  'Content-Type': 'application/json',
+                  'Content-Length': Buffer.byteLength(postData),
+                },
+              }
+              const req = https.request(options, (res) => {
+                if (res.statusCode < 200 || res.statusCode >= 300) {
+                  return reject(new Error('statusCode=' + res.statusCode))
+                }
+                var body = []
+                res.on('data', function (chunk) {
+                  body.push(chunk)
+                })
+                res.on('end', function () {
+                  try {
+                    body = JSON.parse(Buffer.concat(body).toString())
+                  } catch (e) {
+                    reject(e)
+                  }
+                  resolve({ body, headers: res.headers })
+                })
+              })
+              req.on('error', (e) => {
+                reject(e.message)
+              })
+              req.write(postData)
+              req.end()
+            })
+          }
+          const { headers, body } = await httpRequest()
+          const response = {
+            statusCode: 200,
+            body: JSON.stringify(body),
+            headers: {
+              ...headers,
+            },
+          }
+          return response
+        }
+      
+      Handler: index.handler
+      Runtime: nodejs12.x
+      Timeout: 60
+      MemorySize: 512
+      Events:
+        BridgeProxy:
+          Type: Api
+          Properties:
+            RestApiId: !Ref Api
+            Path: /
+            Method: ANY

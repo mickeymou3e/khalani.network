@@ -1,0 +1,37 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "${bank_arn}"
+            },
+            "Action": [
+                "kms:GetPublicKey",
+                "kms:Sign"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "${funding_bot_role_arn}"
+            },
+            "Action": [
+                "kms:GetPublicKey",
+                "kms:Sign"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "${account_id}:root"
+            },
+            "Action": [
+                "kms:*"
+            ],
+            "Resource": "*"
+        }
+    ]
+}

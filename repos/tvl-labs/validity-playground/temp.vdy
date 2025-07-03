@@ -1,0 +1,3 @@
+assume not(not(?a)) {
+    !dn(not(not(?a)))
+}

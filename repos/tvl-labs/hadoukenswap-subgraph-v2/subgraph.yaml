@@ -1,0 +1,25 @@
+specVersion: 0.0.3
+
+schema:
+  file: ./schema.graphql
+
+dataSources:
+  - kind: ethereum/contract
+    name: Blocks
+    network: khalanitestnet
+    source:
+      address: '0xf46DF0f6c91a66bBB14960245eEC280719428EDd'
+      abi: Vault
+      startBlock: 31518
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/blocks/blocks.ts
+      entities:
+        - Balancer
+      abis:
+        - name: Vault
+          file: ./abis/Vault.json
+      blockHandlers:
+        - handler: handleBlock

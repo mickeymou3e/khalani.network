@@ -1,0 +1,5 @@
+Result: Proved(=[add[1, 2]):Nat, 3])
+Result: Proved(lt[10, mul[2, 8]):Nat])
+Result: Proved(le[17, add[mul[2, 8]):Nat, 1]):Nat])
+Result: Proved(forall Nat. forall Nat. if(and(lt[Zero:Nat, @1:Nat], le[@1:Nat, @0:Nat]), =[div[@0:Nat, @1:Nat]):Nat, Succ[div[sub[@0:Nat, @1:Nat]):Nat, @1:Nat]):Nat]):Nat]))
+Result: Proved(forall Nat. forall Nat. if(not(and(lt[Zero:Nat, @1:Nat], le[@1:Nat, @0:Nat])), =[div[@0:Nat, @1:Nat]):Nat, Zero:Nat]))

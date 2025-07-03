@@ -1,0 +1,57 @@
+name: 'Deploy landing to production'
+
+on:
+  release:
+    types: [created]
+
+env:
+  NODE_VERSION: 14.18
+  ENV: prod
+  AWS_EC2_METADATA_DISABLED: true
+
+jobs:
+  webapp_deploy-prod:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v2.3.1
+        with:
+          persist-credentials: false
+
+      - name: 'Use Node.js v${{ env.NODE_VERSION }}'
+        uses: actions/setup-node@master
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: 'https://npm.pkg.github.com'
+
+      - name: Cache NPM dependencies
+        uses: actions/cache@v1
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.OS }}-npm-cache-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-npm-cache-LANDING
+
+      - name: Install yarn dependencies
+        run: |
+          yarn config set //npm.pkg.github.com/download/:_authToken ${{ env.NODE_AUTH_TOKEN }}
+          yarn config set @hadouken-project:registry https://npm.pkg.github.com
+          yarn --frozen-lockfile
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PACKAGES_READ_TOKEN }}
+
+      - name: 'Build'
+        run: yarn bundle
+        env:
+          PUBLIC_PATH: https://hadouken.finance
+          NEXT_PUBLIC_APPLICATION_URL: https://app.hadouken.finance
+
+      - name: 'Deploy'
+        run: |
+          aws s3 sync out s3://${{ secrets.PROD_BUCKET_NAME }} --delete --exact-timestamps
+          aws cloudfront create-invalidation --distribution-id ${{ env.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+        env:
+          AWS_CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.PROD_DISTRIBUTION_ID }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.PROD_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}

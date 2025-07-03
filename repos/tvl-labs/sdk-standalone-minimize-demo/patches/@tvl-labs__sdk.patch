@@ -1,0 +1,13 @@
+diff --git a/dist/standalone/services/DepositService.js b/dist/standalone/services/DepositService.js
+index 0a3da7845e47b4e4e56af354611f4f3932d43c8d..bc925600bd28f4c46fa0ee1a0c6143aaf10df9f7 100644
+--- a/dist/standalone/services/DepositService.js
++++ b/dist/standalone/services/DepositService.js
+@@ -167,7 +167,7 @@ class DepositService {
+             throw new Error('ContractService not initialized');
+         const assetReservesContract = this.contractService.getAssetReservesContract(true);
+         const hubChain = this.walletService?.getHubChain();
+-        const tx = await assetReservesContract.deposit(tokenAddress, amount, Number(hubChain), { value: ethers_v6_1.ethers.parseEther('0.1') });
++        const tx = await assetReservesContract.deposit(tokenAddress, amount, Number(hubChain), { value: ethers_v6_1.ethers.parseEther('0.0001') });
+         const receipt = await tx.wait();
+         if (!receipt)
+             throw new Error('Deposit transaction failed');

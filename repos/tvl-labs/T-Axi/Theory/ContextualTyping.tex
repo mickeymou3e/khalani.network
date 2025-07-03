@@ -1,0 +1,144 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage{xcolor}
+\usepackage{Commands}
+
+\usetheme{Darmstadt}
+
+\title{Contextual typing for T-Axi}
+
+\begin{document}
+
+\section{Contextual Typing}
+
+\NewDocumentCommand{\infer}{m m O{i} m m m}{#1 \pipe #2 \vdash_{#3} #4 \mathcolor{red}{\Rightarrow} #5 \dashv #6}
+
+\NewDocumentCommand{\compat}{m m m m}{#1 \vdash #2 \approx #3 \dashv #4}
+
+\NewDocumentCommand{\emptyhint}{}{\square}
+\NewDocumentCommand{\typehint}{m}{#1}
+\NewDocumentCommand{\arghint}{m m}{#1, #2}
+\NewDocumentCommand{\casehint}{m m m}{#1, \case{\cdot}{#2}{#3}}
+
+\begin{frame}{Compatibility}
+
+\begin{center}
+  $\infrule{}{\compat{\Gamma}{\emptyhint}{A}{\Gamma}}$
+
+  \vspace{2em}
+
+  $\infrule{\infertypeconv{\Gamma}{A}{B}[r]{\Gamma'}}{\compat{\Gamma}{\typehint{A}}{B}{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{\infer{\Gamma}{A}{e}{A'}{\Gamma_1} \quad \compat{\Gamma_1}{\Sigma}{B}{\Gamma_2}}{\compat{\Gamma}{\arghint{\Sigma}{e}}{\Fun{A}{B}}{\Gamma_2}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Variables and annotations}
+
+\begin{center}
+  $\infrule{(x : A) \in \Gamma \quad \compat{\usevar{\Gamma}{x}}{\Sigma}{A}{\Gamma'}}{\infer{\Gamma}{\Sigma}[\computable]{x}{A}{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{(x : A) \in \Gamma \quad \compat{\Gamma}{\Sigma}{A}{\Gamma'}}{\infer{\Gamma}{\Sigma}[\noncomputable]{x}{A}{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{\inferkind{\Gamma}{A}[r]{\Gamma_1} \quad \infer{\Gamma_1}{A}{e}{B}{\Gamma_2} \quad \compat{\Gamma_2}{\Sigma}{B}{\Gamma_3}}{\infer{\Gamma}{\Sigma}{\annot{e}{A}}{A}{\Gamma_3}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Functions}
+
+\begin{center}
+  $\infrule{\infer{\Gamma}{\arghint{\Sigma}{e_2}}{e_1}{\Fun{A}{B}}{\Gamma'}}{\infer{\Gamma}{\Sigma}{\app{e_1}{e_2}}{B}{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{\infer{\extend{\Gamma}[\totalqty{\One}{A}]{x}{A}}{B}{e}{B'}{\extend{\Gamma'}[\Zero]{x}{A}}}{\infer{\Gamma}{\typehint{\Fun{A}{B}}}{\fun{x}{e}}{\Fun{A}{B'}}{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{\begin{array}{l} \infer{\Gamma}{\emptyhint}{e'}{A}{\Gamma_1} \\ \infer{\extend{\Gamma_1}[\totalqty{\One}{A}]{x}{A}}{\Sigma}{e}{B}{\extend{\Gamma_2}[\Zero]{x}{A}} \end{array}}{\infer{\Gamma}{\arghint{\Sigma}{e'}}{\fun{x}{e}}{\Fun{A}{B}}{\Gamma_2}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Box}
+
+\begin{center}
+  $\infrule{\infer{\Gamma}{\emptyhint}{e_1}{\Box[r]{A}}{\Gamma_1} \quad \infer{\extend{\Gamma_1}[\totalqty{r}{A}]{x}{A}}{\Sigma}{e_2}{B}{\extend{\Gamma_2}[\Zero]{x}{A}}}{\infer{\Gamma}{\Sigma}{\boxelim{x}{e_1}{e_2}}{B}{\Gamma_2}}$
+
+  \vspace{2em}
+
+  $\infrule{\divctx{\Gamma}{r} = (\Gamma_1, \Gamma_2) \quad \infer{\Gamma_1}{\typehint{A}}{e}{A'}{\Gamma_3}}{\infer{\Gamma}{\typehint{\Box[r]{A}}}{\boxintro{e}}{\Box[r]{A'}}{\addctx{\Gamma_2}{\scalectx{r}{\Gamma_3}}}}$
+
+  \vspace{2em}
+
+  $\infrule{\divctx{\Gamma}{r} = (\Gamma_1, \Gamma_2) \quad \infer{\Gamma_1}{\emptyhint}{e}{A}{\Gamma_3}}{\infer{\Gamma}{\emptyhint}{\boxintro[r]{e}}{\Box[r]{A}}{\addctx{\Gamma_2}{\scalectx{r}{\Gamma_3}}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Unit}
+
+\begin{center}
+  $\infrule{\infer{\Gamma}{\emptyhint}{e_1}{\Unit}{\Gamma_1} \quad \infer{\Gamma}{\Sigma}{e_2}{A}{\Gamma_2}}{\infer{\Gamma}{\Sigma}{\unitelim{e_1}{e_2}}{A}{\Gamma_2}}$
+
+  \vspace{2em}
+
+  $\infrule{\compat{\Gamma}{\Sigma}{\Unit}{\Gamma'}}{\infer{\Gamma}{\Sigma}{\unit}{\Unit}{\Gamma'}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Empty}
+
+\begin{center}
+  $\infrule{\infer{\Gamma}{\typehint{\Empty}}{e}{\Empty}{\Gamma'}}{\infer{\Gamma}{\typehint{A}}{\emptyelim{e}}{A}{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{\begin{array}{l} \infer{\Gamma}{\Sigma}{\emptyelim{e}}{B}{\Gamma_1} \quad \infer{\Gamma_1}{\emptyhint}{e'}{A}{\Gamma_2} \end{array}}{\infer{\Gamma}{\arghint{\Sigma}{e'}}{\emptyelim{e}}{\Fun{A}{B}}{\Gamma_2}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Product}
+
+\begin{center}
+  $\infrule{\begin{array}{l} \infer{\Gamma}{\emptyhint}{e_1}{\Prod{A}{B}}{\Gamma_1} \\ \infer{\extend{\extend{\Gamma_1}[\totalqty{\One}{A}]{x}{A}}[\totalqty{\One}{B}]{y}{B}}{\Sigma}{e_2}{C}{\extend{\extend{\Gamma_2}[\Zero]{x}{A}}[\Zero]{y}{B}} \end{array}}{\infer{\Gamma}{\Sigma}{\letpair{x}{y}{e_1}{e_2}}{C}{\Gamma_2}}$
+
+  \vspace{2em}
+
+  $\infrule{\infer{\Gamma}{\typehint{A}}{e_1}{A'}{\Gamma_1} \quad \infer{\Gamma_1}{\typehint{B}}{e_2}{B'}{\Gamma_2}}{\infer{\Gamma}{\typehint{\Prod{A}{B}}}{\pair{e_1}{e_2}}{\Prod{A'}{B'}}{\Gamma_2}}$
+
+  \vspace{2em}
+
+  $\infrule{\infer{\Gamma}{\emptyhint}{e_1}{A}{\Gamma_1} \quad \infer{\Gamma_1}{\emptyhint}{e_2}{B}{\Gamma_2}}{\infer{\Gamma}{\emptyhint}{\pair{e_1}{e_2}}{\Prod{A}{B}}{\Gamma_2}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Sum}
+
+\begin{center}
+  $\infrule{\infer{\Gamma}{\emptyhint}{e}{\Sum{A}{B}}{\Gamma_1} \quad \begin{array}{l} \infer{\extend{\Gamma_1}[\totalqty{\One}{A}]{x}{A}}{\Sigma}{e_1}{C}{\extend{\Gamma_2}[\Zero]{x}{A}} \\ \infer{\extend{\Gamma_1}[\totalqty{\One}{B}]{y}{B}}{\Sigma}{e_2}{C}{\extend{\Gamma_3}[\Zero]{y}{B}} \end{array}}{\infer{\Gamma}{\Sigma}{\newcase{e}{x}{e_1}{y}{e_2}}{C}{\lubctx{\Gamma_2}{\Gamma_3}}}$
+
+  \vspace{2em}
+
+  $\infrule{\infer{\Gamma}{\typehint{A}}{e}{A'}{\Gamma'}}{\infer{\Gamma}{\typehint{\Sum{A}{B}}}{\inl{e}}{\Sum{A'}{B}}{\Gamma'}}$
+
+  \vspace{1em}
+
+  $\infrule{\infer{\Gamma}{\typehint{B}}{e}{B'}{\Gamma'}}{\infer{\Gamma}{\typehint{\Sum{A}{B}}}{\inr{e}}{\Sum{A}{B'}}{\Gamma'}}$
+\end{center}
+
+\end{frame}
+
+\end{document}

@@ -1,0 +1,180 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage{xcolor}
+\usepackage{Commands}
+
+\usetheme{Darmstadt}
+
+\title{Billing}
+
+\begin{document}
+
+\section{Billing}
+
+\begin{frame}{Judgements}
+
+$\checktype{\Gamma}{e}{A}{\Gamma'}$ - in context $\Gamma$ (which has zero resources), $e$ checks to have type $A$ and consumes resources according to quantities from $\Gamma'$.
+
+\vspace{2em}
+
+$\infertype{\Gamma}{e}{A}{\Gamma'}$ - as above, but with type inference.
+
+\end{frame}
+
+\begin{frame}{Notation}
+
+$\checktype{\Gamma}{e}{A}{\extend{\Gamma'}[\totalqty{s}{A}]{x}{A}}$ is a shorthand for $\checktype{\Gamma}{e}{A}{\extend{\Gamma'}[r]{x}{A}}$ with the condition $\subusage{\totalqty{s}{A}}{r}$.
+
+\vspace{2em}
+
+$\infertype{\Gamma}{e}{A}{\extend{\Gamma'}[\totalqty{s}{A}]{x}{A}}$ is a shorthand for $\infertype{\Gamma}{e}{A}{\extend{\Gamma'}[r]{x}{A}}$ with the condition $\subusage{\totalqty{s}{A}}{r}$.
+
+\end{frame}
+
+\begin{frame}{Subsumption and annotations}
+
+\begin{center}
+  $\infrule[Subsumption]{\infertype{\Gamma}{e}{A}{\Gamma_1} \quad \infertypeconv{\Gamma}{A}{B}[r]{\Gamma_2}}{\checktype{\Gamma}{e}{B}{\addctx{\Gamma_1}{\Gamma_2}}}$
+
+  \vspace{2em}
+
+  $\infrule[Annot]{\inferkind{\Gamma}{A}[r]{\Gamma_1} \quad \checktype{\Gamma}{e}{A}{\Gamma_2}}{\infertype{\Gamma}{\annot{e}{A}}{A}{\addctx{\Gamma_1}{\Gamma_2}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Using variables}
+
+\begin{center}
+  $\infrule{\findvar{\Gamma}{x}{A}}{\infertype{\Gamma}[\computable]{x}{A}{\varctx{\Gamma}{x}}}$
+
+  \vspace{2em}
+
+  $\infrule{\findvar{\Gamma}{x}{A}}{\infertype{\Gamma}[\noncomputable]{x}{A}{\scalectx{\Zero}{\Gamma}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Functions}
+
+\begin{center}
+  $\infrule{\checktype{\extend{\Gamma}[\Zero]{x}{A}}{e}{B}{\extend{\Gamma'}[\totalqty{\One}{A}]{x}{A}}}{\checktype{\Gamma}{\fun{x}{e}}{\Fun{A}{B}}{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{\infertype{\Gamma}{f}{\Fun{A}{B}}{\Gamma_1} \quad \checktype{\Gamma}{a}{A}{\Gamma_2}}{\infertype{\Gamma}{\app{f}{a}}{B}{\addctx{\Gamma_1}{\Gamma_2}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Box}
+
+\begin{center}
+  $\infrule{\checktype{\Gamma}{e}{A}{\Gamma'}}{\checktype{\Gamma}{\boxintro{e}}{\Box[r]{A}}{\scalectx{r}{\Gamma'}}}$
+
+  \vspace{2em}
+
+  $\infrule{\infertype{\Gamma}{e_1}{\Box[r]{A}}{\Gamma_1} \quad \infertype{\extend{\Gamma}[\Zero]{x}{A}}{e_2}{B}{\extend{\Gamma_2}[\totalqty{r}{A}]{x}{A}}}{\infertype{\Gamma}{\boxelim{x}{e_1}{e_2}}{B}{\addctx{\Gamma_1}{\Gamma_2}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Empty}
+
+\begin{center}
+  $\infrule{\checktype{\Gamma}{e}{\Empty}{\Gamma'}}{\checktype{\Gamma}{\emptyelim{e}}{A}{\Gamma'}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Unit}
+
+\begin{center}
+  $\infrule{}{\checktype{\Gamma}{\unit}{\Unit}{\scalectx{\Zero}{\Gamma}}}$
+
+  \vspace{2em}
+
+  $\infrule{\infertype{\Gamma}{e_1}{\Unit}{\Gamma_1} \quad \infertype{\Gamma}{e_2}{A}{\Gamma_2}}{\infertype{\Gamma}{\unitelim{e_1}{e_2}}{A}{\addctx{\Gamma_1}{\Gamma_2}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Products}
+
+\begin{center}
+  $\infrule{\checktype{\Gamma}{e_1}{A}{\Gamma_1} \quad \checktype{\Gamma}{e_2}{B}{\Gamma_2}}{\checktype{\Gamma}{\pair{e_1}{e_2}}{\Prod{A}{B}}{\addctx{\Gamma_1}{\Gamma_2}}}$
+
+  \vspace{2em}
+
+  $\infrule{\begin{array}{l} \infertype{\Gamma}{e_1}{\Prod{A}{B}}{\Gamma_1} \\ \infertype{\extend{\extend{\Gamma}[\Zero]{x}{A}}[\Zero]{y}{B}}{e_2}{C}{\extend{\extend{\Gamma_2}[\totalqty{\One}{A}]{x}{A}}[\totalqty{\One}{B}]{y}{B}} \end{array}}{\infertype{\Gamma}{\letpair{x}{y}{e_1}{e_2}}{C}{\addctx{\Gamma_1}{\Gamma_2}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Division}
+
+$\divqty{r_1}{r_2} = \sup \{s \in \qty \pipe \subusage{\mulqty{s}{r_2}}{r_1} \}$
+
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|}
+  \hline
+  $\divqty{r_1}{r_2}$ & $\Zero$ & $\One$  & $\Few$   & $\Many$ & $\Any$  \\ \hline
+  $\Zero$             & $\Zero$ & $\Zero$ & $\Zero$  & $\Zero$ & $\Zero$ \\ \hline
+  $\One$              &         & $\One$  & $\One$   & $\One$  & $\One$  \\ \hline
+  $\Few$              &         & $\Few$  & $\One$   & $\Few$  & $\One$  \\ \hline
+  $\Many$             &         & $\Many$ & $\Many$  & $\One$  & $\One$  \\ \hline
+  $\Any$              &         & $\Any$  & $\Many$  & $\Few$  & $\One$  \\ \hline
+  \end{tabular}
+\end{table}
+
+\end{frame}
+
+\begin{frame}{Sums}
+
+\begin{center}
+  $\infrule{\checktype{\Gamma}{e}{A}{\Gamma'}}{\checktype{\Gamma}{\inl{e}}{\Sum{A}{B}}{\Gamma'}}$ \quad
+  $\infrule{\checktype{\Gamma}{e}{B}{\Gamma'}}{\checktype{\Gamma}{\inr{e}}{\Sum{A}{B}}{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{\infertype{\Gamma}{e}{\Sum{A}{B}}{\Gamma_1} \quad \begin{array}{l} \checktype{\extend{\Gamma}[\Zero]{x}{A}}{e_1}{C}{\extend{\Gamma_2}[r_1]{x}{A}} \\ \checktype{\extend{\Gamma}[\Zero]{y}{B}}{e_2}{C}{\extend{\Gamma_3}[r_2]{y}{B}} \\ r = \glbqty{(\divqty{r_1}{\totalqty{\One}{A}})}{(\divqty{r_2}{\totalqty{\One}{B}})} \end{array}}{\checktype{\Gamma}{\newcase{e}{x}{e_1}{y}{e_2}}{C}{\addctx{\scalectx{r}{\Gamma_1}}{(\glbctx{\Gamma_2}{\Gamma_3})}}}$
+
+  \vspace{2em}
+
+  $\infrule{\infertype{\Gamma}{e}{\Sum{A}{B}}{\Gamma_1} \quad \begin{array}{l} \infertype{\extend{\Gamma}[\Zero]{x}{A}}{e_1}{C}{\extend{\Gamma_2}[r_1]{x}{A}} \\ \infertype{\extend{\Gamma}[\Zero]{y}{B}}{e_2}{C}{\extend{\Gamma_3}[r_2]{y}{B}} \\ r = \glbqty{(\divqty{r_1}{\totalqty{\One}{A}})}{(\divqty{r_2}{\totalqty{\One}{B}})} \end{array}}{\infertype{\Gamma}{\newcase{e}{x}{e_1}{y}{e_2}}{C}{\addctx{\scalectx{r}{\Gamma_1}}{(\glbctx{\Gamma_2}{\Gamma_3})}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Let}
+
+\begin{center}
+  $\infrule{\infertype{\Gamma}{e_1}{A}{\Gamma_1} \quad \infertype{\extend{\Gamma}[\Zero]{x}{A}}{e_2}{B}{\extend{\Gamma_2}[r]{x}{A}} \quad r' = \divctx{r}{\totalqty{\One}{A}}}{\infertype{\Gamma}{\letin{x}{e_1}{e_2}}{B}{\addctx{\scalectx{r'}{\Gamma_1}}{\Gamma_2}}}$
+\end{center}
+
+\end{frame}
+
+\NewDocumentCommand{\Nat}{}{\mathbb{N}}
+\NewDocumentCommand{\zero}{}{0}
+\RenewDocumentCommand{\succ}{m}{\texttt{succ}\ #1}
+\NewDocumentCommand{\natelim}{m m m}{\texttt{elim}_\Nat\ #1\ #2\ #3}
+
+\begin{frame}{Natural numbers}
+
+\begin{center}
+  $\infrule{}{\checktype{\Gamma}{\zero}{\Nat}{\scalectx{\Zero}{\Gamma}}}$
+
+  \vspace{2em}
+
+  $\infrule{\checktype{\Gamma}{n}{\Nat}{\Gamma'}}{\checktype{\Gamma}{\succ{n}}{\Nat}{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{\infertype{\Gamma}{n}{\Nat}{\Gamma_1} \quad \infertype{\Gamma}{z}{A}{\Gamma_2} \quad \infertype{\Gamma}{s}{\Fun{A}{A}}{\Gamma_3}}{\infertype{\Gamma}{\natelim{z}{s}{n}}{A}{\addctx{\Gamma_1}{\addctx{\Gamma_2}{\scalectx{\Any}{\Gamma_3}}}}}$
+\end{center}
+
+\end{frame}
+
+\end{document}

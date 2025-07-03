@@ -1,0 +1,21 @@
+# Make sure to not commit this file. It's only used as an example.
+walletBalanceMonitor:
+  addressesContent: |
+    {
+    	"addresses": [{
+    			"name": "goerli_relayer",
+    			"chain": "goerli",
+    			"address": "0x2a3a3c823adf8a55ee012ffbdffdc1ff03235a8b"
+    		},
+    		{
+    			"name": "khala_relayer",
+    			"chain": "khala",
+    			"address": "0x2a3a3c823adf8a55ee012ffbdffdc1ff03235a8b"
+    		},
+    		{
+    			"name": "fuji_relayer",
+    			"chain": "fuji",
+    			"address": "0x2a3a3c823adf8a55ee012ffbdffdc1ff03235a8b"
+    		}
+    	]
+    }

@@ -1,0 +1,1 @@
+export const ERROR_AUTO_HIDE_TIME = 15000

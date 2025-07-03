@@ -1,0 +1,57 @@
+{
+  "env": "zksync-testnet",
+  "chainId": "0x118",
+  "gasLimit": 12500000,
+  "rpcUrl": "https://testnet.era.zksync.dev",
+  "gnosisSafe": "",
+  "gnosisApi": "",
+  "subgraphAddress": "https://graph-dev-http-hadouken-dev.hadouken.finance/subgraphs/name/balancer-zksync-testnet",
+
+  "contracts": {
+    "swap": {
+      "vault": "0xF5E99BD85bCb0745458627F90a1f9eFaEA70f045",
+      "balancerHelpers": "0x293bEd0ce5E828e0D6107085E885907FfffAAdeA",
+      "triCryptoPool": "0x0Aef038b4d8cF8d8E3F4ee4B1E0b582600debc2d",
+      "ckbPools": [
+        "0x14E87182F6D39D1993e8Cc3d5d76C710497D263e",
+        "0xa373e9073d2D147Eb3d40f3b9C5F2B813086d839"
+      ],
+      "ethPools": [
+        "0x0c9CBDaf7EBddA3B4458e107c1F3f654d635efc2",
+        "0x20b28B1e4665FFf290650586ad76E977EAb90c5D"
+      ],
+      "usdPools": [
+        "0xF959629bDBDCaC1e1D0A1ce630046db5CB6A15f2",
+        "0x595972BA6E3865aD82Fb06a5c593740572093D22",
+        "0x150936dA9C9FbccDE86fa699698F35B66182483B",
+        "0x403e853789f38d98f1c2488C5468055b1493082c",
+        "0xcCD4aD7cE363C065A304C0cC4e0e14128B2BF823"
+      ]
+    },
+    "lending": {
+      "lendingPool": "0xfa9A6D1fedcEc11Ab54664673892737855C2C0a7"
+    },
+    "tokens": {
+      "TriCrypto": { "address": "0x0Aef038b4d8cF8d8E3F4ee4B1E0b582600debc2d" },
+      "LinearBTC": { "address": "0x14E87182F6D39D1993e8Cc3d5d76C710497D263e" },
+      "LinearEth": { "address": "0x0c9CBDaf7EBddA3B4458e107c1F3f654d635efc2" },
+      "BoostedUSD": { "address": "0xF959629bDBDCaC1e1D0A1ce630046db5CB6A15f2" },
+      "BTC.e": {
+        "address": "0xa373e9073d2D147Eb3d40f3b9C5F2B813086d839",
+        "aTokenAddress": "0x42Eda0177AF3C5d533d8447f3b0e1190E1051bbF"
+      },
+      "ETH.e": {
+        "address": "0x20b28B1e4665FFf290650586ad76E977EAb90c5D",
+        "aTokenAddress": "0x9E58551b5cAFb8A5E57D860C2c491b977ce7E345"
+      },
+      "USDT.e": {
+        "address": "0xcCD4aD7cE363C065A304C0cC4e0e14128B2BF823",
+        "aTokenAddress": "0x2D31A92F6948488712772C805CD2e93E58C20a7E"
+      },
+      "USDC.e": {
+        "address": "0x403e853789f38d98f1c2488C5468055b1493082c",
+        "aTokenAddress": "0x38b53DD96f7621Fd8b358d1744a99c6A72894545"
+      }
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "env": "godwoken-mainnet",
+  "chainId": "0x116ea",
+  "gasPrice": 90000000000000,
+  "gasLimit": 1000000,
+  "rpcUrl": "https://v1.mainnet.godwoken.io/rpc",
+  "gnosisSafe": "0x7b761E6f5C129544a6663Bcb8741940604A65AF3",
+  "gnosisApi": "https://safe-txs-godwoken-mainnet.khalani.network/api/v1/safes",
+  "subgraphAddress": "https://graph-prod-http-hadouken-prod.hadouken.finance/subgraphs/name/balancer-godwoken-mainnet",
+
+  "contracts": {
+    "swap": {
+      "vault": "0x4F8BDF24826EbcF649658147756115Ee867b7D63",
+      "balancerHelpers": "0x8d39E436F0e4821009C2ADb944A2bD72b0dBA575",
+      "triCryptoPool": "0x23D8E927ddb7113eED58273C128376f941d4dea1",
+      "ckbPools": [
+        "0x3a22945C94fCc35A569dc7e4eF0E17e08Fe9ACc5",
+        "0x7538c85cae4e4673253ffd2568c1f1b48a71558a"
+      ],
+      "ethPools": [
+        "0x70Af4745b56c786db80b860B76316E0Ce9D7AC43",
+        "0x9e858a7aaedf9fdb1026ab1f77f627be2791e98a"
+      ],
+      "usdPools": [
+        "0x80245Ba36346Fe10A1af3f7103E8FdCb2549A87d",
+        "0x2FA3757f7CB848861D6eB56c398e2eDD385CD8b3",
+        "0x1dFf577744cF1f0066b3fD262356b1C41d047aD4",
+        "0x186181e225dc1ad85a4a94164232bd261e351c33",
+        "0x8e019acb11c7d17c26d334901fa2ac41c1f44d50"
+      ]
+    },
+    "lending": {
+      "lendingPool": "0x50ff8715E9882a6a184D51D0952Db1Eb311d1988"
+    },
+    "tokens": {
+      "TriCrypto": {
+        "address": "0x23D8E927ddb7113eED58273C128376f941d4dea1"
+      },
+      "LinearCkb": {
+        "address": "0x3a22945C94fCc35A569dc7e4eF0E17e08Fe9ACc5"
+      },
+      "LinearEth": {
+        "address": "0x70Af4745b56c786db80b860B76316E0Ce9D7AC43"
+      },
+      "BoostedUSD": {
+        "address": "0x80245Ba36346Fe10A1af3f7103E8FdCb2549A87d"
+      },
+      "CKB": {
+        "address": "0x7538C85caE4E4673253fFd2568c1F1b48A71558a",
+        "aTokenAddress": "0x734ba3e711a22a383c1A26DBE5D529CFb793C3bf"
+      },
+      "ETH.e": {
+        "address": "0x9E858A7aAEDf9FDB1026Ab1f77f627be2791e98A",
+        "aTokenAddress": "0x0A0f1D2A3ea1E0442EbC8CC3a2139a2E7B314AA5"
+      },
+      "USDC.e": {
+        "address": "0x186181e225dc1Ad85a4A94164232bD261e351C33",
+        "aTokenAddress": "0x06c0c3ea4983d0141e79f78343Da48BaE6b61a09"
+      },
+      "USDT.e": {
+        "address": "0x8E019acb11C7d17c26D334901fA2ac41C1f44d50",
+        "aTokenAddress": "0x66206E9b054361B623046B12Aa99215541216741"
+      },
+      "BTC.e": {
+        "address": "0x82455018F2c32943b3f12F4e59D0DA2FAf2257Ef",
+        "aTokenAddress": "0x294f250a63C10Df254233B382dB495321E23e161"
+      },
+      "BNB.bsc": {
+        "address": "0xBAdb9b25150Ee75bb794198658A4D0448e43E528",
+        "aTokenAddress": "0xBc63b48c6aA8EC2E7fB899Bcd5Cca3fD8c4b7662"
+      }
+    }
+  }
+}

@@ -1,0 +1,98 @@
+load "definitions.ath"
+
+define proc-state := lambda (v) (num (int->nat v ))
+define propose-msg := lambda (v) (propose (int->nat v))
+define accept-msg := lambda (v) (accept (int->nat v)) 
+define req-msg := lambda (v) (req (int->nat v))
+define set-with := lambda (el)
+    (Set.insert el (Set.null))
+
+define set-of-multiple := lambda(l)
+    (Set.lst->set l)
+
+define msg-converter := lambda(m)
+    match m {
+        (send recpt m) => ("(send " joined-with (id->string recpt) joined-with " " joined-with (msg-converter m) joined-with ")")
+        | (msg sender_id recp_id m) => ("(msg " joined-with (id->string sender_id) joined-with " " joined-with (id->string recp_id) joined-with " " joined-with (msg-converter m) joined-with ")" )
+        | Empty => "empty "
+        | (num n) => ("(" joined-with "proc-state " joined-with " " joined-with (val->string (nat->int n)) joined-with ")")
+        | (propose n) => ( "(propose " joined-with (val->string (nat->int n)) joined-with ")")
+        | (accept n) => ( "(accept " joined-with (val->string (nat->int n)) joined-with ")")
+        | _ => m
+    }
+define step-output-converter := lambda (p)
+    match p {
+        (pair ps ss) =>  ("(pair " joined-with (msg-converter ps) joined-with " " joined-with (msg-converter ("{" joined-with (step-output-converter ss) joined-with "}")) joined-with ")")
+        | (Set.insert s ss) => ((msg-converter s) joined-with (step-output-converter ss))
+        | Set.null => ""
+        | _ => p
+    }
+
+# takes an Event and a Proc and returns a SentMsg
+define mk-sent-msg := lambda(event recpt_proc)
+    match event {
+        (recv s v) => (msg s recpt_proc v)
+    }
+
+# takes a list of Send and returns SendSet
+define mk-send-set := lambda(sent)
+    (Set.lst->set sent)
+
+# takes a list of [Proc SentMsg Proc] triplets and returns MsgSet
+define mk-msg-set := lambda(messages)
+    (Set.lst->set 
+        (map 
+            lambda(msg_info)
+                (msg (first msg_info) (third msg_info) (second msg_info))
+            messages
+        )
+    )
+
+define (make-event-log evs) := 
+    match evs {
+        [] => Nil
+        | (list-of [p e] rest) => ((pair p e) :: (make-event-log rest))
+        | _ => evs
+    }
+
+define make-msgs := lambda (msgs)
+    (Set.lst->set 
+        (map
+            lambda(tripl)
+                (msg (first tripl) (second tripl) (third tripl))
+            msgs
+        )
+    )
+
+
+define (proc-set-from-event-log evs) := match evs {
+    [] => Set.null
+    | (list-of [p _] rest) => (Set.lst->set (dedup (Set.set->lst (p ++ (proc-set-from-event-log rest)))))
+    | _ => evs
+}
+
+define (global-proc-state L) := match L {
+    [] => (DMap.empty-map Empty)
+    | (list-of [proc-id proc-state] rest) => (DMap.update (pair proc-id proc-state) (global-proc-state rest))
+    | _ => L
+}
+
+define (global-state evs proc-states msgs) := 
+    let {
+        procs := (proc-set-from-event-log evs);
+        msgs := (make-msgs msgs);
+        events := (make-event-log evs);
+        procstates := (global-proc-state proc-states)
+    }
+    (system-state events procs procstates msgs)
+define [apply applied-to update at alist->dmap empty-map] := [DMap.apply DMap.applied-to DMap.update DMap.at DMap.alist->dmap DMap.empty-map]
+define make-map := lambda(l)
+    let {
+        l := (list->alist l)
+    }
+    (alist->dmap l)
+transform-output eval [step-output-converter]
+define seval := lambda (x) let {
+    res := (join (eval x))
+}
+(print res)

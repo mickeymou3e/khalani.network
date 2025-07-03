@@ -1,0 +1,92 @@
+{
+  "hadouken": {
+    "lending": {
+      "url": ""
+    },
+    "swap": {
+      "url": ""
+    },
+    "bridge": {
+      "url": ""
+    }
+  },
+  "sentry": "",
+  "ckb": {
+    "ckb": {
+      "url": ""
+    },
+    "godwoken": {
+      "rpcUrl": "",
+      "wsUrl": "",
+      "networkId": ""
+    },
+    "indexer": {
+      "url": ""
+    },
+    "rollupTypeHash": "",
+    "rollupTypeScript": {
+      "codeHash": "",
+      "hashType": "",
+      "args": ""
+    },
+    "ethAccountLockCodeHash": "",
+    "depositLockScriptTypeHash": "",
+    "portalWalletLockHash": "",
+    "rcLockScriptTypeHash": ""
+  },
+  "godwoken": {
+    "chainName": "",
+    "chainId": "",
+    "pwChainId": 0,
+    "type": "",
+    "nativeCurrency": {
+      "name": "",
+      "symbol": "",
+      "decimals": 0
+    },
+    "rpcUrl": "",
+    "rpcReadOnlyUrl": "",
+    "explorerUrl": ""
+  },
+  "bridge": {
+    "ethereum": {
+      "chainId": "",
+      "type": "",
+      "nativeCurrency": {
+        "name": "",
+        "symbol": "",
+        "decimals": 0
+      },
+      "bridges": {
+        "forceBridge": {
+          "url": ""
+        }
+      },
+      "tokens": {
+        "USDC": ""
+      }
+    },
+    "bsc": {
+      "chainName": "",
+      "chainId": "",
+      "type": "",
+      "rpcUrl": "",
+      "explorerUrl": "",
+      "nativeCurrency": {
+        "name": "",
+        "symbol": "",
+        "decimals": 0
+      },
+      "bridges": {
+        "forceBridge": {
+          "url": ""
+        }
+      }
+    }
+  },
+  "explorerUrl": {
+    "ckb": "",
+    "godwoken": "",
+    "ethereum": ""
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "transaction": {
+    "hash": "0x6ff2b8a444a9c926ffccf043e308ea621e8652f420cc0dbafee3fbf11dd3d4a1",
+    "blockNumber": null
+  },
+  "data": {
+    "ComposableStablePoolFactory": {
+      "create": {
+        "input": {
+          "name": "HETH/ETH",
+          "symbol": "HDK-HETH-ETH",
+          "tokens": [
+            "0x20b28B1e4665FFf290650586ad76E977EAb90c5D",
+            "0x35F21DEeE21B12F8056e64ffc4Dcf9c2052B7862"
+          ],
+          "rateProviders": [
+            "0x0000000000000000000000000000000000000000",
+            "0x0000000000000000000000000000000000000000"
+          ],
+          "priceRateCacheDuration": [
+            "0",
+            "0"
+          ],
+          "amplificationParameter": "5000",
+          "swapFeePercentage": "100000000000000",
+          "exemptFromYieldProtocolFeeFlags": [
+            false,
+            false
+          ],
+          "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0x20b28B1e4665FFf290650586ad76E977EAb90c5D": "160000000000000000",
+            "0x35F21DEeE21B12F8056e64ffc4Dcf9c2052B7862": "160000000000000000"
+          }
+        },
+        "output": "0x0c9CBDaf7EBddA3B4458e107c1F3f654d635efc2"
+      }
+    }
+  },
+  "timestamp": 1696410719814
+}

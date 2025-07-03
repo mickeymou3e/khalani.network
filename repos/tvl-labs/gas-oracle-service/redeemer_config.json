@@ -1,0 +1,13 @@
+{
+  "redeemer": {
+    "name": "Arcadia",
+    "chain_id": 1098411886,
+    "rpc_url": "https://rpc.khalani.network",
+    "redeemer_address": "0xBB52db27466409D2F880D0D4AE4427c757BeD0cb",
+    "private_key": "5807eb9e7480428e7bac3eccfa463d5e9b59f6070b64d7d539494c8ef791e804",
+    "baselineAipEthRate": "1000000000000000000",
+    "baselineEthPrice": 1800
+  },
+  "update_threshold": 0.01,
+  "interval_minutes": 30
+}

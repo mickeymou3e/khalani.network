@@ -1,0 +1,6 @@
+export { DaiBoostedIcon } from './DaiBoosted'
+export { EthBoostedIcon } from './EthBoosted'
+export { LpTokenBoostedIcon } from './LpTokenBoosted'
+export { UsdcBoostedIcon } from './UsdcBoosted'
+export { UsdtBoostedIcon } from './UsdtBoosted'
+export { BusdBoostedIcon } from './BusdBoosted'

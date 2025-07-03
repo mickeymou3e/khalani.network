@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": false,
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "strict": true,
+    "target": "ES6",
+    "outDir": "dist",
+    "rootDir": "src",
+    "paths": {
+      "@src/*": ["./src/*"]
+    },
+    "plugins": [
+      {
+        "transform": "tsconfig-paths"
+      }
+    ]
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "scripts", "build", "migrations", "gen", "cli"]
+}

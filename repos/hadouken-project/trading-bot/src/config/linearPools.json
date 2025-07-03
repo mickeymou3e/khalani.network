@@ -1,0 +1,19 @@
+{
+  "pools": [
+    {
+      "name": "LinearUSDC",
+      "contractAddress": "0x4EC013bb67E0b49e01437E8E64e6Ddfa332bf258",
+      "threshold": "1000000",
+      "mainToken": "USDC",
+      "wrappedToken": "hUSDC"
+    },
+    {
+      "name": "LinearUSDT",
+      "contractAddress": "0xd37e9EBe424564ffE7366954d6fE2Cc095abE249",
+      "threshold": "1000000",
+      "mainToken": "USDT",
+      "wrappedToken": "hUSDT"
+    }
+  ],
+  "vaultAddress": "0x4F8BDF24826EbcF649658147756115Ee867b7D63"
+}

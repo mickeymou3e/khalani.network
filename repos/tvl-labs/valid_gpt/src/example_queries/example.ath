@@ -1,0 +1,19 @@
+  domain D
+    declare <: [D D] -> Boolean
+      
+    define [x y z] := [?x:D ?y:D ?z:D]
+        
+    assert* irreflexivity := (~ x < x)
+    assert* transitivity := (x < y & y < z ==> x < z)
+        
+    conclude asymmetry := (forall x y . x < y ==> ~ y < x)
+      pick-any a:D b:D
+        assume (a < b)
+          (!by-contradiction (~ b < a)
+            assume (b < a) 
+              let {less := (!chain-> 
+                             [(b < a) ==> (a < b & b < a)    [augment]
+                                      ==> (a < a)            [transitivity]]);
+                   not-less := (!chain-> [true ==> (~ a < a) [irreflexivity]])
+                  }
+                (!absurd less not-less))

@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  medusa:
+    image: ghcr.io/tvl-labs/medusa-api-server:latest
+    container_name: medusa
+    volumes:
+      - ./config.toml:/app/config.toml
+      - ./solver-config.toml:/app/solver-config.toml
+      - ./free-space:/app/free-space
+    ports:
+      - "8001:8001"
+      - "8002:8002"
+      - "8100:8100"
+    environment:
+      - DEPLOYER_ADDRESS=${DEPLOYER_ADDRESS}
+      - DEPLOYER_PRIVATE_KEY=${DEPLOYER_PRIVATE_KEY}
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1g"
+        max-file: "4"
+
+  medusa-solver:
+    image: ghcr.io/tvl-labs/medusa-api-server:latest
+    container_name: medusa-solver
+    volumes:
+      - ./solver-config.toml:/app/solver-config.toml
+    restart: unless-stopped
+    command: /app/arcadia-solver /app/solver-config.toml
+    depends_on:
+      - medusa
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1g"
+        max-file: "4"

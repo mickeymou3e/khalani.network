@@ -1,0 +1,54 @@
+{
+  "login": {
+    "login": "Login",
+    "email": "Email",
+    "password": "Password",
+    "enterPassword": "Enter password",
+    "next": "Next",
+    "forgotPassword": "I Forgot my password",
+
+    "verifyToLogin": "Verification required",
+    "emailCodeWasSent": "Code was sent to your email address.",
+    "authenticatorCodeWasSent": "Enter the code shown in your authenticator app.",
+
+    "verifyYourId": "Verify your identity",
+    "verifyYourIdDescription": "You must verify your identity first to access all Neutral features.",
+    "verify": "Verify",
+    "remindMeLater": "Remind me later",
+
+    "blockedViewTitle": "Multiple failed login attempts detected",
+    "blockedViewDescription": "For security reasons, your account has been temporarily locked for 60 minutes. Ensure your credentials are accurate and try again after the lock period has expired.",
+    "goToHome": "Go to home",
+    "resetMyPassword": "Reset my password"
+  },
+  "signup": {
+    "accountCreatedTitle": "Account created",
+    "accountCreatedSubtitle": "You can now start trading on the Neutral platform",
+    "close": "Close",
+    "login": "Login",
+    "goNeutralSite": "Go Neutral site"
+  },
+  "reset": {
+    "resetPassword": "Reset password",
+    "email": "Email",
+    "newPassword": "New password",
+    "enterPassword": "Enter password",
+    "confirmPassword": "Confirm password",
+    "next": "Next",
+    "cancel": "Cancel",
+    "passwordTooltip": "The new password must be different from the old one.",
+
+    "verifyNewPassword": "Verify new password",
+    "codeWasSent": "Code was sent to your email address.",
+    "authenticatorCode": "Authenticator code",
+    "enter6Marks": "Please enter the 6-digit code",
+    "emailVerificationCode": "Email verification code",
+    "timeRemaining": "Time remaining",
+    "resendCode": "Resend code",
+
+    "resetConfirmed": "Password reset",
+    "resetConfirmedDescription": "Save your new password in a safe place.",
+    "login": "Login",
+    "goHome": "Go to home"
+  }
+}

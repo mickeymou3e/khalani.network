@@ -1,0 +1,19 @@
+{
+  "transaction": {
+    "hash": "0xdb88e93b0ced4de82483de1477789526d0f6d5a19025d049979e0f828a829025",
+    "blockNumber": 8085339
+  },
+  "data": {
+    "TestToken": {
+      "deploy": {
+        "input": {
+          "name": "USDT",
+          "symbol": "USDT",
+          "decimals": 6
+        },
+        "output": "0x17Faea0748935805f548011Ae4A788de73b1B34e"
+      }
+    }
+  },
+  "timestamp": 1670328641646
+}

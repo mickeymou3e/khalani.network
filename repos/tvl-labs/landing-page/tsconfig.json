@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "noEmit": false,
+    "jsx": "react-jsx",
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@components/*": ["./src/components/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@sections/*": ["./src/sections/*"],
+      "@images/*": ["./src/images/*"],
+      "@config/*": ["./config/config.json"]
+    }
+  },
+  "exclude": ["node_modules"],
+  "include": ["src/**/*", "config/**/*"]
+}

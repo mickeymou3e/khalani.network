@@ -1,0 +1,42 @@
+{
+  "network": "khalanitestnet",
+  "contracts": {
+    "Vault": {
+      "address": "0xf46DF0f6c91a66bBB14960245eEC280719428EDd",
+      "startBlock": 31518
+    },
+    "StablePoolV2Factory": {
+      "address": "0x432e0B120Ef5f6b8622f9239cc8c16c9e2A9349b",
+      "startBlock": 31518
+    },
+    "MetaStablePoolRegistry": {
+      "address": "0x4Ac26538acaf9A0052721f89164CD1D5456C06e1",
+      "startBlock": 31518
+    },
+    "WeightedPoolFactory": {
+      "address": "0x7714a65981886B3F8e18361d326c293483818510",
+      "startBlock": 31518
+    },
+    "StablePhantomPoolFactory": {
+      "address": "0x7ebFA2F860c09Fa5a7191385Eb80291d4b3b1e84",
+      "startBlock": 31518
+    },
+    "ComposableStablePoolFactory": {
+      "address": "0x3F76cC5907aD07De8BFF23e4B1173FCE15A236c0",
+      "startBlock": 31518
+    },
+    "AaveLinearPoolFactory": {
+      "address": "0x777c31013576Ca993E3b11aC61F60C3C628C8714",
+      "startBlock": 31518
+    },
+    "USDCeth": {
+      "address": "0x47e4F578Baa6A63891Ee5Ba2D08fcf0c5b8d8307"
+    },
+    "USDCavax": {
+      "address": "0xb83dca5964b7FF263279c9f5f3E8E38728ea26Ba"
+    },
+    "KAI": {
+      "address": "0x1Fa37818ae2710C23301D94d2BeE37951C2DD55b"
+    }
+  }
+}

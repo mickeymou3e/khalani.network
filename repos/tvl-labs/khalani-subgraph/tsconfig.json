@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "types": ["@graphprotocol/graph-ts", "node"],
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "noEmit": true,   
+  },
+  "exclude": [
+    "src/types",
+    "src/config",
+    "node_modules"
+  ],
+  "include": [
+    "src/mappings/**/*.ts",
+    "node_modules/assemblyscript"
+  ]
+}

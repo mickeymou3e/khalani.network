@@ -1,0 +1,310 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styles */
+body {
+  font-family: "SFPro", Arial, sans-serif;
+  background: url("bg.jpg") no-repeat center center;
+  background-size: cover;
+  color: #fff; /* Default text color; adjust if needed */
+  height: 100vh;
+  overflow: hidden; /* Prevent scrolling */
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 5% 0 5%;
+  flex-shrink: 0; /* Prevent header from shrinking */
+}
+
+.hero-header-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hero-header-content img {
+  width: clamp(36px, 2.5vw, 48px);
+  height: auto;
+}
+
+.hero-header p {
+  font-family: "SFPro";
+  font-weight: 700;
+  font-size: clamp(
+    1.2rem,
+    1.5vw,
+    2.5rem
+  ); /* At 1520px, this will be around 1.88rem */
+}
+
+.hero-header .btn {
+  padding: 0.6rem 1.5rem; /* Reduced height by 0.25rem from 0.75rem to 0.5rem */
+  font-size: clamp(
+    0.9rem,
+    0.8vw,
+    1.25rem
+  ); /* At 1520px, this will be around 1.02rem */
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 5%;
+  flex: 1; /* Take up remaining space */
+  overflow: hidden; /* Prevent overflow */
+  width: 100%; /* Ensure full width */
+  /* If you have a global background, remove or adjust this: 
+       background: linear-gradient(135deg, #6b02b5 0%, #b102e5 100%);
+    */
+}
+
+/* Left Content */
+.hero-content {
+  flex: 0 0 50%; /* Fixed width at 50% */
+  width: 50%;
+  margin-right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 2rem;
+}
+
+.hero-content h1 {
+  font-family: "SFPro";
+  font-weight: 700;
+  font-size: clamp(
+    2.75rem,
+    4vw,
+    6rem
+  ); /* At 1520px, this will be around 4.73rem */
+  line-height: 1.2;
+}
+
+.hero-content p {
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: clamp(
+    1rem,
+    1.2vw,
+    2rem
+  ); /* At 1520px, this will be around 1.42rem */
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.hero-content .btn {
+  padding: clamp(0.8rem, 0.9vw, 1.5rem) clamp(1.5rem, 1.8vw, 3rem); /* At 1520px, padding will be around 1.07rem 2.14rem */
+  font-size: clamp(
+    0.9rem,
+    0.8vw,
+    1.25rem
+  ); /* At 1520px, this will be around 1.02rem */
+}
+
+/* Buttons */
+.hero-buttons {
+  display: flex;
+  gap: clamp(0.8rem, 1.2vw, 2rem); /* At 1520px, this will be around 1.42rem */
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-family: "Inter";
+  font-weight: 500;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.btn.primary {
+  background-color: #f72686;
+  color: #fff;
+  border-radius: 9999px;
+}
+
+.btn.secondary {
+  background-color: #fff;
+  color: #000;
+  border-radius: 9999px;
+}
+
+/* Hover/Active States (optional) */
+.btn:hover {
+  opacity: 0.8;
+}
+
+/* Right Graphic */
+.hero-graphic {
+  flex: 0 0 50%; /* Fixed width at 50% */
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.hero-graphic img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  width: 100%;
+  height: auto;
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 768px) {
+  body {
+    overflow-y: auto; /* Allow scrolling on mobile */
+    height: auto;
+    background-size: auto;
+  }
+
+  .hero {
+    flex-direction: column;
+    padding: 3rem 5%;
+    gap: 2rem;
+  }
+
+  .hero-content,
+  .hero-graphic {
+    flex: 0 0 100%;
+    width: 100%;
+    padding-right: 0;
+    margin-bottom: 2rem;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-header {
+    padding: 1rem 5%;
+  }
+
+  .hero-header .hero-buttons {
+    display: none; /* Hide duplicate buttons in header on mobile */
+  }
+}
+
+/* Media queries for larger screens */
+@media screen and (min-width: 1920px) {
+  .hero-content h1 {
+    font-size: 5.5rem;
+  }
+
+  .hero-content p {
+    font-size: 1.8rem;
+  }
+
+  .hero-buttons .btn {
+    padding: 1.25rem 2.5rem;
+    font-size: 1.2rem;
+  }
+
+  .hero-header-content img {
+    width: 48px;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .hero-content h1 {
+    font-size: 6rem;
+  }
+
+  .hero-content p {
+    font-size: 2rem;
+  }
+
+  .hero-buttons .btn {
+    padding: 1.5rem 3rem;
+    font-size: 1.25rem;
+  }
+
+  .hero-header-content img {
+    width: 54px;
+  }
+}
+
+/* Media query for 1520px width */
+@media screen and (width: 1520px) {
+  .hero-header p {
+    font-size: 1.88rem;
+  }
+
+  .hero-header .btn {
+    font-size: 1.02rem;
+  }
+
+  .hero-header-content img {
+    width: 42px;
+  }
+
+  .hero-content h1 {
+    font-size: 4.73rem; /* 4vw of 1520px */
+  }
+
+  .hero-content p {
+    font-size: 1.42rem; /* 1.2vw of 1520px */
+  }
+
+  .hero-content .btn {
+    padding: 1.07rem 2.14rem; /* 0.9vw and 1.8vw of 1520px */
+    font-size: 1.02rem; /* 0.8vw of 1520px */
+  }
+
+  .hero-buttons {
+    gap: 1.42rem; /* 1.2vw of 1520px */
+  }
+}
+
+/* Small mobile devices */
+@media screen and (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-content p {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 100%;
+  }
+
+  .btn {
+    text-align: center;
+  }
+
+  .hero-header-content img {
+    width: 32px;
+  }
+}

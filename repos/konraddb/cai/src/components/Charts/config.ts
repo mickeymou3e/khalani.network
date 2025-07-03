@@ -1,0 +1,2 @@
+export const CHART_DIMENSIONS = 260;
+export const VINTAGE_CHART_DIMENSIONS = 350;

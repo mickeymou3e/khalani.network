@@ -1,0 +1,15 @@
+{
+  "network": "mantle-testnet",
+  "startBlock": 19000000,
+  "contracts": {
+    "poolProxy": {
+      "address": "0xe0371E2eafca4F84291F513B232245174c3a360C"
+    },
+    "poolConfiguratorProxy": {
+      "address": "0xE1B58212F5e2184A94d23eCa36496F2a182a93BB"
+    },
+    "DIAOracle": {
+      "address": "0x0000000000000000000000000000000000000000"
+    }
+  }
+}

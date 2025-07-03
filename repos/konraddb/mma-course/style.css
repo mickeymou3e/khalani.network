@@ -1,0 +1,662 @@
+.first-section h2 span {
+  background: -webkit-linear-gradient(
+    90deg,
+    var(--blog-secondary) 0%,
+    var(--blog) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  max-width: max-content;
+}
+
+.first-section a {
+  background: rgb(190, 32, 72);
+  background: linear-gradient(
+    90deg,
+    var(--blog-secondary) 30%,
+    var(--blog) 100%
+  );
+  border-radius: 99px;
+  box-sizing: border-box;
+  cursor: pointer;
+  color: #ffffff;
+  margin-top: 25px;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+  word-break: break-word;
+  border: 0;
+}
+
+.headerImage {
+  position: relative;
+  animation: animate 2s alternate infinite;
+}
+
+.second-section {
+  background: rgb(190, 32, 72);
+  background: linear-gradient(90deg, var(--blog-secondary), var(--blog));
+  box-sizing: border-box;
+  position: relative;
+  color: #fff;
+  border-radius: 1.2rem;
+}
+
+.section-one-title {
+  color: var(--primary-color);
+}
+
+.journey-list {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.border-right {
+  border-right: 1px solid black;
+}
+
+.third-section {
+  padding: 5% 10%;
+  color: var(--primary-color);
+  background-color: var(--secondary-bg);
+}
+
+.third-section-title {
+  margin-bottom: 4%;
+}
+
+.third-section-title span {
+  color: var(--blog);
+}
+
+.card {
+  transition: all 0.6s ease;
+  margin: auto;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  background-color: var(--primary-bg);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.course-thumbnail {
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+.card-level {
+  display: inline;
+  padding: 0.15rem 0.7rem;
+  border-radius: 99px;
+  color: #09c533;
+
+  font-size: 0.7rem;
+  border: 2px solid #09c533;
+}
+
+.course-title {
+  margin: 20px 0px;
+  font-size: 1.7rem;
+  color: var(--primary-color);
+}
+
+.line {
+  border-bottom: 2px solid var(--acsent-color);
+  width: 70%;
+  opacity: 0.2;
+}
+
+.course-price-section {
+  display: flex;
+  flex-direction: row;
+}
+
+.final-price {
+  color: var(--blog);
+  margin-left: 5px;
+  font-size: 1.3rem;
+}
+
+.prev-price {
+  margin-left: 15px;
+  font-size: 1.3rem;
+  text-decoration: line-through;
+  color: var(--acsent-color);
+}
+
+.discount-percent {
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 0.375rem;
+  padding: 6px 10px;
+  margin-left: 15px;
+  background-color: #09c533;
+}
+
+.instructor-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.instructor-title p {
+  font-size: 2.5rem;
+  margin: 0;
+  text-align: left;
+}
+
+.instructor-title p span {
+  color: var(--blog);
+}
+
+.button-61 {
+  align-items: center;
+  appearance: none;
+  border-radius: 4px;
+  border-style: none;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 3px 1px -2px, rgba(0, 0, 0, 0.14) 0 2px 2px 0,
+    rgba(0, 0, 0, 0.12) 0 1px 5px 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: Roboto, sans-serif;
+  justify-content: center;
+  letter-spacing: 0.0892857em;
+  min-width: 64px;
+  outline: none;
+  overflow: visible;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  will-change: transform, opacity;
+}
+
+.button-61:hover {
+  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px -1px, rgba(0, 0, 0, 0.14) 0 4px 5px 0,
+    rgba(0, 0, 0, 0.12) 0 1px 10px 0;
+}
+
+.button-61:disabled {
+  background-color: rgba(0, 0, 0, 0.12);
+  box-shadow: rgba(0, 0, 0, 0.2) 0 0 0 0, rgba(0, 0, 0, 0.14) 0 0 0 0,
+    rgba(0, 0, 0, 0.12) 0 0 0 0;
+  color: rgba(0, 0, 0, 0.37);
+  cursor: default;
+  pointer-events: none;
+}
+
+.button-61:not(:disabled) {
+  color: #fff;
+  background-color: var(--blog);
+}
+
+.button-61:focus {
+  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px -1px, rgba(0, 0, 0, 0.14) 0 4px 5px 0,
+    rgba(0, 0, 0, 0.12) 0 1px 10px 0;
+}
+
+.button-61:active {
+  box-shadow: rgba(0, 0, 0, 0.2) 0 5px 5px -3px,
+    rgba(0, 0, 0, 0.14) 0 8px 10px 1px, rgba(0, 0, 0, 0.12) 0 3px 14px 2px;
+  background: var(--know-more-btn-active);
+}
+
+.line-long {
+  width: 100%;
+  border-bottom: 1px solid var(--acsent-color);
+}
+
+.instructor-content {
+  padding: 4rem 0;
+}
+
+.image-div img {
+  width: 16rem;
+  border-radius: 50%;
+}
+
+.name-div {
+  margin-top: 2rem;
+}
+
+.name {
+  font-size: 1.875rem;
+
+  line-height: 2.25rem;
+  margin: 0;
+  padding: 0;
+}
+
+.designation {
+  color: var(--acsent-color);
+  font-size: 1.5rem;
+  line-height: 2rem;
+  margin: 0;
+  font-weight: 400;
+  padding: 0;
+}
+
+.description-div {
+  border: 1px dashed var(--course-border);
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.description {
+  font-size: 1.5rem;
+
+  font-weight: 200;
+  line-height: 2rem;
+  margin: 0;
+  text-align: justify;
+  padding: 0;
+}
+
+.description span {
+  color: var(--blog);
+}
+
+.social-title {
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.social-desc {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.git-redirect,
+.git-text {
+  color: var(--primary-color);
+}
+
+.social-card-section {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  gap: 3rem;
+  display: grid;
+  justify-content: center;
+  margin-top: 4rem;
+}
+
+.social-card {
+  gap: 1rem;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+
+.social-icon {
+  width: 5rem;
+  height: 5rem;
+}
+
+.social-icon img {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.text-link {
+  gap: 0.25rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.advantage-section {
+  padding-bottom: 100px;
+  width: 100vw;
+}
+
+.whycm-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.whycm-container p {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--acsent-color);
+}
+
+.advantage-sub-section {
+  margin: auto;
+  max-width: 1500px;
+}
+
+.advantage-section {
+  text-align: center;
+  font-family: "Poppins", "sans-serif";
+  font-weight: 600;
+}
+
+.whycm-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px 0 2rem;
+}
+
+.adv-section {
+  box-shadow: rgb(0, 0, 0, 0.2) 0px 7px 29px 0px;
+}
+
+.whycm-container .adv-section {
+  background-color: var(--secondary-bg);
+  border-radius: 1.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin: auto;
+  padding: 80px 20px;
+  width: 80%;
+}
+
+.whycm-container .adv-section .adv-card {
+  background: var(--primary-bg);
+  border-radius: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: auto;
+  justify-content: flex-start;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  width: 200px;
+  cursor: pointer;
+  perspective: 100px;
+}
+
+.whycm-container .adv-section .adv-card img {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 50px;
+}
+
+.adv-desc {
+  text-align: left;
+  font-size: 18px;
+  font-family: Poppins, "sans-serif";
+  font-weight: 400;
+  color: var(--primary-color);
+}
+
+.adv-card:hover {
+  background: rgba(255, 46, 99, 1) !important;
+  transform: scale(1.05);
+  color: #fff !important;
+  box-shadow: rgba(255, 255, 255, 0.2) 0px 7px 29px 5px;
+}
+
+.about-us {
+  background-color: var(--secondary-bg);
+  color: var(--primary-color);
+}
+
+@media only screen and (min-width: 900px) {
+  /* For Desktop */
+
+  .title {
+    font-size: 42px;
+  }
+
+  .first-section {
+    text-align: left;
+    margin: 12% 10%;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .first-section h2 {
+    font-size: 44px;
+  }
+
+  .first-section h3 {
+    font-weight: 200;
+    font-size: 22px;
+    margin: 0px 0px 49px 0px;
+  }
+
+  .headerText {
+    width: 60%;
+  }
+
+  .headerImage-div {
+    width: 40%;
+    margin: 0px 0px 0px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      border-radius: 1.4rem;
+    }
+  }
+
+  .headerImage {
+    width: 75%;
+    float: right;
+  }
+
+  .first-section a {
+    font-size: 20px;
+    padding: 18px 36px;
+  }
+
+  .second-section {
+    box-shadow: var(--drop-shadow) 10px 10px 0px -2px;
+    padding: 3% 5%;
+    margin: 3% 20%;
+  }
+
+  .journey-title {
+    font-size: 38px;
+  }
+
+  .journey-title p {
+    margin: 0px 0px 20px 0px;
+    padding: 0;
+  }
+
+  .journey-list {
+    margin: 0px 30px;
+    top: 0;
+  }
+
+  .journey-items h4 {
+    font-size: 32px;
+    margin: 5px 0px;
+    padding: 0;
+  }
+
+  .journey-items p {
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .card {
+    max-width: 350px;
+  }
+
+  .about-us {
+    padding: 3% 15%;
+  }
+
+  .button-61 {
+    font-size: 0.875rem;
+    padding: 0.75rem 1.75rem;
+  }
+
+  .image-div img {
+    width: 16rem;
+    height: 16rem;
+  }
+
+  .social-section {
+    padding: 5% 20%;
+  }
+
+  .social-card-section {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .social-desc {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  /* For Phone */
+
+  .title {
+    font-size: 40px;
+  }
+
+  .first-section {
+    padding: 80px 5px;
+    text-align: center;
+    margin: 20px 0px;
+  }
+
+  .first-section h2 {
+    font-size: 38px;
+  }
+
+  .first-section h2 span {
+    font-size: 28px;
+  }
+
+  .first-section h3 {
+    font-size: 14px;
+    font-weight: normal;
+    margin: 0px 0px 38px 0px;
+  }
+
+  .headerImage {
+    width: 100%;
+    margin-top: 60px;
+  }
+
+  .first-section a {
+    font-size: 20px;
+    padding: 10px 25px;
+  }
+
+  .second-section {
+    padding: 40px 0px;
+    margin: 50px 0px;
+  }
+
+  .journey-title {
+    font-size: 26px;
+  }
+
+  .journey-title p {
+    margin: 0px 0px 20px 0px;
+    padding: 0;
+  }
+
+  .journey-list {
+    margin: 0px 30px;
+    top: 0;
+  }
+
+  .journey-items h4 {
+    font-size: 20px;
+    margin: 5px 0px;
+    padding: 0;
+  }
+
+  .journey-items p {
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+  }
+
+  .card {
+    width: 90%;
+  }
+
+  .about-us {
+    padding: 15% 8%;
+  }
+
+  .instructor-title p {
+    font-size: 24px;
+  }
+
+  .button-61 {
+    font-size: 0.575rem;
+    line-height: 1.25rem;
+    inline-size: 100px;
+    padding: 0.5rem 1rem;
+  }
+
+  .image-div img {
+    width: 13rem;
+    height: 13rem;
+  }
+
+  .social-section {
+    padding: 20% 10%;
+  }
+
+  .social-card-section {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .social-desc {
+    font-size: 0.8rem;
+  }
+
+  .advantage-desc {
+    font-size: 0.875rem;
+    font-weight: 300;
+  }
+
+  .whycm-container h1 {
+    font-size: 2rem;
+    margin: auto;
+    text-align: center;
+    width: 90%;
+  }
+
+  .whycm-container p {
+    font-size: 1.2rem;
+    margin: auto auto 1.5rem;
+    text-align: center;
+    width: 90%;
+  }
+}
+
+@keyframes animate {
+  from {
+    bottom: 0;
+  }
+  to {
+    bottom: 20px;
+  }
+}

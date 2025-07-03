@@ -1,0 +1,26 @@
+{
+  "phaseOneStartTime": 1699435200,
+  "phaseTwoStartTime": 1699455300,
+  "phaseThreeStartTime": 1699458000,
+  "endpoint": "https://lockdrop-api-testnet.hadouken.finance",
+  "chains": [
+    {
+      "chainId": "0x116e9",
+      "name": "godwoken-testnet",
+      "poolAddress": "0xaC1b872C940b79a704e0c0450c42564d0129eb03",
+      "husdAddress": "0x9904d25f1fd95a17fa90ad95901a9aede6952d85",
+      "triCryptoAddress": "0x2f6fefd0f4df1c5ab36713398e246bf37d0c08a0",
+      "priceTokenAddress": "0x0eb76790a2014Dd1F65488Ccd703bCDF75F8195e",
+      "bonusHDK": "833"
+    },
+    {
+      "chainId": "0x1389",
+      "name": "mantle-testnet",
+      "poolAddress": "0xa9E3c842d8d6F8D5380Cfdf0CD521D3D7e7703f2",
+      "husdAddress": "0x0ffda3e96e98d070c910df6009f73a07c183adcb",
+      "triCryptoAddress": "0xcfcf7db72bcf392bc6c8b4c66954e9595b8502d5",
+      "priceTokenAddress": "0xbf89943cabfb8e5d637558cd0a30467ba7188d22",
+      "bonusHDK": "1250"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "transaction": {
+    "hash": "0x50fbfd6a9208ea0d86769497f3cc358d52b86919ed8637017a4cf04237b48b07",
+    "blockNumber": null
+  },
+  "data": {
+    "WeightedPoolFactory": {
+      "create": {
+        "input": {
+          "name": "CKB/USDC",
+          "symbol": "HDK-CKB-USDC",
+          "tokens": [
+            "0x186181e225dc1Ad85a4A94164232bD261e351C33",
+            "0x7538C85caE4E4673253fFd2568c1F1b48A71558a"
+          ],
+          "weights": [
+            "500000000000000000",
+            "500000000000000000"
+          ],
+          "rateProviders": [
+            "0x0000000000000000000000000000000000000000",
+            "0x0000000000000000000000000000000000000000"
+          ],
+          "swapFeePercentage": "3000000000000000",
+          "delegate": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0x7538C85caE4E4673253fFd2568c1F1b48A71558a": "260882042200000000000",
+            "0x186181e225dc1Ad85a4A94164232bD261e351C33": "1000000"
+          }
+        },
+        "output": "0xDFC80050D829ddBF5dc8Ea3F1B9dA5C68a4CBD7a"
+      }
+    }
+  },
+  "timestamp": 1669309290569
+}

@@ -1,0 +1,224 @@
+use crate::ast::*;
+use crate::lex::Token;
+use std::rc::Rc;
+
+grammar<'input>(input: &'input str);
+
+pub Expressions: Exp = {
+    <Expression> => <>,
+ 
+     <mut exprs:Expressions> ";" <e:Expression> => {
+        exprs.seq(e)
+    },
+    
+}
+pub Expression: Exp = {
+    <Atom> => Exp::Const(Constant::PropAtomConstant(<>.into())),
+    <Identifier> => Exp::Ide(<>),
+    "true" => Exp::Const(Constant::TrueConstant),
+    "false" => Exp::Const(Constant::FalseConstant),
+    <MethodName> => Exp::Const(Constant::PrimMethodConstant(<>)),
+    <FuncName> => Exp::Const(Constant::PrimFunConstant(<>)),
+    "(" "fn" "(" <params:(<Identifier>)*> ")" <body:Expression> ")" => {
+        Exp::Fun {
+            params,
+            body: Rc::new(body)
+        }
+    },
+    "(" <f:Expression> <p:(<Frase>)*> ")" => {
+        Exp::FunApp(Rc::new(f), p)
+    },
+    "(" "method" "(" <params:(<Identifier>)*> ")" <body:Deduction> ")" => {
+        Exp::Method {
+            params,
+            body: Rc::new(body)
+        }
+    },
+    "(" "match" <e:Expression> <c:ExpCases> ")" => {
+        Exp::Match {
+            discriminant: Rc::new(e),
+            cases: c
+        }
+    },
+    "(" "let" "(" <b:Bindings> ")" <e:Expression> ")" => {
+        Exp::Let(b, Rc::new(e))
+    },
+    "(" "fix" "(" <i:Identifier> ")" <e:Expression> ")" => Exp::Fix(i, Rc::new(e)),
+   
+}
+
+pub Bindings: Vec<(Ide, Rc<Phrase>)> = {
+    "(" <(Binding)*> ")" => <>,
+    <(Binding)*> => <>
+}
+
+pub Binding: (Ide, Rc<Phrase>) = {
+    "(" <i:Identifier> <p:Frase> ")" => (i, Rc::new(p))
+}
+
+pub ExpCase: (Rc<Pattern>, Rc<Exp>) = {
+    "(" <p:Pat> <e:Expression> ")" => (Rc::new(p), Rc::new(e))
+}
+
+pub ExpCases: Vec<(Rc<Pattern>, Rc<Exp>)> = {
+    "(" <(ExpCase)*> ")" => <>,
+    <(ExpCase)*> => <>
+}
+
+pub DedCase: (Rc<Pattern>, Rc<Ded>) = {
+     "(" <p:Pat> <d:Deduction> ")" => (Rc::new(p), Rc::new(d))
+}
+pub DedCases: Vec<(Rc<Pattern>, Rc<Ded>)> = {
+    "(" <(DedCase)*> ")" => <>,
+    <(DedCase)*> => <>
+}
+
+pub Pat: Pattern = {
+    "_" => Pattern::AnyPat,
+    <Identifier> => Pattern::IdPat(<>),
+    "atom" => Pattern::AtomPat(<>.to_string()),
+    "true" => Pattern::TruePat,
+    "false" => Pattern::FalsePat,
+    "(" "not" <Pat> ")" => Pattern::NegPat(Rc::new(<>)),
+    "(" "and" <l:Pat> <r:Pat> ")" => Pattern::ConjPat {
+        left: Rc::new(l),
+        right: Rc::new(r)
+    },
+    "(" "or" <l:Pat> <r:Pat> ")" => Pattern::DisjPat {
+        left: Rc::new(l),
+        right: Rc::new(r)
+    },
+    "(" "implies" <l:Pat> <r:Pat> ")" => Pattern::CondPat {
+        left: Rc::new(l),
+        right: Rc::new(r)
+    },
+    "(" "bicond" <l:Pat> <r:Pat> ")" => Pattern::BiCondPat {
+        left: Rc::new(l),
+        right: Rc::new(r)
+    },
+}
+pub Deduction: Ded = {
+    
+    "(" "!" <e:Expression> <body:(<Frase>)*> ")" => {
+        Ded::MethodApp(
+            Rc::new(e),
+            body
+        )
+    },
+    "(" "suppose-absurd" <e:Expression> <d:Deduction> ")" => Ded::SupposeAbsurd(Rc::new(e), Rc::new(d)),
+    "(" "let" "(" <b:Bindings> ")" <d:Deduction> ")" => {
+        Ded::LetDed(b, Rc::new(d))
+    },
+    "(" "dmatch" <e:Expression> <d:DedCases> ")" => {
+        Ded::MatchDed {
+            discriminant: Rc::new(e),
+            cases: d
+        }
+    },
+    "(" <e:Expression> "by" <d:Deduction> ")" => Ded::By(Rc::new(e), Rc::new(d))
+}
+
+pub Deductions: Ded = {
+    <Deduction> => <>,
+     <mut deds:Deductions> ";" <ded:Deduction> => {
+        deds.seq(ded)
+    },
+    "assume" <e:Expression> "[" <d:Deductions> "]"  => Ded::Assume(Rc::new(e), Rc::new(d)),
+    
+}
+pub Frase: Phrase = {
+    <Deductions> => Phrase::Ded(Rc::new(<>)),
+    <Expressions> => Phrase::Exp(Rc::new(<>))
+    
+}
+
+MethodName: PrimMethod = {
+    "dn" => PrimMethod::Dn,
+    "both" => PrimMethod::Both,
+    "left-and" => PrimMethod::LeftAnd,
+    "right-and" => PrimMethod::RightAnd ,
+    "left-either" => PrimMethod::LeftEither,
+    "right-either" => PrimMethod::RightEither,
+    "cd" => PrimMethod::Cd,
+    "mp" => PrimMethod::Mp,
+    "cond" => PrimMethod::CondRule,
+    "left-iff" => PrimMethod::LeftIff,
+    "right-iff" => PrimMethod::RightIff,
+    "equiv" => PrimMethod::Equiv,
+    "absurd" => PrimMethod::Absurd,
+    "true-intro" => PrimMethod::TrueIntro,
+    "false-elim" => PrimMethod::FalseElim,
+    "claim" => PrimMethod::Claim,
+}
+
+FuncName: PrimFunc = {
+    "=" => PrimFunc::EqFun,
+    "not" => PrimFunc::NotFun,
+    "and" => PrimFunc::AndFun,
+    "or" => PrimFunc::OrFun,
+    "implies" => PrimFunc::IfFun,
+    "bicond" => PrimFunc::IffFun,
+}
+
+pub Identifier: String = "identifier" => <>.into();
+
+pub Atom: String = "atom" => <>.into();
+extern {
+    type Location = usize;
+    type Error = lexi_matic::Error;
+
+    enum Token<'input> {
+        "atom" => Token::Atom(<&'input str>),
+        "identifier" => Token::Identifier(<&'input str>),
+        "true" => Token::True,
+        "false" => Token::False,
+        "not" => Token::Negate,
+        "and" => Token::And,
+        "or" => Token::Or,
+        "(" => Token::ParenOpen,
+        ")" => Token::ParenClose,
+        "{" => Token::BraceOpen,
+        "}" => Token::BraceClose,
+        "," => Token::Comma,
+        "!" => Token::Excl,
+        "fix" => Token::Fix,
+        "implies" => Token::Cond,
+        "dmatch" => Token::DMatch,
+        "bicond" => Token::Bicond,
+        "assume" => Token::Assume,
+        "claim" => Token::MethodClaim,
+        "both" => Token::MethodBoth,
+        "mp" => Token::MethodMp,
+        "cond" => Token::CondRule,
+        "both" => Token::MethodBoth,
+        "left-and" => Token::MethodLeftAnd,
+        "right-and" => Token::MethodRightAnd,
+        "left-either" => Token::MethodLeftEither,
+        "right-either" => Token::MethodRightEither,
+        "false-elim" => Token::MethodFalseElim,
+        "absurd" => Token::MethodAbsurd,
+        "claim" => Token::MethodClaim,
+        "suppose-absurd" => Token::SupposeAbsurd,
+        "by" => Token::By,
+        // Double-negation
+        "dn" => Token::MethodDn,
+        "chain" => Token::MethodChain,
+        "chain->" => Token::MethodChainConclude,
+        "true-intro" => Token::MethodTrueIntro,
+        "equiv" => Token::MethodEquiv,
+        "left-iff" => Token::MethodLeftIff,
+        "right-iff" => Token::MethodRightIff,
+        // conjunctive-dilemma
+        "cd" => Token::MethodCd,
+        "let" => Token::LetExpr,
+        "method" => Token::Method,
+        "lambda" => Token::Lambda,
+        "=" => Token::Equal,
+        ";" => Token::Semicolon,
+        "fn" => Token::Function,
+        "match" => Token::Match,
+        "[" => Token::LeftBracket, 
+        "]" => Token::RightBracket,
+        "_" => Token::Underscore
+    }
+}

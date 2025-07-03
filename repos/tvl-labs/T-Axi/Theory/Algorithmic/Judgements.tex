@@ -1,0 +1,63 @@
+\section{Judgements}
+
+\begin{frame}{Judgements}
+
+Kinding judgements:
+\begin{itemize}
+  \item $\inferkind{\Gamma}{A}[r]{\Gamma'}$
+  \item $\checkkind{\Gamma}{A}[r]{\Gamma'}$
+\end{itemize}
+
+\vspace{1em}
+
+Typing judgements:
+\begin{itemize}
+  \item $\checktype{\Gamma}{e}{A}{\Gamma'}$
+  \item $\infertype{\Gamma}{e}{A}{\Gamma'}$
+\end{itemize}
+
+\vspace{1em}
+
+Proposition elaboration judgement:
+\begin{itemize}
+  \item $\checkprop{\Gamma}{P}{P'}{\Gamma'}$
+\end{itemize}
+
+\vspace{1em}
+
+Proof judgements:
+\begin{itemize}
+  \item $\checkproof{\Gamma}{p}{P}{\Gamma'}$
+  \item $\inferproof{\Gamma}{p}{P}{\Gamma'}$
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Judgements}
+
+Type conversion judgements:
+\begin{itemize}
+  \item $\infertypeconv{\Gamma}{A}{B}[r]{\Gamma'}$ -- for any types
+  \item $\infertypeconvwhnf{\Gamma}{A}{B}[r]{\Gamma'}$ -- for types in whnf (unused for now)
+  \item $\checktypeconv{\Gamma}{A}{B}[r]{\Gamma'}$
+\end{itemize}
+
+\vspace{1em}
+
+Term conversion judgements:
+\begin{itemize}
+  \item $\checktermconv{\Gamma}{e_1}{e_2}{A}{\Gamma'}$ -- for any terms
+  \item $\checktermconvwhnf{\Gamma}{e_1}{e_2}{A}{\Gamma'}$ for terms in whnf
+  \item $\infertermconv{\Gamma}{n_1}{n_2}{A}{\Gamma'}$ -- for neutral terms, any type
+  \item $\infertermconvwhnf{\Gamma}{n_1}{n_2}{A}{\Gamma'}$ -- neutral terms, type in whnf
+\end{itemize}
+
+\vspace{1em}
+
+Proposition conversion judgements:
+\begin{itemize}
+  \item $\checkpropconv{\Gamma}{P}{Q}{\Gamma'}$ -- any propositions
+  \item $\checkpropconvwhnf{\Gamma}{P}{Q}{\Gamma'}$ -- propositions in whnf
+\end{itemize}
+
+\end{frame}

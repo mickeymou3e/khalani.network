@@ -1,0 +1,15 @@
+{
+  "name": "Hadouken Boosted USD",
+  "symbol": "HDK-Boosted-USD",
+  "tokens": ["0x0b05F1D469bd0fe97B599F939b0E07680760aC8F", "0x30A310DBCcCb67A6B6Df75B660eAa036f8810749"],
+  "rateProviders": ["0x0b05F1D469bd0fe97B599F939b0E07680760aC8F", "0x30A310DBCcCb67A6B6Df75B660eAa036f8810749"],
+  "priceRateCacheDuration": ["0", "0"],
+  "amplificationParameter": "300",
+  "swapFeePercentage": "100000000000000",
+  "exemptFromYieldProtocolFeeFlags": [false, false],
+  "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+  "initialLiquidity": {
+    "0x30A310DBCcCb67A6B6Df75B660eAa036f8810749": "2000000000000000000",
+    "0x0b05F1D469bd0fe97B599F939b0E07680760aC8F": "2000000000000000000"
+  }
+}

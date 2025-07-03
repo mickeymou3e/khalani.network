@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: safe-cgw
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: safe-cgw
+  serviceName: safe-cgw
+  template:
+    metadata:
+      labels:
+        app: safe-cgw
+    spec:
+      serviceAccountName: {{ include "safe.serviceAccountName" . }}
+      containers:
+        - name: cgw-web
+          image: "safeglobal/safe-client-gateway:v3.53.0"
+          envFrom:
+            - configMapRef:
+                name: safe-cgw
+          env:
+            - name: WEBHOOK_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: cgw-webhook-flush-token
+                  key: password
+            - name: ROCKET_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: cgw-rocket-secret-key
+                  key: password
+          ports:
+            - containerPort: 3666
+              protocol: TCP
+          volumeMounts:
+            - name: cgw-webhook-flush-token
+              mountPath: "/mnt/cgw-webhook-flush-token"
+              readOnly: true
+            - name: cgw-rocket-secret-key
+              mountPath: "/mnt/cgw-rocket-secret-key"
+              readOnly: true
+          resources:
+            limits:
+              cpu: 512m
+              memory: 512Mi
+        - name: redis
+          image: "redis:alpine"
+          ports:
+            - containerPort: 6379
+              protocol: TCP
+      volumes:
+        - name: cgw-webhook-flush-token
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "cgw-webhook-flush-token-secret-class"
+        - name: cgw-rocket-secret-key
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "cgw-rocket-secret-key-secret-class"

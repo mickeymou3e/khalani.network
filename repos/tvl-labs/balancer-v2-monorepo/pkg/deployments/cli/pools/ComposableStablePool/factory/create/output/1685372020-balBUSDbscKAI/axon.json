@@ -1,0 +1,41 @@
+{
+  "transaction": {
+    "hash": "0xb8f4b038829983a672b677d40ad30221c36e7614e536147bdc6eeae6377f75db",
+    "blockNumber": 117768
+  },
+  "data": {
+    "ComposableStablePoolFactory": {
+      "create": {
+        "input": {
+          "name": "BUSD.bsc/KAI",
+          "symbol": "balBUSDbscKAI",
+          "tokens": [
+            "0x185a801ba31e9b30bdde1c71b7b2d82396001530",
+            "0x1fa37818ae2710c23301d94d2bee37951c2dd55b"
+          ],
+          "rateProviders": [
+            "0x0000000000000000000000000000000000000000",
+            "0x0000000000000000000000000000000000000000"
+          ],
+          "priceRateCacheDuration": [
+            "0",
+            "0"
+          ],
+          "amplificationParameter": "300",
+          "swapFeePercentage": "100000000000000",
+          "exemptFromYieldProtocolFeeFlags": [
+            false,
+            false
+          ],
+          "owner": "0x73B31aC967f46dB2C45280C7f5d1D3ee7F38E122",
+          "initialLiquidity": {
+            "0x185A801BA31E9b30Bdde1c71b7b2D82396001530": "150000000000000000000000",
+            "0x1Fa37818ae2710C23301D94d2BeE37951C2DD55b": "150000000000000000000000"
+          }
+        },
+        "output": "0x8dF7f7f01EDEE75690F10270cA4C4B8897a83EFe"
+      }
+    }
+  },
+  "timestamp": 1685372020826
+}

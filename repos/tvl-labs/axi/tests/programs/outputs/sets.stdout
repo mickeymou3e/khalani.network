@@ -1,0 +1,23 @@
+Result: Nothing
+Result: Nothing
+Result: Nothing
+Result: Nothing
+Result: Nothing
+Result: Nothing
+Result: Nothing
+Result: Nothing
+Result: Proved(not(exists Set. forall Set. in[@0:Set, @1:Set]))
+Result: Nothing
+Result: Nothing
+Result: Nothing
+Result: Nothing
+Result: Nothing
+Result: Nothing
+Result: Nothing
+Result: Nothing
+Result: Proved(forall Set. forall Set. exists Set. and(forall Set. iff(in[@0:Set, @1:Set], and(in[@0:Set, @3:Set], in[@0:Set, @2:Set])), forall Set. if(forall Set. iff(in[@0:Set, @1:Set], and(in[@0:Set, @4:Set], in[@0:Set, @3:Set])), =[@0:Set, @1:Set])))
+Result: Nothing
+Result: Proved(forall Set. forall Set. forall Set. iff(=[@0:Set, intersection[@2:Set, @1:Set]):Set], forall Set. iff(in[@0:Set, @1:Set], and(in[@0:Set, @3:Set], in[@0:Set, @2:Set]))))
+Result: Proved(forall Set. forall Set. exists Set. and(forall Set. iff(in[@0:Set, @1:Set], or(in[@0:Set, @3:Set], in[@0:Set, @2:Set])), forall Set. if(forall Set. iff(in[@0:Set, @1:Set], or(in[@0:Set, @4:Set], in[@0:Set, @3:Set])), =[@0:Set, @1:Set])))
+Result: Nothing
+Result: Proved(forall Set. forall Set. forall Set. iff(=[@0:Set, union[@2:Set, @1:Set]):Set], forall Set. iff(in[@0:Set, @1:Set], or(in[@0:Set, @3:Set], in[@0:Set, @2:Set]))))

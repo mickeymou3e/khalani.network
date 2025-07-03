@@ -1,0 +1,36 @@
+\documentclass[a4paper]{article}
+\usepackage{mathtools}
+\begin{document}
+We will prove that the relation $<$ is asymmetric, i.e., for all $x$ and $y$, if $x < y$ then it's not the case that $y < x$.
+
+Let $D$ be our domain of discourse, and let $<$ be a binary relation on $D$.
+
+We are given two premises:
+1. Irreflexivity: For all $x$ in $D$, it's not the case that $x < x$.
+2. Transitivity: For all $x$, $y$, and $z$ in $D$, if $x < y$ and $y < z$, then $x < z$.
+
+We will now prove that $<$ is asymmetric:
+
+Let $a$ and $b$ be arbitrary elements of $D$. We need to show that if $a < b$, then it's not the case that $b < a$.
+
+Assume that $a < b$. We will prove that it's not the case that $b < a$ by contradiction.
+
+Suppose, for the sake of contradiction, that $b < a$.
+
+Then we can derive:
+1. $a < b$ and $b < a$ (by augmenting our assumptions)
+2. $a < a$ (by applying transitivity to the result of step 1)
+
+However, we know from the irreflexivity premise that it's not the case that $a < a$.
+
+This is a contradiction: we have derived both $a < a$ and $\neg(a < a)$.
+
+Therefore, our assumption that $b < a$ must be false.
+
+Thus, we have shown that if $a < b$, then it's not the case that $b < a$.
+
+Since $a$ and $b$ were arbitrary elements of $D$, we have proven that for all $x$ and $y$ in $D$, if $x < y$ then it's not the case that $y < x$, which is the definition of asymmetry.
+
+This concludes the proof that $<$ is asymmetric.
+\end{document}
+                                

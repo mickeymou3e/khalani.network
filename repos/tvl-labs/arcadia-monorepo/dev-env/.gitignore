@@ -1,0 +1,9 @@
+configs/
+.validator_signatures.env
+**/node_modules
+hyperlane-dev-env/.env
+hyperlane-dev-env/deployments
+hyperlane-dev-env/multi-node.ready
+**/*.log
+**/*.ready
+**/*.failed

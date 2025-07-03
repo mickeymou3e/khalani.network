@@ -1,0 +1,39 @@
+\section{Contexts}
+
+\begin{frame}{Decrement variable in context}
+
+\begin{center}
+  $\usevar{\emptyctx}{x} = \mathbf{undefined}$ \\
+  $\usevar{(\extend{\Gamma}[r]{x}{A})}{x} = \extend{\Gamma}[(\subqty{r}{\One})]{x}{A}$ \\
+  $\usevar{(\extend{\Gamma}[r]{y}{A})}{x} = \extend{\usevar{\Gamma}{x}}[r]{y}{A}$ \\
+  $\usevar{(\extend{\Gamma}[r]{x}{A}[e])}{x} = \extend{\Gamma}[(\subqty{r}{\One})]{x}{A}[e]$ \\
+  $\usevar{(\extend{\Gamma}[r]{y}{A}[e])}{x} = \extend{\usevar{\Gamma}{x}}[r]{y}{A}[e]$ \\
+  $\usevar{(\assume{\Gamma}{h}{P})}{x} = \assume{\usevar{\Gamma}{x}}{h}{P}$ \\
+  $\usevar{(\extendtype{\Gamma}{a}[r])}{x} = \extendtype{\usevar{\Gamma}{x}}{a}[r]$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Context division with remainder}
+
+\begin{center}
+  $\infrule{}{\divctx{\emptyctx}{r} = \emptyctx}$
+
+  \vspace{2em}
+
+  $\infrule{\divctx{\Gamma}{q} = (\Gamma_1, \Gamma_2) \quad \divqty{r}{q} = (r_1, r_2)}{\divctx{(\extend{\Gamma}[r]{x}{A})}{q} = ((\extend{\Gamma_1}[r_1]{x}{A}), (\extend{\Gamma_2}[r_2]{x}{A}))}$
+
+  \vspace{2em}
+
+  $\infrule{\divctx{\Gamma}{q} = (\Gamma_1, \Gamma_2) \quad \divqty{r}{q} = (r_1, r_2)}{\divctx{(\extend{\Gamma}[r]{x}{A}[e])}{q} = ((\extend{\Gamma_1}[r_1]{x}{A}[e]), (\extend{\Gamma_2}[r_2]{x}{A}[e]))}$
+
+  \vspace{2em}
+
+  $\infrule{\divctx{\Gamma}{q} = (\Gamma_1, \Gamma_2)}{\divctx{(\assume{\Gamma}{h}{P})}{q} = ((\assume{\Gamma_1}{h}{P}), (\assume{\Gamma_2}{h}{P}))}$
+
+  \vspace{2em}
+
+  $\infrule{\divctx{\Gamma}{q} = (\Gamma_1, \Gamma_2)}{\divctx{(\extendtype{\Gamma}{a}[r])}{q} = ((\extendtype{\Gamma_1}{a}[r]), (\extendtype{\Gamma_2}{a}[r]))}$
+\end{center}
+
+\end{frame}

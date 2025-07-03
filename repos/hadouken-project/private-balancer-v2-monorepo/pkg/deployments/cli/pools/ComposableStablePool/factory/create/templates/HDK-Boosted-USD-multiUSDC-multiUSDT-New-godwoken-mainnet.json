@@ -1,0 +1,24 @@
+{
+  "name": "Multichain USD Stable Pool",
+  "symbol": "HDK-Boosted-USD-multiUSDC-multiUSDT",
+  "tokens": [
+    "0x80245Ba36346Fe10A1af3f7103E8FdCb2549A87d",
+    "0xe3f5a90f9cb311505cd691a46596599aa1a0ad7d",
+    "0xfa9343c3897324496a05fc75abed6bac29f8a40f"
+  ],
+  "rateProviders": [
+    "0x80245Ba36346Fe10A1af3f7103E8FdCb2549A87d",
+    "0x0000000000000000000000000000000000000000",
+    "0x0000000000000000000000000000000000000000"
+  ],
+  "priceRateCacheDuration": ["0", "0", "0"],
+  "amplificationParameter": "300",
+  "swapFeePercentage": "100000000000000",
+  "exemptFromYieldProtocolFeeFlags": [false, false, false],
+  "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+  "initialLiquidity": {
+    "0x80245Ba36346Fe10A1af3f7103E8FdCb2549A87d": "1000000000000000000",
+    "0xe3f5a90f9cb311505cd691a46596599aa1a0ad7d": "2500000",
+    "0xfa9343c3897324496a05fc75abed6bac29f8a40f": "2500000"
+  }
+}

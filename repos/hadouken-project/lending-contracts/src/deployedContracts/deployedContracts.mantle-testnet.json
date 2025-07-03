@@ -1,0 +1,66 @@
+{
+  "treasury": "0xdFA534a1c165cA0E255B312d3883ca25c46015EB",
+  "hadoukenCollector": "0x85C31F61DDaBa5880C19df2F33de6D17ED09b896",
+  "tokens": {
+    "ETH.e": {
+      "address": "0xBf89943CAbFB8E5D637558cD0a30467ba7188D22",
+      "aTokenAddress": "0x9cFeba44e07861253EAf8862C4d042c41A3344C9",
+      "stableDebtTokenAddress": "0x55870314D5c75082965809b02b5D4a4b991AfA14",
+      "variableDebtTokenAddress": "0x01d9776679679dB937767241feA42134ADeC7143"
+    },
+    "MNT": {
+      "address": "0xB3553b76ABe6dA9dFE5d788AF39c83963Ba49B43",
+      "aTokenAddress": "0x6eE70cCA10C9C2cc1f8532329724d02e63614579",
+      "stableDebtTokenAddress": "0x37DB40873Eab229c0dd9d5f71cE02e5886dF1585",
+      "variableDebtTokenAddress": "0x3C2d5Bb60A4536B68e55Fe29246882c1931e234A"
+    },
+    "WBTC.e": {
+      "address": "0x797e04E7e70Ad117Ec957444eD5EEb6E09452ACc",
+      "aTokenAddress": "0x4e277cfDFD0d2DC6d9BAAB43ae176334a6f1f254",
+      "stableDebtTokenAddress": "0xe465AF328F13E5B0c5e9b46c209Ac1513b73E3a3",
+      "variableDebtTokenAddress": "0xaE59ca297390334B5162A8cF09c6be01f63A4237"
+    },
+    "USDT.e": {
+      "address": "0x1BA133FcE870bE90177C44C729ef3dEF5b727dbc",
+      "aTokenAddress": "0x6016Bb33b58534C9b7EfE412C21686be58993F10",
+      "stableDebtTokenAddress": "0x9144bA589ef7ad910CeeF54352c9b4742fA63e09",
+      "variableDebtTokenAddress": "0x551c91ddd7204CFe7fB2BdE63206fc00f49316e4"
+    },
+    "USDC.e": {
+      "address": "0x0300e13d8F59FD7ae44980FCDb557565c164D535",
+      "aTokenAddress": "0xB445fEE1eD11771D7D30413d8c13b733E38e8E4C",
+      "stableDebtTokenAddress": "0xa6DF47397ab286c1B63413B31A3d0345915E576a",
+      "variableDebtTokenAddress": "0x29Ea61E7133df31D5c0b8178f046081537d2ee84"
+    }
+  },
+  "registry": "0xed712d0642c836a5265D8fE3A318EcebAcbAab7a",
+  "registryProvider": "0xed712d0642c836a5265D8fE3A318EcebAcbAab7a",
+  "addressProvider": "0x940D41c106eCAE9bAebca847F0e614b311Fc2EC2",
+  "libraries": {
+    "reserve": "0xce15c11Dadeb0809063D48CAf260D903A9108e3F",
+    "generic": "0xeb61C5cb2A68496aE8895B40017904C3663c3baF",
+    "validation": "0x8cF3d2Ee9E66A1e9Bc432886a8D5bA59a66CbB42"
+  },
+  "stableAndVariableTokensHelper": "0xB2e76BA8D2CACc803A5f278e73529BdcCb7bAc22",
+  "lendingRateOracle": "0xEc0D1c8d147EA39706286276d6b5664Ed44220ed",
+  "lendingPool": "0xA65b0723B4e64c09e68C4F0964c0e0D010153FF6",
+  "lendingPoolProxy": "0xe0371E2eafca4F84291F513B232245174c3a360C",
+  "poolConfigurator": "0xB2b29CDe61EA573ceA1a482B8EA71865EBA65695",
+  "poolConfiguratorProxy": "0xE1B58212F5e2184A94d23eCa36496F2a182a93BB",
+  "variableDebtToken": "0xB7EED62052803Df4e045E44Cf1ceb444F17C3aD2",
+  "stableDebtToken": "0xC00b4F4cAF6f9a95868ddcF19f2937e65E2958e9",
+  "aToken": "0x1d98C5A505686DDf75782C4b9176d2dE35081930",
+  "aTokenAndRateHelper": "0xd7F6DCE6Ab1ea7319B427BE171664Df53c5CDC9c",
+  "oracleBrandProvider": "0xD0a88c12083b0e6d13a2354a09B12147d3f07a9B",
+  "diaOracle": "0xF0CaED65351dC117EdFD08Dcf2a67cE0CeD01151",
+  "diaOracleProvider": "0xC43fbD7C13198d534C1e54B0D3f1fCD718fb82F4",
+  "hadoukenOracle": "0x4Fbecb2547C35a11bABAfDb13A439050159a260A",
+  "stdReference": "0xeC544987cD5EEf38fD6c43e5503c273Bc7387E48",
+  "dataProvider": "0x0C5eE7B4802F24C4A8a7a1B522516dF5027fe4e8",
+  "collateralManager": "0xCB049b3726808077852279ceabe7b047a293d631",
+  "firstBlockNumber": 19689237,
+  "lastBlockNumber": 19696133,
+  "userBalances": "0x09Aca51f04D435085Feb990A0fC15E9a9C7f9703",
+  "UIHelper": "0x0d8524c2463f18E333c969EaAb1dc2d70EBCBfcF",
+  "wEthGateway": ""
+}

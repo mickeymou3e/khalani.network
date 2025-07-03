@@ -1,0 +1,19 @@
+{
+  "transaction": {
+    "hash": "0xb1002cdc9cca720da23115829451a654dc064246ec8265a12c6c9a4a2d708605",
+    "blockNumber": 636601
+  },
+  "data": {
+    "TestToken": {
+      "deploy": {
+        "input": {
+          "name": "Wrapped ETH (ForceBridge from BSC)",
+          "symbol": "ETH|bsc",
+          "decimals": 18
+        },
+        "output": "0x5D35D34DA971c795Ec97Ed69786302c6149979E7"
+      }
+    }
+  },
+  "timestamp": 1666951866029
+}

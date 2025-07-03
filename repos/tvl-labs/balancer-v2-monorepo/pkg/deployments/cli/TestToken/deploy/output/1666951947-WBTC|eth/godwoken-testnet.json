@@ -1,0 +1,19 @@
+{
+  "transaction": {
+    "hash": "0xcf2d990df37aa4fc53b35cfba199b66ecb2f72769be811bb19f19f4de9dff4f3",
+    "blockNumber": 636611
+  },
+  "data": {
+    "TestToken": {
+      "deploy": {
+        "input": {
+          "name": "Wrapped WBTC (ForceBridge from Ethereum)",
+          "symbol": "WBTC|eth",
+          "decimals": 8
+        },
+        "output": "0x6a447Ba163039D7e1d674668578A0eb049245915"
+      }
+    }
+  },
+  "timestamp": 1666951947642
+}

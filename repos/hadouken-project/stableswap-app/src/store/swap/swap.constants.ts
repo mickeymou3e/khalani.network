@@ -1,0 +1,3 @@
+export const PRICE_IMPACT_THRESHOLD = 5
+
+export const SWAP_PREVIEW_DELAY = 300

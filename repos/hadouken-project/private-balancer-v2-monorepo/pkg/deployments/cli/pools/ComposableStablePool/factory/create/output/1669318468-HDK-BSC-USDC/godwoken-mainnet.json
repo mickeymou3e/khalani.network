@@ -1,0 +1,41 @@
+{
+  "transaction": {
+    "hash": "0xb8e5a1e06f1d84faf6386a320d4a28979c59bad3f57822da2d26515d809931ad",
+    "blockNumber": null
+  },
+  "data": {
+    "ComposableStablePoolFactory": {
+      "create": {
+        "input": {
+          "name": "USDC BSC Metapool",
+          "symbol": "HDK-BSC-USDC",
+          "tokens": [
+            "0xa04b5B5A11A04773064d8Ca9a28d51a3176F3B02",
+            "0xfA307CfdEA89DC197A346c338a98aC85d517af6e"
+          ],
+          "rateProviders": [
+            "0xa04b5B5A11A04773064d8Ca9a28d51a3176F3B02",
+            "0x0000000000000000000000000000000000000000"
+          ],
+          "priceRateCacheDuration": [
+            "0",
+            "0"
+          ],
+          "amplificationParameter": "300",
+          "swapFeePercentage": "100000000000000",
+          "exemptFromYieldProtocolFeeFlags": [
+            false,
+            false
+          ],
+          "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0xa04b5B5A11A04773064d8Ca9a28d51a3176F3B02": "1000000000000000000",
+            "0xfA307CfdEA89DC197A346c338a98aC85d517af6e": "1000000000000000000"
+          }
+        },
+        "output": "0xD3A35ec483AAC0AC728F6d062211F04a373aA7e4"
+      }
+    }
+  },
+  "timestamp": 1669318468605
+}

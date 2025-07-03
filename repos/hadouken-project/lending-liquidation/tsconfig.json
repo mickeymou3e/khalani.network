@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+      "noEmit": true,
+      "strictBindCallApply": true,
+      "allowJs": true,
+      "allowSyntheticDefaultImports": true,
+      "strictNullChecks": true,
+      "downlevelIteration": true,
+      "lib": ["dom", "esnext"],
+      "esModuleInterop": true,
+      "isolatedModules": true,
+      "module": "CommonJS",
+      "moduleResolution": "Node",
+      "resolveJsonModule": true,
+      "skipLibCheck": true,
+      "declaration": true,
+      "strict": true,
+      "target": "ES6",
+      "outDir": "dist",
+      "rootDir": "."
+    },
+    "include": [
+      "src",
+      "config.json",
+    ],
+    "exclude": [
+      "node_modules",
+    ],
+}

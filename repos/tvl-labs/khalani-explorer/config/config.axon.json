@@ -1,0 +1,103 @@
+{
+  "swapURL": "https://app.testnet.khalani.network",
+  "subgraphs": {
+    "balancer": {
+      "httpUri": "https://graph-node-http-khalani.testnet.khalani.network/subgraphs/name/balancer-khalani",
+      "webSocketUri": "wss://graph-node-ws-khalani.testnet.khalani.network/subgraphs/name/balancer-khalani"
+    },
+    "blocks": {
+      "httpUri": "https://graph-node-http-khalani.testnet.khalani.network/subgraphs/name/blocks-khalani",
+      "webSocketUri": "wss://graph-node-ws-khalani.testnet.khalani.network/subgraphs/name/blocks-khalani"
+    }
+  },
+  "contracts": {
+    "Vault": "0xf46DF0f6c91a66bBB14960245eEC280719428EDd",
+    "AddressBalances": "0x043dC50a7CA2d3Dc24A09c6FEFB0653863c8748F",
+    "PoolsHelpers": "0xc93721cED25615818B1b00c0F4E2b560007A9948",
+    "Oracle": "0x0000000000000000000000000000000000000000",
+    "NexusDiamond": "0xA1eF34B0bEdD89Be33385a5be37C9B3C08b47b1e",
+    "PSM": {
+      "0xa869": "0xAFa514b13425186064F10C936dE51bF8f88A71d9",
+      "0xaa36a7": "0x22EcBeD8A5C55481d82C9733f93087fce276899f"
+    },
+    "CrossChainRouter": {
+      "0xa869": "0xbD1577165fb1eB4E0dA1072A6dFB041eB5EfC212",
+      "0x13881": "0x822919CCD40cd52815c260f74F0E409b9E4b7E30",
+      "0x61": "0xDEC77a5117BF9fC51EF8a30178DB6a01FD4E94a0",
+      "0x116e9": "0xD34c17a74465a3B46984Ec28beA01c1738A53699",
+      "0x1a4": "0x5bad8C050fd202480c8B2604768F25d7458f0946",
+      "0xaa36a7": "0x56C8584Ad47f9A17180B6Ae7A99B7B93A52cF908",
+      "0x66eed": "0x1ac73a3E0c90E6812414814EFD3b54400e36B89F"
+    }
+  },
+  "tokens": [],
+  "supportedChains": [
+    {
+      "id": 11155111,
+      "chainName": "Ethereum Sepolia",
+      "chainId": "0xaa36a7",
+      "nativeCurrency": {
+        "name": "ETH",
+        "symbol": "ETH",
+        "decimals": 18
+      },
+      "blockExplorerUrls": ["https://sepolia.etherscan.io"],
+      "rpcUrls": ["https://rpc.sepolia.org"],
+      "logo": "https://icons.llamao.fi/icons/chains/rsz_ethereum.jpg",
+      "borderColor": "#808080",
+      "poolTokenSymbol": "",
+      "isBalancerChain": false
+    },
+    {
+      "id": 43113,
+      "chainName": "Avalanche Testnet",
+      "chainId": "0xa869",
+      "nativeCurrency": {
+        "name": "AVAX",
+        "symbol": "AVAX",
+        "decimals": 18
+      },
+      "blockExplorerUrls": ["https://testnet.snowtrace.io"],
+      "rpcUrls": ["https://api.avax-test.network/ext/bc/C/rpc"],
+      "logo": "https://icons.llamao.fi/icons/chains/rsz_avalanche.jpg",
+      "borderColor": "#CC3333",
+      "poolTokenSymbol": "",
+      "isBalancerChain": false
+    },
+    {
+      "id": 10012,
+      "chainName": "Khalani",
+      "chainId": "0x271c",
+      "nativeCurrency": {
+        "name": "ETH",
+        "symbol": "ETH",
+        "decimals": 18
+      },
+      "blockExplorerUrls": ["https://block-explorer.testnet.khalani.network/"],
+      "rpcUrls": ["https://testnet.khalani.network/"],
+      "logo": "https://pbs.twimg.com/media/FdWhUExUUAE30t_.png",
+      "borderColor": "#228c22",
+      "poolTokenSymbol": "",
+      "isBalancerChain": true
+    }
+  ],
+  "explorer": {
+    "subgraph": {
+      "0xa869": "https://graph-node-http-khalani.testnet.khalani.network/subgraphs/name/intents-fuji",
+      "0x271c": "https://graph-node-http-khalani.testnet.khalani.network/subgraphs/name/intents-khalanitestnet",
+      "0xaa36a7": "https://graph-node-http-khalani.testnet.khalani.network/subgraphs/name/intents-sepolia"
+    },
+    "blockExplorer": {
+      "0xa869": "https://testnet.snowtrace.io",
+      "0x271c": "https://block-explorer.testnet.khalani.network",
+      "0xaa36a7": "https://sepolia.etherscan.io"
+    }
+  },
+  "intents": {
+    "subgraph": {
+      "0xa869": "https://graph-node-http-khalani.testnet.khalani.network/subgraphs/name/intents-fuji",
+      "0xaa36a7": "https://graph-node-http-khalani.testnet.khalani.network/subgraphs/name/intents-sepolia",
+      "0x271c": "https://graph-node-http-khalani.testnet.khalani.network/subgraphs/name/intents-khalanitestnet"
+    }
+  }
+}

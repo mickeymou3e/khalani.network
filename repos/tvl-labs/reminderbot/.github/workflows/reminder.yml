@@ -1,0 +1,20 @@
+# name: Discord Notification
+
+# on:
+#   schedule:
+#     # Runs at 16:00 UTC on weekdays (Monday to Friday)
+#     - cron: "0 14 * * 1-5"
+
+# jobs:
+#   send_discord_message:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Send Message to Discord
+#         env:
+#           DISCORD_WEB_HOOK: ${{ secrets.DISCORD_WEB_HOOK }}
+#         run: |
+#           curl -H "Content-Type: application/json" \
+#                -X POST \
+#                -d '{"content": "@here Update your daily status on notion : https://www.notion.so/4e5c1dd9375c492d91d62ebd6e6df33f?v=0ffcd066be7a4e86a8daa0c3bccce925&pvs=4 "}' \
+#                $DISCORD_WEB_HOOK

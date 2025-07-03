@@ -1,0 +1,352 @@
+specVersion: 0.0.3
+
+schema:
+  file: ./schema.graphql
+
+dataSources:
+  - kind: ethereum/contract
+    name: Registry
+    network: {{network}}
+    source:
+      address: '{{contracts.registry.address}}'
+      abi: Registry
+      startBlock: {{startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/registry.ts
+      abis:
+        - name: Registry
+          file: ./abis/Registry.json
+        - name: SwapTemplateBase
+          file: ./abis/SwapTemplateBase.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+      entities:
+        - Pool
+        - PoolToken
+      eventHandlers:
+        - event: PoolAdded(indexed address,bytes)
+          handler: poolAddedHandler
+        - event: PoolRemoved(indexed address)
+          handler: poolRemovedHandler
+      blockHandlers:
+        - handler: handleBlock
+
+  - kind: ethereum/contract
+    name: Swaps
+    network: {{network}}
+    source:
+      address: '{{contracts.swaps.address}}'
+      abi: Swaps
+      startBlock: {{startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/swaps.ts
+      abis:
+        - name: Swaps
+          file: ./abis/Swaps.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+      entities:
+        - Swaps
+      eventHandlers:
+        - event: TokenExchange(indexed address,indexed address,indexed address,address,address,uint256,uint256)
+          handler: tokenExchangeHandler
+
+  - kind: ethereum/contract
+    name: SwapTemplateBase
+    network: {{network}}
+    source:
+      abi: SwapTemplateBase
+      startBlock: {{startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/pool.ts
+      abis:
+        - name: SwapTemplateBase
+          file: ./abis/SwapTemplateBase.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+      entities:
+        - Pool
+      eventHandlers:
+        - event: AddLiquidity(indexed address,uint256[],uint256[],uint256,uint256)
+          handler: addLiquidityHandler
+        - event: RemoveLiquidity(indexed address,uint256[],uint256[],uint256)
+          handler: removeLiquidityHandler
+        - event: RemoveLiquidityOne(indexed address,uint256,uint256,uint256)
+          handler: removeLiquidityOneHandler
+        - event: RemoveLiquidityImbalance(indexed address,uint256[],uint256[],uint256,uint256)
+          handler: removeLiquidityImbalanceHandler
+        - event: NewFee(uint256,uint256)
+          handler: newFeeHandler
+        - event: RampA(uint256,uint256,uint256,uint256)
+          handler: rampAHandler
+
+  - kind: ethereum/contract
+    name: SwapTemplateBase2
+    network: {{network}}
+    source:
+      abi: SwapTemplateBase2
+      startBlock: {{startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/pool.ts
+      abis:
+        - name: SwapTemplateBase
+          file: ./abis/SwapTemplateBase.json
+        - name: SwapTemplateBase2
+          file: ./abis/SwapTemplateBase2.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+      entities:
+        - Pool
+      eventHandlers:
+        - event: AddLiquidity(indexed address,uint256[2],uint256[2],uint256,uint256)
+          handler: addLiquidityHandler
+        - event: RemoveLiquidity(indexed address,uint256[2],uint256[2],uint256)
+          handler: removeLiquidityHandler
+        - event: RemoveLiquidityOne(indexed address,uint256,uint256,uint256)
+          handler: removeLiquidityOneHandler
+        - event: RemoveLiquidityImbalance(indexed address,uint256[2],uint256[2],uint256,uint256)
+          handler: removeLiquidityImbalanceHandler
+        - event: NewFee(uint256,uint256)
+          handler: newFeeHandler
+        - event: RampA(uint256,uint256,uint256,uint256)
+          handler: rampAHandler
+    
+  - kind: ethereum/contract
+    name: SwapTemplateBase3
+    network: {{network}}
+    source:
+      abi: SwapTemplateBase3
+      startBlock: {{startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/pool.ts
+      abis:
+        - name: SwapTemplateBase
+          file: ./abis/SwapTemplateBase.json
+        - name: SwapTemplateBase3
+          file: ./abis/SwapTemplateBase3.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+      entities:
+        - Pool
+      eventHandlers:
+        - event: AddLiquidity(indexed address,uint256[3],uint256[3],uint256,uint256)
+          handler: addLiquidityHandler
+        - event: RemoveLiquidity(indexed address,uint256[3],uint256[3],uint256)
+          handler: removeLiquidityHandler
+        - event: RemoveLiquidityOne(indexed address,uint256,uint256,uint256)
+          handler: removeLiquidityOneHandler
+        - event: RemoveLiquidityImbalance(indexed address,uint256[3],uint256[3],uint256,uint256)
+          handler: removeLiquidityImbalanceHandler
+        - event: NewFee(uint256,uint256)
+          handler: newFeeHandler
+        - event: RampA(uint256,uint256,uint256,uint256)
+          handler: rampAHandler
+
+  - kind: ethereum/contract
+    name: SwapTemplateBase4
+    network: {{network}}
+    source:
+      abi: SwapTemplateBase4
+      startBlock: {{startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/pool.ts
+      abis:
+        - name: SwapTemplateBase
+          file: ./abis/SwapTemplateBase.json
+        - name: SwapTemplateBase4
+          file: ./abis/SwapTemplateBase4.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+      entities:
+        - Pool
+      eventHandlers:
+        - event: AddLiquidity(indexed address,uint256[4],uint256[4],uint256,uint256)
+          handler: addLiquidityHandler
+        - event: RemoveLiquidity(indexed address,uint256[4],uint256[4],uint256)
+          handler: removeLiquidityHandler
+        - event: RemoveLiquidityOne(indexed address,uint256,uint256,uint256)
+          handler: removeLiquidityOneHandler
+        - event: RemoveLiquidityImbalance(indexed address,uint256[4],uint256[4],uint256,uint256)
+          handler: removeLiquidityImbalanceHandler
+        - event: NewFee(uint256,uint256)
+          handler: newFeeHandler
+        - event: RampA(uint256,uint256,uint256,uint256)
+          handler: rampAHandler
+  
+  - kind: ethereum/contract
+    name: SwapTemplateBase5
+    network: {{network}}
+    source:
+      abi: SwapTemplateBase5
+      startBlock: {{startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/pool.ts
+      abis:
+        - name: SwapTemplateBase
+          file: ./abis/SwapTemplateBase.json
+        - name: SwapTemplateBase5
+          file: ./abis/SwapTemplateBase5.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+      entities:
+        - Pool
+      eventHandlers:
+        - event: AddLiquidity(indexed address,uint256[5],uint256[5],uint256,uint256)
+          handler: addLiquidityHandler
+        - event: RemoveLiquidity(indexed address,uint256[5],uint256[5],uint256)
+          handler: removeLiquidityHandler
+        - event: RemoveLiquidityOne(indexed address,uint256,uint256,uint256)
+          handler: removeLiquidityOneHandler
+        - event: RemoveLiquidityImbalance(indexed address,uint256[5],uint256[5],uint256,uint256)
+          handler: removeLiquidityImbalanceHandler
+        - event: NewFee(uint256,uint256)
+          handler: newFeeHandler
+        - event: RampA(uint256,uint256,uint256,uint256)
+          handler: rampAHandler
+
+  - kind: ethereum/contract
+    name: SwapTemplateBase6
+    network: {{network}}
+    source:
+      abi: SwapTemplateBase6
+      startBlock: {{startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/pool.ts
+      abis:
+        - name: SwapTemplateBase
+          file: ./abis/SwapTemplateBase.json
+        - name: SwapTemplateBase6
+          file: ./abis/SwapTemplateBase6.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+      entities:
+        - Pool
+      eventHandlers:
+        - event: AddLiquidity(indexed address,uint256[6],uint256[6],uint256,uint256)
+          handler: addLiquidityHandler
+        - event: RemoveLiquidity(indexed address,uint256[6],uint256[6],uint256)
+          handler: removeLiquidityHandler
+        - event: RemoveLiquidityOne(indexed address,uint256,uint256,uint256)
+          handler: removeLiquidityOneHandler
+        - event: RemoveLiquidityImbalance(indexed address,uint256[6],uint256[6],uint256,uint256)
+          handler: removeLiquidityImbalanceHandler
+        - event: NewFee(uint256,uint256)
+          handler: newFeeHandler
+        - event: RampA(uint256,uint256,uint256,uint256)
+          handler: rampAHandler
+
+  - kind: ethereum/contract
+    name: SwapTemplateBase7
+    network: {{network}}
+    source:
+      abi: SwapTemplateBase7
+      startBlock: {{startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/pool.ts
+      abis:
+        - name: SwapTemplateBase
+          file: ./abis/SwapTemplateBase.json
+        - name: SwapTemplateBase7
+          file: ./abis/SwapTemplateBase7.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+      entities:
+        - Pool
+      eventHandlers:
+        - event: AddLiquidity(indexed address,uint256[7],uint256[7],uint256,uint256)
+          handler: addLiquidityHandler
+        - event: RemoveLiquidity(indexed address,uint256[7],uint256[7],uint256)
+          handler: removeLiquidityHandler
+        - event: RemoveLiquidityOne(indexed address,uint256,uint256,uint256)
+          handler: removeLiquidityOneHandler
+        - event: RemoveLiquidityImbalance(indexed address,uint256[7],uint256[7],uint256,uint256)
+          handler: removeLiquidityImbalanceHandler
+        - event: NewFee(uint256,uint256)
+          handler: newFeeHandler
+        - event: RampA(uint256,uint256,uint256,uint256)
+          handler: rampAHandler
+
+  - kind: ethereum/contract
+    name: SwapTemplateBase8
+    network: {{network}}
+    source:
+      abi: SwapTemplateBase8
+      startBlock: {{startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/pool.ts
+      abis:
+        - name: SwapTemplateBase
+          file: ./abis/SwapTemplateBase.json
+        - name: SwapTemplateBase8
+          file: ./abis/SwapTemplateBase8.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+      entities:
+        - Pool
+      eventHandlers:
+        - event: AddLiquidity(indexed address,uint256[8],uint256[8],uint256,uint256)
+          handler: addLiquidityHandler
+        - event: RemoveLiquidity(indexed address,uint256[8],uint256[8],uint256)
+          handler: removeLiquidityHandler
+        - event: RemoveLiquidityOne(indexed address,uint256,uint256,uint256)
+          handler: removeLiquidityOneHandler
+        - event: RemoveLiquidityImbalance(indexed address,uint256[8],uint256[8],uint256,uint256)
+          handler: removeLiquidityImbalanceHandler
+        - event: NewFee(uint256,uint256)
+          handler: newFeeHandler
+        - event: RampA(uint256,uint256,uint256,uint256)
+          handler: rampAHandler
+
+  # TESTED ON MAINNET subgraph release-0_0_3
+  # - kind: ethereum/contract
+  #   name: Tokens
+  #   network: {{network}}
+  #   source:
+  #     abi: ERC20
+  #     startBlock: {{startBlock}}
+  #   mapping:
+  #     kind: ethereum/events
+  #     apiVersion: 0.0.5
+  #     language: wasm/assemblyscript
+  #     file: ./src/mappings/tokens.ts
+  #     abis:
+  #       - name: ERC20
+  #         file: ./abis/ERC20.json
+  #       - name: SwapTemplateBase
+  #         file: ./abis/SwapTemplateBase.json
+  #     entities:
+  #       - ERC20
+  #       - Pool
+  #     eventHandlers:
+  #       - event: Transfer(indexed address,indexed address,uint256)
+  #         handler: tokenTransferHandler   

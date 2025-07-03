@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "chainName": "Ethereum",
+    "chainId": "0x1",
+    "nativeCurrency": {
+      "name": "ETH",
+      "symbol": "ETH",
+      "decimals": 18
+    },
+    "blockExplorerUrls": ["https://etherscan.io"],
+    "rpcUrls": ["https://eth.llamarpc.com"],
+    "logo": "https://icons.llamao.fi/icons/chains/rsz_ethereum.jpg",
+    "borderColor": "#808080",
+    "poolTokenSymbols": ["USDT.eth", "USDC.eth", "DAI.eth", "WETH.eth"],
+    "isBalancerChain": false
+  },
+  {
+    "id": 43114,
+    "chainName": "Avalanche C-Chain",
+    "chainId": "0xa86a",
+    "nativeCurrency": {
+      "name": "AVAX",
+      "symbol": "AVAX",
+      "decimals": 18
+    },
+    "blockExplorerUrls": ["https://snowtrace.io"],
+    "rpcUrls": ["https://1rpc.io/avax/c"],
+    "logo": "https://icons.llamao.fi/icons/chains/rsz_avalanche.jpg",
+    "borderColor": "#CC3333",
+    "poolTokenSymbols": ["USDT.avax", "USDC.avax", "DAI.avax", "ETH.avax"],
+    "isBalancerChain": false
+  },
+  {
+    "id": 1098411886,
+    "chainName": "Arcadia",
+    "chainId": "0x41786f6e",
+    "nativeCurrency": {
+      "name": "ETH",
+      "symbol": "ETH",
+      "decimals": 18
+    },
+    "blockExplorerUrls": ["https://explorer.khalani.network/"],
+    "rpcUrls": ["https://rpc.khalani.network"],
+    "logo": "https://pbs.twimg.com/media/FdWhUExUUAE30t_.png",
+    "borderColor": "#228c22",
+    "poolTokenSymbols": [],
+    "isBalancerChain": true
+  }
+]

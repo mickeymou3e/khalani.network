@@ -1,0 +1,44 @@
+{
+  "addresses": [
+    {
+      "name": "relayer-arbitrum",
+      "chain": "ARBITRUMGOERLI",
+      "address": "0x638f2853f34d8768568d498e8f5e523a09cf0249"
+    },
+    {
+      "name": "relayer-bsc",
+      "chain": "BSCTESTNET",
+      "address": "0xd57feb2f8ec880b6ecebf2ffb2bc459ffdf5e6f4"
+    },
+    {
+      "name": "relayer-fuji",
+      "chain": "FUJI",
+      "address": "0x78b43e668e24ddafee6b1c12d8260e94a2c5f460"
+    },
+    {
+      "name": "relayer-godwoken",
+      "chain": "GODWOKENTESTNET",
+      "address": "0xe262100015ad0c57c3f57d32e59c95bc3eb00413"
+    },
+    {
+      "name": "relayer-khalani",
+      "chain": "KHALANITESTNET",
+      "address": "0x638cabc18c9584a4c005946954faa2936420ba18"
+    },
+    {
+      "name": "relayer-optimism",
+      "chain": "OPTIMISMGOERLI",
+      "address": "0xb6fed084346d71ce256c288dabcf73741f0ccd95"
+    },
+    {
+      "name": "relayer-sepolia",
+      "chain": "SEPOLIA",
+      "address": "0x509409230b3e1c1b335d5e1c77cea7a594174db5"
+    },
+    {
+      "name": "relayer-mumbai",
+      "chain": "MUMBAI",
+      "address": "0x988c0cdaffaf785eb4fc6c183317e147560da4e6"
+    }
+  ]
+}

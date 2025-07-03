@@ -1,0 +1,15 @@
+{
+  "name": "Celer WBTC Stable Pool",
+  "symbol": "HDK-Boosted-WBTC-ceWBTC",
+  "tokens": ["0xa7b28ddf165FF3Bcd698E33924Fb09dcD881FE0e", "0x1C428a6539A40eC5Bb481631266a51cd19b233B1"],
+  "rateProviders": ["0xa7b28ddf165FF3Bcd698E33924Fb09dcD881FE0e", "0x0000000000000000000000000000000000000000"],
+  "priceRateCacheDuration": ["0", "0"],
+  "amplificationParameter": "300",
+  "swapFeePercentage": "100000000000000",
+  "exemptFromYieldProtocolFeeFlags": [false, false],
+  "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+  "initialLiquidity": {
+    "0xa7b28ddf165FF3Bcd698E33924Fb09dcD881FE0e": "100000000000000",
+    "0x1C428a6539A40eC5Bb481631266a51cd19b233B1": "10000"
+  }
+}

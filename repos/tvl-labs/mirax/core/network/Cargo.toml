@@ -1,0 +1,37 @@
+[package]
+name = "mirax-network"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+asynchronous-codec.workspace = true
+async-trait.workspace = true
+bloomfilter.workspace = true
+dashmap.workspace = true
+crossbeam.workspace = true
+faster-hex.workspace = true
+libp2p.workspace = true
+log.workspace = true
+rand.workspace = true
+serde.workspace = true
+smol_str.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+trait-variant.workspace = true
+
+mirax-codec.workspace = true
+mirax-config.workspace = true
+mirax-crypto.workspace = true
+mirax-error.workspace = true
+mirax-primitive.workspace = true
+mirax-signal.workspace = true
+
+[dev-dependencies]
+once_cell.workspace = true
+tracing-subscriber.workspace = true
+
+[[example]]
+name = "demo"

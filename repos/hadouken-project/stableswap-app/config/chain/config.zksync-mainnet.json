@@ -1,0 +1,40 @@
+{
+  "hadouken": {
+    "lending": {
+      "url": "https://app.hadouken.finance/lend"
+    },
+    "bridge": {
+      "url": "https://app.hadouken.finance/bridge"
+    }
+  },
+  "sentry": "https://3e69dfdfa3534b13a009038a11f0ada6@o4504333193969664.ingest.sentry.io/4504333276938240",
+  "chainName": "zkSync",
+  "chainId": "0x144",
+  "nativeCurrency": {
+    "name": "ETH",
+    "symbol": "ETH",
+    "decimals": 18,
+    "address": "0x0000000000000000000000000000000000000000",
+    "wrapAddress": "0x8Ebe4A94740515945ad826238Fc4D56c6B8b0e60"
+  },
+  "rpcUrl": "https://mainnet.era.zksync.io",
+  "readOnlyRpcUrl": "https://mainnet.era.zksync.io",
+  "wsUrl": "",
+  "env": "mainnet",
+  "subgraphs": {
+    "balancer": {
+      "httpUri": "https://graph-prod-http-hadouken-prod.hadouken.finance/subgraphs/name/balancer-zksync-mainnet",
+      "webSocketUri": "wss://graph-prod-ws-hadouken-prod.hadouken.finance/subgraphs/name/balancer-zksync-mainnet"
+    }
+  },
+  "explorerUrl": {
+    "godwoken": "https://v1.gwscan.com",
+    "ethereum": "https://etherscan.io"
+  },
+  "api": {
+    "dia": {
+      "priceUrl": "https://api.diadata.org/v1/quotation"
+    }
+  },
+  "customLinearPools": []
+}

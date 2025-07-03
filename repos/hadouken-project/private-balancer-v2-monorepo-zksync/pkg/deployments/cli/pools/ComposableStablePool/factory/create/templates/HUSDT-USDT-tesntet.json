@@ -1,0 +1,27 @@
+{
+    "name": "HUSDT/USDT",
+    "symbol": "HDK-HUSDT-USDT",
+    "tokens": [
+        "0x9C14AcB697209f9C3d7a0b83C7Bd12bb44f9AA8b",
+        "0xcCD4aD7cE363C065A304C0cC4e0e14128B2BF823"
+    ],
+    "rateProviders": [
+        "0x0000000000000000000000000000000000000000",
+        "0x0000000000000000000000000000000000000000"
+    ],
+    "priceRateCacheDuration": [
+        "0",
+        "0"
+    ],
+    "amplificationParameter": "5000",
+    "swapFeePercentage": "100000000000000",
+    "exemptFromYieldProtocolFeeFlags": [
+        false,
+        false
+    ],
+    "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+    "initialLiquidity": {
+        "0x9C14AcB697209f9C3d7a0b83C7Bd12bb44f9AA8b": "270000000",
+        "0xcCD4aD7cE363C065A304C0cC4e0e14128B2BF823": "270000000"
+    }
+}

@@ -1,0 +1,1185 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage{xcolor}
+\usepackage{AxiCommands}
+
+\usetheme{Darmstadt}
+
+\title{Poor Man's Axi: STLC with Logic}
+\author{Wojciech Kołowski}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\section{Intro}
+
+\begin{frame}{Intro}
+
+These slides propose a basic calculus that could serve as a Poor Man's Axi. The system is Simply Typed Lambda Calculus with a first-order logic on top of it that lets us reason about program equality. At the end, we extend the system with booleans and natural numbers and consider adding some other features.
+
+\end{frame}
+
+\begin{frame}{Grammar}
+
+Terms: \\
+$e ::=$ \\
+\qquad $x \pipe \fun{x}{e} \pipe \app{e_1}{e_2} \pipe$ \\
+\qquad $\pair{e_1}{e_2} \pipe \outl{e} \pipe \outr{e} \pipe$ \\
+\qquad $\inl{e} \pipe \inr{e} \pipe \case{e}{e_1}{e_2} \pipe$ \\
+\qquad $\unit \pipe \emptyelim{e}$
+
+\vspace{1em}
+
+Types: \\
+$A, B ::= \Fun{A}{B} \pipe \Prod{A}{B} \pipe \Sum{A}{B} \pipe \Unit \pipe \Empty$
+
+\vspace{1em}
+
+Propositions: \\
+$P, Q ::=$ \\
+\qquad $\True \pipe \False \pipe \Not{P} \pipe \Or{P}{Q} \pipe \And{P}{Q} \pipe \Impl{P}{Q} \pipe \Iff{P}{Q} \pipe$ \\
+\qquad $\All{x}[A]{P} \pipe \Ex{x}[A]{P} \pipe$ \\
+\qquad $\Eq[A]{e_1}{e_2}$
+
+\end{frame}
+
+\begin{frame}{Terms and types}
+
+In the base language we have only function types $\Fun{A}{B}$, product types $\Prod{A}{B}$, sum types $\Sum{A}{B}$, the unit type $\Unit$ (the type with one element) and the empty type $\Empty$ (the type with no elements). Later we will add booleans, natural numbers, lists and streams.
+
+\vspace{1em}
+
+Some of the less obvious terms: $\outl{e}$ and $\outr{e}$ are product projections, $\unit$ is the only value of the unit type and $\emptyelim{e}$ is the eliminator of the empty type. $\case{e}{e_1}{e_2}$ is the eliminator of the sum type and its arguments $e_1, e_2$ are supposed to be functions. Note that we don't have a type annotation on the lambda, and no type annotations in the language in general. This is not an oversight -- we postpone deciding this detail for later.
+
+\end{frame}
+
+\begin{frame}{Propositions}
+
+Our logic is typed (i.e. multi-sorted) first-order logic with equality. We treat negation and biconditional as defined notions ($\Not{P}$ is $\Impl{P}{\False}$, whereas $\Iff{P}{Q}$ is $\And{\Impl{P}{Q}}{\Impl{Q}{P}}$), so we won't need rules for them.
+
+\vspace{1em}
+
+Note that variables in quantifiers need to be annotated with their types. Similarly, we need a type annotation in equations between terms.
+
+\end{frame}
+
+\begin{frame}{Judgements}
+
+We will present our language using the machinery of judgements and inference rules. Each kind of \textbf{judgement} represents a meta-level proposition about objects of our language: what is the type of a term, how do terms compute and so on.
+
+\end{frame}
+
+\begin{frame}{Inference rules}
+
+
+An \textbf{inference rule} tells us how to derive a given judgement (its conclusion), given derivations of some other judgements and side conditions (the premises). The general form of an inference rule is
+
+\vspace{1em}
+
+\begin{center}
+  $\infrule[Name]{\mathcal{J}_1 \dots \mathcal{J}_n}{\mathcal{J}}$
+\end{center}
+
+\vspace{1em}
+
+where the premises (the judgements $\mathcal{J}_i$) are written above the bar and the conclusion (the judgement $\mathcal{J}$) is written below the bar. A rule can have many premises, but only a single conclusion. Most of the time it is best to read an inference rule clockwise -- start from the conclusion, read the premises from left to right and then look at the conclusion again. Each rule has a name (written in small caps) so that it can be easily referred to, but we will sometimes omit these names to save space.
+
+\end{frame}
+
+\section{Typing}
+
+\begin{frame}{Typing contexts}
+
+Typing contexts: \\
+$\Gamma ::= \emptytypingctx \pipe \extend{\Gamma}{x}{A}$
+
+\vspace{1em}
+
+Our judgements depend on hypotheses of the form $x : A$, which should be read as ``$x$ has type $A$''. We gather these hypotheses in a \textbf{typing context}, which can be either empty or be an extension of another typing context with a new hypothesis. We treat typing contexts as finite partial maps from variables to types, so that we don't need to worry about order of the hypotheses, repetition of variable names and other unimportant technical details. We will use the Greek capital letter gamma $\Gamma$ to denote typing contexts.
+
+\end{frame}
+
+\begin{frame}{Judgements -- programming language part}
+
+Typing judgement: \\
+$\typing{e}{A}$ -- in typing context $\Gamma$, term $e$ is of type $A$.
+
+\vspace{2em}
+
+Computational equality judgement: \\
+$\compeq{e_1}{e_2}{A}$ -- in typing context $\Gamma$, terms $e_1$ and $e_2$ are computationally equal.
+
+\end{frame}
+
+\begin{frame}{Sanity checks}
+
+The inference rules of the system will guarantee that whenever we derive a judgement, then another simpler judgement (called a \textbf{sanity condition}) also holds. For the computational equality $\compeq{e_1}{e_2}{A}$ the sanity conditions are $\typing{e_1}{A}$ and $\typing{e_2}{A}$. The typing judgement $\typing{e}{A}$ does not have a sanity condition, but we can think that its sanity condition is the fact that the typing context $\Gamma$ is a well-formed finite partial map from variables to types.
+
+\end{frame}
+
+\begin{frame}{Typing -- basics}
+
+The typing judgement tells us which terms have which types. The most important rule of typing is that variables have whatever type the typing context tells us -- we will call ths the variable rule. Note that the premise of the rule, $\sidecond{(x : A) \in \Gamma}$, does not belong to any judgement -- we will call such premises \textbf{side conditions}.
+
+\vspace{2em}
+
+\begin{center}
+  $\infrule[Var]{\sidecond{(x : A) \in \Gamma}}{\typing{x}{A}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Typing -- basics 2}
+
+The remaining rules for the typing judgement are standard. For every language construct, there is only a single rule whose conclusion matches it, so it is always obvious which rule should be used, and the language construct is decomposed in the premises, which hints that an eventual typing algorithm will be terminating.
+
+\vspace{1em}
+
+For every type there are two kinds of rules -- introduction rules and elimination rules. Introduction rules are those in which the type appears in the conclusion and the elimination rules are those in which the type appears as the principal (i.e. the first) premise.
+
+\vspace{1em}
+
+We omit names of these rules because it's easier to refer to them by the name of the language construct that they apply to.
+
+\end{frame}
+
+\begin{frame}{Typing -- the rules}
+
+\begin{center}
+  $\infrule{\typing[\extend{\Gamma}{x}{A}]{e}{B}}{\typing{\fun{x}{e}}{\Fun{A}{B}}}$ \quad
+  $\infrule{\typing{f}{\Fun{A}{B}} \quad \typing{a}{A}}{\typing{\app{f}{a}}{B}}$
+
+  \vspace{2em}
+
+  $\infrule{\typing{a}{A} \quad \typing{b}{B}}{\typing{\pair{a}{b}}{\Prod{A}{B}}}$ \quad
+  $\infrule{\typing{e}{\Prod{A}{B}}}{\typing{\outl{e}}{A}}$ \quad
+  $\infrule{\typing{e}{\Prod{A}{B}}}{\typing{\outr{e}}{B}}$
+
+  \vspace{2em}
+
+  $\infrule{\typing{e}{A}}{\typing{\inl{e}}{\Sum{A}{B}}}$ \quad
+  $\infrule{\typing{e}{B}}{\typing{\inr{e}}{\Sum{A}{B}}}$
+
+  \vspace{2em}
+
+  $\infrule{\typing{e}{\Sum{A}{B}} \quad \typing{f}{\Fun{A}{C}} \quad \typing{g}{\Fun{B}{C}}}{\typing{\case{e}{f}{g}}{C}}$
+
+  \vspace{2em}
+
+  $\infrule{}{\typing{\unit}{\Unit}}$ \quad
+  $\infrule{\typing{e}{\Empty}}{\typing{\emptyelim{e}}{A}}$
+\end{center}
+
+\end{frame}
+
+\section{Computation}
+
+\begin{frame}{Computation -- basics}
+
+We represent computation using the non-directed computational equality relation, which might be a bit unintuitive, but is a common practice. Note that computational equality is typed, i.e. there's a separate computational equality relation for each type. Computational equality draws its meaning from two basic kinds of rules, computation rules and uniqueness rules. Intuitively, two terms of a given type are computationally equal when they compute to the same result, where the meaning of ``compute'' is specified by the computation rules and the meaning of ``the same'' is specified by the uniqueness rules. Formally, computational equality is the congruence closure of computation and uniqueness rules, i.e. the least equivalence relation that preserves all term constructors and contains the computation and uniqueness rules.
+
+\end{frame}
+
+\begin{frame}{Substitution}
+
+To state the computation rules, we need a substitution operation. Our notation is $\subst{e_1}{x}{e_2}$ for a term $e_1$ in which term $e_2$ was substituted for the variable $x$. Unfortunately, I'm too lazy to define substitution here, but it shouldn't be hard for you to define it yourself.
+
+\end{frame}
+
+\begin{frame}{Computation rules}
+
+Computation rules describe the most essential computation steps. For example, what happens when we project the first element out of a pair? Note that not all types have computation rules. For example, $\Unit$ and $\Empty$ have no computation rules because there's no computation going on in these types.
+
+\begin{center}
+  $\infrule[App-Lam]{\typing[\extend{\Gamma}{x}{A}]{b}{B} \quad \typing{a}{A}}{\compeq{\app{(\fun{x}{b})}{a}}{\subst{b}{x}{a}}{B}}$
+
+  \vspace{1em}
+
+  $\infrule{\typing{a}{A} \quad \typing{b}{B}}{\compeq{\outl{\pair{a}{b}}}{a}{A}}$ \quad
+  $\infrule{\typing{a}{A} \quad \typing{b}{B}}{\compeq{\outr{\pair{a}{b}}}{b}{B}}$
+
+  \vspace{1em}
+
+  $\infrule[Case-Inl]{\typing{a}{A} \quad \typing{f}{\Fun{A}{C}} \quad \typing{g}{\Fun{B}{C}}}{\compeq{\case{(\inl{a})}{f}{g}}{\app{f}{a}}{C}}$
+
+  \vspace{1em}
+
+  $\infrule[Case-Inr]{\typing{a}{A} \quad \typing{f}{\Fun{A}{C}} \quad \typing{g}{\Fun{B}{C}}}{\compeq{\case{(\inr{b})}{f}{g}}{\app{g}{b}}{C}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Uniqueness rules}
+
+Uniqueness rules establish that every term of a given type is computationally equal to a constructor of the type. For example, every term of a product type is a pair. The rules for $\Unit$ and $\Empty$ are a bit broader -- they establish that all terms of these types are equal. Note that there are no uniqueness rules for sums.
+
+\begin{center}
+  $\infrule[Fun-Uniq]{\typing{f}{\Fun{A}{B}}}{\compeq{f}{\fun{x}{\app{f}{x}}}{\Fun{A}{B}}}$
+
+  \vspace{1em}
+
+  $\infrule[Prod-Uniq]{\typing{e}{\Prod{A}{B}}}{\compeq{e}{\pair{\outl{e}}{\outr{e}}}{\Prod{A}{B}}}$
+
+  \vspace{1em}
+
+  $\infrule[Unit-Uniq]{\typing{e_1}{\Unit} \quad \typing{e_2}{\Unit}}{\compeq{e_1}{e_2}{\Unit}}$
+
+  \vspace{1em}
+
+  $\infrule[Empty-Uniq]{\typing{e_1}{\Empty} \quad \typing{e_2}{\Empty}}{\compeq{e_1}{e_2}{\Empty}}$
+
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Computational equality is an equivalence relation}
+
+Computational equality is an equivalence relation, i.e. it is reflexive, symmetric and transitive.
+
+\vspace{2em}
+
+\begin{center}
+  $\infrule[Comp-Refl]{\typing{e}{A}}{\compeq{e}{e}{A}}$
+
+  \vspace{2em}
+
+  $\infrule[Comp-Sym]{\compeq{e_1}{e_2}{A}}{\compeq{e_2}{e_1}{A}}$
+
+  \vspace{2em}
+
+  $\infrule[Comp-Trans]{\compeq{e_1}{e_2}{A} \quad \compeq{e_2}{e_3}{A}}{\compeq{e_1}{e_3}{A}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Congruence rules 1}
+
+The congruence rules state that computational equality is preserved by every language construct. We omit their names for reasons of space, but they are rather schematic: it would be $\textsc{\footnotesize{Lam-Congr}}$ for lambda, $\textsc{\footnotesize{App-Congr}}$ for application and so on.
+
+\end{frame}
+
+\begin{frame}{Congruence rules 2}
+
+\begin{center}
+  $\infrule{\compeq[\extend{\Gamma}{x}{A}]{e}{e'}{B}}{\compeq{\fun{x}{e}}{\fun{x}{e'}}{\Fun{A}{B}}}$ \quad
+  $\infrule{\compeq{f}{f'}{\Fun{A}{B}} \quad \compeq{a}{a'}{A}}{\compeq{\app{f}{a}}{\app{f'}{a'}}{B}}$
+
+  \vspace{1em}
+
+  $\infrule{\compeq{a}{a'}{A} \quad \compeq{b}{b'}{B}}{\compeq{\pair{a}{b}}{\pair{a'}{b'}}{\Prod{A}{B}}}$
+
+  \vspace{1em}
+
+  $\infrule{\compeq{e}{e'}{\Prod{A}{B}}}{\compeq{\outl{e}}{\outl{e'}}{A}}$ \quad
+  $\infrule{\compeq{e}{e'}{\Prod{A}{B}}}{\compeq{\outr{e}}{\outr{e'}}{B}}$
+
+  \vspace{1em}
+
+  $\infrule{\compeq{e}{e'}{A}}{\compeq{\inl{e}}{\inl{e'}}{\Sum{A}{B}}}$ \quad
+  $\infrule{\compeq{e}{e'}{B}}{\compeq{\inr{e}}{\inr{e'}}{\Sum{A}{B}}}$
+
+  \vspace{1em}
+
+  $\infrule{\compeq{e}{e'}{\Sum{A}{B}} \quad \compeq{f}{f'}{\Fun{A}{C}} \quad \compeq{g}{g'}{\Fun{B}{C}}}{\compeq{\case{e}{f}{g}}{\case{e'}{f'}{g'}}{C}}$
+
+  \vspace{1em}
+
+  $\infrule{}{\compeq{\unit}{\unit}{\Unit}}$ \quad
+  $\infrule{\compeq{e}{e'}{\Empty}}{\compeq{\emptyelim{e}}{\emptyelim{e'}}{A}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Computational equality -- closing remarks}
+
+Note that because of the uniqueness rule for $\Unit$, we don't need the congruence rule for $\unit$. Moreover, we don't need the congruence rule for $\unit$ even more, because we already know that comutational equality is reflexive.
+
+\vspace{1em}
+
+Also note that in the congruence rule for $\Empty$, the premise is always true because of the uniqueness rule for $\Empty$, so it could be replaced with typing rules for $e$ and $e'$.
+
+\vspace{1em}
+
+However, we keep the superfluous rules in our system to make the presentation more schematic and easier to understand.
+
+\end{frame}
+
+\section{Logic}
+
+\begin{frame}{Assumption contexts}
+
+Assumption contexts: \\
+$\Delta ::= \emptyassctx \pipe \assume{\Delta}{P}$
+
+\vspace{1em}
+
+Judgements for the logical part of our system will depend on typing hypotheses too, but they will also depend on another type of hypothesis -- that a given proposition $P$ holds. To gather hypotheses of the latter kind together, we introduce the notion of an \textbf{assumption context}, which can be either empty or be an extension of another context with the assumption that the proposition $P$ holds. We treat assumption contexts as sets, so that we don't need to worry about order of the hypotheses. We denote these contexts with the Greek capital letter delta $\Delta$.
+
+\vspace{1em}
+
+Athena enjoyers can think of the assumption context as an assumption base.
+
+\end{frame}
+
+\begin{frame}{Judgements for logic}
+
+Valid assumption context judgement: \\
+$\assctx[\Gamma]{\Delta}$ -- in typing context $\Gamma$, the assumption context $\Delta$ is valid.
+
+\vspace{2em}
+
+Well-formed proposition judgement: \\
+$\prop[\Gamma]{P}$ -- in typing context $\Gamma$, proposition $P$ is well-formed.
+
+\vspace{2em}
+
+True proposition judgement: \\
+$\holds{P}$ -- in typing context $\Gamma$ and assumption context $\Delta$, proposition $P$ holds.
+
+\end{frame}
+
+\begin{frame}{Judgements for logic -- sanity checks}
+
+Similarly to the situation for typing and computation judgements, the logical judgements also entail sanity conditions. For $\assctx[\Gamma]{\Delta}$ and $\prop[\Gamma]{P}$ the sanity condition is that $\Gamma$ is a well-formed finite partial map. For $\holds{P}$ the sanity conditions are $\assctx[\Gamma]{\Delta}$ and $\prop[\Gamma]{P}$.
+
+\end{frame}
+
+\begin{frame}{Valid assumption context judgement}
+
+The valid assumption context judgement tells us which assumption contexts are valid. The crux of the matter is that we can extend an assumption context only with a well-formed proposition. This judgement depends on a typing context because propositions that we add to the assumption context can contain variables.
+
+\vspace{2em}
+
+\begin{center}
+  $\infrule[Valid-Empty]{}{\assctx{\emptyassctx}}$
+
+  \vspace{2em}
+
+  $\infrule[Valid-Extend]{\assctx{\Delta} \quad \prop[\Gamma]{P}}{\assctx{\assume{\Delta}{P}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Well-formed proposition judgement}
+
+The role of the well-formed proposition judgement is twofold: to ensure that propositions are well-scoped (i.e. they don't contain variables that are not present in the typing context), and that propositional equality is formed only from well-typed terms. This judgement depends only on the typing context.
+
+\end{frame}
+
+\begin{frame}{Well-formed propositions}
+
+\begin{center}
+  $\infrule{}{\prop{\True}}$ \quad
+  $\infrule{}{\prop{\False}}$
+
+  \vspace{2em}
+
+  $\infrule{\prop{P} \quad \prop{Q}}{\prop{\Or{P}{Q}}}$ \quad
+  $\infrule{\prop{P} \quad \prop{Q}}{\prop{\And{P}{Q}}}$
+
+  \vspace{2em}
+
+  $\infrule{\prop{P} \quad \prop{Q}}{\prop{\Impl{P}{Q}}}$
+
+  \vspace{2em}
+
+  $\infrule{\prop[\extend{\Gamma}{x}{A}]{P}}{\prop{\All{x}[A]{P}}}$ \quad
+  $\infrule{\prop[\extend{\Gamma}{x}{A}]{P}}{\prop{\Ex{x}[A]{P}}}$
+
+  \vspace{2em}
+
+  $\infrule{\typing{e_1}{A} \quad \typing{e_2}{A}}{\prop{\Eq[A]{e_1}{e_2}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{True proposition judgement}
+
+The true proposition judgement depends on two contexts -- a typing context $\Gamma$ and an assumption context $\Delta$. This is because propositions can contain variables from $\Gamma$ and their truth depends on assumptions from $\Delta$.
+
+\vspace{1em}
+
+The basic rule of our logic is that we can use assumptions from the assumption context.
+
+\vspace{2em}
+
+\begin{center}
+  $\infrule[Ass]{\assctx{\Delta} \quad \sidecond{P \in \Delta}}{\holds{P}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Rules for connectives}
+
+The rules for connectives are entirely standard.
+
+\vspace{1em}
+
+\begin{center}
+  $\infrule{\holds[\Gamma][\assume{\Delta}{P}]{Q}}{\holds{\Impl{P}{Q}}}$ \quad
+  $\infrule{\holds{\Impl{P}{Q}} \quad \holds{P}}{\holds{Q}}$
+
+  \vspace{1em}
+
+  $\infrule{\holds{P} \quad \holds{Q}}{\holds{\And{P}{Q}}}$ \quad
+  $\infrule{\holds{\And{P}{Q}}}{\holds{P}}$ \quad
+  $\infrule{\holds{\And{P}{Q}}}{\holds{Q}}$
+
+  \vspace{1em}
+
+  $\infrule{\holds{P}}{\holds{\Or{P}{Q}}}$ \quad
+  $\infrule{\holds{Q}}{\holds{\Or{P}{Q}}}$
+
+  \vspace{1em}
+
+  $\infrule{\holds{\Or{P}{Q}} \quad \holds[\Gamma][\assume{\Delta}{P}]{R} \quad \holds[\Gamma][\assume{\Delta}{Q}]{R}}{\holds{R}}$
+
+  \vspace{1em}
+
+  $\infrule{\assctx{\Delta}}{\holds{\True}}$ \quad
+  $\infrule{\holds{\False}}{\holds{P}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Substitution in propositions}
+
+To express rules for quantifiers, we need the operation of substituting a term for a variable in a proposition. Our notation is $\subst{P}{x}{e}$ for proposition $P$ in which variable $x$ was substituted with term $e$.
+
+\end{frame}
+
+\begin{frame}{Rules for quantifiers}
+
+\begin{center}
+  $\infrule[Forall-Intro]{\holds[\extend{\Gamma}{x}{A}][\Delta]{P}}{\holds{\All{x}[A]{P}}}$
+
+  \vspace{2em}
+
+  $\infrule[Forall-Elim]{\holds{\All{x}[A]{P}} \quad \typing{a}{A}}{\holds{\subst{P}{x}{a}}}$
+
+  \vspace{2em}
+
+  $\infrule[Exists-Intro]{\typing{a}{A} \quad \holds{\subst{P}{x}{a}}}{\holds{\Ex{x}[A]{P}}}$
+
+  \vspace{2em}
+
+  $\infrule[Exists-Elim]{\holds{\Ex{x}[A]{P}} \quad \holds[\extend{\Gamma}{x}{A}][\assume{\Delta}{P}]{R}}{\holds{R}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Rules for equality}
+
+Propositional equality is an equivalence relation that can be substitued in proofs. Note that we handle reflexivity by referring to computational equality.
+
+\vspace{2em}
+
+\begin{center}
+  $\infrule[Eq-Refl]{\assctx{\Delta} \quad \compeq{e_1}{e_2}{A}}{\holds{\Eq[A]{e_1}{e_2}}}$
+
+  \vspace{1em}
+
+  $\infrule[Eq-Sym]{\holds{\Eq[A]{e_1}{e_2}}}{\holds{\Eq[A]{e_2}{e_1}}}$
+
+  \vspace{1em}
+
+  $\infrule[Eq-Trans]{\holds{\Eq[A]{e_1}{e_2}} \quad \holds{\Eq[A]{e_2}{e_3}}}{\holds{\Eq[A]{e_1}{e_3}}}$
+
+  \vspace{1em}
+
+  $\infrule[Eq-Subst]{\holds{\Eq[A]{e_1}{e_2}} \quad \prop[\extend{\Gamma}{x}{A}]{P} \quad \holds{\subst{P}{x}{e_2}}}{\holds{\subst{P}{x}{e_1}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Equality of functions}
+
+The general rules from the previous slide are not sufficient to prove all equations that we would like. For example, there's nothing we can use to prove function extensionality. We can fix this issue by adding rules that handle equality on a type-by-type basis. For now, the only additional rule we need concerns equality of functions, but with more types we might need more.
+
+\vspace{2em}
+
+\begin{center}
+  $\infrule[Funext]{\holds{\All{x}[A]{\Eq[B]{\app{f}{x}}{\app{g}{x}}}}}{\holds{\Eq[\Fun{A}{B}]{f}{g}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Reasoning by cases on terms}
+
+Note that so far, we haven't got any rules that allow reasoning by cases on terms. For example, we might want to reason by cases not on a disjunction, but on a term $e : \Sum{A}{B}$. To be able to do this, we need to add some more rules. Note that these rules are needed only for positive types (i.e. sums and the empty type), because for negative types the uniqueness rules suffice. Also, there's a slight discrepancy in the presentation between empty and sums, but don't worry about it.
+
+\vspace{1em}
+
+\begin{center}
+  $\infrule[Empty-Ind]{\assctx{\Delta} \quad \typing{e}{\Empty}}{\holds{P}}$
+
+  \vspace{2em}
+
+  $\infrule[Sum-Ind]{\holds[\extend{\Gamma}{a}{A}][\Delta]{\subst{P}{x}{\inl{a}}} \quad \holds[\extend{\Gamma}{b}{B}][\Delta]{\subst{P}{x}{\inr{b}}}}{\holds{\All{x}[\Sum{A}{B}]{P}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Classical logic}
+
+There are many ways to add classical logic to the system, but we'll have a rule which basically says that we can reason by cases on any proposition.
+
+\vspace{2em}
+
+\begin{center}
+  $\infrule[Classic]{\holds[\Gamma][\assume{\Delta}{P}]{R} \quad \holds[\Gamma][\assume{\Delta}{\Not{P}}]{R}}{\holds{R}}$
+\end{center}
+
+\end{frame}
+
+\section{More types}
+
+\newcommand{\Bool}{\texttt{Bool}}
+\newcommand{\btrue}{\texttt{true}}
+\newcommand{\bfalse}{\texttt{false}}
+\newcommand{\boolelim}[3]{\texttt{if}\ #1\ \texttt{then}\ #2\ \texttt{else}\ #3}
+
+\begin{frame}{Adding more types to the language}
+
+Our current menagerie of type constructors isn't very expressive. In fact, since the only base types are unit and empty, all we can do is finite types and functions between them.
+
+\vspace{1em}
+
+In the following slides, we will introduce new types and their terms one by one. This will demonstrate the kind of work that needs to be done to extend the base language.
+
+\end{frame}
+
+\newcommand{\unitelim}[2]{\Unit\texttt{-elim}\ #1\ #2}
+
+\begin{frame}{Eliminator for $\Unit$}
+
+One little silly thing that we don't have is an eliminator for the $\Unit$ type. It's useless, but why not?
+
+\vspace{1em}
+
+\begin{center}
+  $\infrule[Unit-Elim]{\typing{e}{A} \quad \typing{u}{\Unit}}{\typing{\unitelim{e}{u}}{A}}$
+
+  \vspace{2em}
+
+  $\infrule[Comp-Unit]{\typing{e}{A}}{\compeq{\unitelim{e}{\unit}}{e}{A}}$
+
+  \vspace{2em}
+
+  $\infrule[Congr-Unit-Elim]{\compeq{e}{e'}{A} \quad \compeq{u}{u'}{\Unit}}{\compeq{\unitelim{e}{u}}{\unitelim{e'}{u'}}{A}}$
+
+  \vspace{2em}
+
+  $\infrule[Unit-Ind]{\holds{\subst{P}{x}{\unit}}}{\holds{\All{x}[\Unit]{P}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Booleans}
+
+\begin{center}
+  $\infrule{}{\typing{\btrue}{\Bool}}$ \quad
+  $\infrule{}{\typing{\bfalse}{\Bool}}$
+
+  \vspace{2em}
+
+  $\infrule[If]{\typing{e}{\Bool} \quad \typing{e_1}{A} \quad \typing{e_2}{A}}{\typing{\boolelim{e}{e_1}{e_2}}{A}}$
+
+  \vspace{2em}
+
+  $\infrule[Comp-If-True]{\typing{e_1}{A} \quad \typing{e_2}{A}}{\compeq{\boolelim{\btrue}{e_1}{e_2}}{e_1}{A}}$
+
+  \vspace{2em}
+
+  $\infrule[Comp-If-False]{\typing{e_1}{A} \quad \typing{e_2}{A}}{\compeq{\boolelim{\bfalse}{e_1}{e_2}}{e_2}{A}}$
+
+  \vspace{2em}
+
+  $\infrule[Bool-Ind]{\holds{\subst{P}{b}{\btrue}} \quad \holds{\subst{P}{b}{\bfalse}}}{\holds{\All{b}[\Bool]{P}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Booleans -- congruence rules}
+
+\begin{center}
+  $\infrule[True-Congr]{}{\compeq{\btrue}{\btrue}{\Bool}}$
+
+  \vspace{2em}
+
+  $\infrule[False-Congr]{}{\compeq{\bfalse}{\bfalse}{\Bool}}$
+
+  \vspace{2em}
+
+  $\infrule[If-Congr]{\compeq{e}{e'}{\Bool} \quad \compeq{e_1}{e_1'}{A} \quad \compeq{e_2}{e_2'}{A}}{\compeq{\boolelim{e}{e_1}{e_2}}{\boolelim{e'}{e_1'}{e_2'}}{A}}$
+\end{center}
+
+\end{frame}
+
+\newcommand{\Nat}{\mathbb{N}}
+\newcommand{\zero}{\texttt{zero}}
+\renewcommand{\succ}[1][]{\texttt{succ}\ #1}
+\newcommand{\natelim}[3]{\texttt{rec}_\Nat\ #1\ #2\ #3}
+
+\begin{frame}{Natural numbers}
+
+\begin{center}
+  $\infrule{}{\typing{\zero}{\Nat}}$ \quad
+  $\infrule{\typing{n}{\Nat}}{\typing{\succ[n]}{\Nat}}$
+
+  \vspace{2em}
+
+  $\infrule[Nat-Elim]{\typing{z}{A} \quad \typing{s}{\Fun{A}{A}} \quad \typing{n}{\Nat}}{\typing{\natelim{z}{s}{n}}{A}}$
+
+  \vspace{2em}
+
+  $\infrule[Rec-Zero]{\typing{z}{A} \quad \typing{s}{\Fun{A}{A}}}{\compeq{\natelim{z}{s}{\zero}}{z}{A}}$
+
+  \vspace{2em}
+
+  $\infrule[Rec-Succ]{\typing{z}{A} \quad \typing{s}{\Fun{A}{A}} \quad \typing{n}{\Nat}}{\compeq{\natelim{z}{s}{(\succ[n])}}{\app{s}{(\natelim{z}{s}{n})}}{A}}$
+
+  \vspace{2em}
+
+  $\infrule[Nat-Ind]{\holds{\subst{P}{n}{\zero}} \quad \holds[\extend{\Gamma}{n'}{\Nat}][\assume{\Delta}{\subst{P}{n}{n'}}]{\subst{P}{n}{\succ[n']}}}{\holds{\All{n}[\Nat]{P}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Natural numbers -- congruence rules}
+
+\begin{center}
+  $\infrule[Zero-Congr]{}{\compeq{\zero}{\zero}{\Nat}}$
+
+  \vspace{2em}
+
+  $\infrule[Succ-Congr]{\compeq{n}{n'}{\Nat}}{\compeq{\succ[n]}{\succ[n']}{\Nat}}$
+
+  \vspace{2em}
+
+  $\infrule[Nat-Elim-Congr]{\compeq{z}{z'}{A} \quad \compeq{s}{s'}{\Fun{A}{A}} \quad \compeq{n}{n'}{\Nat}}{\compeq{\natelim{z}{s}{n}}{\natelim{z'}{s'}{n'}}{A}}$
+\end{center}
+
+\end{frame}
+
+\newcommand{\List}[1]{\text{List}\ #1}
+\newcommand{\nil}{\texttt{nil}}
+\newcommand{\cons}[2]{\texttt{cons}\ #1\ #2}
+\newcommand{\listelim}[3]{\texttt{fold}\ #1\ #2\ #3}
+
+\begin{frame}{Lists}
+
+\begin{center}
+  $\infrule{}{\typing{\nil}{\List{A}}}$ \quad
+  $\infrule{\typing{h}{A} \quad \typing{t}{\List{A}}}{\typing{\cons{h}{t}}{\List{A}}}$
+
+  \vspace{2em}
+
+  $\infrule[List-Elim]{\typing{n}{A} \quad \typing{c}{\Fun{A}{\Fun{B}{B}}} \quad \typing{l}{\List{A}}}{\typing{\listelim{n}{c}{l}}{B}}$
+
+  \vspace{2em}
+
+  $\infrule[Fold-Nil]{\typing{n}{B} \quad \typing{c}{\Fun{A}{\Fun{B}{B}}}}{\compeq{\listelim{n}{c}{\nil}}{n}{B}}$
+
+  \vspace{2em}
+
+  $\infrule[Fold-Cons]{\typing{n}{B} \quad \typing{c}{\Fun{A}{\Fun{B}{B}}} \quad \typing{h}{A} \quad \typing{t}{\List{A}}}{\compeq{\listelim{n}{c}{(\cons{h}{t})}}{\app{\app{c}{h}}{(\listelim{n}{c}{t})}}{B}}$
+
+  \vspace{2em}
+
+  $\infrule[List-Ind]{\holds{\subst{P}{l}{\nil}} \quad \holds[\extend{\extend{\Gamma}{h}{A}}{t}{\List{A}}][\assume{\Delta}{\subst{P}{l}{t}}]{\subst{P}{l}{\cons{h}{t}}}}{\holds{\All{l}[\List{A}]{P}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Lists -- congruence rules}
+
+\begin{center}
+  $\infrule[Nil-Congr]{}{\compeq{\nil}{\nil}{\List{A}}}$
+
+  \vspace{2em}
+
+  $\infrule[Cons-Congr]{\compeq{h}{h'}{A} \quad \compeq{t}{t'}{\List{A}}}{\compeq{\cons{h}{t}}{\cons{h'}{t'}}{\List{A}}}$
+
+  \vspace{2em}
+
+  $\infrule[List-Elim-Congr]{\compeq{n}{n'}{A} \quad \compeq{c}{c'}{\Fun{A}{\Fun{B}{B}}} \quad \compeq{l}{l'}{\List{A}}}{\compeq{\listelim{n}{c}{l}}{\listelim{n'}{c'}{l'}}{B}}$
+\end{center}
+
+\end{frame}
+
+\newcommand{\AxiStream}[1]{\texttt{Stream}\ #1}
+\newcommand{\hd}[1][]{\texttt{hd}\ #1}
+\newcommand{\tl}[1][]{\texttt{tl}\ #1}
+\newcommand{\streamintro}[2]{\texttt{scons}\ #1\ #2}
+
+\begin{frame}{Streams}
+
+\begin{center}
+
+  $\infrule{\typing{s}{\AxiStream{A}}}{\typing{\hd[s]}{A}}$ \quad
+  $\infrule{\typing{s}{\AxiStream{A}}}{\typing{\tl[s]}{\AxiStream{A}}}$
+
+  \vspace{2em}
+
+  $\infrule[Scons]{\typing{a}{A} \quad \typing{f}{\Fun{A}{A}}}{\typing{\streamintro{a}{f}}{\AxiStream{A}}}$
+
+  \vspace{2em}
+
+  $\infrule[Hd-Scons]{\typing{a}{A} \quad \typing{f}{\Fun{A}{A}}}{\compeq{\hd[(\streamintro{a}{f})]}{a}{A}}$
+
+  \vspace{2em}
+
+  $\infrule[Tl-Scons]{\typing{a}{A} \quad \typing{f}{\Fun{A}{A}}}{\compeq{\tl[(\streamintro{a}{f})]}{\streamintro{(\app{f}{a})}{f}}{\AxiStream{A}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Streams -- congruence rules}
+
+Streams do have all the congruence rules we would expect, but they don't have any uniqueness rules.
+
+\vspace{1em}
+
+\begin{center}
+  $\infrule[Hd-Congr]{\compeq{s}{s'}{A}}{\compeq{\hd[s]}{\hd[s']}{A}}$
+
+  \vspace{2em}
+
+  $\infrule[Tl-Congr]{\compeq{s}{s'}{A}}{\compeq{\tl[s]}{\tl[s']}{\AxiStream{A}}}$
+
+  \vspace{2em}
+
+  $\infrule[Scons-Congr]{\compeq{a}{a'}{A} \quad \compeq{f}{f'}{\Fun{A}{A}}}{\compeq{\streamintro{a}{f}}{\streamintro{a'}{f'}}{\AxiStream{A}}}$
+\end{center}
+
+\vspace{1em}
+
+However, for now I have no idea how to formulate the rule of proof by coinduction, so let's omit it.
+
+\end{frame}
+
+\newcommand{\recordtypes}[4]{\recordtype{#1_{#3} : #2_{#3}}_{#3 \in #4}}
+\newcommand{\records}[4]{\record{#1_{#3} := #2_{#3}}_{#3 \in #4}}
+\newcommand{\proj}[2]{#2.#1}
+
+\newcommand{\recordtype}[1]{\{#1\}}
+\newcommand{\record}[1]{\{#1\}}
+
+\begin{frame}{Record types -- intro}
+
+The unfortunate reality of product types is that accessing components of nested pairs requires long sequences of left and right projections, which look ugly. To add insult to injury, product types are not strictly associative, so we need to keep track of parentheses in nested pairs.
+
+\vspace{1em}
+
+To free the programmer from these inconveniences, we add record types to the language. Records types are basically finite maps from field names to types, and records are finite maps from field names to values. The inference rules look somewhat ugly because they are rather generic, but everything works like you'd expect.
+
+\vspace{1em}
+
+The original product types could be represented using record types as $\recordtype{\texttt{outl} : A; \texttt{outr} : B}$. We also don't need the unit type anymore -- it gets replaced with the empty record type $\recordtype{}$.
+
+\end{frame}
+
+\begin{frame}{Record types}
+
+\begin{center}
+  $\infrule[Record-Intro]{\forall i \in I. \quad \typing{e_i}{A_i}}{\typing{\records{\ell}{e}{i}{I}}{\recordtypes{\ell}{A}{i}{I}}}$
+
+  \vspace{2em}
+
+  $\infrule[Record-Elim]{\typing{e}{\recordtypes{\ell}{A}{i}{I}} \quad \sidecond{j \in I}}{\typing{\proj{\ell_j}{e}}{A_j}}$
+
+  \vspace{2em}
+
+  $\infrule[Record-Comp]{\typing{\records{\ell}{e}{i}{I}}{\recordtypes{\ell}{A}{i}{I}} \quad \sidecond{j \in I}}{\compeq{\proj{\ell_j}{\records{\ell}{e}{i}{I}}}{e_j}{A_j}}$
+
+  \vspace{2em}
+
+  $\infrule[Record-Uniq]{\typing{r}{\recordtypes{\ell}{A}{i}{I}}}{\compeq{r}{\records{\ell}{\proj{\ell}{r}}{i}{I}}{\recordtypes{\ell}{A}{i}{I}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Record types -- congruence rules}
+
+\begin{center}
+  $\infrule[Record-Intro-Congr]{\forall i \in I. \quad \compeq{e_i}{e_i'}{A_i}}{\compeq{\records{\ell}{e}{i}{I}}{\records{\ell}{e'}{i}{I}}{\recordtypes{\ell}{A}{i}{I}}}$
+
+  \vspace{2em}
+
+  $\infrule[Record-Elim-Congr]{\compeq{e}{e'}{\recordtypes{\ell}{A}{i}{I}} \quad \sidecond{j \in I}}{\compeq{\proj{\ell_j}{e}}{\proj{\ell_j}{e'}}{A_j}}$
+\end{center}
+
+\end{frame}
+
+\newcommand{\varianttype}[1]{\left[#1\right]}
+\newcommand{\varianttypes}[4]{\varianttype{#1_{#3} : #2_{#3}}_{#3 \in #4}}
+\newcommand{\vcase}[2]{\texttt{vcase}\ #1\ \texttt{of}\ #2}
+
+\begin{frame}{Variant types -- intro}
+
+Variant improve upon sum types in the same way that records improve upon product types -- they can be thought of as named sum types. They are basically finite maps from constructor names to types, and terms of variant types are constructors applied to arguments.
+
+\vspace{1em}
+
+The original sum type can be recovered as $\varianttype{\texttt{inl} : A; \texttt{inr} : B}$ whereas the empty type can be represented as the empty variant type $\varianttype{}$.
+\end{frame}
+
+\begin{frame}{Variant types}
+
+\begin{center}
+  $\infrule[Variant-Intro]{\typing{e}{A_j} \quad \sidecond{j \in I}}{\typing{\app{c_j}{e}}{\varianttypes{c}{A}{i}{I}}}$
+
+  \vspace{2em}
+
+  $\infrule[Variant-Elim]{\typing{e}{\varianttypes{c}{A}{i}{I}} \quad \typing{r}{\recordtype{c_i : \Fun{A_i}{B}}_{i \in I}}}{\typing{\vcase{e}{r}}{B}}$
+
+  \vspace{2em}
+
+  $\infrule[Variant-Comp]{\typing{e}{A_j} \quad \typing{r}{\recordtype{c_i : \Fun{A_i}{B}}_{i \in I}} \quad \sidecond{j \in I}}{\compeq{\vcase{(\app{c_j}{e})}{r}}{\app{\proj{c_j}{r}}{e}}{B}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Variant types -- congruence rules}
+
+\begin{center}
+  $\infrule[Variant-Intro-Congr]{\compeq{e}{e'}{A_j} \quad \sidecond{j \in I}}{\compeq{\app{c_j}{e}}{\app{c_j}{e'}}{\varianttypes{c}{A}{i}{I}}}$
+
+  \vspace{2em}
+
+  $\infrule[Variant-Elim-Congr]{\compeq{e}{e'}{\varianttypes{c}{A}{i}{I}} \quad \compeq{r}{r'}{\recordtype{c_i : \Fun{A_i}{B}}_{i \in I}}}{\compeq{\vcase{e}{r}}{\vcase{e'}{r'}}{B}}$
+\end{center}
+
+\end{frame}
+
+\section{Summary}
+
+\begin{frame}{Metatheory}
+
+If I didn't screw anything up, the presented system enjoys nice metatheoretical properties:
+\begin{itemize}
+  \item Decidability -- all judgements are decidable, i.e. we can implement a typechecker, an interpreter/compiler, and we can check whether a given proof is correct.
+  \item Type preservation -- computing with a well-typed program does not change its type.
+  \item Termination -- well-typed programs terminate.
+  \item Confluence -- the final result of computation is unique.
+  \item Canonicity -- the final results of computation of a given type correspond to the introduction rules for that type.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Exercises}
+
+Just seeing a system like this won't be enough to convince anybody that it makes sense. Therefore, doing some exercises would be advised:
+
+\begin{itemize}
+  \item Assume that $A$ and $B$ are arbitrary types. Define functions $\texttt{swap} : \Fun{\Prod{A}{B}}{\Prod{B}{A}}$ and $\texttt{sweep} : \Fun{\Sum{A}{B}}{\Sum{B}{A}}$ and prove that they are involutive. Are they computationally involutive, i.e. involutive up to computational equality? Repeat the exercise using record and variant types.
+  \item Can you prove that every term of a product type is a pair?
+  \item Can you prove that every term of a sum type is either $\inl{a}$ or $\inr{b}$ for some $a$ and $b$?
+  \item Define addition of natural numbers and prove that it is associative and commutative.
+  \item Write an interesting program and prove an interesting theorem about it.
+\end{itemize}
+
+\end{frame}
+
+\NewDocumentCommand{\delete}{o}{\texttt{delete} \optionalspace{#1}}
+\NewDocumentCommand{\create}{o}{\texttt{create} \optionalspace{#1}}
+\NewDocumentCommand{\id}{o}{\texttt{id} \optionalspace{#1}}
+\NewDocumentCommand{\comp}{o o}{\texttt{comp} \optionalspace{#1} \optionalspace{#2}}
+\NewDocumentCommand{\swop}{o}{\texttt{swop} \optionalspace{#1}}
+\NewDocumentCommand{\notb}{o}{\texttt{notb} \optionalspace{#1}}
+\NewDocumentCommand{\andb}{o o}{\texttt{andb} \optionalspace{#1} \optionalspace{#2}}
+\NewDocumentCommand{\add}{o o}{\texttt{add} \optionalspace{#1} \optionalspace{#2}}
+\NewDocumentCommand{\length}{o}{\texttt{length} \optionalspace{#1}}
+\NewDocumentCommand{\replicate}{o o}{\texttt{replicate} \optionalspace{#1} \optionalspace{#2}}
+
+\begin{frame}{Example programs}
+
+Let's write some programs:
+
+\begin{itemize}
+  \item $\delete := \fun{x}{\unit}$
+  \item $\create := \fun{x}{\emptyelim{x}}$
+  \item $\id := \fun{x}{x}$
+  \item $\comp := \fun{f}{\fun{g}{\fun{x}{\app{g}{(\app{f}{x})}}}}$
+  \item $\swap := \fun{p}{\pair{\outr{p}}{\outl{p}}}$
+  \item $\swop := \fun{x}{\case{x}{\fun{a}{\inr{a}}}{\fun{b}{\inl{b}}}}$
+  \item $\notb := \fun{b}{\boolelim{b}{\bfalse}{\btrue}}$
+  \item $\andb := \fun{x}{\fun{y}{\boolelim{x}{y}{\bfalse}}}$
+  \item $\add := \fun{n}{\fun{m}{\natelim{m}{(\fun{r}{\succ[r]})}{n}}}$
+  \item $\length := \fun{l}{\listelim{\zero}{(\fun{h}{\fun{r}{\succ[r]}})}{l}}$
+  \item $\replicate := \fun{n}{\fun{x}{\natelim{\nil}{(\fun{r}{\cons{x}{r}})}{n}}}$
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Example typings}
+
+What are the types of our programs? Assume for a moment that $A, B, C$ are arbitrary types.
+
+\begin{itemize}
+  \item $\typing{\delete}{\Fun{A}{\Unit}}$
+  \item $\typing{\create}{\Fun{\Empty}{A}}$
+  \item $\typing{\id}{\Fun{A}{A}}$
+  \item $\typing{\comp}{\Fun{(\Fun{A}{B})}{\Fun{(\Fun{B}{C})}{(\Fun{A}{C})}}}$
+  \item $\typing{\swap}{\Fun{\Prod{A}{B}}{\Prod{B}{A}}}$
+  \item $\typing{\swop}{\Fun{\Sum{A}{B}}{\Sum{B}{A}}}$
+  \item $\typing{\notb}{\Fun{\Bool}{\Bool}}$
+  \item $\typing{\andb}{\Fun{\Bool}{\Fun{\Bool}{\Bool}}}$
+  \item $\typing{\add}{\Fun{\Nat}{\Fun{\Nat}{\Nat}}}$
+  \item $\typing{\length}{\Fun{\List{A}}{\Nat}}$
+  \item $\typing{\replicate}{\Fun{\Nat}{\Fun{A}{\List{A}}}}$
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Example computations}
+
+\begin{itemize}
+  \item $\compeq{\delete[a]}{\unit}{\Unit}$
+  \item $\compeq{\id[a]}{a}{A}$
+  \item $\compeq{\comp[f][\id]}{f}{\Fun{A}{B}}$
+  \item $\compeq{\comp[\id][g]}{g}{\Fun{B}{C}}$
+  \item $\compeq{\swap[(\swap[p])]}{p}{\Prod{A}{B}}$
+  \item $\compeq{\swop[(\swop[(\inl{a})])]}{\inl{a}}{A}$
+  \item $\compeq{\swop[(\swop[(\inr{b})])]}{\inr{b}}{B}$
+  \item $\compeq{\notb[(\andb[\btrue][\btrue])]}{\bfalse}{\Bool}$
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Example theorems}
+
+\begin{itemize}
+  \item $\holds{\All{x}[\Sum{A}{B}]{\Or{(\Ex{a}[A]{\Eq{x}{\inl{a}}})}{(\Ex{b}[B]{\Eq{x}{\inr{b}}})}}}$
+  \item $\holds{\All{b}[\Bool]{\Eq{\notb[(\notb[b])]}{b}}}$
+  \item $\holds{\All{a}[\Nat]{\All{b}[\Nat]{\All{c}[\Nat]{\Eq{\add[(\add[a][b])][c]}{\add[a][(\add[b][c])]}}}}}$
+  \item $\holds{\All{n}[\Nat]{\All{a}[A]{\Eq{\length[(\replicate[n][a])]}{n}}}}$
+\end{itemize}
+
+\end{frame}
+
+\section{Additional features}
+
+\begin{frame}{Additional features -- intro}
+
+What other features might we add to our language? Let's find out.
+
+\end{frame}
+
+\begin{frame}{Type annotations}
+
+A practical programming language certainly needs a way for the programmer to put some helpful type annotations here and there. The rules are simple -- an annotated term has the stated type, provided that we can check it does. As for computation, the type annotation simply gets erased. There's also a congruence rule.
+
+\vspace{1em}
+
+\begin{center}
+  $\infrule[Annot]{\typing{e}{A}}{\typing{\annot{e}{A}}{A}}$
+
+  \vspace{1em}
+
+  $\infrule[Comp-Annot]{\typing{e}{A}}{\compeq{\annot{e}{A}}{e}{A}}$
+
+  \vspace{1em}
+
+  $\infrule[Annot-Congr]{\compeq{e}{e'}{A}}{\compeq{\annot{e}{A}}{\annot{e'}{A}}{A}}$
+\end{center}
+
+\end{frame}
+
+\newcommand{\letin}[3]{\texttt{let}\ #1 = #2\ \texttt{in}\ #3}
+
+\begin{frame}{Let bindings}
+
+Let-bindings are a useful programming language feature, so we could add them. Note that we have some choice there: we could make it a primitive construct, governed by the below rules, or we could simply make $\letin{x}{e_1}{e_2}$ an abbreviation for $\app{(\fun{x}{e_2})}{e_1}$
+
+\vspace{1em}
+
+\begin{center}
+  $\infrule[Let]{\typing{e_1}{A} \quad \typing[\extend{\Gamma}{x}{A}]{e_2}{B}}{\typing{\letin{x}{e_1}{e_2}}{B}}$
+
+  \vspace{2em}
+
+  $\infrule[Let-Comp]{\typing{\letin{x}{e_1}{e_2}}{A}}{\compeq{\letin{x}{e_1}{e_2}}{\subst{e_2}{x}{e_1}}{A}}$
+
+  \vspace{2em}
+
+  $\infrule[Let-Congr]{\compeq{e_1}{e_1'}{A} \quad \compeq{e_2}{e_2'}{B}}{\compeq{\letin{x}{e_1}{e_2}}{\letin{x}{e_1'}{e_2'}}{B}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Definitions in context -- valid context judgement}
+
+We can change the definition of typing contexts to allow putting definitions in them. This can be handy for expressing let bindings and also makes fully formal derivations much shorter. However, it also requires adding a new judgement, the well-formed context judgement, because we want to allow adding only well-typed definitions to the context. We must also remember to include these definitions in computational equality.
+
+\vspace{1em}
+
+$\Gamma ::= \emptytypingctx \pipe \extend{\Gamma}{x}{A} \pipe \extend{\Gamma}{x}{A}[e]$
+
+\vspace{1em}
+
+\begin{center}
+  $\infrule[Ctx-Empty]{}{\ctx{\emptytypingctx}}$ \quad
+  $\infrule[Ctx-Extend]{\ctx{\Gamma} \quad \sidecond{x \notin \Gamma}}{\ctx{\extend{\Gamma}{x}{A}}}$
+
+  \vspace{2em}
+
+  $\infrule[Ctx-Def]{\ctx{\Gamma} \quad \typing{e}{A} \quad \sidecond{x \notin \Gamma}}{\ctx{\extend{\Gamma}{x}{A}[e]}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Definitions in context -- using variables}
+
+We now need two rules for typing variables: one for when the variable is defined and one for when it is not. Moreover, we also need a computation rule which says that variables are computationally equal to the body of their definition.
+
+\vspace{2em}
+
+\begin{center}
+
+  $\infrule[Var-Ext]{\ctx{\Gamma} \quad \sidecond{(x : A) \in \Gamma}}{\typing{x}{A}}$ \quad
+  $\infrule[Var-Def]{\ctx{\Gamma} \quad \sidecond{(x : A := e) \in \Gamma}}{\typing{x}{A}}$
+
+  \vspace{2em}
+
+  $\infrule[Comp-Var]{\ctx{\Gamma} \quad \sidecond{(x : A := e) \in \Gamma}}{\compeq{x}{e}{A}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Definitions in context -- computation rules}
+
+The computation rule for function can (but need not!) look very different when we can put definitions into contexts. This time, instead of substituting $a$ for $x$ in $b$, we simply extend the context with the definition $x : A := a$ and then proceed with the computation. The rule for $\texttt{let}$ also gets simpler (and this time we should prefer this rule, because it makes so much more sense).
+
+\vspace{2em}
+
+\begin{center}
+  $\infrule[App-Lam-Def]{\compeq[\extend{\Gamma}{x}{A}[a]]{b}{b'}{B}}{\compeq{\app{(\fun{x}{b})}{a}}{b'}{B}}$
+
+  \vspace{2em}
+
+  $\infrule[Let-Comp-Def]{\compeq[\extend{\Gamma}{x}{A}[e_1]]{e_2}{e_2'}{B}}{\compeq{\letin{x}{e_1}{e_2}}{e_2'}{B}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Refinement types and quotient types -- setup}
+
+For a moment, let's say that types can depend on propositions. This means that we have a well-formed type judgement which depends on the typing context. We need to modify the valid context judgement to take this into account.
+
+\vspace{2em}
+
+\begin{center}
+  $\infrule[Ctx-Extend]{\ctx{\Gamma} \quad \sidecond{x \notin \Gamma} \quad \type{A}}{\ctx{\extend{\Gamma}{x}{A}}}$
+\end{center}
+
+\vspace{2em}
+
+With such a setup, $\ctx{\Gamma}$ is a sanity condition for $\type{A}$, whereas $\type{A}$ is a sanity condition for $\typing{x}{A}$.
+
+\end{frame}
+
+\newcommand{\refinement}[3]{\{#1 : #2\ |\ #3\}}
+\newcommand{\refine}[1]{\texttt{refine}\ #1}
+\newcommand{\unrefine}[1]{\texttt{unrefine}\ #1}
+
+\begin{frame}{Refinement types -- intro}
+
+A refinement type can be thought of a subset of the base type for which some proposition holds. They can be used to express types like ``the type of all natural numbers greater than 42'', which can be quite useful. They can also be thought of as a way for the programming layer of the language to access the logic layer.
+
+\end{frame}
+
+\begin{frame}{Refinement types}
+
+\begin{center}
+  $\infrule[Refinement-Form]{\type{A} \quad \prop[\extend{\Gamma}{x}{A}]{P}}{\type{\refinement{x}{A}{P}}}$
+
+  \vspace{1em}
+
+  $\infrule[Refinement-Intro]{\typing[\Gamma \pipe \Delta]{e}{A} \quad \holds{\subst{P}{x}{e}}}{\typing[\Gamma \pipe \Delta]{\refine{e}}{\refinement{x}{A}{P}}}$
+
+  \vspace{1em}
+
+  $\infrule[Refinement-Elim]{\typing[\Gamma \pipe \Delta]{e}{\refinement{x}{A}{P}}}{\typing[\Gamma \pipe \Delta]{\unrefine{e}}{A}}$
+
+  \vspace{1em}
+
+  $\infrule[Refinement-Comp]{\typing[\Gamma \pipe \Delta]{e}{A} \quad \holds{P}}{\compeq{\unrefine{(\refine{e})}}{e}{A}}$
+
+  \vspace{1em}
+
+  $\infrule[Refinement-Uniq]{\typing[\Gamma \pipe \Delta]{e}{\refinement{x}{A}{P}}}{\compeq{e}{\refine{(\unrefine{e})}}{\refinement{x}{A}{P}}}$
+
+  \vspace{1em}
+
+  $\infrule[Refinement-Ind]{\holds[\extend{\Gamma}{e}{A}][\Delta]{\subst{P}{x}{\refine{e}}}}{\holds{\All{x}[\refinement{y}{A}{P}]{P}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Refinement types -- comments}
+
+Let's try to read the above rules:
+\begin{itemize}
+  \item $\refinement{x}{A}{P}$ is a type if $A$ is a well-formed type and $P$ is a well-formed proposition.
+  \item $\refine{e}$ is a term of this type if $e$ is of type $A$ and the proposition $P$ holds for $e$.
+  \item We can project a value of the base from the refinement type.
+  \item Computation and uniqueness rules state the $\texttt{refine}$ and $\texttt{unrefine}$ are inverses of each other.
+  \item The last rule assures us that we can prove properties of refined terms by considering only the $\texttt{refine}$ case.
+\end{itemize}
+
+\end{frame}
+
+\newcommand{\quotient}[2]{#1\ \texttt{\textbackslash\textbackslash}\ #2}
+\newcommand{\quotientintro}[1]{\texttt{qin}\ #1}
+\newcommand{\quotientelim}[2]{\texttt{qout}\ #1\ #2}
+
+\begin{frame}{Quotient types (TODO)}
+
+Athena enjoyers can think of quotient types as akin to Athena's structures, except that the underlying type needs not be an algebraic type (which we don't yet have anyway).
+
+\begin{center}
+  $\infrule[Quotient-Form]{\type{A} \quad \prop[\extend{\extend{\Gamma}{x}{A}}{y}{A}]{R} \quad \mathcolor{red}{\texttt{Equivalence}\ R}}{\type{\quotient{A}{R}}}$
+
+  \vspace{1em}
+
+  $\infrule[Quotient-Intro]{\typing[\Gamma \pipe \Delta]{e}{A} \quad \prop[\extend{\extend{\Gamma}{x}{A}}{y}{A}]{R} \quad \mathcolor{red}{\texttt{Equivalence}\ R}}{\typing[\Gamma \pipe \Delta]{\quotientintro{e}}{\quotient{A}{R}}}$
+
+  \vspace{1em}
+
+  $\infrule[Quotient-Elim]{\typing[\Gamma \pipe \Delta]{e}{\quotient{A}{R}} \quad \typing[\Gamma \pipe \Delta]{f}{\Fun{A}{B}} \quad \mathcolor{red}{f\ \texttt{preserves}\ R}}{\typing[\Gamma \pipe \Delta]{\quotientelim{f}{e}}{B}}$
+
+  \vspace{1em}
+
+  $\infrule[Quotient-Comp]{\typing[\Gamma \pipe \Delta]{e}{A} \quad \typing[\Gamma \pipe \Delta]{f}{\Fun{A}{B}} \quad \mathcolor{red}{f\ \texttt{preserves}\ R}}{\compeq{\quotientelim{f}{(\quotientintro{e})}}{\app{f}{e}}{B}}$
+\end{center}
+
+Where ``preserves'' is $\holds{\All{x}[A]{\All{y}[A]{\Impl{\app{\app{R}{x}}{y}}{\Eq[B]{\app{f}{x}}{\app{f}{y}}}}}}$
+\end{frame}
+
+\begin{frame}{Additional feature proposals}
+
+\begin{itemize}
+  \item Subtyping -- some types are now in a subtyping relation $\subtyping{A}{B}$ and an $a : A$ can be used in every place where a term of type $B$ is expected.
+  \item Parametric polymorphism -- a new type former $\forall \alpha. A$. It can be either explicit (need to manage the type arguments manually) or implicit (type arguments are inferred). The implicit approach is the most common, but it's also harder to implement.
+  \item Algebraic data types -- adding them in a clean manner is a bit complicated, because we either need to deal with general recursion or manage a plethora of checks, like coverage and termination.
+  \item Module system -- this will be a bit harder to model, but we could borrow it from ML and OCaml.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Additional features -- alternative presentations}
+
+\begin{itemize}
+  \item The system could be presented using a reduction relation which would cover the ``directed'' part of computational equality.
+  \item The type system could be presented in a more algorithmic way, which is more amenable to being treated as a reference implementation.
+  \item Is an explicit definition of substitution needed, or nobody cares?
+\end{itemize}
+
+\end{frame}
+
+\end{document}

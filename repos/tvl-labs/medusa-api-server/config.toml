@@ -1,0 +1,17 @@
+solver_whitelist = ["0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"]
+mode = "dev"
+contracts_path = "contracts/arcadia-core-contracts"
+key = "0x"
+intent_book_address = "0x5eAEA387095380BA3B0635e67c8E03D5C416aA7e"
+m_token_manager_address = "0x9B03e72dD8Fa5C268b83EBB1C17721012533DDDB"
+receipt_manager_address = "0x493794550E4917650B873c67234b541b80CE6730"
+arcadia_url = "http://127.0.0.1:8000"
+medusa_rpc_url = "127.0.0.1:8001"
+medusa_ws_url = "127.0.0.1:8002"
+apm_url = "127.0.0.1:8100"
+db_path = "free-space/db"
+gas_price = 1
+
+[m_tokens]
+ERC20 = "0x0000000000000000000000000000000000000000"
+ERC721 = "0x0000000000000000000000000000000000000000"

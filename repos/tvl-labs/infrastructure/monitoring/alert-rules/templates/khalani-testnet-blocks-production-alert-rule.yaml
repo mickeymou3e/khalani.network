@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ include "alert-rules.fullname" . }}-khalani-testnet-blocks-production
+  namespace: monitoring
+  labels:
+    rules: "true"
+spec:
+  groups:
+    - name: KhalaniTestnetBlocksProduction
+      rules:
+        - alert: FewBlocksProducedByKhalaniTestnet
+          expr: increase(axon_consensus_height[{{ .Values.rules.khalaniTestnetBlocksProduction.forPeriod }}]) < {{ .Values.rules.khalaniTestnetBlocksProduction.threshold }}
+          for: {{ .Values.rules.relayerBalance.forPeriod }}
+          labels:
+            severity: critical
+          annotations:
+            summary: "Few blocks are produced by Khalani Testnet"
+            description: "Khalani Testnet https://testnet.khalani.network has produced only {{"{{"}} $value {{"}}"}} blocks during the last {{ .Values.rules.khalaniTestnetBlocksProduction.forPeriod }}, expected at least {{ .Values.rules.khalaniTestnetBlocksProduction.threshold }}"

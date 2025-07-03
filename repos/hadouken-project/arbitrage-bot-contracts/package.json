@@ -1,0 +1,50 @@
+{
+  "name": "arbitrage-bot-contracts",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "https://github.com/hadouken-project/arbitrage-bot-contracts.git",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "lint:sol": "npx solhint 'contracts/**/*.sol'",
+    "deploy:testnet": "hardhat --network godwokenTestnet deploy",
+    "deploy:mainnet": "hardhat --network godwoken deploy",
+    "script:mainnet": "hardhat run --network godwoken scripts/test.ts",
+    "script:testnet": "hardhat run --network godwokenTestnet scripts/test.ts",
+    "test": "hardhat test"
+  },
+  "devDependencies": {
+    "@ethersproject/abi": "^5.7.0",
+    "@ethersproject/providers": "^5.7.2",
+    "@nomicfoundation/hardhat-chai-matchers": "^1.0.5",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.7",
+    "@nomicfoundation/hardhat-toolbox": "^2.0.1",
+    "@nomiclabs/hardhat-ethers": "^2.2.2",
+    "@nomiclabs/hardhat-etherscan": "^3.1.5",
+    "@typechain/ethers-v5": "^10.2.0",
+    "@typechain/hardhat": "^6.1.5",
+    "@types/chai": "^4.2.0",
+    "@types/mocha": ">=9.1.0",
+    "@types/node": ">=12.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.54.1",
+    "@typescript-eslint/parser": "^5.54.1",
+    "chai": "^4.3.7",
+    "eslint": "^8.35.0",
+    "eslint-config-prettier": "^8.7.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "ethers": "^5.7.2",
+    "hardhat": "^2.12.6",
+    "hardhat-deploy": "^0.11.22",
+    "hardhat-gas-reporter": "^1.0.9",
+    "prettier": "^2.8.4",
+    "solidity-coverage": "^0.8.2",
+    "ts-node": ">=8.0.0",
+    "typechain": "^8.1.1",
+    "typescript": ">=4.5.0"
+  },
+  "dependencies": {
+    "@hadouken-project/sdk": "^0.0.10",
+    "@openzeppelin/contracts": "^4.8.2",
+    "solidity-bytes-utils": "^0.8.0"
+  }
+}

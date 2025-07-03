@@ -1,0 +1,20 @@
+{
+    "chain": "0x1389",
+    "appName": "Mantle testnet",
+    "contractsEnv": "testnet",
+    "contracts": {
+        "liquidator": null,
+        "diaOracle": null,
+        "bandOracle": null,
+        "treasury": "0xdFA534a1c165cA0E255B312d3883ca25c46015EB",
+        "protocolFeeCollector": "0x838C43768564332dE95f7233d25D1BB92129683c"
+    },
+    "subgraph": {
+        "httpUri": "https://graph-dev-http-hadouken-dev.hadouken.finance/subgraphs/name/lending-mantle-testnet",
+        "webSocketUri": "wss://graph-dev-ws-hadouken-dev.hadouken.finance/subgraphs/name/lending-mantle-testnet"
+    },
+    "nativeToken": {
+        "address": "0xdeaddeaddeaddeaddeaddeaddeaddeaddead0000",
+        "symbol": "MNT"
+    }
+}

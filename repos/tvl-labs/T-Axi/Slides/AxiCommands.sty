@@ -1,0 +1,219 @@
+\ProvidesPackage{AxiCommands}
+
+\usepackage{xparse}
+
+% Pipes - used when specifying grammars in BNF format.
+\newcommand{\pipe}{\ |\ }
+
+% Programming language.
+
+% Types.
+\newcommand{\Fun}[2]{#1 \to #2}
+\newcommand{\Prod}[2]{#1 \times #2}
+\newcommand{\Sum}[2]{#1 + #2}
+\newcommand{\Unit}{\textbf{1}}
+\newcommand{\Empty}{\textbf{0}}
+\newcommand{\ForallT}[2]{\forall #1.\, #2}
+
+% Base types.
+\newcommand{\Int}{\texttt{Int}}
+\newcommand{\String}{\texttt{String}}
+
+% Commands for coloring differences in term syntax between calculi.
+\newcommand{\newterm}[1]{\mathcolor{green}{#1}}
+\newcommand{\termdiff}[1]{\mathcolor{red}{#1}}
+
+% An optional type annotation.
+\newcommand{\optionalannot}[1]{\IfValueTF{#1}{: #1}{}}
+\newcommand{\optionalspace}[1]{\IfValueTF{#1}{\ #1}{}}
+
+% Terms.
+\newcommand{\annot}[2]{(#1 : #2)}
+\NewDocumentCommand{\fun}{m o m}{\lambda #1 \optionalannot{#2} .\, #3}
+\NewDocumentCommand{\app}{o m m}{\IfValueTF{#1}{\texttt{app}_{#1}\ #2\ #3}{#2\ #3}}
+\newcommand{\pair}[2]{(#1, #2)}
+\newcommand{\outl}[2][]{\texttt{outl}_{#1}\ #2}
+\newcommand{\outr}[2][]{\texttt{outr}_{#1}\ #2}
+\newcommand{\inl}[2][]{\texttt{inl}_{#1}\ #2}
+\newcommand{\inr}[2][]{\texttt{inr}_{#1}\ #2}
+\newcommand{\case}[3]{\texttt{case}\ #1\ \texttt{of}\ (#2, #3)}
+\newcommand{\unit}{\texttt{unit}}
+\newcommand{\emptyelim}[2][]{\Empty\texttt{-elim}_{#1}\ #2}
+
+% Annotated terms.
+\newcommand{\caseannot}[5]{\texttt{case}_{#1, #2}\ #3\ \texttt{of}\ (#4, #5)}
+
+% Unapplied terms.
+\newcommand{\pairfun}{\texttt{pair}}
+\newcommand{\outlfun}{\texttt{outl}}
+\newcommand{\outrfun}{\texttt{outr}}
+\newcommand{\inlfun}{\texttt{inl}}
+\newcommand{\inrfun}{\texttt{inr}}
+\newcommand{\casefun}{\texttt{case}}
+\newcommand{\emptyelimfun}{\Empty\texttt{-elim}}
+
+% Polymorphic terms.
+\newcommand{\tfun}[2]{\Lambda #1.\, #2}
+\newcommand{\tapp}[2]{#1\ \texttt{@}#2}
+
+% Some defined functions.
+\NewDocumentCommand{\swap}{o}{\texttt{swap} \optionalspace{#1}}
+
+% Computation.
+\newcommand{\subst}[3]{#1\left[#2 := #3\right]}
+\newcommand{\val}[1]{#1\ \texttt{value}}
+\newcommand{\smallstep}[2]{#1 \longrightarrow #2}
+\newcommand{\smallsteps}[2]{#1 \longrightarrow^* #2}
+\newcommand{\bigstep}[2]{#1 \Downarrow #2}
+\newcommand{\whnf}[1]{#1\ \texttt{whnf}}
+\newcommand{\smallstepwhnf}[2]{#1 \longrightarrow_{\texttt{whnf}} #2}
+
+% Hints.
+\newcommand{\Hole}{\textbf{?}}
+\newcommand{\hintlub}[2]{#1 \sqcup #2}
+\newcommand{\hintglb}[2]{#1 \sqcap #2}
+\newcommand{\hintdiff}[2]{#1 \setminus #2}
+\newcommand{\hintorder}[2]{#1 \sqsubseteq #2}
+\newcommand{\stricthintorder}[2]{#1 \sqsubset #2}
+\newcommand{\triplehintorder}[3]{#1 \sqsubseteq #2 \sqsubseteq #3}
+\newcommand{\hintfor}[1]{\texttt{hint}(#1)}
+\newcommand{\termorder}[2]{#1 \sqsubseteq #2}
+\newcommand{\stricttermorder}[2]{#1 \sqsubset #2}
+\newcommand{\tripletermorder}[3]{#1 \sqsubseteq #2 \sqsubseteq #3}
+\newcommand{\ctxorder}[2]{#1 \sqsubseteq #2}
+\newcommand{\triplectxorder}[3]{#1 \sqsubseteq #2 \sqsubseteq #3}
+
+% Subtyping.
+\newcommand{\Top}{\top}
+\newcommand{\Bot}{\bot}
+
+\newcommand{\subtyping}[2]{#1 <: #2}
+\newcommand{\subtypinglub}[2]{#1 \sqcup #2}
+\newcommand{\subtypingglb}[2]{#1 \sqcap #2}
+
+% Contexts.
+
+% Typing contexts.
+\newcommand{\emptytypingctx}{\cdot}
+\NewDocumentCommand{\extend}{m m m o}{#1, #2 : #3 \IfValueTF{#4}{:= #4}{}}
+\newcommand{\extendtype}[2]{#1, #2}
+
+% Logic.
+
+% Propositions.
+
+% Propositional logic.
+\newcommand{\True}{\top}
+\newcommand{\False}{\bot}
+\newcommand{\Not}[1]{\neg #1}
+\newcommand{\Or}[2]{#1 \lor #2}
+\renewcommand{\And}[2]{#1 \land #2}
+\newcommand{\Impl}[2]{#1 \Rightarrow #2}
+\newcommand{\Iff}[2]{#1 \Leftrightarrow #2}
+
+% Quantifiers.
+\NewDocumentCommand{\All}{m o m}{\forall #1 \optionalannot{#2} .\, #3}
+\NewDocumentCommand{\Ex}{m o m}{\exists #1 \optionalannot{#2} .\, #3}
+
+% Equality.
+\newcommand{\Eq}[3][]{#2 =_{#1} #3}
+
+% Proofterms.
+
+% Propositional logic.
+\newcommand{\implintro}[2]{\textbf{assume}\ #1\ \textbf{in}\ #2}
+\newcommand{\implelim}[2]{\textbf{modus-ponens}\ #1\ #2}
+\newcommand{\trueintro}{\textbf{true}}
+\newcommand{\falseelim}[1]{\textbf{exfalso}\ #1}
+\newcommand{\notintro}[2]{\textbf{suppose-absurd}\ #1\ \textbf{in}\ #2}
+\newcommand{\notelim}[2]{\textbf{absurd}\ #1\ #2}
+\newcommand{\andintro}[2]{\textbf{both}\ #1\ #2}
+\newcommand{\andeliml}[1]{\textbf{left-and}\ #1}
+\newcommand{\andelimr}[1]{\textbf{right-and}\ #1}
+\NewDocumentCommand{\orintrol}{o m}{\textbf{left-either} \optionalspace{#1}\ #2}
+\NewDocumentCommand{\orintror}{o m}{\textbf{right-either} \optionalspace{#1}\ #2}
+\newcommand{\orelim}[3]{\textbf{constructive-dilemma}\ #1\ #2\ #3}
+\newcommand{\iffintro}[2]{\textbf{equivalence}\ #1\ #2}
+\newcommand{\iffeliml}[1]{\textbf{left-iff}\ #1}
+\newcommand{\iffelimr}[1]{\textbf{right-iff}\ #1}
+\newcommand{\cut}[2]{#1; #2}
+\newcommand{\proofannot}[2]{\textbf{have}\ #1\ \textbf{from}\ #2}
+
+% Classical logic.
+\newcommand{\bycontradiction}[2]{\textbf{by-contradiction}\ #1\ \textbf{in}\ #2}
+\NewDocumentCommand{\dn}{o}{\textbf{double-negation} \optionalspace{#1}}
+
+% Quantifiers.
+\NewDocumentCommand{\allintro}{m o m}{\textbf{pick-any}\ #1 \optionalannot{#2}\ \textbf{in}\ #3}
+\newcommand{\allelim}[2]{\textbf{specialize}\ #1\ \textbf{with}\ #2}
+\NewDocumentCommand{\exintro}{m o m}{\textbf{exists}\ #1 \optionalannot{#2}\ \textbf{such that}\ #3}
+\newcommand{\exelim}[3]{\textbf{pick-witness}\ #1\ \textbf{for}\ #2\ \textbf{in}\ #3}
+
+% Equality.
+\NewDocumentCommand{\refl}{o}{\textbf{refl} \optionalspace{#1}}
+\newcommand{\rewrite}[2]{\textbf{rewrite}\ #1\ \textbf{in}\ #2}
+\newcommand{\funext}[1]{\textbf{funext}\ #1}
+\newcommand{\funextalt}[2]{\textbf{funext}\ #1\ \textbf{in}\ #2}
+
+% Induction.
+\newcommand{\sumind}[5]{\textbf{case}\ #1\ \textbf{of}\ (\inl{#2} \rightarrow #3, \inr{#4} \rightarrow #5)}
+
+% Contexts.
+
+% Assumption contexts.
+\newcommand{\emptyassctx}{\cdot}
+\newcommand{\assume}[2]{#1, #2}
+
+% Judgements.
+
+% Declarative typing.
+\NewDocumentCommand{\typing}{O{\Gamma} m m}{#1 \vdash #2 : #3}
+
+% Type checking (blue arrow pointing left).
+\RenewDocumentCommand{\check}{O{\Gamma} m m}{#1 \vdash #2 \mathcolor{blue}{\Leftarrow} #3}
+
+% Type inference (red arrow pointing right).
+\NewDocumentCommand{\infer}{O{\Gamma} m m}{#1 \vdash #2 \mathcolor{red}{\Rightarrow} #3}
+
+% Hinting.
+\NewDocumentCommand{\hinting}{O{\Gamma} m m m}{#1 \vdash #2 \mathcolor{blue}{\Leftarrow} #3 \mathcolor{red}{\Rightarrow} #4}
+
+% Hinting with output context.
+\NewDocumentCommand{\outctx}{O{\Gamma} m m m O{\Gamma'}}{#1 \vdash #2 \mathcolor{blue}{\Leftarrow} #3 \mathcolor{red}{\Rightarrow} #4 \dashv #5}
+\newcommand{\shortoutctx}[3]{#1 \mathcolor{blue}{\Leftarrow} #2 \mathcolor{red}{\Rightarrow} #3}
+
+% Computational equality.
+\NewDocumentCommand{\compeq}{O{\Gamma} m m m}{#1 \vdash #2 \equiv #3 : #4}
+
+% Valid context.
+\newcommand{\ctx}[1]{#1\ \texttt{ctx}}
+
+% Valid type.
+\NewDocumentCommand{\type}{O{\Gamma} m}{#1 \vdash #2\ \texttt{type}}
+
+% Valid assumption context.
+\NewDocumentCommand{\assctx}{O{\Gamma} m}{#1\ \vdash #2\ \texttt{valid}}
+
+% Well-formed proposition.
+\NewDocumentCommand{\prop}{O{\Gamma} m}{#1 \vdash #2\ \texttt{prop}}
+
+% Proposition holds.
+\NewDocumentCommand{\holds}{O{\Gamma} O{\Delta} m}{#1 \pipe #2 \vdash #3}
+
+% Proof judgement.
+\NewDocumentCommand{\proves}{O{\Gamma} m m}{#1 \vdash #2 : #3}
+
+% Algorithmic proof judgements.
+
+% Proof checking.
+\NewDocumentCommand{\proofcheck}{O{\Gamma} m m}{#1 \vdash #2 \mathcolor{blue}{\Leftarrow} #3}
+
+% Proof inference.
+\NewDocumentCommand{\proofinfer}{O{\Gamma} m m}{#1 \vdash #2 \mathcolor{red}{\Rightarrow} #3}
+
+% Inference rules.
+\newcommand{\rulename}[1]{\textsc{\footnotesize{#1}}}
+\newcommand{\infrule}[3][]{\displaystyle \frac{#2}{#3} \rulename{#1}}
+
+% Side conditions - this command semantically marks side conditions in inference rules, but otherwise does nothing.
+\newcommand{\sidecond}[1]{#1}

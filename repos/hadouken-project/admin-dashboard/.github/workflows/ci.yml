@@ -1,0 +1,44 @@
+name: 'CI'
+
+on:
+  push:
+    branches-ignore:
+      - master
+
+env:
+  NODE_VERSION: 14.17.3
+
+jobs:
+  webapp_ci:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v2.3.1
+        with:
+          persist-credentials: false
+
+      - name: 'Use Node.js v${{ env.NODE_VERSION }}'
+        uses: actions/setup-node@master
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@hadouken-project'
+
+      - name: Cache NPM dependencies
+        uses: actions/cache@v1
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.OS }}-npm-cache-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-npm-cache-
+      - name: Install yarn dependencies
+        run: |
+          yarn config set //npm.pkg.github.com/download/:_authToken ${{ env.NODE_AUTH_TOKEN }}
+          yarn config set @hadouken-project:registry https://npm.pkg.github.com
+          yarn --frozen-lockfile
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Typecheck
+        run: yarn typecheck

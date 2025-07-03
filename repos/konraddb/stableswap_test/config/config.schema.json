@@ -1,0 +1,98 @@
+{
+  "hadouken": {
+    "lending": {
+      "url": ""
+    },
+    "bridge": {
+      "url": ""
+    }
+  },
+  "godwoken": {
+    "chainName": "",
+    "chainId": "",
+    "type": "",
+    "nativeCurrency": {
+      "name": "",
+      "symbol": "",
+      "decimals": 0
+    },
+    "rpcUrl": "",
+    "wsUrl": "",
+    "explorerUrl": ""
+  },
+  "nervos": {
+    "env": "",
+    "ckb": {
+      "url": ""
+    },
+    "indexer": {
+      "url": ""
+    },
+    "rollup_type_hash": "",
+    "rollup_type_script": {
+      "code_hash": "",
+      "hash_type": "",
+      "args": ""
+    },
+    "eth_account_lock_hash": "",
+    "deposit_lock_script_type_hash": "",
+    "portal_wallet_lock_hash": "",
+    "rc_lock_script_type_hash": ""
+  },
+  "subgraph": {
+    "httpUri": {
+      "balancer": "",
+      "tokens": ""
+    },
+    "webSocketUri": {
+      "balancer": "",
+      "tokens": ""
+    }
+  },
+  "subgraphs": {
+    "balancer": {
+      "httpUri": "",
+      "webSocketUri": ""
+    },
+    "blocks": {
+      "httpUri": "",
+      "webSocketUri": ""
+    }
+  },
+  "explorerUrl": {
+    "ckb": "",
+    "godwoken": "",
+    "ethereum": ""
+  },
+  "contracts": {
+    "Vault": "",
+    "AddressBalances": "",
+    "PoolsHelpers": "",
+    "Oracle": "",
+    "CrossChainRouter": {},
+    "USDT": "",
+    "USDC": "",
+    "DAI": "",
+    "ETH": "",
+    "WBTC": "",
+    "CKB": "",
+    "BNB": "",
+    "TRICRYPTO": "",
+    "WBTCUSDT": "",
+    "BNBUSDC": "",
+    "TWOPOOL": "",
+    "USDCCKB": "",
+    "TWOPOOLDAI": "",
+    "CKBETHUSDC": "",
+    "ETHUSDC": "",
+    "hUSDC": "",
+    "hUSDT": "",
+    "hb-a-USDC": "",
+    "hb-a-USDT": ""
+  },
+  "api": {
+    "dia": {
+      "priceUrl": ""
+    }
+  }
+}

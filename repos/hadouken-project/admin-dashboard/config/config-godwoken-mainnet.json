@@ -1,0 +1,20 @@
+{
+  "chain": "0x116ea",
+  "appName": "Godwoken mainnet",
+  "contractsEnv": "mainnet",
+  "contracts": {
+    "liquidator": "0x2661a4786ea12b7edfd3f5c08ff617702360a993",
+    "diaOracle": "0xB0d0fc380a13f0179974C447f36D10Bd00560805",
+    "bandOracle": "0x686960658611c18cE9C35012DE035ebC9A51473D",
+    "treasury": "0x3C98274AFf14eE0DEb7D230da173b1Bcfc14Fd48",
+    "protocolFeeCollector": "0x2D96EABdE22B70aD036eDeB193997de46B0B40ba"
+  },
+  "subgraph": {
+    "httpUri": "https://graph-prod-http-hadouken-prod.hadouken.finance/subgraphs/name/lending-godwoken-mainnet",
+    "webSocketUri": "wss://graph-prod-ws-hadouken-prod.hadouken.finance/subgraphs/name/lending-godwoken-mainnet"
+  },
+  "nativeToken": {
+    "address": "0x7538C85caE4E4673253fFd2568c1F1b48A71558a",
+    "symbol": "CKB"
+  }
+}

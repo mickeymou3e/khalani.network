@@ -1,0 +1,19 @@
+{
+  "transaction": {
+    "hash": "0x7114e4bddbe2e1d20d2480b44d2c5b47ef5cf71af730fc1e25f7d561fecc4418",
+    "blockNumber": 636514
+  },
+  "data": {
+    "TestToken": {
+      "deploy": {
+        "input": {
+          "name": "pCKB",
+          "symbol": "pCKB",
+          "decimals": 18
+        },
+        "output": "0x0eb76790a2014Dd1F65488Ccd703bCDF75F8195e"
+      }
+    }
+  },
+  "timestamp": 1666951166241
+}

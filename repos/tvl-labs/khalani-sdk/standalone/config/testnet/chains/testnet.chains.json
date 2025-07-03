@@ -1,0 +1,128 @@
+[
+  {
+    "id": 11155111,
+    "chainName": "Ethereum Sepolia",
+    "chainId": "0xaa36a7",
+    "nativeCurrency": {
+      "name": "ETH",
+      "symbol": "ETH",
+      "decimals": 18
+    },
+    "blockExplorerUrls": ["https://sepolia.etherscan.io"],
+    "rpcUrls": [
+      "https://eth-sepolia.g.alchemy.com/v2/Cha-uur1WLWVs-6rRtzCuxRtVFeR1LPT",
+      "https://ethereum-sepolia-rpc.publicnode.com"
+    ],
+    "logo": "https://icons.llamao.fi/icons/chains/rsz_ethereum.jpg",
+    "borderColor": "#808080",
+    "poolTokenSymbols": [
+      "USDT.sepolia",
+      "USDC.sepolia",
+      "DAI.sepolia",
+      "ETH.sepolia"
+    ],
+    "isBalancerChain": false
+  },
+  {
+    "id": 11155420,
+    "chainName": "Optimism Sepolia",
+    "chainId": "0xaa37dc",
+    "nativeCurrency": {
+      "name": "ETH",
+      "symbol": "ETH",
+      "decimals": 18
+    },
+    "blockExplorerUrls": ["https://sepolia-optimism.etherscan.io/"],
+    "rpcUrls": [
+      "https://opt-sepolia.g.alchemy.com/v2/Cha-uur1WLWVs-6rRtzCuxRtVFeR1LPT",
+      "https://sepolia.optimism.io"
+    ],
+    "logo": "https://icons.llamao.fi/icons/chains/rsz_ethereum.jpg",
+    "borderColor": "#808080",
+    "poolTokenSymbols": [
+      "USDT.optimism",
+      "USDC.optimism",
+      "DAI.optimism",
+      "WETH.optimism"
+    ],
+    "isBalancerChain": false
+  },
+  {
+    "id": 421614,
+    "chainName": "Arbitrum Sepolia",
+    "chainId": "0x66eee",
+    "nativeCurrency": {
+      "name": "ETH",
+      "symbol": "ETH",
+      "decimals": 18
+    },
+    "blockExplorerUrls": ["https://sepolia.arbiscan.io/"],
+    "rpcUrls": [
+      "https://arb-sepolia.g.alchemy.com/v2/Cha-uur1WLWVs-6rRtzCuxRtVFeR1LPT",
+      "https://arbitrum-sepolia-rpc.publicnode.com"
+    ],
+    "logo": "https://icons.llamao.fi/icons/chains/rsz_ethereum.jpg",
+    "borderColor": "#808080",
+    "poolTokenSymbols": [
+      "USDT.arbitrum",
+      "USDC.arbitrum",
+      "DAI.arbitrum",
+      "WETH.arbitrum"
+    ],
+    "isBalancerChain": false
+  },
+  {
+    "id": 43113,
+    "chainName": "Avalanche Testnet",
+    "chainId": "0xa869",
+    "nativeCurrency": {
+      "name": "AVAX",
+      "symbol": "AVAX",
+      "decimals": 18
+    },
+    "blockExplorerUrls": ["https://testnet.snowtrace.io"],
+    "rpcUrls": [
+      "https://avax-fuji.g.alchemy.com/v2/Cha-uur1WLWVs-6rRtzCuxRtVFeR1LPT",
+      "https://avalanche-fuji-c-chain-rpc.publicnode.com"
+    ],
+    "logo": "https://icons.llamao.fi/icons/chains/rsz_avalanche.jpg",
+    "borderColor": "#CC3333",
+    "poolTokenSymbols": ["USDT.fuji", "USDC.fuji", "DAI.fuji", "ETH.fuji"],
+    "isBalancerChain": false
+  },
+  {
+    "id": 84532,
+    "chainName": "Base Sepolia",
+    "chainId": "0x14a34",
+    "nativeCurrency": {
+      "name": "ETH",
+      "symbol": "ETH",
+      "decimals": 18
+    },
+    "blockExplorerUrls": ["https://sepolia-explorer.base.org"],
+    "rpcUrls": [
+      "https://base-sepolia.g.alchemy.com/v2/Cha-uur1WLWVs-6rRtzCuxRtVFeR1LPT",
+      "https://base-sepolia-rpc.publicnode.com"
+    ],
+    "logo": "https://icons.llamao.fi/icons/chains/rsz_base.jpg",
+    "borderColor": "#ffffff",
+    "poolTokenSymbols": ["USDT.Base", "USDC.Base", "DAI.Base", "ETH.Base"],
+    "isBalancerChain": false
+  },
+  {
+    "id": 1098411886,
+    "chainName": "Arcadia",
+    "chainId": "0x41786f6e",
+    "nativeCurrency": {
+      "name": "ETH",
+      "symbol": "ETH",
+      "decimals": 18
+    },
+    "blockExplorerUrls": ["https://explorer.khalani.network/"],
+    "rpcUrls": ["https://rpc.khalani.network"],
+    "logo": "https://pbs.twimg.com/media/FdWhUExUUAE30t_.png",
+    "borderColor": "#228c22",
+    "poolTokenSymbols": [],
+    "isBalancerChain": true
+  }
+]

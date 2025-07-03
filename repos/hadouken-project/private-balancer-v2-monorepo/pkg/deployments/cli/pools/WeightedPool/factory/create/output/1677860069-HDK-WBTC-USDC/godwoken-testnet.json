@@ -1,0 +1,36 @@
+{
+  "transaction": {
+    "hash": "0x6030c944a09167a249a11ea2b8afdff3493a548b7e46b0861283feac9eac2b1c",
+    "blockNumber": 1994196
+  },
+  "data": {
+    "WeightedPoolFactory": {
+      "create": {
+        "input": {
+          "name": "WBTC/USDC",
+          "symbol": "HDK-WBTC-USDC",
+          "tokens": [
+            "0x0c7F21908222098616803EfF5d054d3F4EF57EBb",
+            "0x6a447Ba163039D7e1d674668578A0eb049245915"
+          ],
+          "weights": [
+            "500000000000000000",
+            "500000000000000000"
+          ],
+          "rateProviders": [
+            "0x0000000000000000000000000000000000000000",
+            "0x0000000000000000000000000000000000000000"
+          ],
+          "swapFeePercentage": "3000000000000000",
+          "delegate": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0x6a447Ba163039D7e1d674668578A0eb049245915": "99000",
+            "0x0c7F21908222098616803EfF5d054d3F4EF57EBb": "25000000"
+          }
+        },
+        "output": "0x3D313fcc5e0F50756a5599713349A26d50245f06"
+      }
+    }
+  },
+  "timestamp": 1677860069188
+}

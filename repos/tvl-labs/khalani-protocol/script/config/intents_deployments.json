@@ -1,0 +1,33 @@
+{
+  "intentBooks": {
+    "LimitOrderIntentBook": "0xc4283FDBB4d36813c6d8655f937EEe449fCb5C25",
+    "SwapIntentBook": "0xE52a0A8BEcbBFc6c8C9C58E7426A7471298a1421",
+    "SpokeChainCallIntentBook": "0x27a3C1f104e300439996A9645a7fbeBDf5E87D09"
+  },
+  "provers": {
+    "sepolia": "0xC55eE0808453Bed3570A4731759055a74963B562",
+    "fuji": "0xBEf9e8e7087038C1277C75f0D8bec8718fdfE3b9"
+  },
+  "verifiers": {
+    "sepolia": "0x594C00467783cf0f422EAd0d4b605F1134D7F0e3",
+    "fuji": "0xED84fBAAa27D1136101D0b1d18B1FF194C17dBC3"
+  },
+  "registry": {
+    "prover": "0x66Dc97746a933AAcC29f7bb6fD7c1431B9Ec4c36",
+    "verifier": "0x621f81125259A86BEC1732469D2dBbd51580AF99"
+  },
+  "liquidity_projector": "0xa04F42A5f212191B37f1B2270E271eD152992d01",
+  "rewarder_khalani": "0x738E12aA6aF874e4019B70718F4057959E0c5D2B",
+  "spokeChainExecutor": {
+    "sepolia": "0x2F013bE9bd96EAb3c0400e11DDC62216d409233A",
+    "fuji": "0x769b2DFa990ff2722E56fb1217fCb148ce2a0b07"
+  },
+  "swapIntentFiller": {
+    "sepolia": "0x7477414Fd9eD20dC7d29DcFdFFECC3f327047710",
+    "fuji": "0xB99eCc3019b66BF2C95Bf04A201c57AFc4059B4A"
+  },
+  "escrow": {
+    "sepolia": "0x932819A4fc7B8483976ADB0E26fC9Ca447248938",
+    "fuji": "0xCFDf427082747451201f745020ccE98Ca33093c3"
+  }
+}

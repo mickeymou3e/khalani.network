@@ -1,0 +1,12 @@
+m_token_manager_address = "0x9B03e72dD8Fa5C268b83EBB1C17721012533DDDB"
+intent_book_address = "0x460D63cf2d8D3D4B06891AdcCf83477126d197CF"
+
+[m_tokens]
+"TokenA" = "0x3456789012345678901234567890123456789012"
+"TokenB" = "0x4567890123456789012345678901234567890123"
+
+receipt_manager_address = "0x493794550E4917650B873c67234b541b80CE6730"
+
+spoke_chain_ids = [10, 11, 12]
+chain_id = 31337
+rpc_url = "http://localhost:8545"

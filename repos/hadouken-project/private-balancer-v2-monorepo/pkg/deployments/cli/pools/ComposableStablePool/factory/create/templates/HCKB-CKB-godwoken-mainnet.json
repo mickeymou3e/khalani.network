@@ -1,0 +1,15 @@
+{
+  "name": "HCKB/CKB",
+  "symbol": "HDK-HCKB-CKB",
+  "tokens": ["0x734ba3e711a22a383c1a26dbe5d529cfb793c3bf", "0x7538c85cae4e4673253ffd2568c1f1b48a71558a"],
+  "rateProviders": ["0x0000000000000000000000000000000000000000", "0x0000000000000000000000000000000000000000"],
+  "priceRateCacheDuration": ["0", "0"],
+  "amplificationParameter": "5000",
+  "swapFeePercentage": "100000000000000",
+  "exemptFromYieldProtocolFeeFlags": [false, false],
+  "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+  "initialLiquidity": {
+    "0x734ba3e711a22a383c1a26dbe5d529cfb793c3bf": "1000000000000000000000",
+    "0x7538c85cae4e4673253ffd2568c1f1b48a71558a": "1000000000000000000000"
+  }
+}

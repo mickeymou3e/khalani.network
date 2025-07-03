@@ -1,0 +1,5 @@
+apiVersion: v2
+description: A Helm chart for Graph Node
+name: graph-node
+type: application
+version: 1.0.0

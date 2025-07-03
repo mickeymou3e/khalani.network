@@ -1,0 +1,145 @@
+{
+  "axon_address_info": [
+    {
+      "key_alias": "alias/khalani-axon-key-0",
+      "key_id": "054a2c9a-38f2-43da-83cc-1353589ccc49",
+      "role_arn": "arn:aws:iam::803035318642:role/khalani-axon-address-0",
+      "role_name": "khalani-axon-address-0"
+    },
+    {
+      "key_alias": "alias/khalani-axon-key-1",
+      "key_id": "76b4932c-d0d5-4d65-9d77-b2ba29f3349a",
+      "role_arn": "arn:aws:iam::803035318642:role/khalani-axon-address-1",
+      "role_name": "khalani-axon-address-1"
+    },
+    {
+      "key_alias": "alias/khalani-axon-key-2",
+      "key_id": "c8f2eb5a-82a6-4550-8fc3-30c444048ad2",
+      "role_arn": "arn:aws:iam::803035318642:role/khalani-axon-address-2",
+      "role_name": "khalani-axon-address-2"
+    }
+  ],
+  "bank_info": {
+    "key_alias": "alias/khalani-bank",
+    "key_id": "e6615864-bc07-4b3c-9a70-11b2ed673506",
+    "role_arn": "arn:aws:iam::803035318642:role/khalani-bank",
+    "role_name": "khalani-bank"
+  },
+  "deployer_info": {
+    "key_alias": "alias/khalani-deployer",
+    "key_id": "37125f6c-6fc9-4000-ae57-726fd75ea060"
+  },
+  "faucet_key_id": "63b0217e-68cf-4e4d-9269-b292765b8ae9",
+  "hyperlane_relayer_info": [
+    {
+      "key_alias": "alias/khalani-hyperlane-relayer-fuji",
+      "key_id": "e7cc7fc6-42fd-4565-bcaf-d126cb6f5d10",
+      "role_arn": "arn:aws:iam::803035318642:role/khalani-hyperlane-relayer-fuji",
+      "role_name": "khalani-hyperlane-relayer-fuji"
+    },
+    {
+      "key_alias": "alias/khalani-hyperlane-relayer-khalani-testnet",
+      "key_id": "541a29cf-b62b-4b0c-9031-94e2d00dfd9f",
+      "role_arn": "arn:aws:iam::803035318642:role/khalani-hyperlane-relayer-khalani-testnet",
+      "role_name": "khalani-hyperlane-relayer-khalani-testnet"
+    },
+    {
+      "key_alias": "alias/khalani-hyperlane-relayer-sepolia",
+      "key_id": "366b6a01-b570-4012-825c-81bf16390789",
+      "role_arn": "arn:aws:iam::803035318642:role/khalani-hyperlane-relayer-sepolia",
+      "role_name": "khalani-hyperlane-relayer-sepolia"
+    }
+  ],
+  "hyperlane_validator_info": [
+    {
+      "bucket_name": "khalani-validator-signatures-0",
+      "key_alias": "alias/khalani-hyperlane-validator-signer-0",
+      "key_id": "dea61829-8c8e-4ec4-8d35-dddd11a729c6",
+      "role_arn": "arn:aws:iam::803035318642:role/khalani-hyperlane-validator-0",
+      "role_name": "khalani-hyperlane-validator-0"
+    },
+    {
+      "bucket_name": "khalani-validator-signatures-1",
+      "key_alias": "alias/khalani-hyperlane-validator-signer-1",
+      "key_id": "a6abc8b7-144a-44ee-9e4d-21374b3a5cc0",
+      "role_arn": "arn:aws:iam::803035318642:role/khalani-hyperlane-validator-1",
+      "role_name": "khalani-hyperlane-validator-1"
+    },
+    {
+      "bucket_name": "khalani-validator-signatures-2",
+      "key_alias": "alias/khalani-hyperlane-validator-signer-2",
+      "key_id": "7345f580-f733-4bb2-9bcb-196d08ff9a1e",
+      "role_arn": "arn:aws:iam::803035318642:role/khalani-hyperlane-validator-2",
+      "role_name": "khalani-hyperlane-validator-2"
+    }
+  ],
+  "hyperlane_godwoken_validator_info": [
+    {
+      "bucket_name": "godwoken-testnet-validator-signatures-0",
+      "key_alias": "alias/godwoken-testnet-hyperlane-validator-signer-0",
+      "key_id": "ab6dd8cd-fe35-4f5f-adcb-c89d22d1f019",
+      "role_arn": "arn:aws:iam::803035318642:role/godwoken-testnet-hyperlane-validator-0",
+      "role_name": "godwoken-testnet-hyperlane-validator-0"
+    },
+    {
+      "bucket_name": "godwoken-testnet-validator-signatures-1",
+      "key_alias": "alias/godwoken-testnet-hyperlane-validator-signer-1",
+      "key_id": "fa934dfc-f51e-482d-9e54-00f0c27564d1",
+      "role_arn": "arn:aws:iam::803035318642:role/godwoken-testnet-hyperlane-validator-1",
+      "role_name": "godwoken-testnet-hyperlane-validator-1"
+    },
+    {
+      "bucket_name": "godwoken-testnet-validator-signatures-2",
+      "key_alias": "alias/godwoken-testnet-hyperlane-validator-signer-2",
+      "key_id": "149791e2-9655-4a81-8dd6-45548e3c1642",
+      "role_arn": "arn:aws:iam::803035318642:role/godwoken-testnet-hyperlane-validator-2",
+      "role_name": "godwoken-testnet-hyperlane-validator-2"
+    }
+  ],
+  "funding_bot_role_arn_info": "arn:aws:iam::803035318642:role/funding-bot",
+  "frontend_deployer_iam_user": "khalani-frontend-deployer",
+  "frontend_environments_info": [
+    {
+      "bucket_id": "arn:aws:s3:::app.testnet.khalani.network20230725132024337400000002",
+      "distribution_id": "arn:aws:cloudfront::803035318642:distribution/E2XBMB6M7P5CH6"
+    },
+    {
+      "bucket_id": "arn:aws:s3:::app.staging.khalani.network20230725132024333600000001",
+      "distribution_id": "arn:aws:cloudfront::803035318642:distribution/E13PLNYU5I70KF"
+    },
+    {
+      "bucket_id": "arn:aws:s3:::cross-chain-explorer.testnet.khalani.20230725130925384100000001",
+      "distribution_id": "arn:aws:cloudfront::803035318642:distribution/E2PUFKBE38F0M9"
+    },
+    {
+      "bucket_id": "arn:aws:s3:::cross-chain-explorer.staging.khalani.20230725130925384100000002",
+      "distribution_id": "arn:aws:cloudfront::803035318642:distribution/E2H7AK2W4QTT1S"
+    }
+  ],
+  "khalani_solver_info": {
+    "cross-chain-market-maker": {
+      "key_alias": "alias/cross-chain-market-maker",
+      "key_id": "af255340-3ca4-44a6-8790-0e6ee7af6a80",
+      "role_arn": "arn:aws:iam::803035318642:role/cross-chain-market-maker",
+      "role_name": "cross-chain-market-maker"
+    },
+    "intentbook-matchmaker": {
+      "key_alias": "alias/intentbook-matchmaker",
+      "key_id": "f6f2fb92-0891-4eab-bc00-9c8dc78655ba",
+      "role_arn": "arn:aws:iam::803035318642:role/intentbook-matchmaker",
+      "role_name": "intentbook-matchmaker"
+    },
+    "settler": {
+      "key_alias": "alias/settler",
+      "key_id": "e4d7cf35-07f5-4aee-8b6c-936eb7c41bc4",
+      "role_arn": "arn:aws:iam::803035318642:role/settler",
+      "role_name": "settler"
+    },
+    "spoke-chain-caller": {
+      "key_alias": "alias/spoke-chain-caller",
+      "key_id": "2ea0dfb8-8299-4c6c-9cf9-d1a9d7f7506d",
+      "role_arn": "arn:aws:iam::803035318642:role/spoke-chain-caller",
+      "role_name": "spoke-chain-caller"
+    }
+  }
+}

@@ -1,0 +1,70 @@
+# Let's define a nonterminating function...
+function loop(n : Nat) -> Nat
+{
+  Succ(loop(n))
+}
+
+# Let's prove a contradiction. To do this, we will need to prove
+# some arithmetical facts about subtraction of natural numbers.
+
+# n - 0 = n, from the definition of subtraction.
+let sub_Zero_r := !claim(forall n : Nat. sub(n, Zero) = n);
+
+# (1 + n) - (1 + m) = n - m, from the definition of subtraction.
+let sub_Succ_Succ := !claim(forall n, m : Nat. sub(Succ(n), Succ(m)) = sub(n, m));
+
+# n - n = 0, proven by induction on n.
+let sub_diag := by_induction n : Nat. sub(n, n) = Zero
+{
+  Zero => !uspec(sub_Zero_r, Zero),
+  Succ(m) =>
+  {
+    !uspec(!uspec(sub_Succ_Succ, m), m);
+    !eq_chain(
+      sub(Succ(m), Succ(m)),
+      sub(m, m),
+      Zero
+    )
+  }
+};
+
+# (1 + n) - n = 1, proven by induction on n.
+let sub_succ_l := by_induction n : Nat. sub(Succ(n), n) = Succ(Zero)
+{
+  Zero => !uspec(sub_Zero_r, Succ(Zero)),
+  Succ(m) =>
+  {
+    !uspec(!uspec(sub_Succ_Succ, Succ(m)), m);
+    !eq_chain(
+      sub(Succ(Succ(m)), Succ(m)),
+      sub(Succ(m), m),
+      Succ(Zero)
+    )
+  }
+};
+
+# loop(0) = 1 + loop(0), from the definition of loop.
+!uspec(forall n : Nat. loop(n) = Succ(loop(n)), Zero);
+
+# loop(0) - loop(0) = 0, from theorem sub_diag.
+!uspec(sub_diag, loop(Zero));
+
+# (1 + loop(0)) - loop(0) = 1, from theorem sub_succ_l.
+!uspec(sub_succ_l, loop(Zero));
+
+# 0 = 1, because 0 = loop(0) - loop(0) = (1 + loop(0)) - loop(0) = 1
+!eq_chain(
+  Zero,
+  sub(loop(Zero), loop(Zero)),
+  sub(Succ(loop(Zero)), loop(Zero)),
+  Succ(Zero)
+);
+
+# ~ 0 = 1, because Zero and Succ are different constructors of Nat.
+!uspec(forall n : Nat. ~ Zero = Succ(n), Zero);
+
+# Contradiction.
+!absurd(Zero = Succ(Zero), ~ Zero = Succ(Zero));
+
+# As a bonus, trying to use prove_by_eval causes a stack overflow.
+#!prove_by_eval(loop(Zero) = Zero);

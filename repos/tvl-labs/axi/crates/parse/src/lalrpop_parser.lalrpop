@@ -1,0 +1,276 @@
+use std::rc::Rc;
+
+use axi_ast::*;
+use lexi_matic::Error as LexicalError;
+
+use crate::lex::Token;
+
+grammar<'input>(input: &'input str);
+
+pub Stmts: Vec<Stmt> = {
+    <s:Stmt*> => s,
+    <mut s:Stmt*> <e:Loc<PrimExpr>> => {
+        s.push(Stmt::Expr(e));
+        s
+    },
+};
+
+Stmt: Stmt = {
+    "let" <Identifier> ":=" <LocExpr> ";" => Stmt::LetBinding(<>),
+    "const" <Loc<Identifier>> ":" <TypeReference> ";" => Stmt::ConstDec(<>),
+    "proc" <n:Identifier> "(" <ps:Comma<Identifier>> ")" <l:@L> "{" <ss:Stmts> "}" <r:@R> =>
+        Stmt::ProcDef(n, ps, Expr::Stmts(ss).with_loc((l, r))),
+    "pick_witness" <Comma1<Identifier>> "." <LocExpr> ";" => Stmt::PickWitness(<>),
+    "inductive" <name:Loc<Identifier>> "{" <variants:Comma<EnumVariant>> "}" => Stmt::InductiveEnum(InductiveEnum {<>}.into()),
+    "domain" <Loc<Identifier>> ";" => Stmt::Domain(<>),
+    "struct" <name:Loc<Identifier>> "{" <fields:Comma<StructField>> "}" => Stmt::Struct(StructDecl { <> }.into()),
+    "function" <name:Loc<Identifier>> "(" <params:Comma<Param>> ")" "->" <return_type:TypeReference> "{" <body:Stmts> "}" =>
+        Stmt::FunctionDef(FunctionDef { name, params, return_type, body: Some(body) }.into()),
+    "function" <name:Loc<Identifier>> "(" <params:Comma<Param>> ")" "->" <return_type:TypeReference> ";" =>
+        Stmt::FunctionDef(FunctionDef { <>, body: None }.into()),
+    <LocExpr> ";" => Stmt::Expr(<>),
+    <Loc<BlockExpr>> => Stmt::Expr(<>),
+};
+
+StructField: Field = {
+    <name:Loc<Identifier>> ":" <type_:TypeReference> => Field { <> },
+};
+
+ParamOptionalType: (Identifier, Option<TypeReference>) = {
+    <Identifier> <(":" <TypeReference>)?> => (<>),
+};
+
+Param: (Identifier, TypeReference) = {
+    <Identifier> ":" <TypeReference> => (<>),
+};
+
+EnumVariant: Rc<EnumVariant> = {
+    <name:Loc<Identifier>> "(" <fields:Comma<TypeReference>> ")" => EnumVariant {<>}.into(),
+    <name:Loc<Identifier>> => EnumVariant { name, fields: Vec::new() }.into(),
+};
+
+TypeReference: TypeReference = {
+    <name:Loc<Identifier>> => TypeReference { name },
+};
+
+Expr: Expr = {
+    <PrimExpr> => <>,
+    <BlockExpr> => <>,
+};
+
+StructExprField = {
+    <Loc<Identifier>> ":" <LocExpr>,
+};
+
+PrimExpr: Expr = {
+    #[precedence(level="0")]
+    "!"  <Identifier> "(" <Comma<LocExpr>> ")" => Expr::MethodApp(<>),
+    "(" <Expr> ")" => <>,
+    <PropOp> "(" <Comma<LocExpr>> ")" => Expr::PropApp(<>),
+    <Identifier> "(" <Comma<LocExpr>> ")" => Expr::App(<>),
+    <Identifier> => Expr::Ident(<>),
+    "true" => Expr::True,
+    "false" => Expr::False,
+    "lit_nat" => Expr::LitNat(<>.into()),
+    "lit_u8" => Expr::LitU8(<>.into()),
+    "lit_hex" => Expr::LitHex(<>.into()),
+    "if" <condition:Box<Loc<ExprNoStruct>>> "{" <true_branch:Stmts> "}" "else" "{" <false_branch:Stmts> "}" =>
+        Expr::IfElse(IfElseExpr { <> }),
+    <Box<Loc<PrimExpr>>> "." <Loc<Identifier>> => Expr::FieldAccess(<>),
+    <name:Loc<Identifier>> "{" <fields:Comma<StructExprField>> "}" => Expr::StructExpr(StructExpr { <> }),
+
+    // Operators and quantifiers.
+    #[precedence(level="1")] #[assoc(side = "left")]
+    <l:Loc<PrimExpr>> <op:Identifier> <r:Loc<PrimExpr>> => Expr::App(op, vec![l, r]),
+
+    #[precedence(level = "2")] #[assoc(side = "none")]
+    <Loc<PrimExpr>> "=" <Loc<PrimExpr>> => Expr::App("=".into(), vec![<>]),
+
+    #[precedence(level = "3")] #[assoc(side = "left")]
+    "~" <Loc<PrimExpr>> => Expr::PropApp(PropOp::Not, vec![<>]),
+    "forall" <Comma1<ParamOptionalType>> "." <Box<Loc<PrimExpr>>> => Expr::ForAll(<>),
+    "exists" <Comma1<ParamOptionalType>> "." <Box<Loc<PrimExpr>>> => Expr::Exists(<>),
+
+    #[precedence(level = "4")] #[assoc(side = "left")]
+    <Loc<PrimExpr>> "&" <Loc<PrimExpr>> => Expr::PropApp(PropOp::And, vec![<>]),
+
+    #[precedence(level = "5")] #[assoc(side = "left")]
+    <Loc<PrimExpr>> "|" <Loc<PrimExpr>> => Expr::PropApp(PropOp::Or, vec![<>]),
+
+    #[precedence(level = "6")] #[assoc(side = "right")]
+    <Loc<PrimExpr>> "==>" <Loc<PrimExpr>> => Expr::PropApp(PropOp::If, vec![<>]),
+
+    #[precedence(level = "7")] #[assoc(side = "none")]
+    <Loc<PrimExpr>> "<==>" <Loc<PrimExpr>> => Expr::PropApp(PropOp::Iff, vec![<>]),
+
+    #[precedence(level = "8")]
+    "|" <Comma<Identifier>> "|" <Box<LocExpr>> => Expr::Proc(<>),
+};
+
+// Almost the same as Expr but without struct expressions. Should be used after
+// assume, match, by_induction etc. See also
+// https://rust-lang.github.io/rfcs/0092-struct-grammar.html
+ExprNoStruct: Expr = {
+    <PrimExprNoStruct> => <>,
+    <BlockExpr> => <>,
+};
+
+PrimExprNoStruct: Expr = {
+    #[precedence(level="0")]
+    "!"  <Identifier> "(" <Comma<LocExpr>> ")" => Expr::MethodApp(<>),
+    "(" <Expr> ")" => <>,
+    <PropOp> "(" <Comma<LocExpr>> ")" => Expr::PropApp(<>),
+    <Identifier> "(" <Comma<LocExpr>> ")" => Expr::App(<>),
+    <Identifier> => Expr::Ident(<>),
+    "true" => Expr::True,
+    "false" => Expr::False,
+    "lit_nat" => Expr::LitNat(<>.into()),
+    "lit_u8" => Expr::LitU8(<>.into()),
+    "lit_hex" => Expr::LitHex(<>.into()),
+    <Box<Loc<PrimExprNoStruct>>> "." <Loc<Identifier>> => Expr::FieldAccess(<>),
+    "if" <condition:Box<Loc<ExprNoStruct>>> "{" <true_branch:Stmts> "}" "else" "{" <false_branch:Stmts> "}" =>
+        Expr::IfElse(IfElseExpr { <> }),
+
+    // Operators and quantifiers.
+    #[precedence(level="1")] #[assoc(side = "left")]
+    <l:Loc<PrimExprNoStruct>> <op:Identifier> <r:Loc<PrimExprNoStruct>> => Expr::App(op, vec![l, r]),
+
+    #[precedence(level = "2")] #[assoc(side = "none")]
+    <Loc<PrimExprNoStruct>> "=" <Loc<PrimExprNoStruct>> => Expr::App("=".into(), vec![<>]),
+
+    #[precedence(level = "3")] #[assoc(side = "left")]
+    "~" <Loc<PrimExprNoStruct>> => Expr::PropApp(PropOp::Not, vec![<>]),
+    "forall" <Comma1<ParamOptionalType>> "." <Box<Loc<PrimExprNoStruct>>> => Expr::ForAll(<>),
+    "exists" <Comma1<ParamOptionalType>> "." <Box<Loc<PrimExprNoStruct>>> => Expr::Exists(<>),
+
+    #[precedence(level = "4")] #[assoc(side = "left")]
+    <Loc<PrimExprNoStruct>> "&" <Loc<PrimExprNoStruct>> => Expr::PropApp(PropOp::And, vec![<>]),
+
+    #[precedence(level = "5")] #[assoc(side = "left")]
+    <Loc<PrimExprNoStruct>> "|" <Loc<PrimExprNoStruct>> => Expr::PropApp(PropOp::Or, vec![<>]),
+
+    #[precedence(level = "6")] #[assoc(side = "right")]
+    <Loc<PrimExprNoStruct>> "==>" <Loc<PrimExprNoStruct>> => Expr::PropApp(PropOp::If, vec![<>]),
+
+    #[precedence(level = "7")] #[assoc(side = "none")]
+    <Loc<PrimExprNoStruct>> "<==>" <Loc<PrimExprNoStruct>> => Expr::PropApp(PropOp::Iff, vec![<>]),
+
+    #[precedence(level = "8")]
+    "|" <Comma<Identifier>> "|" <Box<Loc<ExprNoStruct>>> => Expr::Proc(<>),
+};
+
+BlockExpr: Expr = {
+    "assume" <assumption:Box<Loc<ExprNoStruct>>> "{" <body:Stmts> "}" => Expr::Assume { <> },
+    "pick_any" <Comma1<Param>> "{" <Stmts> "}" => Expr::PickAny(<>),
+    "by_induction" <var:Identifier> ":" <type_:TypeReference> "." <goal:Box<Loc<ExprNoStruct>>> "{" <cases:MatchArms> "}" =>
+        Expr::ByInduction(ByInductionExpr { <> }),
+    "match" <scrutinee:Box<Loc<ExprNoStruct>>> "{" <match_arms:MatchArms> "}" => Expr::Match(MatchExpr { <> }),
+    "{" <Stmts> "}" => Expr::Stmts(<>),
+};
+
+MatchArms: Vec<(LocPattern, LocExpr)> = {
+    <OneMatchArm*>,
+    // Last comma can be omitted.
+    <mut mas:OneMatchArm*> <p:Loc<Pattern>> "=>" <e:Loc<PrimExpr>> => {
+        mas.push((p, e));
+        mas
+    }
+};
+
+OneMatchArm: (LocPattern, LocExpr) = {
+    <Loc<Pattern>> "=>" <Loc<PrimExpr>> "," => (<>),
+    <Loc<Pattern>> "=>" <Loc<BlockExpr>> ","? => (<>),
+};
+
+Pattern: Pattern = {
+    <Loc<Identifier>> "(" <Comma<Loc<Pattern>>> ")" => Pattern::TupleStruct(<>),
+    <Identifier> => Pattern::Identifier(<>),
+};
+
+Box<T>: Box<T> = {
+    <T> => Box::new(<>),
+};
+
+Loc<T>: WithLoc<T> = {
+    <l:@L> <t:T> <r:@R> => t.with_loc((l, r))
+};
+
+LocExpr: LocExpr = Loc<Expr>;
+
+Comma1<T>: Vec<T> = {
+    <mut v:(<T> ",")*> <e:T> ","? => { v.push(e); v }
+};
+
+Comma<T>: Vec<T> = {
+    <mut v:(<T> ",")*> <e:T?> => match e {
+        None => v,
+        Some(e) => {
+            v.push(e);
+            v
+        }
+    }
+};
+
+PropOp: PropOp = {
+    "not" => PropOp::Not,
+    "and" => PropOp::And,
+    "or" => PropOp::Or,
+    "implies" => PropOp::If,
+    "bicond" => PropOp::Iff,
+};
+
+Identifier: String = "identifier" => <>.into();
+
+extern {
+    type Location = usize;
+    type Error = LexicalError;
+
+    enum Token<'input> {
+        "identifier" => Token::Identifier(<&'input str>),
+        "lit_nat" => Token::LitNat(<&'input str>),
+        "lit_u8" => Token::LitU8(<&'input str>),
+        "lit_hex" => Token::LitHex(<&'input str>),
+        "true" => Token::True,
+        "false" => Token::False,
+        "not" => Token::Negate,
+        "~" => Token::NegateS,
+        "and" => Token::And,
+        "&" => Token::AndS,
+        "or" => Token::Or,
+        "|" => Token::OrS,
+        "implies" => Token::Implies,
+        "==>" => Token::ImpliesS,
+        "bicond" => Token::Bicond,
+        "<==>" => Token::BicondS,
+        "(" => Token::ParenOpen,
+        ")" => Token::ParenClose,
+        "{" => Token::BraceOpen,
+        "}" => Token::BraceClose,
+        "," => Token::Comma,
+        "!" => Token::Excl,
+        ":" => Token::Colon,
+        "=>" => Token::FatRightArrow,
+        "->" => Token::RightArrow,
+        "forall" => Token::ForAll,
+        "exists" => Token::Exists,
+        "pick_any" => Token::PickAny,
+        "pick_witness" => Token::PickWitness,
+        "assume" => Token::Assume,
+        "by_induction" => Token::ByInduction,
+
+        "let" => Token::Let,
+        "const" => Token::Const,
+        "inductive" => Token::Inductive,
+        "function" => Token::Function,
+        "match" => Token::Match,
+        "if" => Token::If,
+        "else" => Token::Else,
+        "domain" => Token::Domain,
+        "struct" => Token::Struct,
+        "proc" => Token::Proc,
+        "=" => Token::Equal,
+        ":=" => Token::ColonEqual,
+        ";" => Token::Semicolon,
+        "." => Token::Period,
+    }
+}

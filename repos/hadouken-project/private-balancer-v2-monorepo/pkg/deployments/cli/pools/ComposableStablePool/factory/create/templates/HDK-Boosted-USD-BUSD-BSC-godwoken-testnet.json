@@ -1,0 +1,27 @@
+{
+  "name": "Hadouken Boosted USD / BUSD|BSC Stable Pool",
+  "symbol": "HDK-Boosted-USD-BUSD-BSC",
+  "tokens": [
+    "0xccffa4fff6dab00a69778cb574044245b9de4fec",
+    "0x437f3a7e7af6c611cdbbd33ce79c56aa7b6f7001"
+  ],
+  "rateProviders": [
+    "0xccffa4fff6dab00a69778cb574044245b9de4fec",
+    "0x0000000000000000000000000000000000000000"
+  ],
+  "priceRateCacheDuration": [
+    "0",
+    "0"
+  ],
+  "amplificationParameter": "300",
+  "swapFeePercentage": "100000000000000",
+  "exemptFromYieldProtocolFeeFlags": [
+    false,
+    false
+  ],
+  "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+  "initialLiquidity": {
+    "0xccffa4fff6dab00a69778cb574044245b9de4fec": "1000000000000000000",
+    "0x437f3a7e7af6c611cdbbd33ce79c56aa7b6f7001": "1000000000000000000"
+  }
+}

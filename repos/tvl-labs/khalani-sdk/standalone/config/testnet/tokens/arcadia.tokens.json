@@ -1,0 +1,182 @@
+[
+  {
+    "id": "0x41786f6e:0xeE37F7f98d003C2474310EC27529297bBEAd61Ef",
+    "address": "0xeE37F7f98d003C2474310EC27529297bBEAd61Ef",
+    "decimals": 18,
+    "name": "USDC | fuji",
+    "symbol": "USDC.fuji",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0xa869"
+  },
+  {
+    "id": "0x41786f6e:0xC685464c9Eacaf46F74eB6F1778EdDA5Ffd4DD63",
+    "address": "0xC685464c9Eacaf46F74eB6F1778EdDA5Ffd4DD63",
+    "decimals": 18,
+    "name": "USDT | fuji",
+    "symbol": "USDT.fuji",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0xa869"
+  },
+  {
+    "id": "0x41786f6e:0xF7d2Ddf33265a468180359AD603CDF1d1aEe1a72",
+    "address": "0xF7d2Ddf33265a468180359AD603CDF1d1aEe1a72",
+    "decimals": 18,
+    "name": "DAI | fuji",
+    "symbol": "DAI.fuji",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0xa869"
+  },
+  {
+    "id": "0x41786f6e:0x71A52aFdDedBe8D4E3D93312fBDe5F75e7ce4A34",
+    "address": "0x71A52aFdDedBe8D4E3D93312fBDe5F75e7ce4A34",
+    "decimals": 18,
+    "name": "ETH | fuji",
+    "symbol": "ETH.fuji",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0xa869"
+  },
+  {
+    "id": "0x41786f6e:0xf0fa3976c7b01f23735611964b56fe7ebcf5fd1a",
+    "address": "0xf0fa3976c7b01f23735611964b56fe7ebcf5fd1a",
+    "decimals": 18,
+    "name": "USDC | arbitrum",
+    "symbol": "USDC.arbitrum",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0x66eee"
+  },
+  {
+    "id": "0x41786f6e:0x5D6861D2E8481Ceb8627b445154F7E2D9E914958",
+    "address": "0x5D6861D2E8481Ceb8627b445154F7E2D9E914958",
+    "decimals": 18,
+    "name": "USDT | arbitrum",
+    "symbol": "USDT.arbitrum",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0x66eee"
+  },
+  {
+    "id": "0x41786f6e:0x863433D741543E2995570e19c6761c010cF3D8b7",
+    "address": "0x863433D741543E2995570e19c6761c010cF3D8b7",
+    "decimals": 18,
+    "name": "DAI | arbitrum",
+    "symbol": "DAI.arbitrum",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0x66eee"
+  },
+  {
+    "id": "0x41786f6e:0x9cfBe192742fc6f35D1Dc4F303a2b88C690A4628",
+    "address": "0x9cfBe192742fc6f35D1Dc4F303a2b88C690A4628",
+    "decimals": 18,
+    "name": "ETH | arbitrum",
+    "symbol": "ETH.arbitrum",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0x66eee"
+  },
+  {
+    "id": "0x41786f6e:0x14A10983864CC6463fC4E8c1d7254797Cf19fd9B",
+    "address": "0x14A10983864CC6463fC4E8c1d7254797Cf19fd9B",
+    "decimals": 18,
+    "name": "USDC | optimism",
+    "symbol": "USDC.optimism",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0xaa37dc"
+  },
+  {
+    "id": "0x41786f6e:0x1FF1a010b22422d07926b2c2C48D865292A21AA6",
+    "address": "0x1FF1a010b22422d07926b2c2C48D865292A21AA6",
+    "decimals": 18,
+    "name": "USDT | optimism",
+    "symbol": "USDT.optimism",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0xaa37dc"
+  },
+  {
+    "id": "0x41786f6e:0xD9613f0758Fd56AF3D1740D586cec359BC8b84F4",
+    "address": "0xD9613f0758Fd56AF3D1740D586cec359BC8b84F4",
+    "decimals": 18,
+    "name": "DAI | optimism",
+    "symbol": "DAI.optimism",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0xaa37dc"
+  },
+  {
+    "id": "0x41786f6e:0x005afaFEccC4D7689cB8147C021931e5Ff426Bde",
+    "address": "0x005afaFEccC4D7689cB8147C021931e5Ff426Bde",
+    "decimals": 18,
+    "name": "ETH | optimism",
+    "symbol": "ETH.optimism",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0xaa37dc"
+  },
+  {
+    "id": "0x41786f6e:0x88ab9a58a08a81e38054819eaa1ddcffc266e8d7",
+    "address": "0x88ab9a58a08a81e38054819eaa1ddcffc266e8d7",
+    "decimals": 18,
+    "name": "USDC | sepolia",
+    "symbol": "USDC.sepolia",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0xaa36a7"
+  },
+  {
+    "id": "0x41786f6e:0xa3E350e4f418d1584e8a2013a6F4F2edF51A8D24",
+    "address": "0xa3E350e4f418d1584e8a2013a6F4F2edF51A8D24",
+    "decimals": 18,
+    "name": "USDT | sepolia",
+    "symbol": "USDT.sepolia",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0xaa36a7"
+  },
+  {
+    "id": "0x41786f6e:0x91550653eA903d6c838a69b508adF0bf48d9a30e",
+    "address": "0x91550653eA903d6c838a69b508adF0bf48d9a30e",
+    "decimals": 18,
+    "name": "DAI | sepolia",
+    "symbol": "DAI.sepolia",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0xaa36a7"
+  },
+  {
+    "id": "0x41786f6e:0x94D18c570e993F373Dfe79De8315f7b3ADA6882D",
+    "address": "0x94D18c570e993F373Dfe79De8315f7b3ADA6882D",
+    "decimals": 18,
+    "name": "ETH | sepolia",
+    "symbol": "ETH.sepolia",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0xaa36a7"
+  },
+  {
+    "id": "0x41786f6e:0xcB317cd9838B81144cAf49383d1924a4C11b0813",
+    "address": "0xcB317cd9838B81144cAf49383d1924a4C11b0813",
+    "decimals": 18,
+    "name": "USDC | base",
+    "symbol": "USDC.base",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0x14a34"
+  },
+  {
+    "id": "0x41786f6e:0xA32Dd3a3e36C0780FEE11F5A525Ef45E24FDaD96",
+    "address": "0xA32Dd3a3e36C0780FEE11F5A525Ef45E24FDaD96",
+    "decimals": 18,
+    "name": "USDT | base",
+    "symbol": "USDT.base",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0x14a34"
+  },
+  {
+    "id": "0x41786f6e:0x46693634184433B8bE894aaDA367C5F7b323a7a7",
+    "address": "0x46693634184433B8bE894aaDA367C5F7b323a7a7",
+    "decimals": 18,
+    "name": "DAI | base",
+    "symbol": "DAI.base",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0x14a34"
+  },
+  {
+    "id": "0x41786f6e:0x6E26c370B28C7e438Aaf7d7DE2F64D9A1dFB59e4",
+    "address": "0x6E26c370B28C7e438Aaf7d7DE2F64D9A1dFB59e4",
+    "decimals": 18,
+    "name": "ETH | base",
+    "symbol": "ETH.base",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0x14a34"
+  }
+]

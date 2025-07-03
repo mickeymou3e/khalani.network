@@ -1,0 +1,132 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: safe-cfg-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: safe-cfg-web
+  serviceName: safe-cfg-web
+  template:
+    metadata:
+      labels:
+        app: safe-cfg-web
+    spec:
+      serviceAccountName: {{ include "safe.serviceAccountName" . }}
+      containers:
+        - name: safe-cfg-web
+          image: "safeglobal/safe-config-service:v2.57.0"
+          env:
+            - name: POSTGRES_HOST
+              value: {{ required "Postgres Config Database Host" .Values.cfgDbHost }}
+            - name: POSTGRES_NAME
+              value: safe
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-cfg-secret
+                  key: postgres_user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-cfg-secret
+                  key: postgres_pass
+            - name: DJANGO_SUPERUSER_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: django-auth-secret
+                  key: username
+            - name: DJANGO_SUPERUSER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: django-auth-secret
+                  key: password
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: secret-key-secret
+                  key: password
+            - name: CGW_FLUSH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: cgw-webhook-flush-token
+                  key: password
+          envFrom:
+            - configMapRef:
+                name: safe-cfg-config
+          ports:
+            - containerPort: 8001
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1G
+          volumeMounts:
+            - name: secrets-store-inline
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
+            - name: secrets-store-secret-key
+              mountPath: "/mnt/secrets-store-secrets-key"
+              readOnly: true
+            - name: secrets-store-django-auth
+              mountPath: "/mnt/secrets-store-django-auth"
+              readOnly: true
+            - name: cgw-webhook-flush-token
+              mountPath: "/mnt/cgw-webhook-flush-token"
+              readOnly: true
+            - name: nginx-shared-cfg
+              mountPath: /nginx
+            - name: safe-cfg-scripts
+              mountPath: /app/docker-entrypoint.sh
+              subPath: docker-entrypoint.sh
+            - name: safe-cfg-scripts
+              mountPath: /app/src/about/management/commands/bootstrap.py
+              subPath: bootstrap.py
+        - name: nginx
+          image: "nginx:alpine"
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 512m
+              memory: 512Mi
+          volumeMounts:
+            - name: safe-cfg-scripts
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+            - name: nginx-shared-cfg
+              mountPath: /nginx-cfg
+              readOnly: true
+      volumes:
+        - name: secrets-store-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "db-cfg-secret-class"
+        - name: secrets-store-secret-key
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "secret-key-secret-class"
+        - name: secrets-store-django-auth
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "django-auth-secret-class"
+        - name: cgw-webhook-flush-token
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "cgw-webhook-flush-token-secret-class"
+        - name: safe-cfg-scripts
+          configMap:
+            name: safe-cfg-scripts
+            defaultMode: 0755
+        - name: nginx-shared-cfg
+          emptyDir: {}

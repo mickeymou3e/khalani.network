@@ -1,0 +1,27 @@
+{
+  "name": "Hadouken Boosted USD / Celer BUSD Stable Pool",
+  "symbol": "HDK-Boosted-USD-CBUSD",
+  "tokens": [
+    "0xAf9D4028272F750dd2D028990fd664dc223479B1",
+    "0xcD7bC9fC617a4F82eC1c8359D1C8610B90e3B44C"
+  ],
+  "rateProviders": [
+    "0xAf9D4028272F750dd2D028990fd664dc223479B1",
+    "0x0000000000000000000000000000000000000000"
+  ],
+  "priceRateCacheDuration": [
+    "0",
+    "0"
+  ],
+  "amplificationParameter": "300",
+  "swapFeePercentage": "100000000000000",
+  "exemptFromYieldProtocolFeeFlags": [
+    false,
+    false
+  ],
+  "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+  "initialLiquidity": {
+    "0xAf9D4028272F750dd2D028990fd664dc223479B1": "10000000000000000000",
+    "0xcD7bC9fC617a4F82eC1c8359D1C8610B90e3B44C": "10000000"
+  }
+}

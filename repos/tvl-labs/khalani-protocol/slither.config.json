@@ -1,0 +1,16 @@
+{
+    "filter_paths": "lib, lib/openzeppelin-contracts/,",
+    "detectors_to_exclude": "timestamp,naming-convention,pragma,solc-version,uninitialized-local,constable-states,unused-return",
+    "solc_remaps": [
+        "@ensdomains/=node_modules/@ensdomains/",
+        "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/",
+        "@openzeppelin/contracts/-upgradeable=lib/openzeppelin-contracts-upgradeable/contracts/",
+        "hardhat/=node_modules/hardhat/",
+        "@balancer-labs/=node_modules/@balancer-labs/",
+        "ds-test/=lib/forge-std/lib/ds-test/src/",
+        "forge-std/=lib/forge-std/src/",
+        "hardhat/=node_modules/hardhat/",
+        "@hyperlane-xyz/core=lib/hyperlane-monorepo/solidity/",
+        "@sgn-v2-contracts=lib/sgn-v2-contracts/contracts/"
+    ]
+}

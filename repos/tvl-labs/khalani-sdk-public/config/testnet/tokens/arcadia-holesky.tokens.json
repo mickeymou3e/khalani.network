@@ -1,0 +1,38 @@
+[
+  {
+    "id": "0x41786f6e:0xF4F2b70d3AdC2Cc41014c62E0749E461Cb305178",
+    "address": "0xF4F2b70d3AdC2Cc41014c62E0749E461Cb305178",
+    "decimals": 18,
+    "name": "USDC | holesky",
+    "symbol": "USDC.holesky",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0x4268"
+  },
+  {
+    "id": "0x41786f6e:0xE60739A948f78B9DE07dd6c55b38f635eF55B819",
+    "address": "0xE60739A948f78B9DE07dd6c55b38f635eF55B819",
+    "decimals": 18,
+    "name": "USDT | holesky",
+    "symbol": "USDT.holesky",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0x4268"
+  },
+  {
+    "id": "0x41786f6e:0xcb53156DCeD95a3bfed8Bfa3317781B5Fd50c0Ca",
+    "address": "0xcb53156DCeD95a3bfed8Bfa3317781B5Fd50c0Ca",
+    "decimals": 18,
+    "name": "DAI | holesky",
+    "symbol": "DAI.holesky",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0x4268"
+  },
+  {
+    "id": "0x41786f6e:0x202B0270C5A35ecfe0f9A9deb23e6A11BF2414A2",
+    "address": "0x202B0270C5A35ecfe0f9A9deb23e6A11BF2414A2",
+    "decimals": 18,
+    "name": "ETH | holesky",
+    "symbol": "ETH.holesky",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0x4268"
+  }
+]

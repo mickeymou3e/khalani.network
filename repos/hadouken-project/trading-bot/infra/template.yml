@@ -1,0 +1,472 @@
+Transform: AWS::Serverless-2016-10-31
+
+Parameters:
+  KMSKeyArn:
+    Type: String
+  SecretsArnUs:
+    Type: String
+  DiscordWebhookUrl:
+    Type: String
+    Description: 'Discord webhook URL to send notifications to'
+  LinearSentryDsn:
+    Type: String
+    Description: 'Sentry DSN to send errors to'
+  ArbitrageSentryDsn:
+    Type: String
+    Description: 'Sentry DSN to send errors to'
+  BinanceBaseUrl:
+    Type: String
+    Description: 'Testnet base URL'
+
+Resources:
+  ArbitrageStateFunctionHandler:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./trading-bot.zip
+      Handler: dist/src/lambdaEntrypoint.arbitrageEntrypoint
+      MemorySize: 512
+      Runtime: 'nodejs16.x'
+      Timeout: 25
+      Tracing: Active
+
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - 'kms:Sign'
+                - 'kms:GetPublicKey'
+              Resource: !Ref KMSKeyArn
+            - Effect: Allow
+              Action:
+                - 'secretsmanager:GetSecretValue'
+              Resource: !Ref SecretsArnUs
+      Environment:
+        Variables:
+          NO_COLOR: 'true'
+          DISCORD_WEBHOOK_URL: !Ref DiscordWebhookUrl
+          KMS_KEY_ARN: !Ref KMSKeyArn
+          SENTRY_DSN: !Ref ArbitrageSentryDsn
+          BINANCE_SECRETS: !Ref SecretsArnUs
+          BINANCE_BASEURL: !Ref BinanceBaseUrl
+          BINANCE_REGION_ACTIVE: '0'
+      Events:
+        ReceiveEvent:
+          Type: EventBridgeRule
+          Properties:
+            Pattern:
+              source:
+                - 'aws.states'
+              detail-type:
+                - 'Step Functions Execution Status Change'
+              detail:
+                status:
+                  - 'FAILED'
+                  - 'ABORTED'
+                  - 'TIMED_OUT'
+
+  LinearStateFunctionHandler:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./trading-bot.zip
+      Handler: dist/src/lambdaEntrypoint.linearEntrypoint
+      MemorySize: 256
+      Runtime: 'nodejs16.x'
+      Timeout: 25
+      Tracing: Active
+
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - 'kms:Sign'
+                - 'kms:GetPublicKey'
+              Resource: !Ref KMSKeyArn
+            - Effect: Allow
+              Action:
+                - 'secretsmanager:GetSecretValue'
+              Resource: !Ref SecretsArnUs
+      Environment:
+        Variables:
+          NO_COLOR: 'true'
+          DISCORD_WEBHOOK_URL: !Ref DiscordWebhookUrl
+          KMS_KEY_ARN: !Ref KMSKeyArn
+          SENTRY_DSN: !Ref LinearSentryDsn
+          BINANCE_SECRETS: !Ref SecretsArnUs
+          BINANCE_BASEURL: !Ref BinanceBaseUrl
+      Events:
+        ReceiveEvent:
+          Type: EventBridgeRule
+          Properties:
+            Pattern:
+              source:
+                - 'aws.states'
+              detail-type:
+                - 'Step Functions Execution Status Change'
+              detail:
+                status:
+                  - FAILED
+                  - 'ABORTED'
+                  - 'TIMED_OUT'
+
+  ArbitrageBotStateMachine:
+    Type: AWS::Serverless::StateMachine
+    Properties:
+      Definition:
+        StartAt: ValidateInput
+        States:
+          ValidateInput:
+            Type: Task
+            Resource: !GetAtt ArbitrageStateFunctionHandler.Arn
+            Parameters:
+              'stateMachineName.$': '$$.StateMachine.Name'
+              'stateName.$': '$$.State.Name'
+              'arbitragePair.$': '$.arbitragePair'
+              'chainId.$': '$.chainId'
+            ResultPath: '$'
+            Next: InitializeCounter
+
+          InitializeCounter:
+            Type: Pass
+            Result:
+              'value': 0
+            ResultPath: '$.counter'
+            Next: CalculateTradeVolume
+
+          CalculateTradeVolume:
+            Type: Task
+            Resource: !GetAtt ArbitrageStateFunctionHandler.Arn
+            Parameters:
+              'stateName.$': '$$.State.Name'
+              'arbitragePair.$': '$.arbitragePair'
+              'chainId.$': '$.chainId'
+              'subgraphBlocksBehind.$': '$.calculatedTradeVolume.subgraphBlocksBehind'
+            ResultPath: '$.calculatedTradeVolume'
+            Retry:
+              - ErrorEquals:
+                  - States.TaskFailed
+                  - States.Timeout
+                IntervalSeconds: 10
+                MaxAttempts: 10
+                BackoffRate: 10
+            Next: CheckTradeOpportunity
+
+          CheckTradeOpportunity:
+            Type: Choice
+            Choices:
+              - Variable: '$.calculatedTradeVolume.quoteAmount'
+                StringGreaterThan: '0'
+                Next: SendTx
+            Default: WaitForNextIteration
+
+          SendTx:
+            Type: Task
+            Resource: !GetAtt ArbitrageStateFunctionHandler.Arn
+            Parameters:
+              'stateName.$': '$$.State.Name'
+              'arbitragePair.$': '$.arbitragePair'
+              'quoteAmount.$': '$.calculatedTradeVolume.quoteAmount'
+              'baseAmount.$': '$.calculatedTradeVolume.baseAmount'
+              'swapInfo.$': '$.calculatedTradeVolume.swapInfo'
+              'chainId.$': '$.chainId'
+            Catch:
+              - ErrorEquals:
+                  - States.TaskFailed
+                ResultPath: null
+                Next: WaitForNextIteration
+            ResultPath: '$.sentTransaction'
+            Next: GetTxReceipt
+
+          GetTxReceipt:
+            Type: Task
+            Resource: !GetAtt ArbitrageStateFunctionHandler.Arn
+            Parameters:
+              'stateName.$': '$$.State.Name'
+              'txHash.$': '$.sentTransaction.txHash'
+              'chainId.$': '$.chainId'
+            ResultPath: '$.txReceipt'
+            Retry:
+              - ErrorEquals:
+                  - States.TaskFailed
+                  - States.Timeout
+                IntervalSeconds: 10
+                MaxAttempts: 2
+                BackoffRate: 10
+            Next: CheckIfReceiptIsReady
+
+          CheckIfReceiptIsReady:
+            Type: Choice
+            Choices:
+              - Variable: '$.txReceipt'
+                IsNull: true
+                Next: WaitForTransactionMine
+            Default: ProcessTxReceipt
+
+          ProcessTxReceipt:
+            Type: Task
+            Resource: !GetAtt ArbitrageStateFunctionHandler.Arn
+            Parameters:
+              'stateName.$': '$$.State.Name'
+              'txReceipt.$': '$.txReceipt'
+              'arbitragePair.$': '$.arbitragePair'
+              'quoteAmount.$': '$.calculatedTradeVolume.quoteAmount'
+              'chainId.$': '$.chainId'
+            ResultPath: null
+            Retry:
+              - ErrorEquals:
+                  - States.TaskFailed
+                  - States.Timeout
+                IntervalSeconds: 10
+                MaxAttempts: 2
+                BackoffRate: 10
+            Next: WaitForNextIteration
+
+          WaitForNextIteration:
+            Type: Wait
+            Seconds: 10
+            Next: IncreaseCounter
+
+          IncreaseCounter:
+            Type: Pass
+            Parameters:
+              'value.$': 'States.MathAdd($.counter.value, 1)'
+            ResultPath: '$.counter'
+            Next: CheckMaximumNumberOfIterations
+
+          CheckMaximumNumberOfIterations:
+            Type: Choice
+            Choices:
+              - Variable: '$.counter.value'
+                NumericGreaterThan: 500
+                Next: GetCurrentExecutionId
+            Default: CalculateTradeVolume
+
+          GetCurrentExecutionId:
+            Type: Pass
+            Parameters:
+              'executionNumber.$': "States.StringToJson(States.ArrayGetItem(States.StringSplit($$.Execution.Name, '-'), 2))"
+
+            ResultPath: '$.nextExecutionInfo'
+            Next: GenerateNextExecutionName
+
+          GenerateNextExecutionName:
+            Type: Pass
+            Parameters:
+              'nextExecutionName.$': "States.Format('{}-{}-{}', States.ArrayGetItem(States.StringSplit($$.Execution.Name, '-'), 0), States.ArrayGetItem(States.StringSplit($$.Execution.Name, '-'), 1), States.MathAdd($.nextExecutionInfo.executionNumber, 1))"
+            ResultPath: '$.nextExecutionInfo'
+            Next: RepeatFunctionExecution
+
+          RepeatFunctionExecution:
+            Type: Task
+            Resource: arn:aws:states:::states:startExecution
+            Parameters:
+              Input:
+                'chainId.$': '$.chainId'
+                'arbitragePair.$': '$.arbitragePair'
+                'AWS_STEP_FUNCTIONS_STARTED_BY_EXECUTION_ID.$': '$$.Execution.Id'
+              'StateMachineArn.$': '$$.StateMachine.Id'
+              'Name.$': '$.nextExecutionInfo.nextExecutionName'
+            End: true
+
+          WaitForTransactionMine:
+            Type: Wait
+            Seconds: 10
+            Next: GetTxReceipt
+
+      Tracing:
+        Enabled: true
+      Role: !GetAtt [StatesExecutionRole, Arn]
+
+  LinearBotStateMachine:
+    Type: AWS::Serverless::StateMachine
+    Properties:
+      Definition:
+        StartAt: ValidateInput
+        States:
+          ValidateInput:
+            Type: Task
+            Resource: !GetAtt LinearStateFunctionHandler.Arn
+            Parameters:
+              'stateMachineName.$': '$$.StateMachine.Name'
+              'stateName.$': '$$.State.Name'
+              'poolName.$': '$.poolName'
+              'chainId.$': '$.chainId'
+            ResultPath: '$'
+            Next: InitializeCounter
+
+          InitializeCounter:
+            Type: Pass
+            Result:
+              'value': 0
+            ResultPath: '$.counter'
+            Next: GetIfIsOutOfRange
+
+          GetIfIsOutOfRange:
+            Type: Task
+            Resource: !GetAtt LinearStateFunctionHandler.Arn
+            Parameters:
+              'stateName.$': '$$.State.Name'
+              'poolName.$': '$.poolName'
+              'chainId.$': '$.chainId'
+            Retry:
+              - ErrorEquals:
+                  - States.TaskFailed
+                  - States.Timeout
+                IntervalSeconds: 5
+                MaxAttempts: 20
+                BackoffRate: 10
+            ResultPath: '$.isOutsideRange'
+            Next: CheckIfPoolOutsideRange
+
+          CheckIfPoolOutsideRange:
+            Type: Choice
+            Choices:
+              - Variable: '$.isOutsideRange'
+                BooleanEquals: true
+                Next: SendTx
+            Default: WaitForNextIteration
+
+          SendTx:
+            Type: Task
+            Resource: !GetAtt LinearStateFunctionHandler.Arn
+            Parameters:
+              'stateName.$': '$$.State.Name'
+              'poolName.$': '$.poolName'
+              'chainId.$': '$.chainId'
+            Catch:
+              - ErrorEquals:
+                  - States.TaskFailed
+                ResultPath: null
+                Next: WaitForNextIteration
+            ResultPath: '$.sentTransaction'
+            Next: GetTxReceipt
+
+          GetTxReceipt:
+            Type: Task
+            Resource: !GetAtt LinearStateFunctionHandler.Arn
+            Parameters:
+              'stateName.$': '$$.State.Name'
+              'txHash.$': '$.sentTransaction.txHash'
+              'chainId.$': '$.chainId'
+            ResultPath: '$.txReceipt'
+            Retry:
+              - ErrorEquals:
+                  - States.TaskFailed
+                  - States.Timeout
+                IntervalSeconds: 10
+                MaxAttempts: 2
+                BackoffRate: 10
+            Next: CheckIfReceiptIsReady
+
+          CheckIfReceiptIsReady:
+            Type: Choice
+            Choices:
+              - Variable: '$.txReceipt'
+                IsNull: true
+                Next: WaitForTransactionMine
+            Default: ProcessTxReceipt
+
+          ProcessTxReceipt:
+            Type: Task
+            Resource: !GetAtt LinearStateFunctionHandler.Arn
+            Parameters:
+              'stateName.$': '$$.State.Name'
+              'txReceipt.$': '$.txReceipt'
+              'poolName.$': '$.poolName'
+              'chainId.$': '$.chainId'
+            ResultPath: null
+            Retry:
+              - ErrorEquals:
+                  - States.TaskFailed
+                  - States.Timeout
+                IntervalSeconds: 10
+                MaxAttempts: 2
+                BackoffRate: 10
+            Next: WaitForNextIteration
+
+          WaitForNextIteration:
+            Type: Wait
+            Seconds: 600
+            Next: IncreaseCounter
+
+          IncreaseCounter:
+            Type: Pass
+            Parameters:
+              'value.$': 'States.MathAdd($.counter.value, 1)'
+            ResultPath: '$.counter'
+            Next: CheckMaximumNumberOfIterations
+
+          CheckMaximumNumberOfIterations:
+            Type: Choice
+            Choices:
+              - Variable: '$.counter.value'
+                NumericGreaterThan: 1500
+                Next: GetCurrentExecutionId
+            Default: GetIfIsOutOfRange
+
+          GetCurrentExecutionId:
+            Type: Pass
+            Parameters:
+              'executionNumber.$': "States.StringToJson(States.ArrayGetItem(States.StringSplit($$.Execution.Name, '-'), 1))"
+
+            ResultPath: '$.nextExecutionInfo'
+            Next: GenerateNextExecutionName
+
+          GenerateNextExecutionName:
+            Type: Pass
+            Parameters:
+              'nextExecutionName.$': "States.Format('{}-{}', States.ArrayGetItem(States.StringSplit($$.Execution.Name, '-'), 0), States.MathAdd($.nextExecutionInfo.executionNumber, 1))"
+            ResultPath: '$.nextExecutionInfo'
+            Next: RepeatFunctionExecution
+
+          RepeatFunctionExecution:
+            Type: Task
+            Resource: arn:aws:states:::states:startExecution
+            Parameters:
+              Input:
+                'poolName.$': '$.poolName'
+                'chainId.$': '$.chainId'
+                'AWS_STEP_FUNCTIONS_STARTED_BY_EXECUTION_ID.$': '$$.Execution.Id'
+              'StateMachineArn.$': '$$.StateMachine.Id'
+              'Name.$': '$.nextExecutionInfo.nextExecutionName'
+            End: true
+
+          WaitForTransactionMine:
+            Type: Wait
+            Seconds: 10
+            Next: GetTxReceipt
+
+      Tracing:
+        Enabled: true
+      Role: !GetAtt [StatesExecutionRole, Arn]
+
+  StatesExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: 'Allow'
+            Principal:
+              Service:
+                - !Sub states.${AWS::Region}.amazonaws.com
+            Action: 'sts:AssumeRole'
+      Path: '/'
+      Policies:
+        - PolicyName: StatesExecutionPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 'lambda:InvokeFunction'
+                Resource: '*'
+              - Effect: Allow
+                Action:
+                  - 'states:StartExecution'
+                Resource: '*'
+
+Outputs:
+  ArbitrageStateMachineArn:
+    Value: !Ref ArbitrageBotStateMachine
+  LinearStateMachineArn:
+    Value: !Ref LinearBotStateMachine

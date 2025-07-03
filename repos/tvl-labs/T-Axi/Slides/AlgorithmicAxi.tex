@@ -1,0 +1,583 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage{xcolor}
+\usepackage{AxiCommands}
+
+\usetheme{Darmstadt}
+
+\title{Poor Man's Axi: Algorithmic Version}
+\author{Wojciech Kołowski}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\section{Syntax}
+
+\begin{frame}{Syntax}
+
+\end{frame}
+
+\section{Dynamics}
+
+\begin{frame}{Values (cbv)}
+
+\begin{center}
+  $\infrule{}{\val{\fun{x}{e}}}$
+
+  \vspace{2em}
+
+  $\infrule{\val{v_1} \quad \val{v_2}}{\val{\pair{v_1}{v_2}}}$
+
+  \vspace{2em}
+
+  $\infrule{\val{v}}{\val{\inl{v}}}$ \quad
+  $\infrule{\val{v}}{\val{\inr{v}}}$ \quad
+
+  \vspace{2em}
+
+  $\infrule{}{\val{\unit}}$
+\end{center}
+
+\vspace{2em}
+
+Values are the final results of computation. Note that a function is a value whether or not its body is. Other values are pairs of values, values injected into a sum on the left or right, and unit.
+
+\end{frame}
+
+\begin{frame}{Big-step semantics (cbv)}
+
+\begin{center}
+  $\infrule{}{\bigstep{\fun{x}{e}}{\fun{x}{e}}}$ \quad
+  $\infrule{\bigstep{e_1}{\fun{x}{e}} \quad \bigstep{e_2}{v} \quad \bigstep{\subst{e}{x}{v}}{v'}}{\bigstep{\app{e_1}{e_2}}{v'}}$
+
+  \vspace{2em}
+
+  $\infrule{\bigstep{e_1}{v_1} \quad \bigstep{e_2}{v_2}}{\bigstep{\pair{e_1}{e_2}}{\pair{v_1}{v_2}}}$ \quad
+  $\infrule{\bigstep{e}{\pair{v_1}{v_2}}}{\bigstep{\outl{e}}{v_1}}$ \quad
+  $\infrule{\bigstep{e}{\pair{v_1}{v_2}}}{\bigstep{\outr{e}}{v_2}}$ \quad
+
+  \vspace{2em}
+
+  $\infrule{\bigstep{e}{v}}{\bigstep{\inl{e}}{\inl{v}}}$ \quad
+  $\infrule{\bigstep{e}{v}}{\bigstep{\inr{e}}{\inr{v}}}$ \quad
+
+  \vspace{2em}
+
+  $\infrule{\bigstep{e}{\inl{v}} \quad \bigstep{\app{f}{v}}{v'}}{\bigstep{\case{e}{f}{g}}{v'}}$ \quad
+  $\infrule{\bigstep{e}{\inr{v}} \quad \bigstep{\app{g}{v}}{v'}}{\bigstep{\case{e}{f}{g}}{v'}}$
+
+  \vspace{2em}
+
+  $\infrule{}{\bigstep{\unit}{\unit}}$ \quad
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Small-step semantics (cbv) -- basic rules}
+
+\begin{center}
+  $\infrule{\val{v}}{\smallstep{\app{(\fun{x}{e})}{v}}{\subst{e}{x}{v}}}$
+
+  \vspace{2em}
+
+  $\infrule{\val{v_1} \quad \val{v_2}}{\smallstep{\outl{\pair{v_1}{v_2}}}{v_1}}$ \quad
+  $\infrule{\val{v_1} \quad \val{v_2}}{\smallstep{\outr{\pair{v_1}{v_2}}}{v_2}}$
+
+  \vspace{2em}
+
+  $\infrule{\val{v}}{\smallstep{\case{(\inl{v})}{f}{g}}{\app{f}{v}}}$
+
+  \vspace{2em}
+
+  $\infrule{\val{v}}{\smallstep{\case{(\inr{v})}{f}{g}}{\app{g}{v}}}$
+
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Small-step semantics (cbv) -- boring rules}
+
+\begin{center}
+  $\infrule{\smallstep{e_1}{e_1'}}{\smallstep{\app{e_1}{e_2}}{\app{e_1'}{e_2}}}$ \quad
+  $\infrule{\val{v_1} \quad \smallstep{e_2}{e_2'}}{\smallstep{\app{v_1}{e_2}}{\app{v_1}{e_2'}}}$
+
+  \vspace{2em}
+
+  $\infrule{\smallstep{e_1}{e_1'}}{\smallstep{\pair{e_1}{e_2}}{\pair{e_1'}{e_2}}}$ \quad
+  $\infrule{\val{v_1} \quad \smallstep{e_2}{e_2'}}{\smallstep{\pair{v_1}{e_2}}{\pair{v_1}{e_2'}}}$
+
+  \vspace{2em}
+
+  $\infrule{\smallstep{e}{e'}}{\smallstep{\outl{e}}{\outl{e'}}}$ \quad
+  $\infrule{\smallstep{e}{e'}}{\smallstep{\outr{e}}{\outr{e'}}}$
+
+  \vspace{2em}
+
+  $\infrule{\smallstep{e}{e'}}{\smallstep{\inl{e}}{\inl{e'}}}$ \quad
+  $\infrule{\smallstep{e}{e'}}{\smallstep{\inr{e}}{\inr{e'}}}$
+
+  \vspace{2em}
+
+  $\infrule{\smallstep{e}{e'}}{\smallstep{\case{e}{f}{g}}{\case{e'}{f}{g}}}$
+
+\end{center}
+
+\end{frame}
+
+\section{Statics}
+
+\begin{frame}{Algorithmic typing}
+
+\end{frame}
+
+\section{Computational equality}
+
+\begin{frame}{Weak head normal forms}
+
+\begin{center}
+  $\infrule{}{\whnf{n}}$
+
+  \vspace{2em}
+
+  $\infrule{}{\whnf{\fun{x}{e}}}$
+
+  \vspace{2em}
+
+  $\infrule{}{\whnf{\pair{e_1}{e_2}}}$
+
+  \vspace{2em}
+
+  $\infrule{}{\whnf{\inl{e}}}$ \quad
+  $\infrule{}{\whnf{\inr{e}}}$ \quad
+
+  \vspace{2em}
+
+  $\infrule{}{\whnf{\unit}}$ \quad
+  $\infrule{}{\whnf{\emptyelim{e}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Weak head normal forms grammar}
+
+Weak head normal forms: \\
+$w ::=$ \\
+\qquad $n \pipe \fun{x}{e} \pipe$ \\
+\qquad $\pair{e_1}{e_2} \pipe$ \\
+\qquad $\inl{e} \pipe \inr{e} \pipe$ \\
+\qquad $\unit \pipe \emptyelim{e}$
+
+\vspace{2em}
+
+Neutral forms: \\
+$n ::=$ \\
+\qquad $x \pipe \app{n}{e} \pipe$ \\
+\qquad $\outl{n} \pipe \outr{n} \pipe$ \\
+\qquad $\case{n}{e_1}{e_2} \pipe$ \\
+
+\end{frame}
+
+\begin{frame}{Whnf reduction -- basic rules}
+
+\begin{center}
+  $\infrule{}{\smallstepwhnf{\app{(\fun{x}{e_1})}{e_2}}{\subst{e_1}{x}{e_2}}}$
+
+  \vspace{2em}
+
+  $\infrule{}{\smallstepwhnf{\outl{\pair{e_1}{e_2}}}{e_1}}$ \quad
+  $\infrule{}{\smallstepwhnf{\outr{\pair{e_1}{e_2}}}{e_2}}$
+
+  \vspace{2em}
+
+  $\infrule{}{\smallstepwhnf{\case{(\inl{e})}{f}{g}}{\app{f}{e}}}$
+
+  \vspace{2em}
+
+  $\infrule{}{\smallstepwhnf{\case{(\inr{e})}{f}{g}}{\app{g}{e}}}$
+
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Whnf reduction -- boring rules}
+
+\begin{center}
+  $\infrule{\smallstepwhnf{e_1}{e_1'}}{\smallstepwhnf{\app{e_1}{e_2}}{\app{e_1'}{e_2}}}$ \quad
+  $\infrule{\whnf{e_1} \quad \smallstepwhnf{e_2}{e_2'}}{\smallstepwhnf{\app{e_1}{e_2}}{\app{e_1}{e_2'}}}$
+
+  \vspace{2em}
+
+  $\infrule{\smallstepwhnf{e}{e'}}{\smallstepwhnf{\outl{e}}{\outl{e'}}}$ \quad
+  $\infrule{\smallstepwhnf{e}{e'}}{\smallstepwhnf{\outr{e}}{\outr{e'}}}$
+
+  \vspace{2em}
+
+  $\infrule{\smallstepwhnf{e}{e'}}{\smallstepwhnf{\case{e}{f}{g}}{\case{e'}{f}{g}}}$
+
+\end{center}
+
+\end{frame}
+
+\NewDocumentCommand{\checkcompeq}{O{\Gamma} m m m}{#1 \vdash #2 \equiv #3 \mathcolor{blue}{\Leftarrow} #4}
+\NewDocumentCommand{\infercompeq}{O{\Gamma} m m m}{#1 \vdash #2 \equiv #3 \mathcolor{red}{\Rightarrow} #4}
+\NewDocumentCommand{\checkcompeqwhnf}{O{\Gamma} m m m}{#1 \vdash #2 \equiv #3 \mathcolor{blue}{\Leftarrow}_{\texttt{whnf}} #4}
+\NewDocumentCommand{\infercompeqwhnf}{O{\Gamma} m m m}{#1 \vdash #2 \equiv #3 \mathcolor{red}{\Rightarrow}_{\texttt{whnf}} #4}
+
+\begin{frame}{Algorithmic computational equality 0}
+
+\begin{center}
+  $\infrule[Var]{\sidecond{(x : A) \in \Gamma}}{\infercompeq{x}{x}{A}}$
+
+  \vspace{2em}
+
+  %$\infrule[Annot]{\checkcompeq{e}{e'}{A}}{\infercompeq{\annot{e}{A}}{ź}{A}}$
+
+  \vspace{2em}
+
+  $\infrule[Sub]{\infercompeq{e}{e'}{B} \quad \sidecond{A = B}}{\checkcompeq{e}{e'}{A}}$
+
+  \vspace{2em}
+
+  $\infrule{\smallstepwhnf{e_1}{e_1'} \quad \smallstepwhnf{e_2}{e_2'} \quad \checkcompeq{e_1'}{e_2'}{A}}{\checkcompeqwhnf{e_1}{e_2}{A}}$
+
+  \vspace{2em}
+
+  $\infrule{\smallstepwhnf{e_1}{e_1'} \quad \smallstepwhnf{e_2}{e_2'} \quad \infercompeq{e_1'}{e_2'}{A}}{\infercompeqwhnf{e_1}{e_2}{A}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Algorithmic computational equality 1}
+
+\begin{center}
+  $\infrule{\checkcompeqwhnf[\extend{\Gamma}{x}{A}]{e_1}{e_2}{B}}{\checkcompeq{\fun{x}{e_1}}{\fun{x}{e_2}}{\Fun{A}{B}}}$
+
+  \vspace{2em}
+
+  $\infrule{\infercompeq{n_1}{n_2}{\Fun{A}{B}} \quad \checkcompeqwhnf{e_1}{e_2}{A}}{\infercompeq{\app{n_1}{e_1}}{\app{n_2}{e_2}}{B}}$
+
+  \vspace{2em}
+
+  $\infrule{\checkcompeqwhnf{a_1}{a_2}{A} \quad \checkcompeqwhnf{b_1}{b_2}{B}}{\checkcompeq{\pair{a_1}{b_1}}{\pair{a_2}{b_2}}{\Prod{A}{B}}}$
+
+  \vspace{2em}
+
+  $\infrule{\infercompeq{n_1}{n_2}{\Prod{A}{B}}}{\infercompeq{\outl{n_1}}{\outl{n_2}}{A}}$ \quad
+  $\infrule{\infercompeq{n_1}{n_2}{\Prod{A}{B}}}{\infercompeq{\outr{n_1}}{\outr{n_2}}{B}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Algorithmic computational equality 2}
+
+\begin{center}
+  $\infrule{\checkcompeqwhnf{e_1}{e_2}{A}}{\checkcompeq{\inl{e_1}}{\inl{e_2}}{\Sum{A}{B}}}$ \quad
+  $\infrule{\checkcompeqwhnf{e_1}{e_2}{B}}{\checkcompeq{\inr{e_1}}{\inr{e_2}}{\Sum{A}{B}}}$
+
+  \vspace{2em}
+
+  $\infrule{\infercompeq{n_1}{n_2}{\Sum{A}{B}} \quad \begin{array}{c} \checkcompeqwhnf{f_1}{f_2}{\Fun{A}{C}} \\ \checkcompeqwhnf{g_1}{g_2}{\Fun{B}{C}} \end{array}}{\infercompeq{\case{n_1}{f_1}{g_1}}{\case{n_2}{f_2}{g_2}}{C}}$
+
+  \vspace{2em}
+
+  $\infrule{}{\checkcompeq{\unit}{\unit}{\Unit}}$ \quad
+  $\infrule{\checkcompeq{e_1}{e_2}{\Empty}}{\checkcompeq{\emptyelim{e_1}}{\emptyelim{e_2}}{A}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Uniqueness rules (asymmetric, contraction-like)}
+
+\begin{center}
+  $\infrule[Fun-Uniq]{\check{f}{\Fun{A}{B}}}{\checkcompeq{f}{\fun{x}{\app{f}{x}}}{\Fun{A}{B}}}$
+
+  \vspace{2em}
+
+  $\infrule[Prod-Uniq]{\check{e}{\Prod{A}{B}}}{\checkcompeq{e}{\pair{\outl{e}}{\outr{e}}}{\Prod{A}{B}}}$
+
+  \vspace{2em}
+
+  $\infrule[Unit-Uniq]{\check{e}{\Unit}}{\checkcompeq{e}{\unit}{\Unit}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Uniqueness rules (symmetric, prop-like)}
+
+\begin{center}
+  $\infrule[Fun-Uniq-Alt]{\checkcompeq[\extend{\Gamma}{x}{A}]{\app{f}{x}}{\app{g}{x}}{B}}{\checkcompeq{f}{g}{\Fun{A}{B}}}$
+
+  \vspace{2em}
+
+  $\infrule[Prod-Uniq-Alt]{\begin{array}{c} \checkcompeq{\outl{e_1}}{\outl{e_2}}{A} \\ \checkcompeq{\outr{e_1}}{\outr{e_2}}{B} \end{array}}{\checkcompeq{e_1}{e_2}{\Prod{A}{B}}}$
+
+  \vspace{2em}
+
+  $\infrule[Unit-Uniq-Alt]{\check{e_1}{\Unit} \quad \check{e_2}{\Unit}}{\checkcompeq{e_1}{e_2}{\Unit}}$
+
+  \vspace{2em}
+
+  $\infrule[Empty-Uniq-Alt]{\check{e_1}{\Empty} \quad \check{e_2}{\Empty}}{\checkcompeq{e_1}{e_2}{\Empty}}$
+
+\end{center}
+
+\end{frame}
+
+\section{Proofs}
+
+\begin{frame}{Subsumption}
+
+\begin{center}
+  $\infrule[Sub]{\proofinfer{e}{P'} \quad \sidecond{P = P'}}{\proofcheck{e}{P}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Annotations}
+
+\begin{center}
+  $\infrule[Proof-Annot]{\prop[\Gamma]{P} \quad \proofcheck{e}{P}}{\proofinfer{\proofannot{P}{e}}{P}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Assumptions}
+
+\begin{center}
+  $\infrule[Ass]{\sidecond{P \in \Gamma}}{\proofinfer{P}{P}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{True and False}
+
+\begin{center}
+  $\infrule[True-Intro]{}{\proofinfer{\trueintro}{\True}}$
+
+  \vspace{2em}
+
+  $\infrule[False-Elim]{\proofcheck{e}{\False}}{\proofcheck{\falseelim{e}}{P}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Implication}
+
+\begin{center}
+  $\infrule[Impl-Intro-Check]{\proofcheck[\assume{\Gamma}{P}]{e}{Q}}{\proofcheck{\implintro{P}{e}}{\Impl{P}{Q}}}$
+
+  \vspace{2em}
+
+  $\infrule[Impl-Intro-Infer]{\prop[\Gamma]{P} \quad \proofinfer[\assume{\Gamma}{P}]{e}{Q}}{\proofinfer{\implintro{P}{e}}{\Impl{P}{Q}}}$
+
+  \vspace{2em}
+
+  $\infrule[Impl-Elim]{\proofinfer{e_1}{\Impl{P}{Q}} \quad \proofcheck{e_2}{P}}{\proofinfer{\implelim{e_1}{e_2}}{Q}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Negation}
+
+\begin{center}
+  $\infrule[Not-Intro]{\prop[\Gamma]{P} \quad \proofcheck[\assume{\Gamma}{P}]{e}{\False}}{\proofinfer{\notintro{P}{e}}{\Not{P}}}$
+
+  \vspace{2em}
+
+  $\infrule[Not-Elim]{\proofinfer{e_1}{\Not{P}} \quad \proofcheck{e_2}{P}}{\proofinfer{\notelim{e_1}{e_2}}{\False}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Conjunction}
+
+\begin{center}
+  $\infrule[And-Intro]{\proofcheck{e_1}{P} \quad \proofcheck{e_2}{Q}}{\proofcheck{\andintro{e_1}{e_2}}{\And{P}{Q}}}$
+
+  \vspace{2em}
+
+  $\infrule[And-Intro-Infer]{\proofinfer{e_1}{P} \quad \proofinfer{e_2}{Q}}{\proofinfer{\andintro{e_1}{e_2}}{\And{P}{Q}}}$
+
+  \vspace{2em}
+
+  $\infrule[And-Elim-L]{\proofinfer{e}{\And{P}{Q}}}{\proofinfer{\andeliml{e}}{P}}$
+
+  \vspace{2em}
+
+  $\infrule[And-Elim-R]{\proofinfer{e}{\And{P}{Q}}}{\proofinfer{\andelimr{e}}{Q}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Biconditional}
+
+\begin{center}
+  $\infrule[Iff-Intro]{\proofcheck{e_1}{\Impl{P}{Q}} \quad \proofcheck{e_2}{\Impl{Q}{P}}}{\proofcheck{\iffintro{e_1}{e_2}}{\Iff{P}{Q}}}$
+
+  \vspace{2em}
+
+  $\infrule[Iff-Elim-L]{\proofinfer{e}{\Iff{P}{Q}}}{\proofinfer{\iffeliml{e}}{\Impl{P}{Q}}}$
+
+  \vspace{2em}
+
+  $\infrule[Iff-Elim-R]{\proofinfer{e}{\Iff{P}{Q}}}{\proofinfer{\iffelimr{e}}{\Impl{Q}{P}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Biconditional -- inference}
+
+\begin{center}
+  $\infrule[Iff-Intro-Infer-L]{\proofinfer{e_1}{\Impl{P}{Q}} \quad \proofcheck{e_2}{\Impl{Q}{P}}}{\proofinfer{\iffintro{e_1}{e_2}}{\Iff{P}{Q}}}$
+
+  \vspace{2em}
+
+  $\infrule[Iff-Intro-Infer-R]{\proofinfer{e_2}{\Impl{Q}{P}} \quad \proofcheck{e_1}{\Impl{P}{Q}}}{\proofinfer{\iffintro{e_1}{e_2}}{\Iff{P}{Q}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Disjunction -- checking}
+
+\begin{center}
+  $\infrule[Or-Intro-L]{\proofcheck{e}{P}}{\proofcheck{\orintrol[Q]{e}}{\Or{P}{Q}}}$
+
+  \vspace{2em}
+
+  $\infrule[Or-Intro-R]{\proofcheck{e}{Q}}{\proofcheck{\orintror[P]{e}}{\Or{P}{Q}}}$
+
+  \vspace{2em}
+
+  $\infrule[Or-Elim]{\proofinfer{e_1}{\Or{P}{Q}} \quad \proofcheck{e_2}{\Impl{P}{R}} \quad \proofcheck{e_3}{\Impl{Q}{R}}}{\proofcheck{\orelim{e_1}{e_2}{e_3}}{R}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Disjunction -- inference}
+
+\begin{center}
+  $\infrule[Or-Intro-L-Infer]{\prop[\Gamma]{Q} \quad \proofinfer{e}{P}}{\proofinfer{\orintrol[Q]{e}}{\Or{P}{Q}}}$
+
+  \vspace{2em}
+
+  $\infrule[Or-Intro-R-Infer]{\prop[\Gamma]{P} \quad \proofinfer{e}{Q}}{\proofinfer{\orintror[P]{e}}{\Or{P}{Q}}}$
+
+  \vspace{2em}
+
+  $\infrule[Or-Elim]{\proofinfer{e_1}{\Or{P}{Q}} \quad \proofinfer{e_2}{\Impl{P}{R}} \quad \proofinfer{e_3}{\Impl{Q}{R}}}{\proofinfer{\orelim{e_1}{e_2}{e_3}}{R}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Double Negation Elimination}
+
+\begin{center}
+  $\infrule[Classic-Check]{\proofcheck{e}{\Not{\Not{P}}}}{\proofcheck{\dn{e}}{P}}$
+
+  \vspace{2em}
+
+  $\infrule[Classic-Infer]{\proofinfer{e}{\Not{\Not{P}}}}{\proofinfer{\dn{e}}{P}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Cut rule}
+
+\begin{center}
+  $\infrule[Cut]{\proofinfer{e_1}{P} \quad \proofcheck[\assume{\Gamma}{P}]{e_2}{Q}}{\proofcheck{\cut{e_1}{e_2}}{Q}}$
+
+  \vspace{2em}
+
+  $\infrule[Cut-Infer]{\proofinfer{e_1}{P} \quad \proofinfer[\assume{\Gamma}{P}]{e_2}{Q}}{\proofinfer{\cut{e_1}{e_2}}{Q}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Universal quantifier}
+
+\begin{center}
+  $\infrule[Forall-Intro]{\proofcheck[\extend{\Gamma}{y}{A}]{e}{\subst{P}{x}{y}}}{\proofcheck{\allintro{y}{e}}{\All{x}[A]{P}}}$
+
+  \vspace{2em}
+
+  $\infrule[Forall-Intro-Infer]{\proofinfer[\extend{\Gamma}{x}{A}]{e}{P}}{\proofinfer{\allintro{x}[A]{e}}{\All{x}[A]{P}}}$
+
+  \vspace{2em}
+
+  $\infrule[Forall-Elim]{\proofinfer{e}{\All{x}[A]{P}} \quad \check{t}{A}}{\proofinfer{\allelim{e}{t}}{\subst{P}{x}{t}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Existential quantifier}
+
+\begin{center}
+  $\infrule[Exists-Intro]{\check{t}{A} \quad \proofcheck{e}{\subst{P}{x}{t}}}{\proofcheck{\exintro{t}{e}}{\Ex{x}[A]{P}}}$
+
+  \vspace{2em}
+
+  $\infrule[Exists-Elim]{\proofinfer{e_1}{\Ex{x}[A]{P}} \quad \proofinfer[\assume{\extend{\Gamma}{y}{A}}{\subst{P}{x}{y}}]{e_2}{R}}{\proofinfer{\exelim{y}{e_1}{e_2}}{R}}$
+
+  \vspace{2em}
+
+  $\infrule[Exists-Elim-Check]{\proofinfer{e_1}{\Ex{x}[A]{P}} \quad \proofcheck[\assume{\extend{\Gamma}{y}{A}}{\subst{P}{x}{y}}]{e_2}{R}}{\proofcheck{\exelim{y}{e_1}{e_2}}{R}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Conversion rule -- TODO}
+
+\begin{center}
+  $\infrule[Conv]{\prop[\extend{\Gamma}{x}{A}]{P} \quad \compeq{t_1}{t_2}{A} \quad \proves{e}{\subst{P}{x}{t_1}}}{\proves{e}{\subst{P}{x}{t_2}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Equality introduction and elimination}
+
+\begin{center}
+  $\infrule[Eq-Intro]{\check{t}{A}}{\proofcheck{\refl[t]}{\Eq[A]{t}{t}}}$
+
+  \vspace{2em}
+
+  $\infrule[Eq-Intro-Infer]{\infer{t}{A}}{\proofinfer{\refl[t]}{\Eq[A]{t}{t}}}$
+
+  \vspace{2em}
+
+  $\infrule[Eq-Elim]{\prop[\extend{\Gamma}{x}{A}]{P} \quad \proofinfer{e}{\Eq[A]{t_1}{t_2}} \quad \proofcheck{e'}{\subst{P}{x}{t_1}}}{\proofinfer{\rewrite{e}{e'}}{\subst{P}{x}{t_2}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Experimenting with $\refl$}
+
+\begin{center}
+  $\infrule[Eq-Intro-Alt]{\checkcompeq{t_1}{t_2}{A}}{\proofcheck{\refl}{\Eq[A]{t_1}{t_2}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Function extensionality}
+
+\begin{center}
+  $\infrule[Funext]{\proofcheck{e}{\All{x}[A]{\Eq[B]{\app{f}{x}}{\app{g}{x}}}}}{\proofcheck{\funext{e}}{\Eq[\Fun{A}{B}]{f}{g}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Reasoning by cases (for sums)}
+
+\begin{center}
+  $\infrule{\begin{array}{c} \prop[\extend{\Gamma}{x}{\Sum{A}{B}}]{P} \\ \infer{t}{\Sum{A}{B}} \end{array} \quad \begin{array}{c} \proofcheck[\extend{\Gamma}{a}{A}]{e_1}{\subst{P}{x}{\inl{a}}} \\ \proofcheck[\extend{\Gamma}{b}{B}]{e_2}{\subst{P}{x}{\inr{b}}} \end{array}}{\proofinfer{\sumind{t}{a}{e_1}{b}{e_2}}{\subst{P}{x}{t}}}$
+\end{center}
+
+\vspace{2em}
+
+TODO: the modes are completely wrong.
+
+\end{frame}
+
+\end{document}

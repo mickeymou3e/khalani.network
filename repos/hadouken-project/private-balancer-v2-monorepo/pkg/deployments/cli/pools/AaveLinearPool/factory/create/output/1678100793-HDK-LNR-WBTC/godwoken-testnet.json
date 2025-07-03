@@ -1,0 +1,27 @@
+{
+  "transaction": {
+    "hash": "0x9eabbc1477af30ab8d9277ca4304275b503888e709520e973a6aab4cd1504f1a",
+    "blockNumber": 2024260
+  },
+  "data": {
+    "AaveLinearPoolFactory": {
+      "create": {
+        "input": {
+          "name": "Linear WBTC",
+          "symbol": "HDK-LNR-WBTC",
+          "underlyingToken": "0x6a447Ba163039D7e1d674668578A0eb049245915",
+          "wrappedToken": "0xF504082C78C0Bdf6f301D773ae6553F6264249E0",
+          "upperTarget": "125000000000000000000",
+          "swapFeePercentage": "1500000000000000",
+          "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0x6a447Ba163039D7e1d674668578A0eb049245915": "10000000000",
+            "0xF504082C78C0Bdf6f301D773ae6553F6264249E0": "10000000000"
+          }
+        },
+        "output": "0xa97E7Af6Acc0a34E7d340b634ba056F5dE9498E6"
+      }
+    }
+  },
+  "timestamp": 1678100793438
+}

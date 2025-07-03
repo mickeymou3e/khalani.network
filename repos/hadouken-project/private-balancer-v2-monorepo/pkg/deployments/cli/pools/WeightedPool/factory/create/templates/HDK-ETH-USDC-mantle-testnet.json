@@ -1,0 +1,22 @@
+{
+    "name": "ETH/USDC",
+    "symbol": "HDK-ETH-USDC",
+    "tokens": [
+        "0x0300e13d8F59FD7ae44980FCDb557565c164D535",
+        "0xBf89943CAbFB8E5D637558cD0a30467ba7188D22"
+    ],
+    "weights": [
+        "500000000000000000",
+        "500000000000000000"
+    ],
+    "rateProviders": [
+        "0x0000000000000000000000000000000000000000",
+        "0x0000000000000000000000000000000000000000"
+    ],
+    "swapFeePercentage": "3000000000000000",
+    "delegate": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+    "initialLiquidity": {
+        "0x0300e13d8F59FD7ae44980FCDb557565c164D535": "250000000",
+        "0xBf89943CAbFB8E5D637558cD0a30467ba7188D22": "150000000000000000"
+    }
+}

@@ -1,0 +1,160 @@
+{
+  "tokens": [
+    {
+      "name": "pCKB",
+      "symbol": "CKB",
+      "decimals": 18,
+      "source": "gw",
+      "address": "0x0eb76790a2014dd1f65488ccd703bcdf75f8195e"
+    },
+    {
+      "name": "Wrapped Ether",
+      "symbol": "ETH",
+      "decimals": 18,
+      "source": "eth",
+      "address": "0xff900e1436cbcd25d72b7dafe6ef4d569405cc05"
+    },
+    {
+      "name": "Tether USDT",
+      "symbol": "USDT",
+      "decimals": 6,
+      "source": "eth",
+      "address": "0x30b0a247de59a1cdf44329b756d3343e5afed7f9"
+    },
+    {
+      "name": "Dai Stablecoin",
+      "symbol": "DAI",
+      "decimals": 18,
+      "source": "eth",
+      "address": "0x16fdc39a563400aa6eaca6a5ac4f2cab9a0bc8c6"
+    },
+    {
+      "name": "USD Coin",
+      "symbol": "USDC",
+      "decimals": 6,
+      "source": "eth",
+      "address": "0x0c7f21908222098616803eff5d054d3f4ef57ebb"
+    },
+    {
+      "name": "BNB|bsc",
+      "symbol": "BNB",
+      "decimals": 18,
+      "source": "bsc",
+      "address": "0x3b5b0179fdef8f88c39a94039b66120933729ace"
+    },
+    {
+      "name": "BUSD|bsc",
+      "symbol": "BUSD",
+      "decimals": 18,
+      "source": "bsc",
+      "address": "0x437f3a7e7af6c611cdbbd33ce79c56aa7b6f7001"
+    },
+    {
+      "name": "USDT|bsc",
+      "symbol": "USDT",
+      "decimals": 18,
+      "source": "bsc",
+      "address": "0xb5e2f2cf4611bcc578977aca17a9724b4b1e9863"
+    },
+    {
+      "name": "ETH|bsc",
+      "symbol": "ETH",
+      "decimals": 18,
+      "source": "bsc",
+      "address": "0x5d35d34da971c795ec97ed69786302c6149979e7"
+    },
+    {
+      "name": "USDC|bsc",
+      "symbol": "USDC",
+      "decimals": 18,
+      "source": "bsc",
+      "address": "0x246aeb957fdd930e81ed539402a7f98eef0f8945"
+    },
+    {
+      "name": "WBTC|eth",
+      "symbol": "WBTC",
+      "decimals": 8,
+      "source": "eth",
+      "address": "0x6a447ba163039d7e1d674668578a0eb049245915"
+    },
+    {
+      "name": "BUSD|eth",
+      "symbol": "BUSD",
+      "decimals": 18,
+      "source": "eth",
+      "address": "0xdc40d03d15f5861f486fc4e81b6333e489d78195"
+    },
+    {
+      "name": "Hadouken Interest Bearing USDC",
+      "symbol": "hUSDC",
+      "decimals": 6,
+      "address": "0x70A58262bc55fBF3965bd1C0861e3DDf1a253777",
+      "source": "gw",
+      "unwrappedAddress": "0x5726F09D5333Dd7A40987ad61b99ec1A316af5CC"
+    },
+    {
+      "name": "Hadouken Interest Bearing USDT",
+      "symbol": "hUSDT",
+      "decimals": 6,
+      "address": "0x4Fa5AD2756ac3C62285ec896acc2d514c65F3ed3",
+      "source": "gw",
+      "unwrappedAddress": "0x1f80CD0D7a7c51AD2d7aa1ba749A294b2504EE01"
+    },
+
+    {
+      "name": "Hadouken Interest Bearing CKB",
+      "symbol": "hCKB",
+      "decimals": 18,
+      "address": "0xe7Ea406348dB83f3A0014295d859FB3c896A226B",
+      "source": "gw",
+      "unwrappedAddress": "0xbE264166233E029D98Be7eA611707149102b2988"
+    },
+
+    {
+      "name": "Hadouken Interest Bearing ETH",
+      "symbol": "hETH",
+      "decimals": 18,
+      "address": "0x6B6BceB1f7E1F6efB203D7F75bEb34BEaC62fE43",
+      "source": "gw",
+      "unwrappedAddress": "0xf018b886ef7995B49065aE07F398280236ad5ec0"
+    },
+
+    {
+      "name": "Hadouken Interest Bearing WBTC",
+      "symbol": "hWBTC",
+      "decimals": 8,
+      "address": "0xF504082C78C0Bdf6f301D773ae6553F6264249E0",
+      "source": "gw",
+      "unwrappedAddress": "0x719887A672647b3E6f27C9E89B6E6F00c834543E"
+    },
+    {
+      "name": "Celer USDC",
+      "symbol": "ceUSDC",
+      "decimals": 6,
+      "source": "ce",
+      "address": "0x4ea08dca142f103ac2d5ff95f1d376712c5ef5a9"
+    },
+    {
+      "name": "Celer USDT",
+      "symbol": "ceUSDT",
+      "decimals": 6,
+      "source": "ce",
+      "address": "0xcdb3d2dc427a5bc9af54a9c2ed2f5950619184bf"
+    },
+    {
+      "name": "Hadouken Token",
+      "symbol": "HDK",
+      "decimals": 18,
+      "source": "gw",
+      "address": "0xB314aebeB775D3D0F3b6487D519FB026f443D65d"
+    },
+    {
+      "name": "Hadouken Interest Bearing BNB",
+      "symbol": "hBNB",
+      "decimals": 6,
+      "address": "0x603a7a9a6421556c4c6f58d2c5c016d523a52878",
+      "source": "bsc",
+      "unwrappedAddress": "0x642f29D70DeBa6038e36E5a024173450A2366F89"
+    }
+  ]
+}

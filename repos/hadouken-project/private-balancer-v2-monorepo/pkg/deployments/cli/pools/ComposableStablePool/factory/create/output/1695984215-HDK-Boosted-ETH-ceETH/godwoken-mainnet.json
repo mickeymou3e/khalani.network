@@ -1,0 +1,40 @@
+{
+  "transaction": {
+    "hash": "0x6f704c20980db878958e7f5eb62c3ee70e0340a0f4807633fc86f508f466051f"
+  },
+  "data": {
+    "ComposableStablePoolFactory": {
+      "create": {
+        "input": {
+          "name": "Celer ETH Stable Pool",
+          "symbol": "HDK-Boosted-ETH-ceETH",
+          "tokens": [
+            "0x70Af4745b56c786db80b860B76316E0Ce9D7AC43",
+            "0xB66954619363145a05eF835547449EB9050d82f6"
+          ],
+          "rateProviders": [
+            "0x70Af4745b56c786db80b860B76316E0Ce9D7AC43",
+            "0x0000000000000000000000000000000000000000"
+          ],
+          "priceRateCacheDuration": [
+            "0",
+            "0"
+          ],
+          "amplificationParameter": "300",
+          "swapFeePercentage": "100000000000000",
+          "exemptFromYieldProtocolFeeFlags": [
+            false,
+            false
+          ],
+          "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0x70Af4745b56c786db80b860B76316E0Ce9D7AC43": "1000000000000000",
+            "0xB66954619363145a05eF835547449EB9050d82f6": "1000000000000000"
+          }
+        },
+        "output": "0xC71F7372C0F297B5C214FD6795852c413C883D36"
+      }
+    }
+  },
+  "timestamp": 1695984215840
+}

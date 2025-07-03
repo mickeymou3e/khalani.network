@@ -1,0 +1,73 @@
+{
+  "env": "testnet",
+  "network": "godwoken-testnet",
+  "delay": "10000",
+  "chainId": "0x116e9",
+  "marketId": "Godwoken",
+  "gasPrice": 90000000000000,
+  "gasLimit": 1000000,
+  "rpcUrl": "https://godwoken-testnet-v1.ckbapp.dev",
+  "readOnlyRpcUrl": "https://godwoken-testnet-v1.ckbapp.dev",
+  "wsUrl": "wss://godwoken-testnet-v1.ckbapp.dev/ws",
+  "explorer": "https://v1.testnet.gwscan.com",
+  "nervos": {
+    "ckb": {
+      "url": "https://testnet.ckb.dev"
+    },
+    "indexer": {
+      "url": "https://indexer-testnet.ckb.tools"
+    },
+    "rollup_type_hash": "0x702359ea7f073558921eb50d8c1c77e92f760c8f8656bde4995f26b8963e2dd8",
+    "rollup_type_script": {
+      "code_hash": "0x1e44736436b406f8e48a30dfbddcf044feb0c9eebfe63b0f81cb5bb727d84854",
+      "hash_type": "type",
+      "args": "0x86c7429247beba7ddd6e4361bcdfc0510b0b644131e2afb7e486375249a01802"
+    },
+    "eth_account_lock_hash": "0x07521d0aa8e66ef441ebc31204d86bb23fc83e9edc58c19dbb1b0ebe64336ec0",
+    "deposit_lock_script_type_hash": "0x50704b84ecb4c4b12b43c7acb260ddd69171c21b4c0ba15f3c469b7d143f6f18",
+    "portal_wallet_lock_hash": "0x58c5f491aba6d61678b7cf7edf4910b1f5e00ec0cde2f42e0abb4fd9aff25a63",
+    "rc_lock_script_type_hash": "0x79f90bb5e892d80dd213439eeab551120eb417678824f282b4ffb5f21bad2e1e"
+  },
+  "nativeToken": {
+    "address": "0xE05d380839f32bC12Fb690aa6FE26B00Bd982613",
+    "symbol": "CKB",
+    "wrapAddress": null
+  },
+  "tokens": [
+    {
+      "symbol": "BTC.e",
+      "address": "0x6a447Ba163039D7e1d674668578A0eb049245915",
+      "displaySymbol": "WBTC"
+    },
+    {
+      "symbol": "BNB.bsc",
+      "address": "0x3B5b0179fDEF8F88c39A94039B66120933729ace",
+      "displaySymbol": "BNB"
+    },
+    {
+      "symbol": "ETH.e",
+      "address": "0xfF900E1436cBCd25d72B7DafE6Ef4d569405cc05",
+      "displaySymbol": "ETH"
+    },
+    {
+      "symbol": "USDT.e",
+      "address": "0x30b0A247DE59a1CDF44329b756d3343E5afEd7f9",
+      "displaySymbol": "USDT"
+    },
+    {
+      "symbol": "USDC.e",
+      "address": "0x0c7F21908222098616803EfF5d054d3F4EF57EBb",
+      "displaySymbol": "USDC"
+    },
+    {
+      "symbol": "CKB",
+      "address": "0x0eb76790a2014Dd1F65488Ccd703bCDF75F8195e",
+      "displaySymbol": "CKB"
+    }
+  ],
+  "bandOracleStdReference": "0x0c2362c9A0586Dd7295549C65a4A5e3aFE10a88A",
+  "diaOracleV2": "0x96C5F1E50c4393EFa890699cD9AeCf3FB58dcB99",
+  "gnosisSafe": "0x39a4A1498C7cF5b22bc938bfFF1Ae2C6cA948d7c",
+  "gnosisApi": "https://safe-txs-godwoken-testnet.khalani.network/api/v1/safes",
+  "isGnosisSafe": false
+}

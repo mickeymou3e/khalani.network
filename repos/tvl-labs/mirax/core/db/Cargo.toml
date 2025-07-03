@@ -1,0 +1,21 @@
+[package]
+name = "mirax-db"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+im.workspace = true
+libc.workspace = true
+parking_lot.workspace = true
+rocksdb.workspace = true
+serde.workspace = true
+thiserror.workspace = true
+
+mirax-error.workspace = true
+mirax-codec.workspace = true
+mirax-primitive.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true

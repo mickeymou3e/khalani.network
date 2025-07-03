@@ -1,0 +1,8 @@
+validator:
+  originChain: khalanitestnet
+  originChainEnvName: KHALANITESTNET
+  kmsKeyId: "alias/khalani-hyperlane-validator-signer-2"
+  s3Bucket: "khalani-validator-signatures-2"
+  iamRoleArn: arn:aws:iam::803035318642:role/khalani-hyperlane-validator-2
+  connection:
+    type: http

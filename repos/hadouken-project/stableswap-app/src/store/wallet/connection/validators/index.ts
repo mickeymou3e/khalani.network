@@ -1,0 +1,1 @@
+export { checkAccountConnected } from './validators'

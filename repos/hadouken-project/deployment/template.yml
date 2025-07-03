@@ -1,0 +1,222 @@
+Transform: AWS::Serverless-2016-10-31
+Parameters:
+  DomainName:
+    Type: String
+  CertificateArn:
+    Type: String
+  HostedZoneId:
+    Type: String
+  DefaultObject:
+    Type: String
+    Default: "/index.html"
+  Password:
+    Type: String
+    Default: ""
+  Prefix:
+    Type: String
+    Default: ""
+    Description: Limit serving files only to specified prefix
+
+Conditions:
+  IsPasswordProtected: !Not [!Equals [!Ref Password, ""]]
+
+Resources:
+  FrontendBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: Private
+      BucketName: !Ref DomainName
+
+  FrontendOriginAccessIdentity:
+    Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+    Properties:
+      CloudFrontOriginAccessIdentityConfig:
+        Comment: !Sub access-identity-${DomainName}
+
+  FrontendCloudFront:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Aliases:
+          - !Ref DomainName
+        DefaultCacheBehavior:
+          AllowedMethods:
+            - GET
+            - POST
+            - HEAD
+            - OPTIONS
+            - DELETE
+            - PUT
+            - PATCH
+          Compress: True
+          ForwardedValues:
+            QueryString: False
+          DefaultTTL: 86400
+          MaxTTL: 31536000
+          MinTTL: 0
+          TargetOriginId:
+            Fn::Join:
+              - "-"
+              - - S3
+                - Ref: FrontendBucket
+          ViewerProtocolPolicy: redirect-to-https
+          LambdaFunctionAssociations: !If
+            - IsPasswordProtected
+            - - EventType: viewer-request
+                LambdaFunctionARN: !Ref RestrictAccessFunction.Version
+            - !Ref AWS::NoValue
+
+        Enabled: True
+        HttpVersion: http2
+        IPV6Enabled: True
+        Origins:
+          - DomainName:
+              Fn::GetAtt: [FrontendBucket, RegionalDomainName]
+            Id:
+              Fn::Join:
+                - "-"
+                - - S3
+                  - Ref: FrontendBucket
+            S3OriginConfig:
+              OriginAccessIdentity:
+                Fn::Join:
+                  - "/"
+                  - - origin-access-identity/cloudfront
+                    - Ref: FrontendOriginAccessIdentity
+        ViewerCertificate:
+          AcmCertificateArn: !Ref CertificateArn
+          SslSupportMethod: sni-only
+        CustomErrorResponses:
+          - ErrorCachingMinTTL: 86000
+            ErrorCode: 403
+            ResponseCode: 200
+            ResponsePagePath: !Ref DefaultObject
+          - ErrorCachingMinTTL: 86000
+            ErrorCode: 404
+            ResponseCode: 200
+            ResponsePagePath: !Ref DefaultObject
+
+  FrontendAllowFromCloudFrontBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket:
+        Ref: FrontendBucket
+      PolicyDocument:
+        Statement:
+          - Sid: 1
+            Action:
+              - s3:GetObject
+            Effect: Allow
+            Resource:
+              Fn::Join:
+                - ""
+                - - "arn:aws:s3:::"
+                  - Ref: FrontendBucket
+                  - !Sub "${Prefix}/*"
+            Principal:
+              AWS:
+                Fn::Join:
+                  - " "
+                  - - "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity"
+                    - Ref: FrontendOriginAccessIdentity
+
+  FrontendRoute53:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      AliasTarget:
+        DNSName:
+          Fn::GetAtt: [FrontendCloudFront, DomainName]
+        HostedZoneId: Z2FDTNDATAQYW2 # Static for CloudFront
+      HostedZoneId: !Ref HostedZoneId
+      Name: !Ref DomainName
+      Type: A
+
+  RestrictAccessFunction:
+    Type: AWS::Serverless::Function
+    Condition: IsPasswordProtected
+    DeletionPolicy: Retain
+    Properties:
+      InlineCode: !Sub |
+        exports.handler = (event, context, callback) => {
+
+          const request = event.Records[0].cf.request;
+          const headers = request.headers;
+
+          // Construct the Basic Auth string
+          const authString = 'Basic ${Password}';
+
+          // Require Basic authentication
+          if (typeof headers.authorization == 'undefined' || headers.authorization[0].value != authString) {
+              const body = 'Unauthorized';
+              const response = {
+                  status: '401',
+                  statusDescription: 'Unauthorized',
+                  body: body,
+                  headers: {
+                      'www-authenticate': [{key: 'WWW-Authenticate', value:'Basic'}]
+                  },
+              };
+              callback(null, response);
+          }
+
+          // Continue request processing if authentication passed
+          callback(null, request);
+        };
+      Role: !GetAtt LambdaEdgeFunctionRole.Arn
+      Runtime: nodejs16.x
+      Handler: index.handler
+      Timeout: 5
+      AutoPublishAlias: live
+
+  LambdaEdgeFunctionRole:
+    Type: "AWS::IAM::Role"
+    Condition: IsPasswordProtected
+    Properties:
+      Path: "/"
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: "AllowLambdaServiceToAssumeRole"
+            Effect: "Allow"
+            Action:
+              - "sts:AssumeRole"
+            Principal:
+              Service:
+                - "lambda.amazonaws.com"
+                - "edgelambda.amazonaws.com"
+
+  CiDeployerUser:
+    Type: AWS::IAM::User
+    Properties:
+      Path: "/"
+      Policies:
+        - PolicyName: allow-ci-to-update-website
+          PolicyDocument:
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - "cloudfront:CreateInvalidation"
+                Resource: "*"
+              - Effect: "Allow"
+                Action:
+                  - "s3:*"
+                Resource:
+                  - !Sub arn:aws:s3:::${FrontendBucket}
+                  - !Sub arn:aws:s3:::${FrontendBucket}/**
+
+  CiDeployerCredentials:
+    Type: AWS::IAM::AccessKey
+    Properties:
+      UserName: !Ref CiDeployerUser
+
+Outputs:
+  CloudFrontDistributionId:
+    Value: !Ref FrontendCloudFront
+  FrontendBucketName:
+    Value: !Ref DomainName
+  DeployerAccessKeyId:
+    Value: !Ref CiDeployerCredentials
+  DeployerSecretAccessKey:
+    Value: !GetAtt CiDeployerCredentials.SecretAccessKey

@@ -1,0 +1,13 @@
+{
+  "env": "mainnet",
+  "network": "godwoken-mainnet",
+  "delay": "10000",
+  "chainId": "0x116ea",
+  "marketId": "Godwoken",
+  "gasPrice": 90000000000000,
+  "gasLimit": 1000000,
+  "rpcUrl": "https://v1.mainnet.godwoken.io/rpc",
+  "readOnlyRpcUrl": "https://v1.mainnet.godwoken.io/rpc",
+  "wsUrl": "wss://v1.mainnet.godwoken.io/ws",
+  "explorer": "https://v1.gwscan.com"
+}

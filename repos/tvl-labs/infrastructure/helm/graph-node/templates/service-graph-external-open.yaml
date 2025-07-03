@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: graph-node-external-open
+spec:
+  type: ClusterIP
+  selector:
+    app: graph-node
+  ports:
+    - name: jsonrpc
+      port: 8000
+      targetPort: 8000
+    - name: websocket
+      port: 8001
+      targetPort: 8001

@@ -1,0 +1,12 @@
+# Let's define a function that just returns Zero.
+function f(n : Nat) -> Nat
+{
+  Zero
+}
+
+# f(Zero) = Zero, where both f(Zero) and Zero are of type Nat.
+!uspec(forall n : Nat. f(n) = Zero, Zero);
+
+# f(Zero) = Zero, but this time f(Zero) is of type Nat, whereas Zero is of type Zero.
+# Strange.
+!prove_by_eval_term(f(Zero));

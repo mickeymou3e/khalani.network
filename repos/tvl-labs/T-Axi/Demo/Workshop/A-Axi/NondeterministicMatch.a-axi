@@ -1,0 +1,27 @@
+# Let's define a function on the naturals.
+function nondet(n : Nat) -> Nat
+{
+  # We match the argument.
+  match n
+  {
+    _ => Zero,        # Let's return 0 for all inputs.
+    _ => Succ(Zero),  # But let's also return 1 for all inputs...
+  }
+}
+
+# Every branch of the match gets translated to a standalone equation.
+let branch1 := !claim(forall n : Nat. nondet(n) = Zero);
+let branch2 := !claim(forall n : Nat. nondet(n) = Succ(Zero));
+
+# What is the result of nondet(0)?
+!uspec(branch1, Zero);  # nondet(0) = 0
+!uspec(branch2, Zero);  # nondet(0) = 1
+
+# 0 = 1, because 0 = nondet(0) = 1
+!eq_chain(Zero, nondet(Zero), Succ(Zero));
+
+# ~ 0 = 1, because Zero and Succ are different constructors of Nat.
+!uspec(forall n : Nat. ~ Zero = Succ(n), Zero);
+
+# Contradiction.
+!absurd(Zero = Succ(Zero), ~ Zero = Succ(Zero));

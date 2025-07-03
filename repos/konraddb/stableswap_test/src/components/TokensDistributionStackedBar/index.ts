@@ -1,0 +1,3 @@
+import TokensDistributionStackedBar from './TokensDistributionStackedBar.component'
+
+export default TokensDistributionStackedBar

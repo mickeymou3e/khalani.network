@@ -1,0 +1,19 @@
+{
+  "transaction": {
+    "hash": "0x115c38f67d35872d2f82002b87261401abae95f750cf171dd508082a50d89368",
+    "blockNumber": 636603
+  },
+  "data": {
+    "TestToken": {
+      "deploy": {
+        "input": {
+          "name": "Wrapped BTCB (ForceBridge from BSC)",
+          "symbol": "BTCB|bsc",
+          "decimals": 18
+        },
+        "output": "0x7fA0c8f5Ea34313B7b5E7A56913d9Ca12816F5D3"
+      }
+    }
+  },
+  "timestamp": 1666951880946
+}

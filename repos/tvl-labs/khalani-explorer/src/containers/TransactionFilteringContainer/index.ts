@@ -1,0 +1,3 @@
+import TransactionFilteringContainer from './TransactionFilteringContainer.component'
+
+export default TransactionFilteringContainer

@@ -1,0 +1,92 @@
+{
+  "hadouken": {
+    "lending": {
+      "url": "https://testnet-app.hadouken.finance/lend"
+    },
+    "bridge": {
+      "url": "https://testnet-app.hadouken.finance/bridge"
+    },
+    "swap": {
+      "url": "https://testnet-app.hadouken.finance/swap"
+    }
+  },
+  "sentry": "https://d3b71357a01e426c9c4285a26657d910@o4504333193969664.ingest.sentry.io/4504333202882560",
+  "ckb": {
+    "ckb": {
+      "url": "https://testnet.ckb.dev"
+    },
+    "godwoken": {
+      "rpcUrl": "https://godwoken-testnet-v1.ckbapp.dev",
+      "wsUrl": "wss://godwoken-testnet-v1.ckbapp.dev/ws",
+      "networkId": "0x116e9"
+    },
+    "indexer": {
+      "url": "https://testnet.ckb.dev/indexer"
+    },
+    "rollupTypeHash": "0x702359ea7f073558921eb50d8c1c77e92f760c8f8656bde4995f26b8963e2dd8",
+    "rollupTypeScript": {
+      "codeHash": "0x1e44736436b406f8e48a30dfbddcf044feb0c9eebfe63b0f81cb5bb727d84854",
+      "hashType": "type",
+      "args": "0x86c7429247beba7ddd6e4361bcdfc0510b0b644131e2afb7e486375249a01802"
+    },
+    "ethAccountLockCodeHash": "0x07521d0aa8e66ef441ebc31204d86bb23fc83e9edc58c19dbb1b0ebe64336ec0",
+    "depositLockScriptTypeHash": "0x50704b84ecb4c4b12b43c7acb260ddd69171c21b4c0ba15f3c469b7d143f6f18",
+    "portalWalletLockHash": "0x58c5f491aba6d61678b7cf7edf4910b1f5e00ec0cde2f42e0abb4fd9aff25a63",
+    "rcLockScriptTypeHash": "0x79f90bb5e892d80dd213439eeab551120eb417678824f282b4ffb5f21bad2e1e"
+  },
+  "godwoken": {
+    "chainName": "Godwoken Testnet v1",
+    "chainId": "0x116e9",
+    "pwChainId": 1,
+    "type": "godwoken",
+    "nativeCurrency": {
+      "name": "CKB",
+      "symbol": "CKB",
+      "decimals": 18
+    },
+    "rpcUrl": "https://godwoken-testnet-v1.ckbapp.dev",
+    "rpcReadOnlyUrl": "https://godwoken-testnet-v1.ckbapp.dev",
+    "explorerUrl": "https://v1.betanet.gwscan.com/"
+  },
+  "bridge": {
+    "ethereum": {
+      "chainId": "0x5",
+      "type": "ethereum",
+      "nativeCurrency": {
+        "name": "ETH",
+        "symbol": "ETH",
+        "decimals": 18
+      },
+      "bridges": {
+        "forceBridge": {
+          "url": "https://testnet.forcebridge.com/api/force-bridge/api/v1"
+        }
+      },
+      "tokens": {
+        "USDC": "0x265566D4365d80152515E800ca39424300374A83"
+      }
+    },
+    "bsc": {
+      "chainId": "0x61",
+      "type": "bsc",
+      "nativeCurrency": {
+        "name": "BNB",
+        "symbol": "BNB",
+        "decimals": 18
+      },
+      "chainName": "Binance Smart Chain Testnet",
+      "rpcUrl": "https://data-seed-prebsc-1-s1.binance.org:8545/",
+      "explorerUrl": "https://testnet.bscscan.com/",
+      "bridges": {
+        "forceBridge": {
+          "url": "https://testnet.forcebridge.com/bscapi/force-bridge/api/v1"
+        }
+      }
+    }
+  },
+  "explorerUrl": {
+    "ckb": "https://pudge.explorer.nervos.org",
+    "godwoken": "https://v1.testnet.gwscan.com",
+    "ethereum": "https://goerli.etherscan.io"
+  }
+}

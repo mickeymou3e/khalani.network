@@ -1,0 +1,13 @@
+[package]
+name = "apm"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0"
+axum = "0.7"
+lazy_static = "1.4"
+parking_lot = "0.12"
+prometheus = { version = "0.13", features = ["protobuf"] }
+prometheus-static-metric = "0.5"
+tokio = { version = "1.40", features = ["net"] }

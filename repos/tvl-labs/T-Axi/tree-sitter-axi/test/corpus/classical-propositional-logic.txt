@@ -1,0 +1,88 @@
+=======================
+Proof by contradiction
+=======================
+theorem and-from-weak-and :
+  ~ (~ P \/ ~ Q) --> P /\ Q
+proof
+  assume pq : ~ (~ P \/ ~ Q)
+  by-contradiction npq : ~ (P /\ Q)
+  apply pq
+  or-left
+  assume p : P
+  apply pq
+  or-right
+  assume q : Q
+  apply npq
+  both p q
+qed
+
+---
+
+(source_file
+  (separator)
+  (theorem_declaration
+    (identifier)
+    (type_ann
+      (implication
+        (negation
+          (disjunction
+            (negation
+              (identifier))
+            (negation
+              (identifier))))
+        (conjunction
+          (identifier)
+          (identifier))))
+    (proof_block
+      (begin)
+      (separator)
+      (assume
+        (patterns
+          (identifier)
+          (type_ann
+            (negation
+              (disjunction
+                (negation
+                  (identifier))
+                (negation
+                  (identifier)))))))
+      (separator)
+      (by_contradiction
+        (identifier)
+        (type_ann
+          (negation
+            (conjunction
+              (identifier)
+              (identifier)))))
+      (separator)
+      (apply
+        (identifier))
+      (separator)
+      (identifier)
+      (separator)
+      (assume
+        (patterns
+          (identifier)
+          (type_ann
+            (identifier))))
+      (separator)
+      (apply
+        (identifier))
+      (separator)
+      (identifier)
+      (separator)
+      (assume
+        (patterns
+          (identifier)
+          (type_ann
+            (identifier))))
+      (separator)
+      (apply
+        (identifier))
+      (separator)
+      (call
+        (identifier)
+        (identifier)
+        (identifier))
+      (end)))
+  (separator))

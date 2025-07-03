@@ -1,0 +1,17 @@
+[package]
+name = "mirax-consensus"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+multi_index_map.workspace = true
+thiserror.workspace = true
+
+mirax-consensus-traits.workspace = true
+mirax-crypto.workspace = true
+mirax-error.workspace = true
+mirax-hasher.workspace = true
+mirax-signer.workspace = true
+mirax-types.workspace = true

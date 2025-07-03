@@ -1,0 +1,68 @@
+name: "Code Quality / CI"
+on:
+  pull_request:
+    branches:
+      - "**"
+
+jobs:
+  cancel-previous:
+    name: "Cancel Previous Runs"
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+
+    steps:
+      - uses: styfle/cancel-workflow-action@0.11.0
+        with:
+          access_token: ${{ github.token }}
+
+  coverage:
+    name: Run Test Coverage
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Run install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install # will run `yarn install` command
+
+      - name: Test the app
+        uses: ArtiomTr/jest-coverage-report-action@v2
+        with:
+          working-directory: ./
+          test-script: yarn test
+          package-manager: yarn
+          threshold: 5
+          skip-step: install
+
+  linter:
+    name: Run Linter and Typecheck
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v3
+
+      - name: Set Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Run install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install # will run `yarn install` command
+
+      - name: Run linter
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: lint
+
+      - name: Check Types
+        run: yarn typecheck

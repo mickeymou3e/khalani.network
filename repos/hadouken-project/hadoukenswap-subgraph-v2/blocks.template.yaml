@@ -1,0 +1,25 @@
+specVersion: 0.0.3
+
+schema:
+  file: ./schema.graphql
+
+dataSources:
+  - kind: ethereum/contract
+    name: Blocks
+    network: { { network } }
+    source:
+      address: "{{contracts.Vault.address}}"
+      abi: Vault
+      startBlock: { { contracts.Vault.startBlock } }
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/blocks.ts
+      entities:
+        - Balancer
+      abis:
+        - name: Vault
+          file: ./abis/Vault.json
+      blockHandlers:
+        - handler: handleBlock

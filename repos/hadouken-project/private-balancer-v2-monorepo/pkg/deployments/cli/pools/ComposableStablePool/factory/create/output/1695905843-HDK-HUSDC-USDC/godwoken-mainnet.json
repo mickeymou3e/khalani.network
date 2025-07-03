@@ -1,0 +1,40 @@
+{
+  "transaction": {
+    "hash": "0x5c270879cf5a38c855da00269522551dbf5a0a3df4ec3d3f154054a56bdceb12"
+  },
+  "data": {
+    "ComposableStablePoolFactory": {
+      "create": {
+        "input": {
+          "name": "HUSDC/USDC",
+          "symbol": "HDK-HUSDC-USDC",
+          "tokens": [
+            "0x186181e225dc1ad85a4a94164232bd261e351c33",
+            "0xE16AE54fd2b74D92F9FeD49Bf7fA20aaB003DD60"
+          ],
+          "rateProviders": [
+            "0x0000000000000000000000000000000000000000",
+            "0x0000000000000000000000000000000000000000"
+          ],
+          "priceRateCacheDuration": [
+            "0",
+            "0"
+          ],
+          "amplificationParameter": "5000",
+          "swapFeePercentage": "100000000000000",
+          "exemptFromYieldProtocolFeeFlags": [
+            false,
+            false
+          ],
+          "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0x186181e225dc1ad85a4a94164232bd261e351c33": "10000000",
+            "0xE16AE54fd2b74D92F9FeD49Bf7fA20aaB003DD60": "10000000"
+          }
+        },
+        "output": "0x2FA3757f7CB848861D6eB56c398e2eDD385CD8b3"
+      }
+    }
+  },
+  "timestamp": 1695905843475
+}

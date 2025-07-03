@@ -1,0 +1,60 @@
+{
+  "name": "@hadouken-project/stableswap-contracts",
+  "version": "0.3.1",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "cli": "yarn ts-node cli",
+    "pretypes": "rm -rf ./src/contracts; node ./utils/pretypes.js",
+    "types": "typechain --target ethers-v5 --outDir src/contracts 'prepared/contracts/*.json'",
+    "posttypes": "rm -rf ./prepared",
+    "move:config": "cp config.json ./src",
+    "prebuild": "rm -rf ./dist; brownie compile; node ./utils/prebuild.js; yarn types",
+    "build": "tsc --project tsconfig.build.json",
+    "clean:build": "rm -rf ./build",
+    "postbuild": "copyfiles -u 1 \"src/**/*.d.ts\" dist",
+    "predev:run": "rm -rf ./build",
+    "dev": "tsc --watch",
+    "dev:start": "yarn ganache-cli --accounts 10 --hardfork istanbul --gasLimit 12000000 --gasPrice 0 --mnemonic brownie --port 7545",
+    "dev:network": "brownie networks add live dev host=http://127.0.0.1:7545 chainid=1337",
+    "predev:deploy": "rm -rf ./build",
+    "dev:deploy": "make network=dev deploy",
+    "gw:deploy:dev": "yarn ts-node scripts/godwoken/deploy.godwoken.dev.ts",
+    "gw:deploy": "yarn ts-node scripts/godwoken/deploy.godwoken.ts",
+    "gn:deploy": "yarn ts-node scripts/godwoken/deploy.ganache.ts"
+  },
+  "dependencies": {
+    "@polyjuice-provider/ethers": "^0.1.3",
+    "@polyjuice-provider/web3": "^0.1.3",
+    "nervos-godwoken-integration": "0.1.4",
+    "web3": "^1.6.0"
+  },
+  "devDependencies": {
+    "@lay2/pw-core": "0.4.0-alpha.12",
+    "@typechain/ethers-v5": "^6.0.5",
+    "@types/commander": "^2.12.2",
+    "@types/prompts": "^2.0.14",
+    "ckb-js-toolkit": "^0.10.2",
+    "commander": "^9.0.0",
+    "copyfiles": "^2.4.1",
+    "dotenv": "^10.0.0",
+    "ethers": "^5.4.0",
+    "ganache-cli": "^6.12.2",
+    "node-fetch": "^3.1.0",
+    "prompts": "^2.4.2",
+    "ts-node": "^10.0.0",
+    "typechain": "^4.0.3",
+    "typescript": "^4.2.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hadouken-project/stableswap-contracts.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}

@@ -1,0 +1,237 @@
+\section{Programming}\begin{frame}{Kind inference judgement}
+
+$\inferkind{\Gamma}{A}[r]{\Gamma'}$
+\begin{itemize}
+  \item In context $\Gamma$, infer the kind of type $A$ to be $\Type[r]$, returning output context $\Gamma'$.
+  \item Modes: $\Gamma$ is input, $A$ is subject, $\Type[r]$ and $\Gamma'$ are outputs.
+  \item Preconditions: $\ctx[\noncomputable]{\Gamma}$.
+  \item Postcondition: $\type[\Gamma']{A}[r]$.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Kind inference}
+
+\begin{center}
+  $\infrule{}{\inferkind{\Gamma}{\Unit}{\Gamma}}$ \quad
+  $\infrule{}{\inferkind{\Gamma}{\Empty}{\Gamma}}$
+
+  \vspace{2em}
+
+  $\infrule{\inferkind{\Gamma}{A}[s_1]{\Gamma_1} \quad \inferkind{\Gamma_1}{B}[s_2]{\Gamma_2}}{\inferkind{\Gamma}{\Fun[r]{A}{B}}[\One]{\Gamma_2}}$
+
+  \vspace{2em}
+
+  $\infrule{\inferkind{\Gamma}{A}[s]{\Gamma'}}{\inferkind{\Gamma}{\Box[\Zero]{A}}{\Gamma'}}$ \quad
+  $\infrule{\inferkind{\Gamma}{A}[s]{\Gamma'} \quad r \neq \Zero}{\inferkind{\Gamma}{\Box[r]{A}}[\mulqty{r}{s}]{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{\inferkind{\Gamma}{A}[s_1]{\Gamma_1} \quad \inferkind{\Gamma_1}{B}[s_2]{\Gamma_2}}{\inferkind{\Gamma}{\Prod{A}{B}}[\lubqty{s_1}{s_2}]{\Gamma_2}}$
+
+  \vspace{1em}
+
+  $\infrule{\inferkind{\Gamma}{A}[s_1]{\Gamma_1} \quad \inferkind{\Gamma_1}{B}[s_2]{\Gamma_2}}{\inferkind{\Gamma}{\Sum{A}{B}}[\lubqty{s_1}{s_2}]{\Gamma_2}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Kind inference}
+
+\begin{center}
+  $\infrule{(a : \Type[r]) \in \Gamma}{\inferkind{\Gamma}{a}[r]{\Gamma}}$
+
+  \vspace{2em}
+
+  $\infrule{\inferkind{\extendtype{\Gamma}{a}[r]}{B}[s]{\extendtype{\Gamma'}{a}[r]}}{\inferkind{\Gamma}{\ForallE{a}[r]{B}}[s]{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{\inferkind{\extendtype{\Gamma}{a}[r]}{B}[s]{\extendtype{\Gamma'}{a}[r]}}{\inferkind{\Gamma}{\ForallI{a}[r]{B}}[s]{\Gamma'}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Kind checking judgement}
+
+$\checkkind{\Gamma}{A}[r]{\Gamma'}$
+\begin{itemize}
+  \item Kind checking judgement.
+  \item In context $\Gamma$, check that the kind of type $A$ is $\Type[r]$, returning output context $\Gamma'$.
+  \item Modes: $\Gamma$ and $\Type[r]$ are inputs, $A$ is subject, $\Gamma'$ is an output.
+  \item Preconditions: $\ctx[\noncomputable]{\Gamma}$.
+  \item Postcondition: $\type[\Gamma']{A}[r]$.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Kind checking}
+
+\begin{center}
+  $\infrule{\inferkind{\Gamma}{A}[s]{\Gamma'} \quad r = s}{\checkkind{\Gamma}{A}[r]{\Gamma'}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Typing judgements}
+
+$\checktype{\Gamma}{e}{A}{\Gamma'}$
+\begin{itemize}
+  \item Type checking judgement.
+  \item In context $\Gamma$, check whether term $e$ has type $A$ and return output context $\Gamma'$.
+  \item Modes: $\Gamma$ and $A$ are inputs, $e$ is subject, $\Gamma'$ is an output.
+  \item Preconditions: $\ctx{\Gamma}$ and $\type[\Gamma]{A}[r]$
+  \item Postcondition: $\typing[\subctx{\Gamma}{\Gamma'}]{e}{A}$
+\end{itemize}
+
+\vspace{1em}
+
+$\infertype{\Gamma}{e}{A}{\Gamma'}$
+\begin{itemize}
+  \item Type inference judgement.
+  \item In context $\Gamma$, term $e$ infers type $A$, returning output context $\Gamma'$.
+  \item Modes: $\Gamma$ is input, $e$ is subject, $A$ and $\Gamma'$ are outputs.
+  \item Preconditions: $\ctx{\Gamma}$
+  \item Postcondition: $\typing[\subctx{\Gamma}{\Gamma'}]{e}{A}$
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Context clean-up notation}
+
+$\checktype{\extend{\Gamma}[r]{x}{A}}{e}{A}{\extend{\Gamma'}[\Zero]{x}{A}}$ is a shorthand for $\checktype{\extend{\Gamma}[r]{x}{A}}{e}{A}{\extend{\Gamma'}[r']{x}{A}}$ with the additional condition $\subusage{r'}{\Zero}$ when $i = \computable$
+
+\vspace{2em}
+
+$\infertype{\extend{\Gamma}[r]{x}{A}}{e}{A}{\extend{\Gamma'}[\Zero]{x}{A}}$ is a shorthand for $\infertype{\extend{\Gamma}[r]{x}{A}}{e}{A}{\extend{\Gamma'}[r']{x}{A}}$ with the additional condition $\subusage{r'}{\Zero}$ when $i = \computable$
+
+\end{frame}
+
+\begin{frame}{Subsumption and annotations}
+
+\begin{center}
+  $\infrule[Subsumption]{\infertype{\Gamma}{e}{A}{\Gamma_1} \quad \infertypeconv{\Gamma_1}{A}{B}[r]{\Gamma_2}}{\checktype{\Gamma}{e}{B}{\Gamma_2}}$
+
+  \vspace{2em}
+
+  $\infrule[Annot]{\inferkind{\Gamma}{A}[r]{\Gamma_1} \quad \checktype{\Gamma_1}{e}{A}{\Gamma_2}}{\infertype{\Gamma}{\annot{e}{A}}{A}{\Gamma_2}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Using variables}
+
+\begin{center}
+  $\infrule{\findvar{\Gamma}{x}{A}}{\infertype{\Gamma}[\computable]{x}{A}{\usevar{\Gamma}{x}}}$
+
+  \vspace{2em}
+
+  $\infrule{\findvar{\Gamma}{x}{A}}{\infertype{\Gamma}[\noncomputable]{x}{A}{\Gamma}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Functions}
+
+\begin{center}
+  $\infrule{\checktype{\extend{\Gamma}[\totalqty{r}{A}]{x}{A}}{e}{B}{\extend{\Gamma'}[\Zero]{x}{A}}}{\checktype{\Gamma}{\fun{x}{e}}{\Fun[r]{A}{B}}{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{\infertype{\Gamma}{f}{\Fun[r]{A}{B}}{\Gamma_1} \quad \divctx{\Gamma_1}{r} = (\Gamma_2, \Gamma_3) \quad \checktype{\Gamma_2}{a}{A}{\Gamma_4}}{\infertype{\Gamma}{\app{f}{a}}{B}{\addctx{\Gamma_3}{\scalectx{r}{\Gamma_4}}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Box}
+
+\begin{center}
+  $\infrule{\divctx{\Gamma}{r} = (\Gamma_1, \Gamma_2) \quad \checktype{\Gamma_1}{e}{A}{\Gamma_3}}{\checktype{\Gamma}{\boxintro{e}}{\Box[r]{A}}{\addctx{\Gamma_2}{\scalectx{r}{\Gamma_3}}}}$
+
+  \vspace{2em}
+
+  $\infrule{\infertype{\Gamma}{e_1}{\Box[r]{A}}{\Gamma_1} \quad \infertype{\extend{\Gamma_1}[\totalqty{r}{A}]{x}{A}}{e_2}{B}{\extend{\Gamma_2}[\Zero]{x}{A}}}{\infertype{\Gamma}{\boxelim{x}{e_1}{e_2}}{B}{\Gamma_2}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Empty}
+
+\begin{center}
+  $\infrule{\checktype{\Gamma}{e}{\Empty}{\Gamma'}}{\checktype{\Gamma}{\emptyelim{e}}{A}{\Gamma'}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Unit}
+
+\begin{center}
+  $\infrule{}{\checktype{\Gamma}{\unit}{\Unit}{\Gamma}}$
+
+  \vspace{2em}
+
+  $\infrule{\infertype{\Gamma}{e_1}{\Unit}{\Gamma_1} \quad \infertype{\Gamma_1}{e_2}{A}{\Gamma_2}}{\infertype{\Gamma}{\unitelim{e_1}{e_2}}{A}{\Gamma_2}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Products}
+
+\begin{center}
+    $\infrule{\checktype{\Gamma}{e_1}{A}{\Gamma_1} \quad \checktype{\Gamma_1}{e_2}{B}{\Gamma_2}}{\checktype{\Gamma}{\pair{e_1}{e_2}}{\Prod{A}{B}}{\Gamma_2}}$
+
+    \vspace{2em}
+
+    $\infrule{\infertype{\Gamma}{e_1}{\Prod{A}{B}}{\Gamma_1} \quad \infertype{\extend{\extend{\Gamma_1}[\totalqty{\One}{A}]{x}{A}}[\totalqty{\One}{B}]{y}{B}}{e_2}{C}{\extend{\extend{\Gamma_2}[\Zero]{x}{A}}[\Zero]{y}{B}}}{\infertype{\Gamma}{\letpair{x}{y}{e_1}{e_2}}{C}{\Gamma_2}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Sums}
+
+\begin{center}
+  $\infrule{\checktype{\Gamma}{e}{A}{\Gamma'}}{\checktype{\Gamma}{\inl{e}}{\Sum{A}{B}}{\Gamma'}}$ \quad
+  $\infrule{\checktype{\Gamma}{e}{B}{\Gamma'}}{\checktype{\Gamma}{\inr{e}}{\Sum{A}{B}}{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{\infertype{\Gamma}{e}{\Sum{A}{B}}{\Gamma_1} \quad \begin{array}{l} \checktype{\extend{\Gamma_1}[\totalqty{\One}{A}]{x}{A}}{e_1}{C}{\extend{\Gamma_2}[\Zero]{x}{A}} \\ \checktype{\extend{\Gamma_1}[\totalqty{\One}{B}]{y}{B}}{e_2}{C}{\extend{\Gamma_3}[\Zero]{x}{A}} \end{array}}{\checktype{\Gamma}{\newcase{e}{x}{e_1}{y}{e_2}}{C}{\lubctx{\Gamma_2}{\Gamma_3}}}$
+
+  \vspace{2em}
+
+  $\infrule{\infertype{\Gamma}{e}{\Sum{A}{B}}{\Gamma_1} \quad \begin{array}{l} \infertype{\extend{\Gamma_1}[\totalqty{\One}{A}]{x}{A}}{e_1}{C}{\extend{\Gamma_2}[\Zero]{x}{A}} \\ \infertype{\extend{\Gamma_1}[\totalqty{\One}{B}]{y}{B}}{e_2}{C}{\extend{\Gamma_3}[\Zero]{x}{A}} \end{array}}{\infertype{\Gamma}{\newcase{e}{x}{e_1}{y}{e_2}}{C}{\lubctx{\Gamma_2}{\Gamma_3}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Let}
+
+\begin{center}
+  $\infrule{\divctx{\Gamma}{r} = (\Gamma_1, \Gamma_2) \quad \infertype{\Gamma_1}{e_1}{A}{\Gamma_3} \quad \infertype{\extend{(\addctx{\Gamma_2}{\scalectx{r}{\Gamma_3}})}[\totalqty{r}{A}]{x}{A}}{e_2}{B}{\extend{\Gamma_4}[\Zero]{x}{A}}}{\infertype{\Gamma}{\letin[r]{x}{e_1}{e_2}}{B}{\Gamma_4}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Polymorphism}
+
+\begin{center}
+  $\infrule{\checktype{\extendtype{\Gamma}{a}[r]}{e}{B}{\extendtype{\Gamma'}{a}[r]}}{\checktype{\Gamma}{\tfun{a}{e}}{\ForallE{a}[r]{B}}{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{\infertype{\Gamma}{e}{\ForallE{a}[r]{B}}{\Gamma_1} \quad \checkkind{\Gamma_1}{A}[r]{\Gamma_2}}{\infertype{\Gamma}{\tapp{e}{A}}{\subst{B}{a}{A}}{\Gamma_2}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Polymorphism (implicit arguments)}
+
+\begin{center}
+  $\infrule{\checktype{\extendtype{\Gamma}{a}[r]}{e}{B}{\extendtype{\Gamma'}{a}[r]}}{\checktype{\Gamma}{\itfun{a}{e}}{\ForallI{a}[r]{B}}{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{\infertype{\Gamma}{e}{\ForallI{a}[r]{B}}{\Gamma_1} \quad \checkkind{\Gamma_1}{A}[r]{\Gamma_2}}{\infertype{\Gamma}{\itapp{e}{A}}{\subst{B}{a}{A}}{\Gamma_2}}$
+\end{center}
+
+\end{frame}

@@ -1,0 +1,46 @@
+{
+  "transaction": {
+    "hash": "0x5f66e12831bea1e9753844ac8a19ec523d8d2b6e68c615c74ebf148962d58424",
+    "blockNumber": null
+  },
+  "data": {
+    "ComposableStablePoolFactory": {
+      "create": {
+        "input": {
+          "name": "Multichain USD Stable Pool",
+          "symbol": "HDK-Boosted-USD-multiUSDC-multiUSDT",
+          "tokens": [
+            "0xAf9D4028272F750dd2D028990fd664dc223479B1",
+            "0xe3f5a90f9cb311505cd691a46596599aa1a0ad7d",
+            "0xfa9343c3897324496a05fc75abed6bac29f8a40f"
+          ],
+          "rateProviders": [
+            "0xAf9D4028272F750dd2D028990fd664dc223479B1",
+            "0x0000000000000000000000000000000000000000",
+            "0x0000000000000000000000000000000000000000"
+          ],
+          "priceRateCacheDuration": [
+            "0",
+            "0",
+            "0"
+          ],
+          "amplificationParameter": "300",
+          "swapFeePercentage": "100000000000000",
+          "exemptFromYieldProtocolFeeFlags": [
+            false,
+            false,
+            false
+          ],
+          "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0xAf9D4028272F750dd2D028990fd664dc223479B1": "1000000000000000000",
+            "0xe3f5a90f9cb311505cd691a46596599aa1a0ad7d": "2500000",
+            "0xfa9343c3897324496a05fc75abed6bac29f8a40f": "2500000"
+          }
+        },
+        "output": "0x7b7839F61cBB7c1c52Db9E264c1CBA1883f46B33"
+      }
+    }
+  },
+  "timestamp": 1677771986510
+}

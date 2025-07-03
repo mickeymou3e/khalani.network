@@ -1,0 +1,27 @@
+{
+  "transaction": {
+    "hash": "0x18bd6bbf6206ed5fbd6deffa8a72cfc1accf2ef3aab70d533168c147d5402b7c",
+    "blockNumber": null
+  },
+  "data": {
+    "AaveLinearPoolFactory": {
+      "create": {
+        "input": {
+          "name": "Linear USDC",
+          "symbol": "HDK-LNR-USDC",
+          "mainToken": "0x186181e225dc1ad85a4a94164232bd261e351c33",
+          "wrappedToken": "0xE16AE54fd2b74D92F9FeD49Bf7fA20aaB003DD60",
+          "upperTarget": "20000000000000000000000000",
+          "swapFeePercentage": "1500000000000000",
+          "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0x186181e225dc1ad85a4a94164232bd261e351c33": "1000000",
+            "0xE16AE54fd2b74D92F9FeD49Bf7fA20aaB003DD60": "1000000"
+          }
+        },
+        "output": "0x149916D7128C36bbcebD04F794217Baf51085fB9"
+      }
+    }
+  },
+  "timestamp": 1669315316871
+}

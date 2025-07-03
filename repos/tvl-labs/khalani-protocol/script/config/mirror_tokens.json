@@ -1,0 +1,144 @@
+{
+  "arb-goerli": {
+    "chainId": 421613,
+    "decimals": [
+      6,
+      6
+    ],
+    "mirrorTokens": [
+      "0xfCdFD1ed8BC8E3c3E970f293786CBb84eAD08b92",
+      "0x743984349946D785e3B78336e7b10AB515c01698"
+    ],
+    "symbols": [
+      "USDC.arb-goerli",
+      "USDT.arb-goerli"
+    ],
+    "tokens": [
+      "0x24bcc5d1F6538F4a84Cd9009ebD4Fa614904fA59",
+      "0xdf830a3F120515bd99fE6Bc8513537713e204BC5"
+    ]
+  },
+  "bsctestnet": {
+    "chainId": 97,
+    "decimals": [
+      6,
+      6,
+      18
+    ],
+    "mirrorTokens": [
+      "0xEc0799Febe2A3c3f8b13b287c783D86610eBdEc8",
+      "0xfe06B62EA398f3873F976D11500A2367b472e4EB",
+      "0x3f4c588fD57a5E51dC84DCDC60978eFA1587c74b"
+    ],
+    "symbols": [
+      "USDC.bsctestnet",
+      "USDT.bsctestnet",
+      "BUSD.bsctestnet"
+    ],
+    "tokens": [
+      "0x24bcc5d1F6538F4a84Cd9009ebD4Fa614904fA59",
+      "0xdf830a3F120515bd99fE6Bc8513537713e204BC5",
+      "0x8f9C8f120d5E751b24d96d9c683B8d0450b45DBc"
+    ]
+  },
+  "fuji": {
+    "chainId": 43113,
+    "decimals": [
+      6,
+      6
+    ],
+    "mirrorTokens": [
+      "0x3135036D99D1846Bf36c500DE95535ab2169A351",
+      "0xfbf19afa0f369B07Bfd8cc52Af8F0827060F269a"
+    ],
+    "symbols": [
+      "USDC.fuji",
+      "USDT.fuji"
+    ],
+    "tokens": [
+      "0x24bcc5d1F6538F4a84Cd9009ebD4Fa614904fA59",
+      "0xdf830a3F120515bd99fE6Bc8513537713e204BC5"
+    ]
+  },
+  "godwokentestnet": {
+    "chainId": 71401,
+    "decimals": [
+      6,
+      6
+    ],
+    "mirrorTokens": [
+      "0x615978b3EA2478EAd9cca7aB332987979a23FC03",
+      "0x411CA58d364cae4fE71498229FA92F1B2Ab8fF60"
+    ],
+    "symbols": [
+      "USDT.godwokentestnet",
+      "USDC.godwokentestnet"
+    ],
+    "tokens": [
+      "0xED84fBAAa27D1136101D0b1d18B1FF194C17dBC3",
+      "0x8f9C8f120d5E751b24d96d9c683B8d0450b45DBc"
+    ]
+  },
+  "khalanitestnet": {},
+  "mumbai": {
+    "chainId": 80001,
+    "decimals": [
+      6,
+      6
+    ],
+    "mirrorTokens": [
+      "0xCb2191015Cf28537b21aE1c692Ef04E177BD0bF8",
+      "0x005B250A4d2CC671cE5eB84819Bf2452e078f490"
+    ],
+    "symbols": [
+      "USDC.mumbai",
+      "USDT.mumbai"
+    ],
+    "tokens": [
+      "0x24bcc5d1F6538F4a84Cd9009ebD4Fa614904fA59",
+      "0xdf830a3F120515bd99fE6Bc8513537713e204BC5"
+    ]
+  },
+  "optimism-goerli": {
+    "chainId": 420,
+    "decimals": [
+      6,
+      6
+    ],
+    "mirrorTokens": [
+      "0x8615c99Ce41652c7962B7d3e3903E84D8753A090",
+      "0x6Cd8eE68EDEbC9AC8beA1c2C4155520e058e73D3"
+    ],
+    "symbols": [
+      "USDC.optimism-goerli",
+      "USDT.optimism-goerli"
+    ],
+    "tokens": [
+      "0xED84fBAAa27D1136101D0b1d18B1FF194C17dBC3",
+      "0x738E12aA6aF874e4019B70718F4057959E0c5D2B"
+    ]
+  },
+  "sepolia": {
+    "chainId": 11155111,
+    "decimals": [
+      18,
+      6,
+      6
+    ],
+    "mirrorTokens": [
+      "0x680F6F198f7a6509C05eadD383C0852DdEbd10B9",
+      "0x71DDD5C9D64d0abf188fA3F42cF596Ece6528EcA",
+      "0x1ac73a3E0c90E6812414814EFD3b54400e36B89F"
+    ],
+    "symbols": [
+      "BUSD.sepolia",
+      "USDC.sepolia",
+      "USDT.sepolia"
+    ],
+    "tokens": [
+      "0xC0A27ef2304753d49ec4349DAC38fD33F8D40256",
+      "0x24bcc5d1F6538F4a84Cd9009ebD4Fa614904fA59",
+      "0xdf830a3F120515bd99fE6Bc8513537713e204BC5"
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "HUSDC/USDC",
+  "symbol": "HDK-HUSDC-USDC",
+  "tokens": ["0x186181e225dc1ad85a4a94164232bd261e351c33", "0xE16AE54fd2b74D92F9FeD49Bf7fA20aaB003DD60"],
+  "rateProviders": ["0x0000000000000000000000000000000000000000", "0x0000000000000000000000000000000000000000"],
+  "priceRateCacheDuration": ["0", "0"],
+  "amplificationParameter": "5000",
+  "swapFeePercentage": "100000000000000",
+  "exemptFromYieldProtocolFeeFlags": [false, false],
+  "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+  "initialLiquidity": {
+    "0x186181e225dc1ad85a4a94164232bd261e351c33": "10000000",
+    "0xE16AE54fd2b74D92F9FeD49Bf7fA20aaB003DD60": "10000000"
+  }
+}

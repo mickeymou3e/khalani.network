@@ -1,0 +1,14 @@
+{
+  "name": "Linear CKB",
+  "symbol": "HDK-LNR-CKB",
+  "underlyingToken": "0x0eb76790a2014Dd1F65488Ccd703bCDF75F8195e",
+  "wrappedToken": "0xe7Ea406348dB83f3A0014295d859FB3c896A226B",
+  "upperTarget": "666666660000000000000000000",
+  "lowerTarget": "0",
+  "swapFeePercentage": "1500000000000000",
+  "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+  "initialLiquidity": {
+    "0x0eb76790a2014Dd1F65488Ccd703bCDF75F8195e": "1000000000000000000",
+    "0xe7Ea406348dB83f3A0014295d859FB3c896A226B": "1000000000000000000"
+  }
+}

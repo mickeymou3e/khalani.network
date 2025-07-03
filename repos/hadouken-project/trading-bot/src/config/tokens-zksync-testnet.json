@@ -1,0 +1,28 @@
+{
+  "tokens": [
+    {
+      "symbol": "USDC",
+      "address": "0x403e853789f38d98f1c2488C5468055b1493082c",
+      "decimals": 6,
+      "displayDecimals": 2
+    },
+    {
+      "symbol": "ETH",
+      "address": "0x20b28B1e4665FFf290650586ad76E977EAb90c5D",
+      "decimals": 18,
+      "displayDecimals": 2
+    },
+    {
+      "symbol": "WBTC",
+      "address": "0xa373e9073d2D147Eb3d40f3b9C5F2B813086d839",
+      "decimals": 8,
+      "displayDecimals": 8
+    },
+    {
+      "symbol": "USDT",
+      "address": "0xcCD4aD7cE363C065A304C0cC4e0e14128B2BF823",
+      "decimals": 6,
+      "displayDecimals": 2
+    }
+  ]
+}

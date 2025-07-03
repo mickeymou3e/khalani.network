@@ -1,0 +1,28 @@
+specVersion: 0.0.3
+
+schema:
+  file: ./schema.graphql
+
+dataSources:
+  - kind: ethereum/contract
+    name: Swaps
+    network: {{network}}
+    source:
+      address: '{{contracts.swaps.address}}'
+      abi: Swaps
+      startBlock: {{startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/swaps.ts
+      abis:
+        - name: Swaps
+          file: ./abis/Swaps.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+      entities:
+        - Swaps
+      eventHandlers:
+        - event: TokenExchange(indexed address,indexed address,indexed address,address,address,uint256,uint256)
+          handler: tokenExchangeHandler

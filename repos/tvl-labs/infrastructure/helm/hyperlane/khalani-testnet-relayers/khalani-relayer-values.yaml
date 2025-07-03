@@ -1,0 +1,10 @@
+relayer:
+  iamRoleArn: arn:aws:iam::803035318642:role/khalani-hyperlane-trial-relayer-khalani-testnet
+  originChain: khalanitestnet
+  originChainEnvName: KHALANITESTNET_TRIAL
+  connection:
+    type: http
+
+  destinationChains: "sepolia,fuji"
+  destinationChainsEnvNames: [ "SEPOLIA", "FUJI" ]
+  destinationChainsKmsKeyIds: [ "alias/khalani-hyperlane-relayer-khalani-testnet", "alias/khalani-hyperlane-relayer-khalani-testnet" ]

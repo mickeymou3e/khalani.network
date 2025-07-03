@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "funding-bot.fullname" . }}
+  labels:
+    {{- include "funding-bot.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "funding-bot.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "funding-bot.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "funding-bot.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - node
+            - dist/index.js
+            - --addresses-file
+            - /config/addresses.json
+            - --rpc-urls-file
+            - /config/rpc-urls.json
+            - --interval
+            - {{ .Values.fundingBot.interval | quote }}
+            - --prometheus-pushgateway-url
+            - {{ .Values.fundingBot.prometheusPushGatewayUrl }}
+            - --minimum-balance
+            - {{ .Values.fundingBot.minimumBalance | quote }}
+          env:
+            - name: AWS_REGION
+              value: {{ .Values.fundingBot.kms.awsRegion }}
+            - name: AWS_KMS_KEY_ID
+              value: {{ .Values.fundingBot.kms.alias }}
+            - name: FUNDED_AMOUNT
+              value: {{ .Values.fundingBot.fundingAmount | quote }}
+          volumeMounts:
+            - mountPath: /config/addresses.json
+              name: funding-bot-addresses-config
+              readOnly: true
+              subPath: addresses.json
+            - mountPath: /config/rpc-urls.json
+              name: funding-bot-rpc-urls-secret
+              readOnly: true
+              subPath: rpc-urls.json
+            - name: secrets-store-inline-ghcr # The volume mount is required for the Sync With Kubernetes Secrets
+              mountPath: "/mnt/secrets-store-inline-ghcr"
+              readOnly: true
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+        - name: funding-bot-addresses-config
+          configMap:
+            name: {{ include "funding-bot.addressesConfigMapName" . }}
+        - name: funding-bot-rpc-urls-secret
+          secret:
+            secretName: {{ include "funding-bot.rpcUrlsSecret" . }}
+        - name: secrets-store-inline-ghcr
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "tvl-docker-ghcr-login-secret-aws-secret-class"
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

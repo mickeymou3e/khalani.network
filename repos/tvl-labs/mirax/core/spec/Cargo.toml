@@ -1,0 +1,23 @@
+[package]
+name = "mirax-spec"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap.workspace = true
+serde.workspace = true
+smol_str.workspace = true
+thiserror.workspace = true
+
+mirax-codec.workspace = true
+mirax-crypto.workspace = true
+mirax-error.workspace = true
+mirax-merkle.workspace = true
+mirax-parser.workspace = true
+mirax-time.workspace = true
+mirax-types.workspace = true
+
+[dev-dependencies]
+toml.workspace = true

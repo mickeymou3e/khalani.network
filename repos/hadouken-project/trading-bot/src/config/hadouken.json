@@ -1,0 +1,37 @@
+{
+  "pools": [
+    {
+      "name": "hadoukenUsdcCkb",
+      "tokens": ["USDC", "CKB"]
+    },
+    {
+      "name": "hadoukenUsdtCkb",
+      "tokens": ["CKB", "USDT"]
+    },
+    {
+      "name": "hadoukenEthCkb",
+      "tokens": ["ETH", "CKB"]
+    },
+    {
+      "name": "hadoukenWbtcCkb",
+      "tokens": ["WBTC|eth", "CKB"]
+    },
+    {
+      "name": "hadoukenEthUsdc",
+      "tokens": ["ETH", "USDC"]
+    },
+    {
+      "name": "hadoukenEthUsdt",
+      "tokens": ["ETH", "USDT"]
+    },
+    {
+      "name": "hadoukenBtcUsdc",
+      "tokens": ["WBTC|eth", "USDC"]
+    },
+    {
+      "name": "hadoukenBtcUsdt",
+      "tokens": ["WBTC|eth", "USDT"]
+    }
+  ],
+  "vaultAddress": "0x4F8BDF24826EbcF649658147756115Ee867b7D63"
+}

@@ -1,0 +1,20 @@
+{
+  "transaction": {
+    "hash": "0x73f2667e44f4558fff41d4549bd32d0e5d6aa679c10136f6dcb78584e692c7ef",
+    "blockNumber": 8433697
+  },
+  "data": {
+    "StaticAToken": {
+      "deploy": {
+        "input": {
+          "name": "Wrapped hWETH",
+          "symbol": "hWETH",
+          "lendingPool": "0xfa9A6D1fedcEc11Ab54664673892737855C2C0a7",
+          "aToken": "0x9E58551b5cAFb8A5E57D860C2c491b977ce7E345"
+        },
+        "output": "0x35F21DEeE21B12F8056e64ffc4Dcf9c2052B7862"
+      }
+    }
+  },
+  "timestamp": 1687777427178
+}

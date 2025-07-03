@@ -1,0 +1,87 @@
+{
+  "theme": {
+    "typedefinition": {
+      "color": 124,
+      "bold": true
+    },
+    "toplevel": {
+      "color": 94,
+      "bold": true
+    },
+    "proofblock": {
+      "color": 56,
+      "bold": true
+    },
+    "kind": {
+      "color": "cyan"
+    },
+    "typeoperator": {
+      "color": "green",
+      "bold": true
+    },
+    "typevar": {
+      "color": 239
+    },
+    "typepropformer": {
+      "color": "green"
+    },
+    "proofterm": {
+      "color": 239,
+      "bold": true
+    },
+    "absurd": {
+      "color": 232,
+      "bold": true
+    },
+    "variable": {
+      "color": 239
+    },
+    "constructor": 239,
+    "constant": 239,
+    "keyword": 56,
+    "comment": {
+      "italic": true,
+      "color": 245
+    },
+    "variable.builtin": {
+      "bold": true
+    },
+    "constant.builtin": {
+      "bold": true,
+      "color": 94
+    },
+    "punctuation.delimiter": 239,
+    "string.special": 30,
+    "variable.parameter": {
+      "underline": true
+    },
+    "function.builtin": {
+      "color": 26,
+      "bold": true
+    },
+    "string": 28,
+    "punctuation.bracket": 239,
+    "operator": {
+      "bold": true,
+      "color": 239
+    },
+    "function": 26,
+    "number": {
+      "color": 94,
+      "bold": true
+    },
+    "property": 124,
+    "module": 136,
+    "tag": 18,
+    "attribute": {
+      "color": 124,
+      "italic": true
+    },
+    "type": 23,
+    "embedded": null,
+    "type.builtin": {
+      "color": 23,
+      "bold": true
+    }
+  }
+}

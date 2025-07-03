@@ -1,0 +1,8 @@
+{
+  "Parameters": {
+    "DiscordWebhookUrl": "https://discord.com/api/webhooks/1153236106175852664/Pj1H4gYJUZl6tNbkP3omFNvr3mWpdg9iQlopdcxtA8NTeVT_Spvf_Skwz69VywjGDWju",
+    "KMSKeyArn": "arn:aws:kms:us-east-1:803035318642:key/75517aeb-e410-409a-8b5e-cc117b8a0a57",
+    "SecretsArnUs": "arn:aws:secretsmanager:us-east-1:803035318642:secret:hadouken/trading-bot-8rSolz",
+    "LiquidationSentryDsn": "https://f3ce9d1db8154509866253e672614bc8@o4504339039911936.ingest.sentry.io/4504616557477888"
+  }
+}

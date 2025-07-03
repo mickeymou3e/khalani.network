@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "lib": ["dom", "esnext"],
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "strict": true,
+    "outDir": "dist",
+    "rootDir": ".",
+    "baseUrl": "./",
+    "paths": {
+      "@src/*": ["./src/*"],
+      "@scripts/*": ["./scripts/*"],
+      "@markets/*": ["./markets/*"],
+      "@cli/*": ["./cli/*"]
+    }
+  },
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  },
+  "include": ["src", "./scripts/**/*", "cli", "build", "contracts", "deploy", "test"],
+  "exclude": ["node_modules"],
+  "files": ["hardhat.zksync.ts", "hardhat.godwoken.ts"]
+}

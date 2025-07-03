@@ -1,0 +1,7 @@
+Result: Nothing
+Result: Nothing
+Result: Nothing
+Result: Nothing
+Result: Proved(forall Nat. if(p[Succ[@0:Nat]):Nat], if(q[@0:Nat], =[f[Succ[@0:Nat]):Nat]):Nat, g[@0:Nat]):Nat])))
+Result: Proved(forall Nat. if(p[Succ[@0:Nat]):Nat], if(not(q[@0:Nat]), =[f[Succ[@0:Nat]):Nat]):Nat, f[@0:Nat]):Nat])))
+Result: Proved(forall Nat. if(not(p[@0:Nat]), =[f[@0:Nat]):Nat, Zero:Nat]))

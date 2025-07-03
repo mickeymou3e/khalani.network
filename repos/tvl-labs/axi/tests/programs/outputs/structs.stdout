@@ -1,0 +1,11 @@
+Result: Nothing
+Result: Proved(forall Nat. forall Nat. forall Nat. forall Nat. forall Nat. forall Nat. if(=[Foo.mk[@5:Nat, @4:Nat, @3:Nat]):Foo, Foo.mk[@2:Nat, @1:Nat, @0:Nat]):Foo], and(and(=[@5:Nat, @2:Nat], =[@4:Nat, @1:Nat]), =[@3:Nat, @0:Nat])))
+Result: Nothing
+Result: Nothing
+Result: Proved(=[Foo.mk[3, 4, 5]):Foo, Foo.mk[3, 4, 5]):Foo])
+Result: Term(Foo.x[Foo.mk[3, 4, 5]):Foo]):Nat)
+Result: Nothing
+Result: Term(Foo.x[Bar.f[Bar.mk[Foo.mk[3, 4, 5]):Foo]):Bar]):Foo]):Nat)
+Result: Proved(=[5, Foo.z[Foo.mk[3, 4, 5]):Foo]):Nat])
+Result: Proved(=[Foo.y[Bar.f[Bar.mk[Foo.mk[3, 4, 5]):Foo]):Bar]):Foo]):Nat, 4])
+Result: Proved(=[Foo.y[Bar.f[Bar.mk[Foo.mk[3, 4, 5]):Foo]):Bar]):Foo]):Nat, 4])

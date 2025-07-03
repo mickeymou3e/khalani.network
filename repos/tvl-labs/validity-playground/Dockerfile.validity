@@ -1,0 +1,12 @@
+FROM rust:latest
+
+WORKDIR /usr/src/validity-playground
+COPY ./validity .
+RUN ls -a 
+
+RUN cargo install --path .
+RUN mkdir ./temp-vdy-files
+
+COPY ./temp.vdy ./temp-vdy-files
+ENTRYPOINT ["axi-lang"]
+CMD ["./temp-vdy-files/temp.vdy"]

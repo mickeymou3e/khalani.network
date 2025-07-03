@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  faucet-server:
+    container_name: faucet-server
+    build: ./
+    environment:
+      AXON_FAUCET_RPC_URL: ${AXON_FAUCET_RPC_URL}
+      AXON_FAUCET_CHAIN_ID: ${AXON_FAUCET_CHAIN_ID}
+      AXON_FAUCET_REQUIRED_CONFIRMATIONS: ${AXON_FAUCET_REQUIRED_CONFIRMATIONS}
+      AXON_FAUCET_CLAIM_VALUE: ${AXON_FAUCET_CLAIM_VALUE}
+      AXON_FAUCET_MONGODB_URL: ${AXON_FAUCET_MONGODB_URL}
+      AXON_FAUCET_MONGODB_DB: ${AXON_FAUCET_MONGODB_DB}
+      AXON_FAUCET_MONGODB_TRANSACTIONS_COLLECTION: ${AXON_FAUCET_MONGODB_TRANSACTIONS_COLLECTION}
+      AXON_FAUCET_MONGODB_ADDRESSES_COLLECTION: ${AXON_FAUCET_MONGODB_ADDRESSES_COLLECTION}
+    ports:
+      - "8502:3000"
+    depends_on:
+      - faucet-mongo
+    networks:
+      - faucet-network
+
+  faucet-mongo:
+    image: mongo:latest
+    container_name: faucet-mongo
+    restart: always
+    user: root
+    privileged: true
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: ${AXON_FAUCET_MONGODB_PASSWORD}
+    volumes:
+      - "./data/db:/data/db"
+      - "./data/log:/data/log"
+    ports:
+      - "27017:27017"
+    networks:
+      - faucet-network
+
+networks:
+  faucet-network:
+    driver: bridge

@@ -1,0 +1,13 @@
+image:
+  repository: ghcr.io/tvl-labs/blockscan
+  tag: "5.1.1-prerelease-61eb7a2a"
+
+serviceAccount:
+  create: true
+
+dbSecretName: ""
+domainName: ""
+iamRoleArn: ""
+keyBaseSecretName: ""
+postgresHost: ""
+rpcUrl: ""

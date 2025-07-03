@@ -1,0 +1,13 @@
+@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/
+@hyperlane-xyz/core/contracts/=lib/hyperlane-monorepo/solidity/contracts/
+@openzeppelin/contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/contracts/
+ds-test/=lib/solmate/lib/ds-test/src/
+erc4626-tests/=lib/openzeppelin-contracts-upgradeable/lib/erc4626-tests/
+forge-gas-snapshot/=lib/permit2/lib/forge-gas-snapshot/src/
+forge-std/=lib/forge-std/src/
+hyperlane-monorepo/=lib/hyperlane-monorepo/
+openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/
+openzeppelin-contracts/=lib/openzeppelin-contracts/
+openzeppelin/=lib/openzeppelin-contracts-upgradeable/contracts/
+permit2/=lib/permit2/
+solmate/=lib/solmate/src/

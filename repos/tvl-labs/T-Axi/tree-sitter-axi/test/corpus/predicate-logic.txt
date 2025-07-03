@@ -1,0 +1,573 @@
+==================================
+Universal quantifier introduction
+==================================
+theorem equality_is_reflexive : forall {A} (x : A), x = x
+proof
+  pick-any A x
+  proving (x = x) by
+    refl
+qed
+
+---
+
+(source_file
+  (separator)
+  (theorem_declaration
+    (identifier)
+    (type_ann
+      (forall
+        (parameters
+          (implicit_parameters
+            (identifier))
+          (explicit_parameters
+            (identifier)
+            (type_ann
+              (identifier))))
+        (equality
+          (identifier)
+          (identifier))))
+    (proof_block
+      (begin)
+      (separator)
+      (pick_any
+        (patterns
+          (identifier)
+          (identifier)))
+      (separator)
+      (proving_by
+        (equality
+          (identifier)
+          (identifier))
+        (by_block
+          (begin)
+          (separator)
+          (identifier)
+          (end)))
+      (end)))
+  (separator))
+
+=================================
+Universal quantifier elimination
+=================================
+type A
+declaration x : A
+
+theorem x_is_x : (x = x)
+proof
+  instantiate equality_is_reflexive with {A} x
+qed
+
+---
+
+(source_file
+  (separator)
+  (constant_declaration
+    (type)
+    (identifier))
+  (separator)
+  (declaration
+    (parameters
+      (identifier))
+    (type_ann
+      (identifier)))
+  (separator)
+  (theorem_declaration
+    (identifier)
+    (type_ann
+      (equality
+        (identifier)
+        (identifier)))
+    (proof_block
+      (begin)
+      (separator)
+      (call
+        (instantiate_with
+          (identifier))
+        (identifier)
+        (identifier))
+      (end)))
+  (separator))
+
+====================================
+Existential quantifier introduction
+====================================
+type A
+
+theorem exists-intro-example :
+  exists x : A, P x \/ True
+proof
+  witness a
+  or-right
+  trivial
+qed
+
+---
+
+(source_file
+  (separator)
+  (constant_declaration
+    (type)
+    (identifier))
+  (separator)
+  (theorem_declaration
+    (identifier)
+    (type_ann
+      (exists
+        (parameters
+          (identifier))
+        (type_ann
+          (identifier))
+        (disjunction
+          (call
+            (identifier)
+            (identifier))
+          (identifier))))
+    (proof_block
+      (begin)
+      (separator)
+      (witness
+        (identifier))
+      (separator)
+      (identifier)
+      (separator)
+      (identifier)
+      (end)))
+  (separator))
+
+===================================
+Existential quantifier elimination
+===================================
+theorem exists-elim-example :
+  (exists x : A, P x /\ Q x) --> exists x : A, P x
+proof
+  assume ex : exists x : A, P x /\ Q x
+  pick-witness x pq for ex
+  witness x
+  and-left pq
+qed
+
+theorem exists-elim-example' :
+  (exists x : A, P x /\ Q x) --> exists x : A, P x
+proof
+  assume (witness x such-that both p q)
+  witness x such-that p
+qed
+
+---
+
+(source_file
+  (separator)
+  (theorem_declaration
+    (identifier)
+    (type_ann
+      (implication
+        (exists
+          (parameters
+            (identifier))
+          (type_ann
+            (identifier))
+          (conjunction
+            (call
+              (identifier)
+              (identifier))
+            (call
+              (identifier)
+              (identifier))))
+        (exists
+          (parameters
+            (identifier))
+          (type_ann
+            (identifier))
+          (call
+            (identifier)
+            (identifier)))))
+    (proof_block
+      (begin)
+      (separator)
+      (assume
+        (patterns
+          (identifier)
+          (type_ann
+            (exists
+              (parameters
+                (identifier))
+              (type_ann
+                (identifier))
+              (conjunction
+                (call
+                  (identifier)
+                  (identifier))
+                (call
+                  (identifier)
+                  (identifier)))))))
+      (separator)
+      (pick_witness
+        (patterns
+          (identifier)
+          (identifier))
+        (identifier))
+      (separator)
+      (witness
+        (identifier))
+      (separator)
+      (call
+        (identifier)
+        (identifier))
+      (end)))
+  (separator)
+  (theorem_declaration
+    (identifier)
+    (type_ann
+      (implication
+        (exists
+          (parameters
+            (identifier))
+          (type_ann
+            (identifier))
+          (conjunction
+            (call
+              (identifier)
+              (identifier))
+            (call
+              (identifier)
+              (identifier))))
+        (exists
+          (parameters
+            (identifier))
+          (type_ann
+            (identifier))
+          (call
+            (identifier)
+            (identifier)))))
+    (proof_block
+      (begin)
+      (separator)
+      (assume
+        (patterns
+          (witness_pattern
+            (identifier)
+            (ctor_pattern
+              (identifier)
+              (identifier)
+              (identifier)))))
+      (separator)
+      (witness_such_that
+        (identifier)
+        (identifier))
+      (end)))
+  (separator))
+
+==========
+Rewriting
+==========
+theorem eq-sym : forall x y : A, x = y --> y = x
+proof
+  pick-any x y
+  assume heq : x = y
+  rewrite heq
+  refl
+qed
+
+theorem eq-sym-term-style : (forall x y : A, x = y --> y = x) =
+  pick-any x y in
+    assume eq : x = y in
+      rewrite eq in
+        refl
+
+theorem eq-sym' :
+  forall x y : A,
+    x = y --> y = x
+proof
+  pick-any x y
+  assume heq : x = y
+  rewrite <-heq
+  refl
+qed
+
+theorem eq-sym'' :
+  forall x y : A,
+    x = y --> y = x
+proof
+  pick-any x y
+  assume heq : x = y
+  rewrite ->heq
+  refl
+qed
+
+theorem eq-trans :
+  forall x y z : A,
+    x = y --> y = z --> x = z
+proof
+  pick-any x y z
+  assume (xy : x = y) (yz : y = z)
+  rewrite xy, yz
+  refl
+qed
+
+theorem rewrite-modifiers :
+  forall x y z : A,
+    x = y --> y = z --> x = z
+proof
+  pick-any x y z
+  assume (xy : x = y) (yz : y = z)
+  rewrite <-xy, <-yz
+  refl
+qed
+
+---
+
+(source_file
+  (separator)
+  (theorem_declaration
+    (identifier)
+    (type_ann
+      (forall
+        (parameters
+          (identifier)
+          (identifier))
+        (type_ann
+          (identifier))
+        (equality
+          (identifier)
+          (equality
+            (implication
+              (identifier)
+              (identifier))
+            (identifier)))))
+    (proof_block
+      (begin)
+      (separator)
+      (pick_any
+        (patterns
+          (identifier)
+          (identifier)))
+      (separator)
+      (assume
+        (patterns
+          (identifier)
+          (type_ann
+            (equality
+              (identifier)
+              (identifier)))))
+      (separator)
+      (rewrite
+        (identifier))
+      (separator)
+      (identifier)
+      (end)))
+  (separator)
+  (theorem_declaration
+    (identifier)
+    (type_ann
+      (forall
+        (parameters
+          (identifier)
+          (identifier))
+        (type_ann
+          (identifier))
+        (equality
+          (identifier)
+          (equality
+            (implication
+              (identifier)
+              (identifier))
+            (identifier)))))
+    (value
+      (decl_in
+        (pick_any
+          (patterns
+            (identifier)
+            (identifier)))
+        (decl_in
+          (assume
+            (patterns
+              (identifier)
+              (type_ann
+                (equality
+                  (identifier)
+                  (identifier)))))
+          (decl_in
+            (rewrite
+              (identifier))
+            (identifier))))))
+  (separator)
+  (theorem_declaration
+    (identifier)
+    (type_ann
+      (forall
+        (parameters
+          (identifier)
+          (identifier))
+        (type_ann
+          (identifier))
+        (equality
+          (identifier)
+          (equality
+            (implication
+              (identifier)
+              (identifier))
+            (identifier)))))
+    (proof_block
+      (begin)
+      (separator)
+      (pick_any
+        (patterns
+          (identifier)
+          (identifier)))
+      (separator)
+      (assume
+        (patterns
+          (identifier)
+          (type_ann
+            (equality
+              (identifier)
+              (identifier)))))
+      (separator)
+      (rewrite
+        (identifier))
+      (separator)
+      (identifier)
+      (end)))
+  (separator)
+  (theorem_declaration
+    (identifier)
+    (type_ann
+      (forall
+        (parameters
+          (identifier)
+          (identifier))
+        (type_ann
+          (identifier))
+        (equality
+          (identifier)
+          (equality
+            (implication
+              (identifier)
+              (identifier))
+            (identifier)))))
+    (proof_block
+      (begin)
+      (separator)
+      (pick_any
+        (patterns
+          (identifier)
+          (identifier)))
+      (separator)
+      (assume
+        (patterns
+          (identifier)
+          (type_ann
+            (equality
+              (identifier)
+              (identifier)))))
+      (separator)
+      (rewrite
+        (identifier))
+      (separator)
+      (identifier)
+      (end)))
+  (separator)
+  (theorem_declaration
+    (identifier)
+    (type_ann
+      (forall
+        (parameters
+          (identifier)
+          (identifier)
+          (identifier))
+        (type_ann
+          (identifier))
+        (equality
+          (identifier)
+          (equality
+            (implication
+              (identifier)
+              (identifier))
+            (equality
+              (implication
+                (identifier)
+                (identifier))
+              (identifier))))))
+    (proof_block
+      (begin)
+      (separator)
+      (pick_any
+        (patterns
+          (identifier)
+          (identifier)
+          (identifier)))
+      (separator)
+      (assume
+        (patterns
+          (ann_pattern
+            (identifier)
+            (type_ann
+              (equality
+                (identifier)
+                (identifier))))
+          (ann_pattern
+            (identifier)
+            (type_ann
+              (equality
+                (identifier)
+                (identifier))))))
+      (separator)
+      (rewrite
+        (identifier)
+        (identifier))
+      (separator)
+      (identifier)
+      (end)))
+  (separator)
+  (theorem_declaration
+    (identifier)
+    (type_ann
+      (forall
+        (parameters
+          (identifier)
+          (identifier)
+          (identifier))
+        (type_ann
+          (identifier))
+        (equality
+          (identifier)
+          (equality
+            (implication
+              (identifier)
+              (identifier))
+            (equality
+              (implication
+                (identifier)
+                (identifier))
+              (identifier))))))
+    (proof_block
+      (begin)
+      (separator)
+      (pick_any
+        (patterns
+          (identifier)
+          (identifier)
+          (identifier)))
+      (separator)
+      (assume
+        (patterns
+          (ann_pattern
+            (identifier)
+            (type_ann
+              (equality
+                (identifier)
+                (identifier))))
+          (ann_pattern
+            (identifier)
+            (type_ann
+              (equality
+                (identifier)
+                (identifier))))))
+      (separator)
+      (rewrite
+        (identifier)
+        (identifier))
+      (separator)
+      (identifier)
+      (end)))
+  (separator))

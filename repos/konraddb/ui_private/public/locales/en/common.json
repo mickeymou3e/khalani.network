@@ -1,0 +1,134 @@
+{
+  "noData": "No data available",
+  "orderTypes": {
+    "RFQ_Market": "Market",
+    "RFQ_Limit": "Limit"
+  },
+  "orderStatuses": {
+    "Open": "Not filled",
+    "Filled": "Filled",
+    "Rejected": "Rejected",
+    "Canceled": "Cancelled",
+    "Initiated": "Not filled",
+    "ToCancel": "Cancelling",
+    "partiallyFilled": "{{partial}}% filled"
+  },
+  "executionSide": {
+    "Buy": "Buy",
+    "Sell": "Sell"
+  },
+  "ecoAssetType": {
+    "recs": "Recs",
+    "carbonCredits": "Carbon Credits",
+    "forwards": "Forwards"
+  },
+  "formsValidations": {
+    "required": "Required.",
+    "emailInvalid": "Invalid email address.",
+    "notMatchingEmail": "The entered email addresses do not match.",
+    "passwordDoesntMatch": "Password does not match.",
+    "codeExacly6Marks": "The code must be exactly 6 digits long",
+    "codeEnter6Marks": "Enter the 6 digits code",
+    "checkboxRequired": "You must agree before submitting.",
+    "somethingWentWrong": "Something went wrong.",
+    "invalidCredentials": "Invalid authenticator code. Please, check code you entered.",
+    "invalidToken": "Invalid authenticator code.",
+    "expiredToken": "Session expired. Please re-enter your credentials.",
+    "notMatchingPassword": "Password does not match.",
+    "codeSent": "Code sent",
+    "tooShortPassword": "Password must contain at least 8 characters.",
+    "passwordRequirements": "Password must contain at least one uppercase character and one number.",
+    "unknownEmail": "This email address does not exist in our database.",
+    "samePassword": "Ensure the new password is different from the previous one",
+    "invalidCode": "Invalid code",
+    "emailAlreadyInUse": "Email is already in use",
+    "moreThanZero": "Must be greater than 0",
+    "minimumPoolingAmount": "Minimum pooling amount is 1",
+    "minimumRedeemAmount": "Minimum redeeming amount is 1",
+    "cannotPoolDecimals": "Decimal values cannot be pooled.",
+    "cannotRedeemDecimals": "Decimal values cannot be redeemed.",
+    "invalidEmail": "Invalid email address.",
+    "changePasswordDisabled": "Password change option is disabled",
+    "insufficientBalance": "Insufficient balance",
+    "insufficientRemainingAssets": "Remaining assets are insufficient.",
+    "apiKeyMinRequirements": "Label must be at least 3 characters long",
+    "apiKeysDuplicate": "Label already exists",
+    "apiKeysUnknownError": "Unknown error",
+    "qrCodeRequirements": "Invalid authenticator code. Check code you entered.",
+    "inviteNotFound": "The invite link is either not found or has already been used. Please verify the link's accuracy or reach out to support for further assistance.",
+    "duplicateEntity": "Email already registered or invitation sent.",
+    "invalidTotpCode": "Invalid authenticator code. Please check code you entered.",
+    "invalidEmailWithAction": "Invalid email address. Please check the email address you entered.",
+    "notEnoughPermissions": "You lack sufficient permissions to complete this request",
+    "minimumRetirementAmount": "Minimum retirement amount is 1",
+    "minimumBridgeAmount": "Minimum bridging out amount is 1",
+    "cannotRetireDecimals": "Only integer amounts can be retired; decimal amounts cannot.",
+    "cannotBridgeDecimals": "Only integer amounts can be bridged out; decimal amounts cannot.",
+    "auditYear": "Invalid value for year",
+    "invalidAddress": "Invalid address",
+    "addressAlreadyExists": "Address has already been added. Provide a different option."
+  },
+  "support": {
+    "title": "Contact Support",
+    "description": "Please provide detailed information about the issue you are facing or the specific question you have.",
+    "email": "Email",
+    "typeEmail": "Type your email address",
+    "subject": "Subject",
+    "typeSubject": "Type subject",
+    "message": "Message",
+    "typeMessage": "Type your message, we will contact you soon.",
+    "send": "Send",
+    "cancel": "Cancel",
+    "successTitle": "Message sent",
+    "successDescription": "Our support team will contact you via email within the next 24 hours.",
+    "close": "Close"
+  },
+  "authDisclaimer": "Using an authenticator app improves security.",
+  "needHelp": "Need help?",
+  "contactSupport": "Contact support",
+  "verifyAccount": "Verify your account to operate.",
+  "verify": "Verify",
+  "notifications": {
+    "verifyYourAccountMessage": "Verify your account to operate.",
+    "unavailableFeature": "Currently unavailable, <strong>please contact support</strong>",
+    "contact": "Contact"
+  },
+  "commonBackdrops": {
+    "authenticatorCode": "Authenticator code",
+    "emailCode": "Email Code",
+    "timeRemaining": "Time remaining",
+    "enter6Marks": "Please enter the 6-digit code",
+    "resend": "Resend",
+    "codeSent": "Sent"
+  },
+  "search": "Search",
+  "noHistoryYet": "No history yet",
+  "noBalanceYet": "No balance yet",
+  "resultsNotFound": "Results not found",
+  "noResultsFound": "No results found",
+  "noWalletsYet": "No wallets created yet",
+  "offline": "<strong>We are currently experiencing some connectivity issues</strong>. You will not be able to place orders. Outstanding limit orders will still be filled.",
+  "components": {
+    "password": {
+      "strength": "Strength",
+      "weak": "Weak",
+      "fair": "Fair",
+      "strong": "Strong"
+    },
+    "datagrid": {
+      "rowCount": "Show rows",
+      "info": "Info",
+      "noResultsFound": "No results found"
+    },
+    "select": {
+      "noResultsFound": "No results found"
+    },
+    "backdrop": {
+      "tryAgain": "Try again",
+      "cancel": "Cancel",
+      "failureTitle": "Request couldn’t be processed",
+      "failureSubtitle": "Please try again. If this issue persist, contact support.",
+      "contactSupport": "Contact support"
+    }
+  }
+}

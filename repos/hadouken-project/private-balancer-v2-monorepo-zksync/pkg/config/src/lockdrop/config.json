@@ -1,0 +1,17 @@
+{
+  "phaseOneStartTime": 1698920400,
+  "phaseTwoStartTime": 1699008000,
+  "phaseThreeStartTime": 1699188000,
+  "endpoint": "https://lockdrop-api-testnet.hadouken.finance",
+  "chains": [
+    {
+      "chainId": "0x118",
+      "name": "zksync-testnet",
+      "poolAddress": "0x2B4319427F45E3fdef6dd842763552742C6b5418",
+      "husdAddress": "0xf959629bdbdcac1e1d0a1ce630046db5cb6a15f2",
+      "triCryptoAddress": "0x0aef038b4d8cf8d8e3f4ee4b1e0b582600debc2d",
+      "wethAddress": "0x0000000000000000000000000000000000000000",
+      "bonusHDK": "833"
+    }
+  ]
+}

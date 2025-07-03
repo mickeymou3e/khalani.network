@@ -1,0 +1,40 @@
+{
+  "transaction": {
+    "hash": "0x5bd07013db1e648d126ca73e62d9956315d59fa390ea0ed2ab03a9cf819b85f5"
+  },
+  "data": {
+    "ComposableStablePoolFactory": {
+      "create": {
+        "input": {
+          "name": "HCKB/CKB",
+          "symbol": "HDK-HCKB-CKB",
+          "tokens": [
+            "0x0eb76790a2014Dd1F65488Ccd703bCDF75F8195e",
+            "0xe7Ea406348dB83f3A0014295d859FB3c896A226B"
+          ],
+          "rateProviders": [
+            "0x0000000000000000000000000000000000000000",
+            "0x0000000000000000000000000000000000000000"
+          ],
+          "priceRateCacheDuration": [
+            "0",
+            "0"
+          ],
+          "amplificationParameter": "5000",
+          "swapFeePercentage": "100000000000000",
+          "exemptFromYieldProtocolFeeFlags": [
+            false,
+            false
+          ],
+          "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0x0eb76790a2014Dd1F65488Ccd703bCDF75F8195e": "10000000000000000",
+            "0xe7Ea406348dB83f3A0014295d859FB3c896A226B": "10000000000000000"
+          }
+        },
+        "output": "0x31D4661f29753F6a59905B4ed978F6228EFF995A"
+      }
+    }
+  },
+  "timestamp": 1695127054337
+}

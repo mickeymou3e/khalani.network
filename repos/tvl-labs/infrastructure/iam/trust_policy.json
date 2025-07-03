@@ -1,0 +1,14 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Service": [
+                    "route53"
+                ]
+            },
+            "Action": "sts:AssumeRole"
+        }
+    ]
+}

@@ -1,0 +1,123 @@
+{
+  "whitelist": [
+    "0x3c396ac8a7d3b586ffce3f631f91c17b6d07fb46",
+    "0x932f6f296aec39626c79cacd9cd17616bb369277",
+    "0x3d313fcc5e0f50756a5599713349a26d50245f06",
+    "0x865f61cc98938067c1408cf8b279f01a46ac2ac8",
+    "0x54d08fcb83191ef3f21b2064043f7b1ff35c03f1",
+    "0x4920c8df1ead17984256edf1fbbc8afd6f66ff9a",
+    "0xfa5fc9674fb12c7a8987ba20cedef44a457f902a",
+    "0x0b05F1D469bd0fe97B599F939b0E07680760aC8F",
+    "0x30A310DBCcCb67A6B6Df75B660eAa036f8810749",
+    "0x9904d25F1fd95a17fa90aD95901a9aedE6952D85",
+    "0x31D4661f29753F6a59905B4ed978F6228EFF995A",
+    "0xe0169172B5806b429911207546b69ef7D9348020",
+    "0x2F6fefD0f4df1c5aB36713398e246bf37D0C08a0",
+    "0x68BEE1C18Ac3F603714cA1C8CE28ab0949600b7B",
+    "0x9ED13bb35CC16f2DFb09E531417bEB44209A8f0a"
+  ],
+  "stableAssets": [
+    {
+      "address": "0x0c7F21908222098616803EfF5d054d3F4EF57EBb",
+      "symbol": "USDC"
+    },
+    {
+      "address": "0x16fDC39a563400Aa6EAcA6A5aC4F2CAb9A0BC8c6",
+      "symbol": "DAI"
+    },
+    {
+      "address": "0x30b0A247DE59a1CDF44329b756d3343E5afEd7f9",
+      "symbol": "USDT"
+    }
+  ],
+  "pricingAssets": [
+    {
+      "address": "0x3B5b0179fDEF8F88c39A94039B66120933729ace",
+      "symbol": "BNB"
+    },
+    {
+      "address": "0x6a447Ba163039D7e1d674668578A0eb049245915",
+      "symbol": "WBTC"
+    },
+    {
+      "address": "0xfF900E1436cBCd25d72B7DafE6Ef4d569405cc05",
+      "symbol": "ETH"
+    },
+    {
+      "address": "0xDc40D03d15f5861f486FC4E81b6333E489D78195",
+      "symbol": "BUSD"
+    },
+    {
+      "address": "0x0eb76790a2014Dd1F65488Ccd703bCDF75F8195e",
+      "symbol": "CKB"
+    },
+    {
+      "address": "0x3B5b0179fDEF8F88c39A94039B66120933729ace",
+      "symbol": "BNB-BSC"
+    },
+    {
+      "address": "0x437F3A7E7Af6c611CDbbd33cE79c56aa7B6F7001",
+      "symbol": "BUSD-BSC"
+    },
+    {
+      "address": "0x5D35D34DA971c795Ec97Ed69786302c6149979E7",
+      "symbol": "ETH-BSC"
+    },
+    {
+      "address": "0xb5e2F2cf4611bcc578977aca17A9724b4B1E9863",
+      "symbol": "USDT-BSC"
+    },
+    {
+      "address": "0x246aEB957FdD930E81Ed539402A7F98EEF0f8945",
+      "symbol": "USDC-BSC"
+    },
+    {
+      "address": "0x30A310DBCcCb67A6B6Df75B660eAa036f8810749",
+      "symbol": "HDK-HUSDT-USDT"
+    },
+    {
+      "address": "0x0b05F1D469bd0fe97B599F939b0E07680760aC8F",
+      "symbol": "HDK-HUSDC-USDC"
+    },
+    {
+      "address": "0xe0169172B5806b429911207546b69ef7D9348020",
+      "symbol": "HDK-HETH-ETH"
+    },
+    {
+      "address": "0x31D4661f29753F6a59905B4ed978F6228EFF995A",
+      "symbol": "HDK-HCKB-CKB"
+    },
+    {
+      "address": "0x9904d25F1fd95a17fa90aD95901a9aedE6952D85",
+      "symbol": "HDK-BOOSTED-USD"
+    },
+    {
+      "address": "0x4ea08dca142f103ac2d5ff95f1d376712c5ef5a9",
+      "symbol": "ceUSDC"
+    },
+    {
+      "address": "0xcdb3d2dc427a5bc9af54a9c2ed2f5950619184bf",
+      "symbol": "ceUSDT"
+    },
+    {
+      "address": "0x0000000000000000000000000000000000000000",
+      "symbol": "ceWBTC"
+    },
+    {
+      "address": "0x0000000000000000000000000000000000000000",
+      "symbol": "ceETH"
+    },
+    {
+      "address": "0x0000000000000000000000000000000000000000",
+      "symbol": "multiETH"
+    },
+    {
+      "address": "0x0000000000000000000000000000000000000000",
+      "symbol": "multiUSDC"
+    },
+    {
+      "address": "0x0000000000000000000000000000000000000000",
+      "symbol": "multiWBTC"
+    }
+  ]
+}

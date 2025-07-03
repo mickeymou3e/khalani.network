@@ -1,0 +1,72 @@
+# Make all the ServiceMonitor-s created by Prometheus Operator have this label.
+# It unifies the service monitor selector (below).
+commonLabels:
+  metrics: "true"
+
+# Make all the PrometheusRule-s created by Prometheus Operator have this label.
+# It unifies the rules selector (below).
+defaultRules:
+  labels:
+    rules: "true"
+
+prometheus:
+  prometheusSpec:
+    # Select all ServiceMonitor-s in the 'monitoring' namespace.
+    # Those ServiceMonitor-s are created by different parties:
+    # 1) Prometheus Operator creates default ServiceMonitor-s for Grafana/Alertmanager and other default services.
+    # 2) Pushgateway creates a ServiceMonitor to be discoverable.
+    # 3) Our infrastructure ('hyperlane' / 'axon') creates its own ServiceMonitor-s having the label `metrics: "true"`.
+    # Note that all `ServiceMonitor`s are created in the 'monitoring' namespace but refer to `Service`s in different namespaces ('hyperlane', 'axon').
+    serviceMonitorSelector:
+      matchLabels:
+        metrics: "true"
+
+    # Select all PrometheusRule-s in the 'monitoring' namespace.
+    # Those PrometheusRule-s are created by different parties:
+    # 1) Prometheus Operator creates default PrometheusRule-s for Grafana/Alertmanager and other default services.
+    # 2) Our infrastructure ('hyperlane' / 'axon') create its own PrometheusRule-s.
+    # Note that all `PrometheusRules`s are created in the 'monitoring' namespace.
+    ruleSelector:
+      matchLabels:
+        rules: "true"
+
+# 'prometheus-node-exporter': https://github.com/prometheus/node_exporter
+# This is a sub-chart of the kube-prometheus-stack
+prometheus-node-exporter:
+  prometheus:
+    monitor:
+      enabled: true
+      # Unify auto-discovery of the 'node-exporter' service.
+      additionalLabels:
+        metrics: "true"
+
+  # Workaround for this issue: https://github.com/prometheus-community/helm-charts/issues/325
+  hostRootFsMount:
+    enabled: false
+
+# 'prometheus-node-exporter': https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-state-metrics
+# This is a sub-chart of the kube-prometheus-stack
+kube-state-metrics:
+  prometheus:
+    monitor:
+      additionalLabels:
+        # Unify auto-discovery of the 'kube-state-metrics' service.
+        metrics: "true"
+
+alertmanager:
+  alertmanagerSpec:
+    useExistingSecret: true
+    configSecret: alertmanager-config
+    storage:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: gp2
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 10Gi
+
+grafana:
+  persistence:
+    enabled: true
+    storageClassName: gp2

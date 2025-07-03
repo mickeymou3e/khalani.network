@@ -1,0 +1,143 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Configuration for setting up private subnets and NAT instance. This is required for lambda functions to access resources over public internet connection'
+Parameters:
+  VpcId:
+    Type: AWS::EC2::VPC::Id
+  RoutingTableCidrBlock:
+    Description: Default CIDR block for routing tables.
+    Type: String
+    Default: '0.0.0.0/0'
+  PrivateSubnetCidrBlocks:
+    Type: CommaDelimitedList
+  PublicSubnet:
+    Type: AWS::EC2::Subnet::Id
+  KeyName:
+    Type: String
+    Description: SSH Key name to access the NAT instance
+    Default: ''
+
+Mappings:
+  NatRegionMap:
+    us-east-1:
+      AMI: ami-184dc970
+    eu-west-1:
+      AMI: ami-0ef61a4c455e17f73
+    us-east-2:
+      AMI: ami-0f6592de998750ca7
+    eu-central-1:
+      AMI: ami-ae380eb3
+
+Conditions:
+  SSHAccess: !Not [!Equals [!Ref KeyName, '']]
+
+Resources:
+  PrivateRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VpcId
+
+  DefaultPrivateRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      DestinationCidrBlock: !Ref RoutingTableCidrBlock
+      InstanceId: !Ref NatEC2Instance
+
+  PrivateSubnetARouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      SubnetId: !Ref PrivateSubnetA
+
+  PrivateSubnetBRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      SubnetId: !Ref PrivateSubnetB
+
+  PrivateSubnetCRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      SubnetId: !Ref PrivateSubnetC
+
+  PrivateSubnetA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VpcId
+      AvailabilityZone: !Select [0, !GetAZs '']
+      CidrBlock: !Select [0, !Ref PrivateSubnetCidrBlocks]
+      MapPublicIpOnLaunch: false
+
+  PrivateSubnetB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VpcId
+      AvailabilityZone: !Select [1, !GetAZs '']
+      CidrBlock: !Select [1, !Ref PrivateSubnetCidrBlocks]
+      MapPublicIpOnLaunch: false
+
+  PrivateSubnetC:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VpcId
+      AvailabilityZone: !Select [2, !GetAZs '']
+      CidrBlock: !Select [2, !Ref PrivateSubnetCidrBlocks]
+      MapPublicIpOnLaunch: false
+
+  NatSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: 'Security group of NAT instance'
+      VpcId: !Ref VpcId
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          CidrIp: 172.31.0.0/16
+          FromPort: 80
+          ToPort: 80
+        - IpProtocol: tcp
+          CidrIp: 172.31.0.0/16
+          FromPort: 443
+          ToPort: 443
+        - !If
+          - SSHAccess
+          - FromPort: 22
+            ToPort: 22
+            CidrIp: 0.0.0.0/0
+            IpProtocol: tcp
+          - !Ref 'AWS::NoValue'
+
+  NatEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      SourceDestCheck: false
+      KeyName: !If
+        - SSHAccess
+        - !Ref KeyName
+        - !Ref 'AWS::NoValue'
+      ImageId:
+        Fn::FindInMap:
+          - NatRegionMap
+          - !Ref AWS::Region
+          - AMI
+      NetworkInterfaces:
+        - GroupSet:
+            - !Ref NatSecurityGroup
+          AssociatePublicIpAddress: true
+          DeviceIndex: '0'
+          DeleteOnTermination: true
+          SubnetId: !Ref PublicSubnet
+      UserData:
+        Fn::Base64:
+          Fn::Join:
+            - "\n"
+            - - '#!/bin/bash'
+              - 'yum update -y && yum install -y yum-cron && chkconfig yum-cron on'
+      Tags:
+        - Key: Name
+          Value: 'NAT instance'
+
+Outputs:
+  PrivateSubnets:
+    Value: !Sub ${PrivateSubnetA},${PrivateSubnetB},${PrivateSubnetC}

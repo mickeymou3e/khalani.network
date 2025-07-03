@@ -1,0 +1,62 @@
+{
+  "compilerOptions": {
+    "types": ["jest", "node"],
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "downlevelIteration": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "module": "ES2020",
+    "target": "es5",
+    "jsx": "react",
+    "allowJs": true,
+    "baseUrl": "./",
+    "paths": {
+      "@assets/*": [
+        "./public/*"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@containers/*": [
+        "./src/containers/*"
+      ],
+      "@config": [
+        "./src/config.ts"
+      ],
+      "@constants/*": [
+        "./src/constants/*"
+      ],
+      "@graph/*": [
+        "./src/graph/*"
+      ],
+      "@interfaces/*": [
+        "./src/interfaces/*"
+      ],
+      "@store/*": [
+        "./src/store/*"
+      ],
+      "@styles/*": [
+        "./src/styles/*"
+      ],
+      "@tests/*": [
+        "./testUtils/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+    }
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "jest.config.js",
+    "src/**/*.test.ts*",
+    "src/**/*.stories.ts*"
+  ]
+}

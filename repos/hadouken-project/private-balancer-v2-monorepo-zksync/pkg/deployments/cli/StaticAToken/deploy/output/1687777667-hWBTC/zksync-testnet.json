@@ -1,0 +1,20 @@
+{
+  "transaction": {
+    "hash": "0xf409772c37cfdb6a07238936884f755cdf6379cb31bfb92a0e2df1d33b544a19",
+    "blockNumber": 8433909
+  },
+  "data": {
+    "StaticAToken": {
+      "deploy": {
+        "input": {
+          "name": "Wrapped hWBTC",
+          "symbol": "hWBTC",
+          "lendingPool": "0xfa9A6D1fedcEc11Ab54664673892737855C2C0a7",
+          "aToken": "0x42Eda0177AF3C5d533d8447f3b0e1190E1051bbF"
+        },
+        "output": "0x49fF1203b31bAcDd6E5b62295Af09B9693024944"
+      }
+    }
+  },
+  "timestamp": 1687777667017
+}

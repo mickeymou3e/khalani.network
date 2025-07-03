@@ -1,0 +1,16 @@
+{
+  "name": "tvl-labs-intentsu",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "start:backend": "yarn workspace backend start",
+    "start:frontend": "yarn workspace frontend start",
+    "build:backend": "yarn workspace backend build",
+    "build:frontend": "yarn workspace frontend build"
+  }
+}

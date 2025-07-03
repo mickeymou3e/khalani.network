@@ -1,0 +1,242 @@
+####################################################################################################################################
+# This is an attempt to develop formally the ZFC variant of Set Theory (Zermelo-Fraenkel with the Axiom of Choice).
+# See here: https://en.wikipedia.org/wiki/Zermelo–Fraenkel_set_theory
+#
+# We develop basic notions of set theory:
+# - set operations (union, difference, intersection)
+# - cartesian products
+# - relations and functions
+# - properties of functions (associativity, identity, monomorphism, epimorphism, image, inverse-image)
+# - ordering relations, well-orders and ordinal numbers
+# - transfinite recursion and transfinite induction
+# - construction of natural numbers
+#
+# We conclude this exercise with:
+# - formulation of the Continuum Hypothesis
+# - formulation and proof of the Schröder–Bernstein theorem.
+####################################################################################################################################
+
+load "list-of"
+
+# This theory is single sorted.
+# In other word, every object in the theory is a set.
+domain Set
+
+# Athena does not support Unicode so we cannot use the usual "epsilon" letter for representing  the "is-element-of" relation.
+# Therefore we use the short "in" and we will be mostly using this as infix operator.
+declare in: [Set Set] -> Boolean
+
+# A collection of variables we use throughout this file.
+define [x y z s s' s1 s2 s3] := [?x:Set ?y:Set ?z:Set ?s:Set ?s':Set ?s1:Set ?s2:Set ?s3:Set]
+
+############################################## Empty set and singletons ##########################################################
+
+# Axiom 1: existence of an empty set
+# We give it a name (as Athena constant).
+declare null:Set
+
+# Here we enforce that the empty set contains no elements.
+assert* null-def := (~ _ in null)
+
+# Axiom 2: formation of singletons
+# It says that given any set x, we may construct another set y such that x is the only element of x.
+declare singleton: [Set] -> Set
+assert* singleton-def := (x in singleton y <==> x = y)
+
+############################################## Subsets and extensionality axiom ###################################################
+
+declare subset, proper-subset: [Set Set] -> Boolean
+
+assert* subset-def := (s1 subset s2 <==> forall x . x in s1 ==> x in s2)
+
+define (subset-intro premise) :=
+  match premise {
+    (forall x ((x in a) ==> (x in b))) => (!mp (!right-iff (!uspec* subset-def [a b])) premise)
+  }
+
+# Axiom 3: extensionality axiom
+assert extensionality-axiom := (forall s1 s2 . s1 = s2 <==> s1 subset s2 & s2 subset s1)
+
+define (equality-intro premise) :=
+  match premise {
+    ((s1 subset s2) & (s2 subset s1))  =>
+       (!mp (!right-iff (!uspec* extensionality-axiom [s1 s2]))
+            premise)
+  }
+
+assert* proper-subset-def := (s1 proper-subset s2 <==> s1 subset s2 & s1 =/= s2)
+
+conclude subset-transitivity := (transitive subset)
+  pick-any s1 s2 s3
+    assume (s1 subset s2 & s2 subset s3)
+      conclude (s1 subset s3)
+        (!subset-intro
+           pick-any x
+             (!chain [(x in s1)
+                  ==> (x in s2)    [subset-def (s1 subset s2)]
+                  ==> (x in s3)    [subset-def (s2 subset s3)]]))
+
+####################################################### Separation axiom ##########################################################
+
+# Axiom 4: separation
+# Caution: this is a schema for infinitely many axioms. This has to be this way because we are within the limitations
+# of first-order logic, while in this axiom the "property" is a placeholder for any formula.
+# Hence we use the "primitive-method" approach, which is a mechanism in Athena existing exactly for such situations.
+primitive-method (separation-axiom property) :=
+  let {
+    x := (fresh-var);
+    s := (fresh-var);
+    e := (fresh-var)
+  }
+ (forall x . exists s . forall e . (e in s <==> (e in x) & (property e))
+
+define (separate-from existing-set property) := (!uspec (!separation property) existing-set)
+
+########################################################### Replacement axiom ###################################################
+
+# s - source set
+# f - formula with two free variables that "defines a function" over s, i.e. for any element x from set s there is unique y such that f(x,y) is true
+primitive-method (replacement formula) :=`
+  let {
+    x := (fresh-var);
+    e := (fresh-var);
+    y := (fresh-var)
+  }
+  (forall a . (forall x . e in x ==> exists-unique y . (formula x y)) ==> exists-unique z . forall e . e in x ==> (exists fe . fe in z & (formula e fe)))
+
+define (apply-replacement existing-set formula) := {
+  (!claim forall e . e in existing-set ==> exists-unique y . (formula x y));
+  /
+}
+
+############################################################ Pairing axiom ######################################################
+
+# Axiom 5: pairing
+declare unordered-pair: [Set Set] ->  Set
+define ++ := unordered-pair
+assert* pairing-axiom := (forall x s1 s2 . x in s1 ++ s2 <==> x = s1 | x = s2)
+
+############################################################# Sum axiom ##########################################################
+
+# Axiom 6: sum
+declare sum: [Set] -> Set
+assert* sum-def := (x in sum s <==> exists y . y in s & z in y)
+
+########################################################### Powerset axiom ########################################################
+
+# Axiom 7: powerset
+declare powerset: [Set] -> Set
+assert* powerset-def := (forall s x . x in powerset s <==> x subset s)
+
+################################################## Union, intersection and difference #############################################
+
+declare union, diff: [Set Set] -> Set
+define [\/ \] := [union diff]
+
+define union-existence := (forall s1 s2 . exists s . forall x . x in s <==> x in s1 | x in s2)
+
+# TODO: proof of union-existence
+
+conclude intersection-uniqueness := (forall s1 s2 . exists-unique s . forall x . x in s <==> x in s1 & x in s2)
+  pick-any s1 s2
+    let {# The existence part is easy with the separation axiom. We just separate out from s1 those elements that are also members of s2:
+         existence-part := (!separate-from s1 lambda (x) (x in s2));
+         # For convenience, we define a property is-intersection that holds for a given set s if and only if s is an intersection of s1 and s2,
+         # i.e., iff x is a member of s iff it is both a member of s1 and a member of s2. We'll then show that this property is unique, in the
+         # sense that (is-intersection s) & (is-intersection s') implies s = s'.
+         is-intersection := lambda (s) (forall x . x in s <==> x in s1 & x in s2);
+         # The show-subset method takes as arguments two sets s and s' such that (is-intersection s) and (is-intersection s') both hold, i.e., it is
+         # assumed that s is an intersection of s1 and s2, and that s' is also such an intersection. The method then derives the conclusion (s subset s').
+         show-subset := method (s s')
+                          conclude (s subset s')
+                            (!subset-intro
+                              pick-any x
+                                (!chain [(x in s)
+                                     ==> (x in s1 & x in s2)    [(is-intersection s)]
+                                     ==> (x in s')              [(is-intersection s')]]));
+         # We now prove the uniqueness part: (forall s s' . (is-intersection s) & (is-intersection s') ==> s = s')
+         uniqueness-part := conclude (unique-condition is-intersection)
+                             pick-any s:Set s':Set
+                               assume ((is-intersection s) & (is-intersection s'))
+                                 conclude (s = s')
+                                    (!equality-intro
+                                      (!both (!show-subset s s')
+                                             (!show-subset s' s)))}
+    pick-witness w for existence-part
+      (!egen-unique (exists-unique s . forall x . x in s <==> x in s1 & x in s2)  w)
+
+(define-symbol intersection
+  (forall ?x ?y ?z
+     (iff (= (intersection ?x ?y) ?z)
+          (forall ?w
+             (iff (in ?w ?z)
+                  (and (in ?w ?x)
+                       (in ?w ?y)))))))
+
+define /\ := intersection
+
+# TODO: refactor to conservative definition
+assert* diff-def := (x in s1 \ s2 <==> x in s1 & ~ x in s2)
+
+
+######################################################## Regularity axiom #############################################################
+
+# Axiom 8: regularity
+assert* regularity-axiom := (forall s . s =/= null ==> exists x . x in s & forall y . y in x ==> ~ y in s)
+
+# TODO: proof
+define epsilon-is-anti-reflective := (forall x . ~ x in x)
+
+########################################### Athena built-in lists to be used as a notation for finite sets ############################
+
+define (list->set L) :=
+  match L {
+    [] => null
+  | (list-of h t) => ((singleton h) \/ (list->set t))
+  }
+
+# We can now write [x y z] for the set {x, y, z}. Previous operators should be overloaded, so that we can write, e.g., ([x y] \/ [z])
+
+########################################################### Axiom of infinity #########################################################
+
+# The "successor" concept is the same trick we later use for constructing natural numbers
+declare S: [Set] -> Set
+assert* (S x) = x union (singleton x)
+
+# Axiom 9: infinity
+assert (exists x . (null in x) & (forall y . y in x ==> (S y) in x))
+
+######################################################### Cartesian product ###########################################################
+
+declare ordered-pair: [Set Set] -> Set
+define @ := ordered-pair [500] # we ensure high precedence of pairing, so it simplifies notation
+
+assert* (ordered-pair x y) = (singleton x) ++ (singleton x ++ singleton y)
+
+declare cartesian: [Set Set] -> Set
+define X := cartesian
+
+assert* x in (a X b) <==> (exists xa xb . (xa in a) & (xb in b) & x = (ordered-pair xa xb))
+
+# TODO: prove the existence of cartesian products
+
+#################################################### Relations and functions ###########################################################
+
+# This predicate checks if given triple <r, a, b>, r happens to be a relation on AxB
+declare is-relation: [Set Set Set] -> Boolean
+assert* (is-relation r a b) <==> r subset (a X b)
+
+## This predicate checks if given a triple <f, a, b>, f happens to be a function f: A --> B
+declare is-function: [Set Set Set] -> Boolean
+assert* (is-function f a b) <==> (is-relation f a b) & (forall x . (x in a) ==> exists-unique y . (y in b) & (x @ y in f) )
+
+# Calculating a value of a function in a given point
+declare apply: [Set Set Set Set] -> Set
+assert* (apply f a b x) = y <==> (is-function f a b) & (x @ y in f)
+
+declare is-function: [Set Set Set] -> Boolean
+assert* is-bijection: [f a b] <==> (is-function f a b) & (forall x x' . (x in a & x' in a) ==> (x = x' <==> (apply f a b x) = (apply f a b x') ))
+
+############################################################ Axiom of choice ########################################################
+
+# TODO

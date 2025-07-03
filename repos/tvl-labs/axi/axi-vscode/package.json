@@ -1,0 +1,25 @@
+{
+  "name": "axi",
+  "displayName": "axi",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "axi",
+      "aliases": ["axi", "axi"],
+      "extensions": [".axi",".axi"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "axi",
+      "scopeName": "source.axi",
+      "path": "./syntaxes/axi.tmLanguage.json"
+    }]
+  }
+}

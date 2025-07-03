@@ -1,0 +1,22 @@
+{
+    "name": "WBTC/USDC",
+    "symbol": "HDK-WBTC-USDC",
+    "tokens": [
+        "0x0300e13d8F59FD7ae44980FCDb557565c164D535",
+        "0x797e04E7e70Ad117Ec957444eD5EEb6E09452ACc"
+    ],
+    "weights": [
+        "500000000000000000",
+        "500000000000000000"
+    ],
+    "rateProviders": [
+        "0x0000000000000000000000000000000000000000",
+        "0x0000000000000000000000000000000000000000"
+    ],
+    "swapFeePercentage": "3000000000000000",
+    "delegate": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+    "initialLiquidity": {
+        "0x0300e13d8F59FD7ae44980FCDb557565c164D535": "500000000",
+        "0x797e04E7e70Ad117Ec957444eD5EEb6E09452ACc": "2000000"
+    }
+}

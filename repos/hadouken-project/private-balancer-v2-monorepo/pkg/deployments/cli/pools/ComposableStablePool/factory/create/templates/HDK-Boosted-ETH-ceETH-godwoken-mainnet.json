@@ -1,0 +1,27 @@
+{
+    "name": "Celer ETH Stable Pool",
+    "symbol": "HDK-Boosted-ETH-ceETH",
+    "tokens": [
+      "0x95b91be8AB6743b2A45044F3563170586E0acDDF",
+      "0xB66954619363145a05eF835547449EB9050d82f6"
+    ],
+    "rateProviders": [
+      "0x95b91be8AB6743b2A45044F3563170586E0acDDF",
+      "0x0000000000000000000000000000000000000000"
+    ],
+    "priceRateCacheDuration": [
+      "0",
+      "0"
+    ],
+    "amplificationParameter": "300",
+    "swapFeePercentage": "100000000000000",
+    "exemptFromYieldProtocolFeeFlags": [
+      false,
+      false
+    ],
+    "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+    "initialLiquidity": {
+      "0x95b91be8AB6743b2A45044F3563170586E0acDDF": "10000000000000000",
+      "0xB66954619363145a05eF835547449EB9050d82f6": "10000000000000000"
+    }
+  }

@@ -1,0 +1,41 @@
+{
+  "transaction": {
+    "hash": "0x7d3515b6626c4b4ad46ef937e669d7ee1387f8a0116ce985f570e25485f3010e",
+    "blockNumber": null
+  },
+  "data": {
+    "ComposableStablePoolFactory": {
+      "create": {
+        "input": {
+          "name": "Hadouken Boosted USD / USDC|BSC Stable Pool",
+          "symbol": "HDK-Boosted-USD-USDC-BSC",
+          "tokens": [
+            "0xAf9D4028272F750dd2D028990fd664dc223479B1",
+            "0xfA307CfdEA89DC197A346c338a98aC85d517af6e"
+          ],
+          "rateProviders": [
+            "0xAf9D4028272F750dd2D028990fd664dc223479B1",
+            "0x0000000000000000000000000000000000000000"
+          ],
+          "priceRateCacheDuration": [
+            "0",
+            "0"
+          ],
+          "amplificationParameter": "300",
+          "swapFeePercentage": "100000000000000",
+          "exemptFromYieldProtocolFeeFlags": [
+            false,
+            false
+          ],
+          "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0xAf9D4028272F750dd2D028990fd664dc223479B1": "1000000000000000000",
+            "0xfA307CfdEA89DC197A346c338a98aC85d517af6e": "1000000000000000000"
+          }
+        },
+        "output": "0x8Cd3Dbc0eE2C5C63CB9F10BbB042334F203E97d2"
+      }
+    }
+  },
+  "timestamp": 1670944705909
+}

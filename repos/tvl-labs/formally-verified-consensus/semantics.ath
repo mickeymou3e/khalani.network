@@ -1,0 +1,62 @@
+load "util.ath"
+load "definitions.ath"
+load "proof-methods.ath"
+load "list-of"
+
+assert* valid-event-def := [
+    ((valid-event (recv p m) p1 ms) <==> ((msg p p1 m) in ms))
+    (valid-event (req _) _ _)
+    (valid-event Timeout _ _)
+]
+
+
+assert* acceptor-step-semantics := [
+    ((acceptor-step p Empty (recv senderId (propose n))) = (pair (num n) set-with((msg p senderId (accept n))) ))
+    ((acceptor-step p (num n1) (recv senderId (propose n))) = (pair (num n1) set-with((msg p senderId (accept n1)))))
+    ((acceptor-step p ps (req _)) = (pair ps Set.null))
+    ((acceptor-step p ps Timeout) = (pair ps Set.null))
+]
+
+assert* proposer-step-semantics := [
+  ((proposer-step p Empty (req n)) = (pair Empty set-with((msg p 'acceptor (propose n)))))
+  ((proposer-step p Empty (recv _ (accept n))) = (pair (num n) Set.null))
+  ((proposer-step p ps Timeout) = (pair ps Set.null))
+]
+
+assert* consensus-step-semantics := [
+    (p = 'acceptor ==> (consensus-step p ps e) = (acceptor-step p ps e))
+    (p =/= 'acceptor ==> (consensus-step p ps e) = (proposer-step p ps e))
+    
+]
+
+
+
+assert valid-global-state-semantics := (
+    forall events procs state1 ms .
+        valid-global-state (system-state events procs state1 ms) <==> 
+    
+        (events = Nil & ms = Set.null & state1 = (DMap.empty-map Empty)) |
+        (exists loggedEvent p events' .
+                    (events = (loggedEvent :: events')) &
+                    (p in procs) &
+                    (valid-event (pair-right loggedEvent) p ms)
+        )
+    
+)
+
+assert execute-semantics := (
+    forall global global' . (execute global global') <==>
+        ( exists events events' msgSet msgSet' state1 state2 procs msgSet2 loggedEvent' p procState .
+            global = (system-state events procs state1 msgSet) &
+            global' = (system-state events' procs state2 msgSet') &
+            (List.in loggedEvent' events') &
+            (p in procs) &
+            (valid-event (pair-right loggedEvent') p msgSet) &
+            (consensus-step p (state1 at p) (pair-right loggedEvent')) = (pair procState msgSet2) &
+            (state2 at p) = procState &
+            (agree-on state1 state2 (procs \ (set-with p))) &
+            (msgSet' = (msgSet2 \/ msgSet))
+
+        )
+        
+)

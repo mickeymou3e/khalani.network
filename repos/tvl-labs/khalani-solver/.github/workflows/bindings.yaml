@@ -1,0 +1,37 @@
+name: Check Contract Bindings
+
+on:
+  pull_request:
+  schedule:
+    # Everyday 3:30 UTC.
+    - cron: "30 3 * * *"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: khalani-solver
+      - uses: actions/checkout@v4
+        with:
+          repository: tvl-labs/khalani-protocol
+          path: khalani-protocol
+          token: ${{ SECRETS.KHALANI_PROTOCOL_ACCESS_TOKEN }}
+          ref: main
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: 1.75
+          profile: minimal
+          components: rustfmt
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+      - name: Install contract deps
+        run: forge install
+        working-directory: khalani-protocol
+      - name: Generate bindings
+        run: touch .env && make generate-bindings
+        working-directory: khalani-solver
+      - name: Check repository is clean
+        run: git diff --exit-code
+        working-directory: khalani-solver

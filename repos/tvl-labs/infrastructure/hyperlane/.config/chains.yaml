@@ -1,0 +1,13 @@
+khalanitestnet:
+  name: khalanitestnet
+  chainId: 10012
+  domainId: 10012
+  protocol: ethereum
+  rpcUrls:
+    - http: https://testnet-trial.khalani.network
+sepolia:
+  rpcUrls:
+    - http: https://ethereum-sepolia.publicnode.com
+fuji:
+  rpcUrls:
+    - http: https://avalanche-fuji-c-chain.publicnode.com

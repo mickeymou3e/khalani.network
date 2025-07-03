@@ -1,0 +1,66 @@
+# Default values for hyperlane-relayer.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository:  gcr.io/abacus-labs-dev/hyperlane-agent
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "f44589e-20231130-114734"
+
+imagePullSecrets:
+  - name: ghcr-login-secret
+nameOverride: ""
+fullnameOverride: ""
+
+relayer:
+  iamRoleArn: "" # Required
+  originChain: ""
+  originChainName: ""                # Required, e.g. "fuji"
+  originChainEnvName: []         # Required, e.g. ["FUJI"]
+  connection:
+    type: ""
+
+  destinationChains: ""          # Required, e.g. "khalanitestnet"
+  destinationChainsEnvNames: []  # Required, e.g. ["KHALANITESTNET"]
+  destinationChainsKmsKeyIds: [] # Required, e.g. ["8b8fa4b9-524a-40c3-a23d-09bdbb935fd2"]
+
+  awsRegion: us-east-1
+  extraGas: "50000" # Default value of the Hyperlane https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/c7ad0f4433f6661bf930fe6d6581c1187da84692/rust/chains/hyperlane-ethereum/src/tx.rs#L16
+  storage:
+    size: 10Gi
+
+serviceAccount:
+  create: true
+
+podAnnotations: {}
+
+podSecurityContext:
+  fsGroup: 2000
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  metrics:
+    port: 9090
+
+resources: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+storage:
+  storageClass: gp2
+  accessModes: ReadWriteOnce

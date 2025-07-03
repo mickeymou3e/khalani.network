@@ -1,0 +1,144 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Balances selectors and utils selectBalancesList should return a list of balances with formatted values 1`] = `
+[
+  {
+    "asset": "JLT-F23",
+    "assetName": "JLT-F23",
+    "base": {
+      "availableToAux": "200.00",
+      "availableToAuxValue": 200,
+      "availableToTrade": "250.00",
+      "availableToTradeValue": 250,
+      "inOrders": "0.00",
+      "inOrdersValue": 0,
+      "locked": "50.00",
+      "lockedValue": 50,
+      "total": "250.00",
+      "totalValue": 250,
+    },
+    "description": "Voluntary REC Front - Half 2023",
+    "icon": "JLT-F23",
+    "id": "JLT-F23",
+    "isFiat": false,
+    "quote": {
+      "availableToAux": "408.11 EUR",
+      "availableToAuxValue": 408.1075655277388,
+      "availableToTrade": "510.13 EUR",
+      "availableToTradeValue": 510.1344569096735,
+      "inOrders": "0.00 EUR",
+      "inOrdersValue": 0,
+      "locked": "102.03 EUR",
+      "lockedValue": 102.0268913819347,
+      "total": "510.13 EUR",
+      "totalValue": 510.1344569096735,
+    },
+  },
+  {
+    "asset": "EUR",
+    "assetName": "Euro",
+    "base": {
+      "availableToAux": "1,000.25",
+      "availableToAuxValue": 1000.25,
+      "availableToTrade": "1,000.25",
+      "availableToTradeValue": 1000.25,
+      "inOrders": "10.00",
+      "inOrdersValue": 10,
+      "locked": "0.00",
+      "lockedValue": 0,
+      "total": "1,010.25",
+      "totalValue": 1010.25,
+    },
+    "description": "Euro",
+    "icon": "EUR",
+    "id": "EUR",
+    "isFiat": true,
+    "quote": {
+      "availableToAux": "1,000.25 EUR",
+      "availableToAuxValue": 1000.25,
+      "availableToTrade": "1,000.25 EUR",
+      "availableToTradeValue": 1000.25,
+      "inOrders": "10.00 EUR",
+      "inOrdersValue": 10,
+      "locked": "0.00 EUR",
+      "lockedValue": 0,
+      "total": "1,010.25 EUR",
+      "totalValue": 1010.25,
+    },
+  },
+]
+`;
+
+exports[`Balances selectors and utils selectCryptoBalancesList should return a list of crypto balances 1`] = `
+[
+  {
+    "asset": "JLT-F23",
+    "assetName": "JLT-F23",
+    "base": {
+      "availableToAux": "200.00",
+      "availableToAuxValue": 200,
+      "availableToTrade": "250.00",
+      "availableToTradeValue": 250,
+      "inOrders": "0.00",
+      "inOrdersValue": 0,
+      "locked": "50.00",
+      "lockedValue": 50,
+      "total": "250.00",
+      "totalValue": 250,
+    },
+    "description": "Voluntary REC Front - Half 2023",
+    "icon": "JLT-F23",
+    "id": "JLT-F23",
+    "isFiat": false,
+    "quote": {
+      "availableToAux": "408.11 EUR",
+      "availableToAuxValue": 408.1075655277388,
+      "availableToTrade": "510.13 EUR",
+      "availableToTradeValue": 510.1344569096735,
+      "inOrders": "0.00 EUR",
+      "inOrdersValue": 0,
+      "locked": "102.03 EUR",
+      "lockedValue": 102.0268913819347,
+      "total": "510.13 EUR",
+      "totalValue": 510.1344569096735,
+    },
+  },
+]
+`;
+
+exports[`Balances selectors and utils selectFiatBalancesList should return a list of fiat balances 1`] = `
+[
+  {
+    "asset": "EUR",
+    "assetName": "Euro",
+    "base": {
+      "availableToAux": "1,000.25",
+      "availableToAuxValue": 1000.25,
+      "availableToTrade": "1,000.25",
+      "availableToTradeValue": 1000.25,
+      "inOrders": "10.00",
+      "inOrdersValue": 10,
+      "locked": "0.00",
+      "lockedValue": 0,
+      "total": "1,010.25",
+      "totalValue": 1010.25,
+    },
+    "description": "Euro",
+    "icon": "EUR",
+    "id": "EUR",
+    "isFiat": true,
+    "quote": {
+      "availableToAux": "1,000.25 EUR",
+      "availableToAuxValue": 1000.25,
+      "availableToTrade": "1,000.25 EUR",
+      "availableToTradeValue": 1000.25,
+      "inOrders": "10.00 EUR",
+      "inOrdersValue": 10,
+      "locked": "0.00 EUR",
+      "lockedValue": 0,
+      "total": "1,010.25 EUR",
+      "totalValue": 1010.25,
+    },
+  },
+]
+`;

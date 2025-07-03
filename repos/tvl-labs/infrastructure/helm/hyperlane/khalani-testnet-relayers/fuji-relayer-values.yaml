@@ -1,0 +1,11 @@
+relayer:
+  iamRoleArn: arn:aws:iam::803035318642:role/khalani-hyperlane-trial-relayer-fuji
+  originChain: fuji
+  originChainName: fuji
+  originChainEnvName: FUJI
+  connection:
+    type: httpFallback
+  destinationChains: khalanitestnet
+  destinationChainsEnvNames: ["KHALANITESTNET_TRIAL"]
+  destinationChainsKmsKeyIds: ["alias/khalani-hyperlane-relayer-fuji"]
+  extraGas: "250000" 

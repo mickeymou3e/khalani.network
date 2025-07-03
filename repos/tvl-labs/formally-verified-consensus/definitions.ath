@@ -1,0 +1,75 @@
+load "nat-plus"
+load "sets.ath"
+load "lib/basic/pairs.ath"
+load "dmaps.ath"
+
+define [in null ++ subset \ \/] := [Set.in Set.null Set.++ Set.subset Set.\ Set.\/] 
+define [one two three] := [N.one N.two (S N.two)] 
+define [at agree-on] := [DMap.at DMap.agree-on]
+define-sort Proc := Ide
+
+datatype ProcState := (num N) | Empty [[id] [nat->int]]
+datatype Msg := (propose val:N) | (accept val:N)
+datatype Event := (recv sender:Ide val:Msg) | (req val:N) | Timeout
+datatype SentMsg := (msg sender:Proc recipient:Proc msg:Msg)
+datatype StateRecord := (sr proc:Ide ev:Event)
+
+
+
+define-sort MsgSet := (Set.Set SentMsg)
+define-sort GlobalProcState := (DMap.DMap Proc ProcState)
+define-sort InitSystemState := GlobalProcState 
+define-sort Events := (List (Pair Proc Event))
+define-sort Procs := (Set.Set Proc)
+define-sort LoggedEvent := (Pair Proc Event)
+datatype GlobalSystemState := (system-state events:Events procs:Procs state:GlobalProcState msgs:MsgSet)
+
+
+define (initial-state proc_set) := (system-state Nil proc_set (DMap.empty-map Empty) Set.null)
+define (initial-state-components proc_set) := [Nil proc_set (DMap.empty-map Empty) null]
+
+# An event e is valid if it is a timeout a request, or if it is a message received by proc p which has previously been sent to proc p
+declare valid-event: [Event Proc MsgSet] -> Boolean
+
+declare acceptor-step, proposer-step: [Proc ProcState Event] -> (Pair ProcState MsgSet)
+declare consensus-step: [Ide ProcState Event] -> (Pair ProcState MsgSet)
+
+# Global state is valid if it is in the default state
+# or if 
+declare valid-global-state: [GlobalSystemState] -> Boolean
+
+
+
+
+declare execute: [GlobalSystemState GlobalSystemState] -> Boolean
+
+define [
+    p p1 p2 p3 m m1 m2 m3 
+    sr sr1 sr2 sr3 
+    ms ms1 ms2 msgSet msgSet' msgSet2 e e1 e2 event event' n n1 x y z ps ps1 procState procState' state1 state2 state3
+     procs' procs1 procs2 procs3 events events1 events2 events3 recipientId senderId global global' global1 global2
+    events' loggedEvent loggedEvent'
+] := [
+    ?p:Proc ?p1:Proc ?p2:Proc ?p3:Proc 
+    ?m:Msg ?m1:Msg ?m2:Msg ?m3:Msg 
+    ?sr:StateRecord ?sr1:StateRecord ?sr2:StateRecord ?sr3:StateRecord 
+
+    ?ms:MsgSet ?ms1:MsgSet ?ms2:MsgSet ?msgSet:MsgSet ?msgSet':MsgSet ?msgSet2:MsgSet
+    ?e:Event ?e1:Event ?e2:Event ?event:Event ?event':Event
+    ?n:N ?n1:N ?x ?y ?z
+    ?ps:ProcState ?ps1:ProcState ?procState:ProcState ?procState':ProcState
+    ?state1:GlobalProcState ?state2:GlobalProcState ?state3:GlobalProcState
+     ?procs':Procs ?procs1:Procs ?procs2:Procs ?procs3:Procs
+    ?events:Events ?events1:Events ?events2:Events ?events3:Events
+    ?recipientId:Proc ?senderId:Proc
+    ?global:GlobalSystemState ?global':GlobalSystemState ?global1:GlobalSystemState ?global2:GlobalSystemState
+    ?events':Events ?loggedEvent:LoggedEvent ?loggedEvent':LoggedEvent
+]
+
+# Invariant 1: for any valid execution, for any proposer p, if p's state is (num x),
+#    then there exists a process that has sent a message
+#   (accept x) to p. 
+#   
+
+# Invariant 2: for any valid execution, is (accept x) has been sent, then the sending acceptor is in
+#   the state (num x)

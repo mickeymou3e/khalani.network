@@ -1,0 +1,41 @@
+{
+  "transaction": {
+    "hash": "0x01eee349895260ed93a428525bf4c698f3d75c6e62337fa9dcb73208cd8d6cff",
+    "blockNumber": null
+  },
+  "data": {
+    "ComposableStablePoolFactory": {
+      "create": {
+        "input": {
+          "name": "HWBTC/WBTC",
+          "symbol": "HDK-HWBTC-WBTC",
+          "tokens": [
+            "0x49fF1203b31bAcDd6E5b62295Af09B9693024944",
+            "0xa373e9073d2D147Eb3d40f3b9C5F2B813086d839"
+          ],
+          "rateProviders": [
+            "0x0000000000000000000000000000000000000000",
+            "0x0000000000000000000000000000000000000000"
+          ],
+          "priceRateCacheDuration": [
+            "0",
+            "0"
+          ],
+          "amplificationParameter": "5000",
+          "swapFeePercentage": "100000000000000",
+          "exemptFromYieldProtocolFeeFlags": [
+            false,
+            false
+          ],
+          "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0x49fF1203b31bAcDd6E5b62295Af09B9693024944": "1000000",
+            "0xa373e9073d2D147Eb3d40f3b9C5F2B813086d839": "1000000"
+          }
+        },
+        "output": "0x14E87182F6D39D1993e8Cc3d5d76C710497D263e"
+      }
+    }
+  },
+  "timestamp": 1696410922575
+}

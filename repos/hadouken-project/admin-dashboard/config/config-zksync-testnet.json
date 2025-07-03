@@ -1,0 +1,20 @@
+{
+  "chain": "0x118",
+  "appName": "Zksync testnet",
+  "contractsEnv": "testnet",
+  "contracts": {
+    "liquidator": null,
+    "diaOracle": null,
+    "bandOracle": null,
+    "treasury": "0x2b7D95874EA8905FfA8d343C60ccfC3e46C0B056",
+    "protocolFeeCollector": "0xA93c4CDeaE866e88cE917604deBcB9c34D5A875f"
+  },
+  "subgraph": {
+    "httpUri": "https://graph-dev-http-hadouken-dev.hadouken.finance/subgraphs/name/lending-zksync-testnet",
+    "webSocketUri": "wss://graph-dev-ws-hadouken-dev.hadouken.finance/subgraphs/name/lending-zksync-testnet"
+  },
+  "nativeToken": {
+    "address": "0x20b28B1e4665FFf290650586ad76E977EAb90c5D",
+    "symbol": "ETH"
+  }
+}

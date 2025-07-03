@@ -1,0 +1,929 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks = true,
+  linkcolor = blue,
+  urlcolor  = blue,
+  citecolor = blue,
+  anchorcolor = blue
+}
+\usepackage{AxiCommands}
+
+\usetheme{Darmstadt}
+
+\title{Hinting\\A nice presentation of algorithmic typing}
+\author{Wojciech Kołowski}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\section{Intro}
+
+\begin{frame}{Goals of this research and presentation}
+
+\begin{itemize}
+  \item Research the difference between extrinsic and intrinsic lambda calculi and decide which style is better for Axi. In practice most languages are hybrid, but it's still nice to make decisions in a principled way.
+  \item Establish a simple, readable and easy to follow framework for implementing type checking and type inference in Axi, so that we can concentrate on proposing new features or language extensions.
+  \item Disseminate some knowledge on these topics to the team.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Actionable insights for Axi}
+
+\begin{itemize}
+  \item For now I will lean towards making my Axi proposals more extrinsic.
+  \item I will (try to) follow hint-based typing when making future Axi proposals.
+  \item I recommend Axi prototypes to implement type checking and inference based on hinting as presented here.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Extrinsic vs Intrinsic}
+
+There are two kinds of lambda calculi, intrinsically typed also called (Church-style) and extrinsically typed (also called Curry-style).
+
+\end{frame}
+
+\begin{frame}{Intrinsic calculi -- examples}
+
+\begin{itemize}
+  \item $\fun{x}[\Int]{x}$ -- the identity function at type $\Int$.
+  \item $\fun{x}[\String]{x}$ -- the identity function at type $\String$. This is a different term from the above.
+  \item $\fun{x}{x}$ -- not a term, because it cannot be assigned a unique type.
+  \item $\app{(\fun{x}[\String]{x})}{5}$ -- not a term, as it cannot be assigned a type because of a type error.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Intrinsic calculi}
+
+In intrinsic calculi, terms are inseparable from their types. From the user's point of view, all terms are well-typed and have a unique type. Ill-typed ``terms'' are not terms, but abominations forbidden by the type checker. Types are disjoint, so terms that could possibly be assigned two different types must be banished from existence. If a term is needed at two different types, there are two distinct copies of it.
+
+\vspace{2em}
+
+Of course, from the language designer's point of view, ill-typed ``terms'' still exist (they are usually called preterms) and need to be dealt with, it's just that the users don't care.
+
+\end{frame}
+
+\begin{frame}{Extrinsic calculi -- examples}
+
+\begin{itemize}
+  \item $\fun{x}{x}$ -- the identity function. It can be assigned many types, like $\Fun{\Int}{\Int}$ or $\Fun{\String}{\String}$, so there's no need to have many identity functions for different types.
+  \item $\app{(\fun{x}[\String]{x})}{5}$ -- this is a term, but it cannot be assigned a type because of a type-error.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Extrinsic calculi}
+
+In extrinsic calculi, terms and types are separate beings and the relationship between them is established by the typing judgement. Ill-typed terms are terms, they just happen to be dangerous, so they're forbidden by the type checker. Terms that can be assigned many types are ok and are not forbidden, but cherished, so in some sense types are not disjoint.
+
+\end{frame}
+
+\begin{frame}{In practice}
+
+In practice, purely intrinsic languages become hard to use as soon as they have polymorphism, because the amount of type annotations becomes unwieldy.
+
+\vspace{1em}
+
+In practice, purely extrinsic languages do not have decidable type inference (and thus also type checking) as soon as they have polymorphism, because there are not enough type annotations.
+
+\vspace{1em}
+
+In practice, most languages are a hybrid of both approaches. Proof assistants are more intrinsic, with features like implicit arguments which mimic extrinsic language constructs. Programming languages are more extrinsic, with more or less optional type annotations in various places, which make type checking and inference tractable.
+
+\end{frame}
+
+\begin{frame}{Plan}
+
+Since practical languages are hybrids driven by practical needs, we will devote the rest of this talk to the study of (some) type checking and type inference algorithms, culminating in the description of hint-based typing, or hinting, as I call it. To keep things simple, we will only look at the Simply Typed Lambda Calculus (STLC). But before we see the final boss, STLC with Hints, we will take a look at four more variants of STLC to learn where our presentation is coming from:
+
+\begin{itemize}
+  \item Extrinsic STLC -- the most basic variant of STLC.
+  \item Bidirectional STLC -- a nice variant of STLC with intuitive type checking and type inference algorithms.
+  \item Intrinsic STLC -- an old an venerable variant, in which complete type inference is particularly easy.
+  \item Dual Intrinsic STLC -- a crazy and obscure cousin of the above, in which type checking is particualrly easy.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Types, contexts and judgements}
+
+All variants of STLC presented in these slides will have the same types, contexts and declarative typing judgement. The only differences will be terms and possibly additional judgements.
+
+\vspace{2em}
+
+Types: \\
+$A, B ::= \Fun{A}{B} \pipe \Prod{A}{B} \pipe \Sum{A}{B} \pipe \Unit \pipe \Empty$
+
+\vspace{2em}
+
+Typing contexts: \\
+$\Gamma ::= \emptytypingctx \pipe \extend{\Gamma}{x}{A}$
+
+\vspace{2em}
+
+Judgements: \\
+$\typing[\Gamma]{e}{A}$
+
+\end{frame}
+
+\begin{frame}{Types, contexts and judgements -- explanations}
+
+As for types, we have function types $\Fun{A}{B}$, (binary) product types $\Prod{A}{B}$, (binary) sum types $\Sum{A}{B}$, the unit type $\Unit$ and the empty type $\Empty$.
+
+\vspace{2em}
+
+Contexts are either empty (denote by the symbol $\emptytypingctx$) or they are another context $\Gamma$ extended with a typing declaration $x : A$ (denoted by $\extend{\Gamma}{x}{A}$).
+
+\vspace{2em}
+
+The judgement $\typing[\Gamma]{e}{A}$ means that in context $\Gamma$, the term $e$ has type $A$.
+
+\end{frame}
+
+\section{Extrinsic}
+
+\begin{frame}{Extrinsic STLC}
+
+Extrinsic STLC is the simplest version of typed lambda calculus. The terms are the same as in untyped lambda calculus (with the addition of terms for products, sums, unit and empty). The typing relation takes the form of a type assignment system -- we describe which terms have which types, without worrying about issues such as implementation.
+
+\end{frame}
+
+\begin{frame}{Terms}
+
+Terms: \\
+$e ::=$ \\
+\qquad $x \pipe$ \\
+\qquad $\fun{x}{e} \pipe \app{e_1}{e_2} \pipe$ \\
+\qquad $\pair{e_1}{e_2} \pipe \outl{e} \pipe \outr{e} \pipe$ \\
+\qquad $\inl{e} \pipe \inr{e} \pipe \case{e}{e_1}{e_2} \pipe$ \\
+\qquad $\unit \pipe \emptyelim{e}$
+
+\vspace{2em}
+
+Note: the terms are, in order of appearance, variables, functions, applications, pairs, left and right projections, left and right sum constructors, pattern matching for sums, a value of the unit type, and the eliminator for the empty type.
+
+\end{frame}
+
+\begin{frame}{Example (big-step) semantics -- values}
+
+\begin{center}
+  $\infrule{}{\val{\fun{x}{e}}}$
+
+  \vspace{2em}
+
+  $\infrule{\val{v_1} \quad \val{v_2}}{\val{\pair{v_1}{v_2}}}$
+
+  \vspace{2em}
+
+  $\infrule{\val{v}}{\val{\inl{v}}}$ \quad
+  $\infrule{\val{v}}{\val{\inr{v}}}$ \quad
+
+  \vspace{2em}
+
+  $\infrule{}{\val{\unit}}$
+\end{center}
+
+\vspace{2em}
+
+Values are the final results of computation. Note that a function is a value whether or not its body is. Other values are pairs of values, values injected into a sum on the left or right, and unit.
+
+\end{frame}
+
+\begin{frame}{Example (big-step) semantics -- evaluation}
+
+\begin{center}
+  $\infrule{}{\bigstep{\fun{x}{e}}{\fun{x}{e}}}$ \quad
+  $\infrule{\bigstep{e_1}{\fun{x}{e}} \quad \bigstep{e_2}{v} \quad \bigstep{\subst{e}{x}{v}}{v'}}{\bigstep{\app{e_1}{e_2}}{v'}}$
+
+  \vspace{2em}
+
+  $\infrule{\bigstep{e_1}{v_1} \quad \bigstep{e_2}{v_2}}{\bigstep{\pair{e_1}{e_2}}{\pair{v_1}{v_2}}}$ \quad
+  $\infrule{\bigstep{e}{\pair{v_1}{v_2}}}{\bigstep{\outl{e}}{v_1}}$ \quad
+  $\infrule{\bigstep{e}{\pair{v_1}{v_2}}}{\bigstep{\outr{e}}{v_2}}$ \quad
+
+  \vspace{2em}
+
+  $\infrule{\bigstep{e}{v}}{\bigstep{\inl{e}}{\inl{v}}}$ \quad
+  $\infrule{\bigstep{e}{v}}{\bigstep{\inr{e}}{\inr{v}}}$ \quad
+
+  \vspace{2em}
+
+  $\infrule{\bigstep{e}{\inl{v}} \quad \bigstep{\app{f}{v}}{v'}}{\bigstep{\case{e}{f}{g}}{v'}}$ \quad
+  $\infrule{\bigstep{e}{\inr{v}} \quad \bigstep{\app{g}{v}}{v'}}{\bigstep{\case{e}{f}{g}}{v'}}$
+
+  \vspace{2em}
+
+  $\infrule{}{\bigstep{\unit}{\unit}}$ \quad
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Example (small-step) semantics -- basic rules}
+
+\begin{center}
+  $\infrule{\val{v}}{\smallstep{\app{(\fun{x}{e})}{v}}{\subst{e}{x}{v}}}$
+
+  \vspace{2em}
+
+  $\infrule{\val{v_1} \quad \val{v_2}}{\smallstep{\outl{\pair{v_1}{v_2}}}{v_1}}$ \quad
+  $\infrule{\val{v_1} \quad \val{v_2}}{\smallstep{\outr{\pair{v_1}{v_2}}}{v_2}}$
+
+  \vspace{2em}
+
+  $\infrule{\val{v}}{\smallstep{\case{(\inl{v})}{f}{g}}{\app{f}{v}}}$
+
+  \vspace{2em}
+
+  $\infrule{\val{v}}{\smallstep{\case{(\inr{v})}{f}{g}}{\app{g}{v}}}$
+
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Example (small-step) semantics -- boring rules}
+
+\begin{center}
+  $\infrule{\smallstep{e_1}{e_1'}}{\smallstep{\app{e_1}{e_2}}{\app{e_1'}{e_2}}}$ \quad
+  $\infrule{\val{v_1} \quad \smallstep{e_2}{e_2'}}{\smallstep{\app{v_1}{e_2}}{\app{v_1}{e_2'}}}$
+
+  \vspace{2em}
+
+  $\infrule{\smallstep{e_1}{e_1'}}{\smallstep{\pair{e_1}{e_2}}{\pair{e_1'}{e_2}}}$ \quad
+  $\infrule{\val{v_1} \quad \smallstep{e_2}{e_2'}}{\smallstep{\pair{v_1}{e_2}}{\pair{v_1}{e_2'}}}$
+
+  \vspace{2em}
+
+  $\infrule{\smallstep{e}{e'}}{\smallstep{\outl{e}}{\outl{e'}}}$ \quad
+  $\infrule{\smallstep{e}{e'}}{\smallstep{\outr{e}}{\outr{e'}}}$
+
+  \vspace{2em}
+
+  $\infrule{\smallstep{e}{e'}}{\smallstep{\inl{e}}{\inl{e'}}}$ \quad
+  $\infrule{\smallstep{e}{e'}}{\smallstep{\inr{e}}{\inr{e'}}}$
+
+  \vspace{1em}
+
+  $\infrule{\smallstep{e}{e'}}{\smallstep{\case{e}{f}{g}}{\case{e'}{f}{g}}}$
+
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Example semantics -- explanations}
+
+$\bigstep{e}{v}$ should be read ``term $e$ evalutes to value $v$''. It describes computation in a coarse-grained manner, telling us what is the result of evaluating each term. If $\bigstep{e}{v}$, then $\val{v}$.
+
+\vspace{2em}
+
+$\smallstep{e}{e'}$ should be read ``term $e$ reduces to term $e'$''. It describes computation in a fine-grained manner, telling us what can happen in a single computation step. To actually describe computation fully in this style, we need to take the transitive closure of this relation, written $\smallsteps{e}{v}$.
+
+\vspace{2em}
+
+Both presented semantics are call-by-value, i.e. we evaluate a function's argument before performing a substitution. They are equivalent, i.e. $\bigstep{e}{v}$ if and only if $\smallsteps{e}{v}$
+
+\end{frame}
+
+\begin{frame}{Declarative typing -- basics}
+
+\begin{center}
+  $\infrule[Var]{\sidecond{(x : A) \in \Gamma}}{\typing{x}{A}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Declarative typing -- type-directed rules}
+
+\begin{center}
+  $\infrule{\typing[\extend{\Gamma}{x}{A}]{e}{B}}{\typing{\fun{x}{e}}{\Fun{A}{B}}}$ \quad
+  $\infrule{\typing{f}{\Fun{A}{B}} \quad \typing{a}{A}}{\typing{\app{f}{a}}{B}}$
+
+  \vspace{2em}
+
+  $\infrule{\typing{a}{A} \quad \typing{b}{B}}{\typing{\pair{a}{b}}{\Prod{A}{B}}}$ \quad
+  $\infrule{\typing{e}{\Prod{A}{B}}}{\typing{\outl{e}}{A}}$ \quad
+  $\infrule{\typing{e}{\Prod{A}{B}}}{\typing{\outr{e}}{B}}$
+
+  \vspace{2em}
+
+  $\infrule{\typing{e}{A}}{\typing{\inl{e}}{\Sum{A}{B}}}$ \quad
+  $\infrule{\typing{e}{B}}{\typing{\inr{e}}{\Sum{A}{B}}}$
+
+  \vspace{2em}
+
+  $\infrule{\typing{e}{\Sum{A}{B}} \quad \typing{f}{\Fun{A}{C}} \quad \typing{g}{\Fun{B}{C}}}{\typing{\case{e}{f}{g}}{C}}$
+
+  \vspace{2em}
+
+  $\infrule{}{\typing{\unit}{\Unit}}$ \quad
+  $\infrule{\typing{e}{\Empty}}{\typing{\emptyelim{e}}{A}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Metatheory}
+
+Extrinsic STLC enjoys strong metatheoretical properties:
+
+\begin{itemize}
+  \item Confluence: if a term can be reduced to two different terms, these two can in turn be reduced to a common result.
+  \item Termination: computation on well-typed terms always terminates.
+  \item Type preservation: if we compute with a well-typed term, the result has the same type.
+  \item Canonicity: in the empty context, normal forms are inductively generated from term constructors.
+\end{itemize}
+
+\vspace{1em}
+
+Intuitively: given a well-typed term, in finite time it computes to another term of the same type which cannot compute anymore. In the empty context, we know the result of this computation must be a constructor.
+
+\end{frame}
+
+\begin{frame}{(Non)uniqueness of typing}
+
+Despite these strong metatheoretic properties, Extrinsic STLC does not enjoy another important property: \textbf{uniqueness of typing}. This means that there are terms which can be assigned multiple types. For example, $\fun{x}{x}$ can be assigned the type $\Fun{A}{A}$ for any type $A$. The four culprits of this failure are lambda abstractions, sum constructors and exfalso.
+
+\end{frame}
+
+\section{Bidirectional}
+
+\begin{frame}{Bidirectional STLC}
+
+Bidirectional STLC is a version of simply typed lambda calculus which focuses on a clean implementation of the type checker. The terms are as in Extrinsic STLC, but with the addition of a general type annotation construct that can appear anywhere and is not mandatory. The typing judgement is split into two: type checking and type inference, both of which are algorithmic, i.e. easily implementable.
+
+\end{frame}
+
+\begin{frame}{Terms and judgements}
+
+Terms: \\
+$e ::=$ \\
+\qquad $x \pipe \newterm{\annot{e}{A}} \pipe$ \\
+\qquad $\fun{x}{e} \pipe \app{e_1}{e_2} \pipe$ \\
+\qquad $\pair{e_1}{e_2} \pipe \outl{e} \pipe \outr{e} \pipe$ \\
+\qquad $\inl{e} \pipe \inr{e} \pipe \case{e}{e_1}{e_2} \pipe$ \\
+\qquad $\unit \pipe \emptyelim{e}$
+
+\vspace{1em}
+
+Note: green color marks terms which were not present in Extrinsic STLC.
+
+\vspace{1em}
+
+Judgements: \\
+$\check[\Gamma]{e}{A}$ -- in context $\Gamma$, term $e$ checks against type $A$ ($A$ is an input) \\
+$\infer[\Gamma]{e}{A}$ -- in context $\Gamma$, term $e$ infers type $A$ ($A$ is an output)
+
+\end{frame}
+
+\begin{frame}{Declarative typing -- new rules}
+
+\begin{center}
+  $\infrule[Annot]{\typing{e}{A}}{\typing{\annot{e}{A}}{A}}$
+\end{center}
+
+\vspace{2em}
+
+Note: the only rules shown are those which were not present in Extrinsic STLC.
+
+\end{frame}
+
+\begin{frame}{Bidirectional typing -- basics}
+
+\begin{center}
+  $\infrule[Var]{\sidecond{(x : A) \in \Gamma}}{\infer{x}{A}}$
+
+  \vspace{2em}
+
+  $\infrule[Annot]{\check{e}{A}}{\infer{\annot{e}{A}}{A}}$
+
+  \vspace{2em}
+
+  $\infrule[Sub]{\infer{e}{B} \quad \sidecond{A = B}}{\check{e}{A}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Bidirectional typing -- type-directed rules}
+
+\begin{center}
+  $\infrule{\check[\extend{\Gamma}{x}{A}]{e}{B}}{\check{\fun{x}{e}}{\Fun{A}{B}}}$ \quad
+  $\infrule{\infer{f}{\Fun{A}{B}} \quad \check{a}{A}}{\infer{\app{f}{a}}{B}}$
+
+  \vspace{2em}
+
+  $\infrule{\check{a}{A} \quad \check{b}{B}}{\check{\pair{a}{b}}{\Prod{A}{B}}}$ \quad
+  $\infrule{\infer{e}{\Prod{A}{B}}}{\infer{\outl{e}}{A}}$ \quad
+  $\infrule{\infer{e}{\Prod{A}{B}}}{\infer{\outr{e}}{B}}$
+
+  \vspace{2em}
+
+  $\infrule{\check{e}{A}}{\check{\inl{e}}{\Sum{A}{B}}}$ \quad
+  $\infrule{\check{e}{B}}{\check{\inr{e}}{\Sum{A}{B}}}$
+
+  \vspace{2em}
+
+  $\infrule{\infer{e}{\Sum{A}{B}} \quad \check{f}{\Fun{A}{C}} \quad \check{g}{\Fun{B}{C}}}{\check{\case{e}{f}{g}}{C}}$
+
+  \vspace{2em}
+
+  $\infrule{}{\check{\unit}{\Unit}}$ \quad
+  $\infrule{\check{e}{\Empty}}{\check{\emptyelim{e}}{A}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Bidirectional typing -- additional rules}
+
+\begin{center}
+  $\infrule{}{\infer{\unit}{\Unit}}$
+
+  \vspace{1em}
+
+  $\infrule{\infer{e}{\Sum{A}{B}} \quad \infer{f}{\Fun{A}{C}} \quad \infer{g}{\Fun{B}{C}}}{\infer{\case{e}{f}{g}}{C}}$
+
+  \vspace{1em}
+
+  $\infrule{\infer{a}{A} \quad \infer{b}{B}}{\infer{\pair{a}{b}}{\Prod{A}{B}}}$
+\end{center}
+
+\vspace{1em}
+
+The basic rules are as presented in the previous slide. However, it is possible to add some enhancements. First, we can replace the rule for $\unit$ with an inference rule and if we need to check, we can use subsumption. Second, the paper argues that sum elimination is a general principle, and so it should allow both checking and inference versions. We could also add an inference rule for pairs. It seems there isn't a trade-off either -- if the checking rule fails, we can use subsumption and try to infer.
+
+\end{frame}
+
+\begin{frame}{(Non)uniqueness of typing}
+
+Similarly to Extrinsic STLC, typing is not unique in Bidirectional STLC. This is because while we do have annotations in terms, we are not forced to use them. Therefore, we can check terms like $\fun{x}{x}$ with any type of the form $\Fun{A}{A}$. However, inference is unique.
+
+\end{frame}
+
+\begin{frame}{Bidirectional typing -- how the sausage is made}
+
+We did not describe how to derive the algorithmic rules of Bidirectional STLC from the declarative rules of Extrinsic STLC. This ``bidirectional recipe'' can be found in the paper \href{https://arxiv.org/pdf/1908.05839}{Bidirectional Typing}, section 4. Sections 1-4 provide a nice introduction to the topic of bidirectional typing.
+
+\vspace{2em}
+
+\href{http://davidchristiansen.dk/tutorials/bidirectional.pdf}{Bidirectional Typing Rules: A Tutorial} is a nice tutorial paper which shows how to implement a bidirectional typechecker for STLC with booleans (but no products or sums).
+
+\end{frame}
+
+\section{Intrinsic}
+
+\begin{frame}{Intrinsic STLC}
+
+Intrinsic STLC is the most widespread version of simply typed lambda calculus. The terms differ somewhat from Extrinsic STLC, as type annotations are mandatory on lambdas, sum constructors and the empty type eliminator, but the typing judgement remains the same.
+
+\end{frame}
+
+\begin{frame}{Terms}
+
+Terms: \\
+$e ::=$ \\
+\qquad $x \pipe$ \\
+\qquad $\termdiff{\fun{x}[A]{e}} \pipe \app{e_1}{e_2} \pipe$ \\
+\qquad $\pair{e_1}{e_2} \pipe \outl{e} \pipe \outr{e} \pipe$ \\
+\qquad $\termdiff{\inl[B]{e}} \pipe \termdiff{\inr[A]{e}} \pipe \case{e}{e_1}{e_2} \pipe$ \\
+\qquad $\unit \pipe \termdiff{\emptyelim[A]{e}}$
+
+\vspace{2em}
+
+Note: red color marks places which differ from Extrinsic STLC.
+
+\end{frame}
+
+\begin{frame}{Declarative typing -- differences}
+
+\begin{center}
+  $\infrule{\typing[\extend{\Gamma}{x}{A}]{e}{B}}{\typing{\fun{x}[A]{e}}{\Fun{A}{B}}}$
+
+  \vspace{2em}
+
+  $\infrule{\typing{e}{A}}{\typing{\inl[B]{e}}{\Sum{A}{B}}}$ \quad
+  $\infrule{\typing{e}{B}}{\typing{\inr[A]{e}}{\Sum{A}{B}}}$
+
+  \vspace{2em}
+
+  $\infrule{\typing{e}{\Empty}}{\typing{\emptyelim[A]{e}}{A}}$
+\end{center}
+
+\vspace{2em}
+
+Note: the only rules shown are those that differ from Extrinsic STLC.
+
+\end{frame}
+
+\begin{frame}{Type inference -- basics}
+
+Thanks to abundant type annotations, we can (re)interpret the typing judgement $\typing[\Gamma]{e}{A}$ as a type inference judgement $\infer[\Gamma]{e}{A}$.
+
+\vspace{2em}
+
+\begin{center}
+  $\infrule[Var]{\sidecond{(x : A) \in \Gamma}}{\infer{x}{A}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Type inference -- type-directed rules}
+
+\begin{center}
+  $\infrule{\infer[\extend{\Gamma}{x}{A}]{e}{B}}{\infer{\fun{x}[A]{e}}{\Fun{A}{B}}}$ \quad
+  $\infrule{\infer{f}{\Fun{A}{B}} \quad \infer{a}{A}}{\infer{\app{f}{a}}{B}}$
+
+  \vspace{2em}
+
+  $\infrule{\infer{a}{A} \quad \infer{b}{B}}{\infer{\pair{a}{b}}{\Prod{A}{B}}}$ \quad
+  $\infrule{\infer{e}{\Prod{A}{B}}}{\infer{\outl{e}}{A}}$ \quad
+  $\infrule{\infer{e}{\Prod{A}{B}}}{\infer{\outr{e}}{B}}$
+
+  \vspace{2em}
+
+  $\infrule{\infer{e}{A}}{\infer{\inl[B]{e}}{\Sum{A}{B}}}$ \quad
+  $\infrule{\infer{e}{B}}{\infer{\inr[A]{e}}{\Sum{A}{B}}}$
+
+  \vspace{2em}
+
+  $\infrule{\infer{e}{\Sum{A}{B}} \quad \infer{f}{\Fun{A}{C}} \quad \infer{g}{\Fun{B}{C}}}{\infer{\case{e}{f}{g}}{C}}$
+
+  \vspace{2em}
+
+  $\infrule{}{\infer{\unit}{\Unit}}$ \quad
+  $\infrule{\infer{e}{\Empty}}{\infer{\emptyelim[A]{e}}{A}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Uniqueness of typing}
+
+Because of the annotations on lambda, sum constructors and exfalso, Intrinsic STLC does enjoy uniqueness of typing. It is easy to prove this by induction: types of most terms are determined by the induction hypothesis, whereas for the aforementioned four we need to supplement the induction hypothesis with the annotation.
+
+\end{frame}
+
+\section{Dual Intrinsic}
+
+
+\begin{frame}{Dual Intrinsic STLC}
+
+If the usual Intrinsic STLC turns out to be a system in which we can infer all types, what would a system in which we can check all types look like?
+
+\end{frame}
+
+\begin{frame}{Terms}
+
+Terms: \\
+$e ::=$ \\
+\qquad $x \pipe$ \\
+\qquad $\fun{x}{e} \pipe \termdiff{\app[A]{e_1}{e_2}} \pipe$ \\
+\qquad $\pair{e_1}{e_2} \pipe \termdiff{\outl[B]{e}} \pipe \termdiff{\outr[A]{e}} \pipe$ \\
+\qquad $\inl{e} \pipe \inr{e} \pipe \termdiff{\caseannot{A}{B}{e}{e_1}{e_2}} \pipe$ \\
+\qquad $\unit \pipe \emptyelim{e}$
+
+\vspace{2em}
+
+Note: red color marks places which differ from Extrinsic STLC.
+
+\end{frame}
+
+\begin{frame}{Declarative typing -- differences}
+
+\begin{center}
+  $\infrule{\typing{f}{\Fun{A}{B}} \quad \typing{a}{A}}{\typing{\app[A]{f}{a}}{B}}$
+
+  \vspace{2em}
+
+  $\infrule{\typing{e}{\Prod{A}{B}}}{\typing{\outl[B]{e}}{A}}$ \quad
+  $\infrule{\typing{e}{\Prod{A}{B}}}{\typing{\outr[A]{e}}{B}}$ \quad
+
+  \vspace{2em}
+
+  $\infrule{\typing{e}{\Sum{A}{B}} \quad \typing{f}{\Fun{A}{C}} \quad \typing{g}{\Fun{B}{C}}}{\typing{\caseannot{A}{B}{e}{f}{g}}{C}}$
+\end{center}
+
+\vspace{2em}
+
+Note: the only rules shown are those that differ from Extrinsic STLC.
+
+\end{frame}
+
+\begin{frame}{Type checking -- basics}
+
+Thanks to abundant type annotations, we can (re)interpret the typing judgement $\typing[\Gamma]{e}{A}$ as a type checking judgement $\check[\Gamma]{e}{A}$.
+
+\vspace{2em}
+
+\begin{center}
+  $\infrule[Var]{\sidecond{(x : A) \in \Gamma}}{\check{x}{A}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Type checking -- type-directed rules}
+
+\begin{center}
+  $\infrule{\check[\extend{\Gamma}{x}{A}]{e}{B}}{\check{\fun{x}{e}}{\Fun{A}{B}}}$ \enspace
+  $\infrule{\check{f}{\Fun{A}{B}} \quad \check{a}{A}}{\check{\app[A]{f}{a}}{B}}$
+
+  \vspace{2em}
+
+  $\infrule{\check{a}{A} \quad \check{b}{B}}{\check{\pair{a}{b}}{\Prod{A}{B}}}$ \enspace
+  $\infrule{\check{e}{\Prod{A}{B}}}{\check{\outl[B]{e}}{A}}$ \enspace
+  $\infrule{\check{e}{\Prod{A}{B}}}{\check{\outr[A]{e}}{B}}$
+
+  \vspace{2em}
+
+  $\infrule{\check{e}{A}}{\check{\inl{e}}{\Sum{A}{B}}}$ \quad
+  $\infrule{\check{e}{B}}{\check{\inr{e}}{\Sum{A}{B}}}$
+
+  \vspace{2em}
+
+  $\infrule{\check{e}{\Sum{A}{B}} \quad \check{f}{\Fun{A}{C}} \quad \check{g}{\Fun{B}{C}}}{\check{\caseannot{A}{B}{e}{f}{g}}{C}}$
+
+  \vspace{2em}
+
+  $\infrule{}{\check{\unit}{\Unit}}$ \quad
+  $\infrule{\check{e}{\Empty}}{\check{\emptyelim{e}}{A}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{(Non)uniqueness of typing}
+
+Even though Dual Intrinsic STLC has plenty of mandatory annotations, it does not enjoy uniqueness of typing for the usual reasons: we can type $\fun{x}{x}$ with any type of the form $\Fun{A}{A}$. The role of the annotations is not to force types to be unique, but to make it possible to implement type checking.
+
+\end{frame}
+
+\section{Hinting}
+
+\begin{frame}{STLC with Hints}
+
+STLC with Hints is a flavour of STLC inspired by Bidirectional STLC. The main insight behind it is that in Bidirectional STLC, we have a hard time deciding whether a rule should be in checking mode or in inference mode, so why not both? This way, we would have some input type that guides us, but also produce an output type, which is in some sense ``better''. This is a bit silly if we already have the correct type as input, but we can make this idea work by introducing hints, which are types with holes, and insisting that the input is not a type, but merely a hint.
+
+\end{frame}
+
+\begin{frame}{Hints}
+
+$H ::= \Hole \pipe \Fun{H_1}{H_2} \pipe \Prod{H_1}{H_2} \pipe \Sum{H_1}{H_2} \pipe \Unit \pipe \Empty$
+
+\vspace{2em}
+
+Intuitively, hints are partial types. They are built like types, except that there's one additional constructor, $\Hole$, which can be read as ``hole'' or ``unknown''.
+
+\vspace{2em}
+
+We use the letter $H$ for hints. When we use letters like $A, B, C$ which usually stand in for types, it means that the hint \textbf{is} a type, i.e. it doesn't contain any $\Hole$s.
+
+\end{frame}
+
+\begin{frame}{Order on hints}
+
+\begin{center}
+  $\infrule{}{\hintorder{\Hole}{H}}$
+
+  \vspace{2em}
+
+  $\infrule{\hintorder{H_1}{H_1'} \quad \hintorder{H_2}{H_2'}}{\hintorder{\Fun{H_1}{H_2}}{\Fun{H'_1}{H'_2}}}$
+
+  \vspace{2em}
+
+  $\infrule{\hintorder{H_1}{H_1'} \quad \hintorder{H_2}{H_2'}}{\hintorder{\Prod{H_1}{H_2}}{\Prod{H_1'}{H_2'}}}$
+
+  \vspace{2em}
+
+  $\infrule{\hintorder{H_1}{H_1'} \quad \hintorder{H_2}{H_2'}}{\hintorder{\Sum{H_1}{H_2}}{\Sum{H_1'}{H_2'}}}$
+
+  \vspace{2em}
+
+  $\infrule{}{\hintorder{\Unit}{\Unit}}$ \quad
+  $\infrule{}{\hintorder{\Empty}{\Empty}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Order on hints -- intuition}
+
+The order can be intuitively interpreted as information increase: $\hintorder{H_1}{H_2}$ means that hint $H_2$ is more informative than $H_1$, but in a compatible way. In other words, $H_1$ and $H_2$ have the same structure, but some $\Hole$s from $H_1$ were possibly refined to something more informative in $H_2$.
+
+\end{frame}
+
+\begin{frame}{Combining hints}
+
+\begin{center}
+  $\hintlub{\Hole}{H} = H$ \\
+  $\hintlub{H}{\Hole} = H$ \\
+  $\hintlub{(\Fun{H_1}{H_2})}{(\Fun{H'_1}{H'_2})} = \Fun{(\hintlub{H_1}{H'_1})}{(\hintlub{H_2}{H'_2})}$ \\
+  $\hintlub{(\Prod{H_1}{H_2})}{(\Prod{H'_1}{H'_2})} = \Prod{(\hintlub{H_1}{H'_1})}{(\hintlub{H_2}{H'_2})}$ \\
+  $\hintlub{(\Sum{H_1}{H_2})}{(\Sum{H'_1}{H'_2})} = \Sum{(\hintlub{H_1}{H'_1})}{(\hintlub{H_2}{H'_2})}$ \\
+  $\hintlub{\Unit}{\Unit} = \Unit$ \\
+  $\hintlub{\Empty}{\Empty} = \Empty$
+\end{center}
+
+The order on hints induces a partial operation $\hintlub{}{}$, which computes the least upper bound of two hints when it exists. Intuitively, $\hintlub{}{}$ combines two hints which share the same structure, filling the $\Hole$s in the leaves with something more informative coming from the other argument. For hints with incompatible structure the result is undefined.
+
+\end{frame}
+
+\begin{frame}{Combining hints -- properties}
+
+If all relevant results are defined, then:
+
+\begin{itemize}
+  \item $\hintlub{(\hintlub{H_1}{H_2})}{H_3} = \hintlub{H_1}{(\hintlub{H_2}{H_3})}$
+  \item $\hintlub{H_1}{H_2} = \hintlub{H_2}{H_1}$
+  \item $\hintlub{\Hole}{H} = H = \hintlub{H}{\Hole}$
+  \item $\hintlub{H}{H} = H$
+\end{itemize}
+
+\vspace{2em}
+
+If $\hintlub{}{}$ were not partial, $(H, \hintlub{}{}, \Hole)$ would be a commutative idempotent monoid. But since it is partial, meh...
+
+\end{frame}
+
+\begin{frame}{Hints for term constructors}
+
+\begin{center}
+  $\hintfor{\fun{x}{e}} = \Fun{\Hole}{\Hole}$ \\
+  $\hintfor{\pair{e_1}{e_2}} = \Prod{\Hole}{\Hole}$ \\
+  $\hintfor{\inl{e}} = \Sum{\Hole}{\Hole}$ \\
+  $\hintfor{\inr{e}} = \Sum{\Hole}{\Hole}$ \\
+  $\hintfor{\unit} = \Unit$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Terms}
+
+Terms: \\
+$e ::=$ \\
+\qquad $x \pipe \termdiff{\annot{e}{H}} \pipe $ \\
+\qquad $\fun{x}{e} \pipe \app{e_1}{e_2} \pipe$ \\
+\qquad $\pair{e_1}{e_2} \pipe \outl{e} \pipe \outr{e} \pipe$ \\
+\qquad $\inl{e} \pipe \inr{e} \pipe \case{e}{e_1}{e_2} \pipe$ \\
+\qquad $\unit \pipe \emptyelim{e}$
+
+\vspace{2em}
+
+Note: red color marks differences from Bidirectional STLC.
+
+\vspace{2em}
+
+Judgements: \\
+$\hinting[\Gamma]{e}{H}{A}$ -- in context $\Gamma$, term $e$ checks with hint $H$ and infers type $A$
+
+\end{frame}
+
+\begin{frame}{Declarative typing -- differences}
+
+\begin{center}
+  $\infrule[Annot]{\typing{e}{A} \quad \sidecond{\hintorder{H}{A}}}{\typing{\annot{e}{H}}{A}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Hinting -- basic rules}
+
+\begin{center}
+  $\infrule[Var]{\sidecond{(x : A) \in \Gamma} \quad \sidecond{\hintorder{H}{A}}}{\hinting{x}{H}{A}}$
+
+  \vspace{2em}
+
+  $\infrule[Annot]{\hinting{e}{\hintlub{H_1}{H_2}}{A}}{\hinting{\annot{e}{H_1}}{H_2}{A}}$
+
+  \vspace{2em}
+
+  $\infrule[Hole]{\hinting{e}{\hintfor{e}}{A} \quad \sidecond{e\ \texttt{constructor}}}{\hinting{e}{\Hole}{A}}$
+\end{center}
+
+\vspace{2em}
+
+Note that the rule $\rulename{Hole}$ can only be applied once, because $\hintfor{e}$ can never be $\Hole$. After applying $\rulename{Hole}$, the only applicable rules are the type-directed ones.
+
+\end{frame}
+
+\begin{frame}{Hinting -- type-directed rules}
+
+\begin{center}
+  $\infrule{\hinting[\extend{\Gamma}{x}{A}]{e}{H}{B}}{\hinting{\fun{x}{e}}{\Fun{A}{H}}{\Fun{A}{B}}}$
+
+  \vspace{2em}
+
+  $\infrule{\hinting{f}{\Fun{\Hole}{H}}{\Fun{A}{B}} \quad \hinting{a}{A}{A}}{\hinting{\app{f}{a}}{H}{B}}$
+
+  \vspace{2em}
+
+  $\infrule{\hinting{a}{H_1}{A} \quad \hinting{b}{H_2}{B}}{\hinting{\pair{a}{b}}{\Prod{H_1}{H_2}}{\Prod{A}{B}}}$
+
+  \vspace{2em}
+
+  $\infrule{\hinting{e}{\Prod{H}{\Hole}}{\Prod{A}{B}}}{\hinting{\outl{e}}{H}{A}}$ \quad
+  $\infrule{\hinting{e}{\Prod{\Hole}{H}}{\Prod{A}{B}}}{\hinting{\outr{e}}{H}{B}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Hinting -- type-directed rules}
+
+\begin{center}
+  $\infrule{\hinting{e}{H}{A}}{\hinting{\inl{e}}{\Sum{H}{B}}{\Sum{A}{B}}}$
+
+  \vspace{2em}
+
+  $\infrule{\hinting{e}{H}{B}}{\hinting{\inr{e}}{\Sum{A}{H}}{\Sum{A}{B}}}$
+
+  \vspace{2em}
+
+  $\infrule{\hinting{e}{\Sum{\Hole}{\Hole}}{\Sum{A}{B}} \quad \begin{array}{c} \hinting{f}{\Fun{A}{H}}{\Fun{A}{C}} \\ \hinting{g}{\Fun{B}{C}}{\Fun{B}{C}} \end{array}}{\hinting{\case{e}{f}{g}}{H}{C}}$
+
+  \vspace{2em}
+
+  $\infrule{}{\hinting{\unit}{\Unit}{\Unit}}$ \quad
+  $\infrule{\hinting{e}{\Empty}{\Empty}}{\hinting{\emptyelim{e}}{A}{A}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Hinting -- alternative rules}
+
+\begin{center}
+  $\infrule[AltApp]{\hinting{a}{\Hole}{A} \quad \hinting{f}{\Fun{A}{H}}{\Fun{A}{B}}}{\hinting{\app{f}{a}}{H}{B}}$
+
+  \vspace{2em}
+
+  $\infrule[AltCase]{\begin{array}{c} \hinting{f}{\Fun{\Hole}{H}}{\Fun{A}{C}} \\ \hinting{g}{\Fun{\Hole}{C}}{\Fun{B}{C}} \end{array} \quad \hinting{e}{\Sum{A}{B}}{\Sum{A}{B}}}{\hinting{\case{e}{f}{g}}{H}{C}}$
+\end{center}
+
+\vspace{2em}
+
+We could have made some different choices. For application, we could try to infer the argument type first and then feed it to the function as a hint. For case, we could try to infer domains of the branches first, then feed these as hints when checking the discriminee.
+
+\end{frame}
+
+\begin{frame}{Notations and derived terms}
+
+We can introduce some handy notations:
+
+\begin{itemize}
+  \item $\check{e}{A}$ is defined as $\hinting{e}{A}{A}$
+  \item $\infer{e}{A}$ is defined as $\hinting{e}{\Hole}{A}$
+\end{itemize}
+
+We can embed Intrinsic STLC terms:
+
+\begin{itemize}
+  \item $\fun{x}[A]{e} :\equiv \annot{\fun{x}{e}}{\Fun{A}{\Hole}}$ \\
+  \item $\inl[B]{e} :\equiv \annot{\inl{e}}{\Sum{\Hole}{B}}$ \\
+  \item $\inr[A]{e} :\equiv \annot{\inr{e}}{\Sum{A}{\Hole}}$ \\
+  \item $\emptyelim[A]{e} :\equiv \annot{\emptyelim{e}}{A}$
+\end{itemize}
+
+We can also embed Dual Intrinsic STLC terms:
+
+\begin{itemize}
+  \item $\app[A]{f}{a} :\equiv \app{\annot{f}{\Fun{A}{\Hole}}}{a}$
+  \item $\outl[B]{e} :\equiv \outl{\annot{e}{\Prod{\Hole}{B}}}$
+  \item $\outr[A]{e} :\equiv \outr{\annot{e}{\Prod{A}{\Hole}}}$
+  \item $\caseannot{A}{B}{e}{f}{g} :\equiv \case{\annot{e}{\Sum{A}{B}}}{f}{g}$
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Rules for derived terms}
+
+\begin{center}
+  $\infrule{\infer[\extend{\Gamma}{x}{A}]{e}{B}}{\infer{\fun{x}[A]{e}}{\Fun{A}{B}}}$ \quad
+  $\infrule{\check{f}{\Fun{A}{B}} \quad \check{a}{A}}{\check{\app[A]{f}{a}}{B}}$
+
+  \vspace{2em}
+
+  $\infrule{\check{e}{\Prod{A}{B}}}{\check{\outl[B]{e}}{A}}$ \enspace
+  $\infrule{\check{e}{\Prod{A}{B}}}{\check{\outr[A]{e}}{B}}$
+
+  \vspace{2em}
+
+  $\infrule{\infer{e}{A}}{\infer{\inl[B]{e}}{\Sum{A}{B}}}$ \quad
+  $\infrule{\infer{e}{B}}{\infer{\inr[A]{e}}{\Sum{A}{B}}}$
+
+  \vspace{2em}
+
+  $\infrule{\check{e}{\Sum{A}{B}} \quad \check{f}{\Fun{A}{C}} \quad \check{g}{\Fun{B}{C}}}{\check{\caseannot{A}{B}{e}{f}{g}}{C}}$
+
+  \vspace{2em}
+
+  $\infrule{\infer{e}{\Empty}}{\infer{\emptyelim[A]{e}}{A}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{(Non)uniqueness of typing}
+
+Similarly to Extrinsic STLC, STLC with Hints does not enjoy uniqueness of typing. This is because we still can have terms like $\fun{x}{x}$ with hint $\Hole$, which can be typed with any type of the form $\Fun{A}{A}$. However, if the hint is informative enough, then the type is unique. Moreover, every typable term can be given a hint which makes its type unique.
+
+\end{frame}
+
+\end{document}

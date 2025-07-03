@@ -1,0 +1,114 @@
+{
+  "addresses": {
+    "intents_mempool_address": "0x5aA4E9B8e24903a0327FFbe1803aF0B721Eb6a94",
+    "settlement_reactor_address": "0x9aDCA49Ce95084d25c1b91A43A0833CC3085D2Df",
+    "verifiers": {
+      "khalani": {
+        "sepolia": "0x594C00467783cf0f422EAd0d4b605F1134D7F0e3",
+        "fuji": "0x5FCbd49F076CC2F7AB199471CB8248E61c89A3b8"
+      }
+    },
+    "escrows": {
+      "sepolia": "0x2b3DD016af5C31D5bb8F3998dAD29d9F93bDe89A",
+      "fuji": "0xa4c94244Bc5D8e183b270dF5669393d1F4fB5E9F"
+    },
+    "swap_intent_fillers": {
+      "sepolia": "0xC974CC8297c0E7E992078E2150501A22a5D19651",
+      "fuji": "0x5bBFA02930bC8F7fFE9B34344c71610df8Eab9De"
+    },
+    "spoke_chain_executors": {
+      "sepolia": "0x5Ab12932E6a790c48A41a67C531be0C1A1C9CB7B",
+      "fuji": "0xe3b8c8b4ff312882048a411e9d09A408E695300b"
+    },
+    "intentbook_addresses": {
+      "limit_order_intentbook": "0x6de23d1487Dce0Ca32ade0b0Ea5ea7767Cb30b6B",
+      "spoke_chain_call_intentbook": "0x14a18c09cC898F4824c1B25A5C9E2e9A66948e39",
+      "swap_intent_intentbook": "0x3Ac1A16C1818b3E41B0B5d7f671A56e158162525"
+    }
+  },
+  "chains": [
+    {
+      "name": "khalani",
+      "chain_id": 10012,
+      "rpc_url": "https://testnet.khalani.network",
+      "ws_url": ""
+    },
+    {
+      "name": "sepolia",
+      "chain_id": 11155111,
+      "rpc_url": "$SEPOLIA_RPC_URL",
+      "ws_url": ""
+    },
+    {
+      "name": "fuji",
+      "chain_id": 43113,
+      "rpc_url": "$FUJI_RPC_URL",
+      "ws_url": ""
+    }
+  ],
+  "tokens": {
+    "khalani": [
+      {
+        "alias": "KAI",
+        "address": "0x477b4198Edd0ED573E900db7e9925FC7bbA35395"
+      },
+      {
+        "alias": "klnUSDC",
+        "address": "0x875863D88BF0C9A088a274a0263A903434b306aa"
+      },
+      {
+        "alias": "klnUSDT",
+        "address": "0xdC28d2d648Ed4c4c6fb641a46e9f4D73aE236De1"
+      },
+      {
+        "alias": "klnBUSD",
+        "address": "0xbB6E9f941330a867055Ea1B7CE063B145373CBf4"
+      },
+      {
+        "alias": "USDT/fuji",
+        "address": "0x390882C237BDB20eDb843D95635966ab5feD33BD"
+      },
+      {
+        "alias": "USDC/fuji",
+        "address": "0x88aa6C2584b2095CFa0e0cD3234B738125F77354"
+      },
+      {
+        "alias": "USDT/sepolia",
+        "address": "0x7A59a2D8E2A42C73aaa99E809CFe7816F786A3F7"
+      },
+      {
+        "alias": "USDC/sepolia",
+        "address": "0x1Db42728c12043B4a88ed30E0c7AA04Ac32cD70a"
+      },
+      {
+        "alias": "BUSD/sepolia",
+        "address": "0x1536Ab28180C16C7d20A0bf66F3966F571aAd528"
+      }
+    ],
+    "sepolia": [
+      {
+        "alias": "USDC",
+        "address": "0x24bcc5d1f6538f4a84cd9009ebd4fa614904fa59"
+      },
+      {
+        "alias": "USDT",
+        "address": "0xdf830a3F120515bd99fE6Bc8513537713e204BC5"
+      }
+    ],
+    "fuji": [
+      {
+        "alias": "USDC",
+        "address": "0x24bcc5d1F6538F4a84Cd9009ebD4Fa614904fA59"
+      },
+      {
+        "alias": "USDT",
+        "address": "0xdf830a3F120515bd99fE6Bc8513537713e204BC5"
+      }
+    ]
+  },
+  "ccmm": {
+    "address": "0x0000000000000000000000000000000000000000",
+    "base_token": "0xdf830a3F120515bd99fE6Bc8513537713e204BC5",
+    "quote_token": "0xdf830a3F120515bd99fE6Bc8513537713e204BC5"
+  }
+}

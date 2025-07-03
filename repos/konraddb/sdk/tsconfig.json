@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "types": ["jest", "node"],
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "declaration": true,
+    "declarationMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": false,
+    "strict": true,
+    "strictBindCallApply": true,
+    "noImplicitAny": true,
+    "downlevelIteration": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "module": "commonjs",
+    "target": "es6",
+    "allowJs": true,
+    "lib": ["es2015", "es5", "es2021"],
+    "baseUrl": "./",
+    "outDir": "dist",
+    "paths": {
+      "@store/*": ["./src/store/*"],
+      "@interfaces/*": ["./src/interfaces/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@artifacts/*": ["./src/artifacts/*"],
+      "@services/*": ["./src/services/*"],
+      "@config": ["./src/config.ts"]
+    },
+    "noEmitOnError": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": false,
+    "noUnusedLocals": true,
+    "preserveSymlinks": true,
+    "preserveWatchOutput": true,
+    "pretty": true
+  },
+  "include": ["src/**/*"]
+}

@@ -1,0 +1,16 @@
+Deployed the alert rules:
+
+### Relayer balance alert rule.
+Whenever a balance of a relayer falls below {{ .Values.rules.relayerBalance.threshold }} and stays there for {{ .Values.rules.relayerBalance.forPeriod }} an alert will be triggered.
+
+### Khalani Testnet blocks production alert rule.
+Whenever the Khalani Testnet https://testnet.khalani.network has produced too few blocks (less than {{ .Values.rules.khalaniTestnetBlocksProduction.threshold }} over {{ .Values.rules.khalaniTestnetBlocksProduction.forPeriod }}), this alert gets triggered.
+
+### Hyperlane agents indexed blocks alert rule.
+Whenever a Hyperlane agent indexes too few blocks  (less than {{ .Values.rules.hyperlaneIndexedBlocks.threshold }} over {{ .Values.rules.hyperlaneIndexedBlocks.forPeriod }}), this alert gets triggered.
+
+### Axon node memory usage alert rule
+Whenever an Axon node starts using more than {{ .Values.rules.axonMemoryUsage.threshold }} bytes of memory, this alert gets triggered.
+
+### Hyperlane RPC provider usage
+Whenever a Hyperlane agent makes too many requests to RPC provider (more than {{ .Values.rules.hyperlaneRpcUsage.threshold }} over {{ .Values.rules.hyperlaneRpcUsage.period }}), this alert gets triggered.

@@ -1,0 +1,46 @@
+{
+  "transaction": {
+    "hash": "0xa981b96a11495f590f4ea474335c8eb37e249df665eede4c97c563c5a82349fa",
+    "blockNumber": null
+  },
+  "data": {
+    "ComposableStablePoolFactory": {
+      "create": {
+        "input": {
+          "name": "Hadouken Boosted TriCrypto",
+          "symbol": "HDK-Boosted-CKB-ETH-USD",
+          "tokens": [
+            "0xa05D329Eddc923bC182EcD7e05fB92475BF3dd79",
+            "0xA562428520A15a1eDa3Bb2A62Fd9116f35FA98c1",
+            "0x58c7d8f659cd78da06fd4f7a991000fa472417b1"
+          ],
+          "rateProviders": [
+            "0xa05D329Eddc923bC182EcD7e05fB92475BF3dd79",
+            "0xA562428520A15a1eDa3Bb2A62Fd9116f35FA98c1",
+            "0x58c7d8f659cd78da06fd4f7a991000fa472417b1"
+          ],
+          "priceRateCacheDuration": [
+            "0",
+            "0",
+            "0"
+          ],
+          "amplificationParameter": "1",
+          "swapFeePercentage": "100000000000000",
+          "exemptFromYieldProtocolFeeFlags": [
+            null,
+            false,
+            false
+          ],
+          "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0xa05D329Eddc923bC182EcD7e05fB92475BF3dd79": "2000000000000000000",
+            "0xA562428520A15a1eDa3Bb2A62Fd9116f35FA98c1": "2000000000000000000",
+            "0x58c7d8f659cd78da06fd4f7a991000fa472417b1": "2000000000000000000"
+          }
+        },
+        "output": "0xBdA26F975cD6ad10fB3521d175317EA8b46a1726"
+      }
+    }
+  },
+  "timestamp": 1675337889795
+}

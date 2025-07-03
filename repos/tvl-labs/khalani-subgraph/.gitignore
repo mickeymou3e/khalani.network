@@ -1,0 +1,15 @@
+build/
+node_modules/
+src/types/
+.DS_STORE
+yarn-error.log
+.idea
+.vscode
+*.js
+
+.env
+
+docker/data/*
+
+subgraph.yaml
+/schema.graphql

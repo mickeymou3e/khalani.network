@@ -1,0 +1,29 @@
+{
+  "name": "@konraddB/fund-wallet-script",
+  "version": "1.0.3",
+  "main": "src/index.ts",
+  "private": false,
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "scripts": {
+    "build": "tsc",
+    "postinstall": "husky install",
+    "prepack": "pinst --disable",
+    "postpack": "pinst --enable"
+  },
+  "dependencies": {
+    "aws-kms-provider": "^0.9.0",
+    "process": "^0.11.10",
+    "prom-client": "^14.2.0",
+    "web3": "^1.9.0"
+  },
+  "devDependencies": {
+    "@types/node": "16.11.7",
+    "dotenv": "^16.1.4",
+    "typescript": "^5.0.4",
+    "husky": "^8.0.2",
+    "pinst": "^3.0.0"
+  }
+}

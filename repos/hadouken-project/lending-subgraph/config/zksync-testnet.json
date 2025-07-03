@@ -1,0 +1,15 @@
+{
+  "network": "zksync-testnet",
+  "startBlock": 8420000,
+  "contracts": {
+    "poolProxy": {
+      "address": "0xfa9A6D1fedcEc11Ab54664673892737855C2C0a7"
+    },
+    "poolConfiguratorProxy": {
+      "address": "0xf81BD2b6868b67C40243B8F57F8867533F789975"
+    },
+    "DIAOracle": {
+      "address": "0x0000000000000000000000000000000000000000"
+    }
+  }
+}

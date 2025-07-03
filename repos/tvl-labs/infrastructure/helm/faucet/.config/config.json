@@ -1,0 +1,145 @@
+{
+  "GLOBAL_RL": {
+    "ID": "GLOBAL",
+    "RATELIMIT": {
+      "REVERSE_PROXIES": 2,
+      "MAX_LIMIT": 40,
+      "WINDOW_SIZE": 1,
+      "PATH": "/",
+      "SKIP_FAILED_REQUESTS": false
+    }
+  },
+  "evmchains": [
+    {
+      "ID": "KHALANITESTNET",
+      "NAME": "Khalani (Testnet)",
+      "TOKEN": "KHA",
+      "RPC": "<SECRET>",
+      "CHAINID": 10012,
+      "EXPLORER": "https://block-explorer.testnet.khalani.network/",
+      "IMAGE": "https://drive.google.com/uc?export=view&id=1rWENxCSh0ugo9cXGm0AEheUHtXlui18i",
+      "MAX_PRIORITY_FEE": "10000000000",
+      "MAX_FEE": "100000000000",
+      "DRIP_AMOUNT": 100,
+      "DECIMALS": 18,
+      "RECALIBRATE": 30,
+      "RATELIMIT": {
+        "MAX_LIMIT": 1,
+        "WINDOW_SIZE": 60
+      }
+    },
+    {
+      "ID": "SEPOLIA",
+      "NAME": "Sepolia",
+      "TOKEN": "ETH",
+      "RPC": "<SECRET>",
+      "CHAINID": 11155111,
+      "EXPLORER": "https://sepolia.etherscan.io/",
+      "IMAGE": "https://cryptologos.cc/logos/ethereum-eth-logo.png?v=025",
+      "MAX_PRIORITY_FEE": "10000000000",
+      "MAX_FEE": "100000000000",
+      "DRIP_AMOUNT": 0,
+      "DECIMALS": 18,
+      "RECALIBRATE": 30,
+      "RATELIMIT": {
+        "MAX_LIMIT": 1,
+        "WINDOW_SIZE": 60
+      }
+    },
+    {
+      "ID": "FUJI",
+      "NAME": "Fuji",
+      "TOKEN": "AVAX",
+      "RPC": "<SECRET>",
+      "CHAINID": 43113,
+      "EXPLORER": "https://testnet.snowtrace.io/",
+      "IMAGE": "https://glacier-api.avax.network/proxy/chain-assets/main/chains/43113/chain-logo.png",
+      "MAX_PRIORITY_FEE": "10000000000",
+      "MAX_FEE": "100000000000",
+      "DRIP_AMOUNT": 0,
+      "DECIMALS": 18,
+      "RECALIBRATE": 30,
+      "RATELIMIT": {
+        "MAX_LIMIT": 1,
+        "WINDOW_SIZE": 60
+      }
+    }
+  ],
+  "erc20tokens": [
+    {
+      "ID": "USDCSEPOLIA",
+      "HOSTID": "SEPOLIA",
+      "NAME": "USDC",
+      "TOKEN": "USDC",
+      "IMAGE": "https://cryptologos.cc/logos/usd-coin-usdc-logo.png",
+      "CONTRACTADDRESS": "0x24bcc5d1F6538F4a84Cd9009ebD4Fa614904fA59",
+      "DRIP_AMOUNT": 1000000,
+      "GASLIMIT": "100000",
+      "DECIMALS": 6,
+      "RATELIMIT": {
+        "MAX_LIMIT": 1,
+        "WINDOW_SIZE": 60
+      }
+    },
+    {
+      "ID": "USDTSEPOLIA",
+      "HOSTID": "SEPOLIA",
+      "NAME": "USDT",
+      "TOKEN": "USDT",
+      "IMAGE": "https://cryptologos.cc/logos/tether-usdt-logo.png",
+      "CONTRACTADDRESS": "0xdf830a3F120515bd99fE6Bc8513537713e204BC5",
+      "DRIP_AMOUNT": 1000000,
+      "GASLIMIT": "100000",
+      "DECIMALS": 6,
+      "RATELIMIT": {
+        "MAX_LIMIT": 1,
+        "WINDOW_SIZE": 60
+      }
+    },
+    {
+      "ID": "BUSDSEPOLIA",
+      "HOSTID": "SEPOLIA",
+      "NAME": "BUSD",
+      "TOKEN": "BUSD",
+      "IMAGE": "https://cryptologos.cc/logos/binance-usd-busd-logo.png",
+      "CONTRACTADDRESS": "0xC0A27ef2304753d49ec4349DAC38fD33F8D40256",
+      "DRIP_AMOUNT": 1000,
+      "GASLIMIT": "100000",
+      "DECIMALS": 18,
+      "RATELIMIT": {
+        "MAX_LIMIT": 1,
+        "WINDOW_SIZE": 60
+      }
+    },
+    {
+      "ID": "USDCFUJI",
+      "HOSTID": "FUJI",
+      "NAME": "USDC",
+      "TOKEN": "USDC",
+      "IMAGE": "https://cryptologos.cc/logos/usd-coin-usdc-logo.png",
+      "CONTRACTADDRESS": "0x24bcc5d1F6538F4a84Cd9009ebD4Fa614904fA59",
+      "DRIP_AMOUNT": 1000000,
+      "GASLIMIT": "100000",
+      "DECIMALS": 6,
+      "RATELIMIT": {
+        "MAX_LIMIT": 1,
+        "WINDOW_SIZE": 60
+      }
+    },
+    {
+      "ID": "USDTFUJI",
+      "HOSTID": "FUJI",
+      "NAME": "USDT",
+      "TOKEN": "USDT",
+      "IMAGE": "https://cryptologos.cc/logos/tether-usdt-logo.png",
+      "CONTRACTADDRESS": "0xdf830a3F120515bd99fE6Bc8513537713e204BC5",
+      "DRIP_AMOUNT": 1000000,
+      "GASLIMIT": "100000",
+      "DECIMALS": 6,
+      "RATELIMIT": {
+        "MAX_LIMIT": 1,
+        "WINDOW_SIZE": 60
+      }
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+Result: Nothing
+Result: Nothing
+Result: Proved(forall Nat. =[add[@0:Nat, Zero:Nat]):Nat, @0:Nat])
+Result: Proved(forall Nat. forall Nat. =[add[@1:Nat, Succ[@0:Nat]):Nat]):Nat, Succ[add[@1:Nat, @0:Nat]):Nat]):Nat])
+Result: Nothing
+Result: Proved(forall Nat. =[add[Zero:Nat, @0:Nat]):Nat, @0:Nat])

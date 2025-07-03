@@ -1,0 +1,43 @@
+[package]
+name = "arcadia-solver"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ctrlc-async = "3.2"
+anyhow = "1.0.86"
+medusa-types = { path = "../types" }
+dotenv = "0.15"
+tokio = { version = "1.34.0", features = ["full", "test-util"] }
+tokio-tungstenite = "0.23"
+tungstenite = "0.23"
+log = "0.4"
+env_logger = "0.10"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tracing = "0.1"
+toml = "0.8"
+base64 = "0.22"
+url = "2"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+alloy = { version = "0.4.2", default-features = true, features = [
+    "serde",
+    "signers",
+    "signer-keystore",
+    "signer-mnemonic",
+    "providers",
+    "provider-http",
+    "provider-ws",
+    "network",
+    "node-bindings",
+    "consensus",
+    "contract",
+    "rpc-client",
+    "rpc-client-ws",
+    "rpc-types-eth",
+    "eips",
+] }
+alloy-sol-types = "0.8"
+futures = "0.3.29"
+
+rand = "0.8"

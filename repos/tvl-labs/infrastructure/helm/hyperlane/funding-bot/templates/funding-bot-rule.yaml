@@ -1,0 +1,24 @@
+{{- $addresses := fromJson .Values.fundingBot.addressesContent | default (list) }}
+{{- if .Values.prometheusRule.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: funding-bot
+  namespace: monitoring
+  labels:
+    rules: "true"
+spec:
+  groups:
+    - name: monitor_wallet_balance
+      rules:
+{{- range $addresses.addresses }}
+        - alert: WalletBalanceBelowThreshold
+          expr: monitor_wallet_balance{chain="{{ .chain }}", wallet_name="{{ .name }}", wallet_address="{{ .address }}"} < {{ $.Values.prometheusRule.minimumBalance }}
+          for: 1m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Wallet balance for {{ .name }} is below {{ $.Values.fundingBot.minimumBalance }}"
+            description: "The current wallet balance of {{ .name }} is {{`{{`}} $value {{`}}`}}."
+{{- end }}
+{{- end }}

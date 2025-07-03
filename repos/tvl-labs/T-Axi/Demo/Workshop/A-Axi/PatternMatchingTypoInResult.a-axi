@@ -1,0 +1,10 @@
+# We define a function on the naturals...
+function typo_in_result(n : Nat) -> Nat
+{
+  match n
+  {
+    # ... but we made a typo in the result! It's `Zeroo` instead of `Zero`!
+    Zero => Zeroo,
+    Succ(n) => Succ(n)
+  }
+}

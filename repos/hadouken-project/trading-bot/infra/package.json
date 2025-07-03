@@ -1,0 +1,66 @@
+{
+  "name": "step-function",
+  "version": "0.0.1",
+  "description": "Let's say you need to iterate over huge dataset and perform a piece of work for each record. Let's assume that you need to limit how fast you iterate. It may be because you rely on calls to external service and number of requests per day are capped. Or maybe you just need to care about how much resources you use and not make denial service attack on yourself ;)",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit"
+  },
+  "bugs": {
+    "url": "https://github.com/rumblefishdev/step-function-iterator/issues"
+  },
+  "homepage": "https://github.com/rumblefishdev/step-function-iterator#readme",
+  "dependencies": {
+    "@types/aws-lambda": "^8.10.93",
+    "@types/aws-sdk": "^2.7.0",
+    "@types/jest": "^27.4.1",
+    "@typescript-eslint/eslint-plugin": "^5.19.0",
+    "@typescript-eslint/parser": "^5.19.0",
+    "aws-lambda": "^1.0.7",
+    "aws-sdk": "^2.1115.0",
+    "eslint": "^8.13.0",
+    "jest": "^27.5.1",
+    "node-lambda": "^1.2.0",
+    "ts-jest": "^27.1.4",
+    "typescript": "^4.6.3",
+    "wait-for-expect": "^3.0.2",
+    "yaml-cfn": "^0.3.1"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "./",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "moduleNameMapper": {
+      "@config/(.*)": "<rootDir>/src/config/$1",
+      "@yokai-sdk/(.*)": [
+        "<rootDir>/src/yokai-sdk/$1"
+      ],
+      "@pool/(.*)": [
+        "<rootDir>/src/pool/$1"
+      ],
+      "@opportunity/(.*)": [
+        "<rootDir>/src/opportunity/$1"
+      ],
+      "@abi/(.*)": [
+        "<rootDir>/types/ethers-contracts/$1"
+      ]
+    },
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1"
+  }
+}

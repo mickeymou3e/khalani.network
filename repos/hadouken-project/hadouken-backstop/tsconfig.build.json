@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": false,
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "strict": true,
+    "target": "ES6",
+    "outDir": "dist",
+    "rootDir": "src",
+    "paths": {
+      "@src/*": ["./src/*"]
+    },
+    "plugins": [
+      {
+        "transform": "tsconfig-paths"
+      }
+    ]
+  },
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  },
+  "typeRoots": ["node_modules/@types", "src/types", "src/contracts"],
+
+  "include": ["src"],
+  "exclude": ["node_modules", "build", "migrations", "scripts", "gen", "cli"]
+}

@@ -1,0 +1,125 @@
+godwoken-mainnet:
+  network: godwoken-mainnet
+  Vault:
+    address: '0x4F8BDF24826EbcF649658147756115Ee867b7D63'
+    startBlock: 246000
+  Backstop:
+    address: '0x0000000000000000000000000000000000000000'
+    startBlock: 246000
+  Lockdrop:
+    address: '0x0000000000000000000000000000000000000000'
+    startBlock: 1990000
+  StablePoolV2Factory:
+    address: '0xeDd99861A27dF761e9CE6337FAC031F09e85Eb28'
+    startBlock: 246000
+  MetaStablePoolRegistry:
+    address: '0x4Ac26538acaf9A0052721f89164CD1D5456C06e1'
+    startBlock: 246000
+  WeightedPoolFactory:
+    address: '0x8a55228e79A8A87Aea2cA0dfA3770A9C40975202'
+    startBlock: 246000
+  WeightedPoolFactoryNew:
+    address: '0x4802C683849852bdB97747A2db642C6fA53C4779'
+    startBlock: 246000
+  ComposableStablePoolFactory:
+    address: '0xe1AbF83Cf16b7eF07C150469228985Ce8A8716f1'
+    startBlock: 246000
+  ComposableStablePoolFactoryNew:
+    address: '0x13d81818c07aB9B3c5a28D6d68c684fdB6Fae0b0'
+    startBlock: 246000
+  AaveLinearPoolFactory:
+    address: '0x62AEdB532DBa29a45C36396A84b4D57FAF5766Ec'
+    startBlock: 246000
+godwoken-testnet:
+  network: godwoken-testnet
+  Vault:
+    address: '0x84B73B0f766dD97E9e05fa8702229819DE9cC13D'
+    startBlock: 1990000
+  Backstop:
+    address: '0x1F218A49bDfc50a0302fE87B16122cA687422cF5'
+    startBlock: 1990000
+  Lockdrop:
+    address: '0xcfa73Ed1D1d19a4F1BDD56A402688b906232070E'
+    startBlock: 1990000
+  StablePoolV2Factory:
+    address: '0x0000000000000000000000000000000000000000'
+    startBlock: 1990000
+  MetaStablePoolRegistry:
+    address: '0x0000000000000000000000000000000000000000'
+    startBlock: 1990000
+  WeightedPoolFactory:
+    address: '0xdFB721B35616FcB75444367511b1eB72A46C5AC7'
+    startBlock: 1990000
+  WeightedPoolFactoryNew:
+    address: '0x49Ed5379A5F7f096ac463d6BD64559D3a153995C'
+    startBlock: 1990000
+  ComposableStablePoolFactory:
+    address: '0x3E8FD5C76b0325C54A655D262B6b0ae265D83f6B'
+    startBlock: 1990000
+  ComposableStablePoolFactoryNew:
+    address: '0x47A3d67A2845C150C8c1cB9F984d406B171837d0'
+    startBlock: 1990000
+  AaveLinearPoolFactory:
+    address: '0xc1950F942934D10280A0Dc422D71Cb8e680CB84B'
+    startBlock: 1990000
+zksync-testnet:
+  network: zksync-testnet
+  Vault:
+    address: '0xF5E99BD85bCb0745458627F90a1f9eFaEA70f045'
+    startBlock: 8000000
+  Backstop:
+    address: '0x885ACC4c42eD5bd056f0F7A4997440DC32D70f78'
+    startBlock: 8000000
+  Lockdrop:
+    address: '0x2A20c2cfd858E76D5D48379a4ABf9b4434A539fF'
+    startBlock: 8000000
+  StablePoolV2Factory:
+    address: '0x0000000000000000000000000000000000000000'
+    startBlock: 8000000
+  MetaStablePoolRegistry:
+    address: '0x0000000000000000000000000000000000000000'
+    startBlock: 8000000
+  WeightedPoolFactory:
+    address: '0xD711F9245762e733d7FD707818311bCf95062B76'
+    startBlock: 8000000
+  WeightedPoolFactoryNew:
+    address: '0x0000000000000000000000000000000000000000'
+    startBlock: 8000000
+  ComposableStablePoolFactory:
+    address: '0xA194F61e0b0Da173C9B178F92DC7197380a359D1'
+    startBlock: 8000000
+  ComposableStablePoolFactoryNew:
+    address: '0x0000000000000000000000000000000000000000'
+    startBlock: 8000000
+  AaveLinearPoolFactory:
+    address: '0xbC1F74068AfCE20f7c4F50600d224b25D766fC8e'
+    startBlock: 8000000
+mantle-testnet:
+  network: mantle-testnet
+  Vault:
+    address: '0x3dB6e78a866c69eb37090edB73a5FbEBa5B5DC98'
+    startBlock: 20277000
+  Backstop:
+    address: '0x09eb54e018155e618bDc9A02c205C4Cc743A8CAD'
+    startBlock: 22804000
+  Lockdrop:
+    address: '0x179947104218Ec76D7DE33A22D6022ea1b5312EA'
+    startBlock: 24230000
+  StablePoolV2Factory:
+    address: '0x0000000000000000000000000000000000000000'
+    startBlock: 24230000
+  MetaStablePoolRegistry:
+    address: '0x0000000000000000000000000000000000000000'
+    startBlock: 24230000
+  WeightedPoolFactory:
+    address: '0x14F410ebe71b4A3c0e4708e9415BADce0E3a44b7'
+    startBlock: 20277000
+  ComposableStablePoolFactory:
+    address: '0x88cf3c98F1876a9bDf57631680c5975335BE6390'
+    startBlock: 20277000
+  ComposableStablePoolFactoryNew:
+    address: '0x0000000000000000000000000000000000000000'
+    startBlock: 20277000
+  AaveLinearPoolFactory:
+    address: '0x73EA52FAb567b5BBb10c43B09B04370301C50ba6'
+    startBlock: 20277000

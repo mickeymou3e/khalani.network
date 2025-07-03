@@ -1,0 +1,89 @@
+{
+  "name": "@hadouken-project/backstop",
+  "version": "2.0.5",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": "./dist/index.js",
+    "./connect": "./dist/connect/base/index.js"
+  },
+  "typesVersions": {
+    "*": {
+      "connect": [
+        "dist/connect/base/index.d.ts"
+      ]
+    }
+  },
+  "scripts": {
+    "cli": "yarn ts-node cli",
+    "clean": "rm -rf artifacts artifacts-zk cache cache-zk;",
+    "copy:backstop-abi": "yarn ts-node copyTricryptoBackstopAbi.ts",
+    "prebuild": "yarn build:contracts",
+    "build": "yarn copy:backstop-abi && yarn move:config && tsc --project tsconfig.build.json",
+    "postbuild": "copyfiles -u 1 \"src/**/*.d.ts\" dist && tsc-alias -p tsconfig.build.json",
+    "build:contracts": "yarn clean; yarn build:zksync; yarn build:godwoken",
+    "build:zksync": "cat hardhat-zksync.config.ts > hardhat.config.ts; yarn hardhat compile",
+    "build:godwoken": "cat hardhat-base.config.ts > hardhat.config.ts; yarn hardhat compile",
+    "test": "yarn hardhat test",
+    "clean:build": "rm -rf ./build",
+    "move:config": "cp cli/config/deployedContracts/* ./src/config/",
+    "deploy:zksync-testnet": "cat hardhat-zksync.config.ts > hardhat.config.ts; yarn hardhat deploy-zksync --script 2_Liquidation.ts --network zksyncTestnet; yarn hardhat deploy-zksync --script 3_Backstop.ts --network zksyncTestnet",
+    "deploy:godwoken-testnet": "cat hardhat-base.config.ts > hardhat.config.ts; yarn hardhat deploy --network godwokenTestnet --tags Base",
+    "deploy:godwoken-mainnet": "cat hardhat-base.config.ts > hardhat.config.ts; yarn hardhat deploy --network godwokenMainnet --tags Base",
+    "deploy:mantle-testnet": "cat hardhat-base.config.ts > hardhat.config.ts; yarn hardhat deploy --network mantleTestnet --tags Base"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "web3": "^1.9.0"
+  },
+  "devDependencies": {
+    "@hadouken-project/sdk": "^0.1.53",
+    "@matterlabs/hardhat-zksync-deploy": "^0.6.3",
+    "@matterlabs/hardhat-zksync-solc": "^0.4.0",
+    "@nomicfoundation/hardhat-chai-matchers": "^1.0.6",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.8",
+    "@nomicfoundation/hardhat-toolbox": "^2.0.2",
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "@nomiclabs/hardhat-etherscan": "^3.1.7",
+    "@nomiclabs/hardhat-waffle": "^2.0.5",
+    "@openzeppelin/contracts": "^4.9.1",
+    "@typechain/ethers-v5": "^7.2.0",
+    "@typechain/hardhat": "^6.1.5",
+    "@types/chai": "^4.3.4",
+    "@types/dotenv": "^8.2.0",
+    "@types/jest": "^29.5.1",
+    "@types/mocha": "^10.0.1",
+    "@types/prompts": "^2.4.4",
+    "chai": "^4.3.7",
+    "commander": "^10.0.1",
+    "copyfiles": "^2.4.1",
+    "ethereumjs-util": "^7.1.5",
+    "ganache-cli": "^6.12.2",
+    "hardhat": "^2.14.0",
+    "hardhat-console": "^1.0.0",
+    "hardhat-deploy": "^0.11.26",
+    "hardhat-gas-reporter": "^1.0.9",
+    "prompts": "^2.4.2",
+    "solidity-coverage": "^0.8.2",
+    "ts-node": "^10.9.1",
+    "tsc-alias": "^1.8.8",
+    "tsconfig-paths": "^4.2.0",
+    "typechain": "^8.1.1",
+    "typescript": "^5.0.4",
+    "zksync-web3": "^0.14.3"
+  },
+  "peerDependencies": {
+    "ethers": "^5.6.9"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hadouken-project/hadouken-backstop.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}

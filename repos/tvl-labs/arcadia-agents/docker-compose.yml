@@ -1,0 +1,13 @@
+services:
+  refunder-agent:
+    image: ghcr.io/tvl-labs/arcadia-agents:latest
+    container_name: refunder-agent
+    volumes:
+      - ./config.toml:/app/config.toml
+      - ./chain_config.toml:/app/chain_config.toml
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1g"
+        max-file: "4"

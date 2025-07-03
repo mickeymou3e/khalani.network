@@ -1,0 +1,140 @@
+name: Build and Push RfqUI
+
+on:
+  push:
+    branches: ["staging", "master"]
+env:
+  REGISTRY: 124996922767.dkr.ecr.us-east-1.amazonaws.com
+  PUSH_DOCKER: true
+  ARGOCD_URL: argocd-stg.neutralx.com
+  IMAGE_NAME: exchange-rfq-ui
+
+jobs:
+  setup-env-vars:
+    runs-on: ubuntu-latest
+    outputs:
+      #IMAGE_NAME: ${{ steps.setvars.outputs.IMAGE_NAME }}
+      REGISTRY: ${{ steps.setvars.outputs.REGISTRY }}
+      ARGOCD_URL: ${{ steps.setvars.outputs.ARGOCD_URL }}
+      ARGOCD_APP_NAME: ${{ steps.setvars.outputs.ARGOCD_APP_NAME }}
+      ENV: ${{ steps.setvars.outputs.ENV }}
+    steps:
+      - name: Set variables
+        id: setvars
+        run: |
+          if [[ "${{github.base_ref}}" == "master" || "${{github.ref}}" == "refs/heads/master" ]]; then
+              echo "ARGOCD_APP_NAME=rfq-ui-dev" >> $GITHUB_OUTPUT
+              echo "ENV=dev" >> $GITHUB_OUTPUT
+          fi
+
+          if [[ "${{github.base_ref}}" == "staging" || "${{github.ref}}" == "refs/heads/staging" ]]; then
+              echo "ARGOCD_APP_NAME=rfq-ui" >> $GITHUB_OUTPUT
+              echo "ENV=staging" >> $GITHUB_OUTPUT
+          fi
+      
+          # if [[ "${{github.base_ref}}" == "k8s-deployment" || "${{github.ref}}" == "refs/heads/k8s-deployment" ]]; then
+          #     echo "ARGOCD_APP_NAME=rfq-ui" >> $GITHUB_OUTPUT
+          #     echo "ENV=staging" >> $GITHUB_OUTPUT
+          # fi
+
+
+  cancel-previous:
+    name: "Cancel Previous Runs"
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: styfle/cancel-workflow-action@0.10.0
+        with:
+          access_token: ${{ github.token }}
+  unique_id:
+    runs-on: ubuntu-latest
+    outputs:
+      IMAGE_TAG: ${{ steps.unique_id.outputs.IMAGE_TAG }}
+    steps:
+      - name: Generate unique id
+        id: unique_id
+        run: echo "IMAGE_TAG=$(uuidgen)" >> $GITHUB_OUTPUT
+
+
+  docker-build-and-push:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+    needs: [cancel-previous, unique_id, setup-env-vars]
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.REGISTRY_ACCESS_KEY_ID }}
+          password: ${{ secrets.REGISTRY_SECRET_ACCESS_KEY }}
+
+      # This step outputs Docker labels and Docker tag associated with github.ref
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v4.3.0
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+
+      - name: Prepare env file
+        id: env
+        run: |
+
+            cp CI/.env.${{ needs.setup-env-vars.outputs.ENV }} .env
+
+
+      # When running on master branch Docker images with unique id and latest.
+      # To be changed later and adjusted
+      # Add branch name to latest tag from ${GITHUB_REF##*/}
+      - name: Setup Docker tags
+        id: tags
+        run: |
+          echo "TAGS=${{ steps.meta.outputs.tags }},${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{  needs.unique_id.outputs.IMAGE_TAG  }},${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${GITHUB_REF##*/}-latest" >> $GITHUB_OUTPUT
+
+      - name: Build and push
+        run: |
+
+          # Get the list of tags from the previous step's output
+          tags="${{ steps.tags.outputs.TAGS }}"
+
+          # Split the tags by comma into an array
+          IFS=',' read -ra tagArray <<< "$tags"
+
+          # Build the Docker image using the first tag in the array
+          firstTag="${tagArray[0]}"
+            docker build -t "$firstTag" .
+
+
+          # Loop through the rest of the tags and tag the built image
+          for tag in "${tagArray[@]:1}"; do
+            docker tag "$firstTag" "$tag"
+          done
+
+          # Push each tag in the array
+          for tag in "${tagArray[@]}"; do
+            docker push "$tag"
+          done
+
+
+      - name: ArgoCD login
+        uses: clowdhaus/argo-cd-action/@v1.12.0
+        id: argocd_login
+        with:
+          command: login ${{ env.ARGOCD_URL }}
+          options: --insecure --password ${{ secrets.ARGOCD_PASSWORD }} --username ${{ secrets.ARGOCD_USERNAME }}
+
+      - name: ArgoCD overwite rfq-ui
+        uses: clowdhaus/argo-cd-action/@v1.12.0
+        id: argocd_image_tag_overwrite_admin
+        with:
+          command: app actions run ${{ needs.setup-env-vars.outputs.ARGOCD_APP_NAME }} restart
+          options: --resource-name ${{ needs.setup-env-vars.outputs.ARGOCD_APP_NAME }} --kind Deployment

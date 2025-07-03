@@ -1,0 +1,42 @@
+{
+  "defaultChainId": "0x116ea",
+  "supportedNetworks": [
+    "0x116ea"
+  ],
+  "nativeCurrencies": {
+    "0x116ea": "CKB",
+    "0x144": "ETH",
+    "0x1388": "MNT"
+  },
+  "prioritizedSwapPairs": {
+    "0x116ea": {
+      "baseToken": "0x186181e225dc1ad85a4a94164232bd261e351c33",
+      "quoteToken": "0x7538c85cae4e4673253ffd2568c1f1b48a71558a"
+    },
+    "0x144": {
+      "baseToken": "0x3355df6D4c9C3035724Fd0e3914dE96A5a83aaf4",
+      "quoteToken": "0x8Ebe4A94740515945ad826238Fc4D56c6B8b0e60"
+    },
+    "0x1388": {
+      "baseToken": "0x09bc4e0d864854c6afb6eb9a9cdf58ac190d0df9",
+      "quoteToken": "0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000"
+    }
+  },
+  "lockDropTokens": {
+    "0x116ea": {
+      "TriCrypto": "",
+      "BoostedUSD": "",
+      "PriceToken": "",
+      "Hdk": "",
+      "Pool": ""
+    },
+    "0x144": {
+      "TriCrypto": "",
+      "BoostedUSD": "",
+      "PriceToken": "",
+      "Hdk": "",
+      "Pool": ""
+    }
+  },
+  "lockdropBackend": ""
+}

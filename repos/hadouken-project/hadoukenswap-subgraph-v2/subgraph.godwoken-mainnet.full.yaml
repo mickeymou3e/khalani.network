@@ -1,0 +1,746 @@
+specVersion: 0.0.2
+description: Balancer is a non-custodial portfolio manager, liquidity provider, and price sensor.
+repository: https://github.com/balancer-labs/balancer-subgraph-v2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Vault
+    network: godwoken-mainnet
+    source:
+      address: '0x4F8BDF24826EbcF649658147756115Ee867b7D63'
+      abi: Vault
+      startBlock: 246000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/vault.ts
+      entities:
+        - Balancer
+        - Pool
+        - PoolToken
+        - User
+        - UserInternalBalance
+        - Token
+        - TokenSnapshot
+        - TradePair
+        - TradePairSnapshot
+        - BalancerSnapshot
+      abis:
+        - name: Vault
+          file: ./abis/Vault.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: WeightedPool
+          file: ./abis/WeightedPool.json
+        - name: StablePool
+          file: ./abis/StablePool.json
+        - name: WeightedPoolFactory
+          file: ./abis/WeightedPoolFactory.json
+        - name: AaveLinearPool
+          file: ./abis/AaveLinearPool.json
+        - name: FXPool
+          file: ./abis/FXPool.json
+      eventHandlers:
+        - event: Swap(indexed bytes32,indexed address,indexed address,uint256,uint256)
+          handler: handleSwapEvent
+        - event: PoolBalanceChanged(indexed bytes32,indexed address,address[],int256[],uint256[])
+          handler: handleBalanceChange
+        - event: PoolBalanceManaged(indexed bytes32,indexed address,indexed address,int256,int256)
+          handler: handleBalanceManage
+        - event: InternalBalanceChanged(indexed address,indexed address,int256)
+          handler: handleInternalBalanceChange
+  - kind: ethereum/contract
+    name: Backstop
+    network: godwoken-mainnet
+    source:
+      address: '0x0000000000000000000000000000000000000000'
+      abi: Backstop
+      startBlock: 246000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/backstop.ts
+      entities:
+        - Liquidation
+      abis:
+        - name: Backstop
+          file: ./abis/Backstop.json
+      eventHandlers:
+        - event: Liquidation(indexed address,address,address,uint256,uint256)
+          handler: handleLiquidation
+  - kind: ethereum/contract
+    name: Lockdrop
+    network: godwoken-mainnet
+    source:
+      address: '0x0000000000000000000000000000000000000000'
+      abi: HadoukenLockdrop
+      startBlock: 1990000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/lockdrop.ts
+      entities:
+        - Lockdrop
+      abis:
+        - name: HadoukenLockdrop
+          file: ./abis/HadoukenLockdrop.json
+      eventHandlers:
+        - event: Locked(uint256,indexed address,address,uint256,uint8,uint256,uint256)
+          handler: handleLock
+        - event: Unlocked(uint256,indexed address,address)
+          handler: handleUnlock
+        - event: ClaimedHDKTokens(uint256,indexed address,uint256,uint256)
+          handler: handleClaimHDKTokens
+        - event: DepositedHDK(indexed address,uint256,uint256)
+          handler: handleDepositedHDK
+        - event: DepositedWETH(indexed address,uint256,uint256)
+          handler: handleDepositedWETH
+        - event: FinalizePhaseOne(uint256,address,uint256,address,uint256)
+          handler: handleFinalizePhaseOne
+        - event: LockdropCreated(indexed address,indexed address,uint256)
+          handler: handleLockdropCreated
+  - kind: ethereum/contract
+    name: WeightedPoolFactory
+    network: godwoken-mainnet
+    source:
+      address: '0x8a55228e79A8A87Aea2cA0dfA3770A9C40975202'
+      abi: WeightedPoolFactory
+      startBlock: 246000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/poolFactory.ts
+      entities:
+        - Balancer
+        - Pool
+      abis:
+        - name: Vault
+          file: ./abis/Vault.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: WeightedPoolFactory
+          file: ./abis/WeightedPoolFactory.json
+        - name: WeightedPool
+          file: ./abis/WeightedPool.json
+      eventHandlers:
+        - event: PoolCreated(indexed address)
+          handler: handleNewWeightedPool
+  - kind: ethereum/contract
+    name: WeightedPoolFactoryNew
+    network: godwoken-mainnet
+    source:
+      address: '0x4802C683849852bdB97747A2db642C6fA53C4779'
+      abi: WeightedPoolFactoryNew
+      startBlock: 246000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/poolFactory.ts
+      entities:
+        - Balancer
+        - Pool
+      abis:
+        - name: Vault
+          file: ./abis/Vault.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: WeightedPoolFactoryNew
+          file: ./abis/WeightedPoolFactoryNew.json
+        - name: WeightedPool
+          file: ./abis/WeightedPool.json
+        - name: WeightedPoolNew
+          file: ./abis/WeightedPoolNew.json
+      eventHandlers:
+        - event: PoolCreated(indexed address)
+          handler: handleNewWeightedPoolNew
+  - kind: ethereum/contract
+    name: StablePoolV2Factory
+    network: godwoken-mainnet
+    source:
+      address: '0xeDd99861A27dF761e9CE6337FAC031F09e85Eb28'
+      abi: StablePoolFactory
+      startBlock: 246000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/poolFactory.ts
+      entities:
+        - Balancer
+        - Pool
+      abis:
+        - name: Vault
+          file: ./abis/Vault.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: WeightedPool
+          file: ./abis/WeightedPool.json
+        - name: StablePoolFactory
+          file: ./abis/StablePoolFactory.json
+        - name: StablePool
+          file: ./abis/StablePool.json
+      eventHandlers:
+        - event: PoolCreated(indexed address)
+          handler: handleNewStablePoolV2
+  - kind: ethereum/contract
+    name: ComposableStablePoolFactory
+    network: godwoken-mainnet
+    source:
+      address: '0xe1AbF83Cf16b7eF07C150469228985Ce8A8716f1'
+      abi: ComposableStablePoolFactory
+      startBlock: 246000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/poolFactory.ts
+      entities:
+        - Balancer
+        - Pool
+      abis:
+        - name: Vault
+          file: ./abis/Vault.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: WeightedPool
+          file: ./abis/WeightedPool.json
+        - name: ComposableStablePoolFactory
+          file: ./abis/ComposableStablePoolFactory.json
+        - name: ComposableStablePool
+          file: ./abis/ComposableStablePool.json
+        - name: StablePool
+          file: ./abis/StablePool.json
+      eventHandlers:
+        - event: PoolCreated(indexed address)
+          handler: handleNewComposableStablePool
+  - kind: ethereum/contract
+    name: ComposableStablePoolFactoryNew
+    network: godwoken-mainnet
+    source:
+      address: '0x13d81818c07aB9B3c5a28D6d68c684fdB6Fae0b0'
+      abi: ComposableStablePoolFactoryNew
+      startBlock: 246000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/poolFactory.ts
+      entities:
+        - Balancer
+        - Pool
+      abis:
+        - name: Vault
+          file: ./abis/Vault.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: WeightedPool
+          file: ./abis/WeightedPool.json
+        - name: ComposableStablePoolFactoryNew
+          file: ./abis/ComposableStablePoolFactoryNew.json
+        - name: ComposableStablePool
+          file: ./abis/ComposableStablePool.json
+        - name: StablePool
+          file: ./abis/StablePool.json
+      eventHandlers:
+        - event: PoolCreated(indexed address)
+          handler: handleNewComposableStablePoolNew
+  - kind: ethereum/contract
+    name: AaveLinearPoolFactory
+    network: godwoken-mainnet
+    source:
+      address: '0x62AEdB532DBa29a45C36396A84b4D57FAF5766Ec'
+      abi: AaveLinearPoolFactory
+      startBlock: 246000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/poolFactory.ts
+      entities:
+        - Balancer
+        - Pool
+      abis:
+        - name: Vault
+          file: ./abis/Vault.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: WeightedPool
+          file: ./abis/WeightedPool.json
+        - name: AaveLinearPoolFactory
+          file: ./abis/AaveLinearPoolFactory.json
+        - name: LinearPool
+          file: ./abis/LinearPool.json
+        - name: AaveLinearPool
+          file: ./abis/AaveLinearPool.json
+      eventHandlers:
+        - event: PoolCreated(indexed address)
+          handler: handleNewAaveLinearPool
+templates:
+  - kind: ethereum/contract
+    name: WeightedPool
+    network: godwoken-mainnet
+    source:
+      abi: WeightedPool
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/poolController.ts
+      entities:
+        - Pool
+        - PoolShare
+        - Swap
+        - PoolToken
+      abis:
+        - name: WeightedPool
+          file: ./abis/WeightedPool.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: SwapFeePercentageChanged(uint256)
+          handler: handleSwapFeePercentageChange
+        - event: PausedStateChanged(bool)
+          handler: handlePausedStateChanged
+  - kind: ethereum/contract
+    name: WeightedPoolNew
+    network: godwoken-mainnet
+    source:
+      abi: WeightedPoolNew
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/poolController.ts
+      entities:
+        - Pool
+        - PoolShare
+        - Swap
+        - PoolToken
+      abis:
+        - name: WeightedPoolNew
+          file: ./abis/WeightedPoolNew.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: SwapFeePercentageChanged(uint256)
+          handler: handleSwapFeePercentageChange
+        - event: RecoveryModeStateChanged(bool)
+          handler: handleRecoveryModeStateChanged
+        - event: PausedStateChanged(bool)
+          handler: handlePausedStateChanged
+  - kind: ethereum/contract
+    name: WeightedPool2Tokens
+    network: godwoken-mainnet
+    source:
+      abi: WeightedPool2Tokens
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/poolController.ts
+      entities:
+        - Pool
+        - PoolShare
+        - Swap
+        - PoolToken
+      abis:
+        - name: WeightedPool2Tokens
+          file: ./abis/WeightedPool2Tokens.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: OracleEnabledChanged(bool)
+          handler: handleOracleEnabledChanged
+        - event: SwapFeePercentageChanged(uint256)
+          handler: handleSwapFeePercentageChange
+        - event: PausedStateChanged(bool)
+          handler: handlePausedStateChanged
+  - kind: ethereum/contract
+    name: StablePool
+    network: godwoken-mainnet
+    source:
+      abi: StablePool
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/poolController.ts
+      entities:
+        - Pool
+        - PoolShare
+        - Swap
+        - PoolToken
+      abis:
+        - name: StablePool
+          file: ./abis/StablePool.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: SwapFeePercentageChanged(uint256)
+          handler: handleSwapFeePercentageChange
+        - event: AmpUpdateStarted(uint256,uint256,uint256,uint256)
+          handler: handleAmpUpdateStarted
+        - event: AmpUpdateStopped(uint256)
+          handler: handleAmpUpdateStopped
+        - event: PausedStateChanged(bool)
+          handler: handlePausedStateChanged
+  - kind: ethereum/contract
+    name: MetaStablePool
+    network: godwoken-mainnet
+    source:
+      abi: MetaStablePool
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/poolController.ts
+      entities:
+        - Pool
+        - PoolShare
+        - Swap
+        - PoolToken
+        - PriceRateProvider
+      abis:
+        - name: MetaStablePool
+          file: ./abis/MetaStablePool.json
+        - name: StablePool
+          file: ./abis/StablePool.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: SwapFeePercentageChanged(uint256)
+          handler: handleSwapFeePercentageChange
+        - event: AmpUpdateStarted(uint256,uint256,uint256,uint256)
+          handler: handleAmpUpdateStarted
+        - event: AmpUpdateStopped(uint256)
+          handler: handleAmpUpdateStopped
+        - event: PriceRateProviderSet(indexed address,indexed address,uint256)
+          handler: handlePriceRateProviderSet
+        - event: PriceRateCacheUpdated(indexed address,uint256)
+          handler: handlePriceRateCacheUpdated
+        - event: OracleEnabledChanged(bool)
+          handler: handleOracleEnabledChanged
+        - event: PausedStateChanged(bool)
+          handler: handlePausedStateChanged
+  - kind: ethereum/contract
+    name: ConvergentCurvePool
+    network: godwoken-mainnet
+    source:
+      abi: ConvergentCurvePool
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/poolController.ts
+      entities:
+        - Pool
+        - PoolShare
+        - Swap
+        - PoolToken
+      abis:
+        - name: ConvergentCurvePool
+          file: ./abis/ConvergentCurvePool.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+  - kind: ethereum/contract
+    name: LiquidityBootstrappingPool
+    network: godwoken-mainnet
+    source:
+      abi: LiquidityBootstrappingPool
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/poolController.ts
+      entities:
+        - Pool
+        - PoolShare
+        - Swap
+        - PoolToken
+        - GradualWeightUpdate
+      abis:
+        - name: LiquidityBootstrappingPool
+          file: ./abis/LiquidityBootstrappingPool.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: SwapFeePercentageChanged(uint256)
+          handler: handleSwapFeePercentageChange
+        - event: SwapEnabledSet(bool)
+          handler: handleSwapEnabledSet
+        - event: GradualWeightUpdateScheduled(uint256,uint256,uint256[],uint256[])
+          handler: handleGradualWeightUpdateScheduled
+        - event: PausedStateChanged(bool)
+          handler: handlePausedStateChanged
+  - kind: ethereum/contract
+    name: InvestmentPool
+    network: godwoken-mainnet
+    source:
+      abi: InvestmentPool
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/poolController.ts
+      entities:
+        - Pool
+        - PoolShare
+        - Swap
+        - PoolToken
+        - GradualWeightUpdate
+      abis:
+        - name: InvestmentPool
+          file: ./abis/InvestmentPool.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: SwapFeePercentageChanged(uint256)
+          handler: handleSwapFeePercentageChange
+        - event: SwapEnabledSet(bool)
+          handler: handleSwapEnabledSet
+        - event: GradualWeightUpdateScheduled(uint256,uint256,uint256[],uint256[])
+          handler: handleGradualWeightUpdateScheduled
+        - event: ManagementFeePercentageChanged(uint256)
+          handler: handleManagementFeePercentageChanged
+        - event: PausedStateChanged(bool)
+          handler: handlePausedStateChanged
+  - kind: ethereum/contract
+    name: StablePhantomPool
+    network: godwoken-mainnet
+    source:
+      abi: StablePhantomPool
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/poolController.ts
+      entities:
+        - Pool
+        - PoolShare
+        - Swap
+        - PoolToken
+        - GradualWeightUpdate
+      abis:
+        - name: StablePhantomPool
+          file: ./abis/StablePhantomPool.json
+        - name: StablePool
+          file: ./abis/StablePool.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: SwapFeePercentageChanged(uint256)
+          handler: handleSwapFeePercentageChange
+        - event: AmpUpdateStarted(uint256,uint256,uint256,uint256)
+          handler: handleAmpUpdateStarted
+        - event: AmpUpdateStopped(uint256)
+          handler: handleAmpUpdateStopped
+        - event: TokenRateProviderSet(indexed address,indexed address,uint256)
+          handler: handlePriceRateProviderSet
+        - event: TokenRateCacheUpdated(indexed address,uint256)
+          handler: handlePriceRateCacheUpdated
+        - event: PausedStateChanged(bool)
+          handler: handlePausedStateChanged
+  - kind: ethereum/contract
+    name: StablePhantomPoolV2
+    network: godwoken-mainnet
+    source:
+      abi: ComposableStablePool
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/poolController.ts
+      entities:
+        - Pool
+        - PoolShare
+        - Swap
+        - PoolToken
+        - GradualWeightUpdate
+      abis:
+        - name: ComposableStablePool
+          file: ./abis/ComposableStablePool.json
+        - name: StablePool
+          file: ./abis/StablePool.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: SwapFeePercentageChanged(uint256)
+          handler: handleSwapFeePercentageChange
+        - event: AmpUpdateStarted(uint256,uint256,uint256,uint256)
+          handler: handleAmpUpdateStarted
+        - event: AmpUpdateStopped(uint256)
+          handler: handleAmpUpdateStopped
+        - event: TokenRateProviderSet(indexed uint256,indexed address,uint256)
+          handler: handleTokenRateProviderSet
+        - event: TokenRateCacheUpdated(indexed uint256,uint256)
+          handler: handleTokenRateCacheUpdated
+        - event: ProtocolFeePercentageCacheUpdated(indexed uint256,uint256)
+          handler: handleProtocolFeePercentageCacheUpdated
+        - event: RecoveryModeStateChanged(bool)
+          handler: handleRecoveryModeStateChanged
+        - event: PausedStateChanged(bool)
+          handler: handlePausedStateChanged
+  - kind: ethereum/contract
+    name: LinearPool
+    network: godwoken-mainnet
+    source:
+      abi: LinearPool
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/poolController.ts
+      entities:
+        - Pool
+        - PoolShare
+        - Swap
+        - PoolToken
+        - GradualWeightUpdate
+      abis:
+        - name: LinearPool
+          file: ./abis/LinearPool.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: SwapFeePercentageChanged(uint256)
+          handler: handleSwapFeePercentageChange
+        - event: TargetsSet(indexed address,uint256,uint256)
+          handler: handleTargetsSet
+        - event: PausedStateChanged(bool)
+          handler: handlePausedStateChanged
+        - event: RecoveryModeStateChanged(bool)
+          handler: handleRecoveryModeStateChanged
+  - kind: ethereum/contract
+    name: Gyro2Pool
+    network: godwoken-mainnet
+    source:
+      abi: Gyro2Pool
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/poolController.ts
+      entities:
+        - Pool
+        - PoolShare
+        - Swap
+        - PoolToken
+        - GradualWeightUpdate
+      abis:
+        - name: Gyro2Pool
+          file: ./abis/Gyro2Pool.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: SwapFeePercentageChanged(uint256)
+          handler: handleSwapFeePercentageChange
+        - event: PausedLocally()
+          handler: handlePauseGyroPool
+        - event: UnpausedLocally()
+          handler: handleUnpauseGyroPool
+  - kind: ethereum/contract
+    name: Gyro3Pool
+    network: godwoken-mainnet
+    source:
+      abi: Gyro3Pool
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/poolController.ts
+      entities:
+        - Pool
+        - PoolShare
+        - Swap
+        - PoolToken
+        - GradualWeightUpdate
+      abis:
+        - name: Gyro3Pool
+          file: ./abis/Gyro3Pool.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: SwapFeePercentageChanged(uint256)
+          handler: handleSwapFeePercentageChange
+        - event: PausedLocally()
+          handler: handlePauseGyroPool
+        - event: UnpausedLocally()
+          handler: handleUnpauseGyroPool
+  - kind: ethereum/contract
+    name: GyroEPool
+    network: godwoken-mainnet
+    source:
+      abi: GyroEPool
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/poolController.ts
+      entities:
+        - Pool
+        - PoolShare
+        - Swap
+        - PoolToken
+        - GradualWeightUpdate
+      abis:
+        - name: GyroEPool
+          file: ./abis/GyroEPool.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: SwapFeePercentageChanged(uint256)
+          handler: handleSwapFeePercentageChange
+        - event: PausedLocally()
+          handler: handlePauseGyroPool
+        - event: UnpausedLocally()
+          handler: handleUnpauseGyroPool
+  - kind: ethereum/contract
+    name: FXPool
+    network: godwoken-mainnet
+    source:
+      abi: FXPool
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/poolController.ts
+      entities:
+        - Pool
+        - PoolShare
+        - Swap
+        - PoolToken
+        - GradualWeightUpdate
+      abis:
+        - name: FXPool
+          file: ./abis/FXPool.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: ParametersSet(uint256,uint256,uint256,uint256,uint256)
+          handler: handleParametersSet
+  - kind: ethereum/contract
+    name: OffchainAggregator
+    network: godwoken-mainnet
+    source:
+      abi: AccessControlledOffchainAggregator
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/pricing.ts
+      entities:
+        - Token
+      abis:
+        - name: AccessControlledOffchainAggregator
+          file: ./abis/AccessControlledOffchainAggregator.json
+      eventHandlers:
+        - event: AnswerUpdated(indexed int256,indexed uint256,uint256)
+          handler: handleAnswerUpdated
+

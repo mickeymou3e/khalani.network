@@ -1,0 +1,355 @@
+type Block @entity {
+  id: ID!
+  number: BigInt!
+  timestamp: BigInt!
+  parentHash: String
+  author: String
+  difficulty: BigInt
+  totalDifficulty: BigInt
+  gasUsed: BigInt
+  gasLimit: BigInt
+  receiptsRoot: String
+  transactionsRoot: String
+  stateRoot: String
+  size: BigInt
+  unclesHash: String
+  hash: Bytes
+}
+
+type Balancer @entity {
+  id: ID!
+  poolCount: Int!
+  pools: [Pool!] @derivedFrom(field: "vaultID")
+  totalLiquidity: BigDecimal!
+  totalSwapCount: BigInt!
+  totalSwapVolume: BigDecimal!
+  totalSwapFee: BigDecimal!
+}
+
+type Pool @entity {
+  id: ID!
+  address: Bytes!
+  poolType: String
+  factory: Bytes
+  strategyType: Int!
+  oracleEnabled: Boolean!
+  symbol: String
+  name: String
+  swapEnabled: Boolean!
+  swapFee: BigDecimal!
+  owner: Bytes
+  totalWeight: BigDecimal
+  totalSwapVolume: BigDecimal!
+  totalSwapFee: BigDecimal!
+  totalLiquidity: BigDecimal!
+  totalShares: BigDecimal!
+  createTime: Int!
+  swapsCount: BigInt!
+  holdersCount: BigInt!
+  vaultID: Balancer!
+  tx: Bytes
+  tokensList: [Bytes!]!
+  tokens: [PoolToken!] @derivedFrom(field: "poolId")
+  swaps: [Swap!] @derivedFrom(field: "poolId")
+  shares: [PoolShare!] @derivedFrom(field: "poolId")
+  snapshots: [PoolSnapshot!] @derivedFrom(field: "pool")
+  historicalValues: [PoolHistoricalLiquidity!] @derivedFrom(field: "poolId")
+  weightUpdates: [GradualWeightUpdate!] @derivedFrom(field: "poolId")
+  amp: BigInt
+  priceRateProviders: [PriceRateProvider!] @derivedFrom(field: "poolId")
+  principalToken: Bytes
+  baseToken: Bytes
+  expiryTime: BigInt
+  unitSeconds: BigInt
+  managementFee: BigDecimal
+  mainIndex: Int
+  wrappedIndex: Int
+  lowerTarget: BigDecimal
+  upperTarget: BigDecimal
+  sqrtAlpha: BigDecimal
+  sqrtBeta: BigDecimal
+  root3Alpha: BigDecimal
+}
+
+type PoolToken @entity {
+  id: ID!
+  poolId: Pool
+  token: Token!
+  assetManager: Bytes!
+  symbol: String!
+  name: String!
+  decimals: Int!
+  address: String!
+  priceRate: BigDecimal!
+  balance: BigDecimal!
+  cashBalance: BigDecimal!
+  managedBalance: BigDecimal!
+  managements: [ManagementOperation!] @derivedFrom(field: "poolTokenId")
+  weight: BigDecimal
+  isLpToken: Boolean!
+  pools: [Bytes!]
+}
+
+type PriceRateProvider @entity {
+  id: ID!
+  poolId: Pool!
+  token: PoolToken!
+  address: Bytes!
+  rate: BigDecimal!
+  lastCached: Int!
+  cacheDuration: Int!
+  cacheExpiry: Int!
+}
+
+type PoolShare @entity {
+  id: ID!
+  userAddress: User!
+  poolId: Pool!
+  balance: BigDecimal!
+}
+
+type User @entity {
+  id: ID!
+  sharesOwned: [PoolShare!] @derivedFrom(field: "userAddress")
+  swaps: [Swap!] @derivedFrom(field: "userAddress")
+  userInternalBalances: [UserInternalBalance!] @derivedFrom(field: "userAddress")
+}
+
+type UserInternalBalance @entity {
+  id: ID!
+  userAddress: User
+  token: Bytes!
+  balance: BigDecimal!
+}
+
+type GradualWeightUpdate @entity {
+  id: ID!
+  poolId: Pool!
+  scheduledTimestamp: Int!
+  startTimestamp: BigInt!
+  endTimestamp: BigInt!
+  startWeights: [BigInt!]!
+  endWeights: [BigInt!]!
+}
+
+type AmpUpdate @entity {
+  id: ID!
+  poolId: Pool!
+  scheduledTimestamp: Int!
+  startTimestamp: BigInt!
+  endTimestamp: BigInt!
+  startAmp: BigInt!
+  endAmp: BigInt!
+}
+
+type Swap @entity {
+  id: ID!
+  caller: Bytes!
+  tokenIn: Bytes!
+  tokenInSym: String!
+  tokenOut: Bytes!
+  tokenOutSym: String!
+  tokenAmountIn: BigDecimal!
+  tokenAmountOut: BigDecimal!
+  valueUSD: BigDecimal!
+  poolId: Pool!
+  userAddress: User!
+  timestamp: Int!
+  tx: Bytes!
+}
+
+enum InvestType {
+  Join
+  Exit
+}
+
+type JoinExit @entity {
+  id: ID!
+  type: InvestType!
+  sender: Bytes!
+  amounts: [BigDecimal!]!
+  pool: Pool!
+  user: User!
+  timestamp: Int!
+  tx: Bytes!
+}
+
+type LatestPrice @entity {
+  id: ID!
+  asset: Bytes!
+  pricingAsset: Bytes!
+  poolId: Pool!
+  price: BigDecimal!
+  block: BigInt!
+}
+
+type PoolHistoricalLiquidity @entity {
+  id: ID!
+  poolId: Pool!
+  poolTotalShares: BigDecimal!
+  poolLiquidity: BigDecimal!
+  poolShareValue: BigDecimal!
+  pricingAsset: Bytes!
+  block: BigInt!
+}
+
+type TokenPrice @entity {
+  id: ID!
+  poolId: Pool!
+  asset: Bytes!
+  amount: BigDecimal!
+  pricingAsset: Bytes!
+  price: BigDecimal!
+  block: BigInt!
+  timestamp: Int!
+}
+
+enum OperationType {
+  Deposit
+  Withdraw
+  Update
+}
+
+type ManagementOperation @entity {
+  id: ID!
+  type: OperationType!
+  cashDelta: BigDecimal!
+  managedDelta: BigDecimal!
+  poolTokenId: PoolToken!
+  timestamp: Int!
+}
+
+type PoolSnapshot @entity {
+  id: ID!
+  pool: Pool!
+  amounts: [BigDecimal!]!
+  totalShares: BigDecimal!
+  swapVolume: BigDecimal!
+  swapFees: BigDecimal!
+  liquidity: BigDecimal!
+  swapsCount: BigInt!
+  holdersCount: BigInt!
+  timestamp: Int!
+}
+
+type Token @entity {
+  id: ID!
+  symbol: String
+  name: String
+  decimals: Int!
+  address: String!
+  totalBalanceUSD: BigDecimal!
+  totalBalanceNotional: BigDecimal!
+  totalVolumeUSD: BigDecimal!
+  totalVolumeNotional: BigDecimal!
+  totalSwapCount: BigInt!
+  latestPrice: LatestPrice
+  latestUSDPrice: BigDecimal
+  pool: Pool
+}
+
+type TokenSnapshot @entity {
+  id: ID!
+  token: Token!
+  timestamp: Int!
+  totalBalanceUSD: BigDecimal!
+  totalBalanceNotional: BigDecimal!
+  totalVolumeUSD: BigDecimal!
+  totalVolumeNotional: BigDecimal!
+  totalSwapCount: BigInt!
+}
+
+type TradePair @entity {
+  "Token Address - Token Address"
+  id: ID!
+  token0: Token!
+  token1: Token!
+  totalSwapVolume: BigDecimal!
+  totalSwapFee: BigDecimal!
+}
+
+type TradePairSnapshot @entity {
+  id: ID!
+  pair: TradePair!
+  timestamp: Int!
+  totalSwapVolume: BigDecimal!
+  totalSwapFee: BigDecimal!
+}
+
+type BalancerSnapshot @entity {
+  id: ID!
+  vault: Balancer!
+  timestamp: Int!
+  poolCount: Int!
+  totalLiquidity: BigDecimal!
+  totalSwapCount: BigInt!
+  totalSwapVolume: BigDecimal!
+  totalSwapFee: BigDecimal!
+}
+
+type UsedBlock @entity {
+  id: ID!
+  number: BigInt!
+  hash: Bytes
+}
+
+type TokenBalance @entity {
+  id: ID!
+  tokenAddress: Bytes!
+  walletAddress: Bytes!
+  balance: BigInt!
+  updatedAt: BigInt!
+}
+
+type PoolTokenBalance @entity {
+  id: ID!
+  decimals: Int!
+  balance: BigInt!
+}
+
+type Registry @entity {
+  id: ID!
+  pools: [Pool!]!
+}
+
+type Exchange @entity {
+  id: ID!
+  pool: Bytes!
+  buyer: Bytes!
+  receiver: Bytes!
+  tokenBought: PoolToken!
+  tokenSold: PoolToken!
+}
+
+type SwapPair @entity {
+  id: ID!
+  address: String!
+  poolId: String!
+}
+
+type SwapPossibility @entity {
+  id: ID!
+  quotes: [SwapPair!]
+}
+
+type Apy @entity {
+  id: ID!
+  value: BigDecimal!
+  pool: Pool!
+}
+
+type PoolSnapshotHadouken @entity {
+  id: ID!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+  virtualPrice: BigInt!
+  apy: [BigInt!]
+}
+
+type PoolSnapshotHadoukenRegistry @entity {
+  id: ID!
+  latestSnapshot: PoolSnapshotHadouken
+  latestBlockTimestamp: BigInt
+  snapshots: [PoolSnapshotHadouken!]!
+  snapshotsTimestamps: [BigInt!]!
+}

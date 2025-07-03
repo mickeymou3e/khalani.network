@@ -1,0 +1,12 @@
+{
+    "env": "testnet",
+    "network": "mantle-testnet",
+    "delay": "20000",
+    "chainId": "0x1389",
+    "marketId": "Mantle",
+    "gasLimit": 1000000,
+    "rpcUrl": "https://rpc.testnet.mantle.xyz/",
+    "readOnlyRpcUrl": "https://rpc.testnet.mantle.xyz/",
+    "wsUrl": "",
+    "explorer": "https://explorer.testnet.mantle.xyz/"
+}

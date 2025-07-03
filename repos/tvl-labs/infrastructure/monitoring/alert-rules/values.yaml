@@ -1,0 +1,21 @@
+rules:
+  relayerBalance:
+    threshold: 2
+    forPeriod: 1m
+
+  khalaniTestnetBlocksProduction:
+    forPeriod: 1m
+    threshold: 5  # minimum 5 blocks per minute
+
+  hyperlaneIndexedBlocks:
+    forPeriod: 3m
+    threshold: 5
+
+  axonMemoryUsage:
+    forPeriod: 5m
+    threshold: "4294967296" # 4Gb
+
+  hyperlaneRpcUsage:
+    period: 24h
+    forPeriod: 10m
+    threshold: 500000

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "0x41786f6e:0x604CDb428751cF70DEb7De74569A6416A9cE1327",
+    "address": "0x604CDb428751cF70DEb7De74569A6416A9cE1327",
+    "decimals": 18,
+    "name": "USDC | arb",
+    "symbol": "USDC.arb",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0xa4b1"
+  },
+  {
+    "id": "0x41786f6e:0x2ef4cBfA63AD1df5864AC6bE922B9C9D234be066",
+    "address": "0x2ef4cBfA63AD1df5864AC6bE922B9C9D234be066",
+    "decimals": 18,
+    "name": "USDT | arb",
+    "symbol": "USDT.arb",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0xa4b1"
+  },
+  {
+    "id": "0x41786f6e:0x96fA89c6e8cfC3d1Ac7601d9D9aE87174cC9C7c7",
+    "address": "0x96fA89c6e8cfC3d1Ac7601d9D9aE87174cC9C7c7",
+    "decimals": 18,
+    "name": "USDC | eth",
+    "symbol": "USDC.eth",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0x1"
+  },
+  {
+    "id": "0x41786f6e:0x320CbbdC3ebC1d4E1ca65b2Ea4FFA526Dfa650aC",
+    "address": "0x320CbbdC3ebC1d4E1ca65b2Ea4FFA526Dfa650aC",
+    "decimals": 18,
+    "name": "USDT | eth",
+    "symbol": "USDT.eth",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0x1"
+  }
+]

@@ -1,0 +1,82 @@
+type Block @entity {
+  id: ID!
+  number: BigInt!
+  hash: Bytes
+}
+
+type UsedBlock @entity {
+  id: ID!
+  number: BigInt!
+  hash: Bytes
+}
+
+type PoolToken @entity {
+  id: ID!
+  symbol: String!
+  decimals: Int!
+  address: String!
+  isLpToken: Boolean!
+  pools: [Bytes!]
+}
+
+type TokenBalance @entity {
+  id: ID!
+  tokenAddress: Bytes!
+  walletAddress: Bytes!
+  balance: BigInt!
+  updatedAt: BigInt!
+}
+
+type PoolTokenBalance @entity {
+  id: ID!
+  decimals: Int!
+  balance: BigInt!
+}
+
+
+type Registry @entity {
+  id: ID!
+  pools: [Pool!]!
+}
+
+type Exchange @entity {
+  id: ID!
+  pool: Bytes!
+  buyer: Bytes!
+  receiver: Bytes!
+  tokenBought: PoolToken!
+  tokenSold: PoolToken!
+}
+
+type SwapPair @entity {
+  id: ID!
+  address: String!
+  poolId: String!
+}
+
+type SwapPossibility @entity {
+  id: ID!
+  quotes: [SwapPair!]
+}
+
+type Apy @entity {
+    id: ID!
+    value: BigDecimal!
+    pool: Pool!
+}
+
+type PoolSnapshotHadouken @entity {
+     id: ID!
+     blockNumber: BigInt!
+     timestamp: BigInt!
+     virtualPrice: BigInt!
+     apy: [BigInt!]
+ }
+
+ type PoolSnapshotHadoukenRegistry @entity {
+     id: ID!
+     latestSnapshot: PoolSnapshotHadouken
+     latestBlockTimestamp: BigInt
+     snapshots: [PoolSnapshotHadouken!]!
+     snapshotsTimestamps: [BigInt!]!
+ }

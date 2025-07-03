@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "noEmit": true,
+    "module": "esnext",
+    "allowJs": true,
+    "strictBindCallApply": true,
+    "types": ["jest", "node"],
+    "noImplicitAny": true,
+    "downlevelIteration": true,
+    "strictNullChecks": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "target": "ES6",
+    "jsx": "react",
+    "lib": ["dom", "esnext"],
+    "baseUrl": "./",
+    "paths": {
+      "@components/*": ["./src/components/*"],
+      "@config": ["./src/config.ts"],
+      "@containers/*": ["./src/containers/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@enums/*": ["./src/enums/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@modules/*": ["./src/modules/*"],
+      "@services/*": ["./src/services/*"]
+    }
+  },
+  "include": ["src/**/*", "config/**/*", "testUtils/**/*", "setup-tests.ts"],
+  "exclude": [
+    "node_modules",
+    "scr/**/*.test.ts",
+    "scr/**/*.test.tsx",
+    "scr/**/*.mocks.ts"
+  ]
+}

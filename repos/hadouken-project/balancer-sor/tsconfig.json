@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "module": "esnext",
+        "target": "es2016",
+        "declaration": true,
+        "lib": ["es2019", "es2018.promise", "dom"],
+        "outDir": "./dist/",
+        "baseUrl": "src",
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "experimentalDecorators": true,
+        // "strict": true,
+        "strictNullChecks": true,
+        "strictFunctionTypes": false
+    },
+    "include": [
+        "src",
+        "src/abi/*.json",
+        "src/pools/stablePool/stablePoolAbi.json",
+        "src/pools/weightedPool/weightedPoolAbi.json",
+        "src/pools/elementPool/ConvergentCurvePool.json",
+        "src/pools/linearPool/linearPoolAbi.json"
+    ],
+    "files": ["hardhat.config.js"]
+}

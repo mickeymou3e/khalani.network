@@ -1,0 +1,22 @@
+{
+  "sepolia": {
+    "assetReserves": "0x109d95E12de80F9b50fcEeAbDfe61163f3A0ef1D",
+    "hubProver": "0x8Fae04D407bA0D69AC1DbF1396C8a07Ace378e41",
+    "hubVerifier": "0x228EC64f524aDee75caaEBB9135B076169eEF30D",
+    "spokeChainExecutor": "0x859A27eae1d530884f6D07bD39F142f48F6Ab02D",
+    "spokeEscrow": "0x99e84638f05D0FA5B4AF0af310bcaC92f67Ce3CE",
+    "spokeProver": "0xd8B5025d1563D4376b079A5A7547DbC4Ad5EBBce",
+    "spokeVerifier": "0xe9338657474F856623d2439eB1f05dC869d6b526",
+    "swapIntentFiller": "0x78e18cC1FdfE8540E084e0ac3D0e90904966A3e1"
+  },
+  "fuji": {
+    "assetReserves": "0xe3594c4854aa50c9e01f36D745ADEFBb966fE2b3",
+    "hubProver": "0x38f1B476dc00f49b69945def26B58D452ad3D6E6",
+    "hubVerifier": "0x6d3507C01D4d3043EB57b7472f2841F1D30651f9",
+    "spokeChainExecutor": "0xDBFC4CC40da4ffcb8C2188d6B717dDEFf92e180f",
+    "spokeEscrow": "0x4701b630ECA51a3e687da71A114dC4A71B1eCECe",
+    "spokeProver": "0x16CFB94143350Ee2B4E038ab312068E06884C2B8",
+    "spokeVerifier": "0x791c2B62D26F248Ff3d5A435f80caE34AC24684c",
+    "swapIntentFiller": "0xbaF11C1af22b0211016a29495542Ac06c44c7C94"
+  }
+}

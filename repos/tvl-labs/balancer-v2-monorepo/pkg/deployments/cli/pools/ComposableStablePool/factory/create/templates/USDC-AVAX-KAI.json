@@ -1,0 +1,27 @@
+{
+  "name": "USDC.avax/KAI",
+  "symbol": "balUSDCavaxKAI",
+  "tokens": [
+    "0xb83dca5964b7ff263279c9f5f3e8e38728ea26ba",
+    "0x1fa37818ae2710c23301d94d2bee37951c2dd55b"
+  ],
+  "rateProviders": [
+    "0x0000000000000000000000000000000000000000",
+    "0x0000000000000000000000000000000000000000"
+  ],
+  "priceRateCacheDuration": [
+    "0",
+    "0"
+  ],
+  "amplificationParameter": "300",
+  "swapFeePercentage": "100000000000000",
+  "exemptFromYieldProtocolFeeFlags": [
+    false,
+    false
+  ],
+  "owner": "0x73B31aC967f46dB2C45280C7f5d1D3ee7F38E122",
+  "initialLiquidity": {
+    "0xb83dca5964b7FF263279c9f5f3E8E38728ea26Ba": "150000000000",
+    "0x1Fa37818ae2710C23301D94d2BeE37951C2DD55b": "150000000000000000000000"
+  }
+}

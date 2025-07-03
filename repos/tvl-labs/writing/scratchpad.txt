@@ -1,0 +1,193 @@
+Dec 6
+==========
+
+Ethereum Nexus
+
+depositAndCall([tokens], call)
+  - lockOrBurn([tokens])
+  - Nexus.onDepositAndCall(chainId, [tokens], call)
+
+lockOrBurn([<token, amount>])
+
+onWithdrawAndCall()
+  - unlock or mint tokens
+  - call()
+    - probably always a transfer
+
+
+Khalani Nexus
+======
+
+onDepositAndCall([tokens], <call>)
+  - mint
+  - call()
+
+withdrawAndCall(chainId, [tokens], call)
+  - burn tokens
+  - amp onWithdrawAndCall() on the remote chain
+    - the call is almost always token transfer
+
+------------
+Vortex Wrappers on Khalani Chain
+
+- addLiqudity(sourceChainId, [<token1, amount1>, <token2, amount2>])
+  - Balancer.addLiq()
+  - if succeeds
+    - nothing
+  - else
+    - if(sourceChainId != null)
+      - Nexus.withdraw(sourceChainId, [token1, amount1], [token2, amount2])
+
+- removeLiqAndWithdraw(sourceChainId, ...)
+  - Balancer.removeLiq()
+    - if succeeds
+      - nothing
+    - if fails
+      - nothing
+
+  - if(sourceChainId != null)
+      - Nexus.withdraw(sourceChainId, [token1, amount1], [token2, amount2])
+
+- crossChainTrade([token1, amount], token2, params_like_slippage_etc... target_chain_id, target_chain_address)
+  - [result_token, result_amount] = Balancer.batchSwap
+  - if succeeds
+    - Nexus.withdrawAndCall(target_chain_id, [tokens], <transfer, target_chain_address>)
+  - else
+    - if(sourceChainId != null)
+      - Nexus.withdrawAndCall(ethereum_chain_id, [token1, amount], <transfer, address>)
+
+
+use cases
+------------------
+
+**** Provide Liq from Ethereum
+
+depositAndCall([token1, token2], Vortex.addLiqudity)
+
+**** Remove Liq from Ethereum
+
+Hyperlane / Celer: multiCallRemote(axonChainId, ...., [<removeLiqAndWithdraw(), null>])
+
+
+**** Cross Chain Trades / Transfers:
+
+user want so trade 1000 USDC from ETH to 999 USDC on BSC
+
+- depositAndCall([1000 USDC],
+          <crossChainTrade, null>
+          )
+
+
+*** Transfer PAN from Ethereum to BSC, called from Ethereum
+- depositAndCall([1000 PAN], [
+          <transfer, null>],
+          <withdrawAll(BSC_Chain, [PAN]), null>,
+          ])
+
+*** Transfer PAN from Ethereum to Khalani Chain, called from Ethereum
+- depositAndCall([1000 PAN], [
+          <transfer, null>]
+          ])
+
+*** Transfer PAN from Khalani Chain to Ethereum, called from Ethereum
+  - multiCallRemote(chainId, ...., [<withdrawAll([PAN]), null])
+Nov 30
+==========
+
+Nexus
+
+Motivation
+-------
+
+Khalani's vision is to be a multi-chain native stable coin with unified liquidity across all the blockchains and the Khalani Chain is built as the liquidity hub for the Khalani ecosystem. We expect the main apps in the Khalani ecosystem, such as cross-chain bridging, trading and lending built on the Khalani Chain. Therefore, it's necessary to build a hub-and-spoke based messaging system having the Khalani Chain in the center that connects to all other blockchains.
+
+We call this sytem Nexus.
+
+
+Functional Requirements
+-----
+Security:
+
+This is the most important requirement of Nexus. For each Nexus spoke, we should only need to trust the consensus of the two blockchains and nothing else.
+
+Scalability:
+
+Nexus should be able to scale to all types of blockchains easily without having to custom build the messaging infrastructure for each one or each type.
+
+
+Technical Requirements
+--------- 
+
+Nexus has to guarantee that for each spoke:
+- all messages are delivered once and once only.
+- in their sent order on the source chain.
+- All invalid messages should be rejected.
+- All token accounting (locking, unlocking, burning, minting) associated with messages should be kept with integrity.
+
+
+Solution
+--------
+
+We're building Nexus as a meta messaging protocol. For each spoke, we'd rely on either complete trustless verification (on-chain light clients), or a whitelisted external validation based system + an independent verification factor bound by the Khalani Chain's consensus.
+
+
+Specification
+--------
+
+
+
+
+Nov 23
+
+==================
+Nexus Wallet
+
+address,  tokens
+
+0xuser1,  [[USDCeth, 123123], [BUSDbsc, 19247124], [PAN, 10000]]
+0xuser2,  [[token1, 123123], [token2, 1924u7124]]
+0xuser3,  [[token1, 123123], [token2, 1924u7124]]
+0xuser4,  [[token1, 123123], [token2, 1924u7124]]
+
+
+option1:
+withdraw()
+deposit()
+  - user can deposit to their own
+  - nexus replayers can deposit to any user's balance
+
+
+User deposits 1000 USDC on Ethereum
+
+
+what if Nexus mints USDCeth to 0xeth1
+
+
+
+On etheruem User adds Liqudity 1000USDC and 1000PAN
+
+user address: 0xeth1
+
+
+Khala Chain:
+
+Nexus Mints 1000 USDC and 1000 PAN to 0xeth1
+
+
+
+two options:
+
+
+option 1:
+
+user pre-signs the khala tx (provide liquidity to Balancer using his tokens on 0xeth1 address on Khala chain)
+
+
+option 2:
+
+for each user we create a 1/2 (user / nexus) multi-sig wallet.
+
+- is this interchain account???
+
+
+

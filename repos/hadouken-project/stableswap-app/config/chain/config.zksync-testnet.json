@@ -1,0 +1,45 @@
+{
+  "hadouken": {
+    "lending": {
+      "url": "https://testnet-app.hadouken.finance/lend"
+    },
+    "bridge": {
+      "url": "https://goerli.bridge.zksync.io/"
+    }
+  },
+  "sentry": "https://d3b71357a01e426c9c4285a26657d910@o4504333193969664.ingest.sentry.io/4504333202882560",
+  "chainName": "ZKsync Testnet",
+  "chainId": "0x118",
+  "nativeCurrency": {
+    "name": "ETH",
+    "symbol": "ETH",
+    "decimals": 18,
+    "address": "0x0000000000000000000000000000000000000000",
+    "wrapAddress": "0x20b28B1e4665FFf290650586ad76E977EAb90c5D"
+  },
+  "rpcUrl": "https://testnet.era.zksync.dev",
+  "readOnlyRpcUrl": "https://testnet.era.zksync.dev",
+  "wsUrl": "wss://testnet.era.zksync.dev/ws",
+  "env": "testnet",
+  "subgraphs": {
+    "balancer": {
+      "httpUri": "https://graph-dev-http-hadouken-dev.hadouken.finance/subgraphs/name/balancer-zksync-testnet",
+      "webSocketUri": "wss://graph-dev-ws-hadouken-dev.hadouken.finance/subgraphs/name/balancer-zksync-testnet"
+    }
+  },
+  "explorerUrl": {
+    "godwoken": "https://goerli.explorer.zksync.io/",
+    "ethereum": "https://goerli.etherscan.io"
+  },
+  "api": {
+    "dia": {
+      "priceUrl": "https://api.diadata.org/v1/quotation"
+    }
+  },
+  "customLinearPools": [
+    "0x0c9cbdaf7ebdda3b4458e107c1f3f654d635efc2",
+    "0x14e87182f6d39d1993e8cc3d5d76c710497d263e",
+    "0x150936da9c9fbccde86fa699698f35b66182483b",
+    "0x595972ba6e3865ad82fb06a5c593740572093d22"
+  ]
+}

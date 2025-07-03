@@ -1,0 +1,50 @@
+# Let's define a type of booleans.
+inductive Bool
+{
+  No,
+  Yes
+}
+
+# Let's define boolean negation.
+function neg(b : Bool) -> Bool
+{
+  match b
+  {
+    No => Yes,
+    Yes => No
+  }
+}
+
+# Boolean negation has no fixed points.
+let neg_no_fixpoints := by_induction b : Bool. b = neg(b) ==> false
+{
+  Yes => assume Yes = neg(Yes)
+  {
+    !eq_chain(No, neg(Yes), Yes);
+    !absurd(~ No = Yes, No = Yes);
+  }
+  No => assume No = neg(No)
+  {
+    !eq_chain(No, neg(No), Yes);
+    !absurd(~ No = Yes, No = Yes);
+  }
+};
+
+# Let's define a nonterminating function.
+# loop(b) = neg(loop(b))
+function loop(b : Bool) -> Bool
+{
+  neg(loop(b))
+}
+
+# loop(Yes) = neg(loop(Yes)), from the definition of loop.
+!uspec(forall b : Bool. loop(b) = neg(loop(b)), Yes);
+
+# ~ loop(Yes) = neg(loop(Yes)), from the theorem neg_no_fixpoints.
+!uspec(neg_no_fixpoints, loop(Yes));
+
+# Contradiction.
+!mp(loop(Yes) = neg(loop(Yes)) ==> false);
+
+# As a bonus, trying to use prove_by_eval causes a stack overflow.
+#!prove_by_eval(loop(Yes) = Yes);

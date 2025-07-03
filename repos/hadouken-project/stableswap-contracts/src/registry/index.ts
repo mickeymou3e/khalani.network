@@ -1,0 +1,5 @@
+export { default as connectRegistry } from './registry'
+export { default as connectPoolInfo } from './poolInfo'
+export { default as connectAddressProvider } from './addressProvider'
+export { default as connectSwaps } from './swaps'
+export { default as connectUserBalances } from './userBalances'

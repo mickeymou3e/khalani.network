@@ -1,0 +1,33 @@
+\documentclass[a4paper]{article}
+\usepackage{mathtools}
+\begin{document}
+                                Here's the natural language translation of the given formal proof:
+
+We will show that the negation of $F$ is a logical consequence of the following three premises:
+
+$p1: (A \lor B \Rightarrow C \land D)$
+$p2: (C \lor E \Rightarrow \neg F \land G)$
+$p3: (F \lor H \Rightarrow A \land I)$
+
+We will derive $\neg F$ by contradiction. Let's assume $F$ and show that this leads to a contradiction.
+
+Starting with $F$, we can reason as follows:
+
+$F$
+$\Rightarrow (F \lor H)$ (by the alternate rule)
+$\Rightarrow (A \land I)$ (by premise $p3$)
+$\Rightarrow A$ (by left-and)
+$\Rightarrow (A \lor B)$ (by the alternate rule)
+$\Rightarrow (C \land D)$ (by premise $p1$)
+$\Rightarrow C$ (by left-and)
+$\Rightarrow (C \lor E)$ (by the alternate rule)
+$\Rightarrow (\neg F \land G)$ (by premise $p2$)
+$\Rightarrow \neg F$ (by left-and)
+
+This final result, $\neg F$, contradicts our initial assumption $F$. Therefore, we have derived a contradiction from the assumption $F$.
+
+Thus, by the principle of proof by contradiction, we can conclude $\neg F$.
+
+This proves that $\neg F$ is indeed a logical consequence of the given premises.
+\end{document}
+                                

@@ -1,0 +1,23 @@
+{
+  "pairs": [
+    {
+      "yokaiPoolId": "yokaiUsdcWckb",
+      "hadoukenPoolId": "hadoukenUsdcCkb"
+    },
+    {
+      "yokaiPoolId": "yokaiEthWckb",
+      "hadoukenPoolId": "hadoukenEthCkb"
+    },
+    {
+      "yokaiPoolId": "yokaiWbtcWckb",
+      "hadoukenPoolId": "hadoukenWbtcCkb"
+    }
+  ],
+  "arbitrageSwapContractAddress": "0xAe911c4e1f7e281f882d6d3CB5B18F232ce88932",
+  "yokaiRouterAddress": "0xf4b5cd842e1962ca5b59327fe4bbf5b845c18669",
+  "signerAddress": "0x9B8D70b41c0b1E69b739F60151F2D14127eCc165",
+  "binanceSignerAddress": "0x4B673F0d54BC58cD4Fd4fDB5f5Fd0058214e13A3",
+  "treasuryAddress": "0x7be87e986375d2bd6e56008608fb8074ce258e30",
+  "flashLoanCost": "90000",
+  "flashLoanDecimals": "8"
+}

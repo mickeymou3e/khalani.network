@@ -1,0 +1,45 @@
+{
+  "transaction": {
+    "hash": "0x95ae4c05cbc93cec36ca9a781b380ac1d540a3aa31b89ad1dc01020c56bc9b2c"
+  },
+  "data": {
+    "ComposableStablePoolFactory": {
+      "create": {
+        "input": {
+          "name": "Celer USD Stable Pool",
+          "symbol": "HDK-Boosted-USD-ceUSDC-ceUSDT",
+          "tokens": [
+            "0x3c790b38f466514ffCB4230e7B2334e52B64c942",
+            "0x53bB26dc8C5EFC6c95C37155aCa487d1D043436a",
+            "0x80245Ba36346Fe10A1af3f7103E8FdCb2549A87d"
+          ],
+          "rateProviders": [
+            "0x0000000000000000000000000000000000000000",
+            "0x0000000000000000000000000000000000000000",
+            "0x80245Ba36346Fe10A1af3f7103E8FdCb2549A87d"
+          ],
+          "priceRateCacheDuration": [
+            "0",
+            "0",
+            "0"
+          ],
+          "amplificationParameter": "300",
+          "swapFeePercentage": "100000000000000",
+          "exemptFromYieldProtocolFeeFlags": [
+            false,
+            false,
+            false
+          ],
+          "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0x80245Ba36346Fe10A1af3f7103E8FdCb2549A87d": "1000000000000000000",
+            "0x53bB26dc8C5EFC6c95C37155aCa487d1D043436a": "1000000",
+            "0x3c790b38f466514ffCB4230e7B2334e52B64c942": "1000000"
+          }
+        },
+        "output": "0xDD6fB327bBd16546d071A9ecDEFE5F8674354350"
+      }
+    }
+  },
+  "timestamp": 1695981657269
+}

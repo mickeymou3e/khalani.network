@@ -1,0 +1,19 @@
+[package]
+name = "axi-core-semantics"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[features]
+ariadne = ["dep:ariadne"]
+
+[dependencies]
+ariadne = { workspace = true, optional = true }
+axi-ast = { path = "../ast" }
+num-bigint = "0.4.6"
+axi-parser = { path = "../parse" }
+hex = "0.4.3"
+unifier_set = "0.2.0"
+scopeguard = "1.2.0"
+rpds = "1.1.0"

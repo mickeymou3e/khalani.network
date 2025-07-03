@@ -1,0 +1,7 @@
+Result: Nothing
+Result: Nothing
+Result: Nothing
+Result: Proved(or(a, not(a)))
+Result: Nothing
+Result: Nothing
+Result: Proved(if(or(c, d), if(not(c), d)))

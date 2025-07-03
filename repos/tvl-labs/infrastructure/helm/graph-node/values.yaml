@@ -1,0 +1,13 @@
+image:
+  repository: graphprotocol/graph-node
+  pullPolicy: Always
+  tag: "v0.29.0"
+
+serviceAccount:
+  create: true
+
+chainsCount: 3
+dbSecretName: ""
+domainName: ""
+graphAccessTokenSecretName: ""
+iamRoleArn: ""

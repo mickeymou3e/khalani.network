@@ -1,0 +1,13 @@
+[package]
+name = "mirax-merkle"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+merkle-mountain-range.workspace = true
+merkle-cbt.workspace = true
+
+mirax-hasher.workspace = true
+mirax-primitive.workspace = true

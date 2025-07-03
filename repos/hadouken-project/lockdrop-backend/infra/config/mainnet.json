@@ -1,0 +1,9 @@
+{
+  "Parameters": {
+    "Environment": "mainnet",
+    "DomainName": "lockdrop-api-mainnet.hadouken.finance",
+    "CertificateArn": "arn:aws:acm:us-east-1:803035318642:certificate/65327719-d178-4f19-9ad3-8bba9ae9651a",
+    "HostedZoneId": "Z04824873RDBS62LIUZQ7",
+    "CorsOrigins": "https://app.hadouken.finance;http://localhost:8080"
+  }
+}

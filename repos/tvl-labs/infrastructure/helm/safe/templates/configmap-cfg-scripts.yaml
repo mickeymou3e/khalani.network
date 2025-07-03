@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: safe-cfg-scripts
+data:
+  bootstrap.py: |-
+{{ .Files.Get "scripts/config/bootstrap.py" | indent 4 }}
+  docker-entrypoint.sh: |-
+{{ .Files.Get "scripts/config/docker-entrypoint.sh" | indent 4 }}
+  nginx.conf: |-
+{{ .Files.Get "scripts/config/nginx.conf" | indent 4 }}

@@ -1,0 +1,9 @@
+Result: Nothing
+Result: Nothing
+Result: Nothing
+Result: Nothing
+Result: Proved(forall N. forall N. forall N. forall N. if(=[@3:N, @1:N], if(=[@2:N, @0:N], =[g[@3:N, @2:N]):N, g[@1:N, @0:N]):N])))
+Result: Proved(forall N. forall N. forall N. if(=[@2:N, @1:N], if(=[@1:N, @0:N], =[@2:N, @0:N])))
+Result: Proved(forall N. =[@0:N, @0:N])
+Result: Proved(forall N. forall N. forall N. forall N. if(=[@3:N, @1:N], if(=[@2:N, @0:N], =[g[@1:N, @0:N]):N, g[@3:N, @2:N]):N])))
+Result: Proved(forall N. forall N. forall N. if(=[g[@2:N, @1:N]):N, f[@1:N]):N], if(=[@1:N, h[@0:N]):N], =[g[@2:N, @1:N]):N, f[h[@0:N]):N]):N])))

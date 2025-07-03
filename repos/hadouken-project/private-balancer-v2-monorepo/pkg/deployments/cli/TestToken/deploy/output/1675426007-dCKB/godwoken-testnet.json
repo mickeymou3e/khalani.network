@@ -1,0 +1,19 @@
+{
+  "transaction": {
+    "hash": "0x9d5c7f67ae2924678e4eb204a49f57e734475bcf8eec2e357b70edb1e2f37ecf",
+    "blockNumber": 1691568
+  },
+  "data": {
+    "TestToken": {
+      "deploy": {
+        "input": {
+          "name": "dCKB",
+          "symbol": "dCKB",
+          "decimals": 8
+        },
+        "output": "0xa0F31014fCa74e2b64C8e3b720272F2a3d516F36"
+      }
+    }
+  },
+  "timestamp": 1675426007757
+}

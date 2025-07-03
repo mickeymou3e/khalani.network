@@ -1,0 +1,267 @@
+{
+  "pools": [
+    {
+      "name": "CKB/USDC",
+      "symbol": "HDK-CKB-USDC",
+      "address": "0x3c396ac8a7d3b586ffce3f631f91c17b6d07fb46",
+      "displayName": "CKB/USDC Weighted",
+      "poolType": "Weighted",
+      "depositTokens": null,
+      "wrappedDepositTokens": null
+    },
+    {
+      "name": "ETH-USDC",
+      "symbol": "HDK-ETH-USDC",
+      "address": "0x4920c8df1ead17984256edf1fbbc8afd6f66ff9a",
+      "displayName": "ETH/USDC Weighted",
+      "poolType": "Weighted",
+      "depositTokens": null,
+      "wrappedDepositTokens": null
+    },
+    {
+      "name": "CKB-ETH-USDC",
+      "symbol": "HDK-CKB-ETH-USDC",
+      "address": "0x865f61cc98938067c1408cf8b279f01a46ac2ac8",
+      "displayName": "CKB/ETH/USDC Weighted",
+      "poolType": "Weighted",
+      "depositTokens": null,
+      "wrappedDepositTokens": null
+    },
+    {
+      "name": "BNB-USDC",
+      "symbol": "HDK-BNB-USDC",
+      "address": "0x1f2c799b54fbcbe9dd08cd4beb4951c976909194",
+      "displayName": "BNB/USDC Weighted",
+      "poolType": "Weighted",
+      "depositTokens": null,
+      "wrappedDepositTokens": null
+    },
+    {
+      "name": "CKB-ETH",
+      "symbol": "HDK-CKB-ETH",
+      "address": "0xfa5fc9674fb12c7a8987ba20cedef44a457f902a",
+      "displayName": "CKB/ETH Weighted",
+      "poolType": "Weighted",
+      "depositTokens": null,
+      "wrappedDepositTokens": null
+    },
+    {
+      "name": "CKB-WBTC",
+      "symbol": "HDK-CKB-WBTC",
+      "address": "0x54d08fcb83191ef3f21b2064043f7b1ff35c03f1",
+      "displayName": "CKB/WBTC Weighted",
+      "poolType": "Weighted",
+      "depositTokens": null,
+      "wrappedDepositTokens": null
+    },
+    {
+      "name": "WBTC-USDC",
+      "symbol": "HDK-WBTC-USDC",
+      "address": "0x3d313fcc5e0f50756a5599713349a26d50245f06",
+      "displayName": "WBTC/USDC Weighted",
+      "poolType": "Weighted",
+      "depositTokens": null,
+      "wrappedDepositTokens": null
+    },
+    {
+      "name": "HUSDC-USDC",
+      "symbol": "HDK-HUSDC-USDC",
+      "address": "0x0b05F1D469bd0fe97B599F939b0E07680760aC8F",
+      "displayName": "Boosted USDC",
+      "poolType": "ComposableStable",
+      "depositTokens": null,
+      "wrappedDepositTokens": null
+    },
+    {
+      "name": "LNR-USDC",
+      "symbol": "HDK-LNR-USDC",
+      "address": "0xf74fBc00C6632796A871D53551223c560290E964",
+      "displayName": "Boosted USDC [Deprecated]",
+      "poolType": "AaveLinear",
+      "depositTokens": null,
+      "wrappedDepositTokens": null
+    },
+    {
+      "name": "HUSDT-USDT",
+      "symbol": "HDK-HUSDT-USDT",
+      "address": "0x30A310DBCcCb67A6B6Df75B660eAa036f8810749",
+      "displayName": "Boosted USDT",
+      "poolType": "ComposableStable",
+      "depositTokens": null,
+      "wrappedDepositTokens": null
+    },
+    {
+      "name": "LNR-USDT",
+      "symbol": "HDK-LNR-USDT",
+      "address": "0x911d777c9d8c2055881309a6bf60b177eba242ba",
+      "displayName": "Boosted USDT [Deprecated]",
+      "poolType": "AaveLinear",
+      "depositTokens": null,
+      "wrappedDepositTokens": null
+    },
+    {
+      "name": "HETH-ETH",
+      "symbol": "HDK-HETH-ETH",
+      "address": "0xe0169172B5806b429911207546b69ef7D9348020",
+      "displayName": "Boosted ETH",
+      "poolType": "ComposableStable",
+      "depositTokens": null,
+      "wrappedDepositTokens": null
+    },
+    {
+      "name": "LNR-ETH",
+      "symbol": "HDK-LNR-ETH",
+      "address": "0xa05d329eddc923bc182ecd7e05fb92475bf3dd79",
+      "displayName": "Boosted ETH [Deprecated]",
+      "poolType": "AaveLinear",
+      "depositTokens": null,
+      "wrappedDepositTokens": null
+    },
+    {
+      "name": "LNR-WBTC",
+      "symbol": "HDK-LNR-WBTC",
+      "address": "0xa97e7af6acc0a34e7d340b634ba056f5de9498e6",
+      "displayName": "Boosted WBTC [Deprecated]",
+      "poolType": "AaveLinear",
+      "depositTokens": null,
+      "wrappedDepositTokens": null
+    },
+    {
+      "name": "Hadouken Boosted USD",
+      "symbol": "HDK-Boosted-USD",
+      "address": "0xccffa4fff6dab00a69778cb574044245b9de4fec",
+      "displayName": "Boosted USD [Deprecated]",
+      "poolType": "ComposableStable",
+      "depositTokens": [
+        "0x30b0a247de59a1cdf44329b756d3343e5afed7f9",
+        "0x0c7f21908222098616803eff5d054d3f4ef57ebb",
+        "0x4fa5ad2756ac3c62285ec896acc2d514c65f3ed3",
+        "0x70a58262bc55fbf3965bd1c0861e3ddf1a253777"
+      ],
+      "wrappedDepositTokens": null
+    },
+    {
+      "name": "Hadouken Boosted USD",
+      "symbol": "HDK-Boosted-USD",
+      "address": "0x9904d25f1fd95a17fa90ad95901a9aede6952d85",
+      "displayName": "Boosted USD",
+      "poolType": "ComposableStable",
+      "depositTokens": [
+        "0x30b0a247de59a1cdf44329b756d3343e5afed7f9",
+        "0x0c7f21908222098616803eff5d054d3f4ef57ebb",
+        "0x4fa5ad2756ac3c62285ec896acc2d514c65f3ed3",
+        "0x70a58262bc55fbf3965bd1c0861e3ddf1a253777"
+      ],
+      "wrappedDepositTokens": null
+    },
+
+    {
+      "name": "HCKB-CKB",
+      "symbol": "HDK-HCKB-CKB",
+      "address": "0x31D4661f29753F6a59905B4ed978F6228EFF995A",
+      "displayName": "Boosted CKB",
+      "poolType": "ComposableStable",
+      "depositTokens": null,
+      "wrappedDepositTokens": null
+    },
+    {
+      "name": "LNR-CKB",
+      "symbol": "HDK-LNR-CKB",
+      "address": "0xA562428520A15a1eDa3Bb2A62Fd9116f35FA98c1",
+      "displayName": "Boosted CKB [Deprecated]",
+      "poolType": "AaveLinear",
+      "depositTokens": null,
+      "wrappedDepositTokens": null
+    },
+    {
+      "name": "Celer USD Stable",
+      "symbol": "HDK-Boosted-USD-ceUSDC-ceUSDT",
+      "address": "0x45afd1f730a49fc7814254f9bb06756dc5ba3223",
+      "displayName": "Celer USD Stable [Deprecated]",
+      "poolType": "ComposableStable",
+      "depositTokens": [
+        "0x30b0a247de59a1cdf44329b756d3343e5afed7f9",
+        "0x0c7f21908222098616803eff5d054d3f4ef57ebb",
+        "0x4ea08dca142f103ac2d5ff95f1d376712c5ef5a9",
+        "0xcdb3d2dc427a5bc9af54a9c2ed2f5950619184bf",
+        "0x4fa5ad2756ac3c62285ec896acc2d514c65f3ed3",
+        "0x70a58262bc55fbf3965bd1c0861e3ddf1a253777"
+      ],
+      "wrappedDepositTokens": [
+        "0xccffa4fff6dab00a69778cb574044245b9de4fec",
+        "0x4ea08dca142f103ac2d5ff95f1d376712c5ef5a9",
+        "0xcdb3d2dc427a5bc9af54a9c2ed2f5950619184bf"
+      ]
+    },
+    {
+      "name": "Celer USD Stable",
+      "symbol": "HDK-Boosted-USD-ceUSDC-ceUSDT",
+      "address": "0x68BEE1C18Ac3F603714cA1C8CE28ab0949600b7B",
+      "displayName": "Celer USD Stable",
+      "poolType": "ComposableStable",
+      "depositTokens": [
+        "0x30b0a247de59a1cdf44329b756d3343e5afed7f9",
+        "0x0c7f21908222098616803eff5d054d3f4ef57ebb",
+        "0x4ea08dca142f103ac2d5ff95f1d376712c5ef5a9",
+        "0xcdb3d2dc427a5bc9af54a9c2ed2f5950619184bf",
+        "0x4fa5ad2756ac3c62285ec896acc2d514c65f3ed3",
+        "0x70a58262bc55fbf3965bd1c0861e3ddf1a253777"
+      ],
+      "wrappedDepositTokens": [
+        "0x9904d25f1fd95a17fa90ad95901a9aede6952d85",
+        "0x4ea08dca142f103ac2d5ff95f1d376712c5ef5a9",
+        "0xcdb3d2dc427a5bc9af54a9c2ed2f5950619184bf"
+      ]
+    },
+
+    {
+      "name": "Hadouken Boosted TriCrypto",
+      "symbol": "HDK-Boosted-CKB-ETH-USD",
+      "address": "0x0b4299d102208DA136C8276D3e46cb0cBD1be7b0",
+      "displayName": "Boosted Weighted TriCrypto [Deprecated]",
+      "poolType": "WeightedBoosted",
+      "depositTokens": [
+        "0xff900e1436cbcd25d72b7dafe6ef4d569405cc05",
+        "0x0eb76790a2014dd1f65488ccd703bcdf75f8195e",
+        "0x30b0a247de59a1cdf44329b756d3343e5afed7f9",
+        "0x0c7f21908222098616803eff5d054d3f4ef57ebb",
+        "0x6b6bceb1f7e1f6efb203d7f75beb34beac62fe43",
+        "0xe7ea406348db83f3a0014295d859fb3c896a226b",
+        "0x4fa5ad2756ac3c62285ec896acc2d514c65f3ed3",
+        "0x70a58262bc55fbf3965bd1c0861e3ddf1a253777"
+      ],
+      "wrappedDepositTokens": [
+        "0xccffa4fff6dab00a69778cb574044245b9de4fec",
+        "0xff900e1436cbcd25d72b7dafe6ef4d569405cc05",
+        "0x0eb76790a2014dd1f65488ccd703bcdf75f8195e",
+        "0x6b6bceb1f7e1f6efb203d7f75beb34beac62fe43",
+        "0xe7ea406348db83f3a0014295d859fb3c896a226b"
+      ]
+    },
+
+    {
+      "name": "Hadouken Boosted TriCrypto",
+      "symbol": "HDK-Boosted-CKB-ETH-USD",
+      "address": "0x2F6fefD0f4df1c5aB36713398e246bf37D0C08a0",
+      "displayName": "Boosted Weighted TriCrypto",
+      "poolType": "WeightedBoosted",
+      "depositTokens": [
+        "0xff900e1436cbcd25d72b7dafe6ef4d569405cc05",
+        "0x0eb76790a2014dd1f65488ccd703bcdf75f8195e",
+        "0x30b0a247de59a1cdf44329b756d3343e5afed7f9",
+        "0x0c7f21908222098616803eff5d054d3f4ef57ebb",
+        "0x6b6bceb1f7e1f6efb203d7f75beb34beac62fe43",
+        "0xe7ea406348db83f3a0014295d859fb3c896a226b",
+        "0x4fa5ad2756ac3c62285ec896acc2d514c65f3ed3",
+        "0x70a58262bc55fbf3965bd1c0861e3ddf1a253777"
+      ],
+      "wrappedDepositTokens": [
+        "0x9904d25F1fd95a17fa90aD95901a9aedE6952D85",
+        "0xff900e1436cbcd25d72b7dafe6ef4d569405cc05",
+        "0x0eb76790a2014dd1f65488ccd703bcdf75f8195e",
+        "0x6b6bceb1f7e1f6efb203d7f75beb34beac62fe43",
+        "0xe7ea406348db83f3a0014295d859fb3c896a226b"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "transaction": {
+    "hash": "0xe253b2e3f962600a4988f14ca258561bb0a309d216a21c20f7472aece2533821",
+    "blockNumber": 636591
+  },
+  "data": {
+    "TestToken": {
+      "deploy": {
+        "input": {
+          "name": "USDC",
+          "symbol": "USDC",
+          "decimals": 6
+        },
+        "output": "0x0c7F21908222098616803EfF5d054d3F4EF57EBb"
+      }
+    }
+  },
+  "timestamp": 1666951786963
+}

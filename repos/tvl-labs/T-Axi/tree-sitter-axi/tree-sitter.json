@@ -1,0 +1,39 @@
+{
+  "grammars": [
+    {
+      "name": "axi",
+      "camelcase": "Axi",
+      "scope": "source.axi",
+      "path": ".",
+      "file-types": [
+        "axi",
+        "axi.demo"
+      ],
+      "content-regex": null,
+      "highlights": "queries/highlights.scm",
+      "injection-regex": "^axi$"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Axi grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "Mateusz Pyzik",
+        "email": "mateusz@tunnelvisionlabs.xyz"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/tvl-labs/T-Axi"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true
+  }
+}

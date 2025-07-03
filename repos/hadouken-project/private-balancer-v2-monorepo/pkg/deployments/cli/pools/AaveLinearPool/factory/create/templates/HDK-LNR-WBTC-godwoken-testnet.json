@@ -1,0 +1,14 @@
+{
+  "name": "Linear WBTC",
+  "symbol": "HDK-LNR-WBTC",
+  "underlyingToken": "0x6a447Ba163039D7e1d674668578A0eb049245915",
+  "wrappedToken": "0xF504082C78C0Bdf6f301D773ae6553F6264249E0",
+  "upperTarget": "125000000000000000000",
+  "lowerTarget": "0",
+  "swapFeePercentage": "1500000000000000",
+  "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+  "initialLiquidity": {
+    "0x6a447Ba163039D7e1d674668578A0eb049245915": "10000000000",
+    "0xF504082C78C0Bdf6f301D773ae6553F6264249E0": "10000000000"
+  }
+}

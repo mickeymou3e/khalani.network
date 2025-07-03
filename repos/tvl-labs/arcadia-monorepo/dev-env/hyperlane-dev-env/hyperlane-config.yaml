@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/hyperlane-xyz/hyperlane-registry/main/schema/core-config.json
+owner: "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266" # signer that will own the contracts
+defaultIsm:
+  type: trustedRelayerIsm
+  relayer: "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+defaultHook:
+  type: merkleTreeHook
+requiredHook:
+  type: protocolFee
+  beneficiary: "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+  protocolFee: "0"
+  maxProtocolFee: "100000000000000000"
+chains:
+  arcadialocal:
+    chainId: 31337
+    domainId: 31337
+    displayName: arcadialocal
+    name: arcadialocal
+    nativeToken:
+      decimals: 18
+      symbol: ETH
+      name: Ether
+    protocol: ethereum
+    isTestnet: true
+    rpcUrls:
+      - http: "http://127.0.0.1:8545"
+  spokelocal1:
+    chainId: 31338
+    domainId: 31338
+    displayName: spokelocal1
+    name: spokelocal1
+    nativeToken:
+      decimals: 18
+      symbol: ETH
+      name: Ether
+    protocol: ethereum
+    isTestnet: true
+    rpcUrls:
+      - http: "http://127.0.0.1:8546"
+  spokelocal2:
+    chainId: 31339
+    domainId: 31339
+    displayName: spokelocal2
+    name: spokelocal2
+    nativeToken:
+      decimals: 18
+      symbol: ETH
+      name: Ether
+    protocol: ethereum
+    isTestnet: true
+    rpcUrls:
+      - http: "http://127.0.0.1:8547"

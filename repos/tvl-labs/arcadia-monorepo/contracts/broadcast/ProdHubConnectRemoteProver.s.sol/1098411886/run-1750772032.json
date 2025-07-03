@@ -1,0 +1,50 @@
+{
+  "transactions": [
+    {
+      "hash": "0xb345fdea7c21f9ef8179c94f644605c99d38a0f94097049e287d6043dde16ede",
+      "transactionType": "CALL",
+      "contractName": null,
+      "contractAddress": "0x465d558f2063ad85575035e29d996b8b9cc26915",
+      "function": "addRemoteProver(address)",
+      "arguments": [
+        "0x10a3eD9C511a3AF91Eb47704D02b40323ee619F5"
+      ],
+      "transaction": {
+        "from": "0x230e13243869a3a7eb341e4bdb9120d5cd547fa1",
+        "to": "0x465d558f2063ad85575035e29d996b8b9cc26915",
+        "gas": "0x107ad",
+        "value": "0x0",
+        "input": "0xc6cee29d00000000000000000000000010a3ed9c511a3af91eb47704d02b40323ee619f5",
+        "nonce": "0x10",
+        "chainId": "0x41786f6e"
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    }
+  ],
+  "receipts": [
+    {
+      "status": "0x1",
+      "cumulativeGasUsed": "0xb44b",
+      "logs": [],
+      "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "type": "0x2",
+      "transactionHash": "0xb345fdea7c21f9ef8179c94f644605c99d38a0f94097049e287d6043dde16ede",
+      "transactionIndex": "0x0",
+      "blockHash": "0xad123b7ddfcc66f00540a46056f88e9f240b4539f272c69f33755dad98487b1d",
+      "blockNumber": "0x83c8d4",
+      "gasUsed": "0xb44b",
+      "effectiveGasPrice": "0xb44b",
+      "from": "0x230e13243869a3a7eb341e4bdb9120d5cd547fa1",
+      "to": "0x465d558f2063ad85575035e29d996b8b9cc26915",
+      "contractAddress": null,
+      "root": "0x937f0377f3125c666888315fe2d945c21d7855bc20c8aa468b1c74a1720f379b"
+    }
+  ],
+  "libraries": [],
+  "pending": [],
+  "returns": {},
+  "timestamp": 1750772032,
+  "chain": 1098411886,
+  "commit": "80c8da4"
+}

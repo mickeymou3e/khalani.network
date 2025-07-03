@@ -1,0 +1,15 @@
+{
+  "name": "Multichain ETH Stable Pool",
+  "symbol": "HDK-Boosted-ETH-multiETH",
+  "tokens": ["0x70Af4745b56c786db80b860B76316E0Ce9D7AC43", "0x639a647fbe20b6c8ac19e48e2de44ea792c62c5c"],
+  "rateProviders": ["0x70Af4745b56c786db80b860B76316E0Ce9D7AC43", "0x0000000000000000000000000000000000000000"],
+  "priceRateCacheDuration": ["0", "0"],
+  "amplificationParameter": "300",
+  "swapFeePercentage": "100000000000000",
+  "exemptFromYieldProtocolFeeFlags": [false, false],
+  "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+  "initialLiquidity": {
+    "0x70Af4745b56c786db80b860B76316E0Ce9D7AC43": "100000000000000",
+    "0x639a647fbe20b6c8ac19e48e2de44ea792c62c5c": "100000000000000"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "treasury": "0x3C98274AFf14eE0DEb7D230da173b1Bcfc14Fd48",
+  "hadoukenCollector": "0xf5A9515501D437a77C5b93fAF5cA542152760D9A",
+  "tokens": {
+    "CKB": {
+      "address": "0x7538C85caE4E4673253fFd2568c1F1b48A71558a",
+      "aTokenAddress": "0x734ba3e711a22a383c1A26DBE5D529CFb793C3bf",
+      "stableDebtTokenAddress": "0x9833865A21de49307DECFf252773b85319FCA72d",
+      "variableDebtTokenAddress": "0x32cA9b3F6B9D2C9CFE709448331BD1e3e8083B9C"
+    },
+    "ETH.e": {
+      "address": "0x9E858A7aAEDf9FDB1026Ab1f77f627be2791e98A",
+      "aTokenAddress": "0x0A0f1D2A3ea1E0442EbC8CC3a2139a2E7B314AA5",
+      "stableDebtTokenAddress": "0x529D39F41D579250ABB883F8f139d9c58B901946",
+      "variableDebtTokenAddress": "0x57EA2149dbA2875B52B07c49Db9a90f79c02435F"
+    },
+    "USDC.e": {
+      "address": "0x186181e225dc1Ad85a4A94164232bD261e351C33",
+      "aTokenAddress": "0x06c0c3ea4983d0141e79f78343Da48BaE6b61a09",
+      "stableDebtTokenAddress": "0xCe9C862ccE9AA87670643b8E2f4cCf10822cF796",
+      "variableDebtTokenAddress": "0xC43849CF085c50C94df48eFBf3628b5C5849941e"
+    },
+    "USDT.e": {
+      "address": "0x8E019acb11C7d17c26D334901fA2ac41C1f44d50",
+      "aTokenAddress": "0x66206E9b054361B623046B12Aa99215541216741",
+      "stableDebtTokenAddress": "0x2C59470050D1E480776C6c68b9179B5F422b4dA7",
+      "variableDebtTokenAddress": "0x3fF0c92A8Ee540D59F0730Fb6603EDFe0b144ed3"
+    },
+    "BTC.e": {
+      "address": "0x82455018F2c32943b3f12F4e59D0DA2FAf2257Ef",
+      "aTokenAddress": "0x294f250a63C10Df254233B382dB495321E23e161",
+      "stableDebtTokenAddress": "0x3D8fd5b6f9784C3aAbD49A44ffe4384fF29eAA19",
+      "variableDebtTokenAddress": "0x2307B5e440F5D5df52B824a9089aCB60c22af8F9"
+    },
+    "BNB.bsc": {
+      "address": "0xBAdb9b25150Ee75bb794198658A4D0448e43E528",
+      "aTokenAddress": "0xBc63b48c6aA8EC2E7fB899Bcd5Cca3fD8c4b7662",
+      "stableDebtTokenAddress": "0x13454Ec392A13176494E2859D888756657E93261",
+      "variableDebtTokenAddress": "0x3B28a6F3c893c1bd74b229dBC8d0F2612202D528"
+    }
+  },
+  "registry": "0x10797360711178183455cCa40533FfB62a17C60f",
+  "registryProvider": "0x0000000000000000000000000000000000000000",
+  "addressProvider": "0x7Cf4311f11b3cA5EFd53A85df03A442Da9A9A57d",
+  "libraries": {
+    "reserve": "0x57444070Be2eE64d790919673fF7DFce3a44E7b3",
+    "generic": "0x9c500Ad0c641F1c9Deae3e9a8AC004a3CD1C831A",
+    "validation": "0x956bAb467283634378FF7A95b6Dd0dD26c3Df7AA"
+  },
+  "stableAndVariableTokensHelper": "0x63c774beE23Eb4cCC8251F813B9139f6D1E3820E",
+  "lendingRateOracle": "0x5043772D174b8B77B64707048AbA4aB847BdaeBa",
+  "lendingPool": "0x4eAfC685DcB6bc117B93d41E322364F089E391A9",
+  "lendingPoolProxy": "0x50ff8715E9882a6a184D51D0952Db1Eb311d1988",
+  "poolConfigurator": "0x07f6042a9d8E708a349004d0A71e36EFEa3D53E8",
+  "poolConfiguratorProxy": "0xaEEEC402f1fb883b5612d8962593119656fb62c4",
+  "variableDebtToken": "0xC8ae4BA94249Dc9b7aD2142D00E9378FDAA4F13A",
+  "stableDebtToken": "0xf37bFb073d57923FA87dd894cbFdb8F8210A10c7",
+  "aToken": "0x7052e3970a6495CA325F84262FA65e64d435c982",
+  "aTokenAndRateHelper": "0xfcDBe55aB9969745c16D223d0703620B5bFB3383",
+  "oracleBrandProvider": "0x20B08CC0DA5564D1070d977A2A06B12C7e722446",
+  "diaOracle": "0xc806a37164860913FBfF8D013986229724D6c418",
+  "diaOracleProvider": "0x3c2B80bC9cADa812646e3aA14Dd8C4014d2208Eb",
+  "hadoukenOracle": "0x87CD97A00DdC1602A903c0dA3DC329Aa9eF4bC55",
+  "stdReference": "0xDA7a001b254CD22e46d3eAB04d937489c93174C3",
+  "dataProvider": "0x62Bf3D0Ee97D00cc0891c1F559577b73F2Aa1002",
+  "collateralManager": "0x58Ff204d9129E91F42e570DB34D06ed8A40AADBf",
+  "firstBlockNumber": 244710,
+  "lastBlockNumber": 244745,
+  "userBalances": "0x43F5799d49500679cbE461C6Fa237b68E6d3Fb1F",
+  "UIHelper": "0xbc87F22E170BceE81Fc6AA5637D57A37baAc3B8b",
+  "wEthGateway": "0x0000000000000000000000000000000000000000"
+}

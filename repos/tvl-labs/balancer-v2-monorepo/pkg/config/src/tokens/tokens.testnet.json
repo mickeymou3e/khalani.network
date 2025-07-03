@@ -1,0 +1,86 @@
+{
+  "CKB": {
+    "name": "pCKB",
+    "symbol": "pCKB",
+    "decimals": 18,
+    "address": "0x0eb76790a2014dd1f65488ccd703bcdf75f8195e"
+  },
+  "ETH-eth": {
+    "name": "ETH",
+    "symbol": "ETH",
+    "decimals": 18,
+    "address": "0xff900e1436cbcd25d72b7dafe6ef4d569405cc05"
+  },
+  "USDT-eth": {
+    "name": "USDT",
+    "symbol": "USDT",
+    "decimals": 6,
+    "address": "0x30b0a247de59a1cdf44329b756d3343e5afed7f9"
+  },
+  "DAI-eth": {
+    "name": "DAI",
+    "symbol": "DAI",
+    "decimals": 18,
+    "address": "0x16fdc39a563400aa6eaca6a5ac4f2cab9a0bc8c6"
+  },
+  "USDC-eth": {
+    "name": "USDC",
+    "symbol": "USDC",
+    "decimals": 6,
+    "address": "0x0c7f21908222098616803eff5d054d3f4ef57ebb"
+  },
+  "BNB-bsc": {
+    "name": "Wrapped BNB (ForceBridge from BSC)",
+    "symbol": "BNB|bsc",
+    "decimals": 18,
+    "address": "0x3b5b0179fdef8f88c39a94039b66120933729ace"
+  },
+  "BUSD-bsc": {
+    "name": "Wrapped BUSD (ForceBridge from BSC)",
+    "symbol": "BUSD|bsc",
+    "decimals": 18,
+    "address": "0x437f3a7e7af6c611cdbbd33ce79c56aa7b6f7001"
+  },
+  "USDT-bsc": {
+    "name": "Wrapped USDT (ForceBridge from BSC)",
+    "symbol": "USDT|bsc",
+    "decimals": 18,
+    "address": "0xb5e2f2cf4611bcc578977aca17a9724b4b1e9863"
+  },
+  "ETH-bsc": {
+    "name": "Wrapped ETH (ForceBridge from BSC)",
+    "symbol": "ETH|bsc",
+    "decimals": 18,
+    "address": "0x5d35d34da971c795ec97ed69786302c6149979e7"
+  },
+  "USDC-bsc": {
+    "name": "Wrapped USDC (ForceBridge from BSC)",
+    "symbol": "USDC|bsc",
+    "decimals": 18,
+    "address": "0x246aeb957fdd930e81ed539402a7f98eef0f8945"
+  },
+  "WBTC-eth": {
+    "name": "Wrapped WBTC (ForceBridge from Ethereum)",
+    "symbol": "WBTC|eth",
+    "decimals": 8,
+    "address": "0x6a447ba163039d7e1d674668578a0eb049245915"
+  },
+  "BUSD-eth": {
+    "name": "BUSD",
+    "symbol": "BUSD",
+    "decimals": 18,
+    "address": "0xdc40d03d15f5861f486fc4e81b6333e489d78195"
+  },
+  "hUSDC": {
+    "name": "Wrapped hUSDC",
+    "symbol": "hUSDC",
+    "decimals": 18,
+    "address": "0x70A58262bc55fBF3965bd1C0861e3DDf1a253777"
+  },
+  "hUSDT": {
+    "name": "Wrapped hUSDC",
+    "symbol": "hUSDC",
+    "decimals": 18,
+    "address": "0x4Fa5AD2756ac3C62285ec896acc2d514c65F3ed3"
+  }
+}

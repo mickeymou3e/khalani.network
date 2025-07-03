@@ -1,0 +1,47 @@
+version: "3.2"
+
+services:
+
+  # ================================= Grafana  ================================= 
+  grafana:
+    image: grafana/grafana:master
+    container_name: axon-granafa
+    restart: on-failure
+    ports:
+      - "8600:3000"
+    volumes:
+      - "./config/grafana/grafana.ini:/etc/grafana/grafana.ini"
+      - "./config/grafana/dashboards:/var/lib/grafana/dashboards"
+      - "./config/grafana/provisioning:/etc/grafana/provisioning"
+      - "./data/grafana/log:/var/log/grafana"
+    environment:
+      GF_EXPLORE_ENABLED: "true"
+      GF_RENDERING_SERVER_URL: http://renderer:8081/render
+      GF_RENDERING_CALLBACK_URL: http://grafana:3000/
+      GF_LOG_FILTERS: rendering:debug
+    networks:
+      - medusa-monitor  
+    
+  # ================================= Prometheus ================================= 
+  prometheus:
+    image: prom/prometheus:v2.55.0-rc.0
+    container_name: axon-prometheus
+    hostname: prometheus
+    restart: on-failure
+    volumes:
+      - ./config/promethues/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./data/prometheus:/prometheus
+    ports:
+      - "9090:9090"
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --web.console.libraries=/usr/share/prometheus/console_libraries
+      - --web.console.templates=/usr/share/prometheus/consoles
+      - --web.enable-lifecycle
+    networks:
+      - medusa-monitor   
+
+networks:
+  medusa-monitor:
+    driver: bridge 

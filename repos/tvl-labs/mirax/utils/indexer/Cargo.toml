@@ -1,0 +1,22 @@
+[package]
+name = "mirax-indexer"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+jsonrpsee.workspace = true
+rocksdb.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+
+mirax-api.workspace = true
+mirax-codec.workspace = true
+mirax-error.workspace = true
+mirax-jsonrpc-types.workspace = true
+mirax-primitive.workspace = true
+mirax-types.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true

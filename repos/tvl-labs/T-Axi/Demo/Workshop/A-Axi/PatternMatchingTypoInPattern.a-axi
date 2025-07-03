@@ -1,0 +1,40 @@
+# Let's define a type of booleans.
+inductive Bool
+{
+  No,
+  Yes
+}
+
+# We define a function on the booleans...
+function typo_in_pattern(b : Bool) -> Bool
+{
+  match b
+  {
+    # ... but we made a typo in the pattern! It's `Noo` instead of `No`!
+    Noo => No,
+    Yes => Yes
+  }
+}
+
+# Because of the typo, the first branch is interpreted as a catch-all
+# clause, and together with the second clause, nondeterminism strikes
+# again!
+
+# typo_in_pattern(Yes) = No, from the definition of typo_in_pattern (first branch).
+!uspec(forall b : Bool. typo_in_pattern(b) = No, Yes);
+
+# typo_in_pattern(Yes) = Yes, from the definition of typo_in_pattern (second branch).
+!claim(typo_in_pattern(Yes) = Yes);
+
+# No = Yes
+!eq_chain(
+  No,
+  typo_in_pattern(Yes),
+  Yes
+);
+
+# ~ No = Yes
+!claim(~ No = Yes);
+
+# Contradiction.
+!absurd(~ No = Yes, No = Yes);

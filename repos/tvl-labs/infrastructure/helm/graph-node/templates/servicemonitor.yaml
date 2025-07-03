@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "graph-node.fullname" . }}
+  namespace: monitoring
+  labels:
+    metrics: "true"
+spec:
+  selector:
+    matchLabels:
+      app: graph-node
+  namespaceSelector:
+    matchNames:
+      - graph-node
+  endpoints:
+    - port: metrics
+      path: /
+      honorLabels: true

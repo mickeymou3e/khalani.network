@@ -1,0 +1,53 @@
+{
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "noEmit": true,
+    "module": "commonjs",
+    "allowJs": true,
+    "strictBindCallApply": true,
+    "types": ["jest", "node"],
+    "noImplicitAny": true,
+    "downlevelIteration": true,
+    "strictNullChecks": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "target": "ES2020",
+    "jsx": "react",
+    "lib": ["dom", "esnext"],
+    "baseUrl": "./",
+    "paths": {
+      "@assets/*": ["./public/*"],
+      "@components/*": ["./shared/components/*"],
+      "@config": ["./shared/config.ts"],
+      "@containers/*": ["./shared/containers/*"],
+      "@constants/*": ["./shared/constants/*"],
+      "@dataSource/*": ["./shared/dataSource/*"],
+      "@interfaces/*": ["./shared/interfaces/*"],
+      "@messages/*": ["./shared/messages/*"],
+      "@store/*": ["./shared/store/*"],
+      "@styles/*": ["./shared/styles/*"],
+      "@tests/*": ["./testUtils/*"],
+      "@utils/*": ["./shared/utils/*"],
+      "@libs/*": ["./shared/libs/*"],
+      "@hooks/*": ["./shared/hooks/*"],
+      "@services/*": ["./shared/services/*"],
+      "@shared/*": ["./shared/*"]
+    }
+  },
+  "include": [
+    "shared/**/*",
+    "apps/**/*",
+    "config/**/*",
+    "testUtils/**/*",
+    "setup-tests.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "shared/**/*.test.ts",
+    "shared/**/*.test.tsx",
+    "shared/**/*.mocks.ts"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "contracts": {
+    "Vault": "0xf46DF0f6c91a66bBB14960245eEC280719428EDd",
+    "AddressBalances": "0x043dC50a7CA2d3Dc24A09c6FEFB0653863c8748F",
+    "PoolsHelpers": "0xc93721cED25615818B1b00c0F4E2b560007A9948",
+    "Oracle": "0x0000000000000000000000000000000000000000",
+    "Vortex": "0x0307F29C0003786331E14dFFA744D37D9E6787f3",
+    "NexusDiamond": "0xA1eF34B0bEdD89Be33385a5be37C9B3C08b47b1e",
+    "PSM": {
+      "0xa869": "0x160D66E88acbA72534a27955c96bd2d39345Ed2D",
+      "0x13881": "0xa1bD83a5BDF485645FF93A19f0cE5c66fC89bC9a",
+      "0x61": "0x56C8584Ad47f9A17180B6Ae7A99B7B93A52cF908",
+      "0x66eed": "0xb79a2C9DD3b4E336A5fC53b0Aac92Dfb69a0A6DD",
+      "0x1a4": "0xf2b4C24043302471B9B86D93E48f98D7Dde53B88",
+      "0x116e9": "0x1CD86A3946e2F2a19E939ce4f29E843AB5516726",
+      "0xaa36a7": "0xB0a9070e4437D0E511dEb4bDF590325906613fAA"
+    },
+    "CrossChainRouter": {
+      "0xa869": "0xbD1577165fb1eB4E0dA1072A6dFB041eB5EfC212",
+      "0x13881": "0x822919CCD40cd52815c260f74F0E409b9E4b7E30",
+      "0x61": "0xDEC77a5117BF9fC51EF8a30178DB6a01FD4E94a0",
+      "0x66eed": "0x1ac73a3E0c90E6812414814EFD3b54400e36B89F",
+      "0x1a4": "0x5bad8C050fd202480c8B2604768F25d7458f0946",
+      "0x116e9": "0xD34c17a74465a3B46984Ec28beA01c1738A53699",
+      "0xaa36a7": "0x56C8584Ad47f9A17180B6Ae7A99B7B93A52cF908"
+    }
+  },
+  "supportedChains": [
+    {
+      "id": 0,
+      "chainName": "",
+      "chainId": "",
+      "nativeCurrency": {
+        "name": "",
+        "symbol": "",
+        "decimals": 0
+      },
+      "blockExplorerUrls": [""],
+      "rpcUrls": [""],
+      "logo": "",
+      "borderColor": "",
+      "poolTokenSymbols": [""],
+      "isBalancerChain": false
+    }
+  ],
+  "tokens": [
+    {
+      "id": "",
+      "address": "",
+      "decimals": 0,
+      "name": "",
+      "symbol": "",
+      "chainId": "",
+      "sourceChainId": ""
+    }
+  ]
+}

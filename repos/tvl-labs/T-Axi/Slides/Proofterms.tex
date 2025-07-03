@@ -1,0 +1,655 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage{xcolor}
+\usepackage{AxiCommands}
+
+\usetheme{Darmstadt}
+
+\title{Poor Man's Axi: DPL-like proofs in Type Theory}
+\author{Wojciech Kołowski}
+\date{}
+
+\newcommand{\NDL}{\mathcal{NDL}}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\section{Intro}
+
+\begin{frame}{Layers in Poor Man's Axi}
+
+In our original proposal of Poor Man's Axi, the language was split into two layers:
+
+\begin{itemize}
+  \item A programming layer which consists of a strongly-typed functional programming language based on the Simply Typed Lambda Calculus.
+  \item A logical layer which consists of second-order classical logic with equality and some primitives for reasoning by cases and induction (note that it's not full second-order logic, because it only allows quantification over functions, but not over propositions, predicates or relations).
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Logic without proofterms}
+
+The logic was presented with a bunch of judgements, the most important being the true proposition judgement $\holds{P}$. While this presentation does a good job of explaining what the logic is like, it does not address the problem of writing proofs from the perspective of the programmer.
+
+\end{frame}
+
+\begin{frame}{Logic with proofterms}
+
+To deal with this problem, we introduce proofterms (also known as proof certificates), which are expressions that will serve as the ``proofs'' that the user will write. The manipulation of judgements which establish their correctness (which we will describe soon) is left to the language's proof checker.
+
+\end{frame}
+
+\begin{frame}{Proofterms}
+
+Proofterms ($P, Q$ are propositions, $t$ are terms, $x$ are variables): \\
+$e ::=$ \\
+\qquad $P \pipe \trueintro \pipe \falseelim{e}$ \\
+\qquad $\implintro{P}{e} \pipe \implelim{e_1}{e_2} \pipe$ \\
+\qquad $\notintro{P}{e} \pipe \notelim{e_1}{e_2} \pipe$ \\
+\qquad $\andintro{e_1}{e_2} \pipe \andeliml{e} \pipe \andelimr{e} \pipe$ \\
+\qquad $\iffintro{e_1}{e_2} \pipe \iffeliml{e} \pipe \iffelimr{e} \pipe$ \\
+\qquad $\orintrol[Q]{e} \pipe \orintror[P]{e} \pipe$ \\
+\qquad $\orelim{e_1}{e_2}{e_3} \pipe$ \\
+\qquad $\dn[e] \pipe$ \\
+\qquad $\cut{e_1}{e_2} \pipe$ \\
+\qquad $\allintro{x}{e} \pipe \allelim{e}{t} \pipe$ \\
+\qquad $\exintro{t}{e} \pipe \exelim{x}{e_1}{e_2} \pipe$ \\
+\qquad $\refl[t] \pipe \rewrite{e_1}{e_2} \pipe$ \\
+\qquad $\sumind{t}{a}{e_1}{b}{e_2}$
+
+\end{frame}
+
+\begin{frame}{Proofterms -- overview}
+
+A quick glance at the above grammar:
+
+\begin{itemize}
+  \item First, propositions are included in the syntactic category of proofterms, because we will refer to an assumption $P$ with $P$ itself.
+  \item Then we have some proofterms for dealing with propositional logic, divided as usual into introduction and elimination forms.
+  \item $\dn$ is our way of making the logic classical.
+  \item $\cut{e_1}{e_2}$ is a cut (which, in DPLs, corresponds to proof composition).
+  \item Then we have some proofterms to deal with quantifiers.
+  \item $\refl$ and $\rewrite{e}{e'}$ are primitives for dealing with equality.
+  \item Finally, $\sumind{t}{a}{e_1}{b}{e_2}$ will be used for reasoning by cases on terms of type $\Sum{A}{B}$.
+\end{itemize}
+
+\end{frame}
+
+\section{Examples}
+
+\begin{frame}{Examples}
+
+Before we jump right into the rules, let's see some examples. The point of the first two is to show that our proofterms look very similar to proofs from DPLs (in particular, to proofs in $\NDL$ presented in chapters 4 and 6 of the DPL thesis). The third example shows how simple reasoning about programs might look like.
+
+\end{frame}
+
+\begin{frame}{Example -- propositional logic}
+
+Theorem: $\Impl{(\Impl{P}{Q})}{\Impl{(\Impl{Q}{R})}{\Impl{P}{R}}}$.
+
+\vspace{2em}
+
+Proof: \\
+$\implintro{\Impl{P}{Q}}{}$ \\
+\, $\implintro{\Impl{Q}{R}}{}$ \\
+\quad $\implintro{P}{}$ \\
+\qquad $\implelim{(\Impl{P}{Q})}{P};$ \\
+\qquad $\implelim{(\Impl{Q}{R})}{Q}$
+
+\vspace{2em}
+
+The proof looks the same as the $\NDL$ one (DPL thesis, chapter 4, page 71), except that we don't have \textbf{begin} and \textbf{end}.
+
+\end{frame}
+
+\begin{frame}{Example -- first-order logic}
+
+Theorem: $\Impl{(\All{x}[A]{\And{\app{P}{x}}{\app{Q}{x}}})}{\And{(\All{x}[A]{\app{P}{x}})}{(\All{x}[A]{\app{Q}{x}})}}$
+
+\vspace{2em}
+
+Proof: \\
+$\implintro{\All{x}[A]{\And{\app{P}{x}}{\app{Q}{x}}}}{}$ \\
+\quad $\allintro{y}{}$ \\
+\qquad $\allelim{\All{x}[A]{\And{\app{P}{x}}{\app{Q}{x}}}}{y};$ \\
+\qquad $\andeliml{\And{\app{P}{y}}{\app{Q}{y}}}$; \\
+\quad $\allintro{y}{}$ \\
+\qquad $\allelim{\All{x}[A]{\And{\app{P}{x}}{\app{Q}{x}}}}{y};$ \\
+\qquad $\andelimr{\And{\app{P}{y}}{\app{Q}{y}}}$; \\
+\quad $\andintro{(\All{y}[A]{\app{P}{y}})}{(\All{y}[A]{\app{Q}{y}})}$ \\
+
+\vspace{2em}
+
+Again, the proof looks the same as the $\NDL$ one (DPL thesis, chapter 6, page 156), except we use indentation instead of \textbf{begin} and \textbf{end}.
+
+\end{frame}
+
+\begin{frame}{Example -- proof about a program}
+
+Consider the following program: \\
+$\swap : \Fun{\Sum{A}{B}}{\Sum{B}{A}} := \fun{x}{\case{x}{\fun{a}{\inr{a}}}{\fun{b}{\inl{b}}}}$ \\
+
+\vspace{2em}
+
+It's pretty clear that this function is involutive. \\
+Theorem: $\All{x}[\Sum{A}{B}]{\Eq{\swap[(\swap[x])]}{x}}$
+
+\vspace{1em}
+
+Proof: \\
+$\allintro{x}{}$ \\
+\quad $\sumind{x}{a}{\refl[(\inl{a})]}{b}{\refl[(\inr{b})]}$
+
+\vspace{2em}
+
+The proof has the same structure as the proofterm you would write in Coq, except for the syntactic differences.
+
+\end{frame}
+
+\section{Machinery}
+
+\begin{frame}{New contexts}
+
+Contexts: \\
+$\Gamma ::= \emptytypingctx \pipe \extend{\Gamma}{x}{A} \pipe \assume{\Gamma}{P}$
+
+\vspace{2em}
+
+In the previous presentation of our logic, we judged the truth of a proposition in two contexts, $\Gamma \pipe \Delta$, with $\Gamma$ storing typing assumptions and $\Delta$ storing propositional assumptions (so it was the ``assumption base''). We now change this, so that $\Gamma$ will store both of these.
+
+\vspace{2em}
+
+This change is not strictly necessary to introduce proofterms, but we go for it because it makes the rules more concise and will also bring benefits when implementation time comes.
+
+\end{frame}
+
+\begin{frame}{Judgements}
+
+We will modify the language in the following way: we throw away the true proposition judgement $\holds{P}$ and replace it with the correct proof judgement $\proves{e}{P}$, which should be read: in context $\Gamma$, $e$ is a proof of $P$.
+
+\vspace{2em}
+
+Because we no longer have separate assumption contexts, but still need to keep track of well-formedness of assumptions, we drop the valid assumption context judgement $\assctx[\Gamma]{\Delta}$ and replace it with the valid context judgement $\ctx{\Gamma}$, which should be read: $\Gamma$ is a well-formed context.
+
+\vspace{2em}
+
+The well-formed proposition judgement $\prop[\Gamma]{P}$ stays unchanged.
+
+\end{frame}
+
+\begin{frame}{Sanity checks}
+
+Recall that our judgements should satisfy some ``sanity checks'', which can be summarized like this: a complex judgement should guarantee that its simpler components are well-formed.
+
+\vspace{1em}
+
+In case of our logic, we will set up the judgements so that the following sanity checks hold:
+
+\begin{itemize}
+  \item $\ctx{\Gamma}$ entails nothing (because it is the simplest judgement)
+  \item $\prop[\Gamma]{P}$ entails $\ctx{\Gamma}$
+  \item $\proves{e}{P}$ entails $\prop[\Gamma]{P}$ (which then entails $\ctx{\Gamma}$)
+\end{itemize}
+
+\vspace{1em}
+
+Note that the programming layer would need to be slightly modified so that it satisfies the following sanity checks:
+
+\begin{itemize}
+  \item $\typing{e}{A}$ entails $\ctx{\Gamma}$
+  \item $\compeq{e_1}{e_2}{A}$ entails $\typing{e_1}{A}$ and $\typing{e_2}{A}$
+\end{itemize}
+
+\end{frame}
+
+\section{Propositional logic}
+
+\begin{frame}{Assumptions}
+
+\begin{center}
+  $\infrule[Ass]{\ctx{\Gamma} \quad \sidecond{P \in \Gamma}}{\proves{P}{P}}$
+\end{center}
+
+\vspace{2em}
+
+The basic rule of our logic is that we can use assumptions from the context. Note that here $P$ denotes both the proposition and its proof.
+
+\end{frame}
+
+\begin{frame}{True and False}
+
+\begin{center}
+  $\infrule[True-Intro]{\ctx{\Gamma}}{\proves{\trueintro}{\True}}$
+
+  \vspace{2em}
+
+  $\infrule[False-Elim]{\prop{P} \quad \proves{e}{\False}}{\proves{\falseelim{e}}{P}}$
+\end{center}
+
+\vspace{2em}
+
+$\trueintro$ proves the true proposition $\True$ in any well-formed context.
+
+\vspace{1em}
+
+$\falseelim{e}$ proves any well-formed proposition $P$ whatsoever, provided that $e$ proves the false proposition $\False$.
+
+\end{frame}
+
+\begin{frame}{Implication}
+
+\begin{center}
+  $\infrule[Impl-Intro]{\proves[\assume{\Gamma}{P}]{e}{Q}}{\proves{\implintro{P}{e}}{\Impl{P}{Q}}}$
+
+  \vspace{2em}
+
+  $\infrule[Impl-Elim]{\proves{e_1}{\Impl{P}{Q}} \quad \proves{e_2}{P}}{\proves{\implelim{e_1}{e_2}}{Q}}$
+\end{center}
+
+\vspace{2em}
+
+$\implintro{P}{e}$ proves $\Impl{P}{Q}$, provided that $e$ proves $Q$ in the context extended with the assumption $P$.
+
+\vspace{1em}
+
+$\implelim{e_1}{e_2}$ proves $Q$, provided that $e_1$ proves $\Impl{P}{Q}$ and $e_2$ proves $P$.
+
+\end{frame}
+
+\begin{frame}{Negation}
+
+\begin{center}
+  $\infrule[Not-Intro]{\proves[\assume{\Gamma}{P}]{e}{\False}}{\proves{\notintro{P}{e}}{\Not{P}}}$
+
+  \vspace{2em}
+
+  $\infrule[Not-Elim]{\proves{e_1}{\Not{P}} \quad \proves{e_2}{P}}{\proves{\notelim{e_1}{e_2}}{\False}}$
+\end{center}
+
+\vspace{2em}
+
+$\notintro{P}{e}$ proves $\Not{P}$ provided that $e$ proves $\False$ in the context extended with the assumption $P$.
+
+\vspace{2em}
+
+$\notelim{e_1}{e_2}$ proves $\False$ provided that $e_1$ proves $\Not{P}$ and $e_2$ proves $P$.
+
+\end{frame}
+
+\begin{frame}{Negation -- discussion}
+
+Note that there are some differences from $\NDL$ (DPL thesis, chapter 4, page 65). First, $\notintro{P}{e}$ is a primitive, instead of being syntax sugar. Second, the order of arguments is flipped in $\notelim{e_1}{e_2}$, the proof of negation being the first. The reason for this is that we follow a presentation of logic derived from the Curry-Howard correspondence.
+
+\vspace{2em}
+
+However, what we do is not \textit{the} usual Curry-Howard presentation, because in our system negation is primitive. The usual way to deal with negation would be to \textit{define} $\Not{P}$ as an abbreviation for $\Impl{P}{\False}$, so that we would deal with negation by using $\implintro{P}{e}$ instead of $\notintro{P}{e}$ and $\implelim{e_1}{e_2}$ instead of $\notelim{e_1}{e_2}$.
+
+\end{frame}
+
+\begin{frame}{Conjunction}
+
+\begin{center}
+  $\infrule[And-Intro]{\proves{e_1}{P} \quad \proves{e_2}{Q}}{\proves{\andintro{e_1}{e_2}}{\And{P}{Q}}}$
+
+  \vspace{2em}
+
+  $\infrule[And-Elim-L]{\proves{e}{\And{P}{Q}}}{\proves{\andeliml{e}}{P}}$
+
+  \vspace{2em}
+
+  $\infrule[And-Elim-R]{\proves{e}{\And{P}{Q}}}{\proves{\andelimr{e}}{Q}}$
+\end{center}
+
+\vspace{2em}
+
+$\andintro{e_1}{e_2}$ proves $\And{P}{Q}$ provided that $e_1$ proves $P$ and $e_2$ proves $Q$. $\andeliml{e}$ proves $P$ provided that $e$ proves $\And{P}{Q}$. $\andelimr{e}$ proves $Q$ provided that $e$ proves $\And{P}{Q}$.
+
+\end{frame}
+
+\begin{frame}{Biconditional}
+
+\begin{center}
+  $\infrule[Iff-Intro]{\proves{e_1}{\Impl{P}{Q}} \quad \proves{e_2}{\Impl{Q}{P}}}{\proves{\iffintro{e_1}{e_2}}{\Iff{P}{Q}}}$
+
+  \vspace{2em}
+
+  $\infrule[Iff-Elim-L]{\proves{e}{\Iff{P}{Q}}}{\proves{\iffeliml{e}}{\Impl{P}{Q}}}$
+
+  \vspace{2em}
+
+  $\infrule[Iff-Elim-R]{\proves{e}{\Iff{P}{Q}}}{\proves{\iffelimr{e}}{\Impl{Q}{P}}}$
+\end{center}
+
+\vspace{2em}
+
+$\iffintro{e_1}{e_2}$ proves $\Iff{P}{Q}$ provided that $e_1$ proves $\Impl{P}{Q}$ and $e_2$ proves $\Impl{Q}{P}$. $\iffeliml{e}$ proves $\Impl{P}{Q}$ provided that $e$ proves $\Iff{P}{Q}$. $\iffelimr{e}$ proves $\Impl{Q}{P}$ provided that $e$ proves $\Iff{P}{Q}$.
+
+\end{frame}
+
+\begin{frame}{Biconditional -- discussion}
+
+Our presentation of the biconditional is exactly the same as in $\NDL$ (DPL thesis, chapter 4, page 65), although it differs from the usual Curry-Howard presentation: in our system $\Iff{P}{Q}$ is a primitive, whereas in the usual Curry-Howard presentation it would be defined as $\And{(\Impl{P}{Q})}{(\Impl{Q}{P})}$, so that we would use $\andintro{e_1}{e_2}$ instead of $\iffintro{e_1}{e_2}$, $\andeliml{e}$ instead of $\iffeliml{e}$ and $\andelimr{e}$ instead of $\iffelimr{e}$.
+
+\end{frame}
+
+\begin{frame}{Disjunction}
+
+\begin{center}
+  $\infrule[Or-Intro-L]{\prop{Q} \quad \proves{e}{P}}{\proves{\orintrol[Q]{e}}{\Or{P}{Q}}}$
+
+  \vspace{2em}
+
+  $\infrule[Or-Intro-R]{\prop{P} \quad \proves{e}{Q}}{\proves{\orintror[P]{e}}{\Or{P}{Q}}}$
+
+  \vspace{2em}
+
+  $\infrule[Or-Elim]{\proves{e_1}{\Or{P}{Q}} \quad \proves{e_2}{\Impl{P}{R}} \quad \proves{e_3}{\Impl{Q}{R}}}{\proves{\orelim{e_1}{e_2}{e_3}}{R}}$
+\end{center}
+
+\vspace{2em}
+
+$\orintrol[Q]{e}$ proves $\Or{P}{Q}$ provided that $e$ proves $P$. $\orintror[P]{e}$ proves $\Or{P}{Q}$ provided that $e$ proves $Q$. $\orelim{e_1}{e_2}{e_3}$ proves $R$ provided that $e_1$ proves $\Or{P}{Q}$, $e_2$ proves $\Impl{P}{R}$ and $e_3$ proves $\Impl{Q}{R}$.
+
+\end{frame}
+
+\begin{frame}{Disjunction -- annotations}
+
+The first argument of $\orintrol[Q]{e}$, i.e. $Q$, is a proposition, not a proofterm, and serves as an annotation that clarifies what its conclusion is. Note that it needs to be well-formed. $\orintror[P]{e}$ is analogous.
+
+\vspace{2em}
+
+The choice to have annotations there makes our system very close to $\NDL$ (DPL thesis, chapter 4, page 65), and also to the ``intrinsic'' presentation of the Simply Typed Lambda Calculus, but it is not the only one: we could do without the annotations, which would make the system less similar to $\NDL$ and more to the ``extrinsic'' presentation of Simply Typed Lambda Calculus.
+
+\end{frame}
+
+\begin{frame}{Disjunction -- choices}
+
+We also have a choice regarding the second and third arguments of $\orelim{e_1}{e_2}{e_3}$. To keep close to $\NDL$, they both must prove implications ($\Impl{P}{R}$ for $e_2$ and $\Impl{Q}{R}$ for $e_3$), but perhaps it would be more comfortable for the user if he only needed to prove the conclusion $R$ in a context extended with the appropriate assumption, so that he would be spared from having to manually introduce the assumption twice (once in $e_2$ and once in $e_3$). The alternative rule is as follows:
+
+\vspace{2em}
+
+\begin{center}
+  $\infrule[Or-Elim-Alt]{\proves{e_1}{\Or{P}{Q}} \quad \proves[\assume{\Gamma}{P}]{e_2}{R} \quad \proves[\assume{\Gamma}{Q}]{e_3}{R}}{\proves{\orelim{e_1}{e_2}{e_3}}{R}}$
+\end{center}
+
+\end{frame}
+
+\section{Classic}
+
+\begin{frame}{Classical logic}
+
+Up until now, our logic is entirely constructive, closely following the Curry-Howard correspondence, although it differed slightly with regards to the treatment of negation and biconditional.
+
+\vspace{2em}
+
+To make the logic classical, we need to extend it with one of the laws of classical logic that is strong enough to entail all the others. In our previous presentation of Axi we chose the Law of Excluded Middle, but this time, to keep close to $\NDL$, we will use Double Negation Elimination.
+
+\vspace{2em}
+
+In a richer language and logic, the way to go would probably be to assert some version of the Axiom of Choice.
+
+\end{frame}
+
+\begin{frame}{Double Negation Elimination}
+
+\begin{center}
+  $\infrule[Classic]{\proves{e}{\Not{\Not{P}}}}{\proves{\dn[e]}{P}}$
+\end{center}
+
+\vspace{2em}
+
+$\dn[e]$ proves $P$ provided that $e$ proves $\Not{\Not{P}}$.
+
+\end{frame}
+
+\begin{frame}{Reasoning by contradiction as an alternative}
+
+An alternative way of asserting classical logic would be to use another principle, like proof by contradiction, which might be more convenient to the user, because it automatically extends the context.
+
+\vspace{2em}
+
+\begin{center}
+  $\infrule[By-Contradiction]{\proves[\assume{\Gamma}{\Not{P}}]{e}{\False}}{\proves{\bycontradiction{\Not{P}}{e}}{P}}$
+\end{center}
+
+\vspace{2em}
+
+$\bycontradiction{\Not{P}}{e}$ proves $P$ provided that $e$ proves $\False$ in the context extended with the assumption $\Not{P}$.
+
+\end{frame}
+
+\section{Cut}
+
+\begin{frame}{Backward and forward proofs}
+
+The proofterms we introduced so far only allowed for comfortable ``backward'' proofs, i.e. ones where we go from the conclusion to the assumptions. The other style, ``forward'' proofs, are also possible, but doing them is not comfortable.
+
+\vspace{1em}
+
+To amend this problem, we introduce a new rule, called the $\rulename{Cut}$ rule. In DPLs, it corresponds to proof composition (and in programming languages, to let-expressions, although there is no variable binding).
+
+\vspace{1em}
+
+The $\rulename{Cut}$ rule increases the comfort of doing forward proofs in our system, but does not add any expressive power, because $\cut{e_1}{e_2}$ can be desugared to $\implelim{(\implintro{P}{e_2})}{e_1}$.
+
+\end{frame}
+
+\begin{frame}{Cut rule}
+
+\begin{center}
+  $\infrule[Cut]{\proves{e_1}{P} \quad \proves[\assume{\Gamma}{P}]{e_2}{Q}}{\proves{\cut{e_1}{e_2}}{Q}}$
+\end{center}
+
+\vspace{2em}
+
+$\cut{e_1}{e_2}$ proves $Q$ provided that $e_1$ proves $P$ and $e_2$ proves $Q$ in the context extended with the assumption $P$.
+
+\end{frame}
+
+\section{Quantifiers}
+
+\begin{frame}{Quantifiers}
+
+Our syntax for quantifiers closely follows $\NDL$ (DPL thesis, chapter 6, page 150), except for the introduction rule of the existential quantifier, in which the argument order is flipped (and which, for this reason, uses different keywords).
+
+\vspace{2em}
+
+Our rules, however, are subtly different in that in $\allelim{e}{t}$, $\exintro{t}{e}$ and $\exelim{x}{e_1}{e_2}$, the arguments $e, e_1, e_2$ are arbitrary proofs, whereas $\NDL$ only allows them to be formulas. Therefore, our approach is a slight generalization, which also closely aligns in spirit with the Curry-Howard correspondence.
+
+\end{frame}
+
+\begin{frame}{Universal quantifier}
+
+\begin{center}
+  $\infrule[Forall-Intro]{\proves[\extend{\Gamma}{y}{A}]{e}{\subst{P}{x}{y}}}{\proves{\allintro{y}{e}}{\All{x}[A]{P}}}$
+
+  \vspace{2em}
+
+  $\infrule[Forall-Elim]{\proves{e}{\All{x}[A]{P}} \quad \typing{t}{A}}{\proves{\allelim{e}{t}}{\subst{P}{x}{t}}}$
+\end{center}
+
+\vspace{2em}
+
+$\allintro{y}{e}$ proves $\All{x}[A]{P}$ provided that $e$ proves $P$ in which $y$ was substituted for $x$ in the context extended with $y : A$.
+
+\vspace{2em}
+
+$\allelim{e}{t}$ proves $P$ in which $t$ was substituted for $x$, provided that $e$ proves $\All{x}[A]{P}$ and $t$ is a term of type $A$.
+
+\end{frame}
+
+\begin{frame}{Existential quantifier}
+
+\begin{center}
+  $\infrule[Exists-Intro]{\typing{t}{A} \quad \proves{e}{\subst{P}{x}{t}}}{\proves{\exintro{t}{e}}{\Ex{x}[A]{P}}}$
+
+  \vspace{2em}
+
+  $\infrule[Exists-Elim]{\prop{R} \quad \proves{e_1}{\Ex{x}[A]{P}} \quad \proves[\assume{\extend{\Gamma}{y}{A}}{\subst{P}{x}{y}}]{e_2}{R}}{\proves{\exelim{y}{e_1}{e_2}}{R}}$
+\end{center}
+
+\vspace{2em}
+
+$\exintro{t}{e}$ proves $\Ex{x}[A]{P}$ provided that $t$ is a term of type $A$ and $e$ proves $P$ in which $t$ was substituted for $x$.
+
+\vspace{2em}
+
+$\exelim{y}{e_1}{e_2}$ proves $R$, provided that $e_1$ proves $\Ex{x}[A]{P}$ and $e_2$ proves $R$ in the context extended with $y : A$ and $P$ (in which $y$ was substituted for $x$). Note that $R$ needs to be well-formed in $\Gamma$, i.e. it can't depend on $x$ or $y$.
+
+\end{frame}
+
+\section{Equality}
+
+\begin{frame}{Computational equality -- refresher}
+
+The computational equality judgement $\compeq{t_1}{t_2}{A}$ (sometimes also called judgemental equality, or simply convertibility) is the way in which we express computation in our language. Its intuitive meaning is that $t_1$ and $t_2$ compute to the same result (although the rules we gave in the previous slides don't look like this at all).
+
+\vspace{2em}
+
+Computational equality is a part of the programming layer of our language and does not depend on the logical layer in any way. In particular, it does not have to change to accomodate proofterms (except for a tiny change in the congruence rule for $\Unit$ to accomodate our new contexts). Computational equality is decidable and its use in proofs is handled entirely by the proof checker.
+
+\vspace{1em}
+
+\end{frame}
+
+\begin{frame}{Propositional equality -- refresher}
+
+Propositional equality $\Eq[A]{t_1}{t_2}$ is not a judgement, but, as the name suggests, a proposition. It belongs to the logical layer of our language and the introduction of proofterms does affect it -- we will need to change our rules to accomodate them. It is not decidable and all proofs involving propositional equality are up to the programmer.
+
+\end{frame}
+
+\begin{frame}{Equality -- overview}
+
+Our treatment of equality is fundamentally type-theoretic, with the conversion rule, which connects computational equality to propositional equality, playing the central role. The end product, however, is very similar to $\NDL$ (DPL thesis, chapter 6, page 151).
+
+\vspace{2em}
+
+We also include a rule that asserts function extensionality, i.e. the principle that two functions are equal when they are equal for all arguments. This rule is not present in $\NDL$ because its language of terms doesn't have function types.
+
+\end{frame}
+
+\begin{frame}{Conversion rule}
+
+\begin{center}
+  $\infrule[Conv]{\prop[\extend{\Gamma}{x}{A}]{P} \quad \compeq{t_1}{t_2}{A} \quad \proves{e}{\subst{P}{x}{t_1}}}{\proves{e}{\subst{P}{x}{t_2}}}$
+\end{center}
+
+\vspace{2em}
+
+If $e$ proves $P$ with $t_1$ substituted for $x$ and $t_1$ is computationally equal to $t_2$ at type $A$, then $e$ also proves $P$ with $t_2$ substituted for $x$.
+
+\end{frame}
+
+\begin{frame}{Conversion rule -- discussion}
+
+The main point of the conversion rule is to facilitate proving equalities which hold by computation. In contrast to DPLs, which would require doing some manual labor here (or calling powerful methods for help), in our system proving such equalities is free, or even more than free -- the programmer doesn't need to do anything to benefit from the conversion rule, not even use the conversion rule. This is because computational equality is decidable, so using the conversion rule at the right time is entirely up to the proof checker.
+
+\end{frame}
+
+\begin{frame}{Equality introduction and elimination}
+
+\begin{center}
+  $\infrule[Eq-Intro]{\typing{t}{A}}{\proves{\refl[t]}{\Eq[A]{t}{t}}}$
+
+  \vspace{2em}
+
+  $\infrule[Eq-Elim]{\prop[\extend{\Gamma}{x}{A}]{P} \quad \proves{e}{\Eq[A]{t_1}{t_2}} \quad \proves{e'}{\subst{P}{x}{t_1}}}{\proves{\rewrite{e}{e'}}{\subst{P}{x}{t_2}}}$
+\end{center}
+
+\vspace{2em}
+
+$\refl[t]$ proves that $t$ is equal to itself, provided that it is well-typed at some type $A$.
+
+\vspace{2em}
+
+$\rewrite{e}{e'}$ proves $P$ with $t_2$ substituted for $x$, provided that $e$ proves $\Eq[A]{t_1}{t_2}$ (for some type $A$) and that $e'$ proves $P$ with $t_1$ substituted for $x$.
+
+\end{frame}
+
+\begin{frame}{$\refl$ -- discussion}
+
+$\refl[t]$ might look like a weakling, a puny little proofterm only able to prove $\Eq{t}{t}$, but in reality it is an incantation that summons the invincible juggernaut -- the conversion rule. If $t$ is computationally equal to $t'$, then, by the conversion rule, to prove $\Eq{t}{t'}$ it suffices to prove $\Eq{t}{t}$, which is precisely what $\refl[t]$ accomplishes.
+
+\end{frame}
+
+\begin{frame}{Rewriting -- discussion}
+
+$\rewrite{e}{e'}$ is the workhorse for equational proofs, corresponding to $\NDL$'s \textbf{leibniz} (DPL thesis, chapter 6, page 151), except that, as for quantifiers, we allow its arguments to be proofs, whereas $\NDL$ requires them to be formulas and terms whose equality is already in the assumption base.
+
+\vspace{1em}
+
+Compared to Athena, using $\rewrite{e}{e'}$ is similar to performing a single step of chaining, with $e$ being the justifier and $e'$ being the rest of the chain.
+
+\vspace{1em}
+
+Compared to Coq, $\rewrite{e}{e'}$ looks most similar to Coq's tactic $\texttt{rewrite e}; e'$, which rewrites an equation $e$ and then goes on to $e'$, which is the rest of the proof.
+
+\end{frame}
+
+\begin{frame}{Function extensionality}
+
+\begin{center}
+  $\infrule[Funext]{\proves{e}{\All{x}[A]{\Eq[B]{\app{f}{x}}{\app{g}{x}}}}}{\proves{\funext{e}}{\Eq[\Fun{A}{B}]{f}{g}}}$
+\end{center}
+
+\vspace{2em}
+
+$\funext{e}$ proves $\Eq{f}{g}$ provided that $e$ proves $\All{x}[A]{\Eq{\app{f}{x}}{\app{g}{x}}}$.
+
+\end{frame}
+
+\begin{frame}{Function extensionality -- discussion}
+
+A separate rule for function extensionality is needed, because extensionality, despite being a very basic, useful and desirable principle, does not follow from anything else in the system: neither from the intuitionistic core, nor the classical $\dn$, nor the rules for quantifiers, nor even the conversion rule, even though function extensionality is present at the level of computational equality. This is a well known phenomenon in type theory, with which $\NDL$ and other DPLs don't have to deal because they don't have function types.
+
+\end{frame}
+
+\begin{frame}{Function extensionality -- alternative rule}
+
+$\funext{e}$ is in some sense ``higher-order'', i.e. $e$ is expected to be a proof of a universal statement, which means that usually it will be of the form $\allintro{x}{e'}$. This suggests an alternative, ``first-order'' version of the rule for function extensionality, which has this variable binding baked-in:
+
+\vspace{2em}
+
+\begin{center}
+  $\infrule[Funext-Alt]{\proves[\extend{\Gamma}{x}{A}]{e}{\Eq[B]{\app{f}{x}}{\app{g}{x}}}}{\proves{\funextalt{x}{e}}{\Eq[\Fun{A}{B}]{f}{g}}}$
+\end{center}
+
+\end{frame}
+
+\section{Induction}
+
+\begin{frame}{Reasoning by cases (for sums)}
+
+\begin{center}
+  $\infrule{\prop[\extend{\Gamma}{x}{\Sum{A}{B}}]{P} \quad \typing{t}{\Sum{A}{B}} \quad \begin{array}{c} \proves[\extend{\Gamma}{a}{A}]{e_1}{\subst{P}{x}{\inl{a}}} \\ \proves[\extend{\Gamma}{b}{B}]{e_2}{\subst{P}{x}{\inr{b}}} \end{array}}{\proves{\sumind{t}{a}{e_1}{b}{e_2}}{\subst{P}{x}{t}}}$
+\end{center}
+
+\vspace{2em}
+
+$\sumind{t}{a}{e_1}{b}{e_2}$ proves $P$ with $t$ substituted for $x$, provided that $t$ is of type $\Sum{A}{B}$, that $e_1$ proves $P$ with $\inl{a}$ substituted for $x$ in the context extended with $a : A$, and that $e_2$ proves $P$ with $\inr{b}$ substituted for $x$ in the context extended with $b : B$.
+
+\end{frame}
+
+\begin{frame}{Reasoning by cases (for sums) -- discussion}
+
+From the grammar and typing rules given in the previous slides, we know that terms of type $\Sum{A}{B}$ can be of only two forms: either $\inl{a}$ for some $a : A$, or $\inr{b}$ for some $b : B$.
+
+\vspace{2em}
+
+We know this, but our logic doesn't automagically know this, so we need to tell it by adding an appropriate proofterm and a rule to handle it. This is what $\sumind{t}{a}{e_1}{b}{e_2}$ accomplishes. 
+
+\end{frame}
+
+\begin{frame}{Induction}
+
+Sums are not the only type for which we need to add a principle for reasoning by cases -- there are also products, the unit type, and the empty type, after all.
+
+\vspace{2em}
+
+But for more complicated types, like the natural numbers or lists, reasoning by cases won't suffice, and so we would also need to add proofterms and rules for induction. We won't do this now for lack of space and time, but it's not much more difficult than handling reasoning by cases for sums.
+
+\end{frame}
+
+\end{document}

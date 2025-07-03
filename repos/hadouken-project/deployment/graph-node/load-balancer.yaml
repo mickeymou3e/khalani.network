@@ -1,0 +1,188 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Container cluster on ECS, Load Balancer, Security Groups and Cloudwatch
+
+Parameters:
+  Environment:
+    Type: String
+  ApplicationName:
+    Type: String
+  DomainName:
+    Type: String
+  CertificateArn:
+    Type: String
+  HostedZoneId:
+    Type: String
+  VpcId:
+    Type: String
+  Subnets:
+    Type: String
+  LogGroupName:
+    Type: String
+
+  GraphNodeName:
+    Type: String
+  IPFSName:
+    Type: String
+
+  LoadBalancerPort:
+    Type: Number
+    Default: 443
+
+Mappings: 
+  ELBAccountId: 
+    us-east-1:
+      AccountId: 033677994240
+
+
+Resources:
+  LoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    # DependsOn:
+    #   - LoadBalancerLogsBucketPolicy
+    Properties:
+      Name: !Sub ${ApplicationName}-${Environment}
+      Subnets: !Split [",", !Ref Subnets]
+      SecurityGroups:
+        - !Ref LoadBalancerSecurityGroup
+      # LoadBalancerAttributes:
+      #   - Key: access_logs.s3.enabled
+      #     Value: true
+      #   - Key: access_logs.s3.bucket
+      #     Value: !Ref LoadBalancerLogsBucket
+
+  LoadBalancerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    # A security group acts as a virtual firewall for your instance to control inbound and outbound traffic.
+    Properties:
+      GroupDescription: Security Group for Load Balancer to services on ECS
+      VpcId: !Ref VpcId
+      # Security groups are associated with network interfaces.
+      # A security group can only be used in the VPC that you specify when you create the security group.
+      SecurityGroupIngress:
+      # Adds an inbound rule to a security group.
+      # An inbound rule permits instances to receive traffic
+      # from the specified IPv4 or IPv6 CIDR address range,
+      # or from the instances associated with the specified security group.
+      
+      # The default route in Internet Protocol Version 4 (IPv4)
+      # is designated as the zero-address 0.0.0.0/0 in CIDR notation,
+      # often called the quad-zero route. The subnet mask is given as /0,
+      # which effectively specifies all networks, and is the shortest match possible.
+
+      # Allow inbound HTTP access from all IPv4 addresses
+        - CidrIp: 0.0.0.0/0
+          IpProtocol: -1
+
+  LoadBalancerLogsBucket:
+    Type: AWS::S3::Bucket
+
+  LoadBalancerLogsBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref LoadBalancerLogsBucket
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Sid: GraphNodeELBAccessLogs
+            Effect: Allow
+            Resource: !Sub arn:aws:s3:::${LoadBalancerLogsBucket}/AWSLogs/${AWS::AccountId}/*
+            Principal:              
+              AWS: arn:aws:iam::033677994240:root
+            Action:
+              - s3:PutObject
+
+  LoadBalancerListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      LoadBalancerArn: !Ref LoadBalancer
+      Protocol: HTTPS
+      Certificates:
+        - CertificateArn: !Ref CertificateArn
+      Port: !Ref LoadBalancerPort
+      DefaultActions:
+        - Type: fixed-response
+          FixedResponseConfig:
+            ContentType: text/plain
+            MessageBody: You've reached the Load Balancer Listener! Congratulation!
+            StatusCode: 503
+
+  LoadBalancerRoute53RecordAdmin:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      Name: !Sub ${GraphNodeName}-admin-${ApplicationName}.${DomainName}
+      HostedZoneId: !Ref HostedZoneId
+      Type: A
+      AliasTarget:
+        HostedZoneId: !GetAtt LoadBalancer.CanonicalHostedZoneID
+        DNSName: !GetAtt LoadBalancer.DNSName
+  LoadBalancerRoute53RecordIndexer:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      Name: !Sub ${GraphNodeName}-indexer-${ApplicationName}.${DomainName}
+      HostedZoneId: !Ref HostedZoneId
+      Type: A
+      AliasTarget:
+        HostedZoneId: !GetAtt LoadBalancer.CanonicalHostedZoneID
+        DNSName: !GetAtt LoadBalancer.DNSName
+  LoadBalancerRoute53RecordHttp:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      Name: !Sub ${GraphNodeName}-http-${ApplicationName}.${DomainName}
+      HostedZoneId: !Ref HostedZoneId
+      Type: A
+      AliasTarget:
+        HostedZoneId: !GetAtt LoadBalancer.CanonicalHostedZoneID
+        DNSName: !GetAtt LoadBalancer.DNSName
+  LoadBalancerRoute53RecordWS:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      Name: !Sub ${GraphNodeName}-ws-${ApplicationName}.${DomainName}
+      HostedZoneId: !Ref HostedZoneId
+      Type: A
+      AliasTarget:
+        HostedZoneId: !GetAtt LoadBalancer.CanonicalHostedZoneID
+        DNSName: !GetAtt LoadBalancer.DNSName
+  LoadBalancerRoute53RecordIPFS:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      Name: !Sub ${IPFSName}-${ApplicationName}.${DomainName}
+      HostedZoneId: !Ref HostedZoneId
+      Type: A
+      AliasTarget:
+        HostedZoneId: !GetAtt LoadBalancer.CanonicalHostedZoneID
+        DNSName: !GetAtt LoadBalancer.DNSName
+
+  LogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Ref LogGroupName
+      RetentionInDays: 30
+
+Outputs:
+  LoadBalancer:
+    Description: Load Balancer
+    Value: !Ref LoadBalancer
+
+  LoadBalancerSecurityGroup:
+    Description: Load Balancer Security Group
+    Value: !Ref LoadBalancerSecurityGroup
+    
+  LoadBalancerListenerArn:
+    Description: Load Balancer Listener
+    Value: !Ref LoadBalancerListener
+
+  GraphNodeAdminRoute:
+    Description: Graph Node Admin Route
+    Value: !Ref LoadBalancerRoute53RecordAdmin
+  GraphNodeIndexerRoute:
+    Description: Graph Node Indexer Route
+    Value: !Ref LoadBalancerRoute53RecordIndexer
+  GraphNodeHttpClientRoute:
+    Description: Graph Node HTTP Client Route
+    Value: !Ref LoadBalancerRoute53RecordHttp
+  GraphNodeWsClientRoute:
+    Description: Graph Node WebSocket Client Route
+    Value: !Ref LoadBalancerRoute53RecordWS
+  IPFSRoute:
+    Description: IPFS Route
+    Value: !Ref LoadBalancerRoute53RecordIPFS

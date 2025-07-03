@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ include "alert-rules.fullname" . }}-hyperlane-rpc-provider-usage
+  namespace: monitoring
+  labels:
+    rules: "true"
+spec:
+  groups:
+    - name: HyperlaneRpcProviderUsage
+      rules:
+        - alert: HighHyperlaneRpcProviderUsage
+          expr: sum by(agent,service,provider_node)(increase(hyperlane_request_count[{{ .Values.rules.hyperlaneRpcUsage.period }}])) > {{ .Values.rules.hyperlaneRpcUsage.threshold }}
+          for: {{ .Values.rules.hyperlaneRpcUsage.forPeriod }}
+          labels:
+            severity: critical
+          annotations:
+            summary: "High RPC provider usage by Hyperlane agent"
+            description: "Hyperlane {{"{{"}} $labels.agent {{"}}"}} {{"{{"}} $labels.service {{"}}"}} has high usage of the RPC provider '{{"{{"}} $labels.provider_node {{"}}"}}', more than {{ .Values.rules.hyperlaneRpcUsage.threshold }} during the last {{ .Values.rules.hyperlaneRpcUsage.period }}"

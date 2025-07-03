@@ -1,0 +1,23 @@
+name: Publish to Github Packages
+
+on: push
+
+env:
+  NODE_AUTH_TOKEN: ${{ secrets.PACKAGES_READ_TOKEN }}
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@tvl-labs'
+          always-auth: true
+
+      - run: yarn --frozen-lockfile
+      - run: yarn build
+      - run: yarn publish

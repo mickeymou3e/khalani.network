@@ -1,0 +1,42 @@
+\section{Totality}
+
+\NewDocumentCommand{\emptyenv}{}{\emptyset}
+\NewDocumentCommand{\extendenv}{m m m m}{#1, #2 : #3 := #4}
+\NewDocumentCommand{\extendthm}{m m m m}{#1, #2 : #3 := #4}
+\NewDocumentCommand{\extendpartial}{m m m m}{#1, \texttt{partial}\ #2 : #3 := #4}
+\NewDocumentCommand{\totality}{m m m}{#1, \texttt{totality}\ #2\ #3}
+
+\NewDocumentCommand{\env}{m}{#1\ \texttt{env}}
+
+\begin{frame}{Environments}
+
+Global environments: \\
+$\Sigma ::=$ \\
+\qquad $\emptyenv \pipe \extendthm{\Sigma}{h}{P}{p} \pipe \extendenv{\Sigma}{x}{A}{e} \pipe$ \\
+\qquad $\extendpartial{\Sigma}{x}{A}{e} \pipe \totality{\Sigma}{x}{p}$
+
+\end{frame}
+
+\begin{frame}{Well-formed environments}
+
+\begin{center}
+  $\infrule{}{\env{\emptyenv}}$
+
+  \vspace{2em}
+
+  $\infrule{\env{\Sigma} \quad h \notin \Sigma \quad \proves[\Sigma \pipe \emptyctx]{p}{P}}{\env{\extendthm{\Sigma}{h}{P}{p}}}$
+
+  \vspace{2em}
+
+  $\infrule{\env{\Sigma} \quad x \notin \Sigma \quad \typing[\Sigma \pipe \emptyctx][\computable]{e}{A}}{\env{\extendenv{\Sigma}{x}{A}{e}}}$
+
+  \vspace{2em}
+
+  $\infrule{\env{\Sigma} \quad x \notin \Sigma \quad \typing[\Sigma \pipe \emptyctx][\computable]{e}{A} \quad e\ \textbf{fails syntactic check}}{\env{\extendpartial{\Sigma}{x}{A}{e}}}$
+
+  \vspace{2em}
+
+  $\infrule{\env{\Sigma} \quad \Sigma = \extendpartial{\Sigma_1}{x}{A}{e}, \Sigma_2 \quad \proves[\Sigma \pipe \emptyctx]{p}{\Ex{r}[A]{e =?= r}}}{\env{\totality{\Sigma}{x}{p}}}$
+\end{center}
+
+\end{frame}

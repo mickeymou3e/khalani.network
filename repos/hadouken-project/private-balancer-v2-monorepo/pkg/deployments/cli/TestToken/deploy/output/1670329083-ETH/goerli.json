@@ -1,0 +1,19 @@
+{
+  "transaction": {
+    "hash": "0xc71ab9ebd140e683c931c6d67f78a819718de57d72e4f52acdd0fae297d772a3",
+    "blockNumber": 8085371
+  },
+  "data": {
+    "TestToken": {
+      "deploy": {
+        "input": {
+          "name": "ETH",
+          "symbol": "ETH",
+          "decimals": 18
+        },
+        "output": "0x3D60ec8d7787392FAe76638302194b5Bf47a8ddB"
+      }
+    }
+  },
+  "timestamp": 1670329083770
+}

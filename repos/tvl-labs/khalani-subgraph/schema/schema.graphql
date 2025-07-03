@@ -1,0 +1,53 @@
+type BridgeHistory @entity {
+  id: ID!
+  transactionHash: Bytes!
+  blockNumber: Int!
+  blockTimestamp: BigInt!
+  author: Bytes!
+  srcMToken: Bytes!
+  srcAmount: BigInt!
+  mTokens: [Bytes!]!
+  mAmounts: [BigInt!]!
+  status: String!
+  gasLimit: BigInt!
+  gasPrice: BigInt!
+  callData: Bytes!
+  outcomeAssetStructure: Int!
+  fillStructure: Int!
+}
+
+type LiquidityHistory @entity {
+  id: ID!
+  transactionHash: Bytes!
+  blockNumber: Int!
+  blockTimestamp: BigInt!
+  author: Bytes!
+  srcMToken: Bytes!
+  srcAmount: BigInt!
+  mTokens: [Bytes!]!
+  mAmounts: [BigInt!]!
+  status: String!
+  gasLimit: BigInt!
+  gasPrice: BigInt!
+  callData: Bytes!
+  outcomeAssetStructure: Int!
+  fillStructure: Int!
+}
+
+type OutputIntent @entity {
+  id: ID!
+  transactionHash: Bytes!
+  blockNumber: Int!
+  blockTimestamp: BigInt!
+  author: Bytes!
+  srcMToken: Bytes!
+  srcAmount: BigInt!
+  mTokens: [Bytes!]!
+  mAmounts: [BigInt!]!
+  status: String!
+  gasLimit: BigInt!
+  gasPrice: BigInt!
+  callData: Bytes!
+  outcomeAssetStructure: Int!
+  fillStructure: Int!
+}

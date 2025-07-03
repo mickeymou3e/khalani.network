@@ -1,0 +1,159 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "hyperlane-relayer.fullname" . }}
+  labels:
+    {{- include "hyperlane-relayer.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "hyperlane-relayer.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "hyperlane-relayer.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "hyperlane-relayer.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          command: ["./relayer"]
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: CONFIG_FILES
+              value: /app/config/config.json
+            - name: HYP_DB
+              value: /usr/share/hyperlane
+            - name: HYP_RELAYER_ORIGINCHAINNAME
+              value: {{ required "Origin chain" .Values.relayer.originChain }}
+              # TODO: Remove ; might not be needed
+            - name: HYP_RELAYER_DESTINATIONCHAINNAMES
+              value: {{ required "Destination chains" .Values.relayer.destinationChains }}
+            - name: HYP_GASPAYMENTENFORCEMENT
+              value: '[{"type": "none"}]'
+              # TODO: Remove ; might not be needed
+            - name: HYP_GASPAYMENTENFORCEMENTPOLICY_TYPE
+              value: none
+            - name: HYP_RELAYCHAINS
+              value: {{ .Values.relayer.destinationChains }}
+            - name: "HYP_CHAIN_{{ .Values.relayer.originChainEnvName }}_NAME"
+              value: {{ required "Validator chain" .Values.relayer.originChain }}
+            # Use AWS KMS key for signing.
+            - name: HYP_VALIDATOR_TYPE
+              value: aws
+
+            - name: HYP_VALIDATOR_REGION
+              value: us-east-1
+            {{- $kmsKeyIds := .Values.relayer.destinationChainsKmsKeyIds -}}
+            {{- $awsRegion := .Values.relayer.awsRegion -}}
+
+            {{ range $index, $NAME := .Values.relayer.destinationChainsEnvNames }}
+            - name: "HYP_CHAINS_{{ $NAME }}_SIGNER_TYPE"
+              value: aws
+            - name: "HYP_CHAINS_{{ $NAME }}_SIGNER_ID"
+              value: {{ index $kmsKeyIds $index }}
+            - name: "HYP_CHAINS_{{ $NAME }}_SIGNER_REGION"
+              value: {{ $awsRegion }}
+            {{ end }}
+
+            - name: AWS_REGION
+              value: {{ .Values.relayer.awsRegion }}
+
+            {{- if or (eq .Values.relayer.connection.type "httpQuorum") (eq .Values.relayer.connection.type "httpFallback") }}
+            - name: "HYP_CHAINS_{{ .Values.relayer.originChainEnvName }}_CUSTOMRPCURLS"
+              valueFrom:
+                secretKeyRef:
+                  name: hyperlane-connection-urls
+                  key: "HYP_CHAINS_{{ .Values.relayer.originChainEnvName }}_CUSTOMRPCURLS"
+            {{- else }}
+            - name: "HYP_CHAINS_{{ .Values.relayer.originChainEnvName }}_CUSTOMRPCURLS"
+              valueFrom:
+                secretKeyRef:
+                  name: hyperlane-connection-urls
+                  key: "HYP_CHAINS_{{ .Values.relayer.originChainEnvName }}_CUSTOMRPCURLS"
+            {{- end }}
+            
+            - name: "HYP_CHAINS_{{ .Values.relayer.originChainEnvName }}_CONNECTION_TYPE"
+              value: {{ .Values.relayer.connection.type }}
+
+            {{ range $NAME := .Values.relayer.destinationChainsEnvNames }}
+            - name: "HYP_CHAINS_{{ $NAME }}_CUSTOMRPCURLS"
+              valueFrom:
+                secretKeyRef:
+                  name: hyperlane-connection-urls
+                  key: "HYP_CHAINS_{{ $NAME }}_CUSTOMRPCURLS"
+            {{ end }}
+
+            - name: HYP_METRICS
+              value: "9090"
+            - name: HYP_TRACING_LEVEL
+              value: info
+            - name: HYP_TRACING_FMT
+              value: pretty
+            - name: HYP_GAS_ESTIMATE_BUFFER
+              value: {{ .Values.relayer.extraGas | quote }}
+          ports:
+            - name: metrics
+              containerPort: 9090
+          volumeMounts:
+            - name: state
+              mountPath: /usr/share/hyperlane
+            - name: config-json
+              mountPath: /app/config/config.json
+              subPath: config.json
+            - name: secrets-store-inline # The volume mount is required for the Sync With Kubernetes Secrets
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+      volumes:
+        - name: state
+        - name: config-json
+          configMap:
+            name: config-json
+            items:
+              - key: config.json
+                path: config.json
+        - name: secrets-store-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "blockchain-rpcs-aws-secret-class"
+  volumeClaimTemplates:
+    - metadata:
+        name: state
+      spec:
+        storageClassName: {{ .Values.storage.storageClass }}
+        accessModes: [ {{ .Values.storage.accessModes }} ]
+        resources:
+          requests:
+            storage: {{ .Values.relayer.storage.size }}

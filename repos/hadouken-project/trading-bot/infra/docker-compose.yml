@@ -1,0 +1,27 @@
+version: '3'
+services:
+  step-functions:
+    image: amazon/aws-stepfunctions-local
+    volumes:
+      - ./test/fixtures:/home/StepFunctionsLocal/fixtures:ro
+    ports:
+      - 8083:8083
+    environment:
+      SFN_MOCK_CONFIG: '/home/StepFunctionsLocal/fixtures/fixtures.json'
+      WAIT_TIME_SCALE: 0
+      AWS_ACCESS_KEY_ID: AKIAXTTRUF7NU7KDMIED
+      AWS_SECRET_ACCESS_KEY: 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
+
+  test-runner:
+    image: node:16-buster
+    volumes:
+      - .:/app
+    links:
+      - step-functions
+    working_dir: /app
+    user: node
+    command: npm run test
+
+networks:
+  default:
+    name: stepFunctionIteratorNetwork

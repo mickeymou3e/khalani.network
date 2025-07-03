@@ -1,0 +1,29 @@
+workspace = { members = ["simple-example"] }
+[package]
+name = "el-sdk"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0"
+ark-bn254 = "0.4"
+ark-ff = "0.4"
+async-trait = "0.1"
+ethers = { version = "2.0", features = ["ws"] }
+futures = "0.3"
+hex = "0.4"
+num-bigint = "0.4"
+thiserror = "1.0"
+lazy_static = "1.4"
+prometheus = "0.13"
+prometheus-client = "0.22"
+prometheus-static-metric = "0.5"
+serde = { version = "1.0", features = ["derive"] }
+url = { version = "2.5", features = ["serde"] }
+tokio = { version = "1.37", features = ["macros", "sync", "rt"] }
+
+[[examples]]
+name = "simple"
+path = "example/simple/simple.rs"

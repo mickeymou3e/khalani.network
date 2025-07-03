@@ -1,0 +1,297 @@
+{
+  "AAVELinearPoolFactory": {
+    "create": [{
+      "input": {
+        "name": "Linear USDC",
+        "symbol": "HDK-LNR-USDC",
+        "mainToken": "{{tokens.USDC.address}}",
+        "wrappedToken": "{{tokens.hUSDC.address}}",
+        "upperTarget": "2100000000000000000000000",
+        "swapFeePercentage": "1500000000000000",
+        "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B"
+      }
+    }, {
+      "input": {
+        "name": "Linear USDT",
+        "symbol": "HDK-LNR-USDT",
+        "mainToken": "{{tokens.USDT.address}}",
+        "wrappedToken": "{{tokens.hUSDT.address}}",
+        "upperTarget": "2100000000000000000000000",
+        "swapFeePercentage": "1500000000000000",
+        "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B"
+      }
+    }]
+  },
+  "WeightedPoolFactory": [{
+    "create": {
+      "input": {
+        "name": "CKB/WBTC/ETH",
+        "symbol": "HDK-CKB-WBTC-ETH",
+        "tokens": [
+          "{{tokens.CKB.address}}",
+          "{{tokens.WBTC.address}}",
+          "{{tokens.ETH.address}}"
+        ],
+        "weights": [
+          "500000000000000000",
+          "500000000000000000",
+          "500000000000000000"
+        ],
+        "swapFeePercentage": "3000000000000000",
+        "delegate": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B"
+      }
+    }
+  }, {
+    "create": {
+      "input": {
+        "name": "CKB/ETH/USDC",
+        "symbol": "HDK-CKB-ETH-USDC",
+        "tokens": [
+          "{{tokens.CKB.address}}",
+          "{{tokens.ETH.address}}",
+          "{{tokens.USDC.address}}"
+        ],
+        "weights": [
+          "500000000000000000",
+          "500000000000000000",
+          "500000000000000000"
+        ],
+        "swapFeePercentage": "1500000000000000",
+        "delegate": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B"
+      }
+    }
+  }, {
+    "create": {
+      "input": {
+        "name": "ETH/USDC",
+        "symbol": "HDK-ETH-USDC",
+        "tokens": [
+          "{{tokens.ETH.address}}",
+          "{{tokens.USDC.address}}"
+        ],
+        "weights": [
+          "500000000000000000",
+          "500000000000000000"
+        ],
+        "swapFeePercentage": "1500000000000000",
+        "delegate": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B"
+      }
+    }
+  }, {
+    "create": {
+      "input": {
+        "name": "BNB/USDC",
+        "symbol": "HDK-BNB-USDC",
+        "tokens": [
+          "{{tokens.BNB.address}}",
+          "{{tokens.USDC.address}}"
+        ],
+        "weights": [
+          "500000000000000000",
+          "500000000000000000"
+        ],
+        "swapFeePercentage": "1500000000000000",
+        "delegate": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B"
+      }
+    }
+  }, {
+    "create": {
+      "input": {
+        "name": "WBTC/USDC",
+        "symbol": "HDK-WBTC-USDC",
+        "tokens": [
+          "{{tokens.WBTC.address}}",
+          "{{tokens.USDC.address}}"
+        ],
+        "weights": [
+          "500000000000000000",
+          "500000000000000000"
+        ],
+        "swapFeePercentage": "1500000000000000",
+        "delegate": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B"
+      }
+    }
+  }, {
+    "create": {
+      "input": {
+        "name": "CKB/USDC",
+        "symbol": "HDK-CKB-USDC",
+        "tokens": [
+          "{{tokens.CKB.address}}",
+          "{{tokens.USDC.address}}"
+        ],
+        "weights": [
+          "500000000000000000",
+          "500000000000000000"
+        ],
+        "swapFeePercentage": "1500000000000000",
+        "delegate": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B"
+      }
+    }
+  }, {
+    "create": {
+      "input": {
+        "name": "CKB/ETH",
+        "symbol": "HDK-CKB-ETH",
+        "tokens": [
+          "{{tokens.CKB.address}}",
+          "{{tokens.ETH.address}}"
+        ],
+        "weights": [
+          "500000000000000000",
+          "500000000000000000"
+        ],
+        "swapFeePercentage": "1500000000000000",
+        "delegate": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B"
+      }
+    }
+  }, {
+    "create": {
+      "input": {
+        "name": "CKB/WBTC",
+        "symbol": "HDK-CKB-WBTC",
+        "tokens": [
+          "{{tokens.CKB.address}}",
+          "{{tokens.WBTC.address}}"
+        ],
+        "weights": [
+          "500000000000000000",
+          "500000000000000000"
+        ],
+        "swapFeePercentage": "1500000000000000",
+        "delegate": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B"
+      }
+    }
+  }],
+  "ComposableStablePoolFactory": [{
+    "create": {
+      "input": {
+        "name": "2Pool",
+        "symbol": "HDK-B-2Pool",
+        "tokens": [
+          "{{pools[HDK-LNR-USDC].address}}",
+          "{{pools[HDK-LNR-USDT].address}}"
+        ],
+        "rateProviders": [
+          "{{pools[HDK-LNR-USDC].address}}",
+          "{{pools[HDK-LNR-USDT].address}}"
+        ],
+        "priceRateCacheDuration": [
+          "1000",
+          "1000"
+        ],
+        "amplificationParameter": "300",
+        "swapFeePercentage": "1000000000000000",
+        "exemptFromYieldProtocolFeeFlags": [
+          false,
+          false
+        ],
+        "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B"
+      }
+    }
+  }, {
+    "create": {
+      "input": {
+        "name": "BUSD",
+        "symbol": "HDK-BUSD",
+        "tokens": [
+          "{{tokens.BUSD.address}}",
+          "{{tokens.BUSDbsc.address}}"
+        ],
+        "rateProviders": [
+          "0x0000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000"
+        ],
+        "priceRateCacheDuration": [
+          "0",
+          "0"
+        ],
+        "amplificationParameter": "300",
+        "swapFeePercentage": "1000000000000000",
+        "exemptFromYieldProtocolFeeFlags": [
+          false,
+          false
+        ],
+        "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B"
+      }
+    }
+  }, {
+    "create": {
+      "input": {
+        "name": "BUSD",
+        "symbol": "HDK-BUSD",
+        "tokens": [
+          "{{tokens.BUSD.address}}",
+          "{{tokens.BUSDbsc.address}}"
+        ],
+        "rateProviders": [
+          "0x0000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000"
+        ],
+        "priceRateCacheDuration": [
+          "0",
+          "0"
+        ],
+        "amplificationParameter": "300",
+        "swapFeePercentage": "1000000000000000",
+        "exemptFromYieldProtocolFeeFlags": [
+          false,
+          false
+        ],
+        "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B"
+      }
+    }
+  }, {
+    "create": {
+      "input": {
+        "name": "USDC BSC Metapool",
+        "symbol": "HDK-USDC",
+        "tokens": [
+          "{{pools[HDK-B-2Pool].address}}",
+          "{{tokens.USDCbsc.address}}"
+        ],
+        "rateProviders": [
+          "{{tokens[HDK-B-2Pool].address}}",
+          "0x0000000000000000000000000000000000000000"
+        ],
+        "priceRateCacheDuration": [
+          "1000",
+          "0"
+        ],
+        "amplificationParameter": "300",
+        "swapFeePercentage": "1000000000000000",
+        "exemptFromYieldProtocolFeeFlags": [
+          false,
+          false
+        ],
+        "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B"
+      }
+    }
+  }, {
+    "create": {
+      "input": {
+        "name": "USDT BSC Metapool",
+        "symbol": "HDK-USDT",
+        "tokens": [
+          "{{pools[HDK-B-2Pool].address}}",
+          "{{tokens.USDTbsc.address}}"
+        ],
+        "rateProviders": [
+          "{{tokens[HDK-B-2Pool].address}}",
+          "0x0000000000000000000000000000000000000000"
+        ],
+        "priceRateCacheDuration": [
+          "1000",
+          "0"
+        ],
+        "amplificationParameter": "300",
+        "swapFeePercentage": "1000000000000000",
+        "exemptFromYieldProtocolFeeFlags": [
+          false,
+          false
+        ],
+        "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B"
+      }
+    }
+  }]
+}

@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: ingress-external-auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ingress-external-auth
+  serviceName: ingress-external-auth
+  template:
+    metadata:
+      labels:
+        app: ingress-external-auth
+    spec:
+      serviceAccountName: {{ include "graph-node.serviceAccountName" . }}
+      containers:
+        - name: external-auth
+          image: "ghcr.io/slok/simple-ingress-external-auth:d66482e51e1cc761af31013d9a2279604ecb7470"
+          args: ["--token-config-file", "/mnt/auth-bearer-token/config"]
+          env:
+            - name: config
+              valueFrom:
+                secretKeyRef:
+                  name: auth-bearer-token-secret
+                  key: config
+          volumeMounts:
+            - name: secrets-store-inline
+              mountPath: "/mnt/auth-bearer-token"
+              readOnly: true
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 8081
+              protocol: TCP
+          
+      volumes:
+        - name: secrets-store-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "auth-bearer-token-secret-class"

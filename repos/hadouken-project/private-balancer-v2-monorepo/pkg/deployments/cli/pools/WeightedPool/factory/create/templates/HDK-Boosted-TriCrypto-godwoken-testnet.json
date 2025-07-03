@@ -1,0 +1,26 @@
+{
+  "name": "Hadouken Boosted TriCrypto",
+  "symbol": "HDK-Boosted-CKB-ETH-USD",
+  "tokens": [
+    "0xa562428520a15a1eda3bb2a62fd9116f35fa98c1",
+    "0xa05d329eddc923bc182ecd7e05fb92475bf3dd79",
+    "0xccffa4fff6dab00a69778cb574044245b9de4fec"
+  ],
+  "weights": [
+    "330000000000000000",
+    "330000000000000000",
+    "340000000000000000"
+  ],
+  "rateProviders": [
+    "0xa562428520a15a1eda3bb2a62fd9116f35fa98c1",
+    "0xa05d329eddc923bc182ecd7e05fb92475bf3dd79",
+    "0xccffa4fff6dab00a69778cb574044245b9de4fec"
+  ],
+  "swapFeePercentage": "3000000000000000",
+  "delegate": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+  "initialLiquidity": {
+    "0xa562428520a15a1eda3bb2a62fd9116f35fa98c1": "200000000000000000",
+    "0xa05d329eddc923bc182ecd7e05fb92475bf3dd79": "200000000000000000",
+    "0xccffa4fff6dab00a69778cb574044245b9de4fec": "200000000000000000"
+  }
+}

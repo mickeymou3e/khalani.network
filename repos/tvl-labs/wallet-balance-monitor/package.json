@@ -1,0 +1,26 @@
+{
+  "name": "wallet-balance-monitor",
+  "version": "1.0.0",
+  "description": "Wallet Balance Monitor is a simple background bot that monitors ETH balance of a list of wallets on multiple chains, and pushes the current balances to a Prometheus service.",
+  "main": "src/index.ts",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "start": "node dist/index.js --addresses-file dist/addresses.json --rpc-urls-file dist/rpc-urls.json --interval 10"
+  },
+  "dependencies": {
+    "process": "^0.11.10",
+    "prom-client": "^14.0.1",
+    "web3": "^1.9.0",
+    "yargs": "^17.7.1"
+  },
+  "devDependencies": {
+    "@types/node": "16.11.7",
+    "@types/yargs": "^17.0.24",
+    "@types/jest": "^29.1.0",
+    "ts-jest": "^29.1.0",
+    "jest": "^29.1.0",
+    "typescript": "^5.0.4"
+  }
+}

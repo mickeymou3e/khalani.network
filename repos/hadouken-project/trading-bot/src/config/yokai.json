@@ -1,0 +1,24 @@
+{
+  "pools": [
+    {
+      "name": "yokaiUsdcWckb",
+      "tokens": ["USDC", "CKB"],
+      "address": "0xbcaaedd0337d6c311c9d49f69b44c419b22ea17a"
+    },
+    {
+      "name": "yokaiBnbbscWckb",
+      "tokens": ["BNB|bsc", "CKB"],
+      "address": "0x7535c308e4d56b1d471faf60e852a7ef58408992"
+    },
+    {
+      "name": "yokaiEthWckb",
+      "tokens": ["ETH", "CKB"],
+      "address": "0x48d14809e46c10b8789c30afef5e181a79993843"
+    },
+    {
+      "name": "yokaiWbtcWckb",
+      "tokens": ["WBTC|eth", "CKB"],
+      "address": "0xae448332e434b65ef2535055f6d8a1e3461c6f73"
+    }
+  ]
+}

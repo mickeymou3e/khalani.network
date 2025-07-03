@@ -1,0 +1,9 @@
+apiVersion: v2
+name: alert-rules
+description: Prometheus alert rules tracking the critical services of the Khalani protocol
+
+type: application
+
+version: 0.1.0
+
+appVersion: "1.16.0"

@@ -1,0 +1,42 @@
+name: Publish to Github Packages
+
+on:
+  release:
+    types: [created]
+    
+env:
+  NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+jobs:
+  publish:
+    runs-on: ubuntu-22.04 
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.x'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@tvl-labs'
+          always-auth: true
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Run Forge build
+        working-directory: solidity/khalani-core
+        run: |
+          forge --version
+          forge install
+        id: build
+
+      - run: yarn --frozen-lockfile
+        working-directory: solidity/khalani-core
+      - run: yarn typechain
+        working-directory: solidity/khalani-core
+      - run: yarn config set @tvl-labs:registry https://npm.pkg.github.com
+        working-directory: solidity/khalani-core
+      - run: yarn publish --registry https://npm.pkg.github.com
+        working-directory: solidity/khalani-core
+        

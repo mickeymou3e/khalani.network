@@ -1,0 +1,44 @@
+# DO NOT COMMIT SECRETS IN THIS FILE.
+
+# Alertmanager configuration. We currently use this approach https://prometheus-operator.dev/docs/user-guides/alerting/#using-a-kubernetes-secret
+# to configure the Alertmanager, because we want to use Discord receiver that is not fully supported yet https://github.com/prometheus-operator/prometheus-operator/issues/5251
+# So we have to override the raw config of the Alertmanager here and create a secret "monitoring/alertmanager-config"
+
+global:
+  resolve_timeout: 5m
+inhibit_rules:
+  - source_matchers:
+      - "severity = critical"
+    target_matchers:
+      - "severity =~ warning|info"
+    equal:
+      - "namespace"
+      - "alertname"
+  - source_matchers:
+      - "severity = warning"
+    target_matchers:
+      - "severity = info"
+    equal:
+      - "namespace"
+      - "alertname"
+  - source_matchers:
+      - "alertname = InfoInhibitor"
+    target_matchers:
+      - "severity = info"
+    equal:
+      - "namespace"
+route:
+  group_by: ["alertname", "job"]
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 12h
+  receiver: "discord"
+receivers:
+  - name: discord
+    discord_configs:
+      # Log in to a Discord Server as admin => click Gear button => Edit Channel => Integrations => Webhooks => Create webhook => Copy WebHook URL
+      - webhook_url: "https://discord.com/api/webhooks/<WEB_HOOK>/<WEB_HOOK>"
+        message: '{{ template "tvl.discord.message" . }}'
+        title: '{{ template "tvl.discord.title" . }}'
+templates:
+  - "/etc/alertmanager/config/*.tmpl"

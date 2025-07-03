@@ -1,0 +1,14 @@
+{
+  "version": "0.0.0",
+  "npmClient": "yarn",
+  "packages": ["apps/*", "libs/*"],
+  "command": {
+    "publish": {
+      "ignoreChanges": ["*.md", "*.test.js"],
+      "message": "chore(release): publish"
+    },
+    "bootstrap": {
+      "hoist": true
+    }
+  }
+}

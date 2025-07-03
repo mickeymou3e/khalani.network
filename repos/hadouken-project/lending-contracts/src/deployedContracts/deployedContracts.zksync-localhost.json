@@ -1,0 +1,48 @@
+{
+  "treasury": "0x2b1D5a347298BF2B331f1c5305426c00995934BA",
+  "hadoukenCollector": "0x9cF4759532ADe8C37B3f279F9474E5ede8E290eb",
+  "tokens": {
+    "WETH.e": {
+      "address": "0xb7d4c7f78F587ba8c8D96a74C54B70787E48E148"
+    },
+    "WBTC.e": {
+      "address": "0xb955e5BE96344A4363eFB70E90f7dEdB6757D661"
+    },
+    "USDT.e": {
+      "address": "0x866Cd41453089a2610E67c440f2E73a3b6f794a7"
+    },
+    "USDC.e": {
+      "address": "0xA5d2f958F013F08218A7cE77cC3C78ce01a2Ffe5"
+    }
+  },
+  "registry": "0x628e8b27F0c5c443a68297893c920328dD18e611",
+  "registryProvider": "0x628e8b27F0c5c443a68297893c920328dD18e611",
+  "addressProvider": "0xCFB35C73B8CB2B4b8F246baCc101fC73e137D331",
+  "libraries": {
+    "reserve": "0x82Efa15637658B8e4943B109247cF68bB4c5b1F1",
+    "generic": "0x6d6973Bf5054ce17EB3001914281190B7db1DB07",
+    "validation": "0x548d143c3Cdc00EA1E3e6B11FefbEf6EeB304923"
+  },
+  "stableAndVariableTokensHelper": "0xC00515D76a50D523550C1DA1727cf9Eab8f560F2",
+  "lendingRateOracle": "0xaad5513675a8A962174842615eC87099ff8Ba3bf",
+  "lendingPool": "0x891b221367c8AAcFdA4825c93989F7Fe10B1B07E",
+  "lendingPoolProxy": "0xd6517071D5CD990A6B0DF536bdEeaFd3b2a6Ef3c",
+  "poolConfigurator": "0xFbF18d0fef1c6445D569Df099275C1B7b02F3749",
+  "poolConfiguratorProxy": "0x2Aec86b49edD3F6821335A26bEbc2711304F656F",
+  "variableDebtToken": "0xe498215f123c94C2a52105E47378623bEF2f2e15",
+  "stableDebtToken": "0x59B1C3277688E6059ECC55d0ca16310c23bA679c",
+  "aToken": "0x0C891487604ae3B5870ceC38a75c065b43c7D52D",
+  "aTokenAndRateHelper": "0x9e25820E1f5682478235C45fC2c607E8aA9DBF4E",
+  "oracleBrandProvider": "0xB9D6120056a5FbbBEDE2016CA30A41c2A43D5aA9",
+  "diaOracle": "0xc4dcc15DFE5e0Af629Ee593ec4FE92a41434AC23",
+  "diaOracleProvider": "0xa5faAbf4A37b366e54965fe6abF65119443bb055",
+  "hadoukenOracle": "0x1FBd605b767FA0Ca8130D977Ca7F3f7bf5a9397f",
+  "stdReference": "0x0827b91b242AAc9Fa0181586b5486bbe1B7cc5e1",
+  "dataProvider": "0x9d8d51f663DaE2a7d4B42bCa8ba1053047dEa3d7",
+  "collateralManager": "0xF804B3E113FcF4EdB52561F229237149Db43C770",
+  "firstBlockNumber": 260,
+  "lastBlockNumber": 383,
+  "userBalances": "0x2E71f98f285e99C13d4716E55d20a4f0A5C3A5d0",
+  "UIHelper": "0x5d9B901E8DBc5630bCDd62BC2AA6fc8211039baA",
+  "wEthGateway": ""
+}

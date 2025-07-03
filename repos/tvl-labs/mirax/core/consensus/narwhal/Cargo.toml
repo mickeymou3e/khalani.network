@@ -1,0 +1,29 @@
+[package]
+name = "mirax-narwhal"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+arc-swap.workspace = true
+dashmap.workspace = true
+derive_more.workspace = true
+flume.workspace = true
+futures.workspace = true
+log.workspace = true
+serde.workspace = true
+smol_str.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+
+mirax-codec.workspace = true
+mirax-consensus-traits.workspace = true
+mirax-crypto.workspace = true
+mirax-error.workspace = true
+mirax-hasher.workspace = true
+mirax-merkle.workspace = true
+mirax-network.workspace = true
+mirax-time.workspace = true
+mirax-types.workspace = true
+mirax-verification.workspace = true

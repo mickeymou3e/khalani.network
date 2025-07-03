@@ -1,0 +1,12 @@
+[package]
+name = "mirax-cache"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+async-lock.workspace = true
+parking_lot.workspace = true
+quick_cache.workspace = true
+schnellru.workspace = true

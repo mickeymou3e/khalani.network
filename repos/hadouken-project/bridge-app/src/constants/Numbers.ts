@@ -1,0 +1,3 @@
+export const TOOLTIP_DISPLAY_DECIMALS = 13
+export const ASSET_DISPLAY_DECIMALS = 3
+export const REFRESH_TOOLTIPS_MS = 5000

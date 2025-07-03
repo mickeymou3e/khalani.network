@@ -1,0 +1,81 @@
+name: CI
+
+on:
+  push:
+    branches-ignore:
+      - master
+
+env:
+  NODE_VERSION: '18.x'
+
+jobs:
+  webapp_ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.1
+        with:
+          persist-credentials: false
+
+      - name: Use Node.js v${{ env.NODE_VERSION }} & Auth for GitHub Packages
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: https://npm.pkg.github.com/
+          scope: '@tvl-labs'
+          always-auth: true
+          token: ${{ secrets.PACKAGES_READ_TOKEN }}
+
+      - name: Cache NPM dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.OS }}-npm-cache-rf-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-npm-cache-rf
+
+      - name: Write .npmrc for GitHub Packages
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
+          echo "@tvl-labs:registry=https://npm.pkg.github.com/" >> .npmrc
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PACKAGES_READ_TOKEN }}
+
+      - name: Install yarn dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Typecheck Root
+        run: yarn typecheck
+        working-directory: ./
+
+      - name: Lint Root
+        run: yarn lint
+        working-directory: ./
+        env:
+          CI: false
+
+      - name: Test Root
+        run: yarn test
+        working-directory: ./
+
+      - name: Typecheck Solver
+        run: yarn typecheck:solver
+        working-directory: ./
+
+      - name: Lint Solver
+        run: yarn lint:solver
+        working-directory: ./
+        env:
+          CI: false
+
+      - name: Typecheck Hyperstream
+        run: yarn typecheck:hyperstream
+        working-directory: ./
+
+      - name: Lint Hyperstream
+        run: yarn lint:hyperstream
+        working-directory: ./
+        env:
+          CI: false

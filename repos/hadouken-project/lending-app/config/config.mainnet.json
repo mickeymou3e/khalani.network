@@ -1,0 +1,14 @@
+{
+  "bridgePage": "https://app.hadouken.finance/bridge",
+  "swapPage": "https://app.hadouken.finance/swap",
+  "sentry": "https://3e69dfdfa3534b13a009038a11f0ada6@o4504333193969664.ingest.sentry.io/4504333276938240",
+  "defaultChainId": "0x116ea",
+  "supportedNetworks": ["0x116ea"],
+  "explorerUrl": {
+    "godwoken": "https://v1.gwscan.com",
+    "ckb": "https://explorer.nervos.org",
+    "ethereum": "https://etherscan.io",
+    "goerli": "https://goerli.etherscan.io",
+    "zkSync": "https://explorer.zksync.io"
+  }
+}

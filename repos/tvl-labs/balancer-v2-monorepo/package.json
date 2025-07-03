@@ -1,0 +1,60 @@
+{
+  "name": "@balancer-labs/v2-monorepo",
+  "private": true,
+  "description": "Balancer v2 Monorepo",
+  "license": "GPL-3.0-only",
+  "engines": {
+    "node": ">=12.10"
+  },
+  "contributors": [
+    "Daniel Fernandez <daniel@balancer.finance>",
+    "Facu Spagnuolo <facu@balancer.finance>",
+    "Fernando Martinelli <fernando@balancer.finance>",
+    "Greg Taschuk <greg@balancer.finance>",
+    "Jeffrey Bennett <jeff@balancer.finance>",
+    "John Grant <john@balancer.finance>",
+    "Mike McDonald <mike@balancer.finance>",
+    "Nicolás Venturo <nico@balancer.finance>",
+    "Tom French <tom@balancer.finance>"
+  ],
+  "scripts": {
+    "build:v2-vault": "yarn workspace @balancer-labs/v2-vault run build",
+    "build:pool-linear": "yarn workspace @balancer-labs/v2-pool-linear run build",
+    "build:pool-stable": "yarn workspace @balancer-labs/v2-pool-stable run build",
+    "build:pool-weighted": "yarn workspace @balancer-labs/v2-pool-weighted run build",
+    "build:pool-utils": "yarn workspace @balancer-labs/v2-pool-utils run build",
+    "build:solidity-utils": "yarn workspace @balancer-labs/v2-solidity-utils run build",
+    "build:standalone-utils": "yarn workspace @balancer-labs/v2-standalone-utils run build",
+    "build:balancer-js": "yarn workspace @balancer-labs/balancer-js run build",
+    "build:distributors": "yarn workspace @balancer-labs/v2-distributors run build",
+    "build:governance-scripts": "yarn workspace @balancer-labs/v2-governance-scripts run build",
+    "build:interfaces": "yarn workspace @balancer-labs/v2-interfaces run build",
+    "build:liquidity-mining": "yarn workspace @balancer-labs/v2-liquidity-mining run build",
+    "build:typechain": "yarn workspace @balancer-labs/typechain run build",
+    "build:typechain-hadouken": "yarn workspace @tvl-labs/typechain run build",
+    "build:deployments": "yarn workspace @balancer-labs/v2-deployments run build",
+    "build:config": "yarn workspace @hadouken-project/config run build",
+    "build": "yarn build:v2-vault && yarn build:pool-linear && yarn build:pool-stable && yarn build:pool-weighted && yarn build:pool-utils && yarn build:solidity-utils && yarn build:standalone-utils && yarn build:balancer-js && yarn build:distributors && yarn build:governance-scripts && yarn build:interfaces && yarn build:liquidity-mining && yarn build:typechain && yarn build:typechain-hadouken && yarn build:deployments && yarn build:config",
+    "lint": "yarn workspaces foreach --parallel --verbose run lint",
+    "test": "yarn workspaces foreach --parallel --verbose run test",
+    "clean": "yarn workspaces foreach --parallel --verbose run clean",
+    "publish:typechain": "yarn workspace @tvl-labs/typechain npm publish",
+    "publish:config": "yarn workspace @hadouken-project/config npm publish"
+  },
+  "workspaces": [
+    "pkg/*",
+    "pvt/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hadouken-project/private-balancer-v2-monorepo.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "devDependencies": {
+    "@types/prompts": "^2.0.14",
+    "commander": "^9.4.0",
+    "prompts": "^2.4.2"
+  }
+}

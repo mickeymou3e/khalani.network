@@ -1,0 +1,36 @@
+{
+  "family": "arcadia-worker",
+  "taskRoleArn": "arn:aws:iam::803035318642:role/ecsTaskRole",
+  "executionRoleArn": "arn:aws:iam::803035318642:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "runtimePlatform": {
+    "cpuArchitecture": "ARM64",
+    "operatingSystemFamily": "LINUX"
+  },
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "3072",
+  "containerDefinitions": [
+    {
+      "name": "arcadia-worker",
+      "image": "${AWS_ECR_REPOSITORY_URL}:latest",
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "hostPort": 3000,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "environment": [],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/arcadia-worker",
+          "awslogs-region": "us-west-2",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}

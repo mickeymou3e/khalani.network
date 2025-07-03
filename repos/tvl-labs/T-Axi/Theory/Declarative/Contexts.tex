@@ -1,0 +1,120 @@
+\section{Contexts}
+
+\begin{frame}{Operations on contexts}
+
+Operations on contexts: \\
+$\subusagectx{\Gamma_1}{\Gamma_2}$ -- context subusaging \\
+$\addctx{\Gamma_1}{\Gamma_2}$ -- context addition \\
+$\scalectx{r}{\Gamma}$ -- context scaling \\
+$\cartesianize{\Gamma}$ -- cartesianization \\
+$\varctx{\Gamma}{x}$ -- spotlight $x$
+
+\end{frame}
+
+\begin{frame}{Context subusaging}
+
+\begin{center}
+  $\infrule{}{\subusagectx{\emptyctx}{\emptyctx}}$
+
+  \vspace{1em}
+
+  $\infrule{\subusagectx{\Gamma_1}{\Gamma_2} \quad \subusage{r_1}{r_2}}{\subusagectx{\extend{\Gamma_1}[r_1]{x}{A}}{\extend{\Gamma_2}[r_2]{x}{A}}}$
+
+  \vspace{2em}
+
+  $\infrule{\subusagectx{\Gamma_1}{\Gamma_2} \quad \subusage{r_1}{r_2}}{\subusagectx{\extend{\Gamma_1}[r_1]{x}{A}[e]}{\extend{\Gamma_2}[r_2]{x}{A}[e]}}$
+
+  \vspace{2em}
+
+  $\infrule{\subusagectx{\Gamma_1}{\Gamma_2}}{\subusagectx{\assume{\Gamma_1}{h}{P}}{\assume{\Gamma_2}{h}{P}}}$
+
+  \vspace{2em}
+
+  $\infrule{\subusagectx{\Gamma_1}{\Gamma_2} \quad \subusage{r_1}{r_2}}{\subusagectx{\extendtype{\Gamma_1}{a}[r_1]}{\extendtype{\Gamma_2}{a}[r_2]}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Context addition}
+
+\begin{center}
+  $\addctx{\emptyctx}{\emptyctx} = \emptyctx$ \\
+  $\addctx{(\extend{\Gamma_1}[r_1]{x}{A})}{(\extend{\Gamma_2}[r_2]{x}{A})} = \extend{(\addctx{\Gamma_1}{\Gamma_2})}[(\addqty{r_1}{r_2})]{x}{A}$ \\
+  $\addctx{(\extend{\Gamma_1}[r_1]{x}{A}[e])}{(\extend{\Gamma_2}[r_2]{x}{A}[e])} = \extend{(\addctx{\Gamma_1}{\Gamma_2})}[(\addqty{r_1}{r_2})]{x}{A}[e]$ \\
+  $\addctx{(\assume{\Gamma_1}{h}{P})}{(\assume{\Gamma_2}{h}{P})} = \assume{(\addctx{\Gamma_1}{\Gamma_2})}{h}{P}$ \\
+  $\addctx{(\extendtype{\Gamma_1}{a}[r])}{(\extendtype{\Gamma_2}{a}[r])} = \extendtype{(\addctx{\Gamma_1}{\Gamma_2})}{a}[r]$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Context scaling}
+
+\begin{center}
+  $\scalectx{s}{\emptyctx} = \emptyctx$ \\
+  $\scalectx{s}{(\extend{\Gamma}[r]{x}{A})} = \extend{\scalectx{s}{\Gamma}}[(\mulqty{s}{r})]{x}{A}$ \\
+  $\scalectx{s}{(\extend{\Gamma}[r]{x}{A}[e])} = \extend{\scalectx{s}{\Gamma}}[(\mulqty{s}{r})]{x}{A}[e]$ \\
+  $\scalectx{s}{(\assume{\Gamma}{h}{P})} = \assume{\scalectx{s}{\Gamma}}{h}{P}$ \\
+  $\scalectx{s}{(\extendtype{\Gamma}{a}[r])} = \extendtype{\scalectx{s}{\Gamma}}{a}[r]$ \\
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Spotlight}
+
+\begin{center}
+  $\varctx{\emptyctx}{x} = \mathbf{undefined}$ \\
+  $\varctx{\extend{\Gamma}[r]{x}{A}}{x} = \extend{\scalectx{\Zero}{\Gamma}}[\One]{x}{A}$ \\
+  $\varctx{\extend{\Gamma}[r]{y}{A}}{x} = \extend{\varctx{\Gamma}{x}}[\Zero]{y}{A}$ \\
+  $\varctx{\extend{\Gamma}[r]{x}{A}[e]}{x} = \extend{\scalectx{\Zero}{\Gamma}}[\One]{x}{A}[e]$ \\
+  $\varctx{\extend{\Gamma}[r]{y}{A}[e]}{x} = \extend{\varctx{\Gamma}{x}}[\Zero]{y}{A}[e]$ \\
+  $\varctx{\assume{\Gamma}{h}{P}}{x} = \assume{\varctx{\Gamma}{x}}{h}{P}$ \\
+  $\varctx{\extendtype{\Gamma}{a}[r]}{x} = \extendtype{\varctx{\Gamma}{x}}{a}[r]$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Cartesianization}
+
+Cartesianization turns a context into a context with the same shape but unlimited resources.
+
+\begin{center}
+  $\cartesianize{\emptyctx} = \emptyctx$ \\
+  $\cartesianize{\extend{\Gamma}[r]{x}{A}} = \extend{\cartesianize{\Gamma}}{x}{A}$ \\
+  $\cartesianize{\extend{\Gamma}[r]{x}{A}[e]} = \extend{\cartesianize{\Gamma}}{x}{A}[e]$ \\
+  $\cartesianize{\assume{\Gamma}{h}{P}} = \assume{\cartesianize{\Gamma}}{h}{P}$ \\
+  $\cartesianize{\extendtype{\Gamma}{a}[r]} = \extendtype{\cartesianize{\Gamma}}{a}[r]$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Well-formed contexts}
+
+\begin{center}
+  $\infrule{}{\ctx[\computable]{\emptyctx}}$
+
+  \vspace{2em}
+
+  $\infrule{\ctx[\computable]{\Gamma} \quad \type[\cartesianize{\Gamma}]{A}[s] \quad \sidecond{x \notin \Gamma}}{\ctx[\computable]{\extend{\Gamma}[r]{x}{A}}}$
+
+  \vspace{2em}
+
+  $\infrule{\ctx[\computable]{\Gamma} \quad \typing[\cartesianize{\Gamma}][\noncomputable]{e}{A} \quad \sidecond{x \notin \Gamma}}{\ctx[\computable]{\extend{\Gamma}[r]{x}{A}[e]}}$
+
+  \vspace{2em}
+
+  $\infrule{\ctx[\computable]{\Gamma} \quad \prop[\cartesianize{\Gamma}]{P} \quad \sidecond{h \notin \Gamma}}{\ctx[\computable]{\assume{\Gamma}{h}{P}}}$
+
+  \vspace{2em}
+
+  $\infrule{\ctx[\computable]{\Gamma} \quad a \notin \Gamma \quad r \neq \Zero}{\ctx[\computable]{\extendtype{\Gamma}{a}[r]}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Well-formed cartesian contexts}
+
+\begin{center}
+  $\infrule{\ctx[\computable]{\Gamma} \quad \sidecond{\Gamma = \cartesianize{\Gamma}}}{\ctx[\noncomputable]{\Gamma}}$
+\end{center}
+
+\end{frame}

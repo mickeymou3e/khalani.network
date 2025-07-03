@@ -1,0 +1,20 @@
+{
+  "transaction": {
+    "hash": "0x2b951bd33a8c796ace791a8ed1e48f63d48dec4b4d221e699fefaa3dcf8b909d",
+    "blockNumber": 416941
+  },
+  "data": {
+    "StaticAToken": {
+      "deploy": {
+        "input": {
+          "name": "Wrapped hETH",
+          "symbol": "hETH",
+          "lendingPool": "0x50ff8715E9882a6a184D51D0952Db1Eb311d1988",
+          "aToken": "0x0A0f1D2A3ea1E0442EbC8CC3a2139a2E7B314AA5"
+        },
+        "output": "0x85c8BDA7498F575243Cce55Ad859894Fe67cf0bC"
+      }
+    }
+  },
+  "timestamp": 1676969246024
+}

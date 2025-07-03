@@ -1,0 +1,52 @@
+load "definitions.ath"
+load "list-of"
+
+
+define prove-valid-state := method (events-log:Events proc-set:Procs proc-state:GlobalProcState msg-set:MsgSet assertion)
+    conclude (valid-global-state (system-state events-log proc-set proc-state msg-set))
+    let {
+        specd := (!uspec* assertion [events-log proc-set proc-state msg-set]);
+        right-to-left := (!right-iff specd);
+        left-ro-right := (!left-iff specd);
+        
+        existential := (
+                    exists loggedEvent p events' . 
+                        (events-log = (loggedEvent :: events')) &
+                        (p in proc-set) &
+                        (valid-event (pair-right loggedEvent) p msg-set)
+        );
+        proved-existential := (!force existential)
+        
+
+    }
+   (!mp right-to-left (!right-either 
+                            (events-log = Nil & msg-set = null & proc-state = (DMap.empty-map Empty))
+                            proved-existential  
+                      )
+    )
+
+
+# Prove that going from global-state-begin -> next-global-state-variant-1 is valid
+define prove-valid-exec := method (global1 global2 valid-exec-semantics)
+    let {
+
+            specd := (!uspec* valid-exec-semantics [global1 global2]);
+            right-to-left := (!right-iff specd);
+            existential :=  ( exists events events' msgSet msgSet' state1 state2 procs msgSet2 loggedEvent' p procState .
+                                global1 = (system-state events procs state1 msgSet) &
+                                global2 = (system-state events' procs state2 msgSet') &
+                                (List.in loggedEvent' events') &
+                                (p in procs) &
+                                (valid-event (pair-right loggedEvent') p msgSet) &
+                                (consensus-step p (state1 at p) (pair-right loggedEvent')) = (pair procState msgSet2) &
+                                (state2 at p) = procState &
+                                (agree-on state1 state2 (procs \ (set-with p))) &
+                                (msgSet' = (msgSet2 \/ msgSet))
+
+                            )
+
+            
+        }
+    (!mp right-to-left (!force existential))
+
+

@@ -1,0 +1,108 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "spoke-chain-caller.fullname" . }}
+  labels:
+    {{- include "spoke-chain-caller.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "spoke-chain-caller.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "spoke-chain-caller.labels" . | nindent 8 }}
+    {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "spoke-chain-caller.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: RUST_LOG
+              value: khalani_solver=debug,spoke_chain_caller=debug
+            - name: SEPOLIA_RPC_URL
+              valueFrom:
+                secretKeyRef:
+                  name: solver-connection-urls
+                  key: SEPOLIA_RPC_URL
+            - name: SEPOLIA_WS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: solver-connection-urls
+                  key: SEPOLIA_WS_URL
+            - name: FUJI_RPC_URL
+              valueFrom:
+                secretKeyRef:
+                  name: solver-connection-urls
+                  key: FUJI_RPC_URL
+            - name: FUJI_WS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: solver-connection-urls
+                  key: FUJI_WS_URL
+            - name: PRIVATE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: solver-connection-urls
+                  key: SPOKE_CHAIN_CALLER_PRIVATE_KEY
+          command: ["/bin/sh", "-c"]
+          args: ["spoke-chain-caller --private-key $PRIVATE_KEY --config-file /config/config.json"]
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: config-volume
+              mountPath: /config
+            - name: secrets
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
+          {{- with .Values.volumeMounts }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+      volumes:
+        - name: config-volume
+          configMap:
+            name: {{ include "spoke-chain-caller.solverConfigMapName" . }}
+        - name: secrets
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "solver-connection-urls-class"
+      {{- with .Values.volumes }}
+      {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

@@ -1,0 +1,18 @@
+{
+  "lp_contract": "",
+  "swap_address": "",
+  "lp_token_address": "",
+  "gauge_addresses": [""],
+  "lp_constructor": {
+      "name": "",
+      "symbol": ""
+  },
+  "coins": [
+      {
+          "name": "",
+          "decimals": 0,
+          "tethered": false,
+          "underlying_address": ""
+      }
+  ]
+}

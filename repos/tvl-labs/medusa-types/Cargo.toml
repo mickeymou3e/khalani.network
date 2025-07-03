@@ -1,0 +1,39 @@
+[package]
+name = "medusa-types"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1.28", features = ["full"] }
+tokio-stream = "0.1"
+axum = { version = "0.6", features = ["ws"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+alloy = { version = "0.4.2", default-features = true, features = [
+    "serde",
+    "signers",
+    "signer-keystore",
+    "signer-mnemonic",
+    "providers",
+    "provider-http",
+    "provider-ws",
+    "network",
+    "node-bindings",
+    "consensus",
+    "contract",
+    "rpc-client",
+    "rpc-client-ws",
+    "rpc-types-eth",
+    "eips",
+] }
+dotenv = "0.15"
+futures = "0.3.3"
+futures-util = { version = "0.3", default-features = false, features = [
+    "sink",
+    "std",
+] }
+uuid = { version = "1.1", features = ["v4", "serde"] }
+anyhow = "1.0.86"
+config = "0.14.0"

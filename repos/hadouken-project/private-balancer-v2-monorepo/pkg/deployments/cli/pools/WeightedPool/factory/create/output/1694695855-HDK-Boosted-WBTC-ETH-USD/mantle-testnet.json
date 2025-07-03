@@ -1,0 +1,39 @@
+{
+  "transaction": {
+    "hash": "0x4769c4fcd3eb7fc0c02c81748c633795a4dbc1dafbae6335a1a3d53e84e1c2f9"
+  },
+  "data": {
+    "WeightedPoolFactory": {
+      "create": {
+        "input": {
+          "name": "Hadouken Boosted TriCrypto",
+          "symbol": "HDK-Boosted-WBTC-ETH-USD",
+          "tokens": [
+            "0x1C6caeb1C71c3fb4Cd34Fe463d0293dE94537B48",
+            "0x5F4e67c3125EF68bE6c97452c9683ad2e8b0f69a",
+            "0x82FdBCAEB73a7AAdf9609CB2Ca53734d31CC8fa3"
+          ],
+          "weights": [
+            "330000000000000000",
+            "330000000000000000",
+            "340000000000000000"
+          ],
+          "rateProviders": [
+            "0x1C6caeb1C71c3fb4Cd34Fe463d0293dE94537B48",
+            "0x5F4e67c3125EF68bE6c97452c9683ad2e8b0f69a",
+            "0x82FdBCAEB73a7AAdf9609CB2Ca53734d31CC8fa3"
+          ],
+          "swapFeePercentage": "3000000000000000",
+          "delegate": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0x1C6caeb1C71c3fb4Cd34Fe463d0293dE94537B48": "500000000000000000",
+            "0x5F4e67c3125EF68bE6c97452c9683ad2e8b0f69a": "500000000000000000",
+            "0x82FdBCAEB73a7AAdf9609CB2Ca53734d31CC8fa3": "500000000000000000"
+          }
+        },
+        "output": "0x67a2EF7774231C716862C563A3307bA4A791ff82"
+      }
+    }
+  },
+  "timestamp": 1694695855430
+}

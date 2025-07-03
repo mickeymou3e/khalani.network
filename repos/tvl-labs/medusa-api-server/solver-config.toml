@@ -1,0 +1,2 @@
+bearer_token = "arcsol_" # base64 encode key
+medusa_url = "ws://host.docker.internal:8002"    # medusa url

@@ -1,0 +1,22 @@
+{
+    "name": "WBTC/WETH",
+    "symbol": "HDK-WBTC-WETH",
+    "tokens": [
+      "0xa373e9073d2D147Eb3d40f3b9C5F2B813086d839",
+      "0x20b28B1e4665FFf290650586ad76E977EAb90c5D"
+    ],
+    "weights": [
+      "500000000000000000",
+      "500000000000000000"
+    ],
+    "rateProviders": [
+      "0x0000000000000000000000000000000000000000",
+      "0x0000000000000000000000000000000000000000"
+    ],
+    "swapFeePercentage": "3000000000000000",
+    "delegate": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+    "initialLiquidity": {
+      "0xa373e9073d2D147Eb3d40f3b9C5F2B813086d839": "50000",
+      "0x20b28B1e4665FFf290650586ad76E977EAb90c5D": "8000000000000000"
+    }
+  }

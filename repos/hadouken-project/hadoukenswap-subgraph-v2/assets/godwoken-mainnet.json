@@ -1,0 +1,168 @@
+{
+  "whitelist": [
+    "0x10787c272d37253c3d50d12665d97b748e52b01a",
+    "0x113eca3385216d5152220b6f6d902b5b94a961ad",
+    "0xaea765ef470fd9aa24853bb1ce5f21c6879349c2",
+    "0xbb4bea2b794f1bf9a3d3de7f2ccdd8f443a021e5",
+    "0xf1f6dad64c189ddc8368ebfd5761765aa31f4191",
+    "0xd0b29dda7bf9ba85f975170e31040a959e4c59e1",
+    "0xdfc80050d829ddbf5dc8ea3f1b9da5c68a4cbd7a",
+    "0x80245Ba36346Fe10A1af3f7103E8FdCb2549A87d",
+    "0xa7b28ddf165FF3Bcd698E33924Fb09dcD881FE0e",
+    "0x1dFf577744cF1f0066b3fD262356b1C41d047aD4",
+    "0x2FA3757f7CB848861D6eB56c398e2eDD385CD8b3",
+    "0x70Af4745b56c786db80b860B76316E0Ce9D7AC43",
+    "0x3a22945C94fCc35A569dc7e4eF0E17e08Fe9ACc5",
+    "0x23D8E927ddb7113eED58273C128376f941d4dea1",
+    "0xDD6fB327bBd16546d071A9ecDEFE5F8674354350",
+    "0xC71F7372C0F297B5C214FD6795852c413C883D36",
+    "0x177AeD005aD86BbFc61C1dfBcB9d8e89A72aEEB9",
+
+    "0x3718e79a9ef7b2970afd5053ce1f6a4c3043af5a",
+    "0x95b91be8ab6743b2a45044f3563170586e0acddf",
+    "0x149916d7128c36bbcebd04f794217baf51085fb9",
+    "0xa0430f122fb7e4f6f509c9cb664912c2f01db3e2",
+    "0x136c814f6c7f7412518c07dc401a29707a773ad0",
+    "0x7b7839f61cbb7c1c52db9e264c1cba1883f46b33",
+    "0x6d649f42e3b641d4d0bc7e8edcefca87df164c9a",
+    "0x3572806d69b9359f740669b1f65209a082db97b2",
+    "0x6291c16e5553dc70b54974fe19ae0cbfe0cd0fd6",
+    "0xd4ceadae793ff0cab490c078c948d7bb8ffb0951",
+    "0xeb885c6da09f7ccdcbb302bde8f6d8e83bfd651c",
+    "0x3b02f1be3cb02f0c76d4f93458a2424395b3e9f6",
+    "0xaf9d4028272f750dd2d028990fd664dc223479b1"
+  ],
+  "stableAssets": [
+    {
+      "address": "0x186181e225dc1ad85a4a94164232bd261e351c33",
+      "symbol": "USDC"
+    },
+    {
+      "address": "0x2c9fc6087875646112f66a3c92fef2d158faa76e",
+      "symbol": "DAI"
+    },
+    {
+      "address": "0x8e019acb11c7d17c26d334901fa2ac41c1f44d50",
+      "symbol": "USDT"
+    }
+  ],
+  "pricingAssets": [
+    {
+      "address": "0x149916D7128C36bbcebD04F794217Baf51085fB9",
+      "symbol": "HDK-LNR-USDC"
+    },
+    {
+      "address": "0xa0430F122fb7E4F6F509c9cb664912C2f01db3e2",
+      "symbol": "HDK-LNR-USDT"
+    },
+    {
+      "address": "0x95b91be8ab6743b2a45044f3563170586e0acddf",
+      "symbol": "HDK-LNR-ETH"
+    },
+    {
+      "address": "0x3718e79a9ef7b2970afd5053ce1f6a4c3043af5a",
+      "symbol": "HDK-LNR-CKB"
+    },
+    {
+      "address": "0x136c814f6c7f7412518c07dc401a29707a773ad0",
+      "symbol": "HDK-LNR-WBTC"
+    },
+    {
+      "address": "0xaf9d4028272f750dd2d028990fd664dc223479b1",
+      "symbol": "HDK-BOOSTED-USD"
+    },
+
+    {
+      "address": "0xbadb9b25150ee75bb794198658a4d0448e43e528",
+      "symbol": "BNB"
+    },
+    {
+      "address": "0x82455018f2c32943b3f12f4e59d0da2faf2257ef",
+      "symbol": "WBTC"
+    },
+    {
+      "address": "0x9e858a7aaedf9fdb1026ab1f77f627be2791e98a",
+      "symbol": "ETH"
+    },
+    {
+      "address": "0x9dc5014998b6a7351d75d731263199d31feb4474",
+      "symbol": "BUSD"
+    },
+    {
+      "address": "0x7538c85cae4e4673253ffd2568c1f1b48a71558a",
+      "symbol": "CKB"
+    },
+    {
+      "address": "0xbadb9b25150ee75bb794198658a4d0448e43e528",
+      "symbol": "BNB-BSC"
+    },
+    {
+      "address": "0xd07920d57f400d89d62535d50eb9d1200ed7821b",
+      "symbol": "BUSD-BSC"
+    },
+    {
+      "address": "0x815fd64f16c522becd816d858dde5f337f68a1e6",
+      "symbol": "ETH-BSC"
+    },
+    {
+      "address": "0xdff2facdfe47c1d5b51f18231f900949f1d5988f",
+      "symbol": "USDT-BSC"
+    },
+    {
+      "address": "0xfa307cfdea89dc197a346c338a98ac85d517af6e",
+      "symbol": "USDC-BSC"
+    },
+    {
+      "address": "0x1dFf577744cF1f0066b3fD262356b1C41d047aD4",
+      "symbol": "HDK-HUSDT-USDT"
+    },
+    {
+      "address": "0x2FA3757f7CB848861D6eB56c398e2eDD385CD8b3",
+      "symbol": "HDK-HUSDC-USDC"
+    },
+    {
+      "address": "0x70Af4745b56c786db80b860B76316E0Ce9D7AC43",
+      "symbol": "HDK-HETH-ETH"
+    },
+    {
+      "address": "0x3a22945C94fCc35A569dc7e4eF0E17e08Fe9ACc5",
+      "symbol": "HDK-HCKB-CKB"
+    },
+    {
+      "address": "0xa7b28ddf165FF3Bcd698E33924Fb09dcD881FE0e",
+      "symbol": "HDK-HWBTC-WBTC"
+    },
+    {
+      "address": "0x80245Ba36346Fe10A1af3f7103E8FdCb2549A87d",
+      "symbol": "HDK-BOOSTED-USD"
+    },
+    {
+      "address": "0x53bb26dc8c5efc6c95c37155aca487d1d043436a",
+      "symbol": "ceUSDC"
+    },
+    {
+      "address": "0x3c790b38f466514ffcb4230e7b2334e52b64c942",
+      "symbol": "ceUSDT"
+    },
+    {
+      "address": "0x1c428a6539a40ec5bb481631266a51cd19b233b1",
+      "symbol": "ceWBTC"
+    },
+    {
+      "address": "0xb66954619363145a05ef835547449eb9050d82f6",
+      "symbol": "ceETH"
+    },
+    {
+      "address": "0x639a647fbe20b6c8ac19e48e2de44ea792c62c5c",
+      "symbol": "multiETH"
+    },
+    {
+      "address": "0xe3f5a90f9cb311505cd691a46596599aa1a0ad7d",
+      "symbol": "multiUSDC"
+    },
+    {
+      "address": "0xb44a9b6905af7c801311e8f4e76932ee959c663c",
+      "symbol": "multiWBTC"
+    }
+  ]
+}

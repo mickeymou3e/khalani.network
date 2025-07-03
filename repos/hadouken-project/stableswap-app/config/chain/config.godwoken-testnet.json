@@ -1,0 +1,64 @@
+{
+  "hadouken": {
+    "lending": {
+      "url": "https://testnet-app.hadouken.finance/lend"
+    },
+    "bridge": {
+      "url": "https://testnet-app.hadouken.finance/bridge"
+    }
+  },
+  "sentry": "https://d3b71357a01e426c9c4285a26657d910@o4504333193969664.ingest.sentry.io/4504333202882560",
+  "chainName": "Godwoken Testnet",
+  "chainId": "0x116e9",
+  "nativeCurrency": {
+    "name": "CKB",
+    "symbol": "CKB",
+    "decimals": 18,
+    "address": "0xE05d380839f32bC12Fb690aa6FE26B00Bd982613",
+    "wrapAddress": null
+  },
+  "rpcUrl": "https://godwoken-testnet-v1.ckbapp.dev",
+  "readOnlyRpcUrl": "https://godwoken-testnet-v1.ckbapp.dev",
+  "wsUrl": "wss://godwoken-testnet-v1.ckbapp.dev/ws",
+  "env": "testnet",
+  "nervos": {
+    "ckb": {
+      "url": "https://testnet.ckb.dev"
+    },
+    "indexer": {
+      "url": "https://indexer-testnet.ckb.tools"
+    },
+    "rollup_type_hash": "0x702359ea7f073558921eb50d8c1c77e92f760c8f8656bde4995f26b8963e2dd8",
+    "rollup_type_script": {
+      "code_hash": "0x1e44736436b406f8e48a30dfbddcf044feb0c9eebfe63b0f81cb5bb727d84854",
+      "hash_type": "type",
+      "args": "0x86c7429247beba7ddd6e4361bcdfc0510b0b644131e2afb7e486375249a01802"
+    },
+    "eth_account_lock_hash": "0x07521d0aa8e66ef441ebc31204d86bb23fc83e9edc58c19dbb1b0ebe64336ec0",
+    "deposit_lock_script_type_hash": "0x50704b84ecb4c4b12b43c7acb260ddd69171c21b4c0ba15f3c469b7d143f6f18",
+    "portal_wallet_lock_hash": "0x58c5f491aba6d61678b7cf7edf4910b1f5e00ec0cde2f42e0abb4fd9aff25a63",
+    "rc_lock_script_type_hash": "0x79f90bb5e892d80dd213439eeab551120eb417678824f282b4ffb5f21bad2e1e"
+  },
+  "subgraphs": {
+    "balancer": {
+      "httpUri": "https://graph-dev-http-hadouken-dev.hadouken.finance/subgraphs/name/balancer-godwoken-testnet",
+      "webSocketUri": "wss://graph-dev-ws-hadouken-dev.hadouken.finance/subgraphs/name/balancer-godwoken-testnet"
+    }
+  },
+  "explorerUrl": {
+    "ckb": "https://pudge.explorer.nervos.org",
+    "godwoken": "https://v1.testnet.gwscan.com",
+    "ethereum": "https://goerli.etherscan.io"
+  },
+  "api": {
+    "dia": {
+      "priceUrl": "https://api.diadata.org/v1/quotation"
+    }
+  },
+  "customLinearPools": [
+    "0xe0169172B5806b429911207546b69ef7D9348020",
+    "0x0b05F1D469bd0fe97B599F939b0E07680760aC8F",
+    "0x30A310DBCcCb67A6B6Df75B660eAa036f8810749",
+    "0x31D4661f29753F6a59905B4ed978F6228EFF995A"
+  ]
+}

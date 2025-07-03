@@ -1,0 +1,23 @@
+export type { ERC20 } from '@src/typechain/godwoken/ERC20';
+export type { ERC20Test } from '@src/typechain/godwoken/ERC20Test';
+export type { HadoukenOracle } from '@src/typechain/godwoken/HadoukenOracle';
+export type { LendingPool } from '@src/typechain/godwoken/LendingPool';
+export type { LendingPoolAddressesProvider } from '@src/typechain/godwoken/LendingPoolAddressesProvider';
+export type { LendingPoolAddressesProviderRegistry } from '@src/typechain/godwoken/LendingPoolAddressesProviderRegistry';
+export type { StableDebtToken } from '@src/typechain/godwoken/StableDebtToken';
+export type { UiPoolDataProvider } from '@src/typechain/godwoken/UiPoolDataProvider';
+export type { UserBalances } from '@src/typechain/godwoken/UserBalances';
+export type { VariableDebtToken } from '@src/typechain/godwoken/VariableDebtToken';
+export type { WETHGateway } from '@src/typechain/godwoken/WETHGateway';
+
+export { addressProviderConnect } from './addressProvider';
+export { erc20Connect } from './erc20';
+export { erc20TestTokenConnect } from './erc20mint';
+export { hadoukenOracleConnect } from './hadoukenOracle';
+export { poolConnect } from './pool';
+export { registryConnect } from './registry';
+export { stableDebtTokenConnect } from './stableDebtToken';
+export { uiHelperConnect } from './uiHelper';
+export { userBalancesConnect } from './userBalances';
+export { variableDebtTokenConnect } from './variableDebtToken';
+export { wETHGatewayConnect } from './wEthGateway';

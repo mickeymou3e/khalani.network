@@ -1,0 +1,189 @@
+{
+  "chains": [
+    {
+      "id": 5,
+      "chainName": "Ethereum Goerli",
+      "chainId": "0x5",
+      "nativeCurrency": {
+        "name": "ETH",
+        "symbol": "GoerliETH",
+        "decimals": 18
+      },
+      "blockExplorerUrls": ["https://goerli.etherscan.io"],
+      "rpcUrls": [
+        "https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"
+      ],
+      "logo": "https://icons.llamao.fi/icons/chains/rsz_ethereum.jpg",
+      "borderColor": "#808080",
+      "isDefault": true,
+      "poolTokenSymbol": "USDC.eth"
+    },
+    {
+      "id": 43113,
+      "chainName": "Avalanche Testnet",
+      "chainId": "0xa869",
+      "nativeCurrency": {
+        "name": "AVAX",
+        "symbol": "AVAX",
+        "decimals": 18
+      },
+      "blockExplorerUrls": ["https://testnet.snowtrace.io"],
+      "rpcUrls": ["https://api.avax-test.network/ext/bc/C/rpc"],
+      "logo": "https://icons.llamao.fi/icons/chains/rsz_avalanche.jpg",
+      "borderColor": "#CC3333",
+      "poolTokenSymbol": "USDC.avax"
+    },
+    {
+      "id": 71401,
+      "chainName": "Godwoken Testnet",
+      "chainId": "0x116e9",
+      "nativeCurrency": {
+        "name": "CKB",
+        "symbol": "pCKB",
+        "decimals": 18
+      },
+      "blockExplorerUrls": ["https://v1.betanet.gwscan.com/"],
+      "rpcUrls": ["https://godwoken-testnet-v1.ckbapp.dev"],
+      "logo": "https://pbs.twimg.com/profile_images/1574457602322243584/DPhcGeDA_400x400.jpg",
+      "borderColor": "#ffffff"
+    },
+    {
+      "id": 10012,
+      "chainName": "Axon",
+      "chainId": "0x271c",
+      "nativeCurrency": {
+        "name": "ETH",
+        "symbol": "ETH",
+        "decimals": 18
+      },
+      "blockExplorerUrls": ["https://v1.betanet.gwscan.com/"],
+      "rpcUrls": ["https://www.axon-node.info"],
+      "logo": "https://pbs.twimg.com/media/FdWhUExUUAE30t_.png",
+      "borderColor": "#228c22"
+    }
+  ],
+  "tokens": [
+    {
+      "id": "cbcba4dc-6afb-40c3-8500-109ffcd11186",
+      "address": "0x91FB270bEDfBCd92E212DB460AeF1BE5aa3C17C4",
+      "decimals": 18,
+      "name": "USDC | eth",
+      "symbol": "USDC.eth",
+      "balance": null,
+      "icon": null,
+      "chainId": "0x5"
+    },
+    {
+      "id": "abc36e83-f6e2-4784-9f17-aff8b2cd1bbd",
+      "address": "0xda14B47643112D599f7116116Be44e376dcB8559",
+      "decimals": 18,
+      "name": "PAN",
+      "symbol": "PAN",
+      "balance": null,
+      "icon": null,
+      "chainId": "0x5"
+    },
+    {
+      "id": "575d335b-d450-47c6-82f4-1d917f07de99",
+      "address": "0x65059A3cBB709eD815F0d2e6853D1787e4a73cbc",
+      "decimals": 18,
+      "name": "USDC | avax",
+      "symbol": "USDC.avax",
+      "balance": null,
+      "icon": null,
+      "chainId": "0xa869"
+    },
+    {
+      "id": "cfd10c21-895d-429f-b085-59a523aa3652",
+      "address": "0x6C214FCFFC5F9184300bD95ea1322F78BA189642",
+      "decimals": 18,
+      "name": "PAN",
+      "symbol": "PAN",
+      "balance": null,
+      "icon": null,
+      "chainId": "0xa869"
+    },
+    {
+      "id": "bec1ef38-2bea-4a0a-90a6-ac30b67270f2",
+      "address": "0x91FB270bEDfBCd92E212DB460AeF1BE5aa3C17C4",
+      "decimals": 18,
+      "name": "USDC | avax",
+      "symbol": "USDCavax",
+      "balance": null,
+      "icon": null,
+      "chainId": "0x271c"
+    },
+    {
+      "id": "1807bb88-b1da-4a18-914e-179396101ea4",
+      "address": "0xa889D68e5522bAb2c48deBAf7D8466a7ACccCc93",
+      "decimals": 18,
+      "name": "USDC | eth",
+      "symbol": "USDCeth",
+      "balance": null,
+      "icon": null,
+      "chainId": "0x271c"
+    },
+    {
+      "id": "b4211722-ac35-4822-8f4c-be3c7b5f9c1f",
+      "address": "0xc641563e76C4bB268d76751Af52c46c814BaBf05",
+      "decimals": 18,
+      "name": "PAN",
+      "symbol": "PAN",
+      "balance": null,
+      "icon": null,
+      "chainId": "0x271c"
+    },
+    {
+      "id": "2cbfbd74-3f91-4bf4-a914-079f495e68f9",
+      "address": "0x16715b541a5E400E579dB02b60405E5A6d172D52",
+      "decimals": 18,
+      "name": "USDC | avax.gw",
+      "symbol": "USDCavax",
+      "balance": null,
+      "icon": null,
+      "chainId": "0x116e9"
+    },
+    {
+      "id": "295a0783-edf1-43e8-8d28-3a3aa2cd2618",
+      "address": "0x65059A3cBB709eD815F0d2e6853D1787e4a73cbc",
+      "decimals": 18,
+      "name": "USDC | eth.gw",
+      "symbol": "USDCeth",
+      "balance": null,
+      "icon": null,
+      "chainId": "0x116e9"
+    },
+    {
+      "id": "8ebb0da5-b701-480f-97c7-ac15d2b7cd1c",
+      "address": "0x6C214FCFFC5F9184300bD95ea1322F78BA189642",
+      "decimals": 18,
+      "name": "PAN",
+      "symbol": "PAN",
+      "balance": null,
+      "icon": null,
+      "chainId": "0x116e9"
+    }
+  ],
+  "deposit": [],
+  "balances": {
+    "0x354d40dba2a50d7aeb75228a2bbae858ede40fd7": 5,
+    "0x354d40dba2a50d7aeb75228a2bbae858ede40fd9": 7,
+    "0x354d40dba2a50d7aeb75228a2bbae858ede40fd5": 0,
+    "0x354d40dba2a50d7aeb75228a2bbae858ede40aaa": 0,
+    "0x354d40dba2a50d7aeb75228a2bbae858ede40aab": 14
+  },
+  "userTVL": [
+    {
+      "id": 1,
+      "tokenAddress": "0x91FB270bEDfBCd92E212DB460AeF1BE5aa3C17C4",
+      "amount": 3000
+    },
+    {
+      "id": 2,
+      "tokenAddress": "0x65059A3cBB709eD815F0d2e6853D1787e4a73cbc",
+      "amount": 1500
+    }
+  ],
+  "liquidityAdded": [],
+  "liquidityRemoved": []
+}

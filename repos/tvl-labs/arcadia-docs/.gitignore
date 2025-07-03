@@ -1,0 +1,41 @@
+# Node.js dependencies
+/node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Docusaurus build output
+/build
+/.docusaurus
+/cache
+
+# Static CMS (if used)
+/admin/
+
+# Local environment files
+.env
+.env.local
+.env.*.local
+
+# macOS Finder files
+.DS_Store
+
+# VS Code settings
+.vscode/
+
+# Coverage directories
+/coverage/
+
+# Temporary files
+*.tmp
+*.swp
+
+# OS-specific files
+Thumbs.db
+desktop.ini
+
+# Yarn v2+ Plug’n’Play
+.pnp.*

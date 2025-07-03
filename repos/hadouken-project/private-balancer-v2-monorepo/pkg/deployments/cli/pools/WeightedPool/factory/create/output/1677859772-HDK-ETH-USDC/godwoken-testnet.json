@@ -1,0 +1,36 @@
+{
+  "transaction": {
+    "hash": "0xb05fb6caadd3b601fec5b8f4b8df33bea3994a2fe01c45a8b30a573d63e754dd",
+    "blockNumber": 1994159
+  },
+  "data": {
+    "WeightedPoolFactory": {
+      "create": {
+        "input": {
+          "name": "ETH/USDC",
+          "symbol": "HDK-ETH-USDC",
+          "tokens": [
+            "0x0c7F21908222098616803EfF5d054d3F4EF57EBb",
+            "0xfF900E1436cBCd25d72B7DafE6Ef4d569405cc05"
+          ],
+          "weights": [
+            "500000000000000000",
+            "500000000000000000"
+          ],
+          "rateProviders": [
+            "0x0000000000000000000000000000000000000000",
+            "0x0000000000000000000000000000000000000000"
+          ],
+          "swapFeePercentage": "3000000000000000",
+          "delegate": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0xfF900E1436cBCd25d72B7DafE6Ef4d569405cc05": "120030000000000000",
+            "0x0c7F21908222098616803EfF5d054d3F4EF57EBb": "183422500"
+          }
+        },
+        "output": "0x4920c8DF1eAD17984256Edf1FBbc8Afd6F66fF9A"
+      }
+    }
+  },
+  "timestamp": 1677859772234
+}

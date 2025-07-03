@@ -1,0 +1,87 @@
+name: Slither Analysis
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      # 1) Check out the code (and submodules if needed)
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true # Only if you really need submodules
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+
+      # 3) Confirm Forge is installed
+      - name: Check forge version
+        run: forge --version
+
+      # 2) Install Slither via pip (and solc if needed)
+      - name: Install Slither
+        run: |
+          sudo apt-get update
+          # If you need a system solc:
+          # sudo apt-get install -y solc
+          sudo apt-get install -y python3-pip
+          pip3 install slither-analyzer
+
+      # 3) Run Slither, pipe results to a file
+      - name: Run Slither
+        run: |
+          # If Slither returns a nonzero exit code when findings are present,
+          # we can add `|| true` so the workflow won't fail automatically.
+          slither . \
+            --checklist \
+            --markdown-root $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/blob/$GITHUB_SHA/ \
+            > slither_report.md 2>&1 || true
+
+      # 4) Post Slither report as a PR comment
+      - name: Post Slither report as PR comment
+        uses: actions/github-script@v7
+        if: github.event_name == 'pull_request'
+        with:
+          script: |
+            const fs = require('fs');
+            const header = '# Slither Report';
+
+            // Read the output file
+            const body = fs.readFileSync('slither_report.md', 'utf8');
+
+            // Fetch existing comments on the PR
+            const { data: comments } = await github.rest.issues.listComments({
+              ...context.repo,
+              issue_number: context.issue.number,
+            });
+
+            // Check if there's already a Slither report comment
+            const existingComment = comments.find(comment =>
+              comment.body.startsWith(header)
+            );
+
+            if (existingComment) {
+              // Update existing comment
+              await github.rest.issues.updateComment({
+                ...context.repo,
+                comment_id: existingComment.id,
+                body: `${header}\n\n${body}`,
+              });
+            } else {
+              // Create a new comment
+              await github.rest.issues.createComment({
+                ...context.repo,
+                issue_number: context.issue.number,
+                body: `${header}\n\n${body}`,
+              });
+            }

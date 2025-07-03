@@ -1,0 +1,22 @@
+{
+  "name": "base-dev-env",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "e2e": "npm install --prefix ../sdk-runner && npm --prefix ../sdk-runner run simulation"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-kms": "^3.817.0",
+    "@hyperlane-xyz/sdk": "^12.5.0",
+    "@iarna/toml": "^2.2.5",
+    "@mysten/bcs": "^1.6.1",
+    "dotenv": "^16.5.0",
+    "execa": "^9.6.0",
+    "js-yaml": "^4.1.0"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "markets": "Markets",
+  "bridge": "Bridge",
+  "trade": "Trade",
+  "pool": "Pool",
+  "retire": "Retire",
+  "account": "Account",
+  "wallet": "Wallet",
+  "myAssets": "My assets",
+  "orders": "Orders",
+  "logout": "Logout",
+  "language": "Language",
+  "numberFormat": "Number format",
+  "fiatEstimation": "Fiat estimation",
+  "languageDefault": "Language default",
+  "comma": "Comma as decimal",
+  "period": "Period as decimal",
+  "login": "Login",
+  "appBar": {
+    "wallet": {
+      "overview": "Overview",
+      "portfolio": "Portfolio",
+      "deposits": "Deposits",
+      "withdrawals": "Withdrawals",
+      "wallets": "Wallets",
+      "addresses": "Withdrawal addresses",
+      "banks": "Banks"
+    },
+    "account": {
+      "profile": "Profile",
+      "roles": "Roles",
+      "apiKeys": "Api Keys"
+    }
+  }
+}

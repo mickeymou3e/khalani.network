@@ -1,0 +1,45 @@
+medusa_server_url = "http://"
+intent_book_address = "0x0000000000000000000000000000000000000000"
+mtoken_manager_address = "0x0000000000000000000000000000000000000000"
+
+[chains]
+
+# change <spokelocal1> to the corresponding spoke chain name
+# change the values to corresponding urls and addresses, but do NOT change the keys
+[chains.<spokelocal1>]
+id = 2
+rpc_url = "http://"
+asset_reserve_address = "0x0000000000000000000000000000000000000000"
+permit2_address = "0x0000000000000000000000000000000000000000" 
+
+# change <spokelocal2> to the corresponding spoke chain name
+# change the values to corresponding urls and addresses, but do NOT change the keys
+[chains.<spokelocal2>]
+id = 3
+rpc_url = "http://"
+asset_reserve_address = "0x0000000000000000000000000000000000000000"
+permit2_address = "0x0000000000000000000000000000000000000000" 
+
+
+
+[tokens]
+
+# change <spokelocal1> to the corresponding spoke chain name
+[tokens.<spokelocal1>] 
+
+# change <spokelocal1> to the corresponding spoke chain name
+# change <token1> to the corresponding token name
+# do NOT change the keys token_address and mtoken_address 
+[tokens.<spokelocal1>.<token1>]
+token_address = "0x0000000000000000000000000000000000000000" 
+mtoken_address = "0x0000000000000000000000000000000000000000"  
+
+# change <spokelocal2> to the corresponding spoke chain name
+[tokens.<spokelocal2>]
+
+# change <spokelocal2> to the corresponding spoke chain name
+# change <token1> to the corresponding token name
+# do NOT change the keys token_address and mtoken_address 
+[tokens.<spokelocal2>.<token1>]
+token_address = "0x0000000000000000000000000000000000000000" 
+mtoken_address = "0x0000000000000000000000000000000000000000"  

@@ -1,0 +1,40 @@
+{
+  "transaction": {
+    "hash": "0x6be533eaa47bbad5df7062670fe12346507ae6aece193d48e3fa185f6f889466"
+  },
+  "data": {
+    "ComposableStablePoolFactory": {
+      "create": {
+        "input": {
+          "name": "Hadouken Boosted USD",
+          "symbol": "HDK-Boosted-USD",
+          "tokens": [
+            "0x2897B76Bbe358e65da2EF6e46D66daD568581Eb5",
+            "0x88F28e263DBee9e8b0DEc08077028086e306584A"
+          ],
+          "rateProviders": [
+            "0x2897B76Bbe358e65da2EF6e46D66daD568581Eb5",
+            "0x88F28e263DBee9e8b0DEc08077028086e306584A"
+          ],
+          "priceRateCacheDuration": [
+            "0",
+            "0"
+          ],
+          "amplificationParameter": "300",
+          "swapFeePercentage": "100000000000000",
+          "exemptFromYieldProtocolFeeFlags": [
+            false,
+            false
+          ],
+          "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0x2897B76Bbe358e65da2EF6e46D66daD568581Eb5": "20000000000000000000",
+            "0x88F28e263DBee9e8b0DEc08077028086e306584A": "20000000000000000000"
+          }
+        },
+        "output": "0x82FdBCAEB73a7AAdf9609CB2Ca53734d31CC8fa3"
+      }
+    }
+  },
+  "timestamp": 1694692499348
+}

@@ -1,0 +1,41 @@
+{
+  "transaction": {
+    "hash": "0x67db2fb8dd784d0f18a71e685cb14a21349039020c336a938ea2cac0e92cd5e4",
+    "blockNumber": 113820
+  },
+  "data": {
+    "ComposableStablePoolFactory": {
+      "create": {
+        "input": {
+          "name": "USDT.avax/KAI",
+          "symbol": "balUSDTavaxKAI",
+          "tokens": [
+            "0x1fa37818ae2710c23301d94d2bee37951c2dd55b",
+            "0x89432afbe44404a10e71cc3255ae93fa6facd174"
+          ],
+          "rateProviders": [
+            "0x0000000000000000000000000000000000000000",
+            "0x0000000000000000000000000000000000000000"
+          ],
+          "priceRateCacheDuration": [
+            "0",
+            "0"
+          ],
+          "amplificationParameter": "300",
+          "swapFeePercentage": "100000000000000",
+          "exemptFromYieldProtocolFeeFlags": [
+            false,
+            false
+          ],
+          "owner": "0x73B31aC967f46dB2C45280C7f5d1D3ee7F38E122",
+          "initialLiquidity": {
+            "0x89432AFbE44404a10e71cC3255ae93fA6fAcD174": "150000000000",
+            "0x1Fa37818ae2710C23301D94d2BeE37951C2DD55b": "150000000000000000000000"
+          }
+        },
+        "output": "0x4bE16b1C207Eb9c08dcEc7D7AD288636aF2C5bfd"
+      }
+    }
+  },
+  "timestamp": 1685360042041
+}

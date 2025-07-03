@@ -1,0 +1,44 @@
+{
+  "godwoken": {
+    "chainName": "Godwoken",
+    "chainId": "0x116ea",
+    "nativeCurrency": {
+      "name": "CKB",
+      "symbol": "CKB",
+      "decimals": 8
+    },
+    "type": "godwoken",
+    "rpcUrl": "https://v1.mainnet.godwoken.io/rpc",
+    "readOnlyRpcUrl": "https://godwoken-mainnet.digipnyx.org",
+    "wsUrl": "wss://v1.mainnet.godwoken.io/ws",
+    "explorerUrl": "https://layerview.io/"
+  },
+  "nervos": {
+    "env": "mainnet",
+    "ckb": {
+      "url": "https://mainnet.ckb.dev"
+    },
+    "indexer": {
+      "url": "https://mainnet.ckb.dev/indexer"
+    },
+    "rollup_type_hash": "0x1ca35cb5fda4bd542e71d94a6d5f4c0d255d6d6fba73c41cf45d2693e59b3072",
+    "rollup_type_script": {
+      "code_hash": "0xfef1d086d9f74d143c60bf03bd04bab29200dbf484c801c72774f2056d4c6718",
+      "hash_type": "type",
+      "args": "0xab21bfe2bf85927bb42faaf3006a355222e24d5ea1d4dec0e62f53a8e0c04690"
+    },
+    "eth_account_lock_hash": "0x096df264f38fff07f3acd318995abc2c71ae0e504036fe32bc38d5b6037364d4",
+    "deposit_lock_script_type_hash": "0xff602581f07667eef54232cce850cbca2c418b3418611c132fca849d1edcd775",
+    "rc_lock_script_type_hash": "0x9f3aeaf2fc439549cbc870c653374943af96a0658bd6b51be8d8983183e6f52f"
+  },
+  "subgraphs": {
+    "balancer": {
+      "httpUri": "https://graph-node-v1-http-hadouken-v1.hadouken.finance/subgraphs/name/balancer",
+      "webSocketUri": "wss://graph-node-v1-ws-hadouken-v1.hadouken.finance/subgraphs/name/balancer"
+    },
+    "blocks": {
+      "httpUri": "https://graph-node-v1-http-hadouken-v1.hadouken.finance/subgraphs/name/blocks",
+      "webSocketUri": "wss://graph-node-v1-ws-hadouken-v1.hadouken.finance/subgraphs/name/blocks"
+    }
+  }
+}

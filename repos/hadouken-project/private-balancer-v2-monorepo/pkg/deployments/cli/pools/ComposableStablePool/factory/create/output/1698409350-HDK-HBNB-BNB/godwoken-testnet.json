@@ -1,0 +1,40 @@
+{
+  "transaction": {
+    "hash": "0xb3a756bf98ca4f7c04817c2024131b1367b639d10dc9cba3c6b0e819afedd898"
+  },
+  "data": {
+    "ComposableStablePoolFactory": {
+      "create": {
+        "input": {
+          "name": "HBNB/BNB",
+          "symbol": "HDK-HBNB-BNB",
+          "tokens": [
+            "0x3B5b0179fDEF8F88c39A94039B66120933729ace",
+            "0x603a7a9a6421556c4C6F58d2C5C016d523A52878"
+          ],
+          "rateProviders": [
+            "0xc620bE2D75A13dfEcC691d07d1090df823921cad",
+            "0x2A174ac9fE40d8B8e5141B5E92e8D098F2295b1a"
+          ],
+          "priceRateCacheDuration": [
+            "0",
+            "0"
+          ],
+          "amplificationParameter": "5000",
+          "swapFeePercentage": "100000000000000",
+          "exemptFromYieldProtocolFeeFlags": [
+            false,
+            false
+          ],
+          "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0x3B5b0179fDEF8F88c39A94039B66120933729ace": "1000000000",
+            "0x603a7a9a6421556c4C6F58d2C5C016d523A52878": "1000000000"
+          }
+        },
+        "output": "0xFe8860228Ab873702aCd062e5F93c81E3A31E5aE"
+      }
+    }
+  },
+  "timestamp": 1698409350176
+}

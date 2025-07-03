@@ -1,0 +1,61 @@
+{
+  "tokens": [
+    {
+      "id": "",
+      "address": "",
+      "decimals": 0,
+      "name": "",
+      "symbol": "",
+      "chainId": ""
+    }
+  ],
+  "supportedPools": [
+    {
+      "address": "0x7e8dbbbb4c4485f9986f0c5c28ba7638a8a19a42",
+      "poolTokenSourceChainHexId": "0xaa36a7"
+    },
+    {
+      "address": "0xd061229afce74cb2b7919e917960a912cfe71088",
+      "poolTokenSourceChainHexId": "0xaa36a7"
+    },
+    {
+      "address": "0xd610d2f1fbb1a5a0fd320ac4f0bdfee02b0bcf9b",
+      "poolTokenSourceChainHexId": "0xaa36a7"
+    },
+    {
+      "address": "0x8a8c18bc1a5cb7a0c03fe2c3540b105a1c44d405",
+      "poolTokenSourceChainHexId": "0xa869"
+    },
+    {
+      "address": "0xb50dc24e616bc0b90c6e12b935e43ed21a54be9a",
+      "poolTokenSourceChainHexId": "0xa869"
+    },
+    {
+      "address": "0xBDB2ADE29DD506C115B6aFc761862E2070E966fE",
+      "poolTokenSourceChainHexId": "0x41786f6e"
+    }
+  ],
+  "api": {
+    "dia": {
+      "priceUrl": "https://api.diadata.org/v1/quotation"
+    }
+  },
+  "explorer": {
+    "blockExplorer": {
+      "0xa869": "https://testnet.snowtrace.io",
+      "0x41786f6e": "https://block-explorer.testnet.khalani.network",
+      "0xaa36a7": "https://sepolia.etherscan.io",
+      "0x4268": "https://holesky.etherscan.io/",
+      "0x66eee": "",
+      "0x14a34": "",
+      "0xa0c71fd": "",
+      "0xaa37dc": "",
+      "0x13882": ""
+    },
+    "staging": "https://cross-chain-explorer.staging.khalani.network"
+  },
+  "faucetUrl": "https://faucet.khalani.network/",
+  "discordUrl": "https://discord.gg/7dFbUp4uJe",
+  "twitterUrl": "http://x.com/hyperstream__",
+  "wcProjectId": "b28058f715e4554d6d268810e222da13"
+}

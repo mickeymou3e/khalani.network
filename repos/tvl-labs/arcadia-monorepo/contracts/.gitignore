@@ -1,0 +1,45 @@
+# Compiler files
+cache/
+out/
+
+# Ignores development broadcast logs
+/broadcast/*/31337/
+/broadcast/*/31338/
+/broadcast/*/31339/
+/broadcast/*/1337/
+/broadcast/**/dry-run/
+
+# Docs
+docs/
+Notes-ignore.md
+
+# Dotenv file
+.env
+
+CHANGES.md
+NOTES.md
+SYSTEM.md
+node_modules
+.env
+
+# Hardhat files
+/cache
+/artifacts
+
+# TypeChain files
+/typechain
+/typechain-types
+
+# solidity-coverage files
+/coverage
+/coverage.json
+
+# Hardhat Ignition default folder for deployments against a local node
+ignition/deployments/chain-31337
+
+E2E*
+Intent_Examples.md
+IntentCombinations.md
+Meeting*
+.vscode
+*.DS_Store

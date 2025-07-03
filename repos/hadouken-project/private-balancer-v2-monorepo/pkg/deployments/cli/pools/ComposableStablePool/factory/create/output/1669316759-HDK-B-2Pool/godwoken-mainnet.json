@@ -1,0 +1,41 @@
+{
+  "transaction": {
+    "hash": "0x9fa28e06176091dfc95c58d00aa416c086686f9d15d29ffd889aab7b0e2f51f0",
+    "blockNumber": null
+  },
+  "data": {
+    "ComposableStablePoolFactory": {
+      "create": {
+        "input": {
+          "name": "2pool",
+          "symbol": "HDK-B-2Pool",
+          "tokens": [
+            "0x149916D7128C36bbcebD04F794217Baf51085fB9",
+            "0xa0430F122fb7E4F6F509c9cb664912C2f01db3e2"
+          ],
+          "rateProviders": [
+            "0x149916D7128C36bbcebD04F794217Baf51085fB9",
+            "0xa0430F122fb7E4F6F509c9cb664912C2f01db3e2"
+          ],
+          "priceRateCacheDuration": [
+            "0",
+            "0"
+          ],
+          "amplificationParameter": "300",
+          "swapFeePercentage": "100000000000000",
+          "exemptFromYieldProtocolFeeFlags": [
+            false,
+            false
+          ],
+          "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0x149916D7128C36bbcebD04F794217Baf51085fB9": "2000000000000000000",
+            "0xa0430F122fb7E4F6F509c9cb664912C2f01db3e2": "2000000000000000000"
+          }
+        },
+        "output": "0xa04b5B5A11A04773064d8Ca9a28d51a3176F3B02"
+      }
+    }
+  },
+  "timestamp": 1669316759073
+}

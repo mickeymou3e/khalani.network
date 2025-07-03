@@ -1,0 +1,132 @@
+{
+  "contracts": {
+    "Vault": "0x580d2aa4231E4C2EFfb3A43D3b778cd956C875bf",
+    "AddressBalances": "0x9D025259bf0197105AB4482807Fa83ba0D4346f2",
+    "PoolsHelpers": "0x83b1c864D364b7E277a5218a950ab3887d80044d",
+    "NexusDiamond": "0x930D5879b62763921F3fCe5b20457133Af531225",
+    "InterchainLiquidityHub": "0xAe3bcdBAb70ED1244FbEe1b39FE6D49d98d4c2BC",
+    "MTokenCrossChainAdapter": "0xc8b7E10A48797F101F387FFa327cA72f8DAEd9D3",
+    "SwapIntentBook": "0x77835399E1705a6A16e09d0efC0e690913397E0a",
+    "IntentBook": "0x57F6Cf59dEE43712EF020C277d5138FEEc2D169a",
+    "MTokenRegistry": "0xaaC1b69381970F95DF5CC932E907Fa0Cd448e330",
+    "MTokenManager": "0x9E5C39CEDA403c608bD0Afd07d30f6D33D581256",
+    "ReceiptManager": "0xbe343EF636D4dD1D5bb9e57bf298Bfea695f5DBA",
+    "DiamondProxy": {
+      "0xa869": "0x74f7532b774e055B4F2f413ddb76AA30b4687bf0",
+      "0xaa36a7": "0x1089Fa8b3e08972e6ad149BA900c9dB6Ee984E90"
+    },
+    "AssetReserves": {
+      "0xa4b1": "0xaffD10B1efeF13F12C6c4FdD0C12cfd006ddA3cC",
+      "0x1": "0xaCb15D804f98b007D67DE6dFC2C01E75A14d09e5"
+    },
+    "permit2": {
+      "0xa4b1": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+      "0x1": "0x000000000022D473030F116dDEE9F6B43aC78BA3"
+    },
+    "InterchainGasPaymaster": {
+      "0xa869": "0x6895d3916B94b386fAA6ec9276756e16dAe7480E",
+      "0x41786f6e": "0xfBeaF07855181f8476B235Cf746A7DF3F9e386Fb",
+      "0xa4b1": "0x9e6B1022bE9BBF5aFd152483DAD9b88911bC8611",
+      "0x4268": "0x5CBf4e70448Ed46c2616b04e9ebc72D29FF0cfA9"
+    },
+    "eventVerifier": {
+      "0xa869": "0xcfeF1912628Ad9710f8135810d378B8D6835a93F",
+      "0xaa36a7": "0xd478aa347DdE46BE479Ea65F563539D3eB3736Ec",
+      "0x4268": "0x869Df16aEA0d1581c841f41983FB49F47E25f18b",
+      "0x41786f6e": "0x699331F08e1C267197fFf2776824a25BacaC69c1"
+    },
+    "LibEncode": "0x29aad50db9EFAee498dC7bA8ce9Da2c4651cD942",
+    "SafeAdapter": "0x29c3468182d5b64ADDcE572D1b6Da3A99dB2c144",
+    "safe": {
+      "signMessageLibAddress": "0xA65387F16B013cf2Af4605Ad8aA5ec25a2cbA3a2",
+      "safeProxyFactoryAddress": "0xa6B71E26C5e0845f74c812102Ca7114b6a896AB2",
+      "safeMasterCopyAddress": "0x3E5c63644E683549055b9Be8653de26E0B4CD36E",
+      "multiSendAddress": "0xA238CBeb142c10Ef7Ad8442C6D1f9E89e07e7761",
+      "fallbackHandlerAddress": "0xf48f2B2d2a534e402487b3ee7C18c33Aec0Fe5e4",
+      "multiSendCallOnlyAddress": "0x40A2aCCbd92BCA938b02010E17A5b8929b49130D",
+      "createCallAddress": "0x7cbB62EaA69F79e6873cD1ecB2392971036cFAa4",
+      "simulateTxAccessorAddress": "0x59AD6735bCd8152B84860Cb256dD9e96b85F69Da"
+    },
+    "hyperlaneAdapter": {
+      "0xa869": "0x6961012CB8bF6e6f93bF59a7F5dcfe0056104B44",
+      "0xaa36a7": "0x8B4099086296cd7cAc0F834eBab5ad614Af36e49"
+    },
+    "lending": {
+      "adminContract": "0xDE15f799375143F607ce9E8BBEe882A59431E021",
+      "borrowerOperations": "0x9e2f97CDD30Fbe8997112a3E767b7786b27f1aD4",
+      "feeCollector": "0xe060b4001890a76351f3ab129E34a0DbB3aCE1aa",
+      "priceFeed": "0x7E71245c50c94cd230DdE03d8F4C2f6f89f912d3",
+      "vesselManager": "0x22F1F5473B4783a79C50c6A66F5a20D518630E62"
+    },
+    "intentBookHelper": "0xEB434d3AB94Bc452d0CDdFE8E25f9D8879ef9AC2",
+    "multiCall": "0xcA11bde05977b3631167028862bE2a173976CA11"
+  },
+  "supportedChains": [
+    {
+      "id": 0,
+      "chainName": "",
+      "chainId": "",
+      "nativeCurrency": {
+        "name": "",
+        "symbol": "",
+        "decimals": 0
+      },
+      "blockExplorerUrls": [""],
+      "rpcUrls": [""],
+      "logo": "",
+      "borderColor": "",
+      "poolTokenSymbols": [""],
+      "isBalancerChain": false
+    }
+  ],
+  "tokens": [
+    {
+      "id": "",
+      "address": "",
+      "decimals": 0,
+      "name": "",
+      "symbol": "",
+      "chainId": "",
+      "sourceChainId": ""
+    }
+  ],
+  "mTokens": [
+    {
+      "id": "",
+      "address": "",
+      "decimals": 0,
+      "name": "",
+      "symbol": "",
+      "chainId": "",
+      "sourceChainId": ""
+    }
+  ],
+  "api": {
+    "dia": {
+      "priceUrl": "https://api.diadata.org/v1/quotation"
+    }
+  },
+  "explorer": {
+    "subgraph": {
+      "0xa869": "https://graph-node-http-khalani.testnet.khalani.network/subgraphs/name/mailbox-fuji",
+      "0x41786f6e": "https://graph-node-http-khalani.testnet.khalani.network/subgraphs/name/mailbox-khalanitestnet",
+      "0xaa36a7": "https://graph-node-http-khalani.testnet.khalani.network/subgraphs/name/mailbox-sepolia"
+    }
+  },
+  "intents": {
+    "subgraph": {
+      "0xa869": "https://graph-node-http-khalani.testnet.khalani.network/subgraphs/name/intents-fuji",
+      "0xaa36a7": "https://graph-node-http-khalani.testnet.khalani.network/subgraphs/name/intents-sepolia",
+      "0x41786f6e": "https://graph-node-http-khalani.testnet.khalani.network/subgraphs/name/intents-khalanitestnet"
+    }
+  },
+  "hyperlane": {
+    "subgraph": "https://api.hyperlane.xyz/v1/graphql"
+  },
+  "medusa": {
+    "apiUrl": "https://medusa.arcadia.khalani.network",
+    "wsUrl": "wss://medusa.arcadia.khalani.network"
+  },
+  "workerUrl": "https://worker-mainnet.khalani.network",
+  "solver": "0x63FaC9201494f0bd17B9892B9fae4d52fe3BD377"
+}

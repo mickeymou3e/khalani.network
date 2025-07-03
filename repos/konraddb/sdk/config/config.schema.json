@@ -1,0 +1,41 @@
+{
+  "contracts": {
+    "Vault": "",
+    "AddressBalances": "",
+    "PoolsHelpers": "",
+    "Oracle": "",
+    "Vortex": "",
+    "NexusDiamond": "",
+    "CrossChainRouter": {},
+    "PSM": {}
+  },
+  "supportedChains": [
+    {
+      "id": 0,
+      "chainName": "",
+      "chainId": "",
+      "nativeCurrency": {
+        "name": "",
+        "symbol": "",
+        "decimals": 0
+      },
+      "blockExplorerUrls": [""],
+      "rpcUrls": [""],
+      "logo": "",
+      "borderColor": "",
+      "poolTokenSymbols": [""],
+      "isBalancerChain": false
+    }
+  ],
+  "tokens": [
+    {
+      "id": "",
+      "address": "",
+      "decimals": 0,
+      "name": "",
+      "symbol": "",
+      "chainId": "",
+      "sourceChainId": ""
+    }
+  ]
+}

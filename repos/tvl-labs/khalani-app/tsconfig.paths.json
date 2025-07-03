@@ -1,0 +1,21 @@
+{
+  "paths": {
+    "@assets/*": ["./public/*"],
+    "@components/*": ["./src/components/*"],
+    "@config": ["./src/config.ts"],
+    "@containers/*": ["./src/containers/*"],
+    "@constants/*": ["./src/constants/*"],
+    "@dataSource/*": ["./src/dataSource/*"],
+    "@interfaces/*": ["./src/interfaces/*"],
+    "@messages/*": ["./src/messages/*"],
+    "@pages/*": ["./src/pages/*"],
+    "@store/*": ["./src/store/*"],
+    "@styles/*": ["./src/styles/*"],
+    "@tests/*": ["./testUtils/*"],
+    "@utils/*": ["./src/utils/*"],
+    "@modules/*": ["./src/modules/*"],
+    "@libs/*": ["./src/libs/*"],
+    "@hooks/*": ["./src/hooks/*"],
+    "@services/*": ["./src/services/*"]
+  }
+}

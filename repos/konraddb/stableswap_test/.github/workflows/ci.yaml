@@ -1,0 +1,51 @@
+name: 'CI'
+
+on:
+  push:
+    branches-ignore:
+      - master
+
+env:
+  NODE_VERSION: '16.x'
+
+jobs:
+  webapp_ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v2.3.1
+        with:
+          persist-credentials: false
+
+      - name: 'Use Node.js v${{ env.NODE_VERSION }}'
+        uses: actions/setup-node@master
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@tvl-labs'
+
+      - name: Cache NPM dependencies
+        uses: actions/cache@v1
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.OS }}-npm-cache-rf-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-npm-cache-rf
+
+      - name: Install yarn dependencies
+        run: |
+          yarn config set //npm.pkg.github.com/:_authToken ${{ env.NODE_AUTH_TOKEN }}
+          yarn config set @tvl-labs:registry https://npm.pkg.github.com
+          yarn config set @hadouken-project:registry https://npm.pkg.github.com
+          yarn --frozen-lockfile
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PACKAGES_READ_TOKEN }}
+
+      - name: Typecheck
+        run: yarn typecheck
+
+      - name: Lint
+        run: yarn lint
+        env:
+          CI: false

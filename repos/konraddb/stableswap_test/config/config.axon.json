@@ -1,0 +1,101 @@
+{
+  "hadouken": {
+    "lending": {
+      "url": "https://beta-lending.hadouken.finance"
+    },
+    "bridge": {
+      "url": "https://beta-bridge.hadouken.finance"
+    }
+  },
+  "godwoken": {
+    "chainName": "Axon",
+    "chainId": "0x271c",
+    "type": "godwoken",
+    "nativeCurrency": {
+      "name": "ETH",
+      "symbol": "ETH",
+      "decimals": 18
+    },
+    "rpcUrl": "https://www.axon-node.info",
+    "wsUrl": "wss://godwoken-testnet-v1.ckbapp.dev/ws",
+    "explorerUrl": "https://v1.betanet.gwscan.com/"
+  },
+  "nervos": {
+    "env": "mainnet",
+    "ckb": {
+      "url": "https://mainnet.ckb.dev"
+    },
+    "indexer": {
+      "url": "https://mainnet.ckb.dev/indexer"
+    },
+    "rollup_type_hash": "0x1ca35cb5fda4bd542e71d94a6d5f4c0d255d6d6fba73c41cf45d2693e59b3072",
+    "rollup_type_script": {
+      "code_hash": "0xfef1d086d9f74d143c60bf03bd04bab29200dbf484c801c72774f2056d4c6718",
+      "hash_type": "type",
+      "args": "0xab21bfe2bf85927bb42faaf3006a355222e24d5ea1d4dec0e62f53a8e0c04690"
+    },
+    "eth_account_lock_hash": "0x096df264f38fff07f3acd318995abc2c71ae0e504036fe32bc38d5b6037364d4",
+    "deposit_lock_script_type_hash": "0xff602581f07667eef54232cce850cbca2c418b3418611c132fca849d1edcd775",
+    "rc_lock_script_type_hash": "0x9f3aeaf2fc439549cbc870c653374943af96a0658bd6b51be8d8983183e6f52f",
+    "portal_wallet_lock_hash": ""
+  },
+  "subgraph": {
+    "httpUri": {
+      "balancer": "https://axon-indexer-testnet.digipnyx.org/subgraphs/name/balancer-v2-3",
+      "tokens": "https://axon-indexer-testnet.digipnyx.org/subgraphs/name/balancer-v2-3"
+    },
+    "webSocketUri": {
+      "balancer": "wss://axon-indexer-testnet-ws.digipnyx.org/subgraphs/name/balancer-v2-3",
+      "tokens": "wss://axon-indexer-testnet-ws.digipnyx.org/subgraphs/name/balancer-v2-3"
+    }
+  },
+  "subgraphs": {
+    "balancer": {
+      "httpUri": "https://axon-indexer-testnet.digipnyx.org/subgraphs/name/balancer-v2-fork-1",
+      "webSocketUri": "wss://axon-indexer-testnet-ws.digipnyx.org/subgraphs/name/balancer-v2-fork-1"
+    },
+    "blocks": {
+      "httpUri": "https://axon-indexer-testnet.digipnyx.org/subgraphs/name/blocks",
+      "webSocketUri": "wss://axon-indexer-testnet-ws.digipnyx.org/subgraphs/name/blocks"
+    }
+  },
+  "explorerUrl": {
+    "ckb": "https://v1.betanet.gwscan.com",
+    "godwoken": "https://gw-explorer.nervosdao.community",
+    "ethereum": "https://rinkeby.etherscan.io"
+  },
+  "contracts": {
+    "Vault": "0xBC71BE5E1d0bf8A939544c804E3337DCc347Fd46",
+    "AddressBalances": "0xeDcF525Bf2C99B22794b3bdCbA441C6F19D1515C",
+    "PoolsHelpers": "0x9eE1a805F11835E6A4111d7EEbCFB55A2682fA54",
+    "Oracle": "0x0000000000000000000000000000000000000000",
+    "CrossChainRouter": {
+      "0x5": "0xDAFEA492D9c6733ae3d56b7Ed1ADB60692c98Bc5",
+      "0xa869": "0xDAFEA492D9c6733ae3d56b7Ed1ADB60692c98Bc5"
+    },
+    "USDT": "0x0000000000000000000000000000000000000000",
+    "USDC": "0x0000000000000000000000000000000000000000",
+    "DAI": "0x0000000000000000000000000000000000000000",
+    "ETH": "0x0000000000000000000000000000000000000000",
+    "WBTC": "0x0000000000000000000000000000000000000000",
+    "CKB": "0x0000000000000000000000000000000000000000",
+    "BNB": "0x0000000000000000000000000000000000000000",
+    "TRICRYPTO": "0x0000000000000000000000000000000000000000",
+    "WBTCUSDT": "0x0000000000000000000000000000000000000000",
+    "BNBUSDC": "0x0000000000000000000000000000000000000000",
+    "TWOPOOL": "0x0000000000000000000000000000000000000000",
+    "USDCCKB": "0x0000000000000000000000000000000000000000",
+    "TWOPOOLDAI": "",
+    "CKBETHUSDC": "0x0000000000000000000000000000000000000000",
+    "ETHUSDC": "0x0000000000000000000000000000000000000000",
+    "hUSDC": "0x0000000000000000000000000000000000000000",
+    "hUSDT": "0x0000000000000000000000000000000000000000",
+    "hb-a-USDC": "0x0000000000000000000000000000000000000000",
+    "hb-a-USDT": "0x0000000000000000000000000000000000000000"
+  },
+  "api": {
+    "dia": {
+      "priceUrl": "https://api.diadata.org/v1/quotation"
+    }
+  }
+}

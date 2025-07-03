@@ -1,0 +1,34 @@
+# Code editors
+.idea/
+
+# Logs
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+node_modules/
+
+# Yarn
+.yarnrc.yml
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+
+.npmrc
+# Hardhat artifacts
+artifacts/
+cache/
+
+# Build artifacts
+dist/
+pkg/balancer-js/src/typechain/*
+
+# Forge
+forge-artifacts/
+forge-cache/
+
+.env

@@ -1,0 +1,44 @@
+{
+  "name": "@hadouken-project/config",
+  "version": "1.0.85",
+  "description": "Hadouken Project Config containing addresses to Swap Contracts and infra setup",
+  "license": "GPL-3.0-only",
+  "homepage": "https://github.com/balancer-labs/balancer-v2-monorepo/tree/master/pkg/typechain#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hadouken-project/private-balancer-v2-monorepo.git",
+    "directory": "pkg/typechain"
+  },
+  "bugs": {
+    "url": "https://github.com/balancer-labs/balancer-v2-monorepo/issues"
+  },
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist/ && rm -rf node_modules/"
+  },
+  "devDependencies": {
+    "@typechain/ethers-v5": "^7.0.1",
+    "@types/chai": "^4.2.12",
+    "@types/mocha": "^8.0.3",
+    "@types/node": "^15.12.4",
+    "@typescript-eslint/eslint-plugin": "^4.1.1",
+    "@typescript-eslint/parser": "^4.1.1",
+    "chai": "^4.2.0",
+    "eslint": "^7.9.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "mocha": "^8.2.1",
+    "prettier": "^2.1.2",
+    "tiny-invariant": "^1.1.0",
+    "ts-node": "^10.0.0",
+    "typechain": "^5.1.1",
+    "typescript": "^4.0.2"
+  }
+}

@@ -1,0 +1,22 @@
+load "nat-less"
+
+define [* < <=] := [N.*  N.< N.<=]
+define [zero one two] := [N.zero N.one (S N.one)]
+define [n m x y z] := [?n ?m ?x ?y ?z]
+
+
+declare fact: [N] -> N [[int->nat]]
+
+assert fact-def := [
+    (fact zero = one)
+    (fact one = one)
+    (forall n . fact (S n) = (S n) * (fact n))
+]
+
+transform-output eval [nat->int]
+
+(eval (fact 3)) # 6
+(eval (fact 9)) # 362880
+
+
+define proof-goal := (forall n m . n < m <==> (fact n) < (fact m))

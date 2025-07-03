@@ -1,0 +1,724 @@
+[
+  {
+    "id": "0xa6f548df93de924d73be7d25dc02554c6bd66db500020000000000000000000e",
+    "address": "0xa6f548df93de924d73be7d25dc02554c6bd66db5",
+    "poolType": "Weighted",
+    "swapFee": "0.001",
+    "swapEnabled": true,
+    "totalShares": "1",
+    "wrappedIndex": 0,
+    "mainIndex": 0,
+    "tokensList": [
+      "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+      "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+    ],
+    "totalWeight": "1",
+    "tokens": [
+      {
+        "symbol": "WBTC",
+        "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+        "priceRate": "1",
+        "balance": "10",
+        "decimals": 8,
+        "name": "Wrapped BTC",
+        "weight": "0.5"
+      },
+      {
+        "symbol": "WETH",
+        "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        "priceRate": "1",
+        "balance": "160",
+        "decimals": 18,
+        "name": "Wrapped Ether",
+        "weight": "0.5"
+      }
+    ]
+  },
+  {
+    "id": "0xc6a5032dc4bf638e15b4a66bc718ba7ba474ff73000200000000000000000004",
+    "address": "0xc6a5032dc4bf638e15b4a66bc718ba7ba474ff73",
+    "poolType": "Weighted",
+    "swapFee": "0.0025",
+    "swapEnabled": true,
+    "chainId": 1,
+    "wrappedIndex": 0,
+    "mainIndex": 0,
+    "tokensList": [
+      "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+    ],
+    "totalShares": "1",
+    "totalWeight": "1",
+    "tokens": [
+      {
+        "symbol": "DAI",
+        "address": "0x6b175474e89094c44da98b954eedeac495271d0f",
+        "priceRate": "1",
+        "balance": "4000",
+        "decimals": 18,
+        "weight": "0.4"
+      },
+      {
+        "symbol": "WETH",
+        "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        "priceRate": "1",
+        "balance": "3",
+        "decimals": 18,
+        "weight": "0.6"
+      }
+    ]
+  },
+  {
+    "id": "0xd8833594420db3d6589c1098dbdd073f52419dba000100000000000000000134",
+    "address": "0xd8833594420db3d6589c1098dbdd073f52419dba",
+    "poolType": "Weighted",
+    "swapFee": "0.001",
+    "swapEnabled": true,
+    "tokensList": [
+      "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+      "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "0xba100000625a3754423978a60c9317c58a424e3d"
+    ],
+    "chainId": 1,
+    "totalShares": "1",
+    "totalWeight": "1",
+    "tokens": [
+      {
+        "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+        "priceRate": "1",
+        "balance": "1",
+        "decimals": 18,
+        "weight": "0.25"
+      },
+      {
+        "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        "priceRate": "1",
+        "balance": "15",
+        "decimals": 18,
+        "weight": "0.25"
+      },
+      {
+        "address": "0x6b175474e89094c44da98b954eedeac495271d0f",
+        "priceRate": "1",
+        "balance": "33000",
+        "decimals": 18,
+        "weight": "0.25"
+      },
+      {
+        "address": "0xba100000625a3754423978a60c9317c58a424e3d",
+        "priceRate": "1",
+        "balance": "2005",
+        "decimals": 18,
+        "weight": "0.25"
+      }
+    ]
+  },
+  {
+    "id": "0x06df3b2bbb68adc8b0e302443692037ed9f91b42000000000000000000000063",
+    "address": "0x06df3b2bbb68adc8b0e302443692037ed9f91b42",
+    "poolType": "Stable",
+    "swapFee": "0.001",
+    "swapEnabled": true,
+    "symbol": "staBAL3",
+    "tokensList": [
+      "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "0xdac17f958d2ee523a2206206994597c13d831ec7"
+    ],
+    "chainId": 1,
+    "totalShares": "1",
+    "tokens": [
+      {
+        "symbol": "DAI",
+        "address": "0x6b175474e89094c44da98b954eedeac495271d0f",
+        "priceRate": "1",
+        "balance": "11657153",
+        "decimals": 18,
+        "name": "Dai Stablecoin",
+        "weight": null
+      },
+      {
+        "symbol": "USDC",
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "priceRate": "1",
+        "balance": "11541107",
+        "decimals": 6,
+        "name": "USD Coin",
+        "weight": null
+      },
+      {
+        "symbol": "USDT",
+        "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "priceRate": "1",
+        "balance": "108293584",
+        "decimals": 6,
+        "name": "Tether USD",
+        "weight": null
+      }
+    ]
+  },
+  {
+    "id": "0x000f3b2bbb68adc8b0e302443692037ed9f91b42000000000000000000000063",
+    "address": "0x000f3b2bbb68adc8b0e302443692037ed9f91b42",
+    "poolType": "Stable",
+    "swapFee": "0.001",
+    "swapEnabled": true,
+    "symbol": "staBAL3missingprice",
+    "tokensList": [
+      "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "0x00086991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "0xdac17f958d2ee523a2206206994597c13d831ec7"
+    ],
+    "chainId": 1,
+    "totalShares": "1",
+    "tokens": [
+      {
+        "symbol": "DAI",
+        "address": "0x6b175474e89094c44da98b954eedeac495271d0f",
+        "priceRate": "1",
+        "balance": "11657153",
+        "decimals": 18,
+        "name": "Dai Stablecoin",
+        "weight": null
+      },
+      {
+        "symbol": "mpUSDC",
+        "address": "0x00086991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "priceRate": "1",
+        "balance": "11541107",
+        "decimals": 6,
+        "name": "USD Coin",
+        "weight": null
+      },
+      {
+        "symbol": "USDT",
+        "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "priceRate": "1",
+        "balance": "108293584",
+        "decimals": 6,
+        "name": "Tether USD",
+        "weight": null
+      }
+    ]
+  },
+  {
+    "id": "0x32296969ef14eb0c6d29669c550d4a0449130230000200000000000000000080",
+    "address": "0x32296969ef14eb0c6d29669c550d4a0449130230",
+    "poolType": "MetaStable",
+    "swapFee": "0.001",
+    "swapEnabled": true,
+    "tokensList": [
+      "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0",
+      "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+    ],
+    "chainId": 1,
+    "totalShares": "1",
+    "tokens": [
+      {
+        "symbol": "wstETH",
+        "address": "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0",
+        "priceRate": "1.07",
+        "balance": "45744",
+        "decimals": 18,
+        "weight": null
+      },
+      {
+        "symbol": "WETH",
+        "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        "priceRate": "1",
+        "balance": "28333",
+        "decimals": 18,
+        "name": "Wrapped Ether",
+        "weight": null
+      }
+    ]
+  },
+  {
+    "symbol": "bb-a-USD",
+    "id": "0x7b50775383d3d6f0215a8f290f2c9e2eebbeceb20000000000000000000000fe",
+    "address": "0x7b50775383d3d6f0215a8f290f2c9e2eebbeceb2",
+    "poolType": "StablePhantom",
+    "swapFee": "0.001",
+    "swapEnabled": true,
+    "tokensList": [
+      "0x2bbf681cc4eb09218bee85ea2a5d3d13fa40fc0c",
+      "0x7b50775383d3d6f0215a8f290f2c9e2eebbeceb2",
+      "0x804cdb9116a10bb78768d3252355a1b18067bf8f",
+      "0x9210f1204b5a24742eba12f710636d76240df3d0"
+    ],
+    "name": "Balancer Aave Boosted StablePool (USD)",
+    "totalShares": "175398736.272923442582230154",
+    "tokens": [
+      {
+        "symbol": "bb-a-USDT",
+        "address": "0x2bbf681cc4eb09218bee85ea2a5d3d13fa40fc0c",
+        "priceRate": "1.01082996497897589",
+        "balance": "100355819.977213065407573583",
+        "decimals": 18,
+        "name": "Balancer Aave Boosted Pool (USDT)",
+        "weight": null
+      },
+      {
+        "symbol": "bb-a-USD",
+        "address": "0x7b50775383d3d6f0215a8f290f2c9e2eebbeceb2",
+        "priceRate": "1",
+        "balance": "5192296683136091.355607053746989941",
+        "decimals": 18,
+        "name": "Balancer Aave Boosted StablePool (USD)",
+        "weight": null
+      },
+      {
+        "symbol": "bb-a-DAI",
+        "address": "0x804cdb9116a10bb78768d3252355a1b18067bf8f",
+        "priceRate": "1.008921813227916035",
+        "balance": "37830325.972946457887112113",
+        "decimals": 18,
+        "name": "Balancer Aave Boosted Pool (DAI)",
+        "weight": null
+      },
+      {
+        "symbol": "bb-a-USDC",
+        "address": "0x9210f1204b5a24742eba12f710636d76240df3d0",
+        "priceRate": "1.008899657313215288",
+        "balance": "37493298.126187604430920272",
+        "decimals": 18,
+        "name": "Balancer Aave Boosted Pool (USDC)",
+        "weight": null
+      }
+    ]
+  },
+  {
+    "symbol": "bb-a-USDT",
+    "id": "0x2bbf681cc4eb09218bee85ea2a5d3d13fa40fc0c0000000000000000000000fd",
+    "address": "0x2bbf681cc4eb09218bee85ea2a5d3d13fa40fc0c",
+    "poolType": "AaveLinear",
+    "swapFee": "0.001",
+    "swapEnabled": true,
+    "tokensList": [
+      "0x2bbf681cc4eb09218bee85ea2a5d3d13fa40fc0c",
+      "0xdac17f958d2ee523a2206206994597c13d831ec7",
+      "0xf8fd466f12e236f4c96f7cce6c79eadb819abf58"
+    ],
+    "totalShares": "100355830.767546444512740882",
+    "chainId": 1,
+    "tokens": [
+      {
+        "symbol": "bb-a-USDT",
+        "address": "0x2bbf681cc4eb09218bee85ea2a5d3d13fa40fc0c",
+        "priceRate": "1",
+        "balance": "5192296758178996.860984051816479213",
+        "decimals": 18,
+        "name": "Balancer Aave Boosted Pool (USDT)",
+        "weight": null
+      },
+      {
+        "symbol": "USDT",
+        "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "priceRate": "1",
+        "balance": "3217998.444815",
+        "decimals": 6,
+        "name": "Tether USD",
+        "weight": null
+      },
+      {
+        "symbol": "aUSDT",
+        "address": "0xf8fd466f12e236f4c96f7cce6c79eadb819abf58",
+        "priceRate": "1.087899129027144107",
+        "balance": "90289274.201411",
+        "decimals": 6,
+        "name": "Wrapped aUSDT",
+        "weight": null
+      }
+    ]
+  },
+  {
+    "symbol": "bb-a-DAI",
+    "id": "0x804cdb9116a10bb78768d3252355a1b18067bf8f0000000000000000000000fb",
+    "address": "0x804cdb9116a10bb78768d3252355a1b18067bf8f",
+    "poolType": "AaveLinear",
+    "swapFee": "0.001",
+    "swapEnabled": true,
+    "tokensList": [
+      "0x02d60b84491589974263d922d9cc7a3152618ef6",
+      "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "0x804cdb9116a10bb78768d3252355a1b18067bf8f"
+    ],
+    "totalShares": "37830443.163696080769220657",
+    "chainId": 1,
+    "tokens": [
+      {
+        "symbol": "aDAI",
+        "address": "0x02d60b84491589974263d922d9cc7a3152618ef6",
+        "priceRate": "1.072616406560299348",
+        "balance": "32830627.214575144958054567",
+        "decimals": 18,
+        "name": "Wrapped aDAI",
+        "weight": null
+      },
+      {
+        "symbol": "DAI",
+        "address": "0x6b175474e89094c44da98b954eedeac495271d0f",
+        "priceRate": "1",
+        "balance": "2953604.822433960363139146",
+        "decimals": 18,
+        "name": "Dai Stablecoin",
+        "weight": null
+      },
+      {
+        "symbol": "bb-a-DAI",
+        "address": "0x804cdb9116a10bb78768d3252355a1b18067bf8f",
+        "priceRate": "1",
+        "balance": "5192296820704384.464834415559999438",
+        "decimals": 18,
+        "name": "Balancer Aave Boosted Pool (DAI)",
+        "weight": null
+      }
+    ]
+  },
+  {
+    "symbol": "bb-a-USDC",
+    "id": "0x9210f1204b5a24742eba12f710636d76240df3d00000000000000000000000fc",
+    "address": "0x9210f1204b5a24742eba12f710636d76240df3d0",
+    "poolType": "AaveLinear",
+    "swapFee": "0.001",
+    "swapEnabled": true,
+    "tokensList": [
+      "0x9210f1204b5a24742eba12f710636d76240df3d0",
+      "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "0xd093fa4fb80d09bb30817fdcd442d4d02ed3e5de"
+    ],
+    "totalShares": "37493426.782937744120070627",
+    "tokens": [
+      {
+        "symbol": "bb-a-USDC",
+        "address": "0x9210f1204b5a24742eba12f710636d76240df3d0",
+        "priceRate": "1",
+        "balance": "5192296821041400.845592752209149468",
+        "decimals": 18,
+        "name": "Balancer Aave Boosted Pool (USDC)",
+        "weight": null
+      },
+      {
+        "symbol": "USDC",
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "priceRate": "1",
+        "balance": "9848032.156925",
+        "decimals": 6,
+        "name": "USD Coin",
+        "weight": null
+      },
+      {
+        "symbol": "aUSDC",
+        "address": "0xd093fa4fb80d09bb30817fdcd442d4d02ed3e5de",
+        "priceRate": "1.075650894903184157",
+        "balance": "26011449.668942",
+        "decimals": 6,
+        "name": "Wrapped aUSDC",
+        "weight": null
+      }
+    ]
+  },
+  {
+    "symbol": "LPeYyvcrvSTETH-15APR22",
+    "holdersCount": "7",
+    "address": "0x062f38735aac32320db5e2dbbeb07968351d7c72",
+    "wrappedIndex": 0,
+    "mainIndex": 0,
+    "totalSwapVolume": "0",
+    "upperTarget": null,
+    "tokensList": [
+      "0x06325440d014e39736583c165c2963ba99faf14e",
+      "0xeb1a6c6ea0cd20847150c27b5985fa198b2f90bd"
+    ],
+    "poolType": "Weighted",
+    "totalShares": "2.651113802508642793",
+    "lowerTarget": null,
+    "totalSwapFee": "0",
+    "swapsCount": "22",
+    "totalLiquidity": "0",
+    "chainId": 1,
+    "swapEnabled": true,
+    "name": "LP Element Yield Token yvcrvSTETH-15APR22",
+    "totalWeight": "1",
+    "tokens": [
+      {
+        "symbol": "steCRV",
+        "address": "0x06325440d014e39736583c165c2963ba99faf14e",
+        "priceRate": "1",
+        "balance": "0.092362545086076148",
+        "decimals": 18,
+        "name": "Curve.fi ETH/stETH",
+        "weight": "0.500000000000000001",
+        "id": "0x062f38735aac32320db5e2dbbeb07968351d7c720002000000000000000000ac-0x06325440d014e39736583c165c2963ba99faf14e",
+        "managedBalance": "0"
+      },
+      {
+        "symbol": "eYyvcrvSTETH-15APR22",
+        "address": "0xeb1a6c6ea0cd20847150c27b5985fa198b2f90bd",
+        "priceRate": "1",
+        "balance": "19.064881065606213019",
+        "decimals": 18,
+        "name": "Element Yield Token yvcrvSTETH-15APR22",
+        "weight": "0.499999999999999999",
+        "id": "0x062f38735aac32320db5e2dbbeb07968351d7c720002000000000000000000ac-0xeb1a6c6ea0cd20847150c27b5985fa198b2f90bd",
+        "managedBalance": "0"
+      }
+    ],
+    "id": "0x062f38735aac32320db5e2dbbeb07968351d7c720002000000000000000000ac",
+    "swapFee": "0.003"
+  },
+  {
+    "symbol": "50 wETH 33 3S-ETH 17 3L-ETH",
+    "holdersCount": "11",
+    "address": "0x996616bde0cb4974e571f17d31c844da2bd177f8",
+    "totalSwapVolume": "73154158.64390964307202247896488856",
+    "tokensList": [
+      "0x7d7e4f49a29dda8b1ecdcf8a8bc85edcb234e997",
+      "0x82af49447d8a07e3bd95bd0d56f35241523fbab1",
+      "0xaa846004dc01b532b63feaa0b7a0cb0990f19ed9"
+    ],
+    "poolType": "Weighted",
+    "totalShares": "723.387236870109483763",
+    "totalSwapFee": "731541.5864390964307202247896488856",
+    "swapsCount": "18624",
+    "totalLiquidity": "106775.0505514730485330043905010193",
+    "chainId": 42161,
+    "swapEnabled": true,
+    "name": "50 wETH 33 3S-ETH 17 3L-ETH",
+    "totalWeight": "1",
+    "tokens": [
+      {
+        "symbol": "3S-ETH/USD",
+        "address": "0x7d7e4f49a29dda8b1ecdcf8a8bc85edcb234e997",
+        "priceRate": "1",
+        "balance": "4767.936495",
+        "decimals": 6,
+        "name": "3S-ETH/USD",
+        "weight": "0.3333",
+        "id": "0x996616bde0cb4974e571f17d31c844da2bd177f8000100000000000000000018-0x7d7e4f49a29dda8b1ecdcf8a8bc85edcb234e997",
+        "managedBalance": "0"
+      },
+      {
+        "symbol": "WETH",
+        "address": "0x82af49447d8a07e3bd95bd0d56f35241523fbab1",
+        "priceRate": "1",
+        "balance": "7.533542094716690404",
+        "decimals": 18,
+        "name": "Wrapped Ether",
+        "weight": "0.5",
+        "id": "0x996616bde0cb4974e571f17d31c844da2bd177f8000100000000000000000018-0x82af49447d8a07e3bd95bd0d56f35241523fbab1",
+        "managedBalance": "0"
+      },
+      {
+        "symbol": "3L-ETH/USD",
+        "address": "0xaa846004dc01b532b63feaa0b7a0cb0990f19ed9",
+        "priceRate": "1",
+        "balance": "104354.570452",
+        "decimals": 6,
+        "name": "3L-ETH/USD",
+        "weight": "0.1667",
+        "id": "0x996616bde0cb4974e571f17d31c844da2bd177f8000100000000000000000018-0xaa846004dc01b532b63feaa0b7a0cb0990f19ed9",
+        "managedBalance": "0"
+      }
+    ],
+    "id": "0x996616bde0cb4974e571f17d31c844da2bd177f8000100000000000000000018",
+    "swapFee": "0.01"
+  },
+  {
+    "holdersCount": "5",
+    "lowerTarget": null,
+    "swapEnabled": true,
+    "name": "Balancer 50 VITA 50 WETH",
+    "id": "0xbaeec99c90e3420ec6c1e7a769d2a856d2898e4d00020000000000000000008a",
+    "totalSwapVolume": "2894704.530037270938008629720776634",
+    "totalShares": "13131.715529062384181831",
+    "tokensList": [
+      "0x81f8f0bb1cb2a06649e51913a151f0e7ef6fa321",
+      "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+    ],
+    "mainIndex": 0,
+    "symbol": "B-50VITA-50WETH",
+    "wrappedIndex": 0,
+    "snapshots": [
+      {
+        "swapFees": "28947.04530037270938008629720776634",
+        "timestamp": 1660521600
+      },
+      {
+        "swapFees": "28928.07248262964911030900211200051",
+        "timestamp": 1660348800
+      }
+    ],
+    "poolType": "Weighted",
+    "address": "0xbaeec99c90e3420ec6c1e7a769d2a856d2898e4d",
+    "createTime": 1631291082,
+    "lastUpdate": 1660547742027,
+    "totalWeight": "1",
+    "swapsCount": "419",
+    "totalSwapFee": "28947.04530037270938008629720776634",
+    "chainId": 1,
+    "totalLiquidity": "634448.98518992614430606016",
+    "graphData": { "totalLiquidity": "640698.368476791206945358004321879" },
+    "swapFee": "0.01",
+    "upperTarget": null,
+    "tokens": [
+      {
+        "symbol": "VITA",
+        "address": "0x81f8f0bb1cb2a06649e51913a151f0e7ef6fa321",
+        "priceRate": "1",
+        "balance": "278964.206419329154042175",
+        "decimals": 18,
+        "name": "VitaDAO Token",
+        "weight": "0.5",
+        "id": "0xbaeec99c90e3420ec6c1e7a769d2a856d2898e4d00020000000000000000008a-0x81f8f0bb1cb2a06649e51913a151f0e7ef6fa321",
+        "managedBalance": "0"
+      },
+      {
+        "symbol": "WETH",
+        "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        "priceRate": "1",
+        "balance": "166.591715076908415501",
+        "decimals": 18,
+        "name": "Wrapped Ether",
+        "weight": "0.5",
+        "id": "0xbaeec99c90e3420ec6c1e7a769d2a856d2898e4d00020000000000000000008a-0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        "managedBalance": "0"
+      }
+    ]
+  },
+  {
+    "holdersCount": "3",
+    "lowerTarget": null,
+    "swapEnabled": true,
+    "name": "NFT/Gaming Index",
+    "id": "0x344e8f99a55da2ba6b4b5158df2143374e400df2000100000000000000000079",
+    "totalSwapVolume": "535332.2784457539488546921754750037",
+    "totalShares": "8.137638729432030372",
+    "tokensList": [
+      "0x0ec9f76202a7061eb9b3a7d6b59d36215a7e37da",
+      "0x18aaa7115705e8be94bffebde57af9bfc265b998",
+      "0x25f8087ead173b73d6e8b84329989a8eea16cf73",
+      "0x3845badade8e6dff049820680d1f14bd3903a5d0",
+      "0x87d73e916d7057945c9bcd8cdd94e42a6f47f776",
+      "0xb6ca7399b4f9ca56fc27cbff44f4d2e4eef1fc81",
+      "0xbb0e17ef65f82ab018d8edd776e8dd940327b28b",
+      "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+    ],
+    "mainIndex": 0,
+    "symbol": "NFTG",
+    "wrappedIndex": 0,
+    "snapshots": [
+      {
+        "swapFees": "5353.322784457539488546921754750037",
+        "timestamp": 1659484800
+      },
+      {
+        "swapFees": "5353.253430365446478494999759539674",
+        "timestamp": 1658880000
+      }
+    ],
+    "poolType": "Weighted",
+    "address": "0x344e8f99a55da2ba6b4b5158df2143374e400df2",
+    "createTime": 1627482189,
+    "lastUpdate": 1660547742028,
+    "totalWeight": "1",
+    "swapsCount": "882",
+    "totalSwapFee": "5353.322784457539488546921754750037",
+    "chainId": 1,
+    "totalLiquidity": "60.450842422483721371046222",
+    "graphData": { "totalLiquidity": "107.0540296058752735129733507284743" },
+    "swapFee": "0.01",
+    "upperTarget": null,
+    "tokens": [
+      {
+        "symbol": "BPT",
+        "address": "0x0ec9f76202a7061eb9b3a7d6b59d36215a7e37da",
+        "priceRate": "1",
+        "balance": "9.339431454424532673",
+        "decimals": 18,
+        "name": "BlackPool Token",
+        "weight": "0.125",
+        "id": "0x344e8f99a55da2ba6b4b5158df2143374e400df2000100000000000000000079-0x0ec9f76202a7061eb9b3a7d6b59d36215a7e37da",
+        "managedBalance": "0"
+      },
+      {
+        "symbol": "AUDIO",
+        "address": "0x18aaa7115705e8be94bffebde57af9bfc265b998",
+        "priceRate": "1",
+        "balance": "11.579054239992159476",
+        "decimals": 18,
+        "name": "Audius",
+        "weight": "0.125",
+        "id": "0x344e8f99a55da2ba6b4b5158df2143374e400df2000100000000000000000079-0x18aaa7115705e8be94bffebde57af9bfc265b998",
+        "managedBalance": "0"
+      },
+      {
+        "symbol": "YGG",
+        "address": "0x25f8087ead173b73d6e8b84329989a8eea16cf73",
+        "priceRate": "1",
+        "balance": "4.945778411706075443",
+        "decimals": 18,
+        "name": "Yield Guild Games Token",
+        "weight": "0.125",
+        "id": "0x344e8f99a55da2ba6b4b5158df2143374e400df2000100000000000000000079-0x25f8087ead173b73d6e8b84329989a8eea16cf73",
+        "managedBalance": "0"
+      },
+      {
+        "symbol": "SAND",
+        "address": "0x3845badade8e6dff049820680d1f14bd3903a5d0",
+        "priceRate": "1",
+        "balance": "8.57243620802115272",
+        "decimals": 18,
+        "name": "SAND",
+        "weight": "0.125",
+        "id": "0x344e8f99a55da2ba6b4b5158df2143374e400df2000100000000000000000079-0x3845badade8e6dff049820680d1f14bd3903a5d0",
+        "managedBalance": "0"
+      },
+      {
+        "symbol": "NFTX",
+        "address": "0x87d73e916d7057945c9bcd8cdd94e42a6f47f776",
+        "priceRate": "1",
+        "balance": "0.123976658398697496",
+        "decimals": 18,
+        "name": "NFTX",
+        "weight": "0.125",
+        "id": "0x344e8f99a55da2ba6b4b5158df2143374e400df2000100000000000000000079-0x87d73e916d7057945c9bcd8cdd94e42a6f47f776",
+        "managedBalance": "0"
+      },
+      {
+        "symbol": "MUSE",
+        "address": "0xb6ca7399b4f9ca56fc27cbff44f4d2e4eef1fc81",
+        "priceRate": "1",
+        "balance": "0.854224382331130788",
+        "decimals": 18,
+        "name": "Muse",
+        "weight": "0.125",
+        "id": "0x344e8f99a55da2ba6b4b5158df2143374e400df2000100000000000000000079-0xb6ca7399b4f9ca56fc27cbff44f4d2e4eef1fc81",
+        "managedBalance": "0"
+      },
+      {
+        "symbol": "AXS",
+        "address": "0xbb0e17ef65f82ab018d8edd776e8dd940327b28b",
+        "priceRate": "1",
+        "balance": "0.441388331959998161",
+        "decimals": 18,
+        "name": "Axie Infinity Shard",
+        "weight": "0.125",
+        "id": "0x344e8f99a55da2ba6b4b5158df2143374e400df2000100000000000000000079-0xbb0e17ef65f82ab018d8edd776e8dd940327b28b",
+        "managedBalance": "0"
+      },
+      {
+        "symbol": "WETH",
+        "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        "priceRate": "1",
+        "balance": "0.007268942325689718",
+        "decimals": 18,
+        "name": "Wrapped Ether",
+        "weight": "0.125",
+        "id": "0x344e8f99a55da2ba6b4b5158df2143374e400df2000100000000000000000079-0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        "managedBalance": "0"
+      }
+    ]
+  }
+]

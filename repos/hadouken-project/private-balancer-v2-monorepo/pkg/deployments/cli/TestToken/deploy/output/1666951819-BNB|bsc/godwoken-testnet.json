@@ -1,0 +1,19 @@
+{
+  "transaction": {
+    "hash": "0x4ff76e9220d6e25594d06e6cddc7455739b2e482fddbaf62cb52eb7980964a9a",
+    "blockNumber": 636595
+  },
+  "data": {
+    "TestToken": {
+      "deploy": {
+        "input": {
+          "name": "Wrapped BNB (ForceBridge from BSC)",
+          "symbol": "BNB|bsc",
+          "decimals": 18
+        },
+        "output": "0x3B5b0179fDEF8F88c39A94039B66120933729ace"
+      }
+    }
+  },
+  "timestamp": 1666951819786
+}

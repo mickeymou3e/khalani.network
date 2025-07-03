@@ -1,0 +1,24 @@
+[package]
+name = "mirax-verification"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+ariadne.workspace = true
+axi-core-semantics = { workspace = true, features = ["ariadne"] }
+axi-parser = { workspace = true, features = ["ariadne"] }
+thiserror.workspace = true
+secp256k1.workspace = true
+serde.workspace = true
+log.workspace = true
+
+mirax-types = { workspace = true, features = ["random"] }
+mirax-error.workspace = true
+mirax-crypto.workspace = true
+mirax-hasher.workspace = true
+
+[dev-dependencies]
+env_logger.workspace = true
+rand.workspace = true

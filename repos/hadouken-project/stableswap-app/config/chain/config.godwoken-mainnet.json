@@ -1,0 +1,66 @@
+{
+  "hadouken": {
+    "lending": {
+      "url": "https://app.hadouken.finance/lend"
+    },
+    "bridge": {
+      "url": "https://app.hadouken.finance/bridge"
+    }
+  },
+  "sentry": "https://3e69dfdfa3534b13a009038a11f0ada6@o4504333193969664.ingest.sentry.io/4504333276938240",
+
+  "chainName": "Godwoken",
+  "chainId": "0x116ea",
+  "nativeCurrency": {
+    "name": "pCKB",
+    "symbol": "pCKB",
+    "decimals": 18,
+    "address": "0x7538C85caE4E4673253fFd2568c1F1b48A71558a",
+    "wrapAddress": null
+  },
+  "rpcUrl": "https://v1.mainnet.godwoken.io/rpc",
+  "readOnlyRpcUrl": "https://v1.mainnet.godwoken.io/rpc",
+  "wsUrl": "wss://v1.mainnet.godwoken.io/ws",
+  "env": "mainnet",
+  "nervos": {
+    "ckb": {
+      "url": "https://mainnet.ckb.dev"
+    },
+    "indexer": {
+      "url": "https://mainnet.ckb.dev/indexer"
+    },
+    "rollup_type_hash": "0x1ca35cb5fda4bd542e71d94a6d5f4c0d255d6d6fba73c41cf45d2693e59b3072",
+    "rollup_type_script": {
+      "code_hash": "0xfef1d086d9f74d143c60bf03bd04bab29200dbf484c801c72774f2056d4c6718",
+      "hash_type": "type",
+      "args": "0xab21bfe2bf85927bb42faaf3006a355222e24d5ea1d4dec0e62f53a8e0c04690"
+    },
+    "eth_account_lock_hash": "0x096df264f38fff07f3acd318995abc2c71ae0e504036fe32bc38d5b6037364d4",
+    "deposit_lock_script_type_hash": "0xff602581f07667eef54232cce850cbca2c418b3418611c132fca849d1edcd775",
+    "portal_wallet_lock_hash": "",
+    "rc_lock_script_type_hash": "0x9f3aeaf2fc439549cbc870c653374943af96a0658bd6b51be8d8983183e6f52f"
+  },
+  "subgraphs": {
+    "balancer": {
+      "httpUri": "https://graph-prod-http-hadouken-prod.hadouken.finance/subgraphs/name/balancer-godwoken-mainnet",
+      "webSocketUri": "wss://graph-prod-ws-hadouken-prod.hadouken.finance/subgraphs/name/balancer-godwoken-mainnet"
+    }
+  },
+  "explorerUrl": {
+    "ckb": "https://explorer.nervos.org",
+    "godwoken": "https://v1.gwscan.com",
+    "ethereum": "https://etherscan.io"
+  },
+  "api": {
+    "dia": {
+      "priceUrl": "https://api.diadata.org/v1/quotation"
+    }
+  },
+  "customLinearPools": [
+    "0xa7b28ddf165ff3bcd698e33924fb09dcd881fe0e",
+    "0x2fa3757f7cb848861d6eb56c398e2edd385cd8b3",
+    "0x1dff577744cf1f0066b3fd262356b1c41d047ad4",
+    "0x3a22945c94fcc35a569dc7e4ef0e17e08fe9acc5",
+    "0x70af4745b56c786db80b860b76316e0ce9d7ac43"
+  ]
+}

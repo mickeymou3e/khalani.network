@@ -1,0 +1,161 @@
+\section{Logic}
+
+\begin{frame}{Well-formed propositions}
+
+\begin{center}
+  $\infrule{\ctx[\noncomputable]{\Gamma}}{\prop[\Gamma]{\True}}$ \quad
+  $\infrule{\ctx[\noncomputable]{\Gamma}}{\prop[\Gamma]{\False}}$
+
+  \vspace{1em}
+
+  $\infrule{\prop{P} \quad \prop{Q}}{\prop{\Impl{P}{Q}}}$
+
+  \vspace{1em}
+
+  $\infrule{\prop{P} \quad \prop{Q}}{\prop{\And{P}{Q}}}$ \quad
+  $\infrule{\prop{P} \quad \prop{Q}}{\prop{\Or{P}{Q}}}$
+
+  \vspace{1em}
+
+  $\infrule{\type{A}[r] \quad \prop[\extend{\Gamma}{x}{A}]{P}}{\prop{\All{x}[A]{P}}}$
+
+  \vspace{1em}
+
+  $\infrule{\type{A}[r] \quad \prop[\extend{\Gamma}{x}{A}]{P}}{\prop{\Ex{x}[A]{P}}}$
+
+  \vspace{1em}
+
+  $\infrule{\type{A}[r] \quad \typing[\Gamma][\noncomputable]{e_1}{A} \quad \typing[\Gamma][\noncomputable]{e_2}{A}}{\prop[\Gamma]{\Eq[A]{e_1}{e_2}}}$
+
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Substitution}
+
+The notation is $\subst{P}{x}{e}$ for substitution in propositions.
+
+\end{frame}
+
+\begin{frame}{Assumptions and implication}
+
+\begin{center}
+
+  $\infrule{\ctx[\noncomputable]{\Gamma} \quad \sidecond{(h : P) \in \Gamma}}{\proves[\Gamma]{h}{P}}$ \quad
+  $\infrule{\ctx[\noncomputable]{\Gamma} \quad \sidecond{(h : P) \in \Gamma}}{\proves[\Gamma]{\assumption}{P}}$
+
+  \vspace{2em}
+
+  $\infrule{\proves[\assume{\Gamma}{h}{P}]{q}{Q}}{\proves[\Gamma]{\implintro{h}[P]{q}}{\Impl{P}{Q}}}$
+
+  \vspace{2em}
+
+  $\infrule{\proves{q}{\Impl{P}{Q}} \quad \proves{p}{P}}{\proves{\implelim{q}{p}}{Q}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Propositional logic}
+
+\begin{center}
+  $\infrule{\ctx[\noncomputable]{\Gamma}}{\proves[\Gamma]{\trueintro}{\True}}$ \quad
+  $\infrule{\prop[\Gamma]{Q} \quad \proves[\Gamma]{p}{\False}}{\proves[\Gamma]{\falseelim{p}}{Q}}$
+
+  \vspace{2em}
+
+  $\infrule{\proves[\Gamma]{p}{P} \quad \proves[\Gamma]{q}{Q}}{\proves[\Gamma]{\andintro{p}{q}}{\And{P}{Q}}}$
+
+  \vspace{1em}
+
+  $\infrule{\proves[\Gamma]{pq}{\And{P}{Q}}}{\proves[\Gamma]{\andeliml{pq}}{P}}$ \quad
+  $\infrule{\proves[\Gamma]{pq}{\And{P}{Q}}}{\proves[\Gamma]{\andelimr{pq}}{Q}}$
+
+  \vspace{2em}
+
+  $\infrule{\proves[\Gamma]{p}{P} \quad \prop[\Gamma]{Q}}{\proves[\Gamma]{\orintrol{p}}{\Or{P}{Q}}}$ \quad
+  $\infrule{\prop[\Gamma]{P} \quad \proves[\Gamma]{q}{Q}}{\proves[\Gamma]{\orintror{q}}{\Or{P}{Q}}}$
+
+  \vspace{1em}
+
+  $\infrule{\proves[\Gamma]{pq}{\Or{P}{Q}} \quad \proves[\Gamma]{r_1}{\Impl{P}{R}} \quad \proves[\Gamma]{r_2}{\Impl{Q}{R}}}{\proves[\Gamma]{\orelim{pq}{r_1}{r_2}}{R}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Utilities}
+
+\begin{center}
+  $\infrule{\proves[\Gamma]{p}{P} \quad \proves[\assume{\Gamma}{h}{P}]{q}{Q}}{\proves[\Gamma]{\lemma{h}{P}{p}{q}}{Q}}$
+
+  \vspace{2em}
+
+  $\infrule{\proves[\Gamma]{p}{P}}{\proves[\Gamma]{\proving{P}{p}}{P}}$
+
+  \vspace{2em}
+
+  $\infrule{\proves[\Gamma]{pq}{\Impl{P}{Q}} \quad \proves[\Gamma]{p}{P}}{\proves[\Gamma]{\suffices{P}{pq}{p}}{Q}}$
+
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Quantifiers}
+
+\begin{center}
+  $\infrule{\proves[\extend{\Gamma}{x}{A}]{p}{P}}{\proves[\Gamma]{\allintro{x}[A]{p}}{\All{x}[A]{P}}}$
+
+  \vspace{1em}
+
+  $\infrule{\proves{p}{\All{x}[A]{P}} \quad \typing[\Gamma][\noncomputable]{e}{A}}{\proves{\allelim{p}{e}}{\subst{P}{x}{e}}}$
+
+  \vspace{2em}
+
+  $\infrule{\typing[\Gamma][\noncomputable]{e}{A} \quad \prop[\extend{\Gamma}{x}{A}]{P} \quad \proves{p}{\subst{P}{x}{e}}}{\proves{\exintro{e}{p}}{\Ex{x}[A]{P}}}$
+
+  \vspace{1em}
+
+  $\infrule{\proves[\Gamma]{p}{\Ex{x}[A]{P}} \quad \prop{Q} \quad \proves[\assume{\extend{\Gamma}{x}{A}}{h}{P}]{q}{Q}}{\proves[\Gamma]{\exelim{x}{h}{p}{q}}{Q}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Equality}
+
+\begin{center}
+  $\infrule{\typing[\Gamma][\noncomputable]{e}{A}}{\proves[\Gamma]{\refl[e]}{\Eq[A]{e}{e}}}$
+
+  \vspace{2em}
+
+  $\infrule{\proves[\Gamma]{q}{\Eq[A]{e_1}{e_2}} \quad \prop[\extend{\Gamma}{x}{A}]{P} \quad \proves[\Gamma]{p}{\subst{P}{x}{e_2}}}{\proves[\Gamma]{\rewrite{q}{p}}{\subst{P}{x}{e_1}}}$
+
+  \vspace{2em}
+
+  $\infrule{\proves[\extend{\Gamma}{x}{A}]{p}{\Eq[B]{\app{f}{x}}{\app{g}{x}}}}{\proves[\Gamma]{\funext{x}[A]{p}}{\Eq[\Fun[r]{A}{B}]}{f}{g}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Classical Logic}
+
+\begin{center}
+  $\infrule{\proves[\assume{\Gamma}{h}{\Not{P}}]{q}{\False}}{\proves[\Gamma]{\bycontradiction{h}[P]{q}}{P}}$
+
+  \vspace{2em}
+
+  $\infrule{\proves[\Gamma]{p}{\Ex{x}[A]{P}}}{\typing[\Gamma][\noncomputable]{\choose{p}}{A}}$
+
+  \vspace{1em}
+
+  $\infrule{\proves{p}{\Ex{x}[A]{P}}}{\proves{\choosespec{p}}{\subst{P}{x}{\choose{p}}}}$
+
+  \vspace{2em}
+
+  $\infrule{\proves[\Gamma]{p}{\Ex{x}[A]{P}} \quad \prop{Q} \quad \proves[\assume{\extend{\Gamma}{x}{A}[\choose{p}]}{h}{P}]{q}{Q}}{\proves[\Gamma]{\choosewitnessl{x}{h}{p}{q}}{Q}}$
+
+  \vspace{1em}
+
+  $\infrule{\proves[\Gamma]{p}{\Ex{x}[A]{P}} \quad \type[\Gamma]{B}[r] \quad \typing[\assume{\extend{\Gamma}{x}{A}[\choose{p}]}{h}{P}][\noncomputable]{e}{B}}{\typing[\Gamma][\noncomputable]{\choosewitnessp{x}{h}{p}{e}}{B}}$
+
+\end{center}
+
+\end{frame}

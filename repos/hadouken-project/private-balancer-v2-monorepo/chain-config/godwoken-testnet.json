@@ -1,0 +1,13 @@
+{
+  "env": "testnet",
+  "network": "godwoken-testnet",
+  "delay": "10000",
+  "chainId": "0x116e9",
+  "marketId": "Godwoken",
+  "gasPrice": 90000000000000,
+  "gasLimit": 1000000,
+  "rpcUrl": "https://godwoken-testnet-v1.ckbapp.dev",
+  "readOnlyRpcUrl": "https://godwoken-testnet-v1.ckbapp.dev",
+  "wsUrl": "wss://godwoken-testnet-v1.ckbapp.dev/ws",
+  "explorer": "https://v1.testnet.gwscan.com"
+}

@@ -1,0 +1,15 @@
+{
+    "lpToken": {
+        "name": "Hadouken 3pool",
+        "symbol": "3pool"
+    },
+    "amplification": 100,
+    "fee": 4000000,
+    "adminFee": 0,
+    "tokens": [
+        "DAI",
+        "USDC",
+        "USDT"
+    ],
+    "gauges": []
+}

@@ -1,0 +1,15 @@
+[package]
+name = "medusa-types"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+alloy.workspace = true
+anyhow.workspace = true
+axum.workspace = true
+config.workspace = true
+dotenv.workspace = true
+futures.workspace = true
+serde.workspace = true
+tokio.workspace = true
+tracing.workspace = true

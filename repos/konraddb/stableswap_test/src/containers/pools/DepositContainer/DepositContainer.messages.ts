@@ -1,0 +1,17 @@
+const TITLE = 'Invest in pool'
+const SLIPPAGE_TOLERANCE_LABEL = 'Slippage tolerance'
+const CUSTOM_PERCENTAGE_ITEM_LABEL = 'Custom amount'
+const TOTAL_DEPOSIT = 'Total'
+const DEPOSIT_PREVIEW_BUTTON_LABEL = 'Preview'
+const PRICE_IMPACT_LABEL = 'Price impact'
+const INVESTMENT_PREVIEW_LABEL = 'Investment preview'
+
+export const messages = {
+  TITLE,
+  SLIPPAGE_TOLERANCE_LABEL,
+  CUSTOM_PERCENTAGE_ITEM_LABEL,
+  TOTAL_DEPOSIT,
+  DEPOSIT_PREVIEW_BUTTON_LABEL,
+  PRICE_IMPACT_LABEL,
+  INVESTMENT_PREVIEW_LABEL,
+}

@@ -1,0 +1,10 @@
+# We define a function on the naturals...
+function typo_in_scrutinee(n : Nat) -> Nat
+{
+  # But we made a typo in the scrutinee! It's `nn` instead of `n`!
+  match nn
+  {
+    Zero => Zero,
+    Succ(n) => Succ(n)
+  }
+}

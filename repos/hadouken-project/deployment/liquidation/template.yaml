@@ -1,0 +1,151 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Parameters:
+  Subnets:
+    Type: String
+  Environment:
+    Type: String
+    Description: PROD | TEST | LOCAL
+    Default: "PROD"
+  ChannelID:
+    Type: String
+    Description: Discord channel ID
+    Default: "1025058867664670821"
+  TaskCpu:
+    Type: String
+    Description: See https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
+    Default: 1024
+  TaskMemory:
+    Type: String
+    Description: See https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
+    Default: 2048
+  ECSClusterName:
+    Type: String
+    Default: "liquidation-cluster"
+
+Resources:
+  Service:
+    Type: AWS::ECS::Service
+    Properties:
+      ServiceName: "Liquidation-bot"
+      Cluster: !Ref ECSClusterName
+      LaunchType: FARGATE
+      DesiredCount: 1
+      DeploymentConfiguration:
+        MaximumPercent: 200
+        MinimumHealthyPercent: 100
+      TaskDefinition: !Ref LiquidationBotTaskDefinition
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: ENABLED
+          Subnets: !Split [",", !Ref Subnets]
+
+  ESCCluster:
+    Type: AWS::ECS::Cluster
+    Properties:
+      ClusterName: !Ref ECSClusterName
+
+  TaskRole:
+    Type: AWS::IAM::Role
+    Properties:
+      Path: /
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: ecs-tasks.amazonaws.com
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/CloudWatchFullAccess
+      Policies:
+        - PolicyName: AmazonECSTaskExecutionRolePolicy
+          PolicyDocument:
+            Statement:
+              - Effect: Allow
+                Action:
+                  - ecr:GetAuthorizationToken
+                  - ecr:BatchCheckLayerAvailability
+                  - ecr:GetDownloadUrlForLayer
+                  - ecr:BatchGetImage
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                  - ec2:DescribeNetworkInterfaces
+                  - ecs:DescribeTasks
+                Resource: "*"
+              - Effect: Allow
+                Action:
+                  - secretsmanager:GetSecretValue
+                Resource:
+                  - !Sub arn:aws:secretsmanager:*:*:secret:/hadouken/*
+              - Effect: Allow
+                Action:
+                  - kms:Decrypt
+                Resource:
+                  - "*"
+
+  LiquidationBotTaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Family: LiquidationBot
+      TaskRoleArn: !GetAtt TaskRole.Arn
+      ExecutionRoleArn: !GetAtt TaskRole.Arn
+      RequiresCompatibilities:
+        - FARGATE
+      Memory: !Ref TaskMemory
+      Cpu: !Ref TaskCpu
+      NetworkMode: awsvpc
+      ContainerDefinitions:
+        - Name: liquidation-bot
+          Image: !Sub ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/liquidation:latest
+          Essential: true
+          Secrets:
+            - Name: PRIVATE_KEY
+              ValueFrom: !Sub "arn:aws:secretsmanager:us-east-1:803035318642:secret:/hadouken/liquidation/liquidator_private_key-goSn24:PRIVATE_KEY::"
+            - Name: CLIENT_TOKEN
+              ValueFrom: !Sub "arn:aws:secretsmanager:us-east-1:803035318642:secret:/hadouken/liquidation/discord_client_ID-2nM6Dv:CLIENT_TOKEN::"
+          Environment:
+            - Name: CONFIG
+              Value: !Ref Environment
+            - Name: CHANNEL_ID
+              Value: !Ref ChannelID
+
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref LogGroup
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: liquidation-bot
+
+  RestartLiquidationService:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./RestartECS
+      Handler: index.default
+      Runtime: nodejs16.x
+      Timeout: 30
+      Policies:
+        - Statement:
+            - Action:
+                - ecs:UpdateService
+                - ecs:ListClusters
+                - ecs:ListServices
+                - ecs:DescribeServices
+                - ecs:DescribeTaskDefinition
+              Effect: Allow
+              Resource: "*"
+      Events:
+        NewImage:
+          Type: CloudWatchEvent
+          Properties:
+            Pattern:
+              source:
+                - aws.ecr
+              detail:
+                action-type:
+                  - PUSH
+
+  LogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub ${AWS::StackName}/liquidation-bot
+      RetentionInDays: 1

@@ -1,0 +1,33 @@
+name: BalancerJS Publish
+
+on:
+  release:
+    types: [created]
+
+env:
+  NODE_VERSION: '16.x'
+  NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v2.3.1
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@master
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install
+        run: yarn --immutable
+
+      - run: yarn build
+      - name: Publish
+        run: |
+          yarn config set 'npmRegistries["//npm.pkg.github.com"].npmAuthToken' ${{ env.NODE_AUTH_TOKEN }}
+          yarn config set 'npmScopes["@tvl-labs"].npmRegistryServer' "https://npm.pkg.github.com"
+          yarn publish:typechain

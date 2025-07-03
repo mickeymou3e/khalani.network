@@ -1,0 +1,51 @@
+{
+  "transactions": [
+    {
+      "hash": "0x06dc594c8bcd17914b4ae7536ec6f60ee503edd7d9bc35dd2103283c21db7135",
+      "transactionType": "CALL",
+      "contractName": null,
+      "contractAddress": "0xd20fB06Ec1e1fF68CFa4F1Cfc49f2B2dbbA4a524",
+      "function": "addRemoteProver(address)",
+      "arguments": [
+        "0xf9cebe7c3A5E1E302f5341C7423964Ccc0a861A3"
+      ],
+      "transaction": {
+        "from": "0xc13113E56E00050327Be3AD164185103541f1903",
+        "to": "0xd20fB06Ec1e1fF68CFa4F1Cfc49f2B2dbbA4a524",
+        "gas": "0x12b8b",
+        "value": "0x0",
+        "input": "0xc6cee29d000000000000000000000000f9cebe7c3a5e1e302f5341c7423964ccc0a861a3",
+        "nonce": "0xdb",
+        "chainId": "0x66eee"
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    }
+  ],
+  "receipts": [
+    {
+      "status": "0x1",
+      "cumulativeGasUsed": "0x18728c",
+      "logs": [],
+      "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "type": "0x2",
+      "transactionHash": "0x06dc594c8bcd17914b4ae7536ec6f60ee503edd7d9bc35dd2103283c21db7135",
+      "transactionIndex": "0x16",
+      "blockHash": "0x9bebdaee16d4c9a22e8bfb9c9f207db3917d7d7d833ecd2bc114e332b4e7f29f",
+      "blockNumber": "0x8de3710",
+      "gasUsed": "0xd341",
+      "effectiveGasPrice": "0x2eb45450",
+      "from": "0xc13113E56E00050327Be3AD164185103541f1903",
+      "to": "0xd20fB06Ec1e1fF68CFa4F1Cfc49f2B2dbbA4a524",
+      "contractAddress": null,
+      "gasUsedForL1": "0x1f0c",
+      "l1BlockNumber": "0x7dbfb4"
+    }
+  ],
+  "libraries": [],
+  "pending": [],
+  "returns": {},
+  "timestamp": 1746200199,
+  "chain": 421614,
+  "commit": "041237c"
+}

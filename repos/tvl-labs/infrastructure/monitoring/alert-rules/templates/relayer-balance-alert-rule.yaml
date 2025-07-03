@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ include "alert-rules.fullname" . }}-relayer-balance
+  namespace: monitoring
+  labels:
+    rules: "true"
+spec:
+  groups:
+    - name: RelayerBalanceAlerts
+      rules:
+        - alert: RelayerBalanceBelowThreshold
+          expr: hyperlane_wallet_balance{job=~"(.*)relayer(.*)"} < {{ .Values.rules.relayerBalance.threshold }}
+          for: {{ .Values.rules.relayerBalance.forPeriod }}
+          labels:
+            severity: critical
+          annotations:
+            summary: "Relayer wallet balance is low"
+            description: "The wallet balance of relayer '{{"{{"}} $labels.service {{"}}"}}' on chain '{{"{{"}} $labels.chain {{"}}"}}' ({{"{{"}} $labels.wallet_address {{"}}"}}) is {{"{{"}} $value {{"}}"}}, lower than minimum {{ .Values.rules.relayerBalance.threshold }}"

@@ -1,0 +1,46 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Parameters:
+  Environment:
+    Type: String
+  CorsOrigins:
+    Type: String
+  DomainName:
+    Type: String
+  CertificateArn:
+    Type: String
+  HostedZoneId:
+    Type: String
+
+Resources:
+  Api:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: !Ref Environment
+      MethodSettings:
+        - ResourcePath: '/*'
+          HttpMethod: '*'
+      Domain:
+        CertificateArn: !Ref CertificateArn
+        DomainName: !Ref DomainName
+        Route53:
+          HostedZoneId: !Ref HostedZoneId
+  NestLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ../
+      Handler: dist/lambdaHandler.app
+      Runtime: nodejs16.x
+      Timeout: 10
+      Environment:
+        Variables:
+          NODE_ENV: !Ref Environment
+          CORS: !Ref CorsOrigins
+      Events:
+        ApiGatewayEvent:
+          Type: Api
+          Properties:
+            RestApiId: !Ref Api
+            Path: /{whatever+}
+            Method: ANY

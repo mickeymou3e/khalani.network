@@ -1,0 +1,51 @@
+{
+  "defaultChainId": "0x116e9",
+  "supportedNetworks": [
+    "0x116e9",
+    "0x118",
+    "0x1389"
+  ],
+  "nativeCurrencies": {
+    "0x116e9": "CKB",
+    "0x118": "ETH",
+    "0x1389": "MNT"
+  },
+  "prioritizedSwapPairs": {
+    "0x116e9": {
+      "baseToken": "0x0c7f21908222098616803eff5d054d3f4ef57ebb",
+      "quoteToken": "0x0eb76790a2014dd1f65488ccd703bcdf75f8195e"
+    },
+    "0x118": {
+      "baseToken": "0x403e853789f38d98f1c2488C5468055b1493082c",
+      "quoteToken": "0x20b28B1e4665FFf290650586ad76E977EAb90c5D"
+    },
+    "0x1389": {
+      "baseToken": "0x0300e13d8F59FD7ae44980FCDb557565c164D535",
+      "quoteToken": "0xBf89943CAbFB8E5D637558cD0a30467ba7188D22"
+    }
+  },
+  "lockDropTokens": {
+    "0x116e9": {
+      "BoostedUSD": "0x9904d25f1fd95a17fa90ad95901a9aede6952d85",
+      "TriCrypto": "0x2F6fefD0f4df1c5aB36713398e246bf37D0C08a0",
+      "PriceToken": "0x0eb76790a2014dd1f65488ccd703bcdf75f8195e",
+      "Hdk": "0xB314aebeB775D3D0F3b6487D519FB026f443D65d",
+      "Pool": "0xac1b872c940b79a704e0c0450c42564d0129eb0300020000000000000000003a"
+    },
+    "0x118": {
+      "BoostedUSD": "0xf959629bdbdcac1e1d0a1ce630046db5cb6a15f2",
+      "TriCrypto": "0x0aef038b4d8cf8d8e3f4ee4b1e0b582600debc2d",
+      "PriceToken": "0x20b28B1e4665FFf290650586ad76E977EAb90c5D",
+      "Hdk": "0xcdEc6D5199695cff259FBd4e3C0176456293deCc",
+      "Pool": "0xaca61e07b42716306ba0a41eac7ec111ed5ce838000200000000000000000018"
+    },
+    "0x1389": {
+      "BoostedUSD": "0x0ffda3e96e98d070c910df6009f73a07c183adcb",
+      "TriCrypto": "0xcfcf7db72bcf392bc6c8b4c66954e9595b8502d5",
+      "PriceToken": "0xBf89943CAbFB8E5D637558cD0a30467ba7188D22",
+      "Hdk": "0x5cAf613f555638A735F981B08dE99F857851e096",
+      "Pool": "0xa9e3c842d8d6f8d5380cfdf0cd521d3d7e7703f2000200000000000000000019"
+    }
+  },
+  "lockdropBackend": "https://lockdrop-api-testnet.hadouken.finance"
+}

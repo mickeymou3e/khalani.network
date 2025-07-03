@@ -1,0 +1,17 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "prefer-const": "off", 
+    "comma-spacing": ["error", { "before": false, "after": true }],
+    "prettier/prettier": "error",
+    "@typescript-eslint/ban-types": "off"
+  }
+}

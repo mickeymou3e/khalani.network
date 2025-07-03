@@ -1,0 +1,3 @@
+# Make sure to not commit this file. It's only used as an example.
+walletBalanceMonitor:
+  prometheusPushGatewayUrl: http://prometheus-stack-pushgateway-prometheus-pushgateway.monitoring.svc.cluster.local:9091

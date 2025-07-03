@@ -1,0 +1,19 @@
+[package]
+name = "axi-parser"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[features]
+test-parser = ["dep:lalrpop", "dep:lalrpop-util"]
+ariadne = ["dep:ariadne"]
+
+[dependencies]
+ariadne = { workspace = true, optional = true }
+axi-ast = { path = "../ast" }
+lalrpop-util = { version = "0.22.0", optional = true }
+lexi-matic = "0.1.0"
+
+[build-dependencies]
+lalrpop = { version = "0.22.0", default-features = false, optional = true }

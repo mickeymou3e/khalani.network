@@ -1,0 +1,24 @@
+{{- $fullName := include "graph-node.fullname" . -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ $fullName }}-ws
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    
+    nginx.org/websocket-services: graph-node-external-open
+
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+spec:
+  rules:
+    - host: graph-node-ws-khalani.{{ .Values.domainName }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: graph-node-external-open
+                port:
+                  number: 8001

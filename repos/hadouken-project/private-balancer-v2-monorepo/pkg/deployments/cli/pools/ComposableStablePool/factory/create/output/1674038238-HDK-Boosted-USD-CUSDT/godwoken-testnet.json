@@ -1,0 +1,41 @@
+{
+  "transaction": {
+    "hash": "0x52dc0a4d2de67fb4e30bb37c6f57e677567c21083310412549d6440a9702c55c",
+    "blockNumber": null
+  },
+  "data": {
+    "ComposableStablePoolFactory": {
+      "create": {
+        "input": {
+          "name": "Hadouken Boosted USD / Celer USDT Stable Pool",
+          "symbol": "HDK-Boosted-USD-CUSDT",
+          "tokens": [
+            "0x58C7D8f659Cd78da06FD4f7a991000fa472417B1",
+            "0xCdb3D2dC427A5BC9aF54a9c2Ed2F5950619184BF"
+          ],
+          "rateProviders": [
+            "0x58C7D8f659Cd78da06FD4f7a991000fa472417B1",
+            "0x0000000000000000000000000000000000000000"
+          ],
+          "priceRateCacheDuration": [
+            "0",
+            "0"
+          ],
+          "amplificationParameter": "300",
+          "swapFeePercentage": "100000000000000",
+          "exemptFromYieldProtocolFeeFlags": [
+            false,
+            false
+          ],
+          "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0x58C7D8f659Cd78da06FD4f7a991000fa472417B1": "10000000000000000000",
+            "0xCdb3D2dC427A5BC9aF54a9c2Ed2F5950619184BF": "10000000"
+          }
+        },
+        "output": "0xCa50d90265be12f94E6DEeBC37d7436Fc9417BF7"
+      }
+    }
+  },
+  "timestamp": 1674038238309
+}

@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ include "alert-rules.fullname" . }}-hyperlane-indexed-blocks
+  namespace: monitoring
+  labels:
+    rules: "true"
+spec:
+  groups:
+    - name: HyperlaneIndexedBlocks
+      rules:
+        - alert: FewBlocksIndexedByHyperlane
+          expr: increase(hyperlane_block_height[{{ .Values.rules.hyperlaneIndexedBlocks.forPeriod }}]) < {{ .Values.rules.hyperlaneIndexedBlocks.threshold }}
+          for: {{ .Values.rules.hyperlaneIndexedBlocks.forPeriod }}
+          labels:
+            severity: critical
+          annotations:
+            summary: "Few blocks are indexed by Hyperlane agent"
+            description: "Hyperlane {{"{{"}} $labels.agent {{"}}"}} {{"{{"}} $labels.service {{"}}"}} has indexed only $value blocks on chain {{"{{"}} $labels.chain {{"}}"}} over the last {{ .Values.rules.hyperlaneIndexedBlocks.forPeriod}}, less than expected {{ .Values.rules.hyperlaneIndexedBlocks.threshold }}"

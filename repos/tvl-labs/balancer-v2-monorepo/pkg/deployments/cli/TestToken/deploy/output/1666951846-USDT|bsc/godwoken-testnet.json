@@ -1,0 +1,19 @@
+{
+  "transaction": {
+    "hash": "0x8b45cad72615cfe2cb77143868ad9301052648fdd9887407f3dae7cf55d92972",
+    "blockNumber": 636599
+  },
+  "data": {
+    "TestToken": {
+      "deploy": {
+        "input": {
+          "name": "Wrapped USDT (ForceBridge from BSC)",
+          "symbol": "USDT|bsc",
+          "decimals": 18
+        },
+        "output": "0xb5e2F2cf4611bcc578977aca17A9724b4B1E9863"
+      }
+    }
+  },
+  "timestamp": 1666951846510
+}

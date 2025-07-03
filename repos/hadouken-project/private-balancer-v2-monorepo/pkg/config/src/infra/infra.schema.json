@@ -1,0 +1,44 @@
+{
+  "godwoken": {
+    "chainName": "",
+    "chainId": "",
+    "type": "",
+    "nativeCurrency": {
+      "name": "",
+      "symbol": "",
+      "decimals": 0
+    },
+    "rpcUrl": "",
+    "readOnlyRpcUrl": "",
+    "wsUrl": "",
+    "explorerUrl": ""
+  },
+  "nervos": {
+    "env": "",
+    "ckb": {
+      "url": ""
+    },
+    "indexer": {
+      "url": ""
+    },
+    "rollup_type_hash": "",
+    "rollup_type_script": {
+      "code_hash": "",
+      "hash_type": "",
+      "args": ""
+    },
+    "eth_account_lock_hash": "",
+    "deposit_lock_script_type_hash": "",
+    "rc_lock_script_type_hash": ""
+  },
+  "subgraphs": {
+    "balancer": {
+      "httpUri": "",
+      "webSocketUri": ""
+    },
+    "blocks": {
+      "httpUri": "",
+      "webSocketUri": ""
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "Parameters": {
+    "Subnets": "subnet-09bda2a7d18967f02,subnet-0d2a287134907af48",
+    "Environment": "prod",
+    "ChannelID": "1025058867664670821",
+    "TaskCpu": 1024,
+    "TaskMemory": 2048,
+    "ECSClusterName": "liquidation-cluster"
+  }
+}

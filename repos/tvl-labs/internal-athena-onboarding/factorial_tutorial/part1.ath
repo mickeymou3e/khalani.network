@@ -1,0 +1,13 @@
+define [- <] := [minus less?]
+
+
+define factorial_functional := lambda (n)
+                                    check {
+                                        (n < 1) => 1
+                                        | else =>   (times (factorial_functional(n - 1)) n)
+                                    }
+
+(factorial_functional 0) # 1
+(factorial_functional 1) # 1
+(factorial_functional 2) # 2
+(factorial_functional 3) # 6

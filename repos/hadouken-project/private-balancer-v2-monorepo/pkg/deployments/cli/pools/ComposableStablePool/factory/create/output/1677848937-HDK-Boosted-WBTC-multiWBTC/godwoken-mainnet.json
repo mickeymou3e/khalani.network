@@ -1,0 +1,41 @@
+{
+  "transaction": {
+    "hash": "0xd5e89ad86d81b9cafca5f7a53d370bca011152e973110b3d0896588ce05e48a4",
+    "blockNumber": null
+  },
+  "data": {
+    "ComposableStablePoolFactory": {
+      "create": {
+        "input": {
+          "name": "Multichain WBTC Stable Pool",
+          "symbol": "HDK-Boosted-WBTC-multiWBTC",
+          "tokens": [
+            "0x136C814F6c7F7412518c07dC401a29707a773AD0",
+            "0xb44a9b6905af7c801311e8f4e76932ee959c663c"
+          ],
+          "rateProviders": [
+            "0x136C814F6c7F7412518c07dC401a29707a773AD0",
+            "0x0000000000000000000000000000000000000000"
+          ],
+          "priceRateCacheDuration": [
+            "0",
+            "0"
+          ],
+          "amplificationParameter": "300",
+          "swapFeePercentage": "100000000000000",
+          "exemptFromYieldProtocolFeeFlags": [
+            false,
+            false
+          ],
+          "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0x136C814F6c7F7412518c07dC401a29707a773AD0": "300000000000000",
+            "0xb44a9b6905af7c801311e8f4e76932ee959c663c": "30000"
+          }
+        },
+        "output": "0x6D649f42E3b641d4d0bC7e8eDCeFcA87DF164C9a"
+      }
+    }
+  },
+  "timestamp": 1677848937775
+}

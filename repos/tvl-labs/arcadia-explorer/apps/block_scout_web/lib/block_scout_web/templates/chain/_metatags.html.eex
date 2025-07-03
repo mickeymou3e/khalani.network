@@ -1,0 +1,4 @@
+<title>
+  <%= gettext("%{subnetwork} %{network} Explorer", subnetwork: LayoutView.subnetwork_title(), network: LayoutView.network_title()) %>
+</title>
+<meta name="description" content="<%= gettext "Check out the full %{subnetwork} Explorer for analytics, transaction details, and more.", subnetwork: LayoutView.subnetwork_title() %>">

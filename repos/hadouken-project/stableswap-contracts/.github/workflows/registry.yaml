@@ -1,0 +1,75 @@
+name: Pool Tests
+
+on:
+  pull_request:
+    paths:
+    - 'tests/**/*.py'
+    - 'contracts/registry/**/*'
+  push:
+    paths:
+    - 'tests/**/*.py'
+    - 'contracts/registry/**/*'
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  test:
+
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [registry]
+        type: [unitary, integration]
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Cache Compiler Installations
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.solcx
+          ~/.vvm
+        key: ${{ runner.os }}-compiler-cache-${{ hashFiles('contracts/**/*') }}
+        restore-keys: |
+          ${{ runner.os }}-compiler-cache-
+          ${{ runner.os }}-
+
+    - name: Cache pip
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+          ${{ runner.os }}-
+          
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '12.x'
+
+    - name: Install Ganache
+      run: npm install -g ganache-cli
+
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install Python Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install wheel
+        pip install -r requirements.txt
+
+
+    - name: Compile Contracts
+      run: brownie compile
+
+    - name: Run Tests
+      run: |
+        brownie test tests/${{ matrix.target }} --${{ matrix.type }}

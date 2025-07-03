@@ -1,0 +1,11 @@
+node_modules
+.nyc_output
+yarn-error.log
+
+.vscode/
+.idea/
+
+.DS_Store
+.env
+dist/
+cache/

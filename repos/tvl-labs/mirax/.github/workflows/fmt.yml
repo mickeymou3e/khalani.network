@@ -1,0 +1,37 @@
+name: Code Format
+concurrency:
+  group: Cargo Clippy-${{ github.ref }}
+  cancel-in-progress: true
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  Format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          components: rustfmt, clippy
+          toolchain: 1.85.0
+
+      - name: Check Format
+        run: cargo fmt --all --check
+
+  Editorconfig:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install editorconfig-checker
+        uses: kasperhesthaven/setup-editorconfig-checker@v1.2.0
+        with:
+          version: "2.1.0" # (Optional) Defaults to latest if not set
+
+      - name: Check Lint
+        run: editorconfig-checker

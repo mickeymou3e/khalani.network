@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: safe-cfg-config
+data:
+  PYTHONDONTWRITEBYTECODE: "false"
+
+  DEBUG: "false"
+  ROOT_LOG_LEVEL: "INFO"
+
+  DOCKER_NGINX_VOLUME_ROOT: "/nginx"
+  DOCKER_WEB_VOLUME: ".:/app"
+
+  GUNICORN_BIND_PORT: "8001"
+  GUNICORN_BIND_SOCKET: "unix:/nginx/gunicorn.socket"
+  GUNICORN_WEB_RELOAD: "false"
+
+  NGINX_ENVSUBST_OUTPUT_DIR: "/etc/nginx/"
+
+  DJANGO_ALLOWED_HOSTS: "*"
+  DJANGO_SUPERUSER_EMAIL: "{{ .Values.adminEmail }}"
+  DJANGO_OTP_ADMIN: "false"
+
+  DEFAULT_FILE_STORAGE: "django.core.files.storage.FileSystemStorage"
+
+  CGW_URL: "https://{{ .Values.routeGatewayService }}.{{ .Values.domainName }}"
+
+  CSRF_TRUSTED_ORIGINS: "https://{{ .Values.routeConfigService }}.{{ .Values.domainName }}"

@@ -1,0 +1,201 @@
+\section{Logic}
+
+\begin{frame}{Well-formed propositions}
+
+\begin{center}
+  $\infrule{}{\checkprop{\Gamma}{\True}{\True}{\Gamma}}$ \quad
+  $\infrule{}{\checkprop{\Gamma}{\False}{\False}{\Gamma}}$
+
+  \vspace{2em}
+
+  $\infrule{\checkprop{\Gamma}{P}{P'}{\Gamma_1} \quad \checkprop{\Gamma_1}{Q}{Q'}{\Gamma_2}}{\checkprop{\Gamma}{\Impl{P}{Q}}{\Impl{P'}{Q'}}{\Gamma_2}}$
+
+  \vspace{2em}
+
+  $\infrule{\checkprop{\Gamma}{P}{P'}{\Gamma_1} \quad \checkprop{\Gamma_1}{Q}{Q'}{\Gamma_2}}{\checkprop{\Gamma}{\And{P}{Q}}{\And{P'}{Q'}}{\Gamma_2}}$
+
+  \vspace{2em}
+
+  $\infrule{\checkprop{\Gamma}{P}{P'}{\Gamma_1} \quad \checkprop{\Gamma_1}{Q}{Q'}{\Gamma_2}}{\checkprop{\Gamma}{\Or{P}{Q}}{\Or{P'}{Q'}}{\Gamma_2}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Well-formed propositions}
+
+\begin{center}
+  $\infrule{\inferkind{\Gamma}{A}[r]{\Gamma_1} \quad \checkprop{\extend{\Gamma_1}{x}{A}}{P}{P'}{\extend{\Gamma_2}{x}{A}}}{\checkprop{\Gamma}{\All{x}[A]{P}}{\All{x}[A]{P'}}{\Gamma_2}}$
+
+  \vspace{1em}
+
+  $\infrule{\checkprop{\extend{\Gamma}{x}{\hat{\alpha}}}{P}{P'}{\extend{\Gamma'}{x}{A}}}{\checkprop{\Gamma}{\All{x}{P}}{\All{x}[A]{P'}}{\Gamma'}}$
+
+  \vspace{1em}
+
+  $\infrule{\inferkind{\Gamma}{A}[r]{\Gamma_1} \quad \checkprop{\extend{\Gamma_1}{x}{A}}{P}{P'}{\extend{\Gamma_2}{x}{A}}}{\checkprop{\Gamma}{\Ex{x}[A]{P}}{\Ex{x}[A]{P'}}{\Gamma_2}}$
+
+  \vspace{1em}
+
+  $\infrule{\checkprop{\extend{\Gamma}{x}{\hat{\alpha}}}{P}{P'}{\extend{\Gamma'}{x}{A}}}{\checkprop{\Gamma}{\Ex{x}{P}}{\Ex{x}[A]{P'}}{\Gamma'}}$
+
+  \vspace{1em}
+
+  $\infrule{\inferkind{\Gamma}{A}[r]{\Gamma_1} \quad \checktype{\Gamma_1}[\noncomputable]{e_1}{A}{\Gamma_2} \quad \checktype{\Gamma_2}[\noncomputable]{e_2}{A}{\Gamma_3}}{\checkprop{\Gamma}{\Eq[A]{e_1}{e_2}}{\Eq[A]{e_1}{e_2}}{\Gamma_3}}$
+
+  \vspace{1em}
+
+  $\infrule{\infertype{\Gamma}[\noncomputable]{e_1}{A}{\Gamma_1} \quad \checktype{\Gamma_1}[\noncomputable]{e_2}{A}{\Gamma_2}}{\checkprop{\Gamma}{\Eq{e_1}{e_2}}{\Eq[A]{e_1}{e_2}}{\Gamma_2}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Subsumption and annotations}
+
+\begin{center}
+  $\infrule[Subsumption]{\inferproof{\Gamma}{p}{P}{\Gamma_1} \quad \checkpropconv{\Gamma_1}{P}{Q}{\Gamma_2}}{\checkproof{\Gamma}{p}{Q}{\Gamma_2}}$
+
+  \vspace{2em}
+
+  $\infrule[Annot]{\checkprop{\Gamma}{P}{P'}{\Gamma_1} \quad \checkproof{\Gamma_1}{p}{P'}{\Gamma_2}}{\inferproof{\Gamma}{\proving{P}{p}}{P'}{\Gamma_2}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Assumptions and implication}
+
+\begin{center}
+  $\infrule{\findhyp{\Gamma}{h}{P}}{\inferproof{\Gamma}{h}{P}{\Gamma}}$ \quad
+  $\infrule{\findhyp{\Gamma}{h}{P}}{\checkproof{\Gamma}{\assumption}{P}{\Gamma}}$
+
+  \vspace{2em}
+
+  $\infrule{\checkproof{\assume{\Gamma}{h}{P}}{q}{Q}{\assume{\Gamma'}{h}{P}}}{\checkproof{\Gamma}{\implintro{h}{q}}{\Impl{P}{Q}}{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{\inferproof{\Gamma}{q}{\Impl{P}{Q}}{\Gamma_1} \quad \checkproof{\Gamma_1}{p}{P}{\Gamma_2}}{\inferproof{\Gamma}{\implelim{q}{p}}{Q}{\Gamma_2}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Propositional logic}
+
+\begin{center}
+  $\infrule{}{\checkproof{\Gamma}{\trueintro}{\True}{\Gamma}}$ \quad
+  $\infrule{\checkproof{\Gamma}{p}{\False}{\Gamma'}}{\checkproof{\Gamma}{\falseelim{p}}{Q}{\Gamma'}}$
+
+  \vspace{1em}
+
+  $\infrule{\checkproof{\Gamma}{p}{P}{\Gamma_1} \quad \checkproof{\Gamma_1}{q}{Q}{\Gamma_2}}{\checkproof{\Gamma}{\andintro{p}{q}}{\And{P}{Q}}{\Gamma_2}}$
+
+  \vspace{1em}
+
+  $\infrule{\inferproof{\Gamma}{pq}{\And{P}{Q}}{\Gamma'}}{\inferproof{\Gamma}{\andeliml{pq}}{P}{\Gamma'}}$ \quad
+  $\infrule{\inferproof{\Gamma}{pq}{\And{P}{Q}}{\Gamma'}}{\inferproof{\Gamma}{\andelimr{pq}}{Q}{\Gamma'}}$
+
+  \vspace{1em}
+
+  $\infrule{\checkproof{\Gamma}{p}{P}{\Gamma'}}{\checkproof{\Gamma}{\orintrol{p}}{\Or{P}{Q}}{\Gamma'}}$ \quad
+  $\infrule{\checkproof{\Gamma}{q}{Q}{\Gamma'}}{\checkproof{\Gamma}{\orintror{q}}{\Or{P}{Q}}{\Gamma'}}$
+
+  \vspace{1em}
+
+  $\infrule{\inferproof{\Gamma}{pq}{\Or{P}{Q}}{\Gamma_1} \quad \checkproof{\Gamma_1}{r_1}{\Impl{P}{R}}{\Gamma_2} \quad \checkproof{\Gamma_1}{r_2}{\Impl{Q}{R}}{\Gamma_3}}{\checkproof{\Gamma}{\orelim{pq}{r_1}{r_2}}{R}{\lubctx{\Gamma_2}{\Gamma_3}}}$
+
+\end{center}
+
+\end{frame}
+
+\NewDocumentCommand{\destruct}{m m m m}{\textbf{destruct}\ #1\ \textbf{as}\ #2\ #3\ \textbf{in}\ #4}
+
+\begin{frame}{Positive conjunction}
+
+\begin{center}
+  $\infrule{\inferproof{\Gamma}{pq}{\And{P}{Q}}{\Gamma_1} \quad \checkproof{\assume{\assume{\Gamma_1}{h_1}{P}}{h_2}{Q}}{r}{R}{\assume{\assume{\Gamma_2}{h_1}{P}}{h_2}{Q}}}{\checkproof{\Gamma}{\destruct{pq}{h_1}{h_2}{r}}{R}{\Gamma_2}}$
+\end{center}
+
+\vspace{2em}
+
+To make the system more checking, it makes sense to turn conjunction positive and get rid of the projections.
+
+\end{frame}
+
+\begin{frame}{Utilities}
+
+\begin{center}
+  $\infrule{\begin{array}{l} \checkprop{\Gamma}{P}{P'}{\Gamma_1} \\ \checkproof{\Gamma_1}{p}{P'}{\Gamma_2} \quad \checkproof{\assume{\Gamma_2}{h}{P'}}{q}{Q}{\assume{\Gamma_3}{h}{P'}} \end{array}}{\checkproof{\Gamma}{\lemma{h}{P}{p}{q}}{Q}{\Gamma_3}}$
+
+  \vspace{2em}
+
+  $\infrule{\checkprop{\Gamma}{P}{P'}{\Gamma_1} \quad \checkproof{\Gamma}{q}{\Impl{P'}{Q}}{\Gamma_2} \quad \checkproof{\Gamma_2}{p}{P'}{\Gamma_3}}{\checkproof{\Gamma}{\suffices{P}{q}{p}}{Q}{\Gamma_2}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Quantifiers}
+
+\begin{center}
+  $\infrule{\checkproof{\Gamma}{p}{\subst{P}{x}{y}}{\Gamma'}}{\checkproof{\Gamma}{\allintro{y}{p}}{\All{x}[A]{P}}{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{\inferproof{\Gamma}{p}{\All{x}[A]{P}}{\Gamma_1} \quad \checktype{\Gamma_1}[\noncomputable]{e}{A}{\Gamma_2}}{\inferproof{\Gamma}{\allelim{p}{e}}{\subst{P}{x}{e}}{\Gamma_2}}$
+
+  \vspace{2em}
+
+  $\infrule{\checktype{\Gamma}[\noncomputable]{e}{A}{\Gamma_1} \quad \checkproof{\Gamma_1}{p}{\subst{P}{x}{e}}{\Gamma_2}}{\checkproof{\Gamma}{\exintro{e}{p}}{\Ex{x}[A]{P}}{\Gamma_2}}$
+
+  \vspace{2em}
+
+  $\infrule{\inferproof{\Gamma}{p}{\Ex{x}[A]{P}}{\Gamma_1} \quad \checkproof{\assume{\extend{\Gamma_1}{y}{A}}{h}{\subst{P}{x}{y}}}{q}{Q}{\Gamma_2}}{\checkproof{\Gamma}{\exelim{y}{h}{p}{q}}{Q}{\Gamma_2}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Equality}
+
+\begin{center}
+  $\infrule{\checktermconv{\Gamma}{e_1}{e_2}{A}{\Gamma'}}{\checkproof{\Gamma}{\refl}{\Eq[A]{e_1}{e_2}}{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{\inferproof{\Gamma}{q}{\Eq[A]{e_1}{e_2}}{\Gamma_1} \quad \begin{array}{l} \checkprop{\extend{\Gamma_1}{x}{A}}{P}{P'}{\extend{\Gamma_2}{x}{A}} \\ \checkproof{\Gamma_2}{p}{\subst{P'}{x}{e_2}}{\Gamma_3} \end{array}}{\inferproof{\Gamma}{\rewrite{q}[x.P]{p}}{\subst{P'}{x}{e_1}}{\Gamma_3}}$
+
+  \vspace{2em}
+
+  $\infrule{\checkproof{\extend{\Gamma}{x}{A}}{p}{\Eq[B]{f}{g}}{\extend{\Gamma'}{x}{A}}}{\checkproof{\Gamma}{\funext{x}{p}}{\Eq[\Fun[r]{A}{B}]{f}{g}}{\Gamma'}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Classical logic}
+
+\begin{center}
+  $\infrule{\checkproof{\assume{\Gamma}{h}{\Not{P}}}{q}{\False}{\assume{\Gamma'}{h}{\Not{P}}}}{\checkproof{\Gamma}{\bycontradiction{h}{q}}{P}{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{\checkprop{\Gamma}{P}{\Gamma_1} \quad \checkproof{\assume{\Gamma_1}{h}{\Not{P}}}{q}{\False}{\assume{\Gamma_2}{h}{\Not{P}}}}{\inferproof{\Gamma}{\bycontradiction{h}[P]{q}}{P}{\Gamma_2}}$
+
+  \vspace{2em}
+
+  $\infrule{\inferproof{\Gamma}{p}{\Ex{x}[A]{P}}{\Gamma'}}{\infertype{\Gamma}[\noncomputable]{\choose{p}}{A}{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{\inferproof{\Gamma}{p}{\Ex{x}[A]{P}}{\Gamma'}}{\inferproof{\Gamma}{\choosespec{p}}{\subst{P}{x}{\choose{p}}}{\Gamma'}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Classical logic}
+
+\begin{center}
+  $\infrule{\begin{array}{l} \inferproof{\Gamma}{p}{\Ex{x}[A]{P}}{\Gamma_1} \\ \checkproof{\assume{\extend{\Gamma_1}{y}{A}[\choose{p}]}{h}{\subst{P}{x}{y}}}{q}{Q}{\assume{\extend{\Gamma_2}{y}{A}[\choose{p}]}{h}{\subst{P}{x}{y}}} \end{array}}{\checkproof{\Gamma}{\choosewitnessl{y}{h}{p}{q}}{Q}{\Gamma_2}}$
+
+  \vspace{2em}
+
+  $\infrule{\begin{array}{l} \inferproof{\Gamma}{p}{\Ex{x}[A]{P}}{\Gamma_1} \\ \infertype{\assume{\extend{\Gamma_1}{y}{A}[\choose{p}]}{h}{\subst{P}{x}{y}}}[\noncomputable]{e}{B}{\assume{\extend{\Gamma_2}{y}{A}[\choose{p}]}{h}{\subst{P}{x}{y}}} \end{array}}{\infertype{\Gamma}[\noncomputable]{\choosewitnessp{y}{h}{p}{e}}{B}{\Gamma_2}}$
+\end{center}
+
+\end{frame}

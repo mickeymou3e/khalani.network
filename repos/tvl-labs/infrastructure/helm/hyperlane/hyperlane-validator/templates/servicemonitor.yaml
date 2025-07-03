@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "hyperlane-validator.fullname" . }}
+  namespace: axon-trial
+  labels:
+    metrics: "true"
+spec:
+  selector:
+    matchLabels:
+      {{- include "hyperlane-validator.selectorLabels" . | nindent 6 }}
+  namespaceSelector:
+    matchNames:
+      - hyperlane
+  endpoints:
+    - port: metrics
+      path: /metrics
+      honorLabels: true

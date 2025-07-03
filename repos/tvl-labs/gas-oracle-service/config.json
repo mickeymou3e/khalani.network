@@ -1,0 +1,43 @@
+{
+  "chains": [
+    {
+      "name": "Ethereum Sepolia",
+      "chain_id": 11155111,
+      "role": "spoke",
+      "rpc_url": "https://eth-sepolia.g.alchemy.com/v2/Cha-uur1WLWVs-6rRtzCuxRtVFeR1LPT",
+      "event_verifier_address": "0x329976017082a59cD77df14f46c7828452b857b0",
+      "gas_oracle_address": "0x53e58239632c784bf4E7f2173cAc84C3aa7a9Bd1",
+      "mailbox_address": "0x9c1E82F34Ae12C4D55AeCE9d147B4a8874E13cf5",
+      "private_key": "5807eb9e7480428e7bac3eccfa463d5e9b59f6070b64d7d539494c8ef791e804",
+      "baseline_gas_usage": 100000,
+      "baseline_gas_price": 1000000000
+    },
+    {
+      "name": "Avalanche",
+      "chain_id": 43113,
+      "role": "spoke",
+      "rpc_url": "https://avalanche-fuji-c-chain-rpc.publicnode.com",
+      "event_verifier_address": "0xDb7DBE1CA7Ce62D1a6b739cc6772B33Bb90251bF",
+      "gas_oracle_address": "0xbD312F252F8601D2f57ACbb356156f43c755296e",
+      "mailbox_address": "0xECc566908AAD9894e8CF30bCd1F0862dBb908076",
+      "private_key": "5807eb9e7480428e7bac3eccfa463d5e9b59f6070b64d7d539494c8ef791e804",
+      "baseline_gas_usage": 100000,
+      "baseline_gas_price": 1500000000
+    },
+    {
+      "name": "Arcadia",
+      "chain_id": 1098411886,
+      "role": "hub",
+      "rpc_url": "https://rpc.khalani.network",
+      "event_verifier_address": "0x444d466B39bB0c74Cc78552b99Ba41A25231Da1d",
+      "gas_oracle_address": "0xce78c8F6f7bdE717B276ea263eBEaD8deC7280E1",
+      "mailbox_address": "0x02F00e016e51a71fDA6B328e53C24A15171db049",
+      "private_key": "5807eb9e7480428e7bac3eccfa463d5e9b59f6070b64d7d539494c8ef791e804",
+      "baseline_gas_usage": 100000,
+      "baseline_gas_price": 610000000
+    }
+  ],
+  "safety_margin": 1.1,
+  "update_threshold": 0.05,
+  "interval_minutes": 30
+}

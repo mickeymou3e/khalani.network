@@ -1,0 +1,72 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Axi",
+  "scopeName": "source.axi",
+  "patterns":
+  [
+    {
+      "name": "keyword.other.toplevel.axi",
+      "match": "(?<![-_])\\b(theorem|totality|declaration|axiom|class|instance|fail)\\b(?![-_])"
+    },
+    {
+      "name": "keyword.other.typedefinition.axi",
+      "match": "(?<![-_])\\b(type|record|data|proposition|where)\\b(?![-_])"
+    },
+    {
+      "name": "keyword.other.proofblock.axi",
+      "match": "(?<![-_])\\b(proof|qed|abort)\\b(?![-_])"
+    },
+    {
+      "name": "keyword.other.kind.axi",
+      "match": "(?<![-_])\\b(Type|Prop)\\b(?![-_])"
+    },
+    {
+      "name": "variable.other.proofterm.axi",
+      "match": "(?<![-_])\\b(apply|both|and-left|and-right|or-left|or-right|cases|lemma|suffices|proving|instantiate|witness|such-that|for|choose|choose-spec|choosing|rewrite|symmetry|transitivity|unfold|simpl|induction|step|totalize|quarantine-rewrite)\\b(?![-_])"
+    },
+    {
+      "name": "variable.other.proofterm.absurd.axi",
+      "match": "(?<![-_])\\babsurd\\b(?![-_])"
+    },
+    {
+      "name": "variable.other.proofterm.finisher.axi",
+      "match": "(?<![-_])\\b(assumption|trivial|refl|reflexivity|chaining|prefl)\\b(?![-_])"
+    },
+    {
+      "name": "variable.other.proofterm.binder.axi",
+      "match": "(?<![-_])\\b(assume|by-contradiction|pick-any|pick-witness|choose-witness|funext)\\b(?![-_])"
+    },
+    {
+      "name": "keyword.operator.propformer.axi",
+      "match": "(?<![-_])(?:(?:\\b(?:forall|exists|True|False)\\b)|-->|<-->|\\/\\\\|\\\\/|~|===)(?![-_])"
+    },
+    {
+      "name": "keyword.other.axi",
+      "match": "(?<![-_])(\\b(by|in|of|fun|let|update|if|is|then|else|match|with|ind|noncomputable|eqn)\\b)(?![-_])"
+    },
+    {
+      "name": "string.axi",
+      "match": "\"(?:[^\"\\\\]|\\\\.)*\""
+    },
+    {
+      "name": "comment.line.axi",
+      "match": "\\/\\/.*$"
+    },
+    {
+      "name": "punctuation.bracket.axi",
+      "match": "[(){}]"
+    },
+    {
+      "name": "punctuation.delimiter.axi",
+      "match": "[:,.\\\\]"
+    },
+    {
+      "name": "variable.other.upper.axi",
+      "match": "\\b[A-Z][a-zA-Z0-9_]*\\b"
+    },
+    {
+      "name": "variable.other.lower.axi",
+      "match": "\\b[a-z][a-zA-Z0-9_]*\\b"
+    }
+  ]
+}

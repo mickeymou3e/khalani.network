@@ -1,0 +1,29 @@
+[submodule "external/arcadia-core-contracts"]
+	path = external/arcadia-core-contracts
+	url = git@github.com:tvl-labs/arcadia-core-contracts.git
+	branch = new-chains-deployment
+
+[submodule "external/permit2"]
+	path = external/permit2
+	url = https://github.com/Uniswap/permit2.git
+
+[submodule "external/gas-oracle-service"]
+	path = external/gas-oracle-service
+	url = git@github.com:tvl-labs/gas-oracle-service.git
+
+[submodule "external/medusa-api-server"]
+	path = external/medusa-api-server
+	url = git@github.com:tvl-labs/medusa-api-server.git
+	branch = dev
+
+[submodule "external/arcadia-agents"]
+	path = external/arcadia-agents
+	url = git@github.com:tvl-labs/arcadia-agents.git
+
+[submodule "external/khalani-sdk"]
+	path = external/khalani-sdk
+	url = git@github.com:tvl-labs/khalani-sdk.git
+	branch = feat/sdk-dev-env
+[submodule "external/hyperlane-monorepo"]
+	path = external/hyperlane-monorepo
+	url = https://github.com/hyperlane-xyz/hyperlane-monorepo.git

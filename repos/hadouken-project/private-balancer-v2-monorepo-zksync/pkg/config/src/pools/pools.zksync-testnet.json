@@ -1,0 +1,105 @@
+{
+  "pools": [
+    {
+      "name": "WBTC-WETH",
+      "symbol": "HDK-WBTC-WETH",
+      "address": "0xf5Ba679e4eA09b422216534e20aD0F76145a5b6E",
+      "displayName": "WBTC/WETH Weighted",
+      "poolType": "Weighted",
+      "depositTokens": null,
+      "wrappedDepositTokens": null
+    },
+    {
+      "name": "WETH-USDC",
+      "symbol": "HDK-WETH-USDC",
+      "address": "0x19Ae9cB238E143752B8829dCb4fB4C85d546721d",
+      "displayName": "WETH/USDC Weighted",
+      "poolType": "Weighted",
+      "depositTokens": null,
+      "wrappedDepositTokens": null
+    },
+    {
+      "name": "WBTC-USDC",
+      "symbol": "HDK-WBTC-USDC",
+      "address": "0xe162A981F8E794D5526945B3B61088c21e94F6b1",
+      "displayName": "WBTC/USDC Weighted",
+      "poolType": "Weighted",
+      "depositTokens": null,
+      "wrappedDepositTokens": null
+    },
+    {
+      "name": "HUSDC-USDC",
+      "symbol": "HDK-HUSDC-USDC",
+      "address": "0x595972BA6E3865aD82Fb06a5c593740572093D22",
+      "displayName": "Boosted USDC",
+      "poolType": "ComposableStable",
+      "depositTokens": null,
+      "wrappedDepositTokens": null
+    },
+    {
+      "name": "HUSDT-USDT",
+      "symbol": "HDK-HUSDT-USDT",
+      "address": "0x150936dA9C9FbccDE86fa699698F35B66182483B",
+      "displayName": "Boosted USDT",
+      "poolType": "ComposableStable",
+      "depositTokens": null,
+      "wrappedDepositTokens": null
+    },
+    {
+      "name": "HETH-ETH",
+      "symbol": "HDK-HETH-ETH",
+      "address": "0x0c9CBDaf7EBddA3B4458e107c1F3f654d635efc2",
+      "displayName": "Boosted ETH",
+      "poolType": "ComposableStable",
+      "depositTokens": null,
+      "wrappedDepositTokens": null
+    },
+    {
+      "name": "HWBTC-WBTC",
+      "symbol": "HDK-HWBTC-WBTC",
+      "address": "0x14E87182F6D39D1993e8Cc3d5d76C710497D263e",
+      "displayName": "Boosted WBTC",
+      "poolType": "ComposableStable",
+      "depositTokens": null,
+      "wrappedDepositTokens": null
+    },
+    {
+      "name": "Hadouken Boosted USD",
+      "symbol": "HDK-Boosted-USD",
+      "address": "0xF959629bDBDCaC1e1D0A1ce630046db5CB6A15f2",
+      "displayName": "Boosted USD",
+      "poolType": "ComposableStable",
+      "depositTokens": [
+        "0x403e853789f38d98f1c2488C5468055b1493082c",
+        "0xcCD4aD7cE363C065A304C0cC4e0e14128B2BF823",
+        "0xD96e71a6F41A00399D13a20e4722a56d7aa4dBd1",
+        "0x9C14AcB697209f9C3d7a0b83C7Bd12bb44f9AA8b"
+      ],
+      "wrappedDepositTokens": null
+    },
+    {
+      "name": "Hadouken Boosted TriCrypto",
+      "symbol": "HDK-Boosted-CKB-ETH-USD",
+      "address": "0x0Aef038b4d8cF8d8E3F4ee4B1E0b582600debc2d",
+      "displayName": "Boosted Weighted TriCrypto",
+      "poolType": "WeightedBoosted",
+      "depositTokens": [
+        "0x403e853789f38d98f1c2488C5468055b1493082c",
+        "0xcCD4aD7cE363C065A304C0cC4e0e14128B2BF823",
+        "0xD96e71a6F41A00399D13a20e4722a56d7aa4dBd1",
+        "0x9C14AcB697209f9C3d7a0b83C7Bd12bb44f9AA8b",
+        "0x20b28B1e4665FFf290650586ad76E977EAb90c5D",
+        "0x35F21DEeE21B12F8056e64ffc4Dcf9c2052B7862",
+        "0xa373e9073d2D147Eb3d40f3b9C5F2B813086d839",
+        "0x49fF1203b31bAcDd6E5b62295Af09B9693024944"
+      ],
+      "wrappedDepositTokens": [
+        "0xF959629bDBDCaC1e1D0A1ce630046db5CB6A15f2",
+        "0xa373e9073d2D147Eb3d40f3b9C5F2B813086d839",
+        "0x49fF1203b31bAcDd6E5b62295Af09B9693024944",
+        "0x20b28B1e4665FFf290650586ad76E977EAb90c5D",
+        "0x35F21DEeE21B12F8056e64ffc4Dcf9c2052B7862"
+      ]
+    }
+  ]
+}

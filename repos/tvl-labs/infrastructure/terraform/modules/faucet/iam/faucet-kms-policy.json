@@ -1,0 +1,26 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "${role_arn}"
+      },
+      "Action": [
+        "kms:GetPublicKey",
+        "kms:Sign"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "${root_arn}"
+      },
+      "Action": [
+        "kms:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

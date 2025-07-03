@@ -1,0 +1,331 @@
+{
+  "StateMachines": {
+    "ArbitrageBotStateMachine": {
+      "TestCases": {
+        "HappyPath": {
+          "ValidateInput": "InputPairState",
+          "CalculateTradeVolume": "FoundArbitrageOpportunity",
+          "SendTx": "SendTxSuccess",
+          "GetTxReceipt": "ReceiveTxSuccess",
+          "ProcessTxReceipt": "ProcessTxRequestSuccess"
+        },
+        "NoArbitrageOpportunity": {
+          "ValidateInput": "InputPairState",
+          "CalculateTradeVolume": "ZeroArbitrageOpportunity"
+        },
+        "InvalidPairData": {
+          "ValidateInput": "ValidationErrorState"
+        },
+        "FailsToSendTx": {
+          "ValidateInput": "InputPairState",
+          "CalculateTradeVolume": "FoundArbitrageOpportunity",
+          "SendTx": "SendTxFailure"
+        },
+        "ValidationThrowError": {
+          "ValidateInput": "ValidationErrorState",
+          "CalculateTradeVolume": "FoundArbitrageOpportunity",
+          "SendTx": "SendTxSuccess",
+          "GetTxReceipt": "ReceiveTxSuccess",
+          "ProcessTxReceipt": "ProcessTxRequestSuccess"
+        }
+      }
+    },
+    "LinearBotStateMachine": {
+      "TestCases": {
+        "PoolIsBalanced": {
+          "ValidateInput": "InputLinearState",
+          "GetIfIsOutOfRange": "PoolIsInsideRange"
+        },
+        "PoolIsUnbalanced": {
+          "ValidateInput": "InputLinearState",
+          "GetIfIsOutOfRange": "PoolIsOutsideRange",
+          "SendTx": "SendTxSuccess",
+          "GetTxReceipt": "ReceiveTxSuccess",
+          "ProcessTxReceipt": "ProcessTxRequestSuccess"
+        }
+      }
+    },
+    "BinanceBotStateMachine": {
+      "TestCases": {
+        "FlowIsValid": {
+          "ValidateInput": "InputBinanceState",
+          "FindOpportunity": "FindOpportunityHappyResult",
+          "ExecuteTradeOnBinance": "ExecuteTradeOnBinanceOutput",
+          "ExecuteTradeOnHadouken": "ExecuteTradeOnHadoukenOutput",
+          "GetTxReceipt": "ReceiveTxSuccess",
+          "ProcessTxReceipt": "ProcessTxRequestSuccess"
+        }
+      }
+    },
+    "LiquidationBotStateMachine": {
+      "TestCases": {
+        "HappyPath": {
+          "ValidateInput": "ValidatedChainId",
+          "FindUserToLiquidate": "FoundUserToLiquidate",
+          "LiquidateUser": "SendTxSuccess",
+          "GetTxReceipt": "ReceiveTxSuccess",
+          "ProcessTxReceipt": "ProcessTxRequestSuccess"
+        },
+        "NoLiquidation": {
+          "ValidateInput": "ValidatedChainId",
+          "FindUserToLiquidate": "NoUserToLiquidate"
+        },
+        "FailsToSendTx": {
+          "ValidateInput": "ValidatedChainId",
+          "FindUserToLiquidate": "FoundUserToLiquidate",
+          "LiquidateUser": "SendTxFailure"
+        }
+      }
+    }
+  },
+  "MockedResponses": {
+    "ValidationErrorState": {
+      "0": {
+        "Throw": {
+          "Error": "TypeError",
+          "Cause": "error"
+        }
+      }
+    },
+    "InputPairState": {
+      "0": {
+        "Return": {
+          "arbitragePair": {
+            "poolNameForSell": "yokaiWbtcWckb",
+            "poolNameForBuy": "hadoukenWbtcCkb",
+            "baseToken": "WBTC|eth",
+            "quoteToken": "CKB",
+            "quoteTokenThreshold": "218665",
+            "minProfit": "36000000000000000000"
+          },
+          "chainId": "0x116ea",
+          "calculatedTradeVolume": {
+            "subgraphBlocksBehind": 0
+          }
+        }
+      }
+    },
+    "FoundArbitrageOpportunity": {
+      "0": {
+        "Return": {
+          "quoteAmount": "10000000000",
+          "baseAmount": "100",
+          "profit": "1000000",
+          "swapInfo": {
+            "tokenAddresses": [
+              "0x186181e225dc1ad85a4a94164232bd261e351c33",
+              "0x7538c85cae4e4673253ffd2568c1f1b48a71558a",
+              "0x82455018f2c32943b3f12f4e59d0da2faf2257ef",
+              "0x9e858a7aaedf9fdb1026ab1f77f627be2791e98a"
+            ],
+            "swaps": [
+              {
+                "poolId": "0xf1f6dad64c189ddc8368ebfd5761765aa31f4191000100000000000000000001",
+                "assetInIndex": 0,
+                "assetOutIndex": 1,
+                "amount": "224278347",
+                "userData": "0x",
+                "returnAmount": "64545788132304459176693"
+              },
+              {
+                "poolId": "0xdfc80050d829ddbf5dc8ea3f1b9da5c68a4cbd7a000200000000000000000003",
+                "assetInIndex": 0,
+                "assetOutIndex": 1,
+                "amount": "21224584",
+                "userData": "0x",
+                "returnAmount": "6091697711253459575419"
+              },
+              {
+                "poolId": "0x10787c272d37253c3d50d12665d97b748e52b01a00020000000000000000000f",
+                "assetInIndex": 0,
+                "assetOutIndex": 2,
+                "amount": "636847",
+                "userData": "0x",
+                "returnAmount": "3255"
+              },
+              {
+                "poolId": "0xd0b29dda7bf9ba85f975170e31040a959e4c59e1000100000000000000000004",
+                "assetInIndex": 2,
+                "assetOutIndex": 3,
+                "amount": "0",
+                "userData": "0x",
+                "returnAmount": "456144146063373"
+              },
+              {
+                "poolId": "0xaea765ef470fd9aa24853bb1ce5f21c6879349c2000200000000000000000002",
+                "assetInIndex": 3,
+                "assetOutIndex": 1,
+                "amount": "0",
+                "userData": "0x",
+                "returnAmount": "183361321422558994176"
+              }
+            ]
+          },
+          "subgraphBlocksBehind": 0
+        }
+      }
+    },
+    "ZeroArbitrageOpportunity": {
+      "0": {
+        "Return": {
+          "quoteAmount": "0",
+          "baseAmount": "0",
+          "profit": "0",
+          "swapInfo": {
+            "tokenAddresses": [],
+            "swaps": []
+          }
+        }
+      }
+    },
+    "SendTxSuccess": {
+      "0": {
+        "Return": {
+          "txHash": "0x003d91e1f545e065dffe5aab7fea803af99204f1be55f16b39bd2d9c9e6a7973"
+        }
+      }
+    },
+    "SendTxFailure": {
+      "0": {
+        "Throw": {
+          "Error": "Lambda.TimeoutException",
+          "Cause": "Lambda timed out."
+        }
+      }
+    },
+    "RepeatFunctionExecutionMock": {
+      "0": {
+        "Return": {}
+      }
+    },
+    "ReceiveTxSuccess": {
+      "0": {
+        "Return": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "result": {
+            "hash": "0x003d91e1f545e065dffe5aab7fea803af99204f1be55f16b39bd2d9c9e6a7973",
+            "blockHash": "0x7b4bfe0eab119fae9bff0f9ce3c300713abc10b9bb9cfc6d646598d36c007928",
+            "blockNumber": "0x593a6",
+            "transactionIndex": "0x2",
+            "from": "0xa14d06ee65f19ea64548ca2effcc26925823827d",
+            "to": "0x657cc11c7a06d9d2f7eef5e5af5f23c69d05077e",
+            "gas": "0xd2c65",
+            "gasPrice": "0x246139ca8000",
+            "input": "0x34f3c2b70000000000000000000000000000000000000000000000000000000005f5e1000000000000000000000000007538c85cae4e4673253ffd2568c1f1b48a71558a000000000000000000000000186181e225dc1ad85a4a94164232bd261e351c330000000000000000000000000000000000000000000000000000000000000001dfc80050d829ddbf5dc8ea3f1b9da5c68a4cbd7a000200000000000000000003000000000000000000000000f4b5cd842e1962ca5b59327fe4bbf5b845c18669",
+            "nonce": "0x53",
+            "value": "0x0",
+            "v": "0x22df7",
+            "r": "0xebebe83bc6446a87b8e10fae8c2f1b27c4952f9af64aa58dd7c51d13f75853ef",
+            "s": "0x302ed43aa049bf8852f39893ca576fdee39efbf3d854cdd8aa8ee11fef3137c5"
+          }
+        }
+      }
+    },
+    "ReceiveTxFailure": {
+      "0": {
+        "Throw": {
+          "Error": "Lambda.TimeoutException",
+          "Cause": "Lambda timed out."
+        }
+      }
+    },
+    "ProcessTxRequestSuccess": {
+      "0": {
+        "Return": "Success"
+      }
+    },
+    "ExecuteTradeOnBinanceOutput": {
+      "0": {
+        "Return": {
+          "poolNameForBuy": "binanceETHUSDC",
+          "quoteAmount": "300000000",
+          "baseAmount": "300000000000000000",
+          "baseTokenSymbol": "ETH",
+          "quoteTokenSymbol": "USDT",
+          "binanceFee": "0"
+        }
+      }
+    },
+    "ExecuteTradeOnHadoukenOutput": {
+      "0": {
+        "Return": {
+          "poolNameForBuy": "binanceETHUSDC",
+          "poolNameForSell": "hadoukenCkbEthUsdc",
+          "baseTokenSymbol": "ETH",
+          "quoteTokenSymbol": "USDT",
+          "quoteAmount": "50000000",
+          "baseAmount": "30000000000000000",
+          "txHash": "0x003d91e1f545e065dffe5aab7fea803af99204f1be55f16b39bd2d9c9e6a7973"
+        }
+      }
+    },
+    "InputBinanceState": {
+      "0": {
+        "Return": {
+          "poolNameForBuy": "binanceETHUSDC",
+          "poolNameForSell": "hadoukenCkbEthUsdc",
+          "baseTokenSymbol": "ETH",
+          "quoteTokenSymbol": "USDT",
+          "quoteTokenThreshold": "1",
+          "minProfit": "0",
+          "chainId": "0x116ea",
+          "findOpportunityResult": {
+            "subgraphBlocksBehind": 0
+          }
+        }
+      }
+    },
+    "FindOpportunityHappyResult": {
+      "0": {
+        "Return": {
+          "quoteAmount": "124",
+          "baseAmount": "20000000",
+          "notProfitable": null,
+          "binancePrice": "0",
+          "subgraphBlockBehind": 0
+        }
+      }
+    },
+    "InputLinearState": {
+      "0": {
+        "Return": {
+          "poolName": "LinearUSDC",
+          "chainId": "0x116ea"
+        }
+      }
+    },
+    "PoolIsInsideRange": {
+      "0": {
+        "Return": "false"
+      }
+    },
+    "PoolIsOutsideRange": {
+      "0": {
+        "Return": "true"
+      }
+    },
+    "ValidatedChainId": {
+      "0": {
+        "Return": {
+          "chainId": "0x116ea"
+        }
+      }
+    },
+    "FoundUserToLiquidate": {
+      "0": {
+        "Return": {
+          "collateralToken": "0x0c7f21908222098616803eff5d054d3f4ef57ebb",
+          "debtToken": "0x0eb76790a2014dd1f65488ccd703bcdf75f8195e",
+          "userAddress": "0xA14d06ee65f19EA64548CA2effCc26925823827d",
+          "amount": "1000000"
+        }
+      }
+    },
+    "NoUserToLiquidate": {
+      "0": {
+        "Return": null
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "name": "stableswap-subgraph",
+  "license": "UNLICENSED",
+  "version": "0.0.1",
+  "scripts": {
+    "clean:generated": "rm -rf generated",
+    "clean:build": "rm -rf build",
+    "clean:data": "rm -rf data",
+    "clean": "yarn clean:generated; yarn clean:build; yarn clean:data",
+    "build": "graph build",
+    "codegen": "graph codegen",
+    "prerebuild": "mustache config/godwoken.local.json subgraph.template.yaml > subgraph.yaml; yarn codegen",
+    "rebuild-local": "yarn prerebuild; yarn build; yarn remove-local; yarn create-local; yarn deploy-local",
+    "remove-local": "graph remove release-0_0_1 --node http://127.0.0.1:8020",
+    "create-local": "graph create release-0_0_1 --node http://127.0.0.1:8020",
+    "deploy-local": "graph deploy release-0_0_1 --ipfs http://localhost:5001 --node http://127.0.0.1:8020",
+    "prerebuild-staging": "mustache config/godwoken.test.json subgraph.template.yaml > subgraph.yaml",
+    "remove-staging": "graph remove release-0_0_3 --node https://graph-node-admin-hadouken.rumblefish.dev",
+    "create-staging": "graph create release-0_0_3 --node https://graph-node-admin-hadouken.rumblefish.dev",
+    "deploy-staging": "graph deploy release-0_0_3 --ipfs https://ipfs-hadouken.rumblefish.dev --node https://graph-node-admin-hadouken.rumblefish.dev",
+    "rebuild-staging": "yarn prerebuild-staging; yarn codegen; yarn remove-staging; yarn build; yarn create-staging; yarn deploy-staging",
+    "prerebuild-prod": "mustache config/godwoken.prod.json subgraph.template.yaml > subgraph.yaml",
+    "remove-prod": "graph remove release-0_0_4 --node https://graph-node-admin-hadouken.hadouken.finance",
+    "create-prod": "graph create release-0_0_4 --node https://graph-node-admin-hadouken.hadouken.finance",
+    "deploy-prod": "graph deploy release-0_0_4 --ipfs https://ipfs-hadouken.hadouken.finance --node https://graph-node-admin-hadouken.hadouken.finance",
+    "rebuild-prod": "yarn prerebuild-prod; yarn codegen; yarn remove-prod; yarn build; yarn create-prod; yarn deploy-prod"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "^0.25.1",
+    "@graphprotocol/graph-ts": "^0.24.1",
+    "@openzeppelin/contracts": "^3.4.0",
+    "axios": "^0.21.1",
+    "dayjs": "^1.10.4",
+    "docker-compose": "^0.23.6",
+    "ethers": "^5.4.1",
+    "log4js": "^6.3.0",
+    "ts-node": "^9.1.1"
+  },
+  "devDependencies": {
+    "@typechain/ethers-v5": "^7.0.1",
+    "@types/jest": "^26.0.20",
+    "@types/mustache": "^4.1.2",
+    "@types/node": "^16.4.0",
+    "hardhat": "^2.0.10",
+    "jest": "^27.0.6",
+    "mustache": "^4.2.0",
+    "ts-jest": "^27.0.4",
+    "typechain": "^5.1.2",
+    "typescript": "^4.3.5"
+  }
+}

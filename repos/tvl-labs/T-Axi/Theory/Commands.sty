@@ -1,0 +1,219 @@
+\ProvidesPackage{Commands}
+
+\usepackage{xparse}
+
+% Pipes - used when specifying grammars in BNF format.
+\NewDocumentCommand{\pipe}{}{\ |\ }
+
+% Programming language.
+
+% Quantities.
+\NewDocumentCommand{\qty}{}{\mathcal{Q}}
+\NewDocumentCommand{\Zero}{}{0}
+\NewDocumentCommand{\One}{}{1}
+\NewDocumentCommand{\Few}{}{?}
+\NewDocumentCommand{\Many}{}{+}
+\NewDocumentCommand{\Any}{}{*}
+
+% Subusaging - order on quantities.
+\NewDocumentCommand{\subusage}{m m}{#1 \sqsubseteq #2}
+\NewDocumentCommand{\glbqty}{m m}{#1 \sqcap #2}
+\NewDocumentCommand{\lubqty}{m m}{#1 \sqcup #2}
+
+% Arithmetic order on quantities.
+\NewDocumentCommand{\learithqty}{O{} O{}}{#1 \leq #2}
+\NewDocumentCommand{\lesubqty}{m m}{#1 \leq_{\texttt{sub}} #2}
+\NewDocumentCommand{\ledecqty}{m m}{#1 \leq_{\texttt{dec}} #2}
+
+% Operations on quantities.
+\NewDocumentCommand{\addqty}{m m}{#1 + #2}
+\NewDocumentCommand{\mulqty}{m m}{#1 \cdot #2}
+\NewDocumentCommand{\subqty}{m m}{#1 - #2}
+\NewDocumentCommand{\divqty}{m m}{#1 / #2}
+\NewDocumentCommand{\typeqty}{m}{\texttt{qty}(#1)}
+\NewDocumentCommand{\modeqty}{O{i} m}{#1(#2)}
+\NewDocumentCommand{\totalqty}{m m O{i}}{#1_{#2}^{#3}}
+
+% Types.
+\NewDocumentCommand{\Fun}{o m m}{\IfValueTF{#1}{#1\, }{} #2 \to #3}
+\RenewDocumentCommand{\Box}{o m}{\texttt{!}_{#1}\, #2}
+\NewDocumentCommand{\Prod}{m m}{#1 \otimes #2}
+\NewDocumentCommand{\Sum}{m m}{#1 \oplus #2}
+\NewDocumentCommand{\Unit}{}{\texttt{Unit}}
+\NewDocumentCommand{\Empty}{}{\texttt{Empty}}
+\NewDocumentCommand{\ForallE}{m o m}{\forall @#1 \IfValueTF{#2}{: \Type[#2]}{} .\, #3}
+\NewDocumentCommand{\ForallI}{m o m}{\forall #1 \IfValueTF{#2}{: \Type[#2]}{} .\, #3}
+
+% An optional type annotation.
+\NewDocumentCommand{\optionalannot}{m}{\IfValueTF{#1}{: #1}{}}
+\NewDocumentCommand{\optionalspace}{m}{\IfValueTF{#1}{\ #1}{}}
+\NewDocumentCommand{\optional}{m}{\IfValueTF{#1}{#1}{}}
+
+% Terms.
+\NewDocumentCommand{\annot}{m m}{(#1 : #2)}
+\NewDocumentCommand{\fun}{o m o m}{\lambda_{\optional{#1}}\, #2 \optionalannot{#3} .\, #4}
+\NewDocumentCommand{\app}{m m}{#1\ #2}
+\NewDocumentCommand{\boxintro}{o m}{\texttt{box}_{\optional{#1}}\ #2}
+\NewDocumentCommand{\boxelim}{o m m m o}{\texttt{let}_{\optional{#5}}\ \texttt{box}\ #2 = #3\ \texttt{in}\ #4}
+\NewDocumentCommand{\pair}{m m}{(#1, #2)}
+\NewDocumentCommand{\letpair}{o m m m m o}{\texttt{let}_{\optional{#6}}\ (#2, #3) = #4\ \texttt{in}\ #5}
+\NewDocumentCommand{\inl}{o m}{\texttt{inl}_{\optional{#1}}\ #2}
+\NewDocumentCommand{\inr}{o m}{\texttt{inr}_{\optional{#1}}\ #2}
+\NewDocumentCommand{\case}{o m m m o}{\texttt{case}_{\optional{#5}}\ #2\ \texttt{of}\ (#3, #4)}
+\NewDocumentCommand{\newcase}{o m m m m m o}{\texttt{case}_{\optional{#7}}\ #2\ \texttt{of}\ \{#3.#4;\ #5.#6 \}}
+\NewDocumentCommand{\unit}{}{\texttt{unit}}
+\NewDocumentCommand{\unitelim}{o m m o}{\texttt{let}_{\optional{#4}}\ \unit = #2\ \texttt{in}\ #3}
+\NewDocumentCommand{\emptyelim}{m o}{\Empty\texttt{-elim}_{\optional{#2}}\ #1}
+\NewDocumentCommand{\letin}{o m o m m}{\texttt{let}_{\optional{#1}}\ #2 \optionalannot{#3} = #4\ \texttt{in}\ #5}
+\NewDocumentCommand{\letnoncomp}{m o m m}{\texttt{let noncomputable}\ #1 \optionalannot{#2} = #3\ \texttt{in}\ #4}
+\RenewDocumentCommand{\choose}{m}{\texttt{choose}\ #1}
+\NewDocumentCommand{\choosewitnessp}{m m m m}{\texttt{choose-witness}\ #1\ #2\ \texttt{for}\ #3\ \texttt{in}\ #4}
+\NewDocumentCommand{\tfun}{m o m}{\Lambda\, #1 \IfValueTF{#2}{: \Type[#2]}{} .\, #3}
+\NewDocumentCommand{\itfun}{m o m}{\Lambda\, \{#1 \IfValueTF{#2}{: \Type[#2]}{}\} .\, #3}
+\NewDocumentCommand{\tapp}{m m}{#1\ #2}
+\NewDocumentCommand{\itapp}{m m}{#1\ @#2}
+
+% Logic.
+
+% Propositions.
+
+% Propositional logic.
+\NewDocumentCommand{\True}{}{\top}
+\NewDocumentCommand{\False}{}{\bot}
+\NewDocumentCommand{\Not}{m}{\neg #1}
+\NewDocumentCommand{\Or}{m m}{#1 \lor #2}
+\RenewDocumentCommand{\And}{m m}{#1 \land #2}
+\NewDocumentCommand{\Impl}{m m}{#1 \Rightarrow #2}
+\NewDocumentCommand{\Iff}{m m}{#1 \Leftrightarrow #2}
+
+% Quantifiers.
+\NewDocumentCommand{\All}{m o m}{\forall #1 \optionalannot{#2} .\, #3}
+\NewDocumentCommand{\Ex}{m o m}{\exists #1 \optionalannot{#2} .\, #3}
+
+% Equality.
+\NewDocumentCommand{\Eq}{o m m}{#2 =_{\optional{#1}} #3}
+
+% Proofterms.
+
+% Propositional logic.
+\NewDocumentCommand{\assumption}{}{\textbf{assumption}}
+\NewDocumentCommand{\implintro}{m o m}{\textbf{assume}\ #1 \optionalannot{#2}\ \textbf{in}\ #3}
+\NewDocumentCommand{\implelim}{m m}{\textbf{apply}\ #1\ #2}
+\NewDocumentCommand{\trueintro}{}{\textbf{trivial}}
+\NewDocumentCommand{\falseelim}{o m}{\textbf{absurd}_{\optional{#1}}\ #2}
+\NewDocumentCommand{\andintro}{m m}{\textbf{both}\ #1\ #2}
+\NewDocumentCommand{\andeliml}{m}{\textbf{and-left}\ #1}
+\NewDocumentCommand{\andelimr}{m}{\textbf{and-right}\ #1}
+\NewDocumentCommand{\orintrol}{m}{\textbf{or-left}\ #1}
+\NewDocumentCommand{\orintror}{m}{\textbf{or-right}\ #1}
+\NewDocumentCommand{\orelim}{m m m}{\textbf{cases}\ #1\ #2\ #3}
+\RenewDocumentCommand{\lemma}{m m m m}{\textbf{lemma}\ #1 : #2\ \textbf{by}\ #3\ \textbf{in}\ #4}
+\NewDocumentCommand{\proving}{m m}{\textbf{proving}\ #1\ \textbf{by}\ #2}
+\NewDocumentCommand{\suffices}{m m m}{\textbf{suffices}\ #1\ \textbf{by}\ #2\ \textbf{in}\ #3}
+
+% Classical logic.
+\NewDocumentCommand{\bycontradiction}{m o m}{\textbf{by-contradiction}\ #1 \IfValueTF{#2}{: \Not{#2}}{}\ \textbf{in}\ #3}
+\NewDocumentCommand{\choosespec}{m}{\textbf{choose-spec}\ #1}
+\NewDocumentCommand{\choosewitnessl}{m m m m}{\textbf{choose-witness}\ #1\ #2\ \textbf{for}\ #3\ \textbf{in}\ #4}
+
+% Quantifiers.
+\NewDocumentCommand{\allintro}{m o m}{\textbf{pick-any}\ #1 \optionalannot{#2}\ \textbf{in}\ #3}
+\NewDocumentCommand{\allelim}{m m}{\textbf{instantiate}\ #1\ \textbf{with}\ #2}
+\NewDocumentCommand{\exintro}{m m}{\textbf{witness}\ #1\ \textbf{such that}\ #2}
+\NewDocumentCommand{\exelim}{m m m m}{\textbf{pick-witness}\ #1\ #2\ \textbf{for}\ #3\ \textbf{in}\ #4}
+
+% Equality.
+\NewDocumentCommand{\refl}{o}{\textbf{refl} \optionalspace{#1}}
+\NewDocumentCommand{\rewrite}{m o m}{\textbf{rewrite}\ #1\ \IfValueTF{#2}{\textbf{at}\ #2\ }{} \textbf{in}\ #3}
+\NewDocumentCommand{\funext}{m o m}{\textbf{funext}\ #1 \optionalannot{#2}\ \textbf{in}\ #3}
+
+% Kinding.
+\NewDocumentCommand{\Type}{o}{\texttt{Type}_{\optional{#1}}}
+
+% Contexts.
+
+% Typing contexts.
+\NewDocumentCommand{\emptyctx}{}{\cdot}
+\NewDocumentCommand{\extend}{m o m m o}{#1, \IfValueTF{#2}{#2\,}{} #3 : #4 \IfValueTF{#5}{:= #5}{}}
+\NewDocumentCommand{\assume}{m m m}{#1, #2 : #3}
+\NewDocumentCommand{\extendtype}{m m o}{#1, #2 : \Type[#3]}
+
+% Context operations.
+\NewDocumentCommand{\subusagectx}{m m}{#1 \sqsubseteq #2}
+\NewDocumentCommand{\glbctx}{m m}{#1 \sqcap #2}
+\NewDocumentCommand{\lubctx}{m m}{#1 \sqcup #2}
+\NewDocumentCommand{\addctx}{m m}{#1 + #2}
+\NewDocumentCommand{\subctx}{m m}{#1 - #2}
+\NewDocumentCommand{\scalectx}{m m}{#1\, #2}
+\NewDocumentCommand{\varctx}{m m}{| #1 |_{#2}}
+\NewDocumentCommand{\usevar}{m m}{#1 - #2}
+\NewDocumentCommand{\divctx}{m m}{#1 / #2}
+\NewDocumentCommand{\cartesianize}{m}{| #1 |}
+\NewDocumentCommand{\decomposectx}{m o m o m}{\subctx{#1}{\addctx{\scalectx{\optional{#2}}{#3}}{\scalectx{\optional{#4}}{#5}}}}
+
+% Judgements.
+
+% Modes.
+\NewDocumentCommand{\computable}{}{\texttt{c}}
+\NewDocumentCommand{\noncomputable}{}{\texttt{nc}}
+
+% Valid context.
+\NewDocumentCommand{\ctx}{O{i} m}{#2\ \texttt{ctx}_{#1}}
+
+% Cartesian context.
+\NewDocumentCommand{\cartesian}{m}{#1\ \texttt{cartesian}}
+
+% Valid type.
+\NewDocumentCommand{\type}{O{\Gamma} m o}{#1 \vdash #2 : \Type[#3]}
+
+% Declarative typing.
+\NewDocumentCommand{\typing}{O{\Gamma} O{i} m m}{#1 \vdash_{\optional{#2}} #3 : #4}
+
+% Well-formed proposition.
+\NewDocumentCommand{\prop}{O{\Gamma} m}{#1 \vdash #2\ \texttt{prop}}
+
+% Proof judgement.
+\NewDocumentCommand{\proves}{O{\Gamma} m m}{#1 \vdash #2 : #3}
+
+% Conversion judgements.
+\NewDocumentCommand{\typeconv}{O{\Gamma} m m o}{#1 \vdash #2 \equiv #3 : \Type[#4]}
+\NewDocumentCommand{\propconv}{O{\Gamma} m m}{#1 \vdash #2 \equiv #3\ \texttt{prop}}
+\NewDocumentCommand{\termconv}{O{\Gamma} m m m}{#1 \vdash #2 \equiv #3 : #4}
+
+% Algorithmic judgements.
+\NewDocumentCommand{\findvar}{m m m}{#1(#2) = #3}
+\NewDocumentCommand{\findhyp}{m m m}{#1(#2) = #3}
+
+\NewDocumentCommand{\checkkind}{m m O{} m}{#1 \vdash #2 \mathcolor{blue}{\Leftarrow} \Type[#3] \dashv #4}
+\NewDocumentCommand{\inferkind}{m m O{} m}{#1 \vdash #2 \mathcolor{red}{\Rightarrow} \Type[#3] \dashv #4}
+
+\NewDocumentCommand{\checkprop}{m m m m}{#1 \vdash #2 \mathcolor{blue}{\Leftarrow} \texttt{prop} \mathcolor{red}{\Rightarrow} #3 \dashv #4}
+
+\NewDocumentCommand{\checktype}{m O{i} m m m}{#1 \vdash_{\optional{#2}} #3 \mathcolor{blue}{\Leftarrow} #4 \dashv #5}
+\NewDocumentCommand{\infertype}{m O{i} m m m}{#1 \vdash_{\optional{#2}} #3 \mathcolor{red}{\Rightarrow} #4 \dashv #5}
+
+\NewDocumentCommand{\checkproof}{m m m m}{#1 \vdash #2 \mathcolor{blue}{\Leftarrow} #3 \dashv #4}
+\NewDocumentCommand{\inferproof}{m m m m}{#1 \vdash #2 \mathcolor{red}{\Rightarrow} #3 \dashv #4}
+
+\NewDocumentCommand{\checktypeconv}{m m m O{} m}{#1 \vdash #2 \equiv #3 \mathcolor{blue}{\Leftarrow} \Type[#4] \dashv #5}
+\NewDocumentCommand{\infertypeconv}{m m m O{} m}{#1 \vdash #2 \equiv #3 \mathcolor{red}{\Rightarrow} \Type[#4] \dashv #5}
+\NewDocumentCommand{\infertypeconvwhnf}{m m m O{} m}{#1 \vdash #2\ \hat{\equiv}\ #3 \mathcolor{red}{\Rightarrow} \Type[#4] \dashv #5}
+
+\NewDocumentCommand{\checktermconv}{m m m m m}{#1 \vdash #2 \equiv #3 \mathcolor{blue}{\Leftarrow} #4 \dashv #5}
+\NewDocumentCommand{\checktermconvwhnf}{m m m m m}{#1 \vdash #2\ \hat{\equiv}\ #3 \mathcolor{blue}{\Leftarrow} #4 \dashv #5}
+\NewDocumentCommand{\infertermconv}{m m m m m}{#1 \vdash #2 \equiv #3 \mathcolor{red}{\Rightarrow} #4 \dashv #5}
+\NewDocumentCommand{\infertermconvwhnf}{m m m m m}{#1 \vdash #2\ \hat{\equiv}\ #3 \mathcolor{red}{\Rightarrow} #4 \dashv #5}
+
+\NewDocumentCommand{\checkpropconv}{m m m m}{#1 \vdash #2 \equiv #3 \dashv #4}
+\NewDocumentCommand{\checkpropconvwhnf}{m m m m}{#1 \vdash #2\ \hat{\equiv}\ #3 \dashv #4}
+\NewDocumentCommand{\inferpropconvwhnf}{m m m m}{#1 \vdash #2 \sim #3 \dashv #4}
+
+% Inference rules.
+\NewDocumentCommand{\rulename}{m}{\textsc{\footnotesize{#1}}}
+\NewDocumentCommand{\infrule}{O{} m m}{\displaystyle \frac{#2}{#3} \rulename{#1}}
+
+% Side conditions - this command semantically marks side conditions in inference rules, but otherwise does nothing.
+\NewDocumentCommand{\sidecond}{m}{#1}
+
+% Substitution.
+\NewDocumentCommand{\subst}{m m m}{#1[#2 := #3]}

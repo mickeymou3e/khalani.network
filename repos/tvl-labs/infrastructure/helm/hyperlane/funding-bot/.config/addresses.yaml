@@ -1,0 +1,27 @@
+# Make sure to not commit this file. It's only used as an example.
+fundingBot:
+  addressesContent: |
+    {
+      "addresses": [
+        {
+          "name": "relayer-khalani-testnet",
+          "chain": "FUJI",
+          "address": "0x638cabc18c9584a4c005946954faa2936420ba18"
+        },
+        {
+          "name": "relayer-khalani-testnet",
+          "chain": "SEPOLIA",
+          "address": "0x638cabc18c9584a4c005946954faa2936420ba18"
+        },
+        {
+          "name": "relayer-fuji",
+          "chain": "KHALANITESTNET",
+          "address": "0x78b43e668e24ddafee6b1c12d8260e94a2c5f460"
+        },
+        {
+          "name": "relayer-sepolia",
+          "chain": "KHALANITESTNET",
+          "address": "0x509409230b3e1c1b335d5e1c77cea7a594174db5"
+        }
+      ]
+    }

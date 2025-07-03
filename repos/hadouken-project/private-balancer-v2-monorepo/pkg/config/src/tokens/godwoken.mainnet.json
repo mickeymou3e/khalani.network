@@ -1,0 +1,184 @@
+{
+  "tokens": [
+    {
+      "name": "pCKB",
+      "symbol": "CKB",
+      "decimals": 18,
+      "source": "gw",
+      "address": "0x7538c85cae4e4673253ffd2568c1f1b48a71558a"
+    },
+    {
+      "name": "Wrapped Ether",
+      "symbol": "ETH",
+      "decimals": 18,
+      "source": "eth",
+      "address": "0x9e858a7aaedf9fdb1026ab1f77f627be2791e98a"
+    },
+    {
+      "name": "Tether USDT",
+      "symbol": "USDT",
+      "decimals": 6,
+      "source": "eth",
+      "address": "0x8e019acb11c7d17c26d334901fa2ac41c1f44d50"
+    },
+    {
+      "name": "Dai Stablecoin",
+      "symbol": "DAI",
+      "decimals": 18,
+      "source": "eth",
+      "address": "0x2c9fc6087875646112f66a3c92fef2d158faa76e"
+    },
+    {
+      "name": "USD Coin",
+      "symbol": "USDC",
+      "decimals": 6,
+      "source": "eth",
+      "address": "0x186181e225dc1ad85a4a94164232bd261e351c33"
+    },
+    {
+      "name": "BNB|bsc",
+      "symbol": "BNB",
+      "decimals": 18,
+      "source": "bsc",
+      "address": "0xbadb9b25150ee75bb794198658a4d0448e43e528"
+    },
+    {
+      "name": "BUSD|bsc",
+      "symbol": "BUSD",
+      "decimals": 18,
+      "source": "bsc",
+      "address": "0xd07920d57f400d89d62535d50eb9d1200ed7821b"
+    },
+    {
+      "name": "USDT|bsc",
+      "symbol": "USDT",
+      "decimals": 18,
+      "source": "bsc",
+      "address": "0xdff2facdfe47c1d5b51f18231f900949f1d5988f"
+    },
+    {
+      "name": "ETH|bsc",
+      "symbol": "ETH",
+      "decimals": 18,
+      "source": "bsc",
+      "address": "0x815fd64f16c522becd816d858dde5f337f68a1e6"
+    },
+    {
+      "name": "USDC|bsc",
+      "symbol": "USDC",
+      "decimals": 18,
+      "source": "bsc",
+      "address": "0xfa307cfdea89dc197a346c338a98ac85d517af6e"
+    },
+    {
+      "name": "Wrapped Bitcoin",
+      "symbol": "WBTC",
+      "decimals": 8,
+      "source": "eth",
+      "address": "0x82455018f2c32943b3f12f4e59d0da2faf2257ef"
+    },
+    {
+      "name": "BUSD|eth",
+      "symbol": "BUSD",
+      "decimals": 18,
+      "source": "eth",
+      "address": "0x9dc5014998b6a7351d75d731263199d31feb4474"
+    },
+    {
+      "name": "Hadouken Interest Bearing USDC",
+      "symbol": "hUSDC",
+      "decimals": 6,
+      "address": "0xE16AE54fd2b74D92F9FeD49Bf7fA20aaB003DD60",
+      "source": "gw",
+      "unwrappedAddress": "0x06c0c3ea4983d0141e79f78343Da48BaE6b61a09"
+    },
+    {
+      "name": "Hadouken Interest Bearing USDT",
+      "symbol": "hUSDT",
+      "decimals": 6,
+      "address": "0xb434d6E7945C755c6B16DF386A4b0BE2bfd2d4a5",
+      "source": "gw",
+      "unwrappedAddress": "0x66206E9b054361B623046B12Aa99215541216741"
+    },
+    {
+      "name": "Hadouken Interest Bearing ETH",
+      "symbol": "hETH",
+      "decimals": 18,
+      "address": "0x85c8BDA7498F575243Cce55Ad859894Fe67cf0bC",
+      "source": "gw",
+      "unwrappedAddress": "0x0A0f1D2A3ea1E0442EbC8CC3a2139a2E7B314AA5"
+    },
+    {
+      "name": "Hadouken Interest Bearing WBTC",
+      "symbol": "hWBTC",
+      "decimals": 8,
+      "address": "0x39228fAC0FFbFB343EA2Ed855e06333fE001dCd2",
+      "source": "gw",
+      "unwrappedAddress": "0x294f250a63C10Df254233B382dB495321E23e161"
+    },
+    {
+      "name": "Celer USDC",
+      "symbol": "ceUSDC",
+      "decimals": 6,
+      "source": "ce",
+      "address": "0x53bB26dc8C5EFC6c95C37155aCa487d1D043436a"
+    },
+    {
+      "name": "Celer USDT",
+      "symbol": "ceUSDT",
+      "decimals": 6,
+      "source": "ce",
+      "address": "0x3c790b38f466514ffCB4230e7B2334e52B64c942"
+    },
+    {
+      "name": "Hadouken Interest Bearing CKB",
+      "symbol": "hCKB",
+      "decimals": 18,
+      "address": "0x4Edc8690D6c2636CfAA5Df7A4F0013F20AEB9223",
+      "source": "gw",
+      "unwrappedAddress": "0x734ba3e711a22a383c1A26DBE5D529CFb793C3bf"
+    },
+    {
+      "name": "Celer WBTC",
+      "symbol": "ceWBTC",
+      "decimals": 8,
+      "source": "ce",
+      "address": "0x1c428a6539a40ec5bb481631266a51cd19b233b1"
+    },
+    {
+      "name": "Celer ETH",
+      "symbol": "ceETH",
+      "decimals": 18,
+      "source": "ce",
+      "address": "0xb66954619363145a05ef835547449eb9050d82f6"
+    },
+    {
+      "name": "Multichain ETH",
+      "symbol": "multiETH",
+      "decimals": 18,
+      "source": "multi",
+      "address": "0x639a647fbe20b6c8ac19e48e2de44ea792c62c5c"
+    },
+    {
+      "name": "Multichain WBTC",
+      "symbol": "multiWBTC",
+      "decimals": 8,
+      "source": "multi",
+      "address": "0xb44a9b6905af7c801311e8f4e76932ee959c663c"
+    },
+    {
+      "name": "Multichain USDC",
+      "symbol": "multiUSDC",
+      "decimals": 6,
+      "source": "multi",
+      "address": "0xe3f5a90f9cb311505cd691a46596599aa1a0ad7d"
+    },
+    {
+      "name": "Multichain USDT",
+      "symbol": "multiUSDT",
+      "decimals": 6,
+      "source": "multi",
+      "address": "0xfa9343c3897324496a05fc75abed6bac29f8a40f"
+    }
+  ]
+}

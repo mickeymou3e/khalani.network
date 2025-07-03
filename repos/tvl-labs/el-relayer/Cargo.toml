@@ -1,0 +1,19 @@
+[package]
+name = "el-relayer"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+arcadia = { git = "https://github.com/tvl-labs/el-axon.git", package = "axon-protocol" }
+anyhow = "1.0"
+bcs = "0.1.6"
+jsonrpsee = { version = "0.24.7", features = ["http-client", "macros", "server"] }
+merkle-cbt = "0.3.2"
+rocksdb = { version = "0.22", default-features = false, features = [
+    "lz4",
+    "snappy",
+] }
+serde = { version = "1", features = ["derive"] }
+sparse-merkle-tree = "0.6"
+thiserror = "2.0"
+tokio = { version = "1.41", features = ["full"] }

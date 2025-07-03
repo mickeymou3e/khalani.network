@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: blockscout
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blockscout
+  serviceName: blockscout
+  template:
+    metadata:
+      labels:
+        app: blockscout
+    spec:
+      serviceAccountName: {{ include "blockscout.serviceAccountName" . }}
+      containers:
+        - name: blockscout
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          command: ["/bin/bash"]
+          args: ["-c", "bin/blockscout eval \"Elixir.Explorer.ReleaseTasks.create_and_migrate()\" && bin/blockscout start"]
+          env:
+            - name: postgres_host
+              value: {{ required "Postgres Host" .Values.postgresHost }}
+            - name: postgres_db
+              value: graphnode
+            - name: postgres_user
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: postgres_user
+            - name: postgres_pass
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: postgres_pass
+            - name: DATABASE_URL
+              value: "postgresql://$(postgres_user):$(postgres_pass)@$(postgres_host):5432/$(postgres_db)?ssl=false"
+            - name: ETHEREUM_JSONRPC_HTTP_URL
+              value: {{ required "ETHEREUM_JSONRPC_HTTP_URL" .Values.rpcUrl }}
+            - name: ETHEREUM_JSONRPC_TRACE_URL
+              value: {{ .Values.rpcUrl }}
+            - name: SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  name: key-base-secret
+                  key: password
+          envFrom:
+            - configMapRef:
+                name: config
+          ports:
+            - containerPort: 4020
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 1000m
+              memory: 2G
+            limits:
+              cpu: 2000m
+              memory: 6G
+          volumeMounts:
+            - name: secrets-store-inline
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
+            - name: secrets-store-key-base
+              mountPath: "/mnt/secrets-store-key-base"
+              readOnly: true
+      volumes:
+        - name: secrets-store-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "db-secret-class"
+        - name: secrets-store-key-base
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "key-base-secret-class"

@@ -1,0 +1,13 @@
+{
+    "subgraph": "https://graph-multi-http-hadouken.hadouken.finance/subgraphs/name/lending-testnet",
+    "receiveAToken": true,
+    "gasLimit": 12000000,
+    "gasPrice": 40000000000000,
+    "chainId": "0x116e9",
+    "nervos": {
+      "godwoken": {
+        "rpcUrl": "https://godwoken-testnet-v1.ckbapp.dev"
+      }
+    },
+    "environment": "Testnet"
+  }

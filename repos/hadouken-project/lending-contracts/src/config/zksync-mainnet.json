@@ -1,0 +1,48 @@
+{
+  "env": "mainnet",
+  "network": "zksync-mainnet",
+  "chainId": "0x144",
+  "marketId": "zkSync",
+  "delay": "5000",
+  "gasLimit": 12500000,
+  "rpcUrl": "https://mainnet.era.zksync.io",
+  "readOnlyRpcUrl": "https://mainnet.era.zksync.io",
+  "wsUrl": "",
+  "explorer": "https://explorer.zksync.io",
+  "nativeToken": {
+    "address": "0x0000000000000000000000000000000000000000",
+    "symbol": "ETH",
+    "wrapAddress": "0x8Ebe4A94740515945ad826238Fc4D56c6B8b0e60"
+  },
+  "tokens": [
+    {
+      "symbol": "BTC.e",
+      "address": "0x0000000000000000000000000000000000000000",
+      "displaySymbol": "WBTC",
+      "decimals": 8
+    },
+    {
+      "symbol": "ETH.e",
+      "address": "0x0000000000000000000000000000000000000000",
+      "displaySymbol": "ETH",
+      "decimals": 18
+    },
+    {
+      "symbol": "USDT.e",
+      "address": "0x0000000000000000000000000000000000000000",
+      "displaySymbol": "USDT",
+      "decimals": 6
+    },
+    {
+      "symbol": "USDC.e",
+      "address": "0x0000000000000000000000000000000000000000",
+      "displaySymbol": "USDC",
+      "decimals": 6
+    }
+  ],
+  "bandOracleStdReference": "",
+  "diaOracleV2": "",
+  "gnosisApi": "",
+  "gnosisSafe": "",
+  "isGnosisSafe": false
+}

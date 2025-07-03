@@ -1,0 +1,31 @@
+[package]
+name = "mirax-types"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bit-vec.workspace = true
+derive_more.workspace = true
+semver.workspace = true
+serde.workspace = true
+smol_str.workspace = true
+thiserror.workspace = true
+bcs.workspace = true
+blake3.workspace = true
+
+mirax-codec.workspace = true
+mirax-compat.workspace = true
+mirax-crypto.workspace = true
+mirax-error.workspace = true
+mirax-hasher.workspace = true
+mirax-primitive.workspace = true
+mirax-version.workspace = true
+
+[dependencies.rand]
+workspace = true
+optional = true
+
+[features]
+random = ["dep:rand"]

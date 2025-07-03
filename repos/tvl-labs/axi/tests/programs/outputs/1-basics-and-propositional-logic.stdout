@@ -1,0 +1,11 @@
+Result: Nothing
+Result: Nothing
+Result: Nothing
+Result: Nothing
+Result: Proved(if(not(not(a)), a))
+Result: Proved(if(a, if(b, and(a, b))))
+Result: Proved(if(a, if(b, b)))
+Result: Proved(if(and(a, b), or(a, c)))
+Result: Proved(if(if(or(a, c), d), if(and(a, b), d)))
+Result: Proved(if(if(a, b), if(if(b, a), iff(a, b))))
+Result: Proved(if(iff(a, b), and(if(a, b), if(b, a))))

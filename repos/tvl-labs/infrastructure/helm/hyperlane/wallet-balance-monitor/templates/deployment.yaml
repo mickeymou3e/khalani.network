@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "wallet-balance-monitor.fullname" . }}
+  labels:
+    {{- include "wallet-balance-monitor.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "wallet-balance-monitor.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "wallet-balance-monitor.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "wallet-balance-monitor.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - node
+            - dist/index.js
+            - --addresses-file
+            - /config/addresses.json
+            - --rpc-urls-file
+            - /config/rpc-urls.json
+            - --interval
+            - {{ .Values.walletBalanceMonitor.interval | quote }}
+            - --prometheus-pushgateway-url
+            - {{ .Values.walletBalanceMonitor.prometheusPushGatewayUrl }}
+          volumeMounts:
+            - mountPath: /config/addresses.json
+              name: wallet-balance-monitor-addresses-config
+              readOnly: true
+              subPath: addresses.json
+            - mountPath: /config/rpc-urls.json
+              name: wallet-balance-monitor-rpc-urls-secret
+              readOnly: true
+              subPath: rpc-urls.json
+            - name: secrets-store-inline-ghcr # The volume mount is required for the Sync With Kubernetes Secrets
+              mountPath: "/mnt/secrets-store-inline-ghcr"
+              readOnly: true
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+        - name: wallet-balance-monitor-addresses-config
+          configMap:
+            name: {{ include "wallet-balance-monitor.addressesConfigMapName" . }}
+        - name: wallet-balance-monitor-rpc-urls-secret
+          secret:
+            secretName: {{ include "wallet-balance-monitor.rpcUrlsSecret" . }}
+        - name: secrets-store-inline-ghcr
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "tvl-docker-ghcr-login-secret-aws-secret-class"
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

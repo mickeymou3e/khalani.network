@@ -1,0 +1,1 @@
+export const SLIPPAGE_DEFAULT_VALUE = 1

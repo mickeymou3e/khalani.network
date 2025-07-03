@@ -1,0 +1,320 @@
+Transform: AWS::Serverless-2016-10-31
+
+Parameters:
+  KMSKeyArn:
+    Type: String
+  SecretsArn:
+    Type: String
+  DiscordWebhookUrlBinance:
+    Type: String
+    Description: 'Discord webhook URL to send notifications to'
+  LinearSentryDsn:
+    Type: String
+    Description: 'Sentry DSN to send errors to'
+  VpcId:
+    Type: String
+  SubnetId:
+    Type: String
+  PrivateSubnetCidrBlocks:
+    Type: String
+
+Resources:
+  Subnets:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: ./private-subnets.yml
+      Parameters:
+        VpcId: !Ref VpcId
+        PublicSubnet: !Ref SubnetId
+        PrivateSubnetCidrBlocks: !Ref PrivateSubnetCidrBlocks
+
+  LambdaSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security group in which Lambdas are executed
+      VpcId: !Ref VpcId
+
+  BinanceStateFunctionHandler:
+    Type: AWS::Serverless::Function
+    Properties:
+      VpcConfig:
+        SecurityGroupIds:
+          - !Ref LambdaSecurityGroup
+        SubnetIds:
+          - subnet-07ef12ee2254340ac
+          - subnet-0b020b42597b68ff1
+          - subnet-018a878d48f455015
+      CodeUri: ./trading-bot.zip
+      Handler: dist/src/lambdaEntrypoint.binanceEntrypoint
+      MemorySize: 512
+      Runtime: 'nodejs16.x'
+      Timeout: 25
+      Tracing: Active
+
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - 'kms:Sign'
+                - 'kms:GetPublicKey'
+              Resource: !Ref KMSKeyArn
+            - Effect: Allow
+              Action:
+                - 'secretsmanager:GetSecretValue'
+              Resource: !Ref SecretsArn
+      Environment:
+        Variables:
+          NO_COLOR: 'true'
+          DISCORD_WEBHOOK_URL: !Ref DiscordWebhookUrlBinance
+          KMS_KEY_ARN: !Ref KMSKeyArn
+          SENTRY_DSN: !Ref LinearSentryDsn
+          BINANCE_SECRETS: !Ref SecretsArn
+          BINANCE_REGION_ACTIVE: '1'
+      Events:
+        ReceiveEvent:
+          Type: EventBridgeRule
+          Properties:
+            Pattern:
+              source:
+                - 'aws.states'
+              detail-type:
+                - 'Step Functions Execution Status Change'
+              detail:
+                status:
+                  - 'FAILED'
+                  - 'ABORTED'
+                  - 'TIMED_OUT'
+
+  BinanceBotStateMachine:
+    Type: AWS::Serverless::StateMachine
+    Properties:
+      Definition:
+        StartAt: ValidateInput
+        States:
+          ValidateInput:
+            Type: Task
+            Resource: !GetAtt BinanceStateFunctionHandler.Arn
+            Parameters:
+              'stateMachineName.$': '$$.StateMachine.Name'
+              'stateName.$': '$$.State.Name'
+              'poolNameForBuy.$': '$.poolNameForBuy'
+              'poolNameForSell.$': '$.poolNameForSell'
+              'baseTokenSymbol.$': '$.baseTokenSymbol'
+              'quoteTokenSymbol.$': '$.quoteTokenSymbol'
+              'quoteTokenThreshold.$': '$.quoteTokenThreshold'
+              'minProfit.$': '$.minProfit'
+              'chainId.$': '$.chainId'
+            ResultPath: '$'
+            Next: InitializeCounter
+
+          InitializeCounter:
+            Type: Pass
+            Result:
+              'value': 0
+            ResultPath: '$.counter'
+            Next: FindOpportunity
+
+          FindOpportunity:
+            Type: Task
+            Resource: !GetAtt BinanceStateFunctionHandler.Arn
+            Parameters:
+              'stateName.$': '$$.State.Name'
+              'poolNameForBuy.$': '$.poolNameForBuy'
+              'poolNameForSell.$': '$.poolNameForSell'
+              'baseTokenSymbol.$': '$.baseTokenSymbol'
+              'quoteTokenSymbol.$': '$.quoteTokenSymbol'
+              'quoteTokenThreshold.$': '$.quoteTokenThreshold'
+              'minProfit.$': '$.minProfit'
+              'chainId.$': '$.chainId'
+              'subgraphBlocksBehind.$': '$.findOpportunityResult.subgraphBlocksBehind'
+            Retry:
+              - ErrorEquals:
+                  - States.TaskFailed
+                  - States.Timeout
+                IntervalSeconds: 10
+                MaxAttempts: 10
+                BackoffRate: 10
+            ResultPath: '$.findOpportunityResult'
+            Next: CheckIfProfitable
+
+          CheckIfProfitable:
+            Type: Choice
+            Choices:
+              - Variable: '$.findOpportunityResult.notProfitable'
+                IsNull: false
+                Next: IncreaseCounter
+            Default: ExecuteTradeOnBinance
+
+          ExecuteTradeOnBinance:
+            Type: Task
+            Resource: !GetAtt BinanceStateFunctionHandler.Arn
+            Parameters:
+              'stateName.$': '$$.State.Name'
+              'poolNameForBuy.$': '$.poolNameForBuy'
+              'poolNameForSell.$': '$.poolNameForSell'
+              'quoteAmount.$': '$.findOpportunityResult.quoteAmount'
+              'baseAmount.$': '$.findOpportunityResult.baseAmount'
+              'baseTokenSymbol.$': '$.baseTokenSymbol'
+              'quoteTokenSymbol.$': '$.quoteTokenSymbol'
+              'binancePrice.$': '$.findOpportunityResult.binancePrice'
+              'chainId.$': '$.chainId'
+            Catch:
+              - ErrorEquals:
+                  - States.TaskFailed
+                ResultPath: null
+                Next: IncreaseCounter
+            ResultPath: '$.binanceResult'
+            Next: ExecuteTradeOnHadouken
+
+          ExecuteTradeOnHadouken:
+            Type: Task
+            Resource: !GetAtt BinanceStateFunctionHandler.Arn
+            Parameters:
+              'stateName.$': '$$.State.Name'
+              'poolNameForBuy.$': '$.poolNameForBuy'
+              'poolNameForSell.$': '$.poolNameForSell'
+              'binancePrice.$': '$.findOpportunityResult.binancePrice'
+              'quoteAmount.$': '$.binanceResult.quoteAmount'
+              'baseAmount.$': '$.binanceResult.baseAmount'
+              'baseTokenSymbol.$': '$.baseTokenSymbol'
+              'quoteTokenSymbol.$': '$.quoteTokenSymbol'
+              'quoteTokenThreshold.$': '$.quoteTokenThreshold'
+              'minProfit.$': '$.minProfit'
+              'chainId.$': '$.chainId'
+            Catch:
+              - ErrorEquals:
+                  - States.TaskFailed
+                ResultPath: null
+                Next: IncreaseCounter
+            ResultPath: '$.hadoukenResult'
+            Next: GetTxReceipt
+
+          GetTxReceipt:
+            Type: Task
+            Resource: !GetAtt BinanceStateFunctionHandler.Arn
+            Parameters:
+              'stateName.$': '$$.State.Name'
+              'txHash.$': '$.hadoukenResult.txHash'
+              'chainId.$': '$.chainId'
+            ResultPath: '$.txReceipt'
+            Retry:
+              - ErrorEquals:
+                  - States.TaskFailed
+                  - States.Timeout
+                IntervalSeconds: 10
+                MaxAttempts: 2
+                BackoffRate: 10
+            Next: CheckIfReceiptIsReady
+
+          CheckIfReceiptIsReady:
+            Type: Choice
+            Choices:
+              - Variable: '$.txReceipt'
+                IsNull: true
+                Next: WaitForTransactionMine
+            Default: ProcessTxReceipt
+
+          WaitForTransactionMine:
+            Type: Wait
+            Seconds: 10
+            Next: GetTxReceipt
+
+          ProcessTxReceipt:
+            Type: Task
+            Resource: !GetAtt BinanceStateFunctionHandler.Arn
+            Parameters:
+              'stateName.$': '$$.State.Name'
+              'txReceipt.$': '$.txReceipt'
+              'poolNameForBuy.$': '$.poolNameForBuy'
+              'poolNameForSell.$': '$.poolNameForSell'
+              'binanceQuoteAmount.$': '$.binanceResult.quoteAmount'
+              'binanceBaseAmount.$': '$.binanceResult.baseAmount'
+              'baseTokenSymbol.$': '$.baseTokenSymbol'
+              'quoteTokenSymbol.$': '$.quoteTokenSymbol'
+              'quoteTokenThreshold.$': '$.quoteTokenThreshold'
+              'minProfit.$': '$.minProfit'
+              'binanceFee.$': '$.binanceResult.binanceFee'
+              'chainId.$': '$.chainId'
+            ResultPath: null
+            Retry:
+              - ErrorEquals:
+                  - States.TaskFailed
+                  - States.Timeout
+                IntervalSeconds: 10
+                MaxAttempts: 2
+                BackoffRate: 10
+            Next: IncreaseCounter
+
+          IncreaseCounter:
+            Type: Pass
+            Parameters:
+              'value.$': 'States.MathAdd($.counter.value, 1)'
+            ResultPath: '$.counter'
+            Next: CheckMaximumNumberOfIterations
+
+          CheckMaximumNumberOfIterations:
+            Type: Choice
+            Choices:
+              - Variable: '$.counter.value'
+                NumericGreaterThan: 1000
+                Next: GetCurrentExecutionId
+            Default: FindOpportunity
+
+          GetCurrentExecutionId:
+            Type: Pass
+            Parameters:
+              'executionNumber.$': "States.StringToJson(States.ArrayGetItem(States.StringSplit($$.Execution.Name, '-'), 2))"
+            ResultPath: '$.nextExecutionInfo'
+            Next: GenerateNextExecutionName
+
+          GenerateNextExecutionName:
+            Type: Pass
+            Parameters:
+              'nextExecutionName.$': "States.Format('{}-{}-{}', States.ArrayGetItem(States.StringSplit($$.Execution.Name, '-'), 0), States.ArrayGetItem(States.StringSplit($$.Execution.Name, '-'), 1), States.MathAdd($.nextExecutionInfo.executionNumber, 1))"
+            ResultPath: '$.nextExecutionInfo'
+            Next: RepeatFunctionExecution
+
+          RepeatFunctionExecution:
+            Type: Task
+            Resource: arn:aws:states:::states:startExecution
+            Parameters:
+              Input:
+                'poolNameForBuy.$': '$.poolNameForBuy'
+                'poolNameForSell.$': '$.poolNameForSell'
+                'baseTokenSymbol.$': '$.baseTokenSymbol'
+                'quoteTokenSymbol.$': '$.quoteTokenSymbol'
+                'quoteTokenThreshold.$': '$.quoteTokenThreshold'
+                'minProfit.$': '$.minProfit'
+                'chainId.$': '$.chainId'
+                'AWS_STEP_FUNCTIONS_STARTED_BY_EXECUTION_ID.$': '$$.Execution.Id'
+              'StateMachineArn.$': '$$.StateMachine.Id'
+              'Name.$': '$.nextExecutionInfo.nextExecutionName'
+            End: true
+
+      Role: !GetAtt [StatesExecutionRole, Arn]
+
+  StatesExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: 'Allow'
+            Principal:
+              Service:
+                - !Sub states.${AWS::Region}.amazonaws.com
+            Action: 'sts:AssumeRole'
+      Path: '/'
+      Policies:
+        - PolicyName: StatesExecutionPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 'lambda:InvokeFunction'
+                Resource: '*'
+              - Effect: Allow
+                Action:
+                  - 'states:StartExecution'
+                Resource: '*'

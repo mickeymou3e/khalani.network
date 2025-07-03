@@ -1,0 +1,31 @@
+[package]
+name = "medusa-storage"
+version = "0.1.0"
+edition = "2024"
+
+[features]
+default = ["sqlite", "postgres"]
+sqlite = ["sea-orm/sqlx-sqlite", "sea-orm/sqlite-use-returning-for-3_35"]
+postgres = ["sea-orm/sqlx-postgres"]
+test-with-postgres = ["postgres"]
+
+[dependencies]
+alloy.workspace = true
+anyhow.workspace = true
+async-trait.workspace = true
+bcs.workspace = true
+dashmap.workspace = true
+rustc-hash.workspace = true
+sea-orm.workspace = true
+sea-orm-migration.workspace = true
+serde.workspace = true
+sqlx.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+medusa-apm.workspace = true
+medusa-types.workspace = true
+thiserror.workspace = true
+tracing-subscriber.workspace = true
+
+[dev-dependencies]
+alloy = { workspace = true, features = ["rand"] }

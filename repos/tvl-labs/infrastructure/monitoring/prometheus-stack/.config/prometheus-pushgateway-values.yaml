@@ -1,0 +1,7 @@
+# Create a ServiceMonitor linked to the Pushgateway.
+serviceMonitor:
+  enabled: true
+  namespace: monitoring
+  # We use a convention label `metrics: "true"` to discover all services that need to be monitored in the cluster.
+  additionalLabels:
+    metrics: "true"

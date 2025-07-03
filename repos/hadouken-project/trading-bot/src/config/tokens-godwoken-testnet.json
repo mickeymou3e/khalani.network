@@ -1,0 +1,40 @@
+{
+  "tokens": [
+    {
+      "symbol": "USDC",
+      "address": "0x0c7f21908222098616803eff5d054d3f4ef57ebb",
+      "decimals": 6,
+      "displayDecimals": 2
+    },
+    {
+      "symbol": "CKB",
+      "address": "0x0eb76790a2014dd1f65488ccd703bcdf75f8195e",
+      "decimals": 18,
+      "displayDecimals": 2
+    },
+    {
+      "symbol": "ETH",
+      "address": "0xff900e1436cbcd25d72b7dafe6ef4d569405cc05",
+      "decimals": 18,
+      "displayDecimals": 6
+    },
+    {
+      "symbol": "BNB",
+      "address": "0x3b5b0179fdef8f88c39a94039b66120933729ace",
+      "decimals": 18,
+      "displayDecimals": 6
+    },
+    {
+      "symbol": "WBTC",
+      "address": "0x6a447ba163039d7e1d674668578a0eb049245915",
+      "decimals": 8,
+      "displayDecimals": 8
+    },
+    {
+      "symbol": "USDT",
+      "address": "0x30b0a247de59a1cdf44329b756d3343e5afed7f9",
+      "decimals": 6,
+      "displayDecimals": 2
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+Result: Proved(=[3_u8, 3_u8])
+Result: Proved(=[0x3344aabb, 0x3344aabb])
+Result: Proved(=[add[bytes_len[BytesCons[2_u8, 0x334455]):Bytes]):Nat, 2]):Nat, Succ[add[4, 1]):Nat]):Nat])
+Result: Proved(forall u8. forall Bytes. =[bytes_len[BytesCons[@1:u8, @0:Bytes]):Bytes]):Nat, Succ[bytes_len[@0:Bytes]):Nat]):Nat])

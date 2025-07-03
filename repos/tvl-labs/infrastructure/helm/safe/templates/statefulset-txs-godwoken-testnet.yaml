@@ -1,0 +1,348 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: safe-txs-godwoken-testnet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: safe-txs-godwoken-testnet
+  serviceName: safe-txs-godwoken-testnet
+  template:
+    metadata:
+      labels:
+        app: safe-txs-godwoken-testnet
+    spec:
+      serviceAccountName: {{ include "safe.serviceAccountName" . }}
+      containers:
+        - name: txs-web
+          image: "kuzirashi/safe-transaction-service:staging"
+          command: ["docker/web/run_web.sh"]
+          workingDir: /app
+          env:
+            - name: postgres_host
+              value: {{ required "Transactions DB Postgres Host" .Values.transactionsDatabases.godwokentestnet.host }}
+            - name: postgres_db
+              value: txsdb
+            - name: postgres_user
+              valueFrom:
+                secretKeyRef:
+                  name: txs-db-godwoken-testnet
+                  key: postgres_user
+            - name: postgres_pass
+              valueFrom:
+                secretKeyRef:
+                  name: txs-db-godwoken-testnet
+                  key: postgres_pass
+            - name: DATABASE_URL
+              value: "postgresql://$(postgres_user):$(postgres_pass)@$(postgres_host):5432/$(postgres_db)"
+            - name: DJANGO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: django-secret-key-godwoken-testnet
+                  key: password
+          envFrom:
+            - configMapRef:
+                name: safe-txs-godwoken-testnet
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          volumeMounts:
+            - name: secrets-store-txs-db-godwoken-testnet
+              mountPath: "/mnt/secrets-store-txs-db-godwoken-testnet"
+              readOnly: true
+            - name: django-secret-key-godwoken-testnet
+              mountPath: "/mnt/django-secret-key-godwoken-testnet"
+              readOnly: true
+          resources:
+            limits:
+              cpu: 512m
+              memory: 512Mi
+        - name: txs-scheduler
+          image: "kuzirashi/safe-transaction-service:staging"
+          command: ["docker/web/celery/scheduler/run.sh"]
+          env:
+            - name: postgres_host
+              value: {{ required "Transactions DB Postgres Host" .Values.transactionsDatabases.godwokentestnet.host }}
+            - name: postgres_db
+              value: txsdb
+            - name: postgres_user
+              valueFrom:
+                secretKeyRef:
+                  name: txs-db-godwoken-testnet
+                  key: postgres_user
+            - name: postgres_pass
+              valueFrom:
+                secretKeyRef:
+                  name: txs-db-godwoken-testnet
+                  key: postgres_pass
+            - name: DATABASE_URL
+              value: "postgresql://$(postgres_user):$(postgres_pass)@$(postgres_host):5432/$(postgres_db)"
+            - name: RUN_MIGRATIONS
+              value: "1"
+            - name: WORKER_QUEUES
+              value: "default,indexing"
+            - name: DJANGO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: django-secret-key-godwoken-testnet
+                  key: password
+          envFrom:
+            - configMapRef:
+                name: safe-txs-godwoken-testnet
+          volumeMounts:
+            - name: secrets-store-txs-db-godwoken-testnet
+              mountPath: "/mnt/secrets-store-txs-db-godwoken-testnet"
+              readOnly: true
+            - name: django-secret-key-godwoken-testnet
+              mountPath: "/mnt/django-secret-key-godwoken-testnet"
+              readOnly: true
+          resources:
+            limits:
+              cpu: 256m
+              memory: 256Mi
+        - name: redis
+          image: "redis:alpine"
+          ports:
+            - containerPort: 6379
+              protocol: TCP
+        - name: rabbitmq
+          image: "rabbitmq:alpine"
+          ports:
+            - containerPort: 5672
+              protocol: TCP
+      volumes:
+        - name: secrets-store-txs-db-godwoken-testnet
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "txs-db-godwoken-testnet-secret-class"
+        - name: django-secret-key-godwoken-testnet
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "django-secret-key-godwoken-testnet-secret-class"
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: safe-txs-godwoken-testnet-worker-contracts
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: safe-txs-godwoken-testnet-worker-contracts
+  serviceName: safe-txs-godwoken-testnet-worker-contracts
+  template:
+    metadata:
+      labels:
+        app: safe-txs-godwoken-testnet-worker-contracts
+    spec:
+      serviceAccountName: {{ include "safe.serviceAccountName" . }}
+      containers:
+        - name: txs-worker-contracts-tokens
+          image: "kuzirashi/safe-transaction-service:staging"
+          command: ["docker/web/celery/worker/run.sh"]
+          env:
+            - name: postgres_host
+              value: {{ required "Transactions DB Postgres Host" .Values.transactionsDatabases.godwokentestnet.host }}
+            - name: postgres_db
+              value: txsdb
+            - name: postgres_user
+              valueFrom:
+                secretKeyRef:
+                  name: txs-db-godwoken-testnet
+                  key: postgres_user
+            - name: postgres_pass
+              valueFrom:
+                secretKeyRef:
+                  name: txs-db-godwoken-testnet
+                  key: postgres_pass
+            - name: DATABASE_URL
+              value: "postgresql://$(postgres_user):$(postgres_pass)@$(postgres_host):5432/$(postgres_db)"
+            - name: RUN_MIGRATIONS
+              value: "1"
+            - name: WORKER_QUEUES
+              value: "contracts,tokens"
+            - name: DJANGO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: django-secret-key-godwoken-testnet
+                  key: password
+          envFrom:
+            - configMapRef:
+                name: safe-txs-godwoken-testnet
+          volumeMounts:
+            - name: secrets-store-txs-db-godwoken-testnet
+              mountPath: "/mnt/secrets-store-txs-db-godwoken-testnet"
+              readOnly: true
+            - name: django-secret-key-godwoken-testnet
+              mountPath: "/mnt/django-secret-key-godwoken-testnet"
+              readOnly: true
+          resources:
+            limits:
+              cpu: 256m
+              memory: 256Mi
+      volumes:
+        - name: secrets-store-txs-db-godwoken-testnet
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "txs-db-godwoken-testnet-secret-class"
+        - name: django-secret-key-godwoken-testnet
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "django-secret-key-godwoken-testnet-secret-class"
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: safe-txs-godwoken-testnet-worker-indexer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: safe-txs-godwoken-testnet-worker-indexer
+  serviceName: safe-txs-godwoken-testnet-worker-indexer
+  template:
+    metadata:
+      labels:
+        app: safe-txs-godwoken-testnet-worker-indexer
+    spec:
+      serviceAccountName: {{ include "safe.serviceAccountName" . }}
+      containers:
+        - name: txs-worker-indexer
+          image: "kuzirashi/safe-transaction-service:staging"
+          command: ["docker/web/celery/worker/run.sh"]
+          env:
+            - name: postgres_host
+              value: {{ required "Transactions DB Postgres Host" .Values.transactionsDatabases.godwokentestnet.host }}
+            - name: postgres_db
+              value: txsdb
+            - name: postgres_user
+              valueFrom:
+                secretKeyRef:
+                  name: txs-db-godwoken-testnet
+                  key: postgres_user
+            - name: postgres_pass
+              valueFrom:
+                secretKeyRef:
+                  name: txs-db-godwoken-testnet
+                  key: postgres_pass
+            - name: DATABASE_URL
+              value: "postgresql://$(postgres_user):$(postgres_pass)@$(postgres_host):5432/$(postgres_db)?ssl=false"
+            - name: RUN_MIGRATIONS
+              value: "1"
+            - name: WORKER_QUEUES
+              value: "default,indexing"
+            - name: DJANGO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: django-secret-key-godwoken-testnet
+                  key: password
+          envFrom:
+            - configMapRef:
+                name: safe-txs-godwoken-testnet
+          volumeMounts:
+            - name: secrets-store-txs-db-godwoken-testnet
+              mountPath: "/mnt/secrets-store-txs-db-godwoken-testnet"
+              readOnly: true
+            - name: django-secret-key-godwoken-testnet
+              mountPath: "/mnt/django-secret-key-godwoken-testnet"
+              readOnly: true
+          resources:
+            limits:
+              cpu: 256m
+              memory: 256Mi
+      volumes:
+        - name: secrets-store-txs-db-godwoken-testnet
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "txs-db-godwoken-testnet-secret-class"
+        - name: django-secret-key-godwoken-testnet
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "django-secret-key-godwoken-testnet-secret-class"
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: safe-txs-godwoken-testnet-worker-notifications
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: safe-txs-godwoken-testnet-worker-notifications
+  serviceName: safe-txs-godwoken-testnet-worker-notifications
+  template:
+    metadata:
+      labels:
+        app: safe-txs-godwoken-testnet-worker-notifications
+    spec:
+      serviceAccountName: {{ include "safe.serviceAccountName" . }}
+      containers:
+        - name: txs-worker-notifications-webhooks
+          image: "kuzirashi/safe-transaction-service:staging"
+          command: ["docker/web/celery/worker/run.sh"]
+          env:
+            - name: postgres_host
+              value: {{ required "Transactions DB Postgres Host" .Values.transactionsDatabases.godwokentestnet.host }}
+            - name: postgres_db
+              value: txsdb
+            - name: postgres_user
+              valueFrom:
+                secretKeyRef:
+                  name: txs-db-godwoken-testnet
+                  key: postgres_user
+            - name: postgres_pass
+              valueFrom:
+                secretKeyRef:
+                  name: txs-db-godwoken-testnet
+                  key: postgres_pass
+            - name: DATABASE_URL
+              value: "postgresql://$(postgres_user):$(postgres_pass)@$(postgres_host):5432/$(postgres_db)"
+            - name: RUN_MIGRATIONS
+              value: "1"
+            - name: WORKER_QUEUES
+              value: "notifications,webhooks"
+            - name: DJANGO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: django-secret-key-godwoken-testnet
+                  key: password
+          envFrom:
+            - configMapRef:
+                name: safe-txs-godwoken-testnet
+          volumeMounts:
+            - name: secrets-store-txs-db-godwoken-testnet
+              mountPath: "/mnt/secrets-store-txs-db-godwoken-testnet"
+              readOnly: true
+            - name: django-secret-key-godwoken-testnet
+              mountPath: "/mnt/django-secret-key-godwoken-testnet"
+              readOnly: true
+          resources:
+            limits:
+              cpu: 256m
+              memory: 256Mi 
+      volumes:
+        - name: secrets-store-txs-db-godwoken-testnet
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "txs-db-godwoken-testnet-secret-class"
+        - name: django-secret-key-godwoken-testnet
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "django-secret-key-godwoken-testnet-secret-class"

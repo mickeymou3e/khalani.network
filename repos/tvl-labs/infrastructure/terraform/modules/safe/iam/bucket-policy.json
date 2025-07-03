@@ -1,0 +1,34 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+      {
+          "Effect": "Allow",
+          "Principal": {
+              "AWS": "${user_arn}"
+          },
+          "Action": [
+              "s3:GetBucketLocation",
+              "s3:ListBucket"
+          ],
+          "Resource": "${bucket_arn}"
+      },
+      {
+          "Effect": "Allow",
+          "Principal": {
+              "AWS": "${user_arn}"
+          },
+          "Action": [
+              "s3:GetObject",
+              "s3:PutObject",
+              "s3:DeleteObject"
+          ],
+          "Resource": "${bucket_arn}/*"
+      },
+      {
+          "Effect": "Allow",
+          "Principal": "*",
+          "Action": "s3:GetObject",
+          "Resource": "${bucket_arn}/*"
+      }
+  ]
+}

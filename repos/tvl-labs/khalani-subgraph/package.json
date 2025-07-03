@@ -1,0 +1,74 @@
+{
+  "name": "@tvl-labs/khalani-subgraph",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint --fix src/**/*.ts",
+    "clean:types": "rm -rf src/types",
+    "clean:constants": "rm -rf src/mappings/balancer/helpers/constants.ts",
+    "clean:build": "rm -rf build",
+    "clean:data": "rm -rf data",
+    "clean:schema": "rm schema.graphql",
+    "clean": "yarn clean:types; yarn clean:constants; yarn clean:build; yarn clean:data; yarn clean:schema",
+    "merge-schema": "yarn ts-node ./scripts/merge-schema.ts",
+    "generate-schema": "graph codegen --output-dir src/types/",
+    "schema": "yarn merge-schema; yarn generate-schema",
+    "build": "graph build",
+    "template:intents-arcadiatestnet": "mustache config/arcadiatestnet.json template/intents-khalani-subgraph.template.yaml > subgraph.yaml",
+    "build:intents-arcadiatestnet": "yarn clean; yarn template:intents-arcadiatestnet; yarn schema",
+    "remove:intents-arcadiatestnet": ". ./.env; graph remove intents-arcadiatestnet --access-token $GRAPH_ACCESS_TOKEN --node $GRAPH_ADMIN_URL",
+    "create:intents-arcadiatestnet": ". ./.env; graph create intents-arcadiatestnet --access-token $GRAPH_ACCESS_TOKEN --node $GRAPH_ADMIN_URL",
+    "deploy:intents-arcadiatestnet": ". ./.env; graph deploy intents-arcadiatestnet --access-token $GRAPH_ACCESS_TOKEN --ipfs $GRAPH_IPFS_URL --node $GRAPH_ADMIN_URL -l 0.0.1",
+    "subgraph:intents-arcadiatestnet": "yarn build:intents-arcadiatestnet && yarn build && yarn create:intents-arcadiatestnet && yarn deploy:intents-arcadiamainnet",
+    "template:intents-arcadiamainnet": "mustache config/arcadiamainnet.json template/intents-khalani-subgraph.template.yaml > subgraph.yaml",
+    "build:intents-arcadiamainnet": "yarn clean; yarn template:intents-arcadiamainnet; yarn schema",
+    "remove:intents-arcadiamainnet": ". ./.env; graph remove intents-arcadiamainnet --access-token $GRAPH_ACCESS_TOKEN --node $GRAPH_ADMIN_URL",
+    "create:intents-arcadiamainnet": ". ./.env; graph create intents-arcadiamainnet --access-token $GRAPH_ACCESS_TOKEN --node $GRAPH_ADMIN_URL",
+    "deploy:intents-arcadiamainnet": ". ./.env; graph deploy intents-arcadiamainnet --access-token $GRAPH_ACCESS_TOKEN --ipfs $GRAPH_IPFS_URL --node $GRAPH_ADMIN_URL -l 0.0.1",
+    "subgraph:intents-arcadiamainnet": "yarn build:intents-arcadiamainnet && yarn build && yarn create:intents-arcadiamainnet && yarn deploy:intents-arcadiatestnet"
+  },
+  "devDependencies": {
+    "@graphprotocol/graph-cli": "0.51.0",
+    "@graphprotocol/graph-ts": "0.29.3",
+    "@graphql-tools/load-files": "6.6.1",
+    "@graphql-tools/merge": "8.4.0",
+    "@graphql-tools/schema": "9.0.17",
+    "@openzeppelin/contracts": "^3.4.0",
+    "@typechain/ethers-v5": "^7.0.1",
+    "@types/jest": "^26.0.20",
+    "@types/mustache": "^4.1.2",
+    "@types/node": "^16.4.0",
+    "assemblyscript": "^0.20.12",
+    "dotenv": "^16.0.3",
+    "eslint": "^8.18.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "@typescript-eslint/eslint-plugin": "^5.30.0",
+    "@typescript-eslint/parser": "^5.30.0",
+    "prettier": "^2.7.1",
+    "ethers": "^5.4.1",
+    "graphql": "^16.5.0",
+    "graphql-schema-utilities": "1.1.5",
+    "husky": "^8.0.1",
+    "jest": "^27.0.6",
+    "lint-staged": "^13.0.3",
+    "mustache": "^4.2.0",
+    "ts-jest": "^27.0.4",
+    "ts-node": "^9.1.1",
+    "typechain": "^5.1.2",
+    "typescript": "^4.3.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "eslint --fix"
+    ]
+  },
+  "dependencies": {
+    "@assemblyscript/loader": "^0.20.12"
+  }
+}

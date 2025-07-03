@@ -1,0 +1,36 @@
+[package]
+name = "axi-playground-api"
+version = "0.1.0"
+edition = "2024"
+
+[[bin]]
+name = "mirax-verify"
+path = "src/mirax-verify.rs"
+
+[features]
+default = ["sandbox"]
+# Seccomp sandbox, supported on linux x86_64, aarch64 and riscv64.
+sandbox = ["seccompiler", "libc"]
+
+[dependencies]
+mirax-verification = { path = "../mirax/core/verification" }
+mirax-types = { path = "../mirax/utils/types" }
+mirax-hasher = { path = "../mirax/utils/hasher" }
+serde = { version = "1.0.218", features = ["derive"] }
+serde_json = "1.0.140"
+serde_with = "3.12.0"
+hex = "0.4.3"
+anyhow = "1.0.97"
+env_logger = "0.11.6"
+log = "0.4.26"
+axum = "0.8.1"
+tokio = { version = "1.43.0", features = ["full"] }
+tower = { version = "0.5.2", features = ["limit", "timeout"] }
+tower-http = { version = "0.6.2", features = ["cors"] }
+seccompiler = { version = "0.5.0", optional = true }
+libc = { version = "0.2.170", optional = true }
+tempfile = "3.18.0"
+
+[profile.release]
+lto = "thin"
+strip = true

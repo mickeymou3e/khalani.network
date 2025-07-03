@@ -1,0 +1,27 @@
+{
+  "name": "USDT.arb/KAI",
+  "symbol": "balUSDTarbKAI",
+  "tokens": [
+    "0x1fb2d6402c7468e43b192f4fc59506eb4bd75056",
+    "0x1fa37818ae2710c23301d94d2bee37951c2dd55b"
+  ],
+  "rateProviders": [
+    "0x0000000000000000000000000000000000000000",
+    "0x0000000000000000000000000000000000000000"
+  ],
+  "priceRateCacheDuration": [
+    "0",
+    "0"
+  ],
+  "amplificationParameter": "300",
+  "swapFeePercentage": "100000000000000",
+  "exemptFromYieldProtocolFeeFlags": [
+    false,
+    false
+  ],
+  "owner": "0x73B31aC967f46dB2C45280C7f5d1D3ee7F38E122",
+  "initialLiquidity": {
+    "0x1fb2D6402c7468e43B192F4Fc59506Eb4Bd75056": "150000000000",
+    "0x1Fa37818ae2710C23301D94d2BeE37951C2DD55b": "150000000000000000000000"
+  }
+}

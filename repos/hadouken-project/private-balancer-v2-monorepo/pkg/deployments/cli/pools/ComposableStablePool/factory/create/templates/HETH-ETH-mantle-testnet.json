@@ -1,0 +1,27 @@
+{
+    "name": "HETH/ETH",
+    "symbol": "HDK-HETH-ETH",
+    "tokens": [
+        "0x714278EA950E34Bd9F7574F223D4f1D298dfe1A0",
+        "0xBf89943CAbFB8E5D637558cD0a30467ba7188D22"
+    ],
+    "rateProviders": [
+        "0x0000000000000000000000000000000000000000",
+        "0x0000000000000000000000000000000000000000"
+    ],
+    "priceRateCacheDuration": [
+        "0",
+        "0"
+    ],
+    "amplificationParameter": "5000",
+    "swapFeePercentage": "100000000000000",
+    "exemptFromYieldProtocolFeeFlags": [
+        false,
+        false
+    ],
+    "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+    "initialLiquidity": {
+        "0x714278EA950E34Bd9F7574F223D4f1D298dfe1A0": "160000000000000000",
+        "0xBf89943CAbFB8E5D637558cD0a30467ba7188D22": "160000000000000000"
+    }
+}

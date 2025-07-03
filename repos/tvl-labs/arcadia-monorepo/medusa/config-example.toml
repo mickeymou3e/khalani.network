@@ -1,0 +1,19 @@
+mode = "dev"
+contracts_path = "../contracts/"
+kms_region = "us-east-1"
+kms_key_id = "8ee3b488-bfff-4807-9923-6ab4cbfd01e9"
+key = "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80"
+intent_book_address = "0xD25F6a6C78E4d71f71C09B79287D270d5971128F"
+m_token_manager_address = "0x65C64127E04eddb6D3F4AEb2E323d6A5247cb992"
+receipt_manager_address = "0x3e7F4Ff2Af5262a6e7c754DFCEc0C85f36ECEcE7"
+hub_publisher_address = "0xe25D55C7D1B234b0c081bDf6b9085dC1D465F24E"
+arcadia_url = "http://127.0.0.1:8545"
+medusa_rpc_url = "127.0.0.1:8001"
+medusa_ws_url = "127.0.0.1:8002"
+apm_url = "127.0.0.1:8200"
+db_path = "sqlite:free-space/rdb"
+gas_price = 1_000_000_000
+
+[m_tokens]
+mtokenspokelocal1 = "0x7075999fC63342A82e02fB3538Ec1Fcb68Ea1ABe"
+mtokenspokelocal2 = "0x12857ceba235106a1cea3900E3F31716e81CF843"

@@ -1,0 +1,169 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800,300italic,400italic,600italic,700italic,800italic);
+
+$accent-color: #e7e7e7;
+$brand-color: #fe4141;
+$dark-color: #1e1b26;
+
+/* Typography and fonts */
+
+$heading-font-family: "Montserrat", sans-serif;
+$paragraph-font-family: "Open Sans", sans-serif;
+
+$light: 300;
+$regular: 400;
+$semi-bold: 600;
+$bold: 700;
+$font-regular: 400;
+$mont-bold: 700;
+
+$text-movie-title: 36px;
+$text-summary: 12px;
+$text-action-btn: 14px;
+$text-movie-description: 12px;
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: $heading-font-family;
+  color: $accent-color;
+  margin: 0px;
+}
+
+h1 {
+  font-size: $text-movie-title;
+  font-weight: $font-regular;
+}
+
+h3 {
+  font-size: $text-action-btn;
+  font-weight: $font-regular;
+  color: $brand-color;
+}
+
+h5 {
+  font-size: $text-summary;
+  font-weight: $font-regular;
+}
+
+/* Card */
+
+.movie-gen {
+  margin: 0px;
+  padding: 0px;
+  li {
+    font-family: $paragraph-font-family;
+    font-size: $text-summary;
+    color: darken($accent-color, 40%);
+    width: auto;
+    display: block;
+    float: left;
+    margin-right: 6px;
+    font-weight: $semi-bold;
+  }
+}
+
+.movie-likes {
+  @extend .movie-gen;
+  float: right;
+  li {
+    color: $brand-color;
+    &:last-child {
+      margin-right: 0px;
+    }
+    i {
+      font-size: 14px;
+      margin-right: 4px;
+      position: relative;
+      float: left;
+      line-height: 1;
+    }
+  }
+}
+
+.movie-details {
+  font-family: $paragraph-font-family;
+  font-size: $text-summary;
+  font-weight: $light;
+  color: darken($accent-color, 20%);
+  @extend .elements-distance;
+}
+
+.movie-description {
+  font-family: $paragraph-font-family;
+  font-size: $text-movie-description;
+  font-weight: $regular;
+  color: darken($accent-color, 30%);
+  @extend .elements-distance;
+  text-align: justify;
+  line-height: 1.3;
+}
+
+.movie-actors {
+  font-family: $paragraph-font-family;
+  font-size: $text-summary;
+  font-weight: $light;
+  color: $accent-color;
+  font-style: italic;
+  @extend .elements-distance;
+}
+
+.swiper-slide-prev .cellphone-container {
+  display: none;
+}
+
+.button-container {
+  width: 100%;
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+}
+.cellphone-container {
+  width: 100%;
+  height: 650px;
+  background-color: #1e1b26;
+  margin: 60px auto 0 auto;
+  box-shadow: 5px 5px 115px -14px black;
+  border-radius: 4px;
+}
+
+.movie-img {
+  width: 100%;
+  height: 380px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 111 !important;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  position: relative;
+}
+
+.text-movie-cont {
+  padding: 0px 12px;
+  text-align: justify;
+  h1 {
+    font-size: 18px;
+    margin: 16px 0;
+  }
+  h5 {
+    font-size: 16px;
+  }
+}
+
+.summary-row {
+  margin-top: 12px;
+}
+
+@media only screen and (max-width: 500px) {
+  .cellphone-container {
+    margin: 0 auto;
+  }
+}

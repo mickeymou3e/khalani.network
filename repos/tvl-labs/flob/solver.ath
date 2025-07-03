@@ -1,0 +1,28 @@
+load "asset"
+load "lib/basic/prolog.ath"
+module Solver {
+    open Asset
+
+    define example-tok-ckb := (token_state (token 'ckb (int->nat 10) 'tannr))
+    define example-tok-ckb-2 := (token_state (token 'ckb (int->nat 4) 'tannr))
+    define example-tok-eth := (token_state (token 'eth (int->nat 7) 'tannr))
+    define example-tok-eth-2 := (token_state (token 'eth (int->nat 13) 'tannr))
+    define example-tok-eth-3 := (token_state (token 'eth (int->nat 6) 'tannr))
+
+ 
+    
+    (eval (sum_balances [example-tok-eth] 'eth)) # 7
+    (eval (sum_balances [example-tok-eth example-tok-ckb example-tok-ckb-2] 'ckb)) # 14
+    (eval (state_to_token_list  [example-tok-eth example-tok-ckb]))
+    (eval (sum_balances_prev (state [example-tok-eth example-tok-ckb] [example-tok-ckb-2]) 'ckb)) #10
+    (eval (sum_balances_prev (state [example-tok-ckb example-tok-eth-2 example-tok-eth-3] [example-tok-ckb-2 example-tok-eth]) 'eth)) #19
+    (eval (sum_balances_next (state [example-tok-ckb example-tok-eth-2 example-tok-eth-3] [example-tok-ckb-2 example-tok-eth]) 'eth)) #7
+
+    (!vprove-from (token-in-tx? (state [example-tok-eth example-tok-ckb] [example-tok-ckb-2]) 'ckb) (ab)) # true
+    # (eval (token-in-tx? (state [example-tok-eth example-tok-ckb] [example-tok-ckb-2]) 'eth)) # true
+    (!vprove-from (~ token-in-tx? (state [example-tok-ckb] [example-tok-ckb-2]) 'eth) (ab)) # false
+    (eval (token-in? [(SOME (token 'eth (int->nat 7) 'tannr)) (SOME (token 'eth (int->nat 7) 'tannr))] 'eth)) # true
+    (eval (token-in? [(SOME (token 'eth (int->nat 7) 'tannr)) (SOME (token 'eth (int->nat 7) 'tannr))] 'ckb)) # false
+    #(Prolog.auto-solve (exists ?st . (conservation-property ?st)))
+
+}

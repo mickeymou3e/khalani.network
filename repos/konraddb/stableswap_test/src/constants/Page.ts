@@ -1,0 +1,15 @@
+export enum Page {
+  Home = 'home',
+  Swap = 'swap',
+  SwapPreview = 'trade',
+  Pool = 'pool',
+  Deposit = 'deposit',
+  Withdraw = 'withdraw',
+  Pools = 'pools',
+  Lock = 'lock',
+  Liquidity = 'liquidity',
+  LiquidityAdd = 'liquidityAdd',
+  LiquidityRemove = 'liquidityRemove',
+  Mint = 'mint',
+  Redeem = 'redeem',
+}

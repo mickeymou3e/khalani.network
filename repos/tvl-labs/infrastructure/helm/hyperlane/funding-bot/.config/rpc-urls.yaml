@@ -1,0 +1,39 @@
+# Make sure to not commit this file. It's only used as an example.
+fundingBot:
+  rpcUrlsContent: |
+    {
+      "rpcUrls": [
+        {
+          "chain": "SEPOLIA",
+          "url": "https://rpc.sepolia.org"
+        },
+        {
+          "chain": "FUJI",
+          "url": "https://api.avax-test.network/ext/bc/C/rpc"
+        },
+        {
+          "chain": "KHALANITESTNET",
+          "url": "https://testnet.khalani.network/"
+        },
+        {
+          "chain": "MUMBAI",
+          "url": "https://rpc-mumbai.maticvigil.com/"
+        },
+        {
+          "chain": "BSCTESTNET",
+          "url": "https://data-seed-prebsc-1-s1.binance.org:8545/"
+        },
+        {
+          "chain": "GODWOKENTESTNET",
+          "url": "https://v1.testnet.godwoken.io/rpc"
+        },
+        {
+          "chain": "OPTIMISMGOERLI",
+          "url": "https://goerli.optimism.io"
+        },
+        {
+          "chain": "ARBITRUMGOERLI",
+          "url": "https://goerli-rollup.arbitrum.io/rpc"
+        }
+      ]
+    }

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: hyperlane-relayer
+description: Helm chart for a Hyperlane relayer
+type: application
+version: 0.1.0
+appVersion: "1.16.0"

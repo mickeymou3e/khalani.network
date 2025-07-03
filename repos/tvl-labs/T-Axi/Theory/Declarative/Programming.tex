@@ -1,0 +1,178 @@
+\section{Programming}
+
+\begin{frame}{Well-formed types}
+
+\begin{center}
+  $\infrule{\ctx[\noncomputable]{\Gamma}}{\type{\Unit}}$ \quad
+  $\infrule{\ctx[\noncomputable]{\Gamma}}{\type{\Empty}}$
+
+  \vspace{2em}
+
+  $\infrule{\type{A}[s_1] \quad \type{B}[s_2]}{\type{\Fun[r]{A}{B}}[\One]}$
+
+  \vspace{2em}
+
+  $\infrule{\type{A}[s]}{\type{\Box[\Zero]{A}}}$ \quad
+  $\infrule{\type{A}[s] \quad r \neq \Zero}{\type{\Box[r]{A}}[\mulqty{r}{s}]}$
+
+  \vspace{2em}
+
+  $\infrule{\type{A}[s_1] \quad \type{B}[s_2]}{\type{\Prod{A}{B}}[\lubqty{s_1}{s_2}]}$ \quad
+  $\infrule{\type{A}[s_1] \quad \type{B}[s_2]}{\type{\Sum{A}{B}}[\lubqty{s_1}{s_2}]}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Well-formed types}
+
+\begin{center}
+  $\infrule{\ctx[\noncomputable]{\Gamma} \quad (a : \Type[r]) \in \Gamma}{\type{a}[r]}$
+
+  \vspace{2em}
+
+  $\infrule{\type[\extendtype{\Gamma}{a}[r]]{B}[s]}{\type{\ForallE{a}[r]{B}}[s]}$
+
+  \vspace{2em}
+
+  $\infrule{\type[\extendtype{\Gamma}{a}[r]]{B}[s]}{\type{\ForallI{a}[r]{B}}[s]}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{The inherent quantity of a type}
+
+\begin{center}
+  $\typeqty{\Unit} = \Any$ \\
+  $\typeqty{\Empty} = \Any$ \\
+  $\typeqty{\Box[\Zero]{A}} = \Any$ \\
+  $\typeqty{\Box[r]{A}} = \mulqty{r}{\typeqty{A}}$ \\
+  $\typeqty{\Prod{A}{B}} = \lubqty{\typeqty{A}}{\typeqty{B}}$ \\
+  $\typeqty{\Sum{A}{B}} = \lubqty{\typeqty{A}}{\typeqty{B}}$ \\
+  $\typeqty{\Fun[r]{A}{B}} = \One$ \\
+  $\typeqty{\ForallE{a}[r]{B}} = \typeqty{B}$ \\
+  $\typeqty{\ForallI{a}[r]{B}} = \typeqty{B}$ \\
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Total quantity added to context}
+
+\begin{center}
+  $\totalqty{r}{A}[\noncomputable] = \Any$ \\
+  $\totalqty{r}{A}[\computable] = \mulqty{r}{\typeqty{A}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Using variables}
+
+\begin{center}
+  $\infrule{\ctx{\Gamma} \quad (x : A) \in \Gamma \quad \subusagectx{\Gamma}{\varctx{\Gamma}{x}}}{\typing[\Gamma]{x}{A}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Functions}
+
+\begin{center}
+  $\infrule{\typing[\extend{\Gamma}[\totalqty{r}{A}]{x}{A}]{e}{B}}{\typing[\Gamma]{\fun[r]{x}[A]{e}}{\Fun[r]{A}{B}}}$
+
+  \vspace{2em}
+
+  $\infrule{\subusagectx{\Gamma}{\addctx{\Gamma_1}{\scalectx{r}{\Gamma_2}}} \quad \typing[\Gamma_1]{e_1}{\Fun[r]{A}{B}} \quad \typing[\Gamma_2]{e_2}{A}}{\typing[\Gamma]{\app{e_1}{e_2}}{B}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Box}
+
+\begin{center}
+  $\infrule{\subusagectx{\Gamma}{\scalectx{r}{\Gamma'}} \quad \typing[\Gamma']{e}{A}}{\typing[\Gamma]{\boxintro[r]{e}}{\Box[r]{A}}}$
+
+  \vspace{2em}
+
+  $\infrule{\decomposectx{\Gamma}{\Gamma_1}{\Gamma_2} \quad \typing[\Gamma_1]{e_1}{\Box[r]{A}} \quad \typing[\extend{\Gamma_2}[\totalqty{r}{A}]{x}{A}]{e_2}{B}}{\typing[\Gamma]{\boxelim{x}{e_1}{e_2}[B]}{B}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Empty}
+
+\begin{center}
+  $\infrule{\type[\cartesianize{\Gamma}]{A}[r] \quad \typing[\Gamma]{e}{\Empty}}{\typing[\Gamma]{\emptyelim{e}[A]}{A}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Unit}
+
+\begin{center}
+  $\infrule{\ctx{\Gamma} \quad \subusagectx{\Gamma}{\scalectx{\Zero}{\Gamma}}}{\typing[\Gamma]{\unit}{\Unit}}$
+
+  \vspace{2em}
+
+  $\infrule{\decomposectx{\Gamma}{\Gamma_1}{\Gamma_2} \quad \typing[\Gamma_1]{e_1}{\Unit} \quad \typing[\Gamma_2]{e_2}{A}}{\typing[\Gamma]{\unitelim{e_1}{e_2}[A]}{A}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Products}
+
+\begin{center}
+  $\infrule{\decomposectx{\Gamma}{\Gamma_1}{\Gamma_2} \quad \typing[\Gamma_1]{a}{A} \quad \typing[\Gamma_2]{b}{B}}{\typing[\Gamma]{\pair{a}{b}}{\Prod{A}{B}}}$
+
+  \vspace{2em}
+
+  $\infrule{\decomposectx{\Gamma}{\Gamma_1}{\Gamma_2} \quad \typing[\Gamma_1]{e_1}{\Prod{A}{B}} \quad \typing[\extend{\extend{\Gamma_2}[\totalqty{\One}{A}]{x}{A}}[\totalqty{\One}{B}]{y}{B}]{e_2}{C}}{\typing[\Gamma]{\letpair{x}{y}{e_1}{e_2}[C]}{C}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Sums}
+
+\begin{center}
+  $\infrule{\typing[\Gamma]{e}{A} \quad \type[\cartesianize{\Gamma}]{B}[r]}{\typing[\Gamma]{\inl[B]{e}}{\Sum{A}{B}}}$ \quad
+  $\infrule{\type[\cartesianize{\Gamma}]{A}[r] \quad \typing[\Gamma]{e}{B}}{\typing[\Gamma]{\inr[A]{e}}{\Sum{A}{B}}}$
+
+  \vspace{2em}
+
+  $\infrule{\decomposectx{\Gamma}{\Gamma_1}{\Gamma_2} \quad \typing[\Gamma_1]{e}{\Sum{A}{B}} \quad \begin{array}{l} \typing[\extend{\Gamma_2}[\totalqty{\One}{A}]{x}{A}]{e_1}{C} \\ \typing[\extend{\Gamma_2}[\totalqty{\One}{B}]{y}{B}]{e_2}{C} \end{array}}{\typing[\Gamma]{\newcase{e}{x}{e_1}{y}{e_2}[C]}{C}}$
+\end{center}
+
+\vspace{2em}
+
+Q: Do we want first-order representation of the branches? Probably yes.
+
+\end{frame}
+
+\begin{frame}{Let}
+
+\begin{center}
+  $\infrule{\subusagectx{\Gamma}{\addctx{\scalectx{r}{\Gamma_1}}{\Gamma_2}} \quad \typing[\Gamma_1]{e_1}{A} \quad \typing[\extend{\Gamma_2}[\totalqty{r}{A}]{x}{A}[e_1]]{e_2}{B}}{\typing[\Gamma]{\letin[r]{x}[A]{e_1}{e_2}}{B}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Polymorphism}
+
+\begin{center}
+  $\infrule{\typing[\extendtype{\Gamma}{a}[r]]{e}{B}}{\typing{\tfun{a}[r]{e}}{\ForallE{a}[r]{B}}}$
+
+  \vspace{2em}
+
+  $\infrule{\typing{e}{\ForallE{a}[r]{B}} \quad \type[\cartesianize{\Gamma}]{A}[r]}{\typing{\tapp{e}{A}}{\subst{B}{a}{A}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Polymorphism (implicit arguments)}
+
+\begin{center}
+  $\infrule{\typing[\extendtype{\Gamma}{a}[r]]{e}{B}}{\typing{\itfun{a}[r]{e}}{\ForallI{a}[r]{B}}}$
+
+  \vspace{2em}
+
+  $\infrule{\typing{e}{\ForallI{a}[r]{B}} \quad \type[\cartesianize{\Gamma}]{A}[r]}{\typing{\itapp{e}{A}}{\subst{B}{a}{A}}}$
+\end{center}
+
+\end{frame}

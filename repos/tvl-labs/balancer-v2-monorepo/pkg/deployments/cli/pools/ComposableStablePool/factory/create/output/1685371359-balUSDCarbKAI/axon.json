@@ -1,0 +1,41 @@
+{
+  "transaction": {
+    "hash": "0xd5fc89c9f08de226b5acd2151a86c995146c38300e269f01c326cb89b09b069a",
+    "blockNumber": 117549
+  },
+  "data": {
+    "ComposableStablePoolFactory": {
+      "create": {
+        "input": {
+          "name": "USDC.arb/KAI",
+          "symbol": "balUSDCarbKAI",
+          "tokens": [
+            "0x1fa37818ae2710c23301d94d2bee37951c2dd55b",
+            "0xbef9e8e7087038c1277c75f0d8bec8718fdfe3b9"
+          ],
+          "rateProviders": [
+            "0x0000000000000000000000000000000000000000",
+            "0x0000000000000000000000000000000000000000"
+          ],
+          "priceRateCacheDuration": [
+            "0",
+            "0"
+          ],
+          "amplificationParameter": "300",
+          "swapFeePercentage": "100000000000000",
+          "exemptFromYieldProtocolFeeFlags": [
+            false,
+            false
+          ],
+          "owner": "0x73B31aC967f46dB2C45280C7f5d1D3ee7F38E122",
+          "initialLiquidity": {
+            "0xBEf9e8e7087038C1277C75f0D8bec8718fdfE3b9": "150000000000",
+            "0x1Fa37818ae2710C23301D94d2BeE37951C2DD55b": "150000000000000000000000"
+          }
+        },
+        "output": "0x4bfbcFEFc44e38b52BCe8Cd6FB830ce36e2E0E57"
+      }
+    }
+  },
+  "timestamp": 1685371359193
+}

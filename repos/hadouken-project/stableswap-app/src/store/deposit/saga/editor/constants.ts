@@ -1,0 +1,1 @@
+export const LOW_LIQUIDITY_THRESHOLD = 5000

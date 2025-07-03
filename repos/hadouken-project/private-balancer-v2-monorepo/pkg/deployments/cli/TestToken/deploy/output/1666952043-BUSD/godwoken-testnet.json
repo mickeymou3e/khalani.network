@@ -1,0 +1,19 @@
+{
+  "transaction": {
+    "hash": "0xdedfa96efb36fbfaf7640277207af3059854e46b41745b8a1e928d4e628adc3d",
+    "blockNumber": 636623
+  },
+  "data": {
+    "TestToken": {
+      "deploy": {
+        "input": {
+          "name": "BUSD",
+          "symbol": "BUSD",
+          "decimals": 18
+        },
+        "output": "0xDc40D03d15f5861f486FC4E81b6333E489D78195"
+      }
+    }
+  },
+  "timestamp": 1666952043433
+}

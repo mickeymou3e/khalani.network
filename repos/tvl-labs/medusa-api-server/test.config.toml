@@ -1,0 +1,35 @@
+mode = "testnet"
+contracts_path = "contracts/arcadia-core-contracts"
+asm_region = "us-west-2"
+asm_secret_name = "testnet"
+asm_secret_key = "medusa_deployer_key"
+key = "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80"
+intent_book_address = "0x5eAEA387095380BA3B0635e67c8E03D5C416aA7e"
+m_token_manager_address = "0x4B1f965D90fB8DB80f07Be2A83bcd20fA1d036a6"
+receipt_manager_address = "0x6eE7d2FAa3B99c684192C000577b4074167e082F"
+hub_publisher_address = "0xa3ad7B776686B3Ea3B21a301a174a05d2C0dF140"
+arcadia_url = "http://127.0.0.1:8545"
+medusa_rpc_url = "https://medusa.khalani.network"
+medusa_ws_url = "127.0.0.1:8002"
+apm_url = "127.0.0.1:8200"
+db_path = "free-space/db"
+hyperlane_api_url = ""
+
+[spoke_asset_reserve_addresses]
+43113 = "0x94099942864ea81ccf197e9d71ac53310b1468d7"
+17000 = "0x06b1d212b8da92b83af328de5eef4e211da02098"
+
+[spoke_rpc_urls]
+43113 = "https://avax-fuji.g.alchemy.com/v2/Cha-uur1WLWVs-6rRtzCuxRtVFeR1LPT"
+17000 = "https://eth-holesky.g.alchemy.com/v2/Cha-uur1WLWVs-6rRtzCuxRtVFeR1LPT"
+
+[m_tokens]
+
+avax_USDC = "0xA9EEeEb7d127797683573687f5e6c852464142bc"
+avax_USDT = "0x0E4f3859887224B2f77e7a09638ec31f39f53517"
+avax_DAI = "0x2A5f6B386b7B03c2aaF77f2615353F0dA201E774"
+avax_WETH = "0xCA2b24D4eC7bd1A6827dcD0F7AFe2CeC2C27038c"
+holesky_USDC = "0x49301f7CdF3Fb46Acc97171491e6A977b41F99E9"
+holesky_USDT = "0xE60739A948f78B9DE07dd6c55b38f635eF55B819"
+holesky_DAI = "0xcb53156DCeD95a3bfed8Bfa3317781B5Fd50c0Ca"
+holesky_WETH = "0x202B0270C5A35ecfe0f9A9deb23e6A11BF2414A2"

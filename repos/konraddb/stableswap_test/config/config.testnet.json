@@ -1,0 +1,88 @@
+{
+  "hadouken": {
+    "lending": {
+      "url": "https://testnet-lending.hadouken.finance"
+    },
+    "bridge": {
+      "url": "https://testnet-bridge.hadouken.finance"
+    }
+  },
+  "godwoken": {
+    "chainName": "Godwoken Testnet",
+    "chainId": "0x116e9",
+    "type": "godwoken",
+    "nativeCurrency": {
+      "name": "CKB",
+      "symbol": "CKB",
+      "decimals": 18
+    },
+    "rpcUrl": "https://godwoken-testnet-v1.ckbapp.dev",
+    "wsUrl": "wss://godwoken-testnet-v1.ckbapp.dev/ws",
+    "explorerUrl": "https://v1.betanet.gwscan.com/"
+  },
+  "nervos": {
+    "env": "testnet",
+    "ckb": {
+      "url": "https://testnet.ckb.dev"
+    },
+    "indexer": {
+      "url": "https://indexer-testnet.ckb.tools"
+    },
+    "rollup_type_hash": "0x702359ea7f073558921eb50d8c1c77e92f760c8f8656bde4995f26b8963e2dd8",
+    "rollup_type_script": {
+      "code_hash": "0x1e44736436b406f8e48a30dfbddcf044feb0c9eebfe63b0f81cb5bb727d84854",
+      "hash_type": "type",
+      "args": "0x86c7429247beba7ddd6e4361bcdfc0510b0b644131e2afb7e486375249a01802"
+    },
+    "eth_account_lock_hash": "0x07521d0aa8e66ef441ebc31204d86bb23fc83e9edc58c19dbb1b0ebe64336ec0",
+    "deposit_lock_script_type_hash": "0x50704b84ecb4c4b12b43c7acb260ddd69171c21b4c0ba15f3c469b7d143f6f18",
+    "portal_wallet_lock_hash": "0x58c5f491aba6d61678b7cf7edf4910b1f5e00ec0cde2f42e0abb4fd9aff25a63",
+    "rc_lock_script_type_hash": "0x79f90bb5e892d80dd213439eeab551120eb417678824f282b4ffb5f21bad2e1e"
+  },
+  "subgraphs": {
+    "balancer": {
+      "httpUri": "https://graph-node-v1-http-hadouken-v1.rumblefish.dev/subgraphs/name/balancer-v2",
+      "webSocketUri": "wss://graph-node-v1-ws-hadouken-v1.rumblefish.dev/subgraphs/name/balancer-v2"
+    },
+    "blocks": {
+      "httpUri": "https://graph-node-v1-http-hadouken-v1.rumblefish.dev/subgraphs/name/blocks",
+      "webSocketUri": "wss://graph-node-v1-ws-hadouken-v1.rumblefish.dev/subgraphs/name/blocks"
+    }
+  },
+  "explorerUrl": {
+    "ckb": "https://v1.betanet.gwscan.com",
+    "godwoken": "https://gw-explorer.nervosdao.community",
+    "ethereum": "https://rinkeby.etherscan.io"
+  },
+  "contracts": {
+    "Vault": "0xd69FAC6C632eF023afCe7471Bda724b228237570",
+    "AddressBalances": "0xA8B7D00F6a7f106e43226103EAb0DAe6c690cb21",
+    "PoolsHelpers": "0xD9Aa6Eeb08af2956FE2704d450532EEB000c0231",
+    "Oracle": "0x96C5F1E50c4393EFa890699cD9AeCf3FB58dcB99",
+    "CrossChainRouter": {},
+    "USDT": "0x30b0A247DE59a1CDF44329b756d3343E5afEd7f9",
+    "USDC": "0x0c7F21908222098616803EfF5d054d3F4EF57EBb",
+    "DAI": "0x16fDC39a563400Aa6EAcA6A5aC4F2CAb9A0BC8c6",
+    "ETH": "0xfF900E1436cBCd25d72B7DafE6Ef4d569405cc05",
+    "WBTC": "0x6a447Ba163039D7e1d674668578A0eb049245915",
+    "CKB": "0x0eb76790a2014Dd1F65488Ccd703bCDF75F8195e",
+    "BNB": "0x3B5b0179fDEF8F88c39A94039B66120933729ace",
+    "hUSDC": "0x70a58262bc55fbf3965bd1c0861e3ddf1a253777",
+    "hUSDT": "0x4fa5ad2756ac3c62285ec896acc2d514c65f3ed3",
+    "TRICRYPTO": "0x0b55b2f3f622723f8df20c1fa4e60325d6734bd1",
+    "WBTCUSDT": "0x5c4dda3d4941b5d28a541064859a947f3a836b07",
+    "BNBUSDC": "0x6f516cf7b351ff3985bd3737800920495a00512d",
+    "TWOPOOL": "0x7435412d4baf1cddce79bc4191ebaf7805daf81b",
+    "USDCCKB": "0x7ad0f3c13553f934fc59789312b2df58c91a9771",
+    "TWOPOOLDAI": "0xaa9a5bb4c91bbf2e6d92a322d1615e6a6bab1e9d",
+    "CKBETHUSDC": "0xb79c38bbbeb57fc3f9b4cb56c84fa9458f60b14b",
+    "ETHUSDC": "0x91b5860c9943AA516C8904fd9cBB7d28cc64198f",
+    "hb-a-USDC": "0x4C09eC012EE9a4b4A05441C2f6B90aBe9626C161",
+    "hb-a-USDT": "0x5806fAB57458e2aB1C0319dcA6B9B7d360330247"
+  },
+  "api": {
+    "dia": {
+      "priceUrl": "https://api.diadata.org/v1/quotation"
+    }
+  }
+}

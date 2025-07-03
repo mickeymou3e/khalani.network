@@ -1,0 +1,11 @@
+# Make sure to not commit this file. It's only used as an example.
+walletBalanceMonitor:
+  rpcUrlsContent: |
+    {
+      "rpcUrls": [
+        {
+          "chain": "mainnet",
+          "url": "https://eth.llamarpc.com"
+        }
+      ]
+    }

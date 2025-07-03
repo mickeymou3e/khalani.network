@@ -1,0 +1,49 @@
+{
+  "pools": [
+    {
+      "name": "binanceETHUSDC",
+      "baseToken": "ETH",
+      "minBaseAmount": "100000000000000",
+      "quoteToken": "USDC",
+      "minQuoteAmount": "1000000",
+      "minTradeSizeInQuoteToken": "10000000",
+      "amountPrecision": 4
+    },
+    {
+      "name": "binanceETHUSDT",
+      "baseToken": "ETH",
+      "minBaseAmount": "100000000000000",
+      "quoteToken": "USDT",
+      "minQuoteAmount": "1000000",
+      "minTradeSizeInQuoteToken": "10000000",
+      "amountPrecision": 4
+    },
+    {
+      "name": "binanceBTCUSDC",
+      "baseToken": "WBTC|eth",
+      "minBaseAmount": "1000",
+      "quoteToken": "USDC",
+      "minQuoteAmount": "1000000",
+      "minTradeSizeInQuoteToken": "10000000",
+      "amountPrecision": 5
+    },
+    {
+      "name": "binanceBTCUSDT",
+      "baseToken": "WBTC|eth",
+      "minBaseAmount": "1000",
+      "quoteToken": "USDT",
+      "minQuoteAmount": "1000000",
+      "minTradeSizeInQuoteToken": "10000000",
+      "amountPrecision": 5
+    },
+    {
+      "name": "binanceCKBUSDT",
+      "baseToken": "CKB",
+      "minBaseAmount": "1000000000000000000",
+      "quoteToken": "USDT",
+      "minQuoteAmount": "10000000",
+      "minTradeSizeInQuoteToken": "10000000",
+      "amountPrecision": 0
+    }
+  ]
+}

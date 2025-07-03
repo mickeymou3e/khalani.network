@@ -1,0 +1,60 @@
+{
+  "swapURL": "",
+  "subgraphs": {
+    "balancer": {
+      "httpUri": "",
+      "webSocketUri": ""
+    },
+    "blocks": {
+      "httpUri": "",
+      "webSocketUri": ""
+    }
+  },
+  "contracts": {
+    "Vault": "",
+    "AddressBalances": "",
+    "PoolsHelpers": "",
+    "Oracle": "",
+    "NexusDiamond": "",
+    "CrossChainRouter": {}
+  },
+  "tokens": [
+    {
+      "id": "",
+      "address": "",
+      "decimals": 0,
+      "name": "",
+      "symbol": "",
+      "balance": null,
+      "icon": null,
+      "chainId": "",
+      "type": 0,
+      "sourceChainId": ""
+    }
+  ],
+  "supportedChains": [
+    {
+      "id": 0,
+      "chainName": "",
+      "chainId": "",
+      "nativeCurrency": {
+        "name": "",
+        "symbol": "",
+        "decimals": 0
+      },
+      "blockExplorerUrls": [""],
+      "rpcUrls": [""],
+      "logo": "",
+      "borderColor": "",
+      "poolTokenSymbol": "",
+      "isBalancerChain": false
+    }
+  ],
+  "explorer": {
+    "subgraph": {},
+    "blockExplorer": {}
+  },
+  "intents": {
+    "subgraph": {}
+  }
+}

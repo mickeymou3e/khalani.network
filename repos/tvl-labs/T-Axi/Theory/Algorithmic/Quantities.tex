@@ -1,0 +1,77 @@
+\section{Quantities}
+
+\begin{frame}{Subtraction of quantities}
+
+$\subqty{r_1}{r_2}$ is the least $r'$ such that $\subusage{r_1}{\addqty{r'}{r_2}}$.
+
+\vspace{2em}
+
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|}
+  \hline
+  $\subqty{r_1}{r_2}$ & $\Zero$ & $\One$  & $\Few$  & $\Many$ & $\Any$  \\ \hline
+  $\Zero$             & $\Zero$ &         &         &         &         \\ \hline
+  $\One$              & $\One$  & $\Zero$ &         &         &         \\ \hline
+  $\Few$              & $\Few$  & $\Zero$ & $\Zero$ &         &         \\ \hline
+  $\Many$             & $\Many$ & $\Any$  & $\Many$ & $\Any$  & $\Many$ \\ \hline
+  $\Any$              & $\Any$  & $\Any$  & $\Any$  & $\Any$  & $\Any$  \\ \hline
+  \end{tabular}
+\end{table}
+
+\end{frame}
+
+\begin{frame}{Subtraction order on quantities}
+
+$\lesubqty{r_1}{r_2}$ holds when $\subqty{r_2}{r_1}$ is defined.
+
+\vspace{2em}
+
+Explicitly: $\Zero \lesubqty{}{} \One \lesubqty{}{} \Few \lesubqty{}{} \Many \lesubqty{}{} \Any \lesubqty{}{} \Many$
+
+\end{frame}
+
+\begin{frame}{Decrementation order on quantities}
+
+$\ledecqty{r_1}{r_2}$ holds when $\subqty{r_2}{\One} = r_1$.
+
+\begin{center}
+  $\infrule{}{\ledecqty{\Any}{\Many}}$
+
+  \vspace{2em}
+
+  $\infrule{}{\ledecqty{\Zero}{\One}}$
+
+  \vspace{2em}
+
+  $\infrule{}{\ledecqty{\Zero}{\Few}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Arithmetic order on quantities}
+
+The arithmetic order on quantities is $\Zero \learithqty \One \learithqty \Few \learithqty \Many \learithqty \Any$. The idea is to compare the quantities by how ``big'' they are.
+
+\end{frame}
+
+\begin{frame}{Division with remainder}
+
+$\divqty{a}{b} = (q, r)$ when $a = \addqty{\mulqty{b}{q}}{r}$, with $q$ as large as possible and $r$ being as small as possible according to the arithmetic order. Note that $\divqty{a}{b} = q$ means that $r = \Zero$.
+
+\vspace{2em}
+
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|}
+  \hline
+  $\divqty{r_1}{r_2}$ & $\Zero$         & $\One$  & $\Few$          & $\Many$         & $\Any$          \\ \hline
+  $\Zero$             & $\Any$          & $\Zero$ & $\Zero$         & $\Zero$         & $\Zero$         \\ \hline
+  $\One$              & $(\Any, \One)$  & $\One$  & $(\Zero, \One)$ & $(\Zero, \One)$ & $(\Zero, \One)$ \\ \hline
+  $\Few$              & $(\Any, \Few)$  & $\Few$  & $\Few$          & $(\Zero, \Few)$ & $(\Zero, \Few)$ \\ \hline
+  $\Many$             & $(\Any, \Many)$ & $\Many$ & $(\Any, \One)$  & $\Many$         & $(\Any, \One)$  \\ \hline
+  $\Any$              & $(\Any, \Any)$  & $\Any$  & $\Any$          & $\Any$          & $\Any$          \\ \hline
+  \end{tabular}
+\end{table}
+
+\end{frame}

@@ -1,0 +1,52 @@
+{
+  "env": "mainnet",
+  "network": "mantle-mainnet",
+  "delay": "10000",
+  "chainId": "0x1388",
+  "marketId": "Mantle",
+  "gasLimit": 1000000,
+  "rpcUrl": "https://rpc.mantle.xyz",
+  "readOnlyRpcUrl": "https://rpc.mantle.xyz",
+  "wsUrl": "",
+  "explorer": "https://explorer.mantle.xyz/",
+  "nativeToken": {
+    "address": "0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000",
+    "symbol": "MNT",
+    "wrapAddress": null
+  },
+  "tokens": [
+    {
+      "symbol": "WBTC.e",
+      "displaySymbol": "WBTC",
+      "name": "Wrapped Bitcoin",
+      "decimals": 8,
+      "address": "0xcabae6f6ea1ecab08ad02fe02ce9a44f09aebfa2"
+    },
+    {
+      "symbol": "USDT.e",
+      "displaySymbol": "USDT",
+      "name": "Tether USDT",
+      "decimals": 6,
+      "address": "0x201eba5cc46d216ce6dc03f6a759e8e766e956ae"
+    },
+    {
+      "symbol": "ETH.e",
+      "displaySymbol": "ETH",
+      "name": "Ether",
+      "decimals": 18,
+      "address": "0xdeaddeaddeaddeaddeaddeaddeaddeaddead1111"
+    },
+    {
+      "symbol": "USDC.e",
+      "displaySymbol": "USDC",
+      "name": "USD Coin",
+      "decimals": 6,
+      "address": "0x09bc4e0d864854c6afb6eb9a9cdf58ac190d0df9"
+    }
+  ],
+  "bandOracleStdReference": "",
+  "diaOracleV2": "",
+  "gnosisSafe": "",
+  "gnosisApi": "",
+  "isGnosisSafe": false
+}

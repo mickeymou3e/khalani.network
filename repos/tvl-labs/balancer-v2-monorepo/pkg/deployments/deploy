@@ -1,0 +1,61 @@
+#!/bin/bash
+PS3='select network: '
+options=("godwoken-testnet" "godwoken-mainnet" "axon")
+let network
+select opt in "${options[@]}"
+do
+    case $opt in
+        "godwoken-testnet")
+            network="godwoken-testnet"
+            echo "you chose option 1"
+            break;;
+        "godwoken-mainnet")
+            network="godwoken-mainnet"
+            echo "you chose option 2"
+            break;;
+        "axon")
+            network="axon"
+            echo "you chose option 3"
+            break;;
+        *) echo "invalid option $REPLY";;
+    esac
+done
+
+while [ $# -gt 0 ]; do
+    case $1 in
+    -force)
+        echo "forcing redeployment of all contracts $2"
+        FORCE=1
+        shift
+        shift
+        ;;
+    -verify)
+        echo "verifying all contracts in blockscout $2"
+        VERIFY=1
+        shift
+        shift
+        ;;
+    *)
+        echo "some other arg: $1"
+        shift
+        ;;
+    esac
+done
+args=(
+  --network $network
+)
+if [[ -v FORCE ]]; then
+    args+=(--force)
+fi
+if [[ -v VERIFY ]]; then
+    args+=(--key x)
+fi
+
+yarn hardhat deploy --id 20221124-address-balances "${args[@]}"
+yarn hardhat deploy --id 20210418-authorizer "${args[@]}"
+yarn hardhat deploy --id 20210418-vault "${args[@]}"
+yarn hardhat deploy --id 20220721-balancer-queries "${args[@]}"
+yarn hardhat deploy --id 20220817-aave-rebalanced-linear-pool "${args[@]}"
+yarn hardhat deploy --id 20220725-protocol-fee-percentages-provider "${args[@]}"
+yarn hardhat deploy --id 20220906-composable-stable-pool "${args[@]}"
+yarn hardhat deploy --id 20220908-weighted-pool-v2 "${args[@]}"

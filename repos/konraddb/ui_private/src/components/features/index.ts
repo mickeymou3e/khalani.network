@@ -1,0 +1,9 @@
+export { AccountPage } from "./AccountPage";
+export { AccountVerificationPage } from "./AccountVerificationPage";
+export { RegisterPage } from "./Authentication/RegisterPage";
+export { BuyPage } from "./BuyPage";
+export { PoolPage } from "./PoolPage";
+export { SupportBackdrop } from "./SupportBackdrop";
+export { TradePage } from "./TradePage";
+export { WalletPage } from "./WalletPage";
+export { MarketsPage } from "./MarketsPage";

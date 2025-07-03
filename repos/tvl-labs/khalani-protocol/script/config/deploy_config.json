@@ -1,0 +1,104 @@
+{
+  "khalanitestnet": {
+    "chainId": 10012,
+    "rpcUrl": "https://testnet-trial.khalani.network/",
+    "hyperlaneMailbox": "0x6c974538ac82bF2cbA2F2161A554CbC30847Deba",
+    "hyperlaneGasOracle" : "0x0000000000000000000000000000000000000000",
+    "hyperlaneISM": "0xbD1577165fb1eB4E0dA1072A6dFB041eB5EfC212",
+    "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+    "tokens": [
+      "0x24bcc5d1F6538F4a84Cd9009ebD4Fa614904fA59",
+      "0xdf830a3F120515bd99fE6Bc8513537713e204BC5"
+    ]
+  },
+  "sepolia": {
+    "chainId": 11155111,
+    "rpcUrl": "https://sepolia.infura.io/v3/API_KEY",
+    "hyperlaneMailbox": "0xfFAEF09B3cd11D9b20d1a19bECca54EEC2884766",
+    "hyperlaneIGP" : "0x8f9C8f120d5E751b24d96d9c683B8d0450b45DBc",
+    "hyperlaneGasOracle" : "0x1D5EbC3e15e9ECDe0e3530C85899556797eeaea5",
+    "hyperlaneISM": "0x7B16fCf2fe8A4B282d20a96FEdee30149898a378",
+    "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+    "tokens": [
+      "0xC0A27ef2304753d49ec4349DAC38fD33F8D40256",
+      "0x24bcc5d1F6538F4a84Cd9009ebD4Fa614904fA59",
+      "0xdf830a3F120515bd99fE6Bc8513537713e204BC5"
+    ]
+  },
+  "fuji": {
+    "chainId": 43113,
+    "rpcUrl": "https://avalanche-fuji.infura.io/v3/API_KEY",
+    "hyperlaneMailbox": "0x5b6CFf85442B851A8e6eaBd2A4E4507B5135B3B0",
+    "hyperlaneGasOracle" : "0xd44E79A697136888f0d720Fb6703400a9204FD39",
+    "hyperlaneISM": "0xfe38b3A4c58E5DA6Af56efEAC45C3475640d1D87",
+    "permit2": "0x8A82255fafcBB9E02273e918eE90AEd6B864E04c",
+    "tokens": [
+      "0x24bcc5d1F6538F4a84Cd9009ebD4Fa614904fA59",
+      "0xdf830a3F120515bd99fE6Bc8513537713e204BC5"
+    ]
+  },
+  "mumbai": {
+    "chainId": 80001,
+    "rpcUrl": "https://polygon-mumbai.infura.io/v3/API_KEY",
+    "hyperlaneMailbox": "0xCC737a94FecaeC165AbCf12dED095BB13F037685",
+    "hyperlaneGasOracle" : "0x8970bdA0B0A01d1bA2656b510B2859560e75a7c5",
+    "hyperlaneISM": "0x621f81125259A86BEC1732469D2dBbd51580AF99",
+    "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+    "tokens": [
+      "0x24bcc5d1F6538F4a84Cd9009ebD4Fa614904fA59",
+      "0xdf830a3F120515bd99fE6Bc8513537713e204BC5"
+    ]
+  },
+  "bsctestnet": {
+    "chainId": 97,
+    "rpcUrl": "https://data-seed-prebsc-2-s1.bnbchain.org:8545",
+    "hyperlaneMailbox": "0xCC737a94FecaeC165AbCf12dED095BB13F037685",
+    "hyperlaneGasOracle" : "0x1a75f55e8f574CdB5abb1b2702b9caF2E5F7d4D6",
+    "hyperlaneISM": "0xbde95643690F74d8cB8B972a8B281b004b9004E9",
+    "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+    "tokens": [
+      "0x24bcc5d1F6538F4a84Cd9009ebD4Fa614904fA59",
+      "0xdf830a3F120515bd99fE6Bc8513537713e204BC5",
+      "0x8f9C8f120d5E751b24d96d9c683B8d0450b45DBc"
+    ]
+  },
+  "arb-goerli": {
+    "chainId": 421613,
+    "rpcUrl": "https://arbitrum-goerli.public.blastapi.io",
+    "hyperlaneMailbox": "0xCC737a94FecaeC165AbCf12dED095BB13F037685",
+    "hyperlaneGasOracle" : "0xfFAEF09B3cd11D9b20d1a19bECca54EEC2884766",
+    "hyperlaneISM": "0x621f81125259A86BEC1732469D2dBbd51580AF99",
+    "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+    "tokens": [
+      "0x24bcc5d1F6538F4a84Cd9009ebD4Fa614904fA59",
+      "0xdf830a3F120515bd99fE6Bc8513537713e204BC5"
+    ]
+  },
+  "optimism-goerli": {
+    "chainId": 420,
+    "rpcUrl": "https://optimism-goerli.infura.io/v3/API_KEY",
+    "hyperlaneMailbox": "0xCC737a94FecaeC165AbCf12dED095BB13F037685",
+    "hyperlaneGasOracle" : "0xdE72697715aAeC4CaBbD638C0Aba64488005C64b",
+    "hyperlaneISM": "0x24bcc5d1F6538F4a84Cd9009ebD4Fa614904fA59",
+    "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+    "tokens": [
+      "0xED84fBAAa27D1136101D0b1d18B1FF194C17dBC3",
+      "0x738E12aA6aF874e4019B70718F4057959E0c5D2B"
+    ]
+  },
+  "godwokentestnet": {
+    "chainId": 71401,
+    "rpcUrl": "https://v1.testnet.godwoken.io/rpc",
+    "hyperlaneMailbox": "0xb81B2575b0B34e76e56F2e35cD66b5Cd58c6C85F",
+    "hyperlaneGasOracle" : "0x0000000000000000000000000000000000000000",
+    "hyperlaneISM": "0x16482a447e6c002dd84C303b80b87c991Cd3fb07",
+    "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+    "tokens": [
+      "0xED84fBAAa27D1136101D0b1d18B1FF194C17dBC3",
+      "0x8f9C8f120d5E751b24d96d9c683B8d0450b45DBc"
+    ]
+  }
+}
+
+
+

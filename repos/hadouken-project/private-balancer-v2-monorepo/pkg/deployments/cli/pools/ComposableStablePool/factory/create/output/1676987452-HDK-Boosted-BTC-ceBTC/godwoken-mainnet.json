@@ -1,0 +1,41 @@
+{
+  "transaction": {
+    "hash": "0x8590522a044e878af3cc53b4ae33ebe36f43c14a2046134aa3f5ca0ee644ccad",
+    "blockNumber": null
+  },
+  "data": {
+    "ComposableStablePoolFactory": {
+      "create": {
+        "input": {
+          "name": "Celer BTC Stable Pool",
+          "symbol": "HDK-Boosted-BTC-ceBTC",
+          "tokens": [
+            "0x136C814F6c7F7412518c07dC401a29707a773AD0",
+            "0x1C428a6539A40eC5Bb481631266a51cd19b233B1"
+          ],
+          "rateProviders": [
+            "0x136C814F6c7F7412518c07dC401a29707a773AD0",
+            "0x0000000000000000000000000000000000000000"
+          ],
+          "priceRateCacheDuration": [
+            "0",
+            "0"
+          ],
+          "amplificationParameter": "300",
+          "swapFeePercentage": "100000000000000",
+          "exemptFromYieldProtocolFeeFlags": [
+            false,
+            false
+          ],
+          "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0x136C814F6c7F7412518c07dC401a29707a773AD0": "100000000000000",
+            "0x1C428a6539A40eC5Bb481631266a51cd19b233B1": "10000"
+          }
+        },
+        "output": "0x6291C16e5553dc70b54974FE19aE0cBfe0Cd0FD6"
+      }
+    }
+  },
+  "timestamp": 1676987452993
+}

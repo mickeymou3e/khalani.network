@@ -1,0 +1,274 @@
+\section{Conversion}
+
+\begin{frame}{Conversion rules}
+
+\begin{center}
+  $\infrule{\typing[\Gamma]{e}{A} \quad \typeconv[\cartesianize{\Gamma}]{A}{B}[r]}{\typing[\Gamma]{e}{B}}$
+
+  \vspace{2em}
+
+  $\infrule{\termconv{e_1}{e_2}{A} \quad \typeconv{A}{B}[r]}{\termconv{e_1}{e_2}{B}}$
+
+  \vspace{2em}
+
+  $\infrule{\proves[\Gamma]{p}{P} \quad \propconv[\Gamma]{P}{Q}}{\proves[\Gamma]{p}{Q}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Type conversion}
+
+\begin{center}
+  $\infrule{\ctx[\noncomputable]{\Gamma}}{\typeconv{\Unit}{\Unit}}$ \quad
+  $\infrule{\ctx[\noncomputable]{\Gamma}}{\typeconv{\Empty}{\Empty}}$
+
+  \vspace{1em}
+
+  $\infrule{\typeconv{A_1}{A_2}[s_1] \quad \typeconv{B_1}{B_2}[s_2]}{\typeconv{\Fun[r]{A_1}{B_1}}{\Fun[r]{A_2}{B_2}}[\One]}$
+
+  \vspace{1em}
+
+  $\infrule{\typeconv{A_1}{A_2}[s]}{\typeconv{\Box[\Zero]{A_1}}{\Box[\Zero]{A_2}}}$ \quad
+  $\infrule{\typeconv{A_1}{A_2}[s] \quad r \neq \Zero}{\typeconv{\Box[r]{A_1}}{\Box[r]{A_2}}[\mulqty{r}{s}]}$
+
+  \vspace{1em}
+
+  $\infrule{\typeconv{A_1}{A_2}[s_1] \quad \typeconv{B_1}{B_2}[s_2]}{\typeconv{\Prod{A_1}{B_1}}{\Prod{A_2}{B_2}}[\lubqty{s_1}{s_2}]}$
+
+  \vspace{1em}
+
+  $\infrule{\typeconv{A_1}{A_2}[s_1] \quad \typeconv{B_1}{B_2}[s_2]}{\typeconv{\Sum{A_1}{B_1}}{\Sum{A_2}{B_2}}[\lubqty{s_1}{s_2}]}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Type conversion}
+
+\begin{center}
+  $\infrule{\ctx[\noncomputable]{\Gamma} \quad (a : \Type[r]) \in \Gamma}{\typeconv{a}{a}[r]}$
+
+  \vspace{2em}
+
+  $\infrule{\typeconv[\extendtype{\Gamma}{a}[r]]{B_1}{B_2}[s]}{\typeconv{\ForallE{a}[r]{B_1}}{\ForallE{a}[r]{B_2}}[s]}$
+
+  \vspace{2em}
+
+  $\infrule{\typeconv[\extendtype{\Gamma}{a}[r]]{B_1}{B_2}[s]}{\typeconv{\ForallI{a}[r]{B_1}}{\ForallI{a}[r]{B_2}}[s]}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Type conversion -- properties}
+
+The rules above are the complete definition of type conversion. We don't need to take any closures -- type conversion already is an equivalence relation.
+
+\begin{itemize}
+  \item $\typeconv{A}{A}$
+  \item If $\typeconv{A}{B}$ then $\typeconv{B}{A}$
+  \item If $\typeconv{A}{B}$ and $\typeconv{B}{C}$ then $\typeconv{A}{C}$
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Proposition conversion}
+
+\begin{center}
+  $\infrule{\ctx[\noncomputable]{\Gamma}}{\propconv{\True}{\True}}$ \quad
+  $\infrule{\ctx[\noncomputable]{\Gamma}}{\propconv{\False}{\False}}$
+
+  \vspace{2em}
+
+  $\infrule{\propconv{P_1}{P_2} \quad \propconv{Q_1}{Q_2}}{\propconv{\Impl{P_1}{Q_1}}{\Impl{P_2}{Q_2}}}$
+
+  \vspace{2em}
+
+  $\infrule{\propconv{P_1}{P_2} \quad \propconv{Q_1}{Q_2}}{\propconv{\And{P_1}{Q_1}}{\And{P_2}{Q_2}}}$
+
+  \vspace{2em}
+
+  $\infrule{\propconv{P_1}{P_2} \quad \propconv{Q_1}{Q_2}}{\propconv{\Or{P_1}{Q_1}}{\Or{P_2}{Q_2}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Proposition conversion}
+
+\begin{center}
+  $\infrule{\typeconv{A_1}{A_2}[r] \quad \propconv[\extend{\Gamma}{x}{A_1}]{P_1}{P_2}}{\propconv{\All{x}[A_1]{P_1}}{\All{x}[A_2]{P_2}}}$
+
+  \vspace{2em}
+
+  $\infrule{\typeconv{A_1}{A_2}[r] \quad \propconv[\extend{\Gamma}{x}{A_1}]{P_1}{P_2}}{\propconv{\Ex{x}[A_1]{P_1}}{\Ex{x}[A_2]{P_2}}}$
+
+  \vspace{2em}
+
+  $\infrule{\typeconv{A_1}{A_2}[r] \quad \termconv{e_1}{e_2}{A_1} \quad \termconv{e_1'}{e_2'}{A_1}}{\propconv{\Eq[A_1]{e_1}{e_1'}}{\Eq[A_2]{e_2}{e_2'}}}$
+\end{center}
+
+\vspace{2em}
+
+Note that we don't worry about $\alpha$-conversion and assume the variable is the same on both sides.
+
+\end{frame}
+
+\begin{frame}{Term conversion -- closure}
+
+\begin{center}
+  $\infrule[Refl]{\typing{e}{A}}{\termconv{e}{e}{A}}$
+
+  \vspace{2em}
+
+  $\infrule[Sym]{\termconv{e_2}{e_1}{A}}{\termconv{e_1}{e_2}{A}}$
+
+  \vspace{2em}
+
+  $\infrule[Trans]{\termconv{e_1}{e_2}{A} \quad \termconv{e_2}{e_3}{A}}{\termconv{e_1}{e_3}{A}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Term conversion -- Empty}
+
+\begin{center}
+  $\infrule{\typing[\Gamma][\noncomputable]{e_1}{\Empty} \quad \typing[\Gamma][\noncomputable]{e_2}{\Empty}}{\termconv[\Gamma]{e_1}{e_2}{\Empty}}$
+
+  \vspace{2em}
+
+  $\infrule{\type[\Gamma]{A}[r] \quad \termconv{e_1}{e_2}{\Empty}}{\termconv{\emptyelim{e_1}[A]}{\emptyelim{e_2}[A]}{A}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Term conversion -- Unit}
+
+\begin{center}
+  $\infrule{\typing[\Gamma][\noncomputable]{a}{A}}{\termconv{\unitelim{\unit}{a}}{a}{A}}$
+
+  \vspace{2em}
+
+  $\infrule{\typing[\Gamma][\noncomputable]{u_1}{\Unit} \quad \typing[\Gamma][\noncomputable]{u_2}{\Unit}}{\termconv[\Gamma]{u_1}{u_2}{\Unit}}$
+
+  \vspace{2em}
+
+  $\infrule{\termconv{u_1}{u_2}{\Unit} \quad \termconv{a_1}{a_2}{A}}{\termconv{\unitelim{u_1}{a_1}[A]}{\unitelim{u_2}{a_2}[A]}{A}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Term conversion -- functions}
+
+\begin{center}
+  $\infrule{\typing[\extend{\Gamma}{x}{A}][\noncomputable]{b}{B} \quad \typing[\Gamma][\noncomputable]{a}{A}}{\termconv{\app{(\fun[r]{x}[A]{b})}{a}}{\subst{b}{x}{a}}{B}}$
+
+  \vspace{2em}
+
+  $\infrule{\termconv[\extend{\Gamma}{x}{A}]{\app{f}{x}}{\app{g}{x}}{B}}{\termconv[\Gamma]{f}{g}{\Fun[r]{A}{B}}}$
+
+  \vspace{2em}
+
+  $\infrule{\termconv{f_1}{f_2}{\Fun[r]{A}{B}} \quad \termconv{a_1}{a_2}{A}}{\termconv{\app{f_1}{a_1}}{\app{f_2}{a_2}}{B}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Term conversion -- box}
+
+\begin{center}
+  $\infrule{\typing[\Gamma][\noncomputable]{a}{A} \quad \typing[\extend{\Gamma}{x}{A}][\noncomputable]{b}{B}}{\termconv{\boxelim{x}{\boxintro[r]{a}}{b}[B]}{\subst{b}{x}{a}}{B}}$
+
+  \vspace{2em}
+
+  $\infrule{\termconv{\boxelim{x}{e_1}{x}[A]}{\boxelim{x}{e_2}{x}[A]}{A}}{\termconv{e_1}{e_2}{\Box[r]{A}}}$
+
+  \vspace{2em}
+
+  $\infrule{\termconv{a_1}{a_2}{\Box[r]{A}} \quad \termconv[\extend{\Gamma}{x}{A_1}]{b_1}{b_2}{B}}{\termconv{\boxelim{x}{a_1}{b_1}[B]}{\boxelim{x}{a_2}{b_2}[B]}{B}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Term conversion -- product}
+
+\begin{center}
+  $\infrule{\typing[\Gamma][\noncomputable]{a}{A} \quad \typing[\Gamma][\noncomputable]{b}{B} \quad \typing[\extend{\extend{\Gamma}{x}{A}}{y}{B}][\noncomputable]{c}{C}}{\termconv{\letpair{x}{y}{\pair{a}{b}}{c}[C]}{\subst{\subst{c}{x}{a}}{y}{b}}{C}}$
+
+  \vspace{2em}
+
+  $\infrule{\begin{array}{l} \termconv{\letpair{x}{y}{e_1}{x}[A]}{\letpair{x}{y}{e_2}{x}[A]}{A} \\ \termconv{\letpair{x}{y}{e_1}{y}[B]}{\letpair{x}{y}{e_2}{y}[B]}{B} \end{array}}{\termconv{e_1}{e_2}{\Prod{A}{B}}}$
+
+  \vspace{2em}
+
+  $\infrule{\termconv{e_1}{e_2}{\Prod{A}{B}} \quad \termconv[\extend{\extend{\Gamma}{x}{A}}{y}{B}]{c_1}{c_2}{C}}{\termconv{\letpair{x}{y}{e_1}{c_1}[C]}{\letpair{x}{y}{e_2}{c_2}[C]}{C}}$
+
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Term conversion -- sum}
+
+\begin{center}
+  $\infrule{\typing[\Gamma][\noncomputable]{a}{A} \quad \typing[\extend{\Gamma}{x}{A}][\noncomputable]{c_1}{C} \quad \typing[\extend{\Gamma}{y}{B}][\noncomputable]{c_2}{C}}{\termconv{\newcase{\inl{a}}{x}{c_1}{y}{c_2}[C]}{\subst{c_1}{x}{a}}{C}}$
+
+  \vspace{2em}
+
+  $\infrule{\typing[\Gamma][\noncomputable]{b}{B} \quad \typing[\extend{\Gamma}{x}{A}][\noncomputable]{c_1}{C} \quad \typing[\extend{\Gamma}{y}{B}][\noncomputable]{c_2}{C}}{\termconv{\newcase{\inr{b}}{x}{c_1}{y}{c_2}[C]}{\subst{c_2}{y}{b}}{C}}$
+
+  \vspace{2em}
+
+  $\infrule{\termconv{a_1}{a_2}{A} \quad \type{B}}{\termconv{\inl{a_1}}{\inl{a_2}}{\Sum{A}{B}}}$ \quad
+  $\infrule{\type{A} \quad \termconv{b_1}{b_2}{B}}{\termconv{\inr{b_1}}{\inr{b_2}}{\Sum{A}{B}}}$
+
+  \vspace{2em}
+
+  $\infrule{\termconv{e_1}{e_2}{\Sum{A}{B}} \quad \begin{array}{l} \termconv[\extend{\Gamma}{x}{A}]{c_1}{c_1'}{C} \\ \termconv[\extend{\Gamma}{y}{B}]{c_2}{c_2'}{C} \end{array}}{\termconv{\newcase{e_1}{x}{c_1}{y}{c_2}[C]}{\newcase{e_1'}{x}{c_1'}{y}{c_2'}[C]}{C}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Term conversion -- let}
+
+\begin{center}
+  $\infrule{\typing[\Gamma][\noncomputable]{e_1}{A} \quad \typing[\extend{\Gamma}{x}{A}][\noncomputable]{e_2}{B}}{\termconv{\letin{x}{e_1}{e_2}}{\subst{e_2}{x}{e_1}}{B}}$
+
+  \vspace{2em}
+
+  $\infrule{\termconv[\Gamma]{a_1}{a_2}{A} \quad \termconv[\extend{\Gamma}{x}{A}]{b_1}{b_2}{B}}{\termconv[\Gamma]{\letin{x}{a_1}{b_1}}{\letin{x}{a_2}{b_2}}{B}}$
+\end{center}
+
+\vspace{2em}
+
+Q: Should we have both rules, or just the first one?
+
+\end{frame}
+
+\begin{frame}{Term conversion -- polymorphism}
+
+\begin{center}
+  $\infrule{\typing[\extendtype{\Gamma}{a}[r]][\noncomputable]{e}{B} \quad \type[\cartesianize{\Gamma}]{A}[r]}{\termconv{\tapp{(\tfun{a}[r]{e})}{A}}{\subst{e}{a}{A}}{\subst{B}{a}{A}}}$
+
+  \vspace{2em}
+
+  $\infrule{\termconv[\extendtype{\Gamma}{a}[r]]{\tapp{f}{a}}{\tapp{g}{a}}{B}}{\termconv[\Gamma]{f}{g}{\ForallE{a}[r]{B}}}$
+
+  \vspace{2em}
+
+  $\infrule{\termconv{e_1}{e_2}{\ForallE{a}[r]{B}} \quad \typeconv{A_1}{A_2}[r]}{\termconv{\tapp{e_1}{A_1}}{\tapp{e_2}{A_2}}{\subst{B}{a}{A_1}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Term conversion -- polymorphism (implicit arguments)}
+
+\begin{center}
+  $\infrule{\typing[\extendtype{\Gamma}{a}[r]][\noncomputable]{e}{B} \quad \type[\cartesianize{\Gamma}]{A}[r]}{\termconv{\itapp{(\itfun{a}[r]{e})}{A}}{\subst{e}{a}{A}}{\subst{B}{a}{A}}}$
+
+  \vspace{2em}
+
+  $\infrule{\termconv[\extendtype{\Gamma}{a}[r]]{\itapp{f}{a}}{\itapp{g}{a}}{B}}{\termconv[\Gamma]{f}{g}{\ForallI{a}[r]{B}}}$
+
+  \vspace{2em}
+
+  $\infrule{\termconv{e_1}{e_2}{\ForallI{a}[r]{B}} \quad \typeconv{A_1}{A_2}[r]}{\termconv{\itapp{e_1}{A_1}}{\itapp{e_2}{A_2}}{\subst{B}{a}{A_1}}}$
+\end{center}
+
+\end{frame}

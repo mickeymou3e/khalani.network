@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8">
+    <script src="https://kit.fontawesome.com/e71073d474.js" crossorigin="anonymous"></script>
+    <title>Financial Mill</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="calendar/theme1.css">
+    <link rel="stylesheet" href="materialize.css">
+</head>
+<body>
+
+
+        <main class="main">
+      <!-- Start Header -->
+      <header>
+        <div class="container-nav">
+          <div class="row">
+            <div class="brand-name">
+              <img src="../images/financialmil_biale_RGB-01.png" alt="" />
+            </div>
+            <div class="ham-burger" style="display:none;">
+              <i class="fa fa-bars"></i>
+            </div>
+            <div class="navbar">
+              <ul>
+                <li><a href="index.html" class="active">Strona główna</a></li>
+                <li><a href="/blog/blog.html">Blog</a></li>
+                <li><a href="/aboutus/aboutus.html">O nas</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </header>
+            <section class="home">
+              <div id="app" class="wrapper" v-cloak v-bind:class="{'is-previous': isPreviousSlide, 'first-load': isFirstLoad}">
+                <div class="slide-wrapper" 
+                     v-for="(slide, index) in slides" 
+                     v-bind:class="{ active: index === currentSlide }"
+                     v-bind:style="{ 'z-index': (slides.length - index), 'background-image': 'url(' + slide.bgImg + ')' }">
+                    <div class="slide-inner">
+                        <div class="slide-bg-text">
+                            <p>{{ slide.headlineFirstLine }}</p>
+                            <p>{{ slide.headlineSecondLine }}</p>
+                        </div>
+                        <div class="slide-rect-filter">
+                            <div class="slide-rect" v-bind:style="{'border-image-source': 'url(' + slide.rectImg + ')'}"></div>
+                        </div>
+                        <div class="slide-content">
+                            <h1 class="slide-content-text"><p>{{ slide.headlineFirstLine }}</p><p>{{ slide.headlineSecondLine }}</p></h1><a v-bind:href="slide.hrefLink" class="slide-content-cta">Czytaj dalej</a></div>
+                        <h2 class="slide-side-text"><span>{{ slide.sublineFirstLine }} </span></h2></div>
+                </div>
+            <div class="controls-container">
+                <button class="controls-button" 
+                        v-for="(slide, index) in slides"
+                        v-bind:class="{ active: index === currentSlide }"
+                        v-on:click="updateSlide(index)">{{ slide.headlineFirstLine }}</button>
+            </div>
+            <div class="pagination-container">
+                <span class="pagination-item"
+                      v-for="(slide, index) in slides"
+                      v-bind:class="{ active: index === currentSlide }"
+                      v-on:click="updateSlide(index)"></span>
+            </div>
+        </div>
+        </section>
+
+            <section class="latestposts">
+              <div class="latestposts-header">
+                <h1 class="latestposts-h1">Przewodnik</h1>
+              </div>
+              <div class="container-card">
+              <div class="flip-card" tabIndex="0">
+                <div class="flip-card-inner" style="background:url('/images/Wydarzenia.png') no-repeat; background-size:cover;">
+                  
+                  <div class="flip-card-back">
+                    <h3>Kalendarz</h3>
+                    <p>W kalendarzu znajdziesz przyszłe wpisy, które planujemy wrzucić oraz nadchodzące wydarzenia ze świata finansów. Sprawidzić, który z nich interesuje Cię najbardziej i bądź na bierząco.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flip-card" tabIndex="0">
+                <div class="flip-card-inner" style="background: url('images/Blog.png') no-repeat; background-size:cover;">
+                  <div class="flip-card-back">
+                    <h3>Blog</h3>
+                    <p>Mamy nadzieję, że każdy kolejny wpis będzie ciekawszy, a wszelkie niezrozumiałe kwestie będą dla Ciebie czymś oczywistym. Wierzymy, że nasz blog pozwoli Ci się wkręcić w świat finansów, aż wreszcie oszalejesz na jego punkcie tak jak i my. </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flip-card" tabIndex="0">
+                <div class="flip-card-inner" style="background: url('images/O\ nas.png') no-repeat; background-size:cover;">
+                  <div class="flip-card-back">
+                    <h3>O nas</h3>
+                    <p>Dwóch gniewnym, którzy potrafią nie wpasować się <br/> w schemat. Świat finansów jest dla nich tym, co pokochali od pierwszego spotkania. Nie uwierzą w nic dopóki sami tego nie przeanalizują.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flip-card" tabIndex="0">
+                <div class="flip-card-inner" style="background: url('images/Szkolenia.png') no-repeat; background-size:cover;">
+                  <div class="flip-card-back">
+                    <h3>Breaking news</h3>
+                    <p>W tym miejscu znajdziesz  wiadomości ze świata finansów z ostatnich 30 dni. Staramy się wybierać i przekazywać Ci najważniejsze z nich, aby nic nie rozpraszało twojej uwagi od tego co istotne.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flip-card" tabIndex="0">
+                <div class="flip-card-inner" style="background: url('images/Współpraca.png') no-repeat; background-size:cover;">
+                  <div class="flip-card-back">
+                    <h3>Współpraca</h3>
+                    <p>Zachęcamy Cię, do bycia częścią naszego projektu. Każdy zamieszczony przez Ciebie komentarz będzie <br/> dla nas podpowiedzią w jakim kierunku powinniśmy zmierzać.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flip-card" tabIndex="0">
+                <div class="flip-card-inner" style="background: url('images/Konsultacje.png') no-repeat; background-size:cover;">
+                  <div class="flip-card-back">
+                    <h3>Konsultacje</h3>
+                    <p style="margin-bottom:35px;">Chcesz z nami porozmawiać o czymś czego jeszcze nie poruszaliśmy?  A może  chcesz dowiedzieć się czegoś więcej? Zgłoś się do nas za pomocą formularza zgłoszeniowego.</p>
+                    <!-- <a href="readpage/readpage.html" class="slide-content-cta" style="margin-left:-15px">Formularz</a> -->
+                  </div>
+                </div>
+              </div>
+              </div>
+
+                  <div class="image-container">
+                    <p>Czy wiesz co czeka nas w przyszłości?</p>
+                  </div>
+                  
+
+            </section>
+            <div class="container-calendar">
+              <div class="container-questions">
+                <div class="top-question">
+                  <p>Czy za 20 lat gotówka będzie jedynie pamiątką w świecie<br class="hide-mobile" /> elektronicznych rozliczeń?
+                  </p>
+                </div>
+                <div class="middle-question">
+                  <div class="left-question">
+                    <p>Jak będą funkcjonowały rynki finansowe?
+                    </p>
+                  </div>
+                  <div class="right-question">
+                    <p>Kiedy nastąpi kolejny kryzys gospodarczy?
+                    </p>
+                    <p class="right-question-text-mobile" style="display:none;">
+                      Kiedy nastąpi kolejny kryzys gospodarczy?
+                    </p>
+                  </div>
+                </div>
+                <div class="bottom-question">
+                  <p>W tych kwestiach możemy jedynie wcielić się w rolę spekulantów. Nie ma znaczenia jednak co mówimy i co myślimy, lecz to jak postępujemy. Podróż o naszą lepsza przyszłość rozgrywa się już dziś. Platforma, na której się znajdujesz pomoże Ci lepiej dostosować się do problemów oraz wyzwań współczesnego świata. Poznasz ryzyka i perspektywy jakie dają nam rynki finansowe. Dołącz do naszej społeczności i rozwijaj się razem z nami.
+                  </p>
+                </div>
+              </div>
+              
+              <div class="closest-event">
+                <h1>Najbliższe wydarzenia</h1>
+              </div>
+
+              <div class="calendar-card-container">
+                <div class="card-container">
+                  <div class="entry-number">
+                    <h1>#2</h1>
+                    <h4>Bankowość</h4>
+                  </div>
+                  <h2>18:00</h2>
+                  <h1><img src="/images/calendar9.png"/>21.01.2021</h1>
+                  <p>Otwarte Konto Oszczędnościowe</p>
+                  <h4>Autor</br> Jakub Mączyński</h4>
+                </div>
+                <div class="card-container">
+                  <div class="entry-number">
+                    <h1>#2</h1>
+                    <h4>Inwestycje</h4>
+                  </div>
+                  <h2>18:00</h2>
+                  <h1><img src="/images/calendar9.png"/>28.01.2021</h1>
+                  <p>Otwarte Fundusze Inwestycyjne</p>
+                  <h4>Autor</br> Jakub Mączyński</h4>
+                </div>
+                <div class="card-container">
+                  <div class="entry-number">
+                    <h1>#1</h1>
+                    <h4>Wydarzenia</h4>
+                  </div>
+                  <h2>18:00</h2>
+                  <h1><img src="/images/calendar9.png"/>31.01.2021</h1>
+                  <p>PODSUMOWANIE WYDARZEŃ MIESIĄCA</p>
+                  <h4>Autorzy</br> Jakub Mączyński & Maciej Młyński</h4>
+                </div>
+                <div class="card-container">
+                  <div class="entry-number">
+                    <h1>#2</h1>
+                    <h4>Bankowość</h4>
+                  </div>
+                  <h2>18:00</h2>
+                  <h1><img src="/images/calendar9.png"/>04.02.2021</h1>
+                  <p>Strategia CRM</p>
+                  <h4>Autor</br> Maciej Młyńskif</h4>
+                </div>
+              </div>
+            </div>
+
+                  
+            <!-- <footer>
+                <section class="footerContainer">
+                    
+                </section>
+            </footer> -->
+
+        </main>
+
+        <div class="contact-form">
+
+          <form>
+            <h1>Formularz kontaktowy</h1>
+            <div class="name-email">
+              <input type="text" id="fname" name="fname" placeholder="Imię">
+              <input type="email" id="email" name="email" placeholder="E-mail">
+            </div>
+            <input type="text" id="topic" name="topic" placeholder="Temat">
+            <textarea id="content" name="content" placeholder="Treść"></textarea>
+
+            <a href="readpage/readpage.html" style="padding:10px 32px" class="slide-content-cta btn-primary">Wyślij</a>
+          </form>
+        </div>
+        <hr size="1" color="#646464">
+        <footer>
+          <div class="footer-container">
+            <h1>Blog Finansowy</h1>
+            <h2>Jakub Mączyński oraz Maciej Młyński</h4>
+            <div class="icon-container">
+              <img src="../images/facebook 4.png" alt="facebook-icon">
+              <img src="../images/twitter 2.png" alt="twitter-icon">
+              <img src="../images/instagram 4.png" alt="instagram-icon">
+            </div>
+          </div>
+          <hr size="1" color="#646464">
+          <p>Copyright Ben-IT © 2020 Wszelkie prawa zastrzeżone. </p>
+        </footer>
+
+<script src="calendar/caleandar.js"></script>
+<script src="calendar/demo.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="parallaxie.js"></script>
+<script src="sly.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  	(function () {
+		var $frame = $('#forcecentered');
+		var $wrap  = $frame.parent();
+
+		// Call Sly on frame
+		$frame.sly({
+			horizontal: 1,
+			itemNav: 'centered',
+			smart: 1,
+			activateOn: 'click',
+			mouseDragging: 1,
+			touchDragging: 1,
+			releaseSwing: 1,
+			startAt: 3,
+			scrollBar: $wrap.find('.scrollbar'),
+			scrollBy: 1,
+			speed: 300,
+			elasticBounds: 1,
+			easing: 'easeOutExpo',
+			dragHandle: 1,
+			dynamicHandle: 1,
+			clickBar: 1,
+
+			// Buttons
+			prev: $wrap.find('.prev'),
+			next: $wrap.find('.nextbtn'),
+      // Cycling
+			cycleBy: 'items',
+			cycleInterval: 3000,
+			pauseOnHover: 1,
+		});
+	}());
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>

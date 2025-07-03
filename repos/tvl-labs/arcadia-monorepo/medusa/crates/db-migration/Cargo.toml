@@ -1,0 +1,18 @@
+[package]
+name = "db-migration"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+anyhow.workspace = true
+bcs = { workspace = true, optional = true }
+clap = { workspace = true, optional = true }
+tokio.workspace = true
+rocksdb = { workspace = true, optional = true }
+medusa-types = { workspace = true, optional = true }
+medusa-storage.workspace = true
+sea-orm-migration.workspace = true
+
+[features]
+from-kv = ["dep:bcs", "dep:clap", "dep:rocksdb", "dep:medusa-types"]

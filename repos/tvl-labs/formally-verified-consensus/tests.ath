@@ -1,0 +1,109 @@
+load "semantics.ath"
+
+
+# --------------------------------- Tests ---------------------------------
+
+define example-msg-set := (mk-msg-set [['procA (propose one) 'procB] ['procA (propose one) 'procC]])
+define example-logged-events := ((pair 'procB (recv 'procA (propose one))) :: Nil)
+define example-global-proc-state := (DMap.update 
+    (pair 'procA Empty) 
+    (DMap.update 
+        (pair 'procB Empty) (DMap.empty-map Empty))
+)
+define example-proc-set := (set-of-multiple ['procA 'procB])
+define example-state-for-goal := (system-state example-logged-events example-proc-set example-global-proc-state example-msg-set)
+define test-actor-set-1 :=  (set-of-multiple ['acceptor 'propser1 'proposer2])
+define (default-state-is-valid procs) :=  (valid-global-state (system-state Nil procs (DMap.empty-map Empty) Set.null))
+
+define default-proc-set := Set.null
+define default-event-list := Nil
+define default-proc-state := (DMap.empty-map Empty)
+define default-msg-set := Set.null
+
+(eval (valid-event (recv 'procA (propose one)) 'procB example-msg-set)) # true
+(eval (valid-event (recv 'procA (propose one)) 'procC example-msg-set)) # true
+(eval (valid-event (req one) 'procD example-msg-set)) # true
+(eval (valid-event (Timeout) 'procD example-msg-set)) # true
+(eval (valid-event (recv 'procA (propose one)) 'procA example-msg-set)) # false
+(eval (valid-event (recv 'procB (propose one)) 'procC example-msg-set)) # false
+
+
+(seval (acceptor-step 'procB (proc-state 2) (recv 'procA (propose-msg 1)))) # (pair (num two) {(send 'procA (accept (num two)))})
+(seval (acceptor-step 'procB Empty (recv 'procA (propose-msg 5)))) # (pair Empty [(send procA (accept 5))])
+(seval (proposer-step 'procB Empty (req-msg 3))) # (pair Empty [(send 'acceptor (propose 3))])
+(seval (consensus-step 'proposer Empty (req-msg 3))) # (pair Empty [(send 'acceptor (propose 3))])
+(seval (consensus-step 'acceptor (proc-state 2) (req-msg 3))) #(pair proc-state 2 null)
+
+
+#(eval (execute (empty-map Empty) (set-of-multiple ['acceptor 'propser1 'proposer2]) Nil Set.null (empty-map Empty) )) # true
+
+# (eval (execute (execution (initial-state  test-actor-set-1) (initial-state test-actor-set-1))))
+
+# (eval (valid-global-state initial-state test-actor-set-1))
+
+define example-goal :=  (valid-global-state example-state-for-goal)
+
+conclude example-goal
+    (!prove-valid-state example-logged-events example-proc-set example-global-proc-state example-msg-set valid-global-state-semantics)
+
+
+
+# conclude (default-state-is-valid Set.null)
+#         (!prove-valid-state default-event-list default-proc-set default-proc-state default-msg-set valid-global-state-semantics)
+
+define events-1 := [
+    ['proposerA (req one)] 
+    ['proposerB (req two)] 
+    ['acceptor (recv 'proposerA (propose one))] 
+    ['acceptor (recv 'proposerB (propose two))]
+
+
+]
+
+define msgs-1 := [
+    ['proposerA 'acceptor (propose one)]
+    ['proposerB 'acceptor (propose two)]
+    ['acceptor  'proposerA (accept one)]
+    ['acceptor  'proposerB (accept one)]
+]
+
+# Both events-2a and events-2b are valid histories after execution from (events-1, msgs-1)
+# This is because there is no guaranteed order on "how fast" messages arrive to recipient
+
+define events-2a := [
+    ['proposerA (req one)] 
+    ['proposerB (req two)] 
+    ['acceptor (recv 'proposerA (propose one))] 
+    ['acceptor (recv 'proposerB (propose two))]
+    ['proposerA (recv 'acceptor (accept one))] # new event added & state of 'a updated to one
+
+]
+define events-2b := [
+    ['proposerA (req one)] 
+    ['proposerB (req two)] 
+    ['acceptor (recv 'proposerA (propose one))] 
+    ['acceptor (recv 'proposerB (propose two))]
+    ['proposerB (recv 'acceptor (accept one))] # New event added & state of 'b updated to `one`
+]
+
+define beginning-proc-state := 
+(make-event-log events-1)
+(proc-set-from-event-log events-1)
+(make-msgs msgs-1)
+(global-proc-state [['proposerA Empty] ['proposerB Empty] ['acceptor (num one)]])
+define global-state-begin := (global-state events-1 [['proposerA Empty] ['proposerB Empty] ['acceptor (num one)]] msgs-1 )
+
+define next-global-state-variant-1 := (global-state events-2a [['proposerA (num one)] ['proposerB Empty] ['acceptor (num one)]] msgs-1)
+define next-global-state-variant-2 := (global-state events-2b [['proposerA Empty] ['proposerB (num one)] ['acceptor (num one)]] msgs-1)
+
+
+define goal1 := (execute global-state-begin next-global-state-variant-1)
+define goal2 := (execute global-state-begin next-global-state-variant-2)
+
+
+
+
+    
+(!prove-valid-exec global-state-begin next-global-state-variant-1 execute-semantics)
+    
+# Major goal 1: Prove that for any valid global state, consensus step 

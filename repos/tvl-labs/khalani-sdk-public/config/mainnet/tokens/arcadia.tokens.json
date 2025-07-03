@@ -1,0 +1,74 @@
+[
+  {
+    "id": "0x41786f6e:0xE7b9A281847dD014ef5FB2c6e9Bf165ef123d5f2",
+    "address": "0xE7b9A281847dD014ef5FB2c6e9Bf165ef123d5f2",
+    "decimals": 18,
+    "name": "USDC | avax",
+    "symbol": "USDC.avax",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0xa86a"
+  },
+  {
+    "id": "0x41786f6e:0xd2872537E00fB7365720F3c5036c5a1e4b7202B5",
+    "address": "0xd2872537E00fB7365720F3c5036c5a1e4b7202B5",
+    "decimals": 18,
+    "name": "USDT | avax",
+    "symbol": "USDT.avax",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0xa86a"
+  },
+  {
+    "id": "0x41786f6e:0xbEfe438a775884c0DD2329dBC42Fc6f5b62dFaC5",
+    "address": "0xbEfe438a775884c0DD2329dBC42Fc6f5b62dFaC5",
+    "decimals": 18,
+    "name": "DAI | avax",
+    "symbol": "DAI.avax",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0xa86a"
+  },
+  {
+    "id": "0x41786f6e:0xE7510Ad104e70D1f035B58375f4A7DF564b2F062",
+    "address": "0xE7510Ad104e70D1f035B58375f4A7DF564b2F062",
+    "decimals": 18,
+    "name": "ETH | avax",
+    "symbol": "ETH.avax",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0xa86a"
+  },
+  {
+    "id": "0x41786f6e:0xD4a888D6c74803b721913617946387530Da6A7b1",
+    "address": "0xD4a888D6c74803b721913617946387530Da6A7b1",
+    "decimals": 18,
+    "name": "USDC | eth",
+    "symbol": "USDC.eth",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0x1"
+  },
+  {
+    "id": "0x41786f6e:0xbDf39752810236C8177B3AaA957D659649715DB3",
+    "address": "0xbDf39752810236C8177B3AaA957D659649715DB3",
+    "decimals": 18,
+    "name": "USDT | eth",
+    "symbol": "USDT.eth",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0x1"
+  },
+  {
+    "id": "0x41786f6e:0xC7F7c0699bBFb0C52165AdCEB2b6A5AF844Ba812",
+    "address": "0xC7F7c0699bBFb0C52165AdCEB2b6A5AF844Ba812",
+    "decimals": 18,
+    "name": "DAI | eth",
+    "symbol": "DAI.eth",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0x1"
+  },
+  {
+    "id": "0x41786f6e:0x413093FC2881EefD61B5994AcB98068fc9B263D5",
+    "address": "0x413093FC2881EefD61B5994AcB98068fc9B263D5",
+    "decimals": 18,
+    "name": "ETH | eth",
+    "symbol": "ETH.eth",
+    "chainId": "0x41786f6e",
+    "sourceChainId": "0x1"
+  }
+]

@@ -1,0 +1,77 @@
+{
+  "common": {
+    "pageTitle": "Retire",
+    "pageDescription": "Credits retirement allows you to meet your emission reduction targets to become carbon-neutral."
+  },
+  "form": {
+    "youRetire": "You retire",
+    "info": [
+      "<strong>Pool tokens</strong>",
+      "Depends on amounts settled in your wallet. Settlement cycles happen daily at end of CET business day (GMT+1)",
+      "<strong>Underlyings</strong>",
+      "Are independent of trading activity and can be utilized at any time."
+    ],
+    "strategyBalance": "Balance",
+    "placeholder": "Select asset",
+    "assetInfo": "Only assets with a balance will be displayed in the list.",
+    "amount": "Amount",
+    "remaining": "Remaining for retiring",
+    "max": "Max",
+    "addToRetireList": "Add to retire list",
+    "pool": "Pool",
+    "underlying": "Underlying",
+    "generator": "Generator",
+    "vintage": "Vintage",
+    "region": "Region",
+    "techType": "Techn type",
+    "registry": "Registry",
+    "asset": "Asset",
+    "available": "Available",
+    "total": "Total",
+    "search": "Search",
+    "poolTokenInfoBold": "When the pool token is selected,",
+    "poolTokenInfo": "a credit to be retired will be randomly chosen from the pool during the retirement process."
+  },
+  "selectedAssets": {
+    "title": "Summary",
+    "youRetire": "You retire",
+    "clearList": "Clear retire list",
+    "placeholderText": "Add credits on the retire list",
+    "retire": "Retire",
+    "summaryDescriptionBold": "You will receive the necessary documentation before audit season.",
+    "summaryDescription": "Contact support if you have any questions or need further assistance."
+  },
+  "backdrops": {
+    "retireCredits": "Retire credits",
+    "retireCreditsDescription": "Complete the following information to retire credits.",
+    "beneficiary": "Alternative beneficiary (Optional)",
+    "beneficiaryPlaceholder": "Beneficary name",
+    "auditYear": "Audit year",
+    "auditYearPlaceholder": "2023",
+    "reason": "Reason for retirement",
+    "reasonPlaceholder": "Type reason of retirement",
+    "greenEAudit": "Green-E Audit",
+    "retire": "Retire",
+    "cancel": "Cancel",
+    "infoPopoverContent": "Green-E audits are often required for public companies making consumer or investor facing environmental claims.",
+    "loadingTitle": "Retiring",
+    "loadingSubtitle": "Your assets are being retired.",
+    "loadingHintBold": "Retiring may take up to 1 min.",
+    "loadingHint": "Please wait until process is completed.",
+    "successTitle": "Credits Retired",
+    "successSubtitle": "Your balances have been updated. There could be delays in displaying transactions in the history.",
+    "back": "Back to retire"
+  },
+  "history": {
+    "title": "History",
+    "searchTooltip": "Search",
+    "noHistory": "No history yet",
+    "loginToStartRetiring": "Login to start retiring",
+    "login": "Login",
+    "date": "Date",
+    "creditRetired": "Credit retired",
+    "registry": "Registry",
+    "amount": "Amount",
+    "status": "Status"
+  }
+}

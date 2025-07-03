@@ -1,0 +1,72 @@
+{
+  "tokens": [
+    {
+      "name": "Wrapped Ether",
+      "symbol": "ETH",
+      "decimals": 18,
+      "source": "eth",
+      "address": "0x20b28B1e4665FFf290650586ad76E977EAb90c5D"
+    },
+    {
+      "name": "Tether USDT",
+      "symbol": "USDT",
+      "decimals": 6,
+      "source": "eth",
+      "address": "0xcCD4aD7cE363C065A304C0cC4e0e14128B2BF823"
+    },
+    {
+      "name": "USD Coin",
+      "symbol": "USDC",
+      "decimals": 6,
+      "source": "eth",
+      "address": "0x403e853789f38d98f1c2488C5468055b1493082c"
+    },
+    {
+      "name": "Wrapped Bitcoin",
+      "symbol": "WBTC",
+      "decimals": 8,
+      "source": "eth",
+      "address": "0xa373e9073d2D147Eb3d40f3b9C5F2B813086d839"
+    },
+    {
+      "name": "Hadouken Interest Bearing USDC",
+      "symbol": "hUSDC",
+      "decimals": 6,
+      "address": "0xD96e71a6F41A00399D13a20e4722a56d7aa4dBd1",
+      "source": "gw",
+      "unwrappedAddress": "0x38b53DD96f7621Fd8b358d1744a99c6A72894545"
+    },
+    {
+      "name": "Hadouken Interest Bearing USDT",
+      "symbol": "hUSDT",
+      "decimals": 6,
+      "address": "0x9C14AcB697209f9C3d7a0b83C7Bd12bb44f9AA8b",
+      "source": "gw",
+      "unwrappedAddress": "0x2D31A92F6948488712772C805CD2e93E58C20a7E"
+    },
+    {
+      "name": "Hadouken Interest Bearing ETH",
+      "symbol": "hETH",
+      "decimals": 18,
+      "address": "0x35F21DEeE21B12F8056e64ffc4Dcf9c2052B7862",
+      "source": "gw",
+      "unwrappedAddress": "0x9E58551b5cAFb8A5E57D860C2c491b977ce7E345"
+    },
+    {
+      "name": "Hadouken Interest Bearing WBTC",
+      "symbol": "hWBTC",
+      "decimals": 8,
+      "address": "0x49fF1203b31bAcDd6E5b62295Af09B9693024944",
+      "source": "gw",
+      "unwrappedAddress": "0x42Eda0177AF3C5d533d8447f3b0e1190E1051bbF"
+    },
+    {
+      "name": "Hadouken Token",
+      "symbol": "HDK",
+      "decimals": 18,
+      "source": "gw",
+      "address": "0xcdEc6D5199695cff259FBd4e3C0176456293deCc"
+    }
+  ],
+  "wrappedEthAddress": "0x20b28b1e4665fff290650586ad76e977eab90c5d"
+}

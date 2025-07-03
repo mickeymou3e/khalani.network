@@ -1,0 +1,54 @@
+{
+  "name": "@balancer-labs/v2-monorepo",
+  "private": true,
+  "description": "Balancer v2 Monorepo",
+  "license": "GPL-3.0-only",
+  "homepage": "https://github.com/balancer-labs/balancer-v2-monorepo#readme",
+  "repository": "git@github.com:balancer-labs/balancer-v2-monorepo.git",
+  "bugs": {
+    "url": "https://github.com/balancer-labs/balancer-v2-monorepo/issues"
+  },
+  "engines": {
+    "node": ">=18 <18.16"
+  },
+  "packageManager": "yarn@4.0.0-rc.42",
+  "contributors": [
+    "Daniel Fernandez <daniel@balancer.finance>",
+    "Facu Spagnuolo <facu@balancer.finance>",
+    "Fernando Martinelli <fernando@balancer.finance>",
+    "Greg Taschuk <greg@balancer.finance>",
+    "Jeffrey Bennett <jeff@balancer.finance>",
+    "John Grant <john@balancer.finance>",
+    "Mike McDonald <mike@balancer.finance>",
+    "Nicolás Venturo <nico@balancer.finance>",
+    "Tom French <tom@balancer.finance>",
+    "Igor Yalovoy <igor@balancerlabs.dev>"
+  ],
+  "scripts": {
+    "build": "yarn workspaces foreach --parallel --verbose run build",
+    "lint": "NODE_NO_WARNINGS=1 yarn workspaces foreach --parallel --verbose run lint",
+    "test": "yarn workspaces foreach --parallel --verbose run test",
+    "publish:config": "cd pkg/config && npm publish",
+    "build:v2-vault": "yarn workspace @balancer-labs/v2-vault run build",
+    "build:pool-linear": "yarn workspace @balancer-labs/v2-pool-linear run build",
+    "build:pool-stable": "yarn workspace @balancer-labs/v2-pool-stable run build",
+    "build:pool-weighted": "yarn workspace @balancer-labs/v2-pool-weighted run build",
+    "build:pool-utils": "yarn workspace @balancer-labs/v2-pool-utils run build",
+    "build:solidity-utils": "yarn workspace @balancer-labs/v2-solidity-utils run build",
+    "build:standalone-utils": "yarn workspace @balancer-labs/v2-standalone-utils run build",
+    "build:balancer-js": "yarn workspace @balancer-labs/balancer-js run build",
+    "build:interfaces": "yarn workspace @balancer-labs/v2-interfaces run build",
+    "build:liquidity-mining": "yarn workspace @balancer-labs/v2-liquidity-mining run build",
+    "build:typechain": "yarn workspace @balancer-labs/typechain run build",
+    "build:deployments": "yarn workspace @balancer-labs/v2-deployments run build",
+    "build:config": "yarn workspace @hadouken-project/config-zksync run build",
+    "build:governance": "yarn workspace @hadouken-project/governance-zksync run build"
+  },
+  "workspaces": [
+    "pkg/*",
+    "pvt/*"
+  ],
+  "dependencies": {
+    "dotenv": "^16.1.3"
+  }
+}

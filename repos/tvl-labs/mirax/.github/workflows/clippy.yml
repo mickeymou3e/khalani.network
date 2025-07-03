@@ -1,0 +1,31 @@
+name: Cargo Clippy
+concurrency:
+  group: Code Format-${{ github.ref }}
+  cancel-in-progress: true
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  Clippy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          components: rustfmt, clippy
+          toolchain: 1.85.0
+      
+      - name: Axi dependency
+        uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.SECRET_AXI_DEPENDENCY }}
+
+      - name: Install Clang
+        run: sudo apt-get install clang libclang-dev
+
+      - name: Check Clippy
+        run: cargo clippy --all --all-targets --all-features -- -D warnings

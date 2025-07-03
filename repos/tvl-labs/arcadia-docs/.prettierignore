@@ -1,0 +1,14 @@
+# node_modules
+node_modules/
+
+# Docusaurus build output
+build/
+.docusaurus/
+
+# Generated files
+*.log
+
+# Ignore archives, images, etc.
+*.png
+*.jpg
+*.svg

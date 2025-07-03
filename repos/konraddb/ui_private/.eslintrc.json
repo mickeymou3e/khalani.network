@@ -1,0 +1,90 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint/eslint-plugin",
+    "simple-import-sort",
+    "eslint-plugin-unicorn"
+  ],
+  "extends": [
+    "airbnb",
+    "airbnb-typescript",
+    "plugin:@typescript-eslint/recommended",
+    "next/core-web-vitals",
+    "prettier",
+    "plugin:storybook/recommended"
+  ],
+  "rules": {
+    "react/display-name": "off",
+    "react/react-in-jsx-scope": "off", // Note: might be disabled in React >= v.17
+    "@typescript-eslint/naming-convention": "off",
+    "no-unused-vars": "off", // Note: you must disable the base rule as it can report incorrect errors if you want to change rule to "error" from "warning"
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-shadow": "off",
+    "react/function-component-definition": [
+      "error",
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ],
+    "linebreak-style": "off", // Note: via docs: If you aren’t concerned about having different line endings within your code, then you can safely turn this rule off.
+    "jsx-a11y/alt-text": "off", // Note: no need to always use alt tag, especially when alt=""
+    "import/prefer-default-export": "off",
+    "react/jsx-props-no-spreading": "off",
+    "import/no-extraneous-dependencies": "off",
+    "react/no-array-index-key": "off",
+    "no-param-reassign": "off",
+    "import/no-cycle": "off",
+    "react/require-default-props": "off",
+    "react/no-unstable-nested-components": "off",
+    "no-underscore-dangle": "off",
+    "global-require": "off",
+    "no-console": "off",
+    "consistent-return": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-use-before-define": "off",
+    "react/jsx-no-useless-fragment": "off",
+    "react/destructuring-assignment": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "no-bitwise": "off",
+    "no-await-in-loop": "off",
+    "react/no-unused-prop-types": "off",
+    "import/no-mutable-exports": "off",
+    "import/no-named-default": "off",
+    "import/no-named-as-default": "off",
+    "class-methods-use-this": "off",
+    "no-restricted-syntax": "off",
+    "no-promise-executor-return": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/lines-between-class-members": "off",
+    "@typescript-eslint/no-unused-expressions": [
+      "error",
+      { "allowShortCircuit": true, "allowTernary": true }
+    ],
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [
+          ["^react", "^@?\\w"],
+          ["^(@mui)(/.*|$)"],
+          ["^(@|components)(/.*|$)"],
+          ["^(@|features)(/.*|$)"],
+          ["^(@|definitions)(/.*|$)"],
+          ["^(@|constants)(/.*|$)"],
+          ["^(@|pages)(/.*|$)"],
+          ["^(@|styles)(/.*|$)"],
+          ["^(@|store)(/.*|$)"],
+          ["^(@|utils)(/.*|$)"],
+          ["^(@|services)(/.*|$)"],
+          ["^(@|servers)(/.*|$)"]
+        ]
+      }
+    ]
+  },
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "ignorePatterns": ["jest.config.js", "*.js", "node_modules"]
+}

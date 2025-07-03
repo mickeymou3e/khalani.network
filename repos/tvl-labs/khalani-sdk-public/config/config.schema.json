@@ -1,0 +1,97 @@
+{
+  "contracts": {
+    "Vault": "",
+    "AddressBalances": "",
+    "PoolsHelpers": "",
+    "NexusDiamond": "",
+    "InterchainLiquidityHub": "",
+    "SwapIntentBook": "",
+    "IntentBook": "",
+    "MTokenRegistry": "",
+    "DiamondProxy": {},
+    "AssetReserves": {},
+    "MTokenCrossChainAdapter": "",
+    "ReceiptManager": "",
+    "MTokenManager": "",
+    "LibEncode": "",
+    "SafeAdapter": "",
+    "safe": {
+      "signMessageLibAddress": "",
+      "safeProxyFactoryAddress": "",
+      "safeMasterCopyAddress": "",
+      "multiSendAddress": "",
+      "fallbackHandlerAddress": "",
+      "multiSendCallOnlyAddress": "",
+      "createCallAddress": "",
+      "simulateTxAccessorAddress": ""
+    },
+    "hyperlaneAdapter": {},
+    "InterchainGasPaymaster": {},
+    "lending": {
+      "adminContract": "",
+      "borrowerOperations": "",
+      "feeCollector": "",
+      "priceFeed": "",
+      "vesselManager": ""
+    },
+    "permit2": {},
+    "intentBookHelper": "",
+    "eventVerifier": {},
+    "multiCall": ""
+  },
+  "supportedChains": [
+    {
+      "id": 0,
+      "chainName": "",
+      "chainId": "",
+      "nativeCurrency": {
+        "name": "",
+        "symbol": "",
+        "decimals": 0
+      },
+      "blockExplorerUrls": [""],
+      "rpcUrls": [""],
+      "logo": "",
+      "borderColor": "",
+      "poolTokenSymbols": [""],
+      "isBalancerChain": false
+    }
+  ],
+  "tokens": [
+    {
+      "id": "",
+      "address": "",
+      "decimals": 0,
+      "name": "",
+      "symbol": "",
+      "chainId": "",
+      "sourceChainId": ""
+    }
+  ],
+  "mTokens": [
+    {
+      "id": "",
+      "address": "",
+      "decimals": 0,
+      "name": "",
+      "symbol": "",
+      "chainId": "",
+      "sourceChainId": ""
+    }
+  ],
+  "api": {
+    "dia": {
+      "priceUrl": ""
+    }
+  },
+  "explorer": {
+    "subgraph": {}
+  },
+  "intents": {
+    "subgraph": {}
+  },
+  "medusa": {
+    "apiUrl": "",
+    "wsUrl": ""
+  }
+}

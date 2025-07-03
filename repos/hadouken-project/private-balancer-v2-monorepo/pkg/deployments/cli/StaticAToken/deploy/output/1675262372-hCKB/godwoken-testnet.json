@@ -1,0 +1,20 @@
+{
+  "transaction": {
+    "hash": "0x7440ba6d145abaefa5b997ce2d4bf34f07439892392d808e15f4664d6f5228bd",
+    "blockNumber": 1671128
+  },
+  "data": {
+    "StaticAToken": {
+      "deploy": {
+        "input": {
+          "name": "Wrapped hCKB",
+          "symbol": "hCKB",
+          "lendingPool": "0x72ddd1eca2af73024e0823C9a80B00de8e3f0070",
+          "aToken": "0xbE264166233E029D98Be7eA611707149102b2988"
+        },
+        "output": "0xe7Ea406348dB83f3A0014295d859FB3c896A226B"
+      }
+    }
+  },
+  "timestamp": 1675262372887
+}

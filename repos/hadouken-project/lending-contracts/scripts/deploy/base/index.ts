@@ -1,0 +1,16 @@
+export { deployBaseAddressProvider } from './addressProvider';
+export { deployBaseCollateralManager } from './collateralManager';
+export { deployBaseConfigurator } from './configurator';
+export { deployBaseDataProvider } from './dataProvider';
+export { deployBaseInitialization, deployBaseRateStrategy } from './initialization';
+export { deployBaseLendingPool } from './lendingPool';
+export { deployBaseLibraries } from './libraries';
+export { deployBasePriceOracle } from './oracle';
+export { deployBaseRegistry } from './registry';
+export { deployBaseRegistryProvider } from './registryProvider';
+export { deployBasePoolTokens } from './tokens/poolTokens';
+export { deployBaseSingleToken, deployBaseTestTokens } from './tokens/testTokens';
+export { deployBaseTreasury } from './treasury';
+export { deployBaseUIHelper } from './uiHelper';
+export { deployBaseUserBalances } from './userBalances';
+export { deployBaseWEthGateway } from './wETHGateway';

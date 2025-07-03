@@ -1,0 +1,101 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage{xcolor}
+\usepackage{Commands}
+
+\usetheme{Darmstadt}
+
+\NewDocumentCommand{\checkelab}{m O{i} m m m m}{#1 \vdash_{\optional{#2}} #3 \mathcolor{blue}{\Leftarrow} #4 \mathcolor{red}{\Rightarrow} #5 \dashv #6}
+
+\NewDocumentCommand{\inferelab}{m O{i} m m m m}{#1 \vdash_{\optional{#2}} #3 \mathcolor{red}{\Rightarrow} #4 : #5 \dashv #6}
+
+\title{Elaboration (billing-style)}
+
+\begin{document}
+
+\section{Elaboration}
+
+\begin{frame}{Judgements}
+
+$\checkelab{\Gamma}{e}{A}{e'}{\Gamma'}$ -- in context $\Gamma$ check that term $e$ has type $A$ and elaborate it to term $e'$, returning the bill $\Gamma'$.
+
+\vspace{2em}
+
+$\inferelab{\Gamma}{e}{e'}{A}{\Gamma'}$ -- in context $\Gamma$ infer that $A$ is the type of term $e$ and elaborate it to term $e'$, returning the bill $\Gamma'$.
+
+\end{frame}
+
+\begin{frame}{Functions}
+
+\begin{center}
+  $\infrule{\checkelab{\extend{\Gamma}[\Zero]{x}{A}}{e}{B}{e'}{\extend{\Gamma'}[\totalqty{\One}{A}]{x}{A}}}{\checkelab{\Gamma}{\fun{x}{e}}{\Fun{A}{B}}{\fun{x}[A]{e'}}{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{\inferelab{\Gamma}{e_1}{e_1'}{\Fun{A}{B}}{\Gamma_1} \quad \checkelab{\Gamma}{e_2}{A}{e_2'}{\Gamma_2}}{\inferelab{\Gamma}{\app{e_1}{e_2}}{\app{e_1'}{e_2'}}{B}{\addctx{\Gamma_1}{\Gamma_2}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Box}
+
+\begin{center}
+  $\infrule{\checkelab{\Gamma}{e}{A}{e'}{\Gamma'}}{\checkelab{\Gamma}{\boxintro{e}}{\Box[r]{A}}{\boxintro[r]{e'}}{\scalectx{r}{\Gamma'}}}$
+
+  \vspace{2em}
+
+  $\infrule{\inferelab{\Gamma}{e_1}{e_1'}{\Box[r]{A}}{\Gamma_1} \quad \inferelab{\extend{\Gamma}[\Zero]{x}{A}}{e_2}{e_2'}{B}{\extend{\Gamma_2}[\totalqty{r}{A}]{x}{A}}}{\inferelab{\Gamma}{\boxelim{x}{e_1}{e_2}}{\boxelim{x}{e_1'}{e_2'}[B]}{B}{\addctx{\Gamma_1}{\Gamma_2}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Empty}
+
+\begin{center}
+  $\infrule{\checkelab{\Gamma}{e}{\Empty}{e'}{\Gamma'}}{\checkelab{\Gamma}{\emptyelim{e}}{A}{\emptyelim{e'}[A]}{\Gamma'}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Unit}
+
+\begin{center}
+  $\infrule{}{\checkelab{\Gamma}{\unit}{\Unit}{\unit}{\Gamma}}$
+
+  \vspace{2em}
+
+  $\infrule{\inferelab{\Gamma}{e_1}{e_1'}{\Unit}{\Gamma_1} \quad \inferelab{\Gamma}{e_2}{e_2'}{A}{\Gamma_2}}{\inferelab{\Gamma}{\unitelim{e_1}{e_2}}{\unitelim{e_1'}{e_2'}[A]}{A}{\addctx{\Gamma_1}{\Gamma_2}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Product}
+
+\begin{center}
+  $\infrule{\checkelab{\Gamma}{e_1}{A}{e_1'}{\Gamma_1} \quad \checkelab{\Gamma}{e_2}{B}{e_2'}{\Gamma_2}}{\checkelab{\Gamma}{\pair{e_1}{e_2}}{\Prod{A}{B}}{\pair{e_1'}{e_2'}}{\addctx{\Gamma_1}{\Gamma_2}}}$
+
+  \vspace{2em}
+
+  $\infrule{\begin{array}{l} \inferelab{\Gamma}{e_1}{e_1'}{\Prod{A}{B}}{\Gamma_1} \\ \inferelab{\extend{\extend{\Gamma}[\Zero]{x}{A}}[\Zero]{y}{B}}{e_2}{e_2'}{C}{\extend{\extend{\Gamma_2}[\totalqty{\One}{A}]{x}{A}}[\totalqty{\One}{B}]{y}{B}} \end{array}}{\inferelab{\Gamma}{\letpair{x}{y}{e_1}{e_2}}{\letpair{x}{y}{e_1'}{e_2'}[C]}{C}{\addctx{\Gamma_1}{\Gamma_2}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Sum}
+
+\begin{center}
+  $\infrule{\checkelab{\Gamma}{e}{A}{e'}{\Gamma'}}{\checkelab{\Gamma}{\inl{e}}{\Sum{A}{B}}{\inl[B]{e'}}{\Gamma'}}$
+
+  \vspace{1em}
+
+  $\infrule{\checkelab{\Gamma}{e}{B}{e'}{\Gamma'}}{\checkelab{\Gamma}{\inr{e}}{\Sum{A}{B}}{\inr[A]{e'}}{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{\inferelab{\Gamma}{e}{e'}{\Sum{A}{B}}{\Gamma_1} \quad \begin{array}{l} \checkelab{\extend{\Gamma}[\Zero]{x}{A}}{e_1}{e_1'}{C}{\extend{\Gamma_2}[r_1]{x}{A}} \\ \checkelab{\extend{\Gamma}[\Zero]{y}{B}}{e_2}{e_2'}{C}{\extend{\Gamma_3}[r_2]{y}{B}} \\ r = \glbqty{(\divqty{r_1}{\totalqty{\One}{A}})}{(\divqty{r_2}{\totalqty{\One}{B}})} \end{array}}{\checkelab{\Gamma}{\newcase{e}{x}{e_1}{y}{e_2}}{C}{\newcase{e'}{x}{e_1'}{y}{e_2'}[C]}{\addctx{\scalectx{r}{\Gamma_1}}{(\glbctx{\Gamma_2}{\Gamma_3})}}}$
+\end{center}
+
+\end{frame}
+
+\end{document}

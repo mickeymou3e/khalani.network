@@ -1,0 +1,9 @@
+const BALANCE = 'AVAILABLE TO BORROW'
+const VARIABLE_APY = 'VARIABLE APY'
+const STABLE_APY = 'STABLE APY'
+
+export const messages = {
+  BALANCE,
+  VARIABLE_APY,
+  STABLE_APY,
+}

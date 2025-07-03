@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "declaration": true,
+    "outDir": "dist",
+    "resolveJsonModule": true
+  },
+  "exclude": ["node_modules","dist"],
+  "include": ["index.ts", "src", "scripts", "cli","./cli"],
+  "files": ["./hardhat.config.ts"]
+}

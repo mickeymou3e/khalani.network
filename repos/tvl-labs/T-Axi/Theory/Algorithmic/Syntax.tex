@@ -1,0 +1,92 @@
+\section{Syntax}
+
+\begin{frame}{Algorithmic types}
+
+Types: \\
+$A, B ::=$ \\
+\qquad $\Fun[r]{A}{B} \pipe \Box[r]{A} \pipe \Prod{A}{B} \pipe \Sum{A}{B} \pipe \Unit \pipe \Empty \pipe$ \\
+\qquad $\ForallE{a}[r]{A} \pipe \ForallE{a}{A} \pipe \ForallI{a}[r]{A} \pipe \ForallI{a}{A}$
+
+\end{frame}
+
+\begin{frame}{Algorithmic terms}
+
+Terms: \\
+$e ::=$ \\
+\qquad $\annot{e}{A} \pipe x \pipe \fun{x}{e} \pipe \app{e_1}{e_2} \pipe$ \\
+\qquad $\boxintro{e} \pipe \boxelim{x}{e_1}{e_2} \pipe$ \\
+\qquad $\pair{e_1}{e_2} \pipe \letpair{x}{y}{e_1}{e_2} \pipe$ \\
+\qquad $\inl{e} \pipe \inr{e} \pipe \newcase{e}{x}{e_1}{y}{e_2} \pipe$ \\
+\qquad $\unit \pipe \unitelim{e_1}{e_2} \pipe$ \\
+\qquad $\emptyelim{e} \pipe$ \\
+\qquad $\letin[r]{x}{e_1}{e_2} \pipe$ \\
+\qquad $\tfun{a}{e} \pipe \tapp{e}{A} \pipe$ \\
+\qquad $\itfun{a}{e} \pipe \itapp{e}{A} \pipe$ \\
+\qquad $\choose{p} \pipe \choosewitnessp{x}{h}{p}{e}$
+
+\vspace{2em}
+
+The algorithmic terms are almost the same to the declarative ones, but there are far fewer annotations.
+
+\end{frame}
+
+\begin{frame}{Recovering annotated terms}
+
+We can recover some of the original terms by combining algorithmic terms with annotations.
+
+\begin{itemize}
+  \item $\unitelim{e_1}{e_2}[A] :\equiv \unitelim{e_1}{\annot{e_2}{A}}$
+  \item $\emptyelim{e_1}[A] :\equiv \annot{\emptyelim{e_1}}{A}$
+  \item $\letin[r]{x}[A]{e_1}{e_2} :\equiv \letin[r]{x}{\annot{e_1}{A}}{e_2}$
+\end{itemize}
+
+\vspace{2em}
+
+However, as long as annotations must be types (and not partial types, for example), we cannot recover more, like $\inl[A]{e}$, because we don't have partial annotations.
+
+\end{frame}
+
+\begin{frame}{Algorithmic propositions}
+
+Propositions: \\
+$P, Q ::=$ \\
+\qquad $\True \pipe \False \pipe \Impl{P}{Q} \pipe \And{P}{Q} \pipe \Or{P}{Q} \pipe$ \\
+\qquad $\All{x}[A]{P} \pipe \All{x}{P} \pipe \Ex{x}[A]{P} \pipe \Ex{x}{P} \pipe$ \\
+\qquad $\Eq[A]{e_1}{e_2} \pipe \Eq{e_1}{e_2}$
+
+\vspace{2em}
+
+The only difference from declarative propositions is that we can omit type annotations on quantifiers and equality.
+
+\end{frame}
+
+\begin{frame}{Algorithmic proofterms}
+
+Proofterms ($P, Q$ are propositions, $e$ are terms, $h$ are variables): \\
+$p, q ::=$ \\
+\qquad $h \pipe \assumption \pipe \trueintro \pipe \falseelim{p}$ \\
+\qquad $\implintro{h}{q} \pipe \implelim{p_1}{p_2} \pipe$ \\
+\qquad $\andintro{p_1}{p_2} \pipe \andeliml{p} \pipe \andelimr{p} \pipe$ \\
+\qquad $\orintrol{p} \pipe \orintror{p} \pipe \orelim{p_1}{p_2}{p_3} \pipe$ \\
+\qquad $\lemma{h}{P}{p}{q} \pipe \proving{P}{p} \pipe$ \\
+\qquad $\suffices{P}{q}{p} \pipe$ \\
+\qquad $\allintro{x}{e} \pipe \allelim{p}{e} \pipe$ \\
+\qquad $\exintro{e}{p} \pipe \exelim{x}{h}{p_1}{p_2} \pipe$ \\
+\qquad $\refl \pipe \rewrite{p_1}[x.P]{p_2} \pipe \funext{x}{p}$ \\
+\qquad $\bycontradiction{h}{q} \pipe$ \\
+\qquad $\choosespec{p} \pipe \choosewitnessl{x}{h}{p}{q}$
+
+\end{frame}
+
+\begin{frame}{Recovering annotated proofterms}
+
+We can recover some of the original proofterms by combining algorithmic proofterms with annotations.
+
+\begin{itemize}
+  \item $\refl[e] :\equiv \proving{\Eq{e}{e}}{\refl}$
+  \item $\bycontradiction{h}[P]{q} :\equiv \proving{P}{\bycontradiction{h}{q}}$
+\end{itemize}
+
+\vspace{2em}
+
+\end{frame}

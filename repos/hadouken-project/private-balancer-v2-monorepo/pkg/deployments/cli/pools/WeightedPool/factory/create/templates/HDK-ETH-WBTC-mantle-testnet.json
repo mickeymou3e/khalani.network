@@ -1,0 +1,22 @@
+{
+    "name": "WBTC/ETH",
+    "symbol": "HDK-WBTC-ETH",
+    "tokens": [
+        "0x797e04E7e70Ad117Ec957444eD5EEb6E09452ACc",
+        "0xBf89943CAbFB8E5D637558cD0a30467ba7188D22"
+    ],
+    "weights": [
+        "500000000000000000",
+        "500000000000000000"
+    ],
+    "rateProviders": [
+        "0x0000000000000000000000000000000000000000",
+        "0x0000000000000000000000000000000000000000"
+    ],
+    "swapFeePercentage": "3000000000000000",
+    "delegate": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+    "initialLiquidity": {
+        "0x797e04E7e70Ad117Ec957444eD5EEb6E09452ACc": "2000000",
+        "0xBf89943CAbFB8E5D637558cD0a30467ba7188D22": "310000000000000000"
+    }
+}

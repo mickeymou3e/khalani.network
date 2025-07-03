@@ -1,0 +1,27 @@
+{
+  "transaction": {
+    "hash": "0xee1a14fbf5b65f934b84df9a11848f370ef9eb2ccf4615236f2322a5e15b791a",
+    "blockNumber": 2024051
+  },
+  "data": {
+    "AaveLinearPoolFactory": {
+      "create": {
+        "input": {
+          "name": "Linear ETH",
+          "symbol": "HDK-LNR-ETH",
+          "underlyingToken": "0xfF900E1436cBCd25d72B7DafE6Ef4d569405cc05",
+          "wrappedToken": "0x6B6BceB1f7E1F6efB203D7F75bEb34BEaC62fE43",
+          "upperTarget": "125000000000000000000",
+          "swapFeePercentage": "1500000000000000",
+          "owner": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0xfF900E1436cBCd25d72B7DafE6Ef4d569405cc05": "1000000000000000000",
+            "0x6B6BceB1f7E1F6efB203D7F75bEb34BEaC62fE43": "1000000000000000000"
+          }
+        },
+        "output": "0xa05D329Eddc923bC182EcD7e05fB92475BF3dd79"
+      }
+    }
+  },
+  "timestamp": 1678099108939
+}

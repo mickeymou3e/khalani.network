@@ -1,0 +1,17 @@
+[package]
+name = "local-dev-env"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+clap.workspace = true
+ethers.workspace = true
+futures.workspace = true
+serde.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+toml = "0.7.8"
+
+[dev-dependencies]
+bindings-khalani = { path = "../crates/bindings-khalani" }

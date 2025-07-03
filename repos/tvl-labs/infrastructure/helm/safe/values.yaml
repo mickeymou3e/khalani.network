@@ -1,0 +1,32 @@
+serviceAccount:
+  create: true
+  name: null
+
+adminEmail: ""
+cfgDbHost: ""
+cfgDbSecretName: ""
+djangoAuthSecretName: ""
+domainName: ""
+iamRoleArn: ""
+routeConfigService: "safe-cfg"
+routeGatewayService: "safe-cgw"
+rpcUrl: ""
+secretKeySecretName: ""
+
+transactionsDatabases:
+  godwokenmainnet:
+    host: ""
+    secretName: ""
+  godwokentestnet:
+    host: ""
+    secretName: ""
+  khalanitestnet:
+    host: ""
+    secretName: ""
+
+secrets:
+  cgwRocketSecretKey: ""
+  cgwWebhookFlushToken: ""
+  txsGodwokenMainnetDjangoSecretKey: ""
+  txsGodwokenTestnetDjangoSecretKey: ""
+  txsKhalaniTestnetDjangoSecretKey: ""

@@ -1,0 +1,135 @@
+\section{Syntax}
+
+\begin{frame}{Quantities}
+
+Quantities: \\
+$r ::= \Zero \pipe \One \pipe \Few \pipe \Many \pipe \Any$
+
+\vspace{2em}
+
+$\Any$ is the default quantity, so when there's nothing to indicate quantity, it means it's $\Any$.
+
+\end{frame}
+
+\begin{frame}{Kinds}
+
+$U$ ::= $\Type[\One] \pipe \Type[\Few] \pipe \Type[\Many] \pipe \Type[\Any]$
+
+\vspace{2em}
+
+$\Type$ is a notation for $\Type[\Any]$
+
+\end{frame}
+
+\begin{frame}{Types}
+
+Types: \\
+$A, B ::=$ \\
+\qquad $\Fun[r]{A}{B} \pipe \Box[r]{A} \pipe \Prod{A}{B} \pipe \Sum{A}{B} \pipe \Unit \pipe \Empty \pipe$ \\
+\qquad $\ForallE{a}[r]{A} \pipe \ForallI{a}[r]{A}$
+
+\end{frame}
+
+\begin{frame}{Terms}
+
+Terms: \\
+$e ::=$ \\
+\qquad $x \pipe \fun[r]{x}[A]{e} \pipe \app{e_1}{e_2} \pipe$ \\
+\qquad $\boxintro[r]{e} \pipe \boxelim{x}{e_1}{e_2}[A] \pipe$ \\
+\qquad $\pair{e_1}{e_2} \pipe \letpair{x}{y}{e_1}{e_2}[A] \pipe$ \\
+\qquad $\inl[A]{e} \pipe \inr[A]{e} \pipe \newcase{e}{x}{e_1}{y}{e_2}[A] \pipe$ \\
+\qquad $\unit \pipe \unitelim{e_1}{e_2}[A] \pipe$ \\
+\qquad $\emptyelim{e}[A] \pipe$ \\
+\qquad $\letin[r]{x}[A]{e_1}{e_2} \pipe$ \\
+\qquad $\tfun{a}[r]{e} \pipe \tapp{e}{A} \pipe$ \\
+\qquad $\itfun{a}[r]{e} \pipe \itapp{e}{A} \pipe$ \\
+\qquad $\choose{p} \pipe \choosewitnessp{x}{h}{p}{e}$
+
+\vspace{1em}
+
+$\choose{p}$ and $\choosewitnessp{x}{h}{p}{e}$ are noncomputable terms, whereas all others are computable.
+
+\end{frame}
+
+\begin{frame}{Propositions}
+
+Propositions: \\
+$P, Q ::=$ \\
+\qquad $\True \pipe \False \pipe \Impl{P}{Q} \pipe \And{P}{Q} \pipe \Or{P}{Q} \pipe$ \\
+\qquad $\All{x}[A]{P} \pipe \Ex{x}[A]{P} \pipe$ \\
+\qquad $\Eq[A]{e_1}{e_2}$
+
+\vspace{2em}
+
+Notations: \\
+$\Not{P}$ stands for $\Impl{P}{\False}$ \\
+$\Iff{P}{Q}$ stands for $\And{(\Impl{P}{Q})}{(\Impl{Q}{P})}$
+
+\end{frame}
+
+\begin{frame}{Proofterms}
+
+Proofterms ($P, Q$ are propositions, $e$ are terms, $h$ are variables): \\
+$p, q ::=$ \\
+\qquad $h \pipe \assumption \pipe \trueintro \pipe \falseelim{p}$ \\
+\qquad $\implintro{h}[P]{q} \pipe \implelim{p_1}{p_2} \pipe$ \\
+\qquad $\andintro{p_1}{p_2} \pipe \andeliml{p} \pipe \andelimr{p} \pipe$ \\
+\qquad $\orintrol{p} \pipe \orintror{p} \pipe \orelim{p_1}{p_2}{p_3} \pipe$ \\
+\qquad $\lemma{h}{P}{p}{q} \pipe \proving{P}{p} \pipe$ \\
+\qquad $\suffices{P}{q}{p} \pipe$ \\
+\qquad $\allintro{x}[A]{e} \pipe \allelim{p}{e} \pipe$ \\
+\qquad $\exintro{e}{p} \pipe \exelim{x}{h}{p_1}{p_2} \pipe$ \\
+\qquad $\refl[e] \pipe \rewrite{p_1}{p_2} \pipe \funext{x}[A]{p}$ \\
+\qquad $\bycontradiction{h}[P]{q} \pipe$ \\
+\qquad $\choosespec{p} \pipe \choosewitnessl{x}{h}{p}{q}$
+
+\end{frame}
+
+\begin{frame}{Contexts}
+
+Contexts: \\
+$\Gamma ::= \emptyctx \pipe \extend{\Gamma}[r]{x}{A} \pipe \extend{\Gamma}[r]{x}{A}[e] \pipe \assume{\Gamma}{h}{P} \pipe \extendtype{\Gamma}{a}[r]$
+
+\end{frame}
+
+\begin{frame}{Judgements}
+
+Well-formed context judgement: $\ctx[i]{\Gamma}$, where $i$ is either $\computable$ or $\noncomputable$.
+
+\vspace{2em}
+
+Well-formed type judgement: $\type[\Gamma]{A}[r]$ \\
+Type conversion judgement: $\typeconv[\Gamma]{A}{B}[r]$
+
+\vspace{2em}
+
+Typing judgement: $\typing[\Gamma][i]{e}{A}$, where $i$ is either $\computable$ or $\noncomputable$ \\
+Conversion judgement: $\termconv[\Gamma]{e_1}{e_2}{A}$
+
+\vspace{2em}
+
+Well-formed proposition judgement: $\prop[\Gamma]{P}$ \\
+Proposition conversion judgement: $\propconv[\Gamma]{P}{Q}$
+
+\vspace{2em}
+
+Proof judgement: $\proves[\Gamma]{p}{P}$
+
+\end{frame}
+
+\begin{frame}{Sanity checks}
+
+We'll set up the system so that:
+
+\begin{itemize}
+  \item If $\termconv[\Gamma]{e_1}{e_2}{A}$, then $\typing[\Gamma][\noncomputable]{e_1}{A}$ and $\typing[\Gamma][\noncomputable]{e_2}{A}$.
+  \item If $\typing[\Gamma][i]{e}{A}$, then $\ctx[i]{\Gamma}$ and $\type[\cartesianize{\Gamma}]{A}[\typeqty{A}]$.
+  \item If $\typeconv[\Gamma]{A}{B}[r]$, then $\type[\Gamma]{A}[r]$ and $\type[\Gamma]{B}[r]$.
+  \item If $\type[\Gamma]{A}[r]$, then $\ctx[\noncomputable]{\Gamma}$.
+  \item If $\proves[\Gamma]{p}{P}$, then $\prop[\Gamma]{P}$.
+  \item If $\propconv[\Gamma]{P}{Q}$, then $\prop[\Gamma]{P}$ and $\prop[\Gamma]{Q}$.
+  \item If $\prop[\Gamma]{P}$, then $\ctx[\noncomputable]{\Gamma}$.
+  \item If $\ctx[\noncomputable]{\Gamma}$, then $\ctx[\computable]{\Gamma}$.
+\end{itemize}
+
+\end{frame}

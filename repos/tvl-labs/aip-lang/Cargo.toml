@@ -1,0 +1,29 @@
+[package]
+name = "aip-lang"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+logos = "0.14.2"
+nom = "7.1.1"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+alloy = { version = "0.6.4", features = [
+    "serde",
+    "signers",
+    "signer-keystore",
+    "signer-mnemonic",
+    "providers",
+    "provider-http",
+    "provider-ws",
+    "transports",
+    "transport-ws",
+    "network",
+    "node-bindings",
+    "consensus",
+    "contract",
+    "rpc-client",
+    "rpc-client-ws",
+    "rpc-types-eth",
+    "eips",
+] }

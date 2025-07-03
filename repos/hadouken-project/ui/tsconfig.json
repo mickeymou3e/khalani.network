@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "noEmit": true,
+    "module": "esnext",
+    "allowJs": true,
+    "strictBindCallApply": true,
+    "strictNullChecks": true,
+    "skipLibCheck": true,
+    "types": ["jest", "node", "@testing-library/jest-dom"],
+    "noImplicitAny": true,
+    "downlevelIteration": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "target": "ES6",
+    "jsx": "react",
+    "lib": ["dom", "esnext"],
+    "baseUrl": "./",
+    "paths": {
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@interfaces/*": [
+        "./src/interfaces/*"
+      ],
+      "@styles/*": [
+        "./src/styles/*"
+      ],
+      "@tests/*": [
+        "./testUtils/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+    }
+  },
+  "include": [
+    "src/**/*",
+    "storybook/**/*",
+    "testUtils/**/*",
+    "setup-tests.ts" ],
+  "exclude": [
+    "node_modules",
+    "scr/**/*.test.ts",
+    "scr/**/*.test.tsx",
+    "scr/**/*.mocks.ts"
+  ]
+}

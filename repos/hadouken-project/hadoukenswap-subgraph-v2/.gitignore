@@ -1,0 +1,16 @@
+build/
+node_modules/
+.DS_STORE
+yarn-error.log
+.idea
+.vscode
+*.js
+.npmrc
+
+.env
+
+docker/data/*
+#Subgraph
+subgraph.yaml
+
+types

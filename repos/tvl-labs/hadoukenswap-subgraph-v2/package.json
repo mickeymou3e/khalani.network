@@ -1,0 +1,77 @@
+{
+  "name": "@hadouken-project/hadoukenswap-subgraph-v2",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "fix-all": "eslint --fix src/**/*.ts",
+    "clean:types": "rm -rf src/types",
+    "clean:constants": "rm -rf src/mappings/balancer/helpers/constants.ts",
+    "clean:build": "rm -rf build",
+    "clean:data": "rm -rf data",
+    "clean:schema": "rm schema.graphql",
+    "clean": "yarn clean:types; yarn clean:constants; yarn clean:build; yarn clean:data; yarn clean:schema",
+    "merge-schema": "yarn ts-node ./scripts/merge-schema.ts",
+    "generate-schema": "graph codegen --output-dir src/types/",
+    "schema": "yarn merge-schema; yarn generate-schema",
+    "build": "graph build",
+
+    "template:balancer:assets:khala": "mustache config/balancer/khala.json src/mappings/balancer/helpers/assets.template.ts > src/mappings/balancer/helpers/assets.ts",
+    "template:balancer:constants:khala": "mustache config/balancer/khala.json src/mappings/balancer/helpers/constants.template.ts > src/mappings/balancer/helpers/constants.ts",
+    "template:balancer:subgraph:khala": "mustache config/balancer/khala.json template/balancer/subgraph.template.yaml > subgraph.yaml",
+    "template:balancer:khala": "yarn template:balancer:assets:khala; yarn template:balancer:constants:khala; yarn template:balancer:subgraph:khala",
+    "build:balancer:khala": "yarn clean; yarn template:balancer:khala; yarn schema;",
+    "remove:balancer:khala": ". ./.env; graph remove balancer-khala --access-token $GRAPH_TESTNET_ACCESS_TOKEN --node $GRAPH_TESTNET_ADMIN_URL",
+    "create:balancer:khala": ". ./.env; graph create balancer-khala --access-token $GRAPH_TESTNET_ACCESS_TOKEN --node $GRAPH_TESTNET_ADMIN_URL",
+    "deploy:balancer:khala": ". ./.env; graph deploy balancer-khala --access-token $GRAPH_TESTNET_ACCESS_TOKEN --ipfs $GRAPH_TESTNET_IPFS_URL --node $GRAPH_TESTNET_ADMIN_URL -l 0.0.1",
+    "subgraph:balancer:khala": "yarn build:balancer:khala; yarn remove:balancer:khala; yarn build; yarn create:balancer:khala; yarn deploy:balancer:khala",
+
+    "template:blocks:khala": "mustache config/balancer/khala.json template/blocks.template.yaml > subgraph.yaml",
+    "build:blocks:khala": "yarn clean; yarn template:blocks:khala; yarn schema;",
+    "remove:blocks:khala": ". ./.env; graph remove blocks-khala --access-token $GRAPH_TESTNET_ACCESS_TOKEN --node $GRAPH_TESTNET_ADMIN_URL",
+    "create:blocks:khala": ". ./.env; graph create blocks-khala --access-token $GRAPH_TESTNET_ACCESS_TOKEN --node $GRAPH_TESTNET_ADMIN_URL",
+    "deploy:blocks:khala": ". ./.env; graph deploy blocks-khala --access-token $GRAPH_TESTNET_ACCESS_TOKEN --ipfs $GRAPH_TESTNET_IPFS_URL --node $GRAPH_TESTNET_ADMIN_URL -l 0.0.1",
+    "subgraph:blocks:khala": "yarn build:blocks:khala; yarn remove:blocks:khala; yarn build; yarn create:blocks:khala; yarn deploy:blocks:khala"
+  },
+  "devDependencies": {
+    "@graphprotocol/graph-cli": "^0.25.1",
+    "@graphprotocol/graph-ts": "^0.24.1",
+    "@graphql-tools/load-files": "^6.6.0",
+    "@graphql-tools/merge": "^8.3.0",
+    "@graphql-tools/schema": "^8.5.0",
+    "@openzeppelin/contracts": "^3.4.0",
+    "@typechain/ethers-v5": "^7.0.1",
+    "@types/jest": "^26.0.20",
+    "@types/mustache": "^4.1.2",
+    "@types/node": "^16.4.0",
+    "assemblyscript": "^0.20.12",
+    "eslint": "^8.18.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "@typescript-eslint/eslint-plugin": "^5.30.0",
+    "@typescript-eslint/parser": "^5.30.0",
+    "prettier": "^2.7.1",
+    "ethers": "^5.4.1",
+    "graphql": "^16.5.0",
+    "graphql-schema-utilities": "^1.1.3",
+    "hardhat": "^2.0.10",
+    "husky": "^8.0.1",
+    "jest": "^27.0.6",
+    "lint-staged": "^13.0.3",
+    "mustache": "^4.2.0",
+    "ts-jest": "^27.0.4",
+    "ts-node": "^9.1.1",
+    "typechain": "^5.1.2",
+    "typescript": "^4.3.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.ts": ["eslint --fix"]
+  },
+  "dependencies": {
+    "@assemblyscript/loader": "^0.20.12"
+  }
+}

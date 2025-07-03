@@ -1,0 +1,32 @@
+appenders:
+  console:
+    kind: console
+    encoder:
+      # this pattern below contains file name and line, useful for debugging
+      # pattern: "[{d} {h({l})} {t} {f}:{L}] {m}{n}"
+      pattern: "[{d} {h({l})} {t}] {m}{n}"
+
+  file:
+    kind: file
+    path: tests/free-space/logs/mirax.log
+    encoder:
+      kind: json
+
+  metrics:
+    kind: file
+    path: tests/free-space/logs/metrics.log
+    encoder:
+      kind: json
+
+root:
+  level: info
+  appenders:
+  - console
+  - file
+
+loggers:
+  metrics:
+    level: trace
+    appenders:
+    - metrics
+    additive: false

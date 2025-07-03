@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles/universal.css" />
+    <link rel="stylesheet" href="styles/colors.css" />
+    <link rel="stylesheet" href="styles/navbar.css" />
+    <link rel="stylesheet" href="styles/footer.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Kurs MMA | Maciek Szczepaniak</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <script src="https://cdn.auth0.com/js/lock/11.30/lock.min.js"></script>
+  </head>
+  <body class="dark">
+    <header>
+      <nav style="position: fixed; top: 0; width: 100%">
+        <div class="nav-bar">
+          <li class="logo">
+            <a href="#">
+              <img id="topLogo" src="images/logo.png" alt="CoderClas Main Logo" />
+            </a>
+          </li>
+          <div style="display: flex">
+            <div class="wrapper">
+              <input type="checkbox" id="hide_checkbox" checked />
+              <label for="hide_checkbox" class="toggle">
+                <span class="toggle-button">
+                  <span class="crater crater-1"></span>
+                  <span class="crater crater-2"></span>
+                  <span class="crater crater-3"></span>
+                  <span class="crater crater-4"></span>
+                  <span class="crater crater-5"></span>
+                  <span class="crater crater-6"></span>
+                  <span class="crater crater-7"></span>
+                </span>
+                <span class="star star-1"></span>
+                <span class="star star-2"></span>
+                <span class="star star-3"></span>
+                <span class="star star-4"></span>
+                <span class="star star-5"></span>
+                <span class="star star-6"></span>
+                <span class="star star-7"></span>
+                <span class="star star-8"></span>
+              </label>
+            </div>
+            <input type="checkbox" id="check" />
+            <span class="menu font-sans">
+              <!-- The Kursy tab has an ID so it can be shown/hidden -->
+              <li id="kursyTab">
+                <a class="text-white text-center" href="pages/courses/courses.html">Kursy</a>
+              </li>
+              <li>
+                <a class="text-white text-center" href="pages/contact us/contact.html">Kontakt</a>
+              </li>
+              <li>
+                <a class="text-white text-center" href="pages/about us/about.html">O mnie</a>
+              </li>
+              <li>
+                <button id="loginBtn" class="btn-design text-bold">Zaloguj się</button>
+              </li>
+              <label for="check" class="close-menu">
+                <i class="text-white fas fa-times"></i>
+              </label>
+            </span>
+          </div>
+          <label for="check" class="open-menu">
+            <i class="text-white fas fa-bars"></i>
+          </label>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="first-section">
+        <div class="headerText font-sans">
+          <h2 class="section-one-title text-bold">
+            Zostań Mistrzem Parteru – Naucz Się Skutecznych Technik MMA!
+            <br /><span><span class="typed_text"></span> do Lepszego MMA </span>
+          </h2>
+          <h3 class="text-white">
+            Chcesz poprawić swoje umiejętności w parterze? Mój autorski kurs online to kompleksowy przewodnik po technikach, które pozwolą Ci kontrolować przeciwnika, unikać poddań i skutecznie wygrywać walki.
+          </h3>
+          <a href="#courses" class="text-bold">Przeglądaj Kursy </a>
+        </div>
+        <div class="headerImage-div">
+          <img src="images/cropped-logo123.webp" alt="A Boy Working on Laptop" class="headerImage" />
+        </div>
+      </div>
+      <div class="line-div"></div>
+      <div class="advantage-section bg-dark">
+        <div class="advantage-sub-section">
+          <div class="whycm-container">
+            <div>
+              <h1 class="advantage-title title font-sans margin-0">Dlaczego warto?</h1>
+            </div>
+            <div class="adv-section">
+              <div class="adv-card">
+                <img src="images/wrestling.png" alt="" />
+                <span class="adv-desc margin-0">Skuteczne metody nauki oparte na realnym doświadczeniu zawodnika MMA</span>
+              </div>
+              <div class="adv-card">
+                <img src="images/clock.png" alt="" />
+                <span class="adv-desc margin-0">Sam decydujesz, kiedy i jak się uczysz</span>
+              </div>
+              <div class="adv-card">
+                <img src="images/judo.png" alt="" />
+                <span class="adv-desc margin-0">Przejrzyste i profesjonalne materiały</span>
+              </div>
+              <div class="adv-card">
+                <img src="images/champion-belt.png" alt="" />
+                <span class="adv-desc margin-0">Stały rozwój kursu oparty na Twoich potrzebach</span>
+              </div>
+              <div class="adv-card">
+                <img src="images/guaranteed.png" alt="" />
+                <span class="adv-desc margin-0">7-dniowa gwarancja satysfakcji – pełen zwrot kosztów, jeśli kurs nie spełni Twoich oczekiwań!</span>
+              </div>
+              <div class="adv-card">
+                <img src="images/anniversary.png" alt="" />
+                <span class="adv-desc margin-0">Ponad 100 filmów instruktażowych</span>
+              </div>
+              <div class="adv-card">
+                <img src="images/star.png" alt="" />
+                <span class="adv-desc margin-0">Możliwość oceniania każdej techniki i wpływania na rozwój kursu</span>
+              </div>
+              <div class="adv-card">
+                <img src="images/certificate.png" alt="" />
+                <span class="adv-desc margin-0">Certyfikat Udziału w Kursie jako dowód Twoich postępów</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="instructor" class="about-us font-sans text-center">
+        <div class="instructor-title">
+          <p class="text-bold title">Kim jestem i dlaczego warto mi <span>zaufać? </span></p>
+          <a href="pages/about us/about.html"><button class="button-61 text-bold text-center">Dowiedz się więcej</button></a>
+        </div>
+        <div class="line-long"></div>
+        <div class="instructor-content">
+          <div class="image-div">
+            <img src="images/laska.jpg" alt="Manish Kushwaha" />
+          </div>
+          <div class="name-div">
+            <p class="name text-bold">Maciek Szczepaniak</p>
+            <p class="designation text-bold">Twórca kursu</p>
+          </div>
+        </div>
+        <div class="description-div">
+          <p class="description">
+            Jestem się <span><i>Maciek</i></span> i jestem zawodnikiem MMA z rekordem 5-1 oraz posiadaczem purpurowego pasa w BJJ. Sporty walki to moja pasja, a przez lata zdobywałem doświadczenie zarówno na macie, jak i w klatce.
+          </p>
+        </div>
+      </div>
+      <div class="line-div"></div>
+      <div id="social" class="social-section bg-dark-light">
+        <div class="text-center">
+          <p class="social-title font-sans text-bold title">Znajdziesz mnie również na</p>
+        </div>
+        <div class="social-card-section">
+          <div class="social-card">
+            <div class="social-icon">
+              <a target="_blank" href="https://www.youtube.com/@maciekszczepaniak6654">
+                <span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0; margin: 0; padding: 0; position: relative;">
+                  <span style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0; margin: 0; padding: 100% 0 0;"></span>
+                  <img style="position: absolute; inset: 0; box-sizing: border-box; padding: 0; border: none; margin: auto; display: block; width: 0; height: 0; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;" src="images/youtube.webp" alt="Youtube Logo" />
+                </span>
+              </a>
+            </div>
+            <div class="social-text">
+              <a class="text-link d-flex" target="_blank" href="https://www.youtube.com/@coderclas">
+                <div>
+                  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="20" width="20" xmlns="http://www.w3.org/2000/svg" style="color: rgb(255, 0, 0)">
+                    <path d="m13 3 3.293 3.293-7 7 1.414 1.414 7-7L21 11V3z"></path>
+                    <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"></path>
+                  </svg>
+                </div>
+                <p style="color: rgb(255, 0, 0)" class="margin-0 text-bold font-sans">YouTube</p>
+              </a>
+            </div>
+          </div>
+          <div class="social-card">
+            <div class="social-icon">
+              <a target="_blank" href="https://www.instagram.com/szczepaniakmma/">
+                <span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0; margin: 0; padding: 0; position: relative;">
+                  <span style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0; margin: 0; padding: 100% 0 0;"></span>
+                  <img style="position: absolute; inset: 0; box-sizing: border-box; padding: 0; border: none; margin: auto; display: block; width: 0; height: 0; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;" src="images/instagram.webp" alt="Instagram Logo" />
+                </span>
+              </a>
+            </div>
+            <div class="social-text">
+              <a class="text-link d-flex" target="_blank" href="https://www.instagram.com/coderclas/">
+                <div>
+                  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="20" width="20" xmlns="http://www.w3.org/2000/svg" style="color: #9f40ab">
+                    <path d="m13 3 3.293 3.293-7 7 1.414 1.414 7-7L21 11V3z"></path>
+                    <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"></path>
+                  </svg>
+                </div>
+                <p style="color: #9f40ab" class="margin-0 text-bold font-sans">Instagram</p>
+              </a>
+            </div>
+          </div>
+          <div class="social-card">
+            <div class="social-icon">
+              <a target="_blank" href="https://www.facebook.com/Szczepaniakmma/">
+                <span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0; margin: 0; padding: 0; position: relative;">
+                  <span style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0; margin: 0; padding: 100% 0 0;"></span>
+                  <img style="position: absolute; inset: 0; box-sizing: border-box; padding: 0; border: none; margin: auto; display: block; width: 0; height: 0; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;" src="images/facebook.png" alt="Facebook Logo" />
+                </span>
+              </a>
+            </div>
+            <div class="social-text">
+              <a class="text-link d-flex" target="_blank" href="https://www.facebook.com/Szczepaniakmma/">
+                <div>
+                  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="20" width="20" xmlns="http://www.w3.org/2000/svg" style="color: rgb(0, 119, 181)">
+                    <path d="m13 3 3.293 3.293-7 7 1.414 1.414 7-7L21 11V3z"></path>
+                    <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"></path>
+                  </svg>
+                </div>
+                <p style="color: rgb(0, 119, 181)" class="margin-0 text-bold font-sans">Facebook</p>
+              </a>
+            </div>
+          </div>
+          <div class="social-card">
+            <div class="social-icon">
+              <a target="_blank" href="https://www.tiktok.com/@szczepaniakmma">
+                <span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0; margin: 0; padding: 0; position: relative;">
+                  <span style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0; margin: 0; padding: 100% 0 0;"></span>
+                  <img id="gitlogo" src="images/tik-tok.png" style="position: absolute; inset: 0; box-sizing: border-box; padding: 0; border: none; margin: auto; display: block; width: 0; height: 0; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;" alt="Github Logo" />
+                </span>
+              </a>
+            </div>
+            <div class="social-text">
+              <a class="text-link d-flex" target="_blank" href="https://www.tiktok.com/@szczepaniakmma">
+                <div>
+                  <svg class="git-redirect" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="m13 3 3.293 3.293-7 7 1.414 1.414 7-7L21 11V3z"></path>
+                    <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"></path>
+                  </svg>
+                </div>
+                <p class="git-text margin-0 text-bold font-sans">TikTok</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Auth0 and Video.js Scripts -->
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <script>
+      var typed = new Typed(".typed_text", {
+        strings: ["Twój Kurs", "Twoja Droga"],
+        typeSpeed: 100,
+        backSpeed: 100,
+        loop: true,
+      });
+    </script>
+    <script>
+      // Initialize Auth0 Lock with your credentials
+      var lock = new Auth0Lock(
+        "8Iu9ARdzc1VQcm0TeaLzL46bY2fR9mxC",
+        "dev-pvzy5psc7qz66nd8.us.auth0.com",
+        {
+          auth: {
+            redirectUrl: window.location.href,
+            responseType: "token id_token",
+            params: {
+              scope: "openid profile email",
+            },
+          },
+        }
+      );
+
+      // Function to update the login button
+      function updateAuthButton() {
+        var authButton = document.getElementById("loginBtn");
+        var token = localStorage.getItem("id_token");
+
+        // Replace the button node to clear previous event listeners
+        var newButton = authButton.cloneNode(true);
+        authButton.parentNode.replaceChild(newButton, authButton);
+
+        if (token) {
+          newButton.textContent = "Wyloguj się";
+          newButton.addEventListener("click", function () {
+            localStorage.removeItem("id_token");
+            localStorage.removeItem("profile");
+            lock.logout({ returnTo: window.location.origin });
+            window.location.reload();
+          });
+        } else {
+          newButton.textContent = "Zaloguj się";
+          newButton.addEventListener("click", function () {
+            lock.show();
+          });
+        }
+      }
+
+      // Function to update the navigation menu (display or hide the "Kursy" tab)
+      function updateNav() {
+        var kursyTab = document.getElementById("kursyTab");
+        var token = localStorage.getItem("id_token");
+        if (kursyTab) {
+          // Show the tab only if the user is logged in
+          kursyTab.style.display = token ? "block" : "none";
+        }
+      }
+
+      // Listen for successful authentication and store token/profile
+      lock.on("authenticated", function (authResult) {
+        localStorage.setItem("id_token", authResult.idToken);
+        lock.getUserInfo(authResult.accessToken, function (error, profile) {
+          if (!error) {
+            localStorage.setItem("profile", JSON.stringify(profile));
+          }
+          updateAuthButton();
+          updateNav();
+        });
+      });
+
+      // On page load, update both the login button and the navigation
+      window.addEventListener("load", function () {
+        updateAuthButton();
+        updateNav();
+      });
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>

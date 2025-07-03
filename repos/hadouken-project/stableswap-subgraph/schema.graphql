@@ -1,0 +1,88 @@
+type Block @entity {
+  id: ID!
+  number: BigInt!
+  hash: Bytes
+}
+
+type UsedBlock @entity {
+  id: ID!
+  number: BigInt!
+  hash: Bytes
+}
+
+type DailyVolume @entity {
+  id: ID!
+  utcDay: BigInt!
+  poolId: Bytes!
+  timeStamp: BigInt!
+  volume: BigInt!
+}
+
+type PoolToken @entity {
+  id: ID!
+  decimals: BigInt!
+  symbol: String!
+  address: Bytes!
+  isLpToken: Boolean!
+  pools: [Pool!]
+}
+
+type TokenBalance @entity {
+  id: ID!
+  tokenAddress: Bytes!
+  walletAddress: Bytes!
+  balance: BigInt!
+  updatedAt: BigInt!
+}
+
+type PoolTokenBalance @entity {
+  id: ID!
+  decimals: BigInt!
+  balance: BigInt!
+}
+
+type Pool @entity {
+  id: ID!
+  name: String!
+  tokens: [PoolToken!]
+  tokensOrder: [Bytes!]
+  poolTokensBalances: [PoolTokenBalance!]
+  fee: BigInt
+  adminFee: BigInt
+  rampA: BigInt
+  lpToken: PoolToken!
+  totalSupply: BigInt!
+  createdAt: BigInt!
+}
+
+type PoolSnapshot @entity {
+  id: ID!
+  name: String!
+  tokens: [PoolToken!]
+  tokensOrder: [Bytes!]
+  fee: BigInt
+  adminFee: BigInt
+  rampA: BigInt
+  lpToken: PoolToken!
+  totalSupply: BigInt!
+  createdAt: BigInt!
+}
+
+type Registry @entity {
+  id: ID!
+  pools: [Pool!]!
+}
+
+type Exchange @entity {
+  id: ID!
+  pool: Bytes!
+  buyer: Bytes!
+  receiver: Bytes!
+  tokenBought: PoolToken!
+  tokenSold: PoolToken!
+}
+
+type SwapPossibility @entity {
+  id: ID!
+  quotes: [PoolToken!]
+}

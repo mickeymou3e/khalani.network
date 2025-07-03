@@ -1,0 +1,30 @@
+[package]
+name = "mirax-storage"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+derive_more.workspace = true
+either.workspace = true
+futures.workspace = true
+once_cell.workspace = true
+serde.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+
+mirax-consensus-traits.workspace = true
+mirax-db.workspace = true
+mirax-error.workspace = true
+mirax-hasher.workspace = true
+mirax-storage-traits.workspace = true
+mirax-types.workspace = true
+mirax-verification.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true
+
+[dev-dependencies.mirax-types]
+workspace = true
+features = ["random"]

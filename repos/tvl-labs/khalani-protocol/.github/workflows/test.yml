@@ -1,0 +1,81 @@
+name: test
+
+on:
+  push:
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  FOUNDRY_PROFILE: ci
+  USDC_ETH_MIRROR : "0x47e4F578Baa6A63891Ee5Ba2D08fcf0c5b8d8307"
+  USDC_AVAX_MIRROR : "0xb83dca5964b7FF263279c9f5f3E8E38728ea26Ba"
+  AXON_TEST_KAI : "0x1Fa37818ae2710C23301D94d2BeE37951C2DD55b"
+
+  AXON_USDCETH_KAI_BPT : "0x1D2BBc35f7aCe0b2132C888552143c3dc54161Ca"
+  AXON_USDCAVAX_KAI_BPT : "0x6978997B5b6061A84d77Bd539F4ff9AECf01C27e"
+
+  TOKEN_ADMIN : "0x04b0bff8776d8cc0ef00489940afd9654c67e4c7"
+  GOERLI_INFURA_URL: ${{ secrets.GOERLI_INFURA_URL }}
+  AXON_RPC_URL : ${{ secrets.AXON_RPC_URL }}
+  FUJI_INFURA_URL : ${{ secrets.FUJI_INFURA_URL }}
+
+jobs:
+  check:
+    strategy:
+      fail-fast: true
+
+    name: Foundry project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1.0.9
+        with:
+          version: nightly
+        
+      - name: Run Forge build
+        run: |
+          forge --version
+          forge build --sizes --build-info
+        id: build
+
+      - name: Run Forge tests
+        run: |
+          forge test -vvv
+        id: test
+        
+      - name: Run Slither
+        uses: crytic/slither-action@v0.3.0
+        id: slither
+        with:
+          ignore-compile: false
+          node-version: 16
+          slither-config: slither.config.json
+          
+    # TODO: remove this when repo is public so we dont have to have to code-ql
+     # - name: Upload SARIF file for core
+      #  uses: github/codeql-action/upload-sarif@v2
+       # id: upload-1
+        #with:
+         # sarif_file: ${{ steps.slither.outputs.sarif }}
+            
+      - name: Running coverage
+        run: |
+          forge coverage --report lcov
+          sudo apt-get install lcov
+          lcov --remove ./lcov.info -o ./lcov.info.pruned 'src/diamondCommons/*'  'test/Mock/*' 'test/utils/*' 'test/lib/*' 'script/*' 'scripts/*' 'script/lib/*' 'src/Tokens/*'
+
+      - name: Report coverage
+        uses: romeovs/lcov-reporter-action@v0.2.21
+        with:
+          lcov-file: ./lcov.info.pruned
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+

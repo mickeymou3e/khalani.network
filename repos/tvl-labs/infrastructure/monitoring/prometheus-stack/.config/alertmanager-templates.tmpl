@@ -1,0 +1,23 @@
+{{ define "tvl.discord.title" }}
+    {{ if gt (len .Alerts.Firing) 0 }}
+      Fire! {{ .GroupLabels.SortedPairs.Values | join " " }}
+    {{ end }}
+
+    {{ if gt (len .Alerts.Resolved) 0 }}
+      Resolved! {{ .GroupLabels.SortedPairs.Values | join " " }}
+    {{ end }}
+{{ end }}
+
+{{ define "tvl.discord.message" }}
+    {{ range .Alerts.Firing }}
+      Alert: **{{ printf "%.150s" .Annotations.summary }}** ({{ .Labels.severity }})
+      Description: {{ printf "%.150s" .Annotations.description }}
+      Alertname: {{ .Labels.alertname }}
+      Namespace: {{ .Labels.namespace }}
+      Service: {{ .Labels.service }}
+    {{ end }}
+
+    {{ if gt (len .Alerts.Resolved) 0 }}
+        Also {{ .Alerts.Resolved | len }} resolved alerts.
+    {{ end }}
+{{ end }}

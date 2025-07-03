@@ -1,0 +1,36 @@
+{
+  "transaction": {
+    "hash": "0x21128e6dd687f6016206390a52204e4bf45f4d4a376622ed15442676243241ec",
+    "blockNumber": null
+  },
+  "data": {
+    "WeightedPoolFactory": {
+      "create": {
+        "input": {
+          "name": "BNB/USDC",
+          "symbol": "HDK-BNB-USDC",
+          "tokens": [
+            "0x186181e225dc1Ad85a4A94164232bD261e351C33",
+            "0xBAdb9b25150Ee75bb794198658A4D0448e43E528"
+          ],
+          "weights": [
+            "500000000000000000",
+            "500000000000000000"
+          ],
+          "rateProviders": [
+            "0x0000000000000000000000000000000000000000",
+            "0x0000000000000000000000000000000000000000"
+          ],
+          "swapFeePercentage": "3000000000000000",
+          "delegate": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0x186181e225dc1Ad85a4A94164232bD261e351C33": "1000000",
+            "0xBAdb9b25150Ee75bb794198658A4D0448e43E528": "3680259090000000"
+          }
+        },
+        "output": "0x030f1d783141Ba68338356cacC8c98B9D5b56edF"
+      }
+    }
+  },
+  "timestamp": 1669307938627
+}

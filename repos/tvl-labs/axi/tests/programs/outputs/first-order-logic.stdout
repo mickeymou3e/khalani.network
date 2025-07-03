@@ -1,0 +1,18 @@
+Result: Nothing
+Result: Nothing
+Result: Nothing
+Result: Nothing
+Result: Proposition(not(forall N. and(P[@0:N], not(not(not(exists N. R[@0:N, @0:N]))))))
+Result: Nothing
+Result: Nothing
+Result: Proved(if(forall N. and(P[@0:N], Q[@0:N]), and(forall N. P[@0:N], forall N. Q[@0:N])))
+Result: Proved(if(and(forall N. P[@0:N], forall N. Q[@0:N]), forall N. and(P[@0:N], Q[@0:N])))
+Result: Proved(iff(forall N. and(P[@0:N], Q[@0:N]), and(forall N. P[@0:N], forall N. Q[@0:N])))
+Result: Nothing
+Result: Proved(if(exists N. or(P[@0:N], Q[@0:N]), or(exists N. P[@0:N], exists N. Q[@0:N])))
+Result: Proved(if(forall N. P[@0:N], not(exists N. not(P[@0:N]))))
+Result: Nothing
+Result: Nothing
+Result: Nothing
+Result: Proved(if(forall N. not(R[@0:N, @0:N]), if(forall N. forall N. forall N. if(and(R[@2:N, @1:N], R[@1:N, @0:N]), R[@2:N, @0:N]), forall N. forall N. if(R[@1:N, @0:N], not(R[@0:N, @1:N])))))
+Result: Proved(if(forall N. not(R[@0:N, @0:N]), if(forall N. forall N. forall N. if(and(R[@2:N, @1:N], R[@1:N, @0:N]), R[@2:N, @0:N]), forall N. forall N. if(R[@1:N, @0:N], not(R[@0:N, @1:N])))))

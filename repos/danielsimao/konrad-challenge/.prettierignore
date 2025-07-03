@@ -1,0 +1,11 @@
+dist
+node_modules
+coverage
+build
+scripts
+!.storybook
+!.commitlintrc.cjs
+!.lintstagedrc
+!jest.config.js
+!plopfile.js
+!react-shim.js

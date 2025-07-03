@@ -1,0 +1,17 @@
+target
+.vscode
+docs/s*.md
+.env
+project.txt
+.DS_Store
+free-space/
+.idea
+configs/
+
+Roadmap.md
+milestones.md
+
+e2e_runs/
+*.sh
+*.bak
+config.toml

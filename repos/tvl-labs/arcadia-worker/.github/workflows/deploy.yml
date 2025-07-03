@@ -1,0 +1,81 @@
+name: Deploy arcadia-worker
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Deployment environment"
+        required: true
+        default: "testnet"
+        type: choice
+        options:
+          - testnet
+          - mainnet
+
+env:
+  AWS_REGION: us-west-2
+  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set environment variables
+        run: |
+          if [[ "${{ github.event.inputs.environment }}" == "testnet" ]]; then
+            echo "PORT=3000" >> $GITHUB_ENV
+            echo "DYNAMODB_TABLE=DepositIntents" >> $GITHUB_ENV
+            echo "ECR_REPOSITORY=arcadia-worker-service" >> $GITHUB_ENV
+            echo "CLUSTER_NAME=arcadia-worker" >> $GITHUB_ENV
+            echo "SERVICE_NAME=arcadia-worker-service" >> $GITHUB_ENV
+            echo "NODE_ENV=production" >> $GITHUB_ENV
+            echo "NETWORK_TYPE=testnet" >> $GITHUB_ENV
+          else
+            echo "PORT=3000" >> $GITHUB_ENV
+            echo "DYNAMODB_TABLE=DepositIntentsMainnet" >> $GITHUB_ENV
+            echo "ECR_REPOSITORY=arcadia-worker-service-mainnet" >> $GITHUB_ENV
+            echo "CLUSTER_NAME=arcadia-worker-mainnet" >> $GITHUB_ENV
+            echo "SERVICE_NAME=arcadia-worker-service-mainnet" >> $GITHUB_ENV
+            echo "NODE_ENV=production" >> $GITHUB_ENV
+            echo "NETWORK_TYPE=mainnet" >> $GITHUB_ENV
+          fi
+
+      - name: Set IMAGE_URI
+        run: |
+          echo "IMAGE_URI=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}:latest" >> $GITHUB_ENV
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push Docker image
+        run: |
+          docker buildx build \
+            --platform linux/arm64 \
+            -t $IMAGE_URI \
+            --push .
+
+      - name: Force new deployment in ECS
+        run: |
+          aws ecs update-service \
+            --region "$AWS_REGION" \
+            --cluster "$CLUSTER_NAME" \
+            --service "$SERVICE_NAME" \
+            --force-new-deployment
+
+      - name: Done!
+        run: echo "Deployment to ${{ github.event.inputs.environment }} complete."

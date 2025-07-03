@@ -1,0 +1,3 @@
+#!/bin/bash
+
+terraform output -json | jq '{ axon_address_info: .axon_address_info.value, bank_info: .bank_info.value, deployer_info: .deployer_info.value, faucet_key_id: .faucet_key_id.value, hyperlane_relayer_info: .hyperlane_relayer_info.value, hyperlane_validator_info: .hyperlane_validator_info.value, hyperlane_godwoken_validator_info: .hyperlane_godwoken_validator_info.value, funding_bot_role_arn_info: .funding_bot_role_arn_info.value, frontend_deployer_iam_user: .frontend_deployer_iam_user.value, frontend_environments_info: .frontend_environments_info.value, khalani_solver_info: .khalani_solver_info.value }' > outputs.json

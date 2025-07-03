@@ -1,0 +1,35 @@
+{
+  "transaction": {
+    "hash": "0x7d8b64146965d46345d7f82130fc1207a95afe7592a49e212b6e41a210d20d4b"
+  },
+  "data": {
+    "WeightedPoolFactory": {
+      "create": {
+        "input": {
+          "name": "HDK/ETH",
+          "symbol": "HDK-ETH",
+          "tokens": [
+            "0x5cAf613f555638A735F981B08dE99F857851e096",
+            "0xBf89943CAbFB8E5D637558cD0a30467ba7188D22"
+          ],
+          "weights": [
+            "800000000000000000",
+            "200000000000000000"
+          ],
+          "rateProviders": [
+            "0x0000000000000000000000000000000000000000",
+            "0x0000000000000000000000000000000000000000"
+          ],
+          "swapFeePercentage": "3000000000000000",
+          "delegate": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0x5cAf613f555638A735F981B08dE99F857851e096": "0",
+            "0xBf89943CAbFB8E5D637558cD0a30467ba7188D22": "0"
+          }
+        },
+        "output": "0x3d471F871c9Ab7be782517F1022F31a4038db154"
+      }
+    }
+  },
+  "timestamp": 1697719511796
+}

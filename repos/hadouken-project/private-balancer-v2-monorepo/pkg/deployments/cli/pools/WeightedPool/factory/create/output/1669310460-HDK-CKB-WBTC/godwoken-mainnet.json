@@ -1,0 +1,36 @@
+{
+  "transaction": {
+    "hash": "0xe227062028dfc0021a7a48149600c164db600ba8a607539fbcbb4823cc5dd2d9",
+    "blockNumber": null
+  },
+  "data": {
+    "WeightedPoolFactory": {
+      "create": {
+        "input": {
+          "name": "CKB/WBTC",
+          "symbol": "HDK-CKB-WBTC",
+          "tokens": [
+            "0x7538C85caE4E4673253fFd2568c1F1b48A71558a",
+            "0x82455018F2c32943b3f12F4e59D0DA2FAf2257Ef"
+          ],
+          "weights": [
+            "500000000000000000",
+            "500000000000000000"
+          ],
+          "rateProviders": [
+            "0x0000000000000000000000000000000000000000",
+            "0x0000000000000000000000000000000000000000"
+          ],
+          "swapFeePercentage": "3000000000000000",
+          "delegate": "0xBA1BA1ba1BA1bA1bA1Ba1BA1ba1BA1bA1ba1ba1B",
+          "initialLiquidity": {
+            "0x7538C85caE4E4673253fFd2568c1F1b48A71558a": "260882042200000000000",
+            "0x82455018F2c32943b3f12F4e59D0DA2FAf2257Ef": "5228"
+          }
+        },
+        "output": "0xBB4Bea2b794f1BF9A3D3DE7F2cCdD8F443a021E5"
+      }
+    }
+  },
+  "timestamp": 1669310460586
+}

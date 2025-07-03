@@ -1,0 +1,65 @@
+{
+  "contracts": {
+    "IntentBook": "0x3aa7ece347c0b37feac61837399f43f55b7d09b9",
+    "AssetReserves": {
+      "0xa869": "0x901B462853519FF5b3d235b355a23737736538eB",
+      "0xaa36a7": "0x2ba13efd182c7930122d4b3d26a28e9371157fee",
+      "0x4268": "0x146ebdb92afb3267D49ab479D53B868Db20125C0",
+      "0x66eee": "0x76e77d4a36441d3fbc467b71a7ec502f406e821f",
+      "0xaa37dc": "0xF3815caFc75450C00c01a3D14fa03f88cC316d26",
+      "0x14a34": "0xc06Ce41AB23c070F25ea3fa41Bf8f1A9e98f34f5"
+    },
+    "permit2": {
+      "0xa869": "0x8A82255fafcBB9E02273e918eE90AEd6B864E04c",
+      "0xaa36a7": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+      "0x4268": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+      "0x66eee": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+      "0xaa37dc": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+      "0x14a34": "0x000000000022D473030F116dDEE9F6B43aC78BA3"
+    }
+  },
+  "supportedChains": [
+    {
+      "id": 0,
+      "chainName": "",
+      "chainId": "",
+      "nativeCurrency": {
+        "name": "",
+        "symbol": "",
+        "decimals": 0
+      },
+      "blockExplorerUrls": [""],
+      "rpcUrls": [""],
+      "logo": "",
+      "borderColor": "",
+      "poolTokenSymbols": [""],
+      "isBalancerChain": false
+    }
+  ],
+  "tokens": [
+    {
+      "id": "",
+      "address": "",
+      "decimals": 0,
+      "name": "",
+      "symbol": "",
+      "chainId": "",
+      "sourceChainId": ""
+    }
+  ],
+  "mTokens": [
+    {
+      "id": "",
+      "address": "",
+      "decimals": 0,
+      "name": "",
+      "symbol": "",
+      "chainId": "",
+      "sourceChainId": ""
+    }
+  ],
+  "medusa": {
+    "apiUrl": "https://medusa.khalani.network",
+    "wsUrl": "wss://medusa.khalani.network"
+  }
+}

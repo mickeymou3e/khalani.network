@@ -1,0 +1,431 @@
+Your task is to translate natural-deduction proofs from a formal language into natural language as well as natural-deduction proofs into formal language.
+- INPUT: You will receive either a FORMAL input or a NATURAL input formatted in plain text.
+- OUTPUT: If the input was FORMAL,  you must answer with a NATURAL language translation of the formal proof. Please do not wrap the output in <NATURAL></NATURAL> tags. Please do write the output in LaTeX format.
+          If the input was NATURAL, you must answer with a FORMAL language translation of the natural-deduction proof. Please do not wrap the output in <FORMAL></FORMAL> tags. Please do NOT write FORMAL outputs in LaTeX.
+
+## Notes about LaTeX:
+-The below <NATURAL></NATURAL> sections are NOT written in LaTeX format, but in plain text. You should write the output in LaTeX equivalent of the plain text format. 
+For example, while an example NATURAL section might have a formula "(A & B) | C", you should write it as $(A \land B) \lor C$. YOU MUST wrap all mathematical and logical symbols in LaTeX format.
+- If the OUTPUT is NATURALL, the entire output should be written in LaTeX format so that a program like pdflatex can be used to compile it into a PDF. You do not need to include documentclass command, nor \document{begin} and \document{end}.
+- The LaTeX should be formatted so that each step of the proof is written as a separate paragraph and left-aligned.
+-DO NOT write any messages to the user in the output outside of the actual translation. For example, please do not say things like "Here is the LaTeX translation of the proof".
+- To align, use \\begin{align*} ... \\end{align*}. Do not use any additional commands, such as itemize, enumerate, etc.
+
+Some noteworthy points about the formal language in which these proofs are written are below:
+
+(1) Propositional formulas are written in a customary notation but always requiring an outer pair of parentheses, e.g., 
+(A | B) is the disjunction of A and B, (A & ~ B) is the conjunction of A  with the negation of B, ((A <==> B) ==> (~ B ==> ~A)) 
+says that the biconditional (A <==> B)  implies (~ B ==> ~ A), etc.  
+
+(2) Inference rules are called "methods", and an application of a method to a number of formulas is written in the form 
+(!method-name argument_1 ... argument_n), for instance, (!mp (A ==> B) A) applies the inference method modus ponens (mp) 
+to the two arguments (A ==> B) and A, which would yield the conclusion A. But in general, the argument to an inference
+rule can be an arbitrary proof D, not just a single formula. 
+
+(3) Every proof is evaluated in the context of a given assumption base, which is a set of formulas that are taken as premises. 
+If an argument to an inference method is not in the assumption base, typically that indicates an error. For instance, an application
+of modus ponens to arguments (A ==> B) and A can only succeed if both arguments (A ==> B) and A are in the assumption 
+base at the time of the application. If that's the case, then this application will produce the conclusion B as its result. 
+
+(4) Conditional proofs are written in the form "assume F D", where F is the hypothesis that is being assumed and the body D is, recursively, 
+an arbitrary proof that lies within the scope of F. So, to evaluate "assume F D" in an assumption base beta, we add F to beta and then
+proceed to evaluate the body D in the augmented assumption base, beta union \{F\}. If that evaluation produces a conclusion G, then
+the result of the entire "assume F D" proof is the conditional conclusion (F ==> G). 
+
+A convenient variant of this proof form is "assume <identifer> := F D", in which the hypothesis F is given the name <identifier> 
+inside the scope of D.
+
+(5) Proofs can be chained together in a sequence using the 'let' syntax form, e.g., "let {p1 := D1; p2 := D2} D". To evaluate this in 
+an assumption base beta, we first evaluate the proof D1 in beta, and binds its conclusion c1 to the name (identifier) p1. 
+Then proof D2 is evaluated in beta union \{c1\}, and in an environment where c1 (the conclusion of D1)  is bound to the name p2. 
+If that evaluation produces a conclusion c2, then we finally evaluate the body of the let, D, in the assumption base beta union \{c1,c2\}, 
+and in an environment in which c1 and c2 are bound to the names p1 and p2, respectively. That conclusion (of the body D) is 
+the conclusion of the entire let form. When we don't care to name the conclusion of an intermediate deduction (such as D1 and/or D2 
+in this example), we can use the wildcard underscore, e.g. let "{_ := D1; p2 := D2} D" does not give a name to the conclusion
+of D1. 
+
+(6) Optionally, it's good practice to annotate any proof D with its conclusion, by expressing D in the form "conclude p D", where p is the
+expected conclusion of D. Then, at evaluation time, if D doesn't produce the advertised conclusion p, the proof checker can throw an error. 
+
+(7) Apart from proofs, which are recursively built up as described above, this language also has a global command of the form "assert F",
+whose effect is to add the formula F into the current assumption base. A  variant of this command is "assert p := F", which inserts F into
+the assumption base but also gives it the name p. 
+
+(8) The "chain" method is very useful for proof steps. It supports equational and implication chaining. Each step has a left hand side (assumed to be true) and a right hand side lemma, as well as a justifier
+in brackets. For example, if we know that A <==> C and we know (A & B), then we can use chain like so: "(!chain-> [(A & B) ==> A [left-and] ==> C [mp]])".
+
+(9) Conditionals must be explicitly extracted from Biconditionals using "left-iff" and "right-iff" methods. The exception to this rule is that, when implication chaining, the relevant unidirectional 
+implication is extracted automatically.
+
+
+
+I will now list 9 examples of proofs in this formal language, along with their natural-language counterparts. Each example is wrapped in <EXAMPLE></EXAMPLE> tags. Each example 
+describes a formal proof (which should be submitted by the user) and a natural-language translation of that proof which you would provide as a response.
+
+The formal language proof is wrapped in <FORMAL></FORMAL> tags. Code comments within the formal language proofs are preceded by a hashtag (#). Their purpose is to assist you
+in understanding how the formal language works.
+The natural language translation is wrapped in <NATURAL></NATURAL> tags.
+
+<EXAMPLE>
+    <FORMAL>
+    declare A, B: Boolean
+    conclude (A & B ==> B & A)
+    assume p:= (A & B)
+        let {_ := (conclude A (!left-and p));
+            _ := (conclude B (!right-and p))}
+        conclude (B & A)
+            (!both B A)
+    </FORMAL>
+    <NATURAL> 
+    We will derive the conditional (A & B ==> B & A). Let p be the conjuction (A & B) and assume that p holds.  
+    Then, by applying left-and to p, we can conclude A. Moreover, by applying right-and to p, we can derive B. 
+    Thus, by applying both to B and A we conclude (B & A). This proves the conditional (A & B ==> B & A). 
+    </NATURAL>
+</EXAMPLE>
+<EXAMPLE>
+    <FORMAL>
+    conclude B
+      (!cases (A & B | C)
+        assume (A & B)
+          conclude B
+            (!right-and (A & B))
+        assume C
+          conclude B
+            (!mp (C ==> B) C))
+    </FORMAL>
+    <NATURAL> 
+    We will show B by case analysis on (A & B | C). Suppose first that A & B holds. In that case B follows by applying right-and to (A & B). On the other hand, suppose that C holds. In that case B follows by applying modus ponens (mp) to (C ==> B) and C. Thus, B holds in either case. 
+    </NATURAL>
+</EXAMPLE>
+
+<EXAMPLE>
+    <FORMAL>
+    declare A, B, C: Boolean
+    conclude ((A ==> B & C) ==> (~ B) ==> (~ A))
+      assume premise-1 := (A ==> B & C)
+        assume premise-2 := (~ B)
+          (!by-contradiction (~ A)
+            assume A 
+              let {_ := conclude (B & C)
+                           (!mp premise-1 A);
+                   _ := conclude B 
+                          (!left-and (B & C))}
+                (!absurd B premise-2))
+    </FORMAL>
+    <NATURAL> 
+    We will derive the conditional ((A ==> B & C) ==> (~ B) ==> (~ A)). Let premise-1 and premise-2 be the sentences (A ==> B & C) and (~ B), respectively. 
+    Assume premise-1, and then assume premise-2. We will now prove (~ A) by contradiction. In particular, assume A. Then we can derive (B & C) by applying
+    modus ponens to premise-1 and A, and from that we can get B via left-and. But we have assumed (~ B2) (that's premise-2), so we now have a contradiction: B and (~ B).
+    This allows us to reject the hypothesis A and derive the desired conclusion (~ A). 
+    </NATURAL>
+</EXAMPLE>
+<EXAMPLE>
+    <FORMAL>
+    declare A, B: Boolean
+    assert (~ (A ==> B))
+    (!by-contradiction (~ B)
+      assume B
+        let {_ := conclude (A ==> B) 
+                    assume A 
+                      (!claim B)}
+         (!absurd (A ==> B) (~ (A ==> B))))
+    </FORMAL>
+    <NATURAL> 
+    Suppose that the premise (~ (A ==> B)) has been inserted into the assumption base. We will use reasoning to show that (~ B) holds. So, by way of contradiction, assume that B. 
+    We can then conclude the conditional (A ==> B) by assuming A and then simply claiming B. But the conditional (A ==> B) is inconsistent with the negation (~ (A ==> B))
+    in the assumption base, and this contradiction allows us to reject the hypothesis B and derive the desired conclusion (~ B).
+    </NATURAL>
+</EXAMPLE>
+<EXAMPLE>
+    <FORMAL>
+    declare A, B, C, E: Boolean
+    assert premise-1 := (A & B | (A ==> C))
+    assert premise-2 := (C <==> ~ E)    
+    conclude (~ B ==> A ==> ~ E)
+      assume (~ B)
+        assume A
+          conclude (~ E)
+            (!cases premise-1
+                    assume (A & B)
+                      conclude (~ E)
+                        (!from-complements (~ E) B (~ B))
+                    assume (A ==> C)
+                      let {_ := conclude (C ==> ~ E)
+                                  (!left-iff premise-2);
+                           _ := conclude C 
+                                 (!mp (A ==> C) A)}
+                        conclude (~ E)
+                          (!mp (C ==> ~ E) C))
+    </FORMAL>
+    <NATURAL> 
+    Let premise-1 be the disjunction (A & B | (A ==> C)) and let premise-2 be the biconditional (C <==> ~ E), and suppose that both premises have been inserted into the assumption base.
+    We will now derive the conditional (~ B ==> A ==> ~ E) as follows. Assume (~ B) and then assume A. We can now derive (~ E) by a case analysis of premise-1, the disjunction (A & B | A ==> C).
+    Starting with the first case, assume (A & B). In that case we can conclude (~ E) simply because our assumption base now contains the two complements B and (~ B). For the second case,
+    assume the conditional (A ==> C) holds. Then, by applying left-iff to the biconditional premise-2, we infer (C ==> ~ E). We also derive C by applying  modus ponens to the case assumption (A ==> C)
+    and the assumption A. Thus, we can now conclude (~ E) by applying modus ponens to (C ==> ~ E) and C.  
+    </NATURAL>
+</EXAMPLE>
+<EXAMPLE>
+    <FORMAL>
+    declare A, B, C, D: Boolean
+    assert (A & B ==> C)
+    assert (C | ~ B ==> D)
+    conclude (A ==> D) 
+      assume A
+        let {_  := conclude (B | ~ B) 
+                     (!excluded-middle B)}
+          (!cases (B | ~ B)
+             assume B
+               let {_ := conclude (A & B)
+                           (!both A B);
+                    _ := conclude C
+                           (!mp (A & B ==> C) (A & B));
+                    _ := conclude (C | ~ B)
+                           (!left-either C (~ B))}
+                conclude D
+                  (!mp (C | ~ B ==> D) (C | ~ B))
+             assume (~ B)
+               let {_ := conclude (C | ~ B)
+                           (!right-either C (~ B))}
+                conclude D
+                  (!mp (C | ~ B ==> D) (C | ~ B)))
+    </FORMAL>
+    <NATURAL> 
+    Suppose that the premises (A & B ==> C) and (C | ~ B ==> D) have been inserted into the assumption base. We will proceed to derive the 
+    conditional (A ==> D). To that end, assume that A holds. By the excluded middle, we know that (B | ~ B) holds, so we will do a case analysis 
+    on that disjunction. For the first case, assume that B holds. Since we are under the scope of the assumption A, we can derive (A & B) by applying 
+    both to A and B. Then, by applying modus ponens to the premise (A & B ==> C) and (A & B), we obtain C, and by applying left-either to C and (~ B)
+    we derive the disjunction (C | ~ B). Finally, we infer D by applying modus ponens to the premise (C | ~ B ==> D) and (C | ~ B). 
+    For the second case, assume that (~ B) holds. Then we again derive the disjunction (C | ~ B), this time by applying right-either to C and (~ B). 
+    Finally, we obtain D by applying modus ponens to the premises (C | ~ B ==> D) and (C | ~ B). 
+    </NATURAL>
+</EXAMPLE>
+
+<EXAMPLE>
+    <FORMAL>
+    declare A, B, C, D,E: Boolean
+    assert premise-1 := (A & B | (A ==> C))
+    assert premise-2 := (C <==> ~ E)
+    assert premise-3 := (~ E)
+    conclude (~ D & ~ A)
+      let {_ := conclude (~ E ==> ~ (B | D)) 
+                  (!contra-pos (B | D ==> E));
+           _ := conclude (~ (B | D))
+                  (!mp (~ E ==> ~ (B | D)) premise-3);
+           _ := conclude (~ B & ~ D)
+                          (!dm (~ (B | D)));
+           _ := conclude (~ D)
+             (!right-and (~ B & ~ D));
+           _ := conclude (~ B)
+             (!left-and (~ B & ~ D));
+           _ := conclude (~ (B & C) ==> ~ A)
+                  (!contra-pos premise-1);
+           _ := conclude (~ A)
+                  let {_ := conclude (~ B | ~ C)  
+                             (!left-either (~ B) (~ C));
+                       _ := conclude (~ (B & C))
+                          (!dm (~ B | ~ C))}
+                    (!mp (~ (B & C) ==> ~ A) (~ (B & C)))}
+        (!both (~ D) (~ A))
+    </FORMAL>
+    <NATURAL> 
+    Let premise-1 be the conditional (A ==> B & C), premise-2 the conditional (B | D ==> E), and premise-3 the negation (~ E).
+    Suppose that all three premises have been inserted into the assumption base. We will now derive the conclusion (~ D & ~ A). 
+    We start by deriving the contrapositive of premise-2, namely the conditional (~ E ==> ~ (B | D)). We then apply modus ponents
+    to that and the premise (~ E), concluding (~ (B | D)). This gives (~ B | ~ D) by DeMorgan's (dm), so we get (~ D) as well as (~ B). 
+    Applying contra-pos to premise-1 gives (~ (B & C) ==> ~ A). We can now derive (~ A) as follows: First, from (~ B) we obtain (~ B | ~ C),
+    through left-either, which yields (~ (B & C)) by dm (DeMorgan). Thus, by modus ponens on (~ (B & C) ==> ~ A) and (~ (B & C)) we get (~ A).
+    Finally, we simply apply conjunction introduction (the method both) to (~ D) and (~ A). 
+    </NATURAL>
+</EXAMPLE>
+<EXAMPLE>
+    <FORMAL>
+        declare A, B, C, E: Boolean
+        assert premise-1 := (~ A | (B ==> E) & (C ==> E))
+        assert premise-2 := (A & (B | C))
+        conclude E
+        let {c1 := conclude (A ==> (B ==> E) & (C ==> E))
+                        (!cond-def premise-1);
+                _ := conclude A
+                    (!left-and premise-2);
+                _ := conclude (B | C)
+                    (!right-and premise-2);
+                _ := conclude ((B ==> E) & (C ==> E))
+                    (!mp c1 A);
+                _ := conclude (B ==> E)
+                    (!left-and ((B ==> E) & (C ==> E)));
+                _ := conclude (C ==> E)
+                    (!right-and ((B ==> E) & (C ==> E)))}
+            (!cases (B | C)
+                assume B
+                (!mp (B ==> E) B)
+                assume C
+                (!mp (C ==> E) C))
+        </FORMAL>
+    <NATURAL> 
+    Let premise-1 be the disjunction (~ A | (B ==> E) & (C ==> E)) and let premise-2 be the conjunction (A & (B | C)).
+    Suppose that both premises have been inserted in the assumption base. We will now derive E from these premises.
+    First, use the definition of conditionals (cond-def) on premise-1 to conclude (A ==> (B ==> E) & (C ==> E)). Call
+    that conclusion c1. Next, decompose premise-2 by applying left-and and right-and to it, obtaining A and (B | C). 
+    Next, apply modus ponens (mp) to conclusion c1 and A to obtain the conjunction ((B ==> E) & (C ==> E)), which we
+    then decompose into the two conditionals (B ==> E) and (C ==> E) by applying left-and and right-and to it, respectively. 
+    Finally, we perform a case analysis on the disjunction (B | C). Assuming B yields the desired conclusion E via modus
+    ponens on (B ==> E) and B, while assuming C yields E via modus ponens on (C ==> E) and C. 
+    </NATURAL>
+</EXAMPLE>
+<EXAMPLE>
+    <FORMAL>
+    # A simple exercise in quantifier logic:
+
+        domain D
+        declare P,Q: [D] -> Boolean
+        declare R: [D D] -> Boolean
+
+        assert premise-1 := (exists x . P x)
+        assert premise-2 := (exists x . Q x)
+        assert premise-3 := (forall x . P x ==> forall y . Q y ==> x R y)
+
+        # We'll prove that R is non-empty: 
+
+        conclude goal := (exists x y . x R y)
+            pick-witness a for premise-1    # We now have (P a)
+            pick-witness b for premise-2  # We now have (Q b)
+                (!chain-> [(P a) ==> (forall y . Q y ==> a R y) [premise-3]
+                                ==> (Q b ==> a R b)            [(uspec with b)]
+                                ==> (a R b)                    [(mp with (Q b))]
+                                ==> goal                       [existence]])
+    </FORMAL>
+    <NATURAL>
+    Consider an arbitrary domain of discourse D. Let P and Q be predicates on D, and let R be a binary relation on D x D. We will prove that R is non-empty if the following
+    premises hold:
+    1. There exists an x in D such that P x holds.
+    2. There exists an x in D such that Q x holds.
+    3. For all x in D, if P x holds, then for all y in D, if Q y holds, then R x y holds.
+
+    We will prove that R is non-empty by showing that there exists an x and y in D such that x R y holds.
+         Let a be a witness for P. Then, we can conclude that P(a).
+         Let b be a witness for Q. Then, we can conclude that Q(b).
+         By universal instantiation of premise 3 with P(a), we can conlude that P(a) implies for all y in D, if Q y holds, then a R y holds.
+         By universal instantiation of premise 3, we can conclude that Q(b) implies that a R b holds.  
+         Since Q(b) we can conclude that a R b holds by modus ponents on the result from step 4 above. 
+         Since there is some a and some b such that a R b holds, we can conclude by existential generalization that there exists an x and y in D such that x R y holds.
+    This concludes the proof that R is non-empty.
+    </NATURAL>
+</EXAMPLE>
+<EXAMPLE>
+    <FORMAL>
+    # Here we derive the formula known as Russell's barber paradox. 
+
+    domain D
+    
+    # (x R y) will mean that x is shaved by y:
+    
+    declare R: [D D] -> Boolean
+    
+    conclude goal := (~ exists x . forall y . y R x <==> ~ y R y)
+    (!by-contradiction goal
+    # By contradiction, assume that such an individual exists: 
+      assume hyp := (exists x . forall y . y R x <==> ~ y R y)
+      # Call that individual w: 
+        pick-witness w for hyp 
+          let {w-characterization := (forall y . y R w <==> ~ y R y);
+               # w-characterization is already in the assumption base,
+               # so let's apply it to w itself: 
+               w-lemma := conclude (w R w <==> ~ w R w)
+                           (!instance w-characterization w)
+              }
+               # Now we have a contradiction, which we can show more explicitly
+               # by a case analysis:
+            (!two-cases
+              assume (w R w)
+                (!chain-> [(w R w) ==> (~ w R w) [w-lemma]
+                                   ==> false     [(absurd with (w R w))]])
+              assume (~ w R w)			 
+                (!chain-> [(~ w R w) ==> (w R w) [w-lemma]
+                                     ==> false   [(absurd with (~ w R w))]])))
+          
+    </FORMAL>
+    <NATURAL>
+    We will derive the formula known as Russell’s barber paradox.
+    Let D be our domain of discourse.
+    Let R be a binary relation on D, where (x R y) means that x is shaved by y.
+    We will prove that there is not some x such that forall y, yRx implies not yRy by contradiction.
+    Assume, for the sake of contradiction, that there is some x such that forall y, yRx implies not yRy.
+        Let w be a witness for this existential statement.
+        Then we have the characterization: forall y, yRw implies not yRy.
+        Let’s apply this characterization to w itself:
+            wRw implies not wRw
+        Now we have a contradiction, which we can show more explicitly by case analysis:
+
+        Case 1: Assume wRw
+            wRw implies not wRw (by the characterization)
+            This leads to a contradiction with our assumption wRw.
+        Case 2: Assume not wRw
+            not wRw implies wRw (by the characterization)
+            This leads to a contradiction with our assumption not wRw.
+
+        Thus, in both cases, we arrive at a contradiction.
+        Therefore, our original assumption must be false, and we conclude:
+        there is not some x such that forall y, yRx implies not yRy
+    </NATURAL>
+</EXAMPLE>
+<EXAMPLE>
+    <FORMAL>
+    domain D
+    declare <: [D D] -> Boolean
+      
+    define [x y z] := [?x:D ?y:D ?z:D]
+        
+    assert* irreflexivity := (~ x < x)
+    assert* transitivity := (x < y & y < z ==> x < z)
+        
+    conclude asymmetry := (forall x y . x < y ==> ~ y < x)
+      pick-any a:D b:D
+        assume (a < b)
+          (!by-contradiction (~ b < a)
+            assume (b < a) 
+              let {less := (!chain-> 
+                             [(b < a) ==> (a < b & b < a)    [augment]
+                                      ==> (a < a)            [transitivity]]);
+                   not-less := (!chain-> [true ==> (~ a < a) [irreflexivity]])
+                  }
+                (!absurd less not-less))
+    </FORMAL>
+    <NATURAL>
+    We will prove that the relation < is asymmetric, i.e., for all x and y, if x < y then it's not the case that y < x.
+
+    Let D be our domain of discourse, and let < be a binary relation on D.
+    
+    We are given two premises:
+    1. Irreflexivity: For all x in D, it's not the case that x < x.
+    2. Transitivity: For all x, y, and z in D, if x < y and y < z, then x < z.
+    
+    We will now prove that < is asymmetric:
+    
+    Let a and b be arbitrary elements of D. We need to show that if a < b, then it's not the case that b < a.
+    
+    Assume that a < b. We will prove that it's not the case that b < a by contradiction.
+    
+    Suppose, for the sake of contradiction, that b < a.
+    
+    Then we can derive:
+    1. a < b and b < a (by augmenting our assumptions)
+    2. a < a (by applying transitivity to the result of step 1)
+    
+    However, we know from the irreflexivity premise that it's not the case that a < a.
+    
+    This is a contradiction: we have derived both a < a and not (a < a).
+    
+    Therefore, our assumption that b < a must be false.
+    
+    Thus, we have shown that if a < b, then it's not the case that b < a.
+    
+    Since a and b were arbitrary elements of D, we have proven that for all x and y in D, if x < y then it's not the case that y < x, which is the definition of asymmetry.
+    
+    This concludes the proof that < is asymmetric.
+    </NATURAL>
+</EXAMPLE>
+
+## Notes about generating proofs in the formal language:
+1. All relations, domains and symbols must be explicitly declared. Domains are declared with the keyword "domain". Constants, relations and function symbols are declared with "declare"
+2. To introduce arbitrary elements of a domain when reasoning about a universally quantified statement, the syntax is "pick-any VAR:DOMAIN, VAR2:DOMAIN2, ...". It is invalid to write "assume VAR := DOMAIN".

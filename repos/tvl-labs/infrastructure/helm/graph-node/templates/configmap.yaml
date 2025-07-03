@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: graph-node-config
+data:
+  # https://github.com/graphprotocol/graph-node/blob/master/docs/environment-variables.md
+  GRAPH_LOG: info
+  ETHEREUM_POLLING_INTERVAL: "2000"
+  GRAPH_ETHEREUM_TARGET_TRIGGERS_PER_BLOCK_RANGE: "200"
+  ETHEREUM_BLOCK_BATCH_SIZE: "20"
+  GRAPH_ETHEREUM_MAX_BLOCK_RANGE_SIZE: "2000"
+  GRAPH_ETHEREUM_MAX_EVENT_ONLY_RANGE: "1000"
+  GRAPH_ETHEREUM_FETCH_TXN_RECEIPTS_IN_BATCHES: "true"

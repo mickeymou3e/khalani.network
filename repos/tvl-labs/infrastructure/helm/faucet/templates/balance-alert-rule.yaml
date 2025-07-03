@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ include "faucet.fullname" . }}-balance-alert-rule
+  namespace: monitoring
+  labels:
+    rules: "true"
+spec:
+  groups:
+    - name: FaucetBalanceAlerts
+      rules:
+        - alert: FaucetBalanceBelowThreshold
+          expr: faucet_wallet_balance{token_name!='native'} < {{ .Values.rule.balance.threshold }}
+          for: {{ .Values.rule.forPeriod }}
+          labels:
+            severity: critical
+          annotations:
+            summary: "Faucet balance is low"
+            description: "The faucet balance on chain '{{"{{"}} $labels.chain {{"}}"}}' of '{{"{{"}} $labels.token_name {{"}}"}}' ('{{"{{"}} $labels.token_address {{"}}"}}') is {{"{{"}} $value {{"}}"}}, lower than minimum {{ .Values.rule.balance.threshold }}"

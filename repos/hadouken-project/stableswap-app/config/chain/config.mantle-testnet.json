@@ -1,0 +1,45 @@
+{
+  "hadouken": {
+    "lending": {
+      "url": "https://testnet-app.hadouken.finance/lend"
+    },
+    "bridge": {
+      "url": "https://bridge.testnet.mantle.xyz/"
+    }
+  },
+  "sentry": "https://d3b71357a01e426c9c4285a26657d910@o4504333193969664.ingest.sentry.io/4504333202882560",
+  "chainName": "Mantle Testnet",
+  "chainId": "0x1389",
+  "nativeCurrency": {
+    "name": "MNT",
+    "symbol": "MNT",
+    "decimals": 18,
+    "address": "0xdeaddeaddeaddeaddeaddeaddeaddeaddead0000",
+    "wrapAddress": "0x2c6db4f138a1336db50ab698ca70cf99a37e1198"
+  },
+  "rpcUrl": "https://rpc.testnet.mantle.xyz/",
+  "readOnlyRpcUrl": "https://rpc.testnet.mantle.xyz/",
+  "wsUrl": "wss://ws.testnet.mantle.xyz",
+  "env": "testnet",
+  "subgraphs": {
+    "balancer": {
+      "httpUri": "https://graph-dev-http-hadouken-dev.hadouken.finance/subgraphs/name/balancer-mantle-testnet",
+      "webSocketUri": "wss://graph-dev-ws-hadouken-dev.hadouken.finance/subgraphs/name/balancer-mantle-testnet"
+    }
+  },
+  "explorerUrl": {
+    "godwoken": "https://explorer.testnet.mantle.xyz",
+    "ethereum": "https://goerli.etherscan.io"
+  },
+  "api": {
+    "dia": {
+      "priceUrl": "https://api.diadata.org/v1/quotation"
+    }
+  },
+  "customLinearPools": [
+    "0xA0053205d408654A92d05dD7B4C95abF43f39BF0",
+    "0x5da1921024638E4e63776aD04c8691500B162dCd",
+    "0xbD6ed3135e6277180D0eCA73749192FB51312E7d",
+    "0xd8db23E879716C033597354A6981Af6A2A410207"
+  ]
+}

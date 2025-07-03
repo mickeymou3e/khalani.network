@@ -1,0 +1,115 @@
+type Reserve @entity {
+  id: ID!
+  address: Bytes!
+  symbol: String!
+  decimals: BigInt!
+  aTokenAddress: Bytes!
+  variableDebtTokenAddress: Bytes!
+  stableDebtTokenAddress: Bytes!
+  interestRateStrategyAddress: Bytes!
+  variableBorrowIndex: BigInt!
+  availableLiquidity: BigInt!
+  totalStableDebt: BigInt!
+  totalVariableDebt: BigInt!
+  totalLiquidity: BigInt!
+  ltv: BigInt!
+  liquidityThreshold: BigInt!
+  liquidityBonus: BigInt!
+  isActive: Boolean!
+  isFrozen: Boolean!
+  isBorrowingEnable: Boolean!
+  isStableBorrowingEnable: Boolean!
+  reserved: BigInt
+  liquidityIndex: BigInt!
+  reservedFactory: BigInt
+  liquidityRate: BigInt!
+  variableBorrowRate: BigInt!
+  stableBorrowRate: BigInt!
+  lastUpdateTimestamp: BigInt
+  depositCap: BigInt
+  borrowCap: BigInt
+}
+
+type ReserveHistory @entity {
+  id: ID!
+  reserve: Bytes!
+  liquidityRate: BigInt!
+  stableBorrowRate: BigInt!
+  variableBorrowRate: BigInt!
+  liquidityIndex: BigInt!
+  variableBorrowIndex: BigInt!
+  lastUpdateTimestamp: BigInt!
+}
+
+type DIAPrice @entity {
+  id: ID!
+  symbol: String
+  rate: BigInt
+  timestamp: BigInt
+}
+
+type Registry @entity {
+  id: ID!
+  reserves: [Reserve!]
+  hadoukenOracle: Bytes
+}
+
+type Liquidation @entity {
+  id: ID!
+  collateralAsset: Bytes!
+  debtAsset: Bytes!
+  user: User!
+  debtToCover: BigInt!
+  liquidatedCollateralAmount: BigInt!
+  liquidator: Bytes!
+  receiveAToken: Boolean!
+}
+
+type PoolToken @entity {
+  id: ID!
+  decimals: BigInt!
+  symbol: String!
+  address: Bytes!
+  isAToken: Boolean!
+  isStableDebt: Boolean!
+  isVariableDebt: Boolean!
+  underlyingAsset: Bytes!
+}
+
+type ATokenAsset @entity {
+  id: ID!
+  scaledBalance: BigInt!
+  currentBalance: BigInt!
+  isCollateral: Boolean!
+  walletAddress: Bytes!
+  address: Bytes!
+  underlyingAsset: Bytes!
+}
+
+type STokenAsset @entity {
+  id: ID!
+  principalStableDebt: BigInt!
+  currentStableDebt: BigInt!
+  walletAddress: Bytes!
+  address: Bytes!
+  underlyingAsset: Bytes!
+}
+
+type VTokenAsset @entity {
+  id: ID!
+  scaledVariableDebt: BigInt!
+  currentVariableDebt: BigInt!
+  walletAddress: Bytes!
+  address: Bytes!
+  underlyingAsset: Bytes!
+}
+
+type User @entity {
+  id: ID!
+  ltv: BigInt
+  currentLiquidationThreshold: BigInt
+  updatedAt: BigInt
+  aTokenAssets: [ATokenAsset!]
+  variableBorrowAssets: [VTokenAsset!]
+  stableBorrowAssets: [STokenAsset!]
+}

@@ -1,0 +1,32 @@
+specVersion: 0.0.4
+
+schema:
+  file: ./schema.graphql
+
+dataSources:
+  - kind: ethereum/contract
+    name: IntentBook
+    network: {{network}}
+    source:
+      address: '{{contracts.IntentBook.address}}'
+      abi: IntentBook
+      startBlock: {{contracts.IntentBook.startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      file: ./src/mappings/IntentBook.ts
+      entities:
+        - IntentEntity
+      abis:
+        - name: IntentBook
+          file: ./abis/IntentBook.json
+      eventHandlers:
+        - event: IntentCreated(indexed bytes32,indexed address,indexed address,uint256,address[],uint256[],uint8,uint8)
+          handler: handleIntentCreated
+        - event: IntentLocked(indexed bytes32)
+          handler: handleIntentLocked
+        - event: IntentCancelled(indexed bytes32)
+          handler: handleIntentCancelled
+        - event: IntentSolved(indexed bytes32)
+          handler: handleIntentSolved

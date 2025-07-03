@@ -1,0 +1,66 @@
+{{- $fullName := include "safe.fullname" . -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ $fullName }}
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: {{ .Values.routeConfigService }}.{{ .Values.domainName }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: safe-cfg-web
+                port:
+                  number: 8001
+          - path: /static
+            pathType: Prefix
+            backend:
+              service:
+                name: safe-cfg-web
+                port:
+                  number: 8000
+    - host: safe-txs-godwoken-mainnet.{{ .Values.domainName }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: safe-txs-godwoken-mainnet
+                port:
+                  number: 8888
+    - host: safe-txs-godwoken-testnet.{{ .Values.domainName }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: safe-txs-godwoken-testnet
+                port:
+                  number: 8888
+    - host: safe-txs-khalani-testnet.{{ .Values.domainName }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: safe-txs-khalani-testnet
+                port:
+                  number: 8888
+    - host: {{ .Values.routeGatewayService }}.{{ .Values.domainName }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: safe-cgw
+                port:
+                  number: 3666

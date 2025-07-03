@@ -1,0 +1,50 @@
+name: 'CI'
+
+on:
+    push:
+        branches:
+            - master
+    pull_request:
+        branches:
+            - '*'
+
+env:
+    NODE_VERSION: '16.x'
+    INFURA: ${{ secrets.INFURA }}
+
+jobs:
+    webapp_ci:
+        runs-on: ubuntu-latest
+        steps:
+            - name: 'Checkout'
+              uses: actions/checkout@v2.3.1
+              with:
+                  persist-credentials: false
+
+            - name: 'Use Node.js v${{ env.NODE_VERSION }}'
+              uses: actions/setup-node@master
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
+                  registry-url: 'https://npm.pkg.github.com'
+                  scope: '@hadouken-project'
+
+            - name: Cache NPM dependencies
+              uses: actions/cache@v3
+              with:
+                  path: |
+                      node_modules
+                  key: ${{ runner.OS }}-npm-cache-rf-${{ hashFiles('yarn.lock') }}
+                  restore-keys: |
+                      ${{ runner.OS }}-npm-cache-rf
+
+            - name: Install yarn dependencies
+              run: |
+                  yarn config set //npm.pkg.github.com/:_authToken ${{ secrets.GITHUB_TOKEN }}
+                  yarn config set @hadouken-project:registry https://npm.pkg.github.com
+                  yarn --frozen-lockfile
+
+            - name: Run node in background for integration tests
+              run: npx hardhat --tsconfig tsconfig.testing.json node --hostname 127.0.0.1 --fork https://mainnet.infura.io/v3/${{ secrets.INFURA }} &
+
+            - name: Test
+              run: yarn test

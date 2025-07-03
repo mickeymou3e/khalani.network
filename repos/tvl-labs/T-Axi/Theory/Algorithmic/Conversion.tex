@@ -1,0 +1,317 @@
+\section{Conversion}
+
+\begin{frame}{Type conversion}
+
+\begin{center}
+  $\infrule{\infertypeconv{\Gamma}{A}{B}[s]{\Gamma'} \quad r = s}{\checktypeconv{\Gamma}{A}{B}[r]{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{\infertypeconvwhnf{\Gamma}{A}{B}[r]{\Gamma'}}{\infertypeconv{\Gamma}{A}{B}[r]{\Gamma'}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Type conversion}
+
+\begin{center}
+  $\infrule{}{\infertypeconvwhnf{\Gamma}{\Unit}{\Unit}{\Gamma}}$
+
+  \vspace{1em}
+
+  $\infrule{}{\infertypeconvwhnf{\Gamma}{\Empty}{\Empty}{\Gamma}}$
+
+  \vspace{2em}
+
+  $\infrule{r_1 = r_2 \quad \infertypeconv{\Gamma}{A_1}{A_2}[s_A]{\Gamma_1} \quad \infertypeconv{\Gamma_1}{B_1}{B_2}[s_B]{\Gamma_2}}{\infertypeconvwhnf{\Gamma}{\Fun[r_1]{A_1}{B_1}}{\Fun[r_2]{A_2}{B_2}}[\One]{\Gamma_2}}$
+
+  \vspace{2em}
+
+  $\infrule{\infertypeconv{\Gamma}{A_1}{A_2}[s]{\Gamma'}}{\infertypeconvwhnf{\Gamma}{\Box[\Zero]{A_1}}{\Box[\Zero]{A_2}}{\Gamma'}}$
+
+  \vspace{1em}
+
+  $\infrule{r_1 = r_2 \quad r_1 \neq \Zero \quad \infertypeconv{\Gamma}{A_1}{A_2}[s]{\Gamma'}}{\infertypeconvwhnf{\Gamma}{\Box[r_1]{A_1}}{\Box[r_2]{A_2}}[\mulqty{r_1}{s}]{\Gamma'}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Type conversion}
+
+\begin{center}
+
+  $\infrule{\infertypeconv{\Gamma}{A_1}{A_2}[s_A]{\Gamma_1} \quad \infertypeconv{\Gamma_1}{B_1}{B_2}[s_B]{\Gamma_2}}{\infertypeconvwhnf{\Gamma}{\Prod{A_1}{B_1}}{\Prod{A_2}{B_2}}[\lubqty{s_A}{s_B}]{\Gamma_2}}$
+
+  \vspace{2em}
+
+  $\infrule{\infertypeconv{\Gamma}{A_1}{A_2}[s_A]{\Gamma_1} \quad \infertypeconv{\Gamma_1}{B_1}{B_2}[s_B]{\Gamma_2}}{\infertypeconvwhnf{\Gamma}{\Sum{A_1}{B_1}}{\Sum{A_2}{B_2}}[\lubqty{s_A}{s_B}]{\Gamma_2}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Type conversion}
+
+\begin{center}
+  $\infrule{(a : \Type[r]) \in \Gamma}{\infertypeconvwhnf{\Gamma}{a}{a}[r]{\Gamma}}$
+
+  \vspace{2em}
+
+  $\infrule{r_1 = r_2 \quad \infertypeconv{\extendtype{\Gamma}{a_1}[r_1]}{B_1}{\subst{B_2}{a_2}{a_1}}[s]{\extendtype{\Gamma'}{a_1}[r_1]}}{\infertypeconvwhnf{\Gamma}{\ForallE{a_1}[r_1]{B_1}}{\ForallE{a_2}[r_2]{B_2}}[s]{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{r_1 = r_2 \quad \infertypeconv{\extendtype{\Gamma}{a_1}[r_1]}{B_1}{\subst{B_2}{a_2}{a_1}}[s]{\extendtype{\Gamma'}{a_1}[r_1]}}{\infertypeconvwhnf{\Gamma}{\ForallI{a_1}[r_1]{B_1}}{\ForallI{a_2}[r_2]{B_2}}[s]{\Gamma'}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Proposition conversion}
+
+\begin{center}
+  $\infrule{\checkpropconvwhnf{\Gamma}{P_1}{P_2}{\Gamma'}}{\checkpropconv{\Gamma}{P_1}{P_2}{\Gamma'}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Proposition conversion}
+
+\begin{center}
+  $\infrule{}{\checkpropconvwhnf{\Gamma}{\True}{\True}{\Gamma}}$ \quad
+  $\infrule{}{\checkpropconvwhnf{\Gamma}{\False}{\False}{\Gamma}}$
+
+  \vspace{2em}
+
+  $\infrule{\checkpropconv{\Gamma}{P_1}{P_2}{\Gamma_1} \quad \checkpropconv{\Gamma_1}{Q_1}{Q_2}{\Gamma_2}}{\checkpropconvwhnf{\Gamma}{\Impl{P_1}{Q_1}}{\Impl{P_2}{Q_2}}{\Gamma_2}}$
+
+  \vspace{2em}
+
+  $\infrule{\checkpropconv{\Gamma}{P_1}{P_2}{\Gamma_1} \quad \checkpropconv{\Gamma_1}{Q_1}{Q_2}{\Gamma_2}}{\checkpropconvwhnf{\Gamma}{\And{P_1}{Q_1}}{\And{P_2}{Q_2}}{\Gamma_2}}$
+
+  \vspace{2em}
+
+  $\infrule{\checkpropconv{\Gamma}{P_1}{P_2}{\Gamma_1} \quad \checkpropconv{\Gamma_1}{Q_1}{Q_2}{\Gamma_2}}{\checkpropconvwhnf{\Gamma}{\Or{P_1}{Q_1}}{\Or{P_2}{Q_2}}{\Gamma_2}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Proposition conversion}
+
+\begin{center}
+  $\infrule{\infertypeconv{\Gamma}{A_1}{A_2}[r]{\Gamma_1} \quad \checkpropconv{\extend{\Gamma_1}{x_1}{A_1}}{P_1}{\subst{P_2}{x_2}{x_1}}{\extend{\Gamma_2}{x_1}{A_1}}}{\checkpropconvwhnf{\Gamma}{\All{x_1}[A_1]{P_1}}{\All{x_2}[A_2]{P_2}}{\Gamma_2}}$
+
+  \vspace{2em}
+
+  $\infrule{\infertypeconv{\Gamma}{A_1}{A_2}[r]{\Gamma_1} \quad \checkpropconv{\extend{\Gamma_1}{x_1}{A_1}}{P_1}{\subst{P_2}{x_2}{x_1}}{\extend{\Gamma_2}{x_1}{A_1}}}{\checkpropconvwhnf{\Gamma}{\Ex{x_1}[A_1]{P_1}}{\Ex{x_2}[A_2]{P_2}}{\Gamma_2}}$
+
+  \vspace{2em}
+
+  $\infrule{\infertypeconv{\Gamma}{A_1}{A_2}[r]{\Gamma_1} \quad \begin{array}{l} \checktermconv{\Gamma_1}{e_1}{e_2}{A_1}{\Gamma_2} \\ \checktermconv{\Gamma_2}{e_1'}{e_2'}{A_1}{\Gamma_3} \end{array}}{\checkpropconvwhnf{\Gamma}{\Eq[A_1]{e_1}{e_1'}}{\Eq[A_2]{e_2}{e_2'}}{\Gamma_3}}$
+\end{center}
+
+\end{frame}
+
+\NewDocumentCommand{\contraction}{m m}{#1 \longmapsto #2}
+\NewDocumentCommand{\reduction}{m m}{#1 \longrightarrow #2}
+\NewDocumentCommand{\reductions}{m m}{#1 \longrightarrow^* #2}
+
+\begin{frame}{Contraction}
+
+\begin{center}
+  $\infrule{}{\contraction{\app{(\fun{x}{e_1})}{e_2}}{\subst{e_1}{x}{e_2}}}$
+
+  \vspace{1em}
+
+  $\infrule{}{\contraction{\boxelim{x}{\boxintro{e_1}}{e_2}}{\subst{e_2}{x}{e_1}}}$
+
+  \vspace{1em}
+
+  $\infrule{}{\contraction{\unitelim{\unit}{e}}{e}}$
+
+  \vspace{1em}
+
+  $\infrule{}{\contraction{\letpair{x}{y}{\pair{e_1}{e_2}}{e_3}}{\subst{\subst{e_3}{x}{e_1}}{y}{e_2}}}$
+
+  \vspace{1em}
+
+  $\infrule{}{\contraction{\case{\inl{e_1}}{x}{e_2}{y}{e_3}}{\subst{e_2}{x}{e_1}}}$
+
+  \vspace{1em}
+
+  $\infrule{}{\contraction{\case{\inr{e_1}}{x}{e_2}{y}{e_3}}{\subst{e_3}{x}{e_1}}}$
+
+  \vspace{1em}
+
+  $\infrule{}{\contraction{\letin{x}{e_1}{e_2}}{\subst{e_2}{x}{e_1}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Contraction}
+
+\begin{center}
+  $\infrule{}{\contraction{\tapp{(\tfun{a}[r]{e})}{A}}{\subst{e}{a}{A}}}$
+
+  \vspace{1em}
+
+  $\infrule{}{\contraction{\itapp{(\itfun{a}[r]{e})}{A}}{\subst{e}{a}{A}}}$
+
+  \vspace{1em}
+
+  $\infrule{}{\contraction{\choosewitnessp{x}{h}{p}{e}}{\subst{\subst{e}{x}{\choose{p}}}{h}{\choosespec{p}}}}$
+\end{center}
+
+\end{frame}
+
+\NewDocumentCommand{\plug}{m m}{#1[#2]}
+
+\begin{frame}{Weak head evaluation contexts}
+
+E ::=\\
+\qquad $\square \pipe \app{\square}{e} \pipe \tapp{\square}{A} \pipe \itapp{\square}{A} \pipe$ \\
+\qquad $\unitelim{\square}{e} \pipe \boxelim{x}{\square}{e} \pipe$ \\
+\qquad $\letpair{x}{y}{\square}{e} \pipe \newcase{\square}{x}{e_1}{y}{e_2}$
+
+\end{frame}
+
+\begin{frame}{Computation}
+
+\begin{center}
+  $\infrule{\contraction{e}{e'}}{\reduction{\plug{E}{e}}{\plug{E}{e'}}}$
+
+  \vspace{2em}
+
+  $\infrule{}{\reductions{e}{e}}$ \quad
+  $\infrule{\reduction{e_1}{e_2} \quad \reductions{e_2}{e_3}}{\reductions{e_1}{e_3}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Whnfs and neutral terms}
+
+Whnfs: \\
+$\hat{e} ::=$ \\
+\qquad $n \pipe \fun{x}{e} \pipe \boxintro{e} \pipe \pair{e_1}{e_2} \pipe \inl{e} \pipe \inr{e} \pipe \unit$ \\
+\qquad $\tfun{a}[r]{e} \pipe \itfun{a}[r]{e}$
+
+\vspace{2em}
+
+Neutral forms: \\
+$n ::=$ \\
+\qquad $x \pipe \app{n}{e} \pipe \tapp{n}{A} \pipe \itapp{n}{A} \pipe \emptyelim{e}[A] \pipe$ \\
+\qquad $\unitelim{n}{e}[A] \pipe \boxelim{x}{n}{e}[A] \pipe$ \\
+\qquad $\letpair{x}{y}{n}{e}[A] \pipe \newcase{n}{x}{e_1}{y}{e_2}[A] \pipe$ \\
+\qquad $\choose{p}$
+
+\end{frame}
+
+\begin{frame}{Term conversion -- checking, all terms}
+
+\begin{center}
+  $\infrule{}{\checktermconv{\Gamma}{e_1}{e_2}{\Unit}{\Gamma}}$
+
+  \vspace{2em}
+
+  $\infrule{}{\checktermconv{\Gamma}{e_1}{e_2}{\Empty}{\Gamma}}$
+
+  \vspace{2em}
+
+  $\infrule{A \neq \Unit \quad A \neq \Empty \quad \reductions{e_1}{e_1'} \quad \reductions{e_2}{e_2'} \quad \checktermconvwhnf{\Gamma}{e_1'}{e_2'}{A}{\Gamma'}}{\checktermconv{\Gamma}{e_1}{e_2}{A}{\Gamma'}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Term conversion -- checking whnfs}
+
+\begin{center}
+  $\infrule{\checktermconv{\extend{\Gamma}{x}{A}}{\app{f}{x}}{\app{g}{x}}{B}{\extend{\Gamma'}{x}{A}}}{\checktermconvwhnf{\Gamma}{f}{g}{\Fun[r]{A}{B}}{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{\checktermconv{\Gamma}{\boxelim{x}{e_1}{x}}{\boxelim{x}{e_2}{x}}{A}{\Gamma'}}{\checktermconvwhnf{\Gamma}{e_1}{e_2}{\Box[r]{A}}{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{\begin{array}{l} \checktermconv{\Gamma}{\letpair{x}{y}{e_1}{x}}{\letpair{x}{y}{e_2}{x}}{A}{\Gamma_1} \\ \checktermconv{\Gamma_1}{\letpair{x}{y}{e_1}{y}}{\letpair{x}{y}{e_2}{y}}{B}{\Gamma_2} \end{array}}{\checktermconvwhnf{\Gamma}{e_1}{e_2}{\Prod{A}{B}}{\Gamma_2}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Term conversion -- checking whnfs}
+
+\begin{center}
+  $\infrule{\checktermconv{\Gamma}{e_1}{e_2}{A}{\Gamma'}}{\checktermconvwhnf{\Gamma}{\inl{e_1}}{\inl{e_2}}{\Sum{A}{B}}{\Gamma}}$
+
+  \vspace{1em}
+
+  $\infrule{\checktermconv{\Gamma}{e_1}{e_2}{B}{\Gamma'}}{\checktermconvwhnf{\Gamma}{\inr{e_1}}{\inr{e_2}}{\Sum{A}{B}}{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{\checktermconv{\extendtype{\Gamma}{a}[r]}{\tapp{f}{a}}{\tapp{g}{a}}{B}{\Gamma'}}{\checktermconvwhnf{\Gamma}{f}{g}{\ForallE{a}[r]{B}}{\Gamma'}}$
+
+  \vspace{2em}
+
+  $\infrule{\checktermconv{\extendtype{\Gamma}{a}[r]}{\itapp{f}{a}}{\itapp{g}{a}}{B}{\Gamma'}}{\checktermconvwhnf{\Gamma}{f}{g}{\ForallI{a}[r]{B}}{\Gamma'}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Term conversion -- switch mode}
+
+\begin{center}
+  $\infrule{\infertermconv{\Gamma}{n_1}{n_2}{A}{\Gamma_1} \quad \infertypeconv{\Gamma_1}{A}{B}[r]{\Gamma_2}}{\checktermconvwhnf{\Gamma}{n_1}{n_2}{B}{\Gamma_2}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Term conversion -- infer neutrals}
+
+\begin{center}
+  $\infrule{\findvar{\Gamma}{x}{A}}{\infertermconv{\Gamma}{x}{x}{A}{\Gamma}}$
+
+  \vspace{2em}
+
+  $\infrule{\infertermconvwhnf{\Gamma}{n_1}{n_2}{\Fun[r]{A}{B}}{\Gamma_1} \quad \checktermconv{\Gamma_1}{e_1}{e_2}{A}{\Gamma_2}}{\infertermconv{\Gamma}{\app{n_1}{e_1}}{\app{n_2}{e_2}}{B}{\Gamma_2}}$
+
+  \vspace{2em}
+
+  $\infrule{\infertermconvwhnf{\Gamma}{n_1}{n_2}{\ForallE{a}[r]{B}}{\Gamma_1} \quad \checktypeconv{\Gamma_1}{A_1}{A_2}[r]{\Gamma_2}}{\infertermconv{\Gamma}{\tapp{n_1}{A_1}}{\tapp{n_2}{A_2}}{\subst{B}{a}{A}}{\Gamma_2}}$
+
+  \vspace{2em}
+
+  $\infrule{\infertermconvwhnf{\Gamma}{n_1}{n_2}{\ForallI{a}[r]{B}}{\Gamma_1} \quad \checktypeconv{\Gamma_1}{A_1}{A_2}[r]{\Gamma_2}}{\infertermconv{\Gamma}{\itapp{n_1}{A_1}}{\itapp{n_2}{A_2}}{\subst{B}{a}{A}}{\Gamma_2}}$
+
+  \vspace{2em}
+
+  $\infrule{\infertypeconv{\Gamma}{A_1}{A_2}[r]{\Gamma'}}{\infertermconv{\Gamma}{\emptyelim{e_1}[A_1]}{\emptyelim{e_2}[A_2]}{A_1}{\Gamma'}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Term conversion -- infer neutrals}
+
+\begin{center}
+  $\infrule{\infertypeconv{\Gamma}{A_1}{A_2}[r]{\Gamma_1} \quad \checktermconv{\Gamma_1}{e_1}{e_2}{A}{\Gamma_2}}{\infertermconv{\Gamma}{\unitelim{n_1}{e_1}[A_1]}{\unitelim{n_2}{e_2}[A_2]}{A_1}{\Gamma_2}}$
+
+  \vspace{2em}
+
+  $\infrule{\begin{array}{l} \infertypeconv{\Gamma}{B_1}{B_2}[s]{\Gamma_1} \\ \infertermconvwhnf{\Gamma}{n_1}{n_2}{\Box[r]{A}}{\Gamma_2} \end{array} \quad \checktermconv{\extend{\Gamma_2}{x}{A}}{e_1}{e_2}{B_1}{\extend{\Gamma_3}{x}{A}}}{\infertermconv{\Gamma}{\boxelim{x}{n_1}{e_1}[B_1]}{\boxelim{x}{n_2}{e_2}[B_2]}{B_1}{\Gamma_3}}$
+
+  \vspace{2em}
+
+  $\infrule{\begin{array}{l} \infertypeconv{\Gamma}{C_1}{C_2}[r]{\Gamma_1} \\ \infertermconvwhnf{\Gamma_1}{n_1}{n_2}{\Prod{A}{B}}{\Gamma_2} \end{array} \quad \checktermconv{\extend{\extend{\Gamma_2}{x}{A}}{y}{B}}{e_1}{e_2}{C_1}{\extend{\extend{\Gamma_3}{x}{A}}{y}{B}}}{\infertermconv{\Gamma}{\letpair{x}{y}{n_1}{e_1}[C_1]}{\letpair{x}{y}{n_2}{e_2}[C_2]}{C_1}{\Gamma_2}}$
+
+  \vspace{1em}
+
+  $\infrule{\begin{array}{l} \infertypeconv{\Gamma}{C_1}{C_2}[r]{\Gamma_1} \\ \infertermconv{\Gamma_1}{e_1}{e_2}{\Sum{A}{B}}{\Gamma_2} \end{array} \quad \begin{array}{l} \checktermconv{\extend{\Gamma_2}{x}{A}}{f_1}{f_2}{C}{\extend{\Gamma_3}{x}{A}} \\ \checktermconv{\extend{\Gamma_2}{y}{B}}{g_1}{g_2}{C}{\extend{\Gamma_4}{y}{B}} \end{array}}{\infertermconv{\Gamma}{\newcase{e_1}{x_1}{f_1}{y_1}{g_1}[C_1]}{\newcase{e_2}{x_2}{f_2}{y_2}{g_2}[C_2]}{C_1}{\lubctx{\Gamma_3}{\Gamma_4}}}$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Term conversion (choice)}
+
+\begin{center}
+  $\infrule{\begin{array}{l} \inferproof{\Gamma}{p_1}{\Ex{x}[A_1]{P_1}}{\Gamma_1} \\ \inferproof{\Gamma_1}{p_2}{\Ex{x}[A_2]{P_2}}{\Gamma_2} \end{array} \quad \checkpropconv{\Gamma_2}{\Ex{x}[A_1]{P_1}}{\Ex{x}[A_1]{P_2}}{\Gamma_3}}{\infertermconv{\Gamma}{\choose{p_1}}{\choose{p_2}}{A_1}{\Gamma_3}}$
+\end{center}
+
+\end{frame}

@@ -1,0 +1,83 @@
+\section{Quantities}
+
+\begin{frame}{Quantities}
+
+\begin{itemize}
+  \item $\Zero$ means a resource has been used up and is no longer available.
+  \item $\One$ means a resource must be used exactly once.
+  \item $\Few$ (pronounced ``few'') means a resource must be used at most once.
+  \item $\Many$ (pronounced ``many'') means a resource must be used at least once.
+  \item $\Any$ (pronounced ``any'') means no restrictions on usage.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Subusage ordering}
+
+$\subusage{r_1}{r_2}$ means that a resource with quantity $r_1$ may be used when quantity $r_2$ is expected. This ordering is called sub-usaging. The definition below is just the skeleton, the full ordering is the reflexive-transitive closure of it.
+
+\begin{center}
+  $\subusage{\Any}{\Few}$ \\
+  $\subusage{\Any}{\Many}$ \\
+  $\subusage{\Many}{\One}$ \\
+  $\subusage{\Few}{\One}$ \\
+  $\subusage{\Few}{\Zero}$
+\end{center}
+
+\vspace{2em}
+
+We will denote the greatest lower bound in this order with $\glbqty{r_1}{r_2}$ and the least upper bound (if it exists) with $\lubqty{r_1}{r_2}$.
+
+\end{frame}
+
+\begin{frame}{Addition of quantities}
+
+When we have two quantities of the same resource, we can sum the quantities.
+
+\vspace{2em}
+
+\begin{center}
+  $\addqty{\Zero}{r} = r$ \\
+  $\addqty{r}{\Zero} = r$ \\
+  $\addqty{\Few}{\Few} = \Any$ \\
+  $\addqty{\Few}{\Any} = \Any$ \\
+  $\addqty{\Any}{\Few} = \Any$ \\
+  $\addqty{\Any}{\Any} = \Any$ \\
+  $\addqty{\_}{\_} = \Many$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Multiplication of quantities}
+
+When we have a quantity $r_1$ of resource $A$ that contains quantitty $r_2$ of resource $B$, then we in fact have quantity $\mulqty{r_1}{r_2}$ of resource $B$.
+
+\vspace{2em}
+
+\begin{center}
+  $\mulqty{\Zero}{r} = \Zero$ \\
+  $\mulqty{r}{\Zero} = \Zero$ \\
+  $\mulqty{\One}{r} = r$ \\
+  $\mulqty{r}{\One} = r$ \\
+  $\mulqty{\Few}{\Few} = \Few$ \\
+  $\mulqty{\Many}{\Many} = \Many$ \\
+  $\mulqty{\_}{\_} = \Any$
+\end{center}
+
+\end{frame}
+
+\begin{frame}{The algebra of quantities}
+
+Quantities $\qty$ form a positive ordered commutative semiring with no zero divisors, i.e.:
+
+\begin{itemize}
+  \item $(\qty, \addqty{}{}, \Zero)$ is a commutative monoid.
+  \item $(\qty, \mulqty{}{}, \One)$ is a commutative monoid.
+  \item $\Zero$ annihilates multiplication.
+  \item Multiplication distributes over addition.
+  \item Addition and multiplication preserve the subusage ordering in both arguments.
+  \item If $\addqty{r_1}{r_2} = \Zero$, then $r_1 = \Zero$ and $r_2 = \Zero$.
+  \item If $\mulqty{r_1}{r_2} = \Zero$, then $r_1 = \Zero$ or $r_2 = \Zero$.
+\end{itemize}
+
+\end{frame}

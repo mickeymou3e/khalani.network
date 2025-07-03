@@ -1,0 +1,19 @@
+{
+  "transaction": {
+    "hash": "0x9df31a71a2931378a55f585f10ae93fdc236b6ec7f74f5fefdda7d62dc8fff04",
+    "blockNumber": 636588
+  },
+  "data": {
+    "TestToken": {
+      "deploy": {
+        "input": {
+          "name": "DAI",
+          "symbol": "DAI",
+          "decimals": 18
+        },
+        "output": "0x16fDC39a563400Aa6EAcA6A5aC4F2CAb9A0BC8c6"
+      }
+    }
+  },
+  "timestamp": 1666951762017
+}

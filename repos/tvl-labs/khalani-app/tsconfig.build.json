@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    "types": ["jest", "node"],
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "downlevelIteration": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "module": "commonjs",
+    "target": "ES2020",
+    "jsx": "react",
+    "allowJs": true,
+    "baseUrl": "./",
+    "paths": {
+      "@assets/*": ["./public/*"],
+      "@components/*": ["./shared/components/*"],
+      "@config": ["./shared/config.ts"],
+      "@containers/*": ["./shared/containers/*"],
+      "@constants/*": ["./shared/constants/*"],
+      "@dataSource/*": ["./shared/dataSource/*"],
+      "@interfaces/*": ["./shared/interfaces/*"],
+      "@messages/*": ["./shared/messages/*"],
+      "@store/*": ["./shared/store/*"],
+      "@styles/*": ["./shared/styles/*"],
+      "@tests/*": ["./testUtils/*"],
+      "@utils/*": ["./shared/utils/*"],
+      "@libs/*": ["./shared/libs/*"],
+      "@hooks/*": ["./shared/hooks/*"],
+      "@services/*": ["./shared/services/*"],
+      "@shared/*": ["./shared/*"]
+    }
+  },
+  "include": ["shared/**/*"],
+  "exclude": [
+    "node_modules",
+    "babel.config.js",
+    "jest.config.js",
+    "shared/**/*.test.ts*",
+    "shared/**/*.stories.ts*"
+  ]
+}

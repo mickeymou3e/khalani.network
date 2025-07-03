@@ -1,0 +1,34 @@
+[package]
+name = "mirax-crypto"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+blst.workspace = true
+ed25519-consensus.workspace = true
+rand.workspace = true
+rayon.workspace = true
+secp256k1.workspace = true
+serde.workspace = true
+smol_str.workspace = true
+thiserror.workspace = true
+zeroize.workspace = true
+
+mirax-error.workspace = true
+mirax-hasher.workspace = true
+mirax-primitive.workspace = true
+
+[dev-dependencies]
+criterion.workspace = true
+
+[[bench]]
+name = "ecdsa"
+path = "benchmark/ecdsa.rs"
+harness = false
+
+[[bench]]
+name = "multi-signature"
+path = "benchmark/multi_signature.rs"
+harness = false

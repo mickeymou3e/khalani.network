@@ -1,0 +1,96 @@
+load "nat-less"
+
+define [* < <=] := [N.*  N.< N.<=]
+define [zero one two] := [N.zero N.one (S N.one)]
+define [n m x y z] := [?n ?m ?x ?y ?z]
+
+
+declare fact: [N] -> N [[int->nat]]
+
+assert fact-def := [
+    (fact zero = one)
+    (fact one = one)
+    (forall n . fact (S n) = (S n) * (fact n))
+]
+
+transform-output eval [nat->int]
+
+# (eval (fact 3)) # 6
+# (eval (fact 9)) # 362880
+
+
+define proof-goal := (forall n m . n < m <==> (fact n) < (fact m))
+
+
+# -------------------------------- Part 3 --------------------------------
+
+# First, let's see if it can be auto-proven. If it can be proven, this should be quick. If it is taking a while for
+# something this simple, it is likely that the prover is not going to generate a proof.
+# If it does generate the proof, then we know that it is provable from the current set of assumptions in scope.
+# In this case, we can then attempt to prove it inline and perhaps extract the proof to a reusable proof method, which often
+# can reduce proving time.
+
+# Go ahead and try it then move to part 4
+
+# NOTICE: If you do not have the vampire automated theorem prover installed, then `vprove-from` should be replaced with `prove` (which uses SPASS by default)
+# if you have neither installed, copy this and follow along through the athena playground at https://tryathena.org (which has both automated theorem provers installed)
+
+# conclude proof-goal
+#     (!vprove-from proof-goal (ab))
+
+# -------------------------------- Part 4 --------------------------------
+
+# let's start with a simpler proof goal.
+define proof-goal := (forall x . fact x <= fact S x)
+#(!vprove-from proof-goal (ab))
+
+# Try this  out. the proof should complete quickly.
+
+# I recommend commenting out the line that calls the automated theorem provers (ATP) after you run it once, since it still adds a few seconds of execution time and is inconvneient.
+
+
+
+
+# Since the natural numbers are inductively defined, and since the relation we are trying to prove is primarily about an *ordering* 
+# (for which induction is particularly suitable), we begin by attempting a proof by induction.
+# Inductive proofs in athena will induct over the first variable in the quantified sentence we are attempting to prove (in this case, n)
+# Each *case* in the inductive proof is expected to be represented by a clause in the induction body.
+# Natural numbers have two cases: zero | (S n), so this proof body will require a proof for the base case (zero) and one for non-zero numbers
+
+
+# --- COMMENTED OUT AND MOVED TO PART 5 SECTION ------
+
+# by-induction proof-goal {
+#     zero => (!force (fact zero <= fact S zero))
+#     | (n as (S m)) => (!force (fact S m <= fact S S m))
+# }
+
+
+
+
+# Note also the use of !force.
+# This !force is useful for proof development because it allows us to literally force the runtime to accept the conclusion based on 
+# whatever premise or premises are in scope. It is analogous to using `todo!()` within a function body in Rust lang.
+# The reason we do this here is because it allows us to check whether or not we have even written the correct conclusions in the first place.
+#   inductive proofs expect wellformed conclusions. These are generated based on the proof goal in conjunction with the inductive data type(s) over which the proof goal
+#   is defined
+# If Athena accepts the above proof with the use of !force, it means that the !force'd sentences are the correct conclusions.
+# And it tends to be easier to write a proof when we know what we are proving in the first place!
+
+# Go ahead and run Athena over this proof before moving onto part 5.
+
+
+
+# -------------------------------- Part 5--------------------------------
+
+by-induction proof-goal {
+    zero => conclude (fact zero <= fact S zero)
+                (!chain-> [
+                    (fact zero)
+                    = one 
+                    = (fact one)
+                    ==> (fact zero <= fact one)   [N.Less=.<=-def]
+                    ==> (fact zero <= fact S zero)
+                ])
+    | (n as (S m)) => (!force (fact S m <= fact S S m))
+}

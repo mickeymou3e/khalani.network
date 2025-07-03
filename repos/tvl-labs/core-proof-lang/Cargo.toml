@@ -1,0 +1,14 @@
+[package]
+name = "proof-lang"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+
+[dependencies]
+lalrpop-util = "0.20.0"
+lexi-matic = "0.1.0"
+
+[build-dependencies]
+lalrpop = { version = "0.20.0", default-features = false }

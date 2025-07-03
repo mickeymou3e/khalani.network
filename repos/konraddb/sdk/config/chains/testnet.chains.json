@@ -1,0 +1,134 @@
+[
+  {
+    "id": 11155111,
+    "chainName": "Ethereum Sepolia",
+    "chainId": "0xaa36a7",
+    "nativeCurrency": {
+      "name": "ETH",
+      "symbol": "ETH",
+      "decimals": 18
+    },
+    "blockExplorerUrls": ["https://sepolia.etherscan.io"],
+    "rpcUrls": ["https://rpc.sepolia.org"],
+    "logo": "https://icons.llamao.fi/icons/chains/rsz_ethereum.jpg",
+    "borderColor": "#808080",
+    "poolTokenSymbols": ["USDT.sepolia", "USDC.sepolia", "BUSD.sepolia"],
+    "isBalancerChain": false
+  },
+  {
+    "id": 43113,
+    "chainName": "Avalanche Testnet",
+    "chainId": "0xa869",
+    "nativeCurrency": {
+      "name": "AVAX",
+      "symbol": "AVAX",
+      "decimals": 18
+    },
+    "blockExplorerUrls": ["https://testnet.snowtrace.io"],
+    "rpcUrls": ["https://api.avax-test.network/ext/bc/C/rpc"],
+    "logo": "https://icons.llamao.fi/icons/chains/rsz_avalanche.jpg",
+    "borderColor": "#CC3333",
+    "poolTokenSymbols": ["USDT.fuji", "USDC.fuji"],
+    "isBalancerChain": false
+  },
+  {
+    "id": 10012,
+    "chainName": "Khala",
+    "chainId": "0x271c",
+    "nativeCurrency": {
+      "name": "ETH",
+      "symbol": "ETH",
+      "decimals": 18
+    },
+    "blockExplorerUrls": ["https://block-explorer.testnet.khalani.network/"],
+    "rpcUrls": ["https://testnet.khalani.network/"],
+    "logo": "https://pbs.twimg.com/media/FdWhUExUUAE30t_.png",
+    "borderColor": "#228c22",
+    "poolTokenSymbols": [],
+    "isBalancerChain": true
+  },
+  {
+    "id": 80001,
+    "chainName": "Mumbai Testnet",
+    "chainId": "0x13881",
+    "nativeCurrency": {
+      "name": "MATIC",
+      "symbol": "MATIC",
+      "decimals": 18
+    },
+    "blockExplorerUrls": ["https://mumbai.polygonscan.com/"],
+    "rpcUrls": ["https://rpc-mumbai.maticvigil.com/"],
+    "logo": "https://pbs.twimg.com/media/FdWhUExUUAE30t_.png",
+    "borderColor": "#228c22",
+    "poolTokenSymbols": ["USDT.mumbai", "USDC.mumbai"],
+    "isBalancerChain": false
+  },
+  {
+    "id": 97,
+    "chainName": "BSC Testnet",
+    "chainId": "0x61",
+    "nativeCurrency": {
+      "name": "BNB",
+      "symbol": "BNB",
+      "decimals": 18
+    },
+    "blockExplorerUrls": ["https://testnet.bscscan.com"],
+    "rpcUrls": ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
+    "logo": "https://pbs.twimg.com/media/FdWhUExUUAE30t_.png",
+    "borderColor": "#228c22",
+    "poolTokenSymbols": [
+      "USDT.bsctestnet",
+      "USDC.bsctestnet",
+      "BUSD.bsctestnet"
+    ],
+    "isBalancerChain": false
+  },
+  {
+    "id": 71401,
+    "chainName": "Godwoken Testnet",
+    "chainId": "0x116e9",
+    "nativeCurrency": {
+      "name": "CKB",
+      "symbol": "pCKB",
+      "decimals": 18
+    },
+    "blockExplorerUrls": ["https://v1.betanet.gwscan.com/"],
+    "rpcUrls": ["https://v1.testnet.godwoken.io/rpc"],
+    "logo": "https://pbs.twimg.com/media/FdWhUExUUAE30t_.png",
+    "borderColor": "#228c22",
+    "poolTokenSymbols": ["USDT.godwoken-testnet", "USDC.godwoken-testnet"],
+    "isBalancerChain": false
+  },
+  {
+    "id": 420,
+    "chainName": "Optimism Goerli",
+    "chainId": "0x1a4",
+    "nativeCurrency": {
+      "name": "ETH",
+      "symbol": "ETH",
+      "decimals": 18
+    },
+    "blockExplorerUrls": ["https://goerli-explorer.optimism.io"],
+    "rpcUrls": ["https://goerli.optimism.io"],
+    "logo": "https://pbs.twimg.com/media/FdWhUExUUAE30t_.png",
+    "borderColor": "#228c22",
+    "poolTokenSymbols": ["USDT.optimismgoerli", "USDC.optimismgoerli"],
+    "isBalancerChain": false
+  },
+  {
+    "id": 421613,
+    "chainName": "Arbitrum Goerli",
+    "chainId": "0x66eed",
+    "nativeCurrency": {
+      "name": "ARB",
+      "symbol": "AGOR",
+      "decimals": 18
+    },
+    "blockExplorerUrls": ["https://goerli.arbiscan.io/"],
+    "rpcUrls": ["https://goerli-rollup.arbitrum.io/rpc"],
+    "logo": "",
+    "borderColor": "#808080",
+    "poolTokenSymbols": ["USDT.arbitrumgoerli", "USDC.arbitrumgoerli"],
+    "isBalancerChain": false
+  }
+]

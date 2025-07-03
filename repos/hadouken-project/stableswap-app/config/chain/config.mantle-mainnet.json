@@ -1,0 +1,40 @@
+{
+  "hadouken": {
+    "lending": {
+      "url": "https://app.hadouken.finance/lend"
+    },
+    "bridge": {
+      "url": "https://bridge.mantle.xyz/"
+    }
+  },
+  "sentry": "https://d3b71357a01e426c9c4285a26657d910@o4504333193969664.ingest.sentry.io/4504333202882560",
+  "chainName": "Mantle Mainnet",
+  "chainId": "0x1388",
+  "nativeCurrency": {
+    "name": "MNT",
+    "symbol": "MNT",
+    "decimals": 18,
+    "address": "0xdeaddeaddeaddeaddeaddeaddeaddeaddead0000",
+    "wrapAddress": "0x78c1b0c915c4faa5fffa6cabf0219da63d7f4cb8"
+  },
+  "rpcUrl": "https://rpc.mantle.xyz/",
+  "readOnlyRpcUrl": "https://rpc.mantle.xyz/",
+  "wsUrl": "wss://wss.mantle.xyz",
+  "env": "testnet",
+  "subgraphs": {
+    "balancer": {
+      "httpUri": "",
+      "webSocketUri": ""
+    }
+  },
+  "explorerUrl": {
+    "godwoken": "https://explorer.mantle.xyz/",
+    "ethereum": "https://etherscan.io"
+  },
+  "api": {
+    "dia": {
+      "priceUrl": "https://api.diadata.org/v1/quotation"
+    }
+  },
+  "customLinearPools": []
+}

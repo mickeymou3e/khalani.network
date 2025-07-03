@@ -1,0 +1,54 @@
+{
+  "compilerOptions": {
+    "types": ["jest", "node"],
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "declaration": true,
+    "declarationMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": false,
+    "strict": true,
+    "strictBindCallApply": true,
+    "noImplicitAny": true,
+    "downlevelIteration": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "module": "commonjs",
+    "target": "ES2020",
+    "allowJs": true,
+    "lib": ["es2015", "es5", "es2021", "DOM"],
+    "baseUrl": "./",
+    "outDir": "dist",
+    "paths": {
+      "@store/*": ["./src/store/*"],
+      "@classes/*": ["./src/classes/*"],
+      "@interfaces/*": ["./src/interfaces/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@artifacts/*": ["./src/artifacts/*"],
+      "@services/*": ["./src/services/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@enums/*": ["./src/enums/*"],
+      "@graph/*": ["./src/graph/*"],
+      "@dataSource/*": ["./src/dataSource/*"],
+      "@config": ["./src/config.ts"],
+      "@intents/*": ["./src/intents/*"]
+    },
+    "plugins": [
+      // Transform paths in output .js files
+      { "transform": "typescript-transform-paths" },
+
+      // Transform paths in output .d.ts files (Include this line if you output declaration files)
+      { "transform": "typescript-transform-paths", "afterDeclarations": true }
+    ],
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": false,
+    "noUnusedLocals": false,
+    "preserveSymlinks": true,
+    "preserveWatchOutput": true,
+    "pretty": true
+  },
+  "include": ["src/**/*", "standalone"],
+  "exclude": ["node_modules", "standalone"]
+}

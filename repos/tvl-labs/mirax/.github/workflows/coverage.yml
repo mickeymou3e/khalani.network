@@ -1,0 +1,44 @@
+name: Coverage Test
+concurrency:
+  group: Coverage Test-${{ github.ref }}
+  cancel-in-progress: true
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  Coverage:
+    name: Collect test coverage
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@nightly
+        with:
+          components: llvm-tools-preview
+          toolchain: 1.85.0
+
+      - name: Install Clang
+        run: sudo apt-get install clang libclang-dev
+
+      - name: Axi dependency
+        uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.SECRET_AXI_DEPENDENCY }}
+
+      - name: Install latest nextest release
+        uses: taiki-e/install-action@nextest
+
+      - name: Install cargo-llvm-cov
+        uses: taiki-e/install-action@cargo-llvm-cov
+
+      - name: Collect coverage data
+        run: |
+          cargo llvm-cov --no-report nextest --all --all-features
+          cargo llvm-cov report --lcov --output-path lcov.info
+
+      - name: Upload coverage data to codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: lcov.info

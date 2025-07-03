@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ include "alert-rules.fullname" . }}-axon-nodes-memory-usage
+  namespace: monitoring
+  labels:
+    rules: "true"
+spec:
+  groups:
+    - name: AxonNodesMemoryUsage
+      rules:
+        - alert: TooHighAxonNodeMemoryUsage
+          expr: container_memory_working_set_bytes{namespace="axon", container=~"axon.*"} > {{ .Values.rules.axonMemoryUsage.threshold }}
+          for: {{ .Values.rules.axonMemoryUsage.forPeriod }}
+          labels:
+            severity: critical
+          annotations:
+            summary: "Memory usage by Axon node is too high"
+            description: "Axon node {{"{{"}} $labels.pod {{"}}"}} is using $value bytes of memory, more than expected {{ .Values.rules.axonMemoryUsage.threshold }}"

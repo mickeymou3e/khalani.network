@@ -1,0 +1,29 @@
+name: Publish to Github Packages
+
+on:
+  release:
+    types: [created]
+    
+env:
+  NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+jobs:
+  publish:
+    runs-on: ubuntu-22.04 
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.x'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@tvl-labs'
+          always-auth: true
+      - run: yarn --frozen-lockfile
+      - run: yarn hardhat compile
+      - run: yarn build
+      - run: find ./ -type f -exec sed -i 's/"ethers"/"ethers-v6"/g' {} \;
+        working-directory: build/typechain-types
+      - run: yarn config set @tvl-labs:registry https://npm.pkg.github.com
+      - run: yarn publish --registry https://npm.pkg.github.com
+      

@@ -1,0 +1,17 @@
+Result: Nothing
+Result: Proved(=[factorial[0]):Nat, 1])
+Result: Proved(=[factorial[1]):Nat, 1])
+Result: Proved(=[factorial[5]):Nat, 120])
+Result: Nothing
+Result: Proved(=[fibonacci[0]):Nat, 0])
+Result: Proved(=[fibonacci[1]):Nat, 1])
+Result: Proved(=[fibonacci[8]):Nat, 21])
+Result: Nothing
+Result: Nothing
+Result: Proved(=[sum_list_nat[ListNatCons[1, ListNatCons[2, ListNatCons[3, ListNatNil:ListNat]):ListNat]):ListNat]):ListNat]):Nat, 6])
+Result: Nothing
+Result: Proved(my_predicate[1])
+Result: Proved(my_predicate[3])
+Result: Proved(my_predicate[Succ[Succ[Succ[Zero:Nat]):Nat]):Nat]):Nat])
+Result: Nothing
+Result: Proved(my_boolean_function[])

@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "strict": true,
+    "target": "ES6",
+    "outDir": "dist",
+    "rootDir": ".",
+    "paths": {
+      "@src/*": ["./src/*"]
+    }
+  },
+
+  "typeRoots": ["node_modules/@types", "src/types", "src/contracts"],
+  "include": ["src", "cli", "build", "contracts", "deploy", "test"],
+  "exclude": ["node_modules", "build", "contracts"],
+  "files": [
+    "hardhat.config.ts",
+    "hardhat-zksync.config.ts",
+    "hardhat-base.config.ts"
+  ]
+}

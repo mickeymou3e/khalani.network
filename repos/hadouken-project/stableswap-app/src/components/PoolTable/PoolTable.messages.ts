@@ -1,0 +1,9 @@
+const POOL_COLUMN_HEADER = 'Pool'
+const BASE_APY_COLUMN_HEADER = 'Base APY'
+const VOLUME_COLUMN_HEADER = 'Volume'
+
+export const messages = {
+  POOL_COLUMN_HEADER,
+  BASE_APY_COLUMN_HEADER,
+  VOLUME_COLUMN_HEADER,
+}

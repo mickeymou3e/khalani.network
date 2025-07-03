@@ -1,0 +1,20 @@
+{
+  "transaction": {
+    "hash": "0xd8fc799e65c69ddcdbfaf76097193976025ae7fa50e7507a84c3dab293279f4f",
+    "blockNumber": 20400505
+  },
+  "data": {
+    "StaticAToken": {
+      "deploy": {
+        "input": {
+          "name": "Wrapped hUSDC",
+          "symbol": "hUSDC",
+          "lendingPool": "0xe0371E2eafca4F84291F513B232245174c3a360C",
+          "aToken": "0xB445fEE1eD11771D7D30413d8c13b733E38e8E4C"
+        },
+        "output": "0xaE5B34D44d4235AdAE837D8272a5418156c40e68"
+      }
+    }
+  },
+  "timestamp": 1694691141071
+}
