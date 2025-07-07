@@ -1,1 +1,1 @@
-Khalani Network Compromised
+Khalani Network Arcadia Intents Protocol Compromised
