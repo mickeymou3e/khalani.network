@@ -1,0 +1,378 @@
+---
+title: Communication System
+---
+
+import SourceLink from '@components/SourceLink.astro';
+import { Aside, Card, CardGrid, Tabs, TabItem, Steps, FileTree, Code, LinkButton, Badge } from '@astrojs/starlight/components';
+import CollapsibleAside from '../../../components/CollapsibleAside.astro';
+
+<CollapsibleAside title="Relevant Source Files">
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/ecosystem.config.js" text="ecosystem.config.js" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/hparams.json" text="hparams.json" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/miner.py" text="neurons/miner.py" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py" text="neurons/validator.py" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/pyproject.toml" text="pyproject.toml" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/__init__.py" text="src/tplr/__init__.py" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/comms.py" text="src/tplr/comms.py" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/tests/test_comms.py" text="tests/test_comms.py" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/uv.lock" text="uv.lock" />
+</CollapsibleAside>
+
+
+
+The Communication System in Templar provides a robust data exchange mechanism for distributed training across the network. It manages gradient sharing, checkpoint synchronization, peer coordination, and storage integration to enable effective communication between miners and validators. This page covers the core communication infrastructure, while related topics such as checkpoint specifics and blockchain integration are covered in [Checkpoint Management](/reference/checkpoint-management) and [Chain Integration](/reference/chain-integration).
+
+## Architecture Overview
+
+The Communication System is built around the `Comms` class, which serves as a centralized interface for all network communication operations. It inherits from `ChainManager` to integrate with the Bittensor blockchain and leverages Cloudflare R2 storage for data persistence.
+
+```mermaid
+graph TD
+    subgraph "Communication System Components"
+        COMMS["Comms Class"]
+        CHAIN["ChainManager"]
+        R2["R2 Storage Integration"]
+        PEER["Peer Management"]
+        GRAD["Gradient Exchange"]
+        CKPT["Checkpoint Handling"]
+    end
+
+    COMMS -->|"inherits from"| CHAIN
+    COMMS -->|"manages"| R2
+    COMMS -->|"provides"| PEER
+    COMMS -->|"enables"| GRAD
+    COMMS -->|"handles"| CKPT
+
+    subgraph "Integration Points"
+        MINERS["Miners"]
+        VALIDATORS["Validators"]
+        BLOCKCHAIN["Bittensor Blockchain"]
+        STORAGE["Cloudflare R2 Storage"]
+    end
+
+    MINERS -->|"uses"| COMMS
+    VALIDATORS -->|"uses"| COMMS
+    COMMS -->|"interacts with"| BLOCKCHAIN
+    COMMS -->|"stores/retrieves data"| STORAGE
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/comms.py#L64-L121" text="src/tplr/comms.py:64-121" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/miner.py#L174-L188" text="neurons/miner.py:174-188" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py#L208-L220" text="neurons/validator.py:208-220" />
+
+## Core Functionality
+
+### Initialization and Configuration
+
+The `Comms` class is initialized with a wallet, configuration, and references to the network context. It sets up connections to R2 storage buckets and prepares for blockchain interactions.
+
+```mermaid
+flowchart LR
+    subgraph "Comms Initialization"
+        INIT["__init__()"]
+        WALLET["Wallet Authentication"]
+        CONFIG["Configuration"]
+        BUCKETS["Storage Buckets"]
+        SESSIONS["S3 Sessions"]
+    end
+
+    INIT -->|"requires"| WALLET
+    INIT -->|"processes"| CONFIG
+    INIT -->|"configures"| BUCKETS
+    INIT -->|"establishes"| SESSIONS
+
+    subgraph "Bucket Types"
+        GRAD["Gradients Bucket"]
+        DATA["Dataset Bucket"]
+        AGG["Aggregator Bucket"]
+    end
+
+    BUCKETS -->|"creates"| GRAD
+    BUCKETS -->|"creates"| DATA
+    BUCKETS -->|"creates"| AGG
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/comms.py#L64-L121" text="src/tplr/comms.py:64-121" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/comms.py#L174-L220" text="src/tplr/comms.py:174-220" />
+
+### Storage Integration
+
+The Communication System uses Cloudflare R2 for persistent storage of gradients, model checkpoints, and peer information. It manages connections to different buckets and handles data serialization/deserialization.
+
+| Bucket Type | Purpose | Access Control |
+|-------------|---------|----------------|
+| Gradients | Stores gradient updates from miners | Read/Write separated |
+| Dataset | Contains training datasets | Read-only for most users |
+| Aggregator | Stores aggregated model states | Managed access |
+
+The system provides efficient methods for large file handling through multipart uploads and downloads.
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/comms.py#L122-L169" text="src/tplr/comms.py:122-169" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/comms.py#L322-L389" text="src/tplr/comms.py:322-389" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/comms.py#L476-L683" text="src/tplr/comms.py:476-683" />
+
+### Data Exchange
+
+#### Put Operations
+
+```mermaid
+sequenceDiagram
+    participant Neuron as "Miner/Validator"
+    participant Comms as "Comms"
+    participant S3 as "R2 Storage"
+    participant Chain as "Bittensor Chain"
+    
+    Neuron->>Comms: put(state_dict, uid, window, key)
+    Comms->>Comms: Prepare data
+    
+    alt local storage
+        Comms->>Comms: Store locally
+    else remote storage
+        Comms->>S3: s3_put_object(key, file_path)
+        alt large file
+            S3->>S3: upload_large_file()
+        end
+    end
+    
+    Comms->>Chain: try_commit(wallet, bucket)
+    Comms->>Neuron: Return completion timestamp
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/comms.py#L322-L371" text="src/tplr/comms.py:322-371" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/comms.py#L476-L573" text="src/tplr/comms.py:476-573" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/miner.py#L417-L435" text="neurons/miner.py:417-435" />
+
+#### Get Operations
+
+```mermaid
+sequenceDiagram
+    participant Neuron as "Miner/Validator"
+    participant Comms as "Comms"
+    participant S3 as "R2 Storage"
+    
+    Neuron->>Comms: get(uid, window, key)
+    
+    alt local retrieval
+        Comms->>Comms: Load from local storage
+    else remote retrieval
+        Comms->>S3: s3_get_object(key, bucket)
+        alt large file
+            S3->>S3: download_large_file()
+        end
+        S3->>Comms: Return data
+    end
+    
+    Comms->>Comms: Process data (deserialize)
+    Comms->>Neuron: Return state_dict, global_step
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/comms.py#L372-L474" text="src/tplr/comms.py:372-474" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/comms.py#L574-L683" text="src/tplr/comms.py:574-683" />
+
+### Gradient Gathering
+
+The gradient gathering process is central to Templar's distributed training approach. Validators collect gradient updates from multiple miners, normalize them, and apply them to update their models.
+
+```mermaid
+flowchart TD
+    subgraph "Gather Process"
+        GATHER["gather()"]
+        FETCH["Fetch peer gradients"]
+        NORMALIZE["Normalize gradients"]
+        AGGREGATE["Aggregate results"]
+        SKIPPED["Track skipped UIDs"]
+    end
+
+    GATHER -->|"1. initiates"| FETCH
+    FETCH -->|"2. processes"| NORMALIZE
+    NORMALIZE -->|"3. combines"| AGGREGATE
+    FETCH -->|"4. records failures"| SKIPPED
+    AGGREGATE -->|"5. includes"| SKIPPED
+
+    subgraph "Time Management"
+        TIME_WINDOW["Time window filtering"]
+        TIME_CHECK["Check data timestamp"]
+        TOO_EARLY["Reject too early"]
+        TOO_LATE["Reject too late"]
+    end
+
+    FETCH -->|"applies"| TIME_WINDOW
+    TIME_WINDOW -->|"performs"| TIME_CHECK
+    TIME_CHECK -->|"may flag"| TOO_EARLY
+    TIME_CHECK -->|"may flag"| TOO_LATE
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/comms.py#L684-L1118" text="src/tplr/comms.py:684-1118" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py#L827-L846" text="neurons/validator.py:827-846" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/miner.py#L489-L501" text="neurons/miner.py:489-501" />
+
+## Peer Management
+
+The Communication System incorporates sophisticated peer management to ensure efficient and fair participation in the training process.
+
+### Peer Selection and Tracking
+
+```mermaid
+flowchart LR
+    subgraph "Peer Management"
+        TRACK["track_active_peers()"]
+        UPDATE["update_peers_with_buckets()"]
+        ACTIVE["active_peers set"]
+        EVAL["eval_peers"]
+        INACTIVE["inactive_peers"]
+    end
+
+    TRACK -->|"continuously updates"| ACTIVE
+    UPDATE -->|"refreshes"| EVAL
+    UPDATE -->|"identifies"| INACTIVE
+
+    subgraph "Peer Selection Criteria"
+        BUCKETS["Has valid bucket"]
+        COMMITMENT["Has chain commitment"]
+        RECENT["Recently active"]
+        PERFORMANCE["Performance rating"]
+    end
+
+    BUCKETS -->|"contributes to"| EVAL
+    COMMITMENT -->|"contributes to"| EVAL
+    RECENT -->|"contributes to"| EVAL
+    PERFORMANCE -->|"affects"| EVAL
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/comms.py#L1228-L1386" text="src/tplr/comms.py:1228-1386" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py#L695-L704" text="neurons/validator.py:695-704" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/miner.py#L477-L485" text="neurons/miner.py:477-485" />
+
+### Peer List Management
+
+The system manages peer lists to coordinate which nodes should communicate with each other during different training windows.
+
+| Method | Purpose | 
+|--------|---------|
+| `post_peer_list` | Publishes a list of selected peers for a future window |
+| `get_peer_list` | Retrieves the peer list for the current window |
+| `update_peers_with_buckets` | Refreshes peer information with storage access |
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/comms.py#L1228-L1336" text="src/tplr/comms.py:1228-1336" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py#L678-L686" text="neurons/validator.py:678-686" />
+
+## Checkpoint Management
+
+The Communication System provides mechanisms for saving and loading model checkpoints to enable consistent model state across the network.
+
+```mermaid
+flowchart TD
+    subgraph "Checkpoint Operations"
+        SAVE["save_checkpoint()"]
+        LOAD["load_checkpoint()"]
+        GET_LATEST["get_latest_checkpoint()"]
+    end
+
+    SAVE -->|"stores model state"| R2["R2 Storage"]
+    LOAD -->|"requests from"| GET_LATEST
+    GET_LATEST -->|"retrieves from"| R2
+
+    subgraph "Checkpoint Components"
+        MODEL["Model state_dict"]
+        OPT["Optimizer state"]
+        SCHED["Scheduler state"]
+        MOM["Momentum buffer"]
+        META["Metadata (window, step)"]
+    end
+
+    SAVE -->|"includes"| MODEL
+    SAVE -->|"includes"| OPT
+    SAVE -->|"includes"| SCHED
+    SAVE -->|"includes"| MOM
+    SAVE -->|"includes"| META
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/comms.py#L1489-L1566" text="src/tplr/comms.py:1489-1566" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/comms.py#L1567-L1677" text="src/tplr/comms.py:1567-1677" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/miner.py#L727-L747" text="neurons/miner.py:727-747" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py#L582-L602" text="neurons/validator.py:582-602" />
+
+## Error Handling and Resilience
+
+The Communication System incorporates several mechanisms to ensure reliable operation in a distributed environment:
+
+1. **Retry Logic**: Automatic retries for network operations with exponential backoff
+2. **Client Reconnection**: Purging and recreation of S3 clients when connection issues occur
+3. **Stale Data Cleanup**: Regular removal of outdated data from both local and remote storage
+4. **Timeout Handling**: Graceful handling of operations that exceed time limits
+5. **Concurrency Control**: Semaphores to limit the number of concurrent operations
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/comms.py#L366-L371" text="src/tplr/comms.py:366-371" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/comms.py#L484-L497" text="src/tplr/comms.py:484-497" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/comms.py#L237-L258" text="src/tplr/comms.py:237-258" />
+
+## Integration with Neurons
+
+Both miners and validators integrate with the Communication System to participate in the distributed training process.
+
+### Miner Integration
+
+Miners use the Communication System to:
+- Retrieve model checkpoints to align with the network state
+- Upload their own gradient updates
+- Gather peer gradients to update their models
+- Share debug information and metrics
+
+```python
+# Miner initialization of Comms
+self.comms = tplr.comms.Comms(
+    wallet=self.wallet,
+    save_location="/tmp",
+    key_prefix="model",
+    config=self.config,
+    netuid=self.config.netuid,
+    metagraph=self.metagraph,
+    hparams=self.hparams,
+    uid=self.uid,
+)
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/miner.py#L174-L188" text="neurons/miner.py:174-188" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/miner.py#L417-L435" text="neurons/miner.py:417-435" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/miner.py#L489-L501" text="neurons/miner.py:489-501" />
+
+### Validator Integration
+
+Validators use the Communication System to:
+- Maintain the latest model state via checkpoints
+- Gather gradients from miners for evaluation
+- Post peer lists to coordinate network communication
+- Commit storage information to the blockchain
+
+```python
+# Validator gradient gathering
+gather_result = await self.comms.gather(
+    my_uid=self.uid,
+    uids=self.comms.peers,
+    window=self.sync_window,
+    key="gradient",
+    timeout=35,
+    device=self.config.device,
+    local=False,
+    totalks=self.totalks,
+    time_min=time_min,
+    time_max=time_max,
+)
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py#L208-L220" text="neurons/validator.py:208-220" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py#L678-L686" text="neurons/validator.py:678-686" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py#L827-L846" text="neurons/validator.py:827-846" />
+
+## Performance Considerations
+
+The Communication System is designed for efficiency in a distributed environment:
+
+1. **Chunked Transfers**: Large files are processed in manageable chunks
+2. **Resource Optimization**: Adaptive resource allocation based on available CPU/GPU
+3. **Persistent Connections**: S3 clients are reused to avoid connection overhead
+4. **Concurrent Operations**: Parallel processing of multiple data transfers
+5. **Time Window Filtering**: Implements temporal boundaries for data relevance
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/comms.py#L476-L573" text="src/tplr/comms.py:476-573" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/comms.py#L574-L683" text="src/tplr/comms.py:574-683" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/comms.py#L122-L147" text="src/tplr/comms.py:122-147" />
+
+## Configuration
+
+The Communication System is configured through:
+
+1. **Environment Variables**: R2 credentials and bucket information
+2. **Hyperparameters**: Network settings from the hparams configuration
+3. **Runtime Parameters**: Passed during neuron initialization
+
+Key configuration parameters include:
+
+| Parameter | Purpose | Source |
+|-----------|---------|--------|
+| `active_check_interval` | Frequency for checking peer activity | hparams.json |
+| `recent_windows` | Number of windows to check for activity | hparams.json |
+| `peer_replacement_frequency` | How often to update peer lists | hparams.json |
+| `time_window_delta_seconds` | Temporal boundary for data relevance | hparams.json |
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/comms.py#L64-L121" text="src/tplr/comms.py:64-121" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/hparams.json#L38-L46" text="hparams.json:38-46" />
+
+## Summary
+
+The Communication System is a fundamental component of Templar that enables decentralized training by facilitating efficient data exchange between miners and validators. Through integration with Cloudflare R2 storage and the Bittensor blockchain, it provides a reliable infrastructure for gradient sharing, checkpoint synchronization, and peer coordination.

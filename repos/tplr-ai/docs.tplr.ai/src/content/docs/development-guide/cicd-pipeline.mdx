@@ -1,0 +1,290 @@
+---
+
+title: "CI/CD Pipeline"
+
+---
+
+
+
+import CollapsibleAside from '@components/CollapsibleAside.astro';
+
+import SourceLink from '@components/SourceLink.astro';
+
+
+
+<CollapsibleAside title="Relevant Source Files">
+
+  <SourceLink text=".github/workflows/ci.yml" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.github/workflows/ci.yml" />
+
+  <SourceLink text="codecov.yml" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/codecov.yml" />
+
+</CollapsibleAside>
+
+
+
+
+
+
+
+
+This document details the Continuous Integration and Continuous Deployment (CI/CD) pipeline implemented for the Templar project. It focuses on the automated workflows that run when code changes are pushed, ensuring code quality, test coverage, and consistent formatting. For information about the development environment setup, see [Development Environment](/development-guide/development-environment#10.1), and for testing strategies, see [Testing](/development-guide/testing#10.2).
+
+## Pipeline Overview
+
+The Templar project uses GitHub Actions as its primary CI/CD platform. The pipeline automates code quality checks, testing, and coverage reporting to maintain high standards of code quality while enabling rapid development.
+
+```mermaid
+flowchart TD
+    subgraph "Trigger Events"
+        PR["Pull Request"]
+        Push["Push to main branch"]
+    end
+
+    subgraph "CI Pipeline"
+        Block["Block Fixup Job"]
+        Lint["Lint and Format Job"]
+        Test["Test Job"]
+    end
+
+    subgraph "Reporting"
+        Coverage["Codecov Coverage Report"]
+    end
+
+    PR --> Block
+    PR --> Lint
+    PR --> Test
+    Push --> Lint
+    Push --> Test
+    Test --> Coverage
+```
+
+Sources: <SourceLink text=".github/workflows/ci.yml:3-8" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.github/workflows/ci.yml#L3-L8" />
+
+## Workflow Configuration
+
+The CI/CD pipeline is configured in the GitHub Actions workflow file, which defines the jobs, their dependencies, and execution environments.
+
+```mermaid
+flowchart TB
+    subgraph "CI Workflow"
+        direction TB
+        subgraph "Jobs"
+            direction LR
+            block["block-fixup"]
+            lint["lint-and-format"]
+            test["test"]
+        end
+        
+        subgraph "Environment"
+            ubuntu["Ubuntu Latest"]
+            py311["Python 3.11"]
+            py312["Python 3.12"]
+        end
+        
+        subgraph "Tools"
+            uv["uv package manager"]
+            ruff["Ruff (lint/format)"]
+            pytest["Pytest with coverage"]
+            codecov["Codecov uploader"]
+        end
+    end
+    
+    block --> ubuntu
+    lint --> ubuntu
+    lint --> py311
+    lint --> py312
+    test --> ubuntu
+    test --> py311
+    test --> py312
+    
+    ubuntu --> uv
+    uv --> ruff
+    uv --> pytest
+    pytest --> codecov
+```
+
+Sources: <SourceLink text=".github/workflows/ci.yml:9-122" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.github/workflows/ci.yml#L9-L122" />
+
+## Jobs in the Pipeline
+
+The pipeline consists of three main jobs, each serving a specific purpose in maintaining code quality.
+
+### Block Fixup Job
+
+This job prevents pull requests containing fixup commits from being merged, ensuring a clean git history.
+
+```mermaid
+flowchart TD
+    PR["Pull Request"] --> Check{{"Is PR?"}}
+    Check -->|Yes| Checkout["Checkout Repository"]
+    Check -->|No| Skip["Skip Job"]
+    Checkout --> BlockFixup["Block Fixup Commit Merge"]
+    BlockFixup -->|Fixup Found| Fail["Fail CI"]
+    BlockFixup -->|No Fixups| Pass["Pass"]
+```
+
+Sources: <SourceLink text=".github/workflows/ci.yml:10-17" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.github/workflows/ci.yml#L10-L17" />
+
+### Lint and Format Job
+
+This job checks that code follows the project's styling and linting rules, running on both Python 3.11 and 3.12.
+
+```mermaid
+flowchart TD
+    Start["Lint and Format Job"] --> Checkout["Checkout Repository"]
+    Checkout --> SetupUV["Setup uv package manager"]
+    SetupUV --> InstallDeps["Install dependencies"]
+    InstallDeps --> RuffLint["Run Ruff Lint"]
+    RuffLint --> RuffFormat["Run Ruff Format Check"]
+    RuffLint -->|Errors| Fail["Fail CI"]
+    RuffFormat -->|Errors| Fail
+    RuffFormat -->|No Errors| Pass["Pass"]
+```
+
+Sources: <SourceLink text=".github/workflows/ci.yml:19-44" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.github/workflows/ci.yml#L19-L44" />
+
+### Test Job
+
+This job runs the test suite with coverage reporting, ensuring that code changes don't break existing functionality and maintain adequate test coverage.
+
+```mermaid
+flowchart TD
+    Start["Test Job"] --> Checkout["Checkout Repository"]
+    Checkout --> CreateEnv["Create .env file from secrets"]
+    CreateEnv --> SetupUV["Setup uv package manager"]
+    SetupUV --> InstallDeps["Install dependencies"]
+    InstallDeps --> RunTests["Run Tests with Coverage"]
+    RunTests --> UploadCodecov["Upload to Codecov"]
+    RunTests -->|Tests Fail| FailCI["Fail CI"]
+    UploadCodecov -->|Upload Fails| FailCI
+    UploadCodecov -->|Success| Pass["Pass"]
+```
+
+Sources: <SourceLink text=".github/workflows/ci.yml:46-122" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.github/workflows/ci.yml#L46-L122" />
+
+## Environment Configuration
+
+The test job requires specific environment variables to properly run tests that interact with storage services. These variables are securely stored as GitHub Secrets and injected into the workflow runtime.
+
+### Secret Variables
+
+The pipeline uses several R2 storage-related secrets for running tests that interact with Cloudflare R2 storage:
+
+| Secret Category | Variables |
+|----------------|-----------|
+| Gradients Bucket | Account ID, Bucket Name, Read/Write Access Keys |
+| Dataset Bucket | Account ID, Bucket Name, Read/Write Access Keys, Bucket List |
+| Aggregator Bucket | Account ID, Bucket Name, Read Access Keys |
+
+Sources: <SourceLink text=".github/workflows/ci.yml:53-70" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.github/workflows/ci.yml#L53-L70" />, <SourceLink text=".github/workflows/ci.yml:78-100" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.github/workflows/ci.yml#L78-L100" />
+
+## Code Coverage Configuration
+
+The project enforces code coverage requirements through Codecov integration, with specific targets defined in the configuration file.
+
+```mermaid
+flowchart TD
+    Test["Run Tests with Coverage"] --> GenerateXML["Generate XML Coverage Report"]
+    GenerateXML --> UploadCodecov["Upload to Codecov"]
+    UploadCodecov --> CheckTarget{"Meet 85% Target?"}
+    CheckTarget -->|Yes| Pass["Pass CI"]
+    CheckTarget -->|No, but within 1% threshold| Pass
+    CheckTarget -->|No, exceeds threshold| Fail["Fail CI"]
+```
+
+Coverage requirements:
+- Project target: 85% code coverage
+- Patch target: 85% code coverage for changes
+- Threshold: 1% tolerance for coverage changes
+
+Sources: <SourceLink text="codecov.yml:1-10" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/codecov.yml#L1-L10" />, <SourceLink text=".github/workflows/ci.yml:112-121" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.github/workflows/ci.yml#L112-L121" />
+
+## Pipeline Integration with Development Workflow
+
+The CI/CD pipeline is integrated into the development workflow to ensure code quality at different stages.
+
+```mermaid
+flowchart LR
+    subgraph "Developer Workflow"
+        Fork["Fork Repository"] --> Branch["Create Branch"]
+        Branch --> Code["Make Changes"]
+        Code --> Test["Run Local Tests"]
+        Test --> Commit["Commit Changes"]
+        Commit --> PR["Create Pull Request"]
+        PR --> Review["Code Review"]
+        Review --> Merge["Merge to main"]
+    end
+    
+    subgraph "CI Pipeline Checks"
+        BlockFixup["Block Fixup Commits"]
+        LintFormat["Lint and Format Check"]
+        TestCov["Test with Coverage"]
+    end
+    
+    PR --> BlockFixup
+    PR --> LintFormat
+    PR --> TestCov
+    
+    BlockFixup -->|Pass| Review
+    LintFormat -->|Pass| Review
+    TestCov -->|Pass| Review
+    
+    BlockFixup -->|Fail| Code
+    LintFormat -->|Fail| Code
+    TestCov -->|Fail| Code
+```
+
+Sources: <SourceLink text=".github/workflows/ci.yml:3-8" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.github/workflows/ci.yml#L3-L8" />
+
+## Package Management with UV
+
+The CI pipeline uses the UV package manager for Python dependency management, which provides faster and more reliable dependency resolution than pip.
+
+| Feature | Implementation |
+|---------|---------------|
+| Cache Support | Enabled for faster CI runs |
+| Dependency Installation | `uv sync --all-extras --dev` |
+| Python Versions | 3.11 and 3.12 matrix testing |
+
+Sources: <SourceLink text=".github/workflows/ci.yml:30-35" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.github/workflows/ci.yml#L30-L35" />, <SourceLink text=".github/workflows/ci.yml:102-110" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.github/workflows/ci.yml#L102-L110" />
+
+## Codecov Reporting Configuration
+
+Codecov is configured to provide detailed feedback on code coverage through PR comments.
+
+```mermaid
+flowchart TD
+    Test["Run Tests"] --> GenerateCovXML["Generate Coverage XML"]
+    GenerateCovXML --> UploadCodecov["Upload to Codecov"]
+    UploadCodecov --> PRComment["Generate PR Comment"]
+    
+    subgraph "Comment Contents"
+        Reach["Coverage Reach Stats"]
+        Diff["Coverage Diff"]
+        Flags["Coverage Flags"]
+        Files["Affected Files"]
+    end
+    
+    PRComment --> Reach
+    PRComment --> Diff
+    PRComment --> Flags
+    PRComment --> Files
+```
+
+Sources: <SourceLink text="codecov.yml:12-15" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/codecov.yml#L12-L15" />, <SourceLink text=".github/workflows/ci.yml:116-121" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.github/workflows/ci.yml#L116-L121" />
+
+## Summary of CI/CD Components
+
+The Templar CI/CD pipeline combines several key technologies to ensure code quality:
+
+| Component | Tool | Purpose |
+|-----------|------|---------|
+| Workflow Engine | GitHub Actions | Orchestrates the CI/CD process |
+| Package Management | UV | Fast, reliable dependency installation |
+| Code Quality | Ruff | Linting and formatting |
+| Testing | pytest | Running test suite |
+| Coverage | pytest-cov | Generating coverage reports |
+| Coverage Reporting | Codecov | Tracking and enforcing coverage targets |
+| Commit Quality | block-fixup-merge-action | Ensuring clean git history |
+
+Sources: <SourceLink text=".github/workflows/ci.yml:1-122" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.github/workflows/ci.yml#L1-L122" />, <SourceLink text="codecov.yml:1-15" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/codecov.yml#L1-L15" />

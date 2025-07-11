@@ -1,0 +1,97 @@
+@import '@/styles/shared-imports.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.mainContent {
+  flex-grow: 1;
+  padding: 4rem 2rem 6rem;
+
+  @media (max-width: 768px) {
+    padding: 3rem 1.5rem 4rem;
+  }
+}
+
+.heroSection {
+  text-align: center;
+  margin-bottom: 4rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 3rem;
+  }
+}
+
+.pageTitle {
+  font-size: 3rem;
+  margin: 0;
+
+  @media (max-width: 1024px) {
+    font-size: 2.5rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+}
+
+.contentSection {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: justify;
+}
+
+.mainText {
+  line-height: 1.7;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+
+  @media (max-width: 768px) {
+    margin-bottom: 2rem;
+    text-align: left;
+  }
+}
+
+.contactText {
+  line-height: 1.7;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.highlight {
+  color: var(--color-templar-red);
+}
+
+.emailLink {
+  color: var(--color-templar-red);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--color-templar-red);
+    transition: width 0.3s ease;
+  }
+
+  &:hover {
+    &::after {
+      width: 100%;
+    }
+  }
+
+  .dark & {
+    &:hover {
+      color: var(--color-templar-red-light, var(--color-templar-red));
+    }
+  }
+}

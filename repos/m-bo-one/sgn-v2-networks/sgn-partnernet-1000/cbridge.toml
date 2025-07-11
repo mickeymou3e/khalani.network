@@ -1,0 +1,43 @@
+[bridge.default_check_interval]
+# cbridge events
+send = 2
+relay = 2
+liquidity_added = 2
+withdraw_done = 3
+signers_updated = 2
+# pegbridge events
+deposited = 2
+mint = 3
+burn = 2
+withdrawn = 3
+# eth events
+delegation_update = 20
+
+[[multichain]]
+chainID = 5
+name = "Goerli"
+# Private gateway endpoint recommended
+gateway = "https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"
+blkinterval = 15
+blkdelay = 5
+maxblkdelta = 5000
+cbridge = "0x8d50a024B2F5593605d3cE8183Ca8969226Fcbf8"
+
+[[multichain]]
+chainID = 97
+name = "BSC Testnet"
+gateway = "https://data-seed-prebsc-1-s1.binance.org:8545/"
+blkinterval = 3
+blkdelay = 8
+maxblkdelta = 5000
+cbridge = "0xD9d1034ef3d21221F008C7e96346CA999966752C"
+
+[[multichain]]
+chainID = 4002
+name = "Fantom Testnet"
+gateway = "https://rpc.testnet.fantom.network/"
+blkinterval = 3
+blkdelay = 6
+maxblkdelta = 5000
+forwardblkdelay = 50
+cbridge = "0xB565E2fFee7Eb5aA40EB755250f7F7D1549fdAe2"

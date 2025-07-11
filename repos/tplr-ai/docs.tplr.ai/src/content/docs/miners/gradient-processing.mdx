@@ -1,0 +1,314 @@
+---
+
+title: "Gradient Processing"
+
+---
+
+
+
+import CollapsibleAside from '@components/CollapsibleAside.astro';
+
+import SourceLink from '@components/SourceLink.astro';
+
+
+
+<CollapsibleAside title="Relevant Source Files">
+
+  <SourceLink text="ecosystem.config.js" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/ecosystem.config.js" />
+
+  <SourceLink text="hparams.json" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/hparams.json" />
+
+  <SourceLink text="neurons/miner.py" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/miner.py" />
+
+  <SourceLink text="neurons/validator.py" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py" />
+
+  <SourceLink text="src/tplr/__init__.py" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/__init__.py" />
+
+  <SourceLink text="src/tplr/chain.py" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/chain.py" />
+
+  <SourceLink text="src/tplr/comms.py" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/comms.py" />
+
+  <SourceLink text="src/tplr/compress.py" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/compress.py" />
+
+  <SourceLink text="src/tplr/neurons.py" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/neurons.py" />
+
+  <SourceLink text="tests/test_model_comparison.py" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/tests/test_model_comparison.py" />
+
+</CollapsibleAside>
+
+
+
+
+
+
+
+
+This page explains how miners in the Templar framework process and share gradients, including momentum, weight decay, and the compression techniques used to efficiently distribute updates across the network. For information about how validators evaluate these gradients, see [Weight Setting](/validators/weight-setting#3.1).
+
+## Gradient Processing Pipeline Overview
+
+Gradient processing is a critical component of the decentralized training process in Templar. Miners compute gradients during local training, process them through a series of transformations, and then share these compressed representations with validators and other miners via the Cloudflare R2 storage system.
+
+```mermaid
+flowchart TD
+    subgraph "Miner Gradient Processing"
+        A["Local Training Loop"] --> B["Gradient Computation"]
+        B --> C["Weight Decay Application"]
+        C --> D["Momentum Update"]
+        D --> E["DCT Transform"]
+        E --> F["Top-K Compression"]
+        F --> G["Upload to R2 Storage"]
+    end
+    
+    subgraph "Validator Processing"
+        H["Download from R2 Storage"] --> I["Decompress Gradients"]
+        I --> J["Evaluate Improvements"]
+        J --> K["Set Weights on Chain"]
+    end
+    
+    G --> H
+```
+
+Sources: <SourceLink text="neurons/miner.py:399-402" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/miner.py#L399-L402" />. <SourceLink text="neurons/validator.py:827-838" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py#L827-L838" />. <SourceLink text="src/tplr/neurons.py:40-124" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/neurons.py#L40-L124" />.
+
+## Technical Components
+
+The gradient processing system consists of several key components that work together to optimize, compress, and distribute model updates:
+
+```mermaid
+classDiagram
+    class TransformDCT {
+        +target_chunk: int
+        +shape_dict: dict
+        +f_dict: dict
+        +b_dict: dict
+        +encode(x): tensor
+        +decode(x): tensor
+    }
+    
+    class CompressDCT {
+        +compress(x, topk): tuple
+        +decompress(p, idx, val, xshape, totalk): tensor
+        +batch_decompress(p, idx, val, xshape, totalk): tensor
+    }
+    
+    class prepare_gradient_dict {
+        <<function>>
+    }
+    
+    prepare_gradient_dict --> TransformDCT: uses
+    prepare_gradient_dict --> CompressDCT: uses
+```
+
+Sources: <SourceLink text="src/tplr/compress.py:35-178" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/compress.py#L35-L178" />. <SourceLink text="src/tplr/neurons.py:40-124" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/neurons.py#L40-L124" />.
+
+## Momentum and Weight Decay Implementation
+
+During training, miners apply weight decay and momentum updates to gradients before compression. This process helps stabilize training and improve convergence.
+
+### Weight Decay
+
+Weight decay helps prevent overfitting by regularizing model parameters. It is applied directly to the parameters before updating the momentum:
+
+```mermaid
+flowchart LR
+    A["Parameter p"] --> B["p.data.mul_(1.0 - lr * weight_decay)"]
+    B --> C["Parameter p'"]
+```
+
+### Momentum Update
+
+Momentum helps accelerate gradients in the relevant direction and dampens oscillations. In Templar, momentum is:
+1. First scaled by a decay factor to reduce the influence of older gradients
+2. Then updated with the current gradient scaled by the learning rate
+3. For the first iteration, momentum is set directly to the gradient to avoid cold starts
+
+```mermaid
+flowchart TD
+    A["First Iteration?"] -- "Yes" --> B["momentum = grad * lr"]
+    A -- "No" --> C["momentum *= momentum_decay"]
+    C --> D["momentum += grad * lr"]
+    B --> E["Proceed to Compression"]
+    D --> E
+```
+
+Sources: <SourceLink text="src/tplr/neurons.py:80-97" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/neurons.py#L80-L97" />. <SourceLink text="neurons/miner.py:80-97" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/miner.py#L80-L97" />.
+
+## DCT-Based Gradient Compression
+
+The Templar system uses Discrete Cosine Transform (DCT) based compression to efficiently share gradients across the network.
+
+### Transformation Process
+
+```mermaid
+flowchart LR
+    subgraph "Encoding"
+        A["Original Gradient"] --> B["Split into Chunks"]
+        B --> C["Apply DCT Transform"]
+        C --> D["Keep Top-K Values"]
+        D --> E["Compress to (indices, values)"]
+    end
+    
+    subgraph "Decoding"
+        F["(indices, values)"] --> G["Reconstruct Sparse Matrix"]
+        G --> H["Apply Inverse DCT"]
+        H --> I["Reassemble Chunks"]
+        I --> J["Reconstructed Gradient"]
+    end
+    
+    E -- "Transfer" --> F
+```
+
+The `TransformDCT` class handles the encoding and decoding process, while `CompressDCT` manages the selection of top-K components and creates compressed representations.
+
+Sources: <SourceLink text="src/tplr/compress.py:35-178" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/compress.py#L35-L178" />. <SourceLink text="src/tplr/neurons.py:100-112" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/neurons.py#L100-L112" />.
+
+### Compression Parameters
+
+Two key hyperparameters control the compression process:
+
+| Parameter | Description | Default Value |
+|-----------|-------------|---------------|
+| `target_chunk` | Size of chunks for DCT transform | 64 |
+| `topk_compression` | Number of DCT coefficients to keep | 32 |
+
+The combination of these parameters allows for significant compression while preserving essential gradient information.
+
+Sources: <SourceLink text="hparams.json:12-13" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/hparams.json#L12-L13" />. <SourceLink text="neurons/miner.py:132-134" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/miner.py#L132-L134" />.
+
+## prepare_gradient_dict Function
+
+The `prepare_gradient_dict` function is the central component that orchestrates the entire gradient processing pipeline:
+
+```mermaid
+flowchart TD
+    A["Model Parameters & Gradients"] --> B["Apply Weight Decay"]
+    B --> C["Update Momentum"]
+    C --> D["Transform via DCT"]
+    D --> E["Compress with Top-K Selection"]
+    E --> F["Create Gradient Dictionary"]
+    F --> G["Attach Metadata"]
+    G --> H["Return for Communication"]
+```
+
+This function:
+1. Applies weight decay to model parameters
+2. Updates momentum tensors with current gradients
+3. Transforms and compresses using DCT
+4. Creates a dictionary containing compressed gradient data
+5. Attaches metadata like the current window and pages information
+
+Sources: <SourceLink text="src/tplr/neurons.py:40-124" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/neurons.py#L40-L124" />.
+
+## Implementation Details
+
+### TransformDCT
+
+The `TransformDCT` class handles the mathematical transformation of gradients using Discrete Cosine Transform. It:
+
+1. Initializes by generating DCT basis matrices for all parameter shapes
+2. Encodes parameters by transforming them into the frequency domain
+3. Decodes parameters by transforming from frequency domain back to spatial domain
+
+The DCT transformation concentrates most of the signal energy in fewer coefficients, allowing for effective compression by discarding less important components.
+
+Sources: <SourceLink text="src/tplr/compress.py:35-120" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/compress.py#L35-L120" />.
+
+### CompressDCT
+
+The `CompressDCT` class handles the actual compression by:
+
+1. Taking DCT-transformed tensors and selecting the top-K components by magnitude
+2. Storing only the indices and values of these components
+3. Providing methods to reconstruct the original tensor from the compressed representation
+
+Sources: <SourceLink text="src/tplr/compress.py:123-178" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/compress.py#L123-L178" />.
+
+## Gradient Data Flow
+
+The flow of gradient data through the system illustrates how miners and validators interact through gradients:
+
+```mermaid
+sequenceDiagram
+    participant Miner
+    participant R2Storage as "R2 Gradient Bucket"
+    participant Validator
+    
+    Miner->>Miner: Train model & compute gradients
+    Miner->>Miner: Apply weight decay
+    Miner->>Miner: Update momentum
+    Miner->>Miner: Compress gradients (DCT + Top-K)
+    Miner->>R2Storage: Upload compressed gradients
+    
+    Validator->>R2Storage: Download compressed gradients
+    Validator->>Validator: Decompress gradients
+    Validator->>Validator: Evaluate model improvements
+    Validator->>Validator: Update miner scores
+```
+
+Each gradient upload contains:
+- Compressed parameter indices and values for each layer
+- Metadata about the current window and training pages
+- Timestamp information for proper synchronization
+
+Sources: <SourceLink text="neurons/miner.py:415-426" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/miner.py#L415-L426" />. <SourceLink text="neurons/validator.py:827-859" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py#L827-L859" />.
+
+## Integration with Communication System
+
+Gradients are shared via the Comms system, which handles all data exchange in Templar:
+
+```mermaid
+flowchart TD
+    A["Miner"] --> B["prepare_gradient_dict()"]
+    B --> C["Processed Gradient Dict"]
+    C --> D["comms.put()"]
+    D --> E["R2 Storage"]
+    
+    F["Validator"] --> G["comms.gather()"]
+    G --> E
+    G --> H["Gathered Gradients"]
+    H --> I["Evaluate Improvement"]
+```
+
+The gradient dictionary follows a structured format with special keys:
+- Parameter names with "idxs" suffix containing compressed indices
+- Parameter names with "vals" suffix containing compressed values
+- "metadata" key with window and page information
+
+Sources: <SourceLink text="neurons/miner.py:399-426" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/miner.py#L399-L426" />. <SourceLink text="src/tplr/comms.py:324-373" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/comms.py#L324-L373" />.
+
+## Special Handling During Early Training
+
+The gradient processing includes special handling for the initial training iterations:
+
+1. In the first iteration, the momentum is set directly to the gradient scaled by the learning rate
+2. For the first 5 iterations, the system skips subtracting transmitted gradients from the momentum 
+
+This approach helps stabilize early training and enables faster initial convergence.
+
+Sources: <SourceLink text="src/tplr/neurons.py:91-112" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/neurons.py#L91-L112" />.
+
+## Gradient Compression Performance
+
+The DCT-based compression technique achieves significant reduction in communication overhead:
+
+| Parameter | Raw Size (MB) | Compressed (KB) | Compression Ratio |
+|-----------|---------------|-----------------|-------------------|
+| Large models | 100s-1000s | 10s | ~100x-1000x |
+| Target parameters | Full model | topk per tensor | Proportional to topk value |
+| Retained information | 100% | Significant | Based on frequency spectrum |
+
+The compression approach prioritizes the most important gradient components by leveraging the sparsity that emerges when transforming to the frequency domain using DCT.
+
+Sources: <SourceLink text="hparams.json:12-13" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/hparams.json#L12-L13" />. <SourceLink text="src/tplr/compress.py:100-112" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/compress.py#L100-L112" />.
+
+## Model Updates in Miners
+
+After receiving and decompressing gradients from other miners, the miner applies these updates to the model:
+
+1. The gathered gradients are decompressed and transformed back to parameter space
+2. The decompressed gradients are assigned to the `.grad` attribute of model parameters
+3. The optimizer's `step()` method is called to apply the updates using the configured learning rate
+4. The scheduler updates the learning rate for the next iteration
+
+Sources: <SourceLink text="neurons/miner.py:559-600" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/miner.py#L559-L600" />.

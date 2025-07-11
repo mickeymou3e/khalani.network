@@ -1,0 +1,286 @@
+---
+
+title: "Weight Setting"
+
+---
+
+
+
+import CollapsibleAside from '@components/CollapsibleAside.astro';
+
+import SourceLink from '@components/SourceLink.astro';
+
+
+
+<CollapsibleAside title="Relevant Source Files">
+
+  <SourceLink text="ecosystem.config.js" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/ecosystem.config.js" />
+
+  <SourceLink text="hparams.json" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/hparams.json" />
+
+  <SourceLink text="neurons/miner.py" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/miner.py" />
+
+  <SourceLink text="neurons/validator.py" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py" />
+
+  <SourceLink text="src/tplr/__init__.py" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/__init__.py" />
+
+  <SourceLink text="src/tplr/chain.py" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/chain.py" />
+
+  <SourceLink text="src/tplr/comms.py" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/comms.py" />
+
+  <SourceLink text="src/tplr/compress.py" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/compress.py" />
+
+  <SourceLink text="src/tplr/neurons.py" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/neurons.py" />
+
+  <SourceLink text="tests/test_model_comparison.py" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/tests/test_model_comparison.py" />
+
+</CollapsibleAside>
+
+
+
+
+
+
+
+
+This document explains how validators evaluate miner-produced gradients and set weights on the Bittensor blockchain in the Templar decentralized training framework. Weight setting is the critical mechanism that determines the rewards miners receive for their contributions to model training, ensuring that validators can appropriately incentivize high-quality gradient contributions.
+
+## Overview of Weight Setting Process
+
+Weight setting in Templar involves multiple interconnected evaluation mechanisms that assess different aspects of miner performance. The process combines gradient quality assessment, model synchronization verification, and consistency tracking to produce final weights.
+
+```mermaid
+flowchart TB
+    subgraph "Weight Setting Process"
+        direction TB
+        A["Gradient Evaluation"] --> B["Score Calculation"]
+        B --> C["OpenSkill Rating Update"]
+        C --> D["Weight Normalization"]
+        D --> E["Set Weights on Chain"]
+    end
+
+    subgraph "Score Components"
+        direction TB
+        G1["Gradient Scores"] --> F["Final Scores"]
+        G2["Sync Scores"] --> F
+        G3["Binary Indicator Scores"] --> F
+    end
+
+    A --- G1
+    B --- G2
+    B --- G3
+    F --- C
+```
+
+Sources: <SourceLink text="neurons/validator.py:355-455" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py#L355-L455" />. <SourceLink text="neurons/validator.py:489-514" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py#L489-L514" />
+
+## Score Components and Calculation
+
+Validators in Templar use several types of scores to comprehensively evaluate miner performance:
+
+| Score Type | Purpose | Implementation |
+|------------|---------|----------------|
+| Gradient Scores | Evaluate the quality of gradients | Measures improvement in loss after applying gradients |
+| Sync Scores | Verify model synchronization | Calculates how closely a miner's model matches the global model |
+| Binary Indicator Scores | Track consistency | Binary indicator of whether a miner is contributing positively |
+| Final Scores | Determine weights | Combination of all scores for final weighting |
+
+The calculation of these scores involves testing miner-submitted gradients on validation data and measuring the resulting improvement in model performance.
+
+```mermaid
+flowchart LR
+    subgraph "Gradient Evaluation Process"
+        direction LR
+        A["Miner Gradient"] --> B["Apply to Model"]
+        B --> C["Evaluate on Data Batches"]
+        C --> D["Measure Loss Improvement"]
+        D --> E["Calculate Gradient Score"]
+    end
+```
+
+Sources: <SourceLink text="neurons/validator.py:489-514" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py#L489-L514" />. <SourceLink text="neurons/validator.py:914-1028" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py#L914-L1028" />
+
+## OpenSkill Rating System
+
+Templar uses the OpenSkill rating system with a PlackettLuce model to maintain probabilistic skill ratings for each miner. This system accounts for uncertainty and relative performance among peers.
+
+```mermaid
+flowchart TB
+    subgraph "OpenSkill Rating Update"
+        direction TB
+        A["Collect Window Scores"] --> B["Create Teams from UIDs"]
+        B --> C["Rate Using PlackettLuce Model"]
+        C --> D["Update Miner Ratings"]
+        D --> E["Calculate Ordinal Values"]
+        E --> F["Update Final Scores"]
+    end
+```
+
+Key parameters for the OpenSkill rating system are controlled by hyperparameters:
+- `openskill_beta`: Controls the dynamics of rating changes (default: 20)
+- `openskill_tau`: Controls the uncertainty in ratings (default: 0.1)
+
+Sources: <SourceLink text="neurons/validator.py:356-445" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py#L356-L445" />. <SourceLink text="hparams.json:50-51" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/hparams.json#L50-L51" />
+
+## Weight Normalization
+
+After calculating final scores for each miner, the validator normalizes these scores into weights that sum to 1.0. This uses a min-power normalization approach that emphasizes higher-performing miners.
+
+```mermaid
+flowchart TB
+    subgraph "Weight Normalization"
+        direction TB
+        A["Final Scores"] --> B["Filter Positive Scores"]
+        B --> C["Apply Power Normalization"]
+        C --> D["Verify Sum ≈ 1.0"]
+        D --> E["Normalized Weights"]
+    end
+```
+
+The power normalization is controlled by the `power_normalisation` hyperparameter (default: 2.0), which determines how much the system should favor higher-scoring miners.
+
+Key implementation details:
+- Only miners with positive scores receive non-zero weights
+- The power normalization function is applied to ensure weights sum to 1.0
+- The implementation checks that the sum of weights is approximately 1.0
+
+Sources: <SourceLink text="neurons/validator.py:446-488" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py#L446-L488" />. <SourceLink text="hparams.json:40" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/hparams.json#L40" />
+
+## Model Evaluation Mechanism
+
+The validator assesses gradient quality by measuring how much a miner's gradient improves model performance on evaluation data batches:
+
+```mermaid
+sequenceDiagram
+    participant V as "Validator"
+    participant M as "Model"
+    participant D as "Evaluation Data"
+    
+    V->>M: Measure initial loss (loss_before)
+    V->>M: Apply miner gradient
+    V->>M: Measure new loss (loss_after)
+    V->>V: Calculate improvement = loss_before - loss_after
+    V->>V: Calculate relative improvement = improvement / loss_before
+    V->>V: Update gradient score
+```
+
+Sources: <SourceLink text="neurons/validator.py:489-514" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py#L489-L514" />. <SourceLink text="neurons/validator.py:914-1028" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py#L914-L1028" />
+
+## Inactivity Handling
+
+Validators apply penalties to miners who become inactive or fail to submit gradients in a particular window:
+
+```mermaid
+flowchart TB
+    subgraph "Inactivity Management"
+        direction TB
+        A["Monitor Peer Activity"] --> B["Detect Inactive Peers"]
+        B --> C["Apply Inactivity Penalty"]
+        B --> D["Apply Missing Gradient Penalty"]
+        B --> E["Apply Sync Score Penalty"]
+        C & D & E --> F["Reset Peers After Extended Inactivity"]
+    end
+```
+
+Inactivity penalties are configured with several parameters:
+- `inactivity_slash_rate`: 25% score reduction per window for inactive miners
+- `missing_gradient_slash_rate`: 75% score reduction for miners failing to submit gradients
+- `sync_score_slash_rate`: 75% score reduction for miners with poor synchronization
+- `reset_inactivity_windows`: Number of windows after which an inactive miner is fully reset (default: 25)
+
+Sources: <SourceLink text="neurons/validator.py:302-316" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py#L302-L316" />. <SourceLink text="neurons/validator.py:697-769" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py#L697-L769" />. <SourceLink text="hparams.json:48" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/hparams.json#L48" />
+
+## Integration with Synchronization Verification
+
+Validators also evaluate how well miners stay synchronized with the global model state by comparing model parameters:
+
+```mermaid
+classDiagram
+    class SyncVerification {
+        +compare_model_with_debug_dict()
+        +l2_norm
+        +avg_l2_norm
+        +avg_abs_diff
+        +max_diff
+        +avg_steps_behind
+        +max_steps_behind
+    }
+    
+    class SyncScoreCalculation {
+        +evaluate_miner_sync()
+        +sync_scores
+        +sync_max_steps_behind
+    }
+    
+    SyncVerification --> SyncScoreCalculation
+```
+
+The synchronization verification process:
+1. Loads debug dictionaries containing parameter samples from miners
+2. Calculates various distance metrics between miner and expected model parameters
+3. Computes "steps behind" metrics to quantify synchronization lag
+4. Updates sync scores based on these metrics
+
+Sources: <SourceLink text="neurons/validator.py:875-892" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py#L875-L892" />. <SourceLink text="src/tplr/neurons.py:403-476" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/neurons.py#L403-L476" />
+
+## Implementation in Code
+
+The weight setting functionality is primarily implemented in the `Validator` class in `neurons/validator.py`. Key methods include:
+
+- `update_openskill_ratings()`: Updates miner ratings using the OpenSkill system
+- `update_weights()`: Normalizes scores into weights
+- `evaluate_model_on_batches()`: Evaluates model performance on data batches
+- `reset_peer()`: Handles resetting peers after extended inactivity
+- `evaluate_miner_sync()`: Evaluates miner model synchronization
+
+The process is controlled by hyperparameters defined in `hparams.json`, including:
+- `openskill_beta` and `openskill_tau` for rating configuration
+- `power_normalisation` for weight normalization
+- `sync_max_steps_behind` for synchronization thresholds
+- Various slash rates for penalties
+
+Sources: <SourceLink text="neurons/validator.py:356-445" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py#L356-L445" />. <SourceLink text="neurons/validator.py:446-488" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py#L446-L488" />. <SourceLink text="neurons/validator.py:302-316" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py#L302-L316" />. <SourceLink text="hparams.json:40-52" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/hparams.json#L40-L52" />
+
+## Architecture Integration
+
+```mermaid
+flowchart TB
+    subgraph "Templar System"
+        direction TB
+        A["Miners"] -->|"Submit Gradients"| B["Validator"]
+        B -->|"Evaluate Gradients"| C["Score Calculation"]
+        C --> D["Weight Setting"]
+        D -->|"Set Weights"| E["Bittensor Blockchain"]
+        E -->|"Determines Rewards"| A
+    end
+```
+
+The weight setting process forms a critical feedback loop in the Templar architecture:
+1. Miners compute and submit gradients
+2. Validators evaluate these gradients
+3. Validators set weights on the blockchain based on evaluations
+4. Miner rewards are determined by these weights
+5. Miners are incentivized to improve their gradient quality
+
+Sources: <SourceLink text="neurons/validator.py" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py" />. <SourceLink text="neurons/miner.py:229-755" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/miner.py#L229-L755" />
+
+## Technical Details
+
+The weight setting function `update_weights()` creates a mask for evaluated peers with positive scores and applies power normalization only to those positive scores:
+
+```python
+def update_weights(self) -> None:
+    """
+    Update the weights for all evaluated peers using min power normalization.
+    This method:
+    1. Creates a mask for peers that have been evaluated
+    2. Creates a mask for evaluated peers with positive scores
+    3. Applies power normalization to only the positive scores
+    4. Verifies that weights sum to approximately 1.0
+    This approach only assigns weights to peers with positive scores.
+    """
+```
+
+This implementation ensures that only miners contributing positively to the model training receive rewards, creating a robust incentive mechanism for the decentralized training process.
+
+Sources: <SourceLink text="neurons/validator.py:446-488" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/neurons/validator.py#L446-L488" />

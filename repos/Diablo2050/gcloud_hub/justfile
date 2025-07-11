@@ -1,0 +1,70 @@
+login: 
+    gcloud auth application-default login
+
+authorise:
+    gcloud auth print-access-token | helm registry login -u oauth2accesstoken \
+    --password-stdin https://us-central1-docker.pkg.dev
+
+docker-upload:
+    gcloud auth configure-docker us-central1-docker.pkg.dev && docker build -t server ./server && docker tag server us-central1-docker.pkg.dev/civil-lambda-374300/ezkl-hub/server && docker push us-central1-docker.pkg.dev/civil-lambda-374300/ezkl-hub/server
+
+package-chart: docker-upload authorise 
+    helm package hub-kube/
+
+push-chart: package-chart
+    helm push hub-kube-0.1.0.tgz oci://us-central1-docker.pkg.dev/civil-lambda-374300/ezkl-hub
+    rm hub-kube-0.1.0.tgz
+
+verify-chart:
+    gcloud artifacts docker images list us-central1-docker.pkg.dev/civil-lambda-374300/ezkl-hub
+
+get-credentials:
+    gcloud container clusters get-credentials --zone us-central1 ezkl-hub-cluster
+
+install-chart: push-chart
+    helm install hub-kube oci://us-central1-docker.pkg.dev/civil-lambda-374300/ezkl-hub/hub-kube --version 0.1.0
+
+uninstall-chart:
+    helm uninstall hub-kube
+
+upgrade-chart: push-chart
+    helm upgrade hub-kube oci://us-central1-docker.pkg.dev/civil-lambda-374300/ezkl-hub/hub-kube --version 0.1.0
+
+validate:
+    helm template ./hub-kube | kubeconform -strict
+
+install-hub-kube:
+    #!/usr/bin/env bash
+    helm install hub-kube ./hub-kube --namespace applications
+
+install-hub-kube-test:
+    #!/usr/bin/env bash
+    helm install hub-kube ./hub-kube-test 
+
+uninstall-hub-kube-test:
+    #!/usr/bin/env bash
+    helm uninstall hub-kube
+
+uninstall-hub-kube:
+    #!/usr/bin/env bash
+    helm uninstall hub-kube 
+
+kubeconfig:
+    #!/usr/bin/env bash
+    gcloud container clusters get-credentials hub-staging --zone us-central1
+
+install-rabbitmq:
+    #!/usr/bin/env bash
+    helm install rabbitmq -f hub-kube/values_rabbitmq.yaml bitnami/rabbitmq
+
+uninstall-rabbitmq:
+    #!/usr/bin/env bash
+    helm uninstall rabbitmq
+
+upgrade-rabbitmq:
+     helm upgrade rabbitmq -f hub-kube/values_rabbitmq.yaml bitnami/rabbitmq
+
+get-project-id:
+    gcloud config get-value project
+
+

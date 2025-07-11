@@ -1,0 +1,182 @@
+{
+  "bsctestnet": [
+    {
+      "destinationChain": 71401,
+      "destinationGas": 264286
+    },
+    {
+      "destinationChain": 43113,
+      "destinationGas": 186526
+    },
+    {
+      "destinationChain": 420,
+      "destinationGas": 180532
+    },
+    {
+      "destinationChain": 11155111,
+      "destinationGas": 180591
+    },
+    {
+      "destinationChain": 421613,
+      "destinationGas": 180946
+    },
+    {
+      "destinationChain": 80001,
+      "destinationGas": 197564
+    },
+    {
+      "destinationChain": 10012,
+      "destinationGas": 558515
+    }
+  ],
+  "optimism-goerli": [
+    {
+      "destinationChain": 43113,
+      "destinationGas": 186538
+    },
+    {
+      "destinationChain": 421613,
+      "destinationGas": 1056685
+    },
+    {
+      "destinationChain": 97,
+      "destinationGas": 198002
+    },
+    {
+      "destinationChain": 80001,
+      "destinationGas": 180944
+    },
+    {
+      "destinationChain": 11155111,
+      "destinationGas": 180941
+    },
+    {
+      "destinationChain": 71401,
+      "destinationGas": 263932
+    },
+    {
+      "destinationChain": 10012,
+      "destinationGas": 558515
+    }
+  ],
+  "fuji": [
+    {
+      "destinationChain": 80001,
+      "destinationGas": 180534
+    },
+    {
+      "destinationChain": 11155111,
+      "destinationGas": 198003
+    },
+    {
+      "destinationChain": 421613,
+      "destinationGas": 180556
+    },
+    {
+      "destinationChain": 97,
+      "destinationGas": 198026
+    },
+    {
+      "destinationChain": 420,
+      "destinationGas": 198038
+    },
+    {
+      "destinationChain": 71401,
+      "destinationGas": 263930
+    },
+    {
+      "destinationChain": 10012,
+      "destinationGas": 558515
+    }
+  ],
+  "mumbai": [
+    {
+      "destinationChain": 97,
+      "destinationGas": 180918
+    },
+    {
+      "destinationChain": 420,
+      "destinationGas": 180960
+    },
+    {
+      "destinationChain": 11155111,
+      "destinationGas": 180935
+    },
+    {
+      "destinationChain": 43113,
+      "destinationGas": 186110
+    },
+    {
+      "destinationChain": 71401,
+      "destinationGas": 263988
+    },
+    {
+      "destinationChain": 421613,
+      "destinationGas": 197674
+    },
+    {
+      "destinationChain": 10012,
+      "destinationGas": 558515
+    }
+  ],
+  "arb-goerli": [
+    {
+      "destinationChain": 11155111,
+      "destinationGas": 180559
+    },
+    {
+      "destinationChain": 80001,
+      "destinationGas": 182158
+    },
+    {
+      "destinationChain": 71401,
+      "destinationGas": 265586
+    },
+    {
+      "destinationChain": 420,
+      "destinationGas": 180566
+    },
+    {
+      "destinationChain": 43113,
+      "destinationGas": 186162
+    },
+    {
+      "destinationChain": 97,
+      "destinationGas": 180530
+    },
+    {
+      "destinationChain": 10012,
+      "destinationGas": 558515
+    }
+  ],
+  "sepolia": [
+    {
+      "destinationChain": 71401,
+      "destinationGas": 265220
+    },
+    {
+      "destinationChain": 420,
+      "destinationGas": 180928
+    },
+    {
+      "destinationChain": 97,
+      "destinationGas": 197630
+    },
+    {
+      "destinationChain": 43113,
+      "destinationGas": 203656
+    },
+    {
+      "destinationChain": 421613,
+      "destinationGas": 180938
+    },
+    {
+      "destinationChain": 80001,
+      "destinationGas": 180532
+    },
+    {
+      "destinationChain": 10012,
+      "destinationGas": 558515
+    }
+  ]
+}

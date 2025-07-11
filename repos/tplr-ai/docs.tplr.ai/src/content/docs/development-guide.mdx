@@ -1,0 +1,345 @@
+---
+
+title: "Development Guide"
+
+---
+
+
+
+import CollapsibleAside from '@components/CollapsibleAside.astro';
+
+import SourceLink from '@components/SourceLink.astro';
+
+
+
+<CollapsibleAside title="Relevant Source Files">
+
+  <SourceLink text=".github/workflows/ci.yml" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.github/workflows/ci.yml" />
+
+  <SourceLink text=".gitignore" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.gitignore" />
+
+  <SourceLink text="codecov.yml" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/codecov.yml" />
+
+  <SourceLink text="justfile" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/justfile" />
+
+  <SourceLink text="scripts/start.sh" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/scripts/start.sh" />
+
+</CollapsibleAside>
+
+
+
+
+
+
+
+
+This guide provides comprehensive instructions for developers contributing to the Templar project. It covers setting up your development environment, working with the codebase, testing procedures, and understanding the CI/CD pipeline. For deployment-specific information, see [Deployment](/deployment#8).
+
+## Development Environment Setup
+
+Setting up your development environment requires installing the necessary dependencies and configuring your local system to work with the Templar codebase.
+
+### Prerequisites
+
+- Python 3.11 or 3.12
+- Git
+- PM2 (for process management)
+- UV (Python package installer and environment manager)
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/tplr-ai/templar.git
+   cd templar
+   ```
+
+2. Install dependencies using UV:
+   ```bash
+   uv venv
+   source .venv/bin/activate
+   uv pip install --pre -e ".[dev]"
+   ```
+
+   Alternatively, use the provided convenience command in the justfile:
+   ```bash
+   just dev
+   ```
+
+3. Create a `.env` file with required environment variables (see the CI configuration for examples of required variables)
+
+Sources: <SourceLink text="justfile:23-24" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/justfile#L23-L24" />, <SourceLink text=".github/workflows/ci.yml:77-100" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.github/workflows/ci.yml#L77-L100" />
+
+### Development Tools
+
+Templar uses several development tools:
+
+- **UV**: Modern Python package installer and environment manager
+- **Ruff**: Fast Python linter and formatter
+- **Pytest**: Testing framework
+- **PM2**: Process manager for running multiple components
+- **Just**: Command runner for common development tasks
+
+```mermaid
+graph TD
+    subgraph "Development Environment"
+        UV["UV Package Manager"]
+        RUFF["Ruff Linter/Formatter"]
+        PYTEST["Pytest Testing"]
+        PM2["PM2 Process Manager"]
+        JUST["Justfile Command Runner"]
+    end
+
+    subgraph "Developer Workflow"
+        SETUP["Setup Environment"]
+        DEVELOP["Write Code"]
+        TEST["Run Tests"]
+        LINT["Format & Lint"]
+        RUN["Run Application"]
+        PR["Submit PR"]
+    end
+
+    UV --> SETUP
+    SETUP --> DEVELOP
+    DEVELOP --> TEST
+    TEST --> LINT
+    LINT --> RUN
+    RUN --> PR
+    
+    JUST --> LINT
+    JUST --> TEST
+    PYTEST --> TEST
+    RUFF --> LINT
+    PM2 --> RUN
+```
+
+Sources: <SourceLink text=".github/workflows/ci.yml:30-38" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.github/workflows/ci.yml#L30-L38" />, <SourceLink text="justfile:5-12" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/justfile#L5-L12" />, <SourceLink text="scripts/start.sh:1-16" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/scripts/start.sh#L1-L16" />
+
+## Development Workflow
+
+### Using Just Commands
+
+The project includes a `justfile` that provides shortcuts for common development tasks:
+
+| Command | Description |
+|---------|-------------|
+| `just lint` | Run ruff to check and format code |
+| `just fix` | Alias for `just lint` |
+| `just dev` | Install development dependencies |
+| `just test` | Run tests |
+| `just cov` | Run tests with coverage report |
+| `just test-run` | Create a development version and start the application |
+| `just bistro` | Check for running Bistro processes |
+
+Sources: <SourceLink text="justfile:1-33" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/justfile#L1-L33" />
+
+### Code Formatting and Linting
+
+The project uses Ruff for both code formatting and linting:
+
+```bash
+# Manually run linting
+ruff check --fix .
+ruff format .
+
+# Or use the shortcut
+just lint
+```
+
+The formatting rules are enforced in CI, so all code must pass these checks before being merged.
+
+Sources: [justfile:5-12](), <SourceLink text=".github/workflows/ci.yml:40-44" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.github/workflows/ci.yml#L40-L44" />
+
+### Starting the Application
+
+To start the application locally:
+
+```bash
+# Using PM2 process manager
+./scripts/start.sh
+```
+
+This script will:
+1. Stop any existing PM2 processes
+2. Check for zombie processes
+3. Start all applications defined in `ecosystem.config.js`
+4. Show logs from the TM1 process
+
+Sources: <SourceLink text="scripts/start.sh:1-16" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/scripts/start.sh#L1-L16" />
+
+## Testing
+
+### Running Tests
+
+Tests are written using pytest and can be run with:
+
+```bash
+# Run all tests
+pytest tests/ -v
+
+# Run with coverage report
+pytest tests/ -v --cov=src --cov-report=xml --cov-report=term
+
+# Or use the shortcuts
+just test
+just cov
+```
+
+Sources: <SourceLink text="justfile:25-32" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/justfile#L25-L32" />, <SourceLink text=".github/workflows/ci.yml:113-114" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.github/workflows/ci.yml#L113-L114" />
+
+### Test Coverage Requirements
+
+The project maintains a minimum code coverage target of 85% with a threshold of 1%. This is enforced in the CI pipeline.
+
+```mermaid
+graph LR
+    subgraph "Test Process"
+        WC["Write Code"]
+        WT["Write Tests"]
+        RT["Run Tests"]
+        CC["Check Coverage"]
+        PC["Pass/Fail CI"]
+    end
+
+    WC --> WT
+    WT --> RT
+    RT --> CC
+    CC --> PC
+
+    subgraph "Coverage Requirements"
+        PR["Project Coverage: 85%"]
+        PT["Patch Coverage: 85%"]
+        TH["Threshold: 1%"]
+    end
+
+    PR -.-> CC
+    PT -.-> CC
+    TH -.-> CC
+```
+
+Sources: <SourceLink text="codecov.yml:1-11" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/codecov.yml#L1-L11" />, <SourceLink text=".github/workflows/ci.yml:112-121" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.github/workflows/ci.yml#L112-L121" />
+
+## CI/CD Pipeline
+
+The project uses GitHub Actions for continuous integration and deployment. The CI pipeline runs on both push to main and pull requests.
+
+### Workflow Steps
+
+```mermaid
+flowchart TD
+    subgraph "GitHub Actions CI Workflow"
+        direction TB
+        TRIG["Trigger: Push to main/PR"]
+        
+        subgraph "Block Fixup Job"
+            BF["Block Fixup Commit Merge"]
+        end
+        
+        subgraph "Lint & Format Job"
+            LF1["Setup Python (3.11/3.12)"]
+            LF2["Install Dependencies"]
+            LF3["Run Ruff Lint"]
+            LF4["Run Ruff Format"]
+        end
+        
+        subgraph "Test Job"
+            T1["Setup Python (3.11/3.12)"]
+            T2["Create .env file"]
+            T3["Install Dependencies"]
+            T4["Run Tests with Coverage"]
+            T5["Upload to Codecov"]
+        end
+    end
+
+    TRIG --> BF
+    TRIG --> LF1
+    TRIG --> T1
+    
+    LF1 --> LF2 --> LF3 --> LF4
+    T1 --> T2 --> T3 --> T4 --> T5
+```
+
+The CI workflow includes three main jobs:
+
+1. **Block Fixup**: Prevents merging PRs that contain fixup commits
+2. **Lint and Format**: Checks code style and formatting
+3. **Test**: Runs the test suite with coverage reporting
+
+Sources: <SourceLink text=".github/workflows/ci.yml:1-122" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.github/workflows/ci.yml#L1-L122" />
+
+### Environment Setup in CI
+
+The CI environment automatically sets up:
+
+1. Python versions (3.11 and 3.12) using a matrix strategy
+2. UV package manager
+3. Environment variables for R2 storage services
+
+Sources: <SourceLink text=".github/workflows/ci.yml:47-70" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.github/workflows/ci.yml#L47-L70" />, <SourceLink text=".github/workflows/ci.yml:102-110" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.github/workflows/ci.yml#L102-L110" />
+
+### Code Coverage Reporting
+
+Test coverage reports are uploaded to Codecov:
+
+1. Coverage is generated as XML during test runs
+2. The Codecov GitHub Action uploads the report
+3. PRs must maintain coverage thresholds to pass checks
+
+Sources: <SourceLink text=".github/workflows/ci.yml:116-121" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.github/workflows/ci.yml#L116-L121" />, <SourceLink text="codecov.yml:1-15" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/codecov.yml#L1-L15" />
+
+## Development Best Practices
+
+### File Structure
+
+Templar follows a standard Python package structure:
+
+- `src/tplr/`: Core package code
+- `tests/`: Test suite
+- `scripts/`: Utility scripts
+- `.github/workflows/`: CI configuration
+- `justfile`: Development tasks
+
+### Pull Request Process
+
+1. Create a feature branch from `main`
+2. Make your changes following the code style guidelines
+3. Write tests to maintain coverage
+4. Run linting and tests locally before pushing
+5. Create a PR targeting `main`
+6. Ensure all CI checks pass
+7. Address review feedback
+8. Merge when approved
+
+### Version Management
+
+The project automatically assigns development versions during test runs:
+
+```bash
+sed -i "s/__version__ = .*/__version__ = \"dev-$(cat /dev/urandom \
+    | tr -dc 'a-z0-9' \
+    | fold -w 8 \
+    | head -n 1)\"/" \
+    src/tplr/__init__.py
+```
+
+Sources: <SourceLink text="justfile:13-20" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/justfile#L13-L20" />
+
+### Gitignore Rules
+
+The project's `.gitignore` is set up to exclude:
+- Environment files (`.env`, `.env.yaml`)
+- Python artifacts (`__pycache__`, `.egg-info`, etc.)
+- Virtual environments (`.uv/`, `.venv/`, etc.)
+- IDE files (`.idea/`, `.vscode/`, etc.)
+- Project-specific files (`wandb`, models, etc.)
+
+Sources: <SourceLink text=".gitignore:1-84" href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.gitignore#L1-L84" />
+
+## Next Steps
+
+For information on how to deploy the system, refer to the [Deployment](/deployment#8) guide.
+
+For subsystem-specific details, check the following:
+- [Miners](/miners#2) for miner development
+- [Validators](/validators#3) for validator development
+- [System Architecture](/system-architecture#1.1) for understanding the overall system design

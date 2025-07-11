@@ -1,0 +1,128 @@
+@import '@/styles/shared-imports.scss';
+
+.dataBlocksSection {
+  padding: 0 var(--indent);
+  @include max-prop(margin-bottom, rem(54), vw(100));
+
+  @include above('desktop') {
+    display: flex;
+    gap: var(--indent);
+  }
+
+  .dataBlocks {
+    flex: 1;
+    height: 100%;
+  }
+
+  .aside {
+    flex: 0 0 calc(25% - var(--indent));
+  }
+}
+
+.dataBlocks {
+  @include above('medium') {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: vw(40) var(--indent);
+  }
+}
+
+.dataBlock {
+  &.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: rem(24) rem(20);
+    margin-bottom: rem(20);
+    border-top: 1px solid currentColor;
+    background-color: var(--bgColor);
+
+    @include above('medium') {
+      margin-bottom: 0;
+    }
+
+    @include above('desktop') {
+      padding: vw(20) vw(24);
+    }
+
+    .title {
+      @include max-prop(margin-bottom, rem(54), vw(54));
+    }
+
+    .subtitle {
+      color: var(--color-grey-500);
+    }
+
+    .valueRow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: rem(10);
+      white-space: nowrap;
+    }
+
+    .lottie {
+      height: rem(45);
+    }
+  }
+
+  &.table {
+    margin-bottom: rem(20);
+
+    @include above('medium') {
+      margin-bottom: 0;
+    }
+
+    .title {
+      @include max-prop(padding-top, rem(20), vw(20));
+      @include max-prop(padding-bottom, rem(20), vw(20));
+      border-bottom: 1px solid currentColor;
+      display: flex;
+      align-items: center;
+
+      &:before {
+        content: '';
+        display: inline-block;
+        height: rem(4);
+        width: rem(4);
+        background-color: var(--color-templar-red);
+        margin-right: rem(10);
+      }
+
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+    }
+
+    .dataItem {
+      @include max-prop(padding-top, rem(14), vw(14));
+      @include max-prop(padding-bottom, rem(14), vw(14));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--lineColor);
+    }
+
+    &:hover .title:before {
+      animation: blink 1s infinite;
+    }
+  }
+}
+
+.aside {
+  @include max-prop(margin-top, rem(30), vw(30));
+  width: 100%;
+  background-color: var(--bgColor);
+
+  // temp
+  aspect-ratio: 3/4;
+
+  @include above('desktop') {
+    margin-top: 0;
+    height: auto;
+    width: auto;
+  }
+}

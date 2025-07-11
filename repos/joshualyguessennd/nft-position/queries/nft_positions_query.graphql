@@ -1,0 +1,23 @@
+query GetNFTPositions($owner: String!) {
+  positions(first: 10) {
+    id
+    pool {
+      id
+      token0 {
+        id
+        name
+      }
+      token1 {
+        id
+        name
+      }
+    }
+    transaction {
+      mints(first: 10) {
+        id
+        amount0
+        amount1
+      }
+    }
+  }
+}

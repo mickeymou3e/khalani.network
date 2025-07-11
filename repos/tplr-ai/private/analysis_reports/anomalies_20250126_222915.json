@@ -1,0 +1,4381 @@
+[
+  {
+    "uid": "103",
+    "window": 1197768,
+    "global_step": 25,
+    "key": "gathers/0.2.14/103/1197768/25.npz",
+    "grad_norm": 0.0025354421231895685,
+    "grad_mean": -5.310079598253026e-10,
+    "grad_std": 3.5433918128546793e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197769,
+    "global_step": 26,
+    "key": "gathers/0.2.14/103/1197769/26.npz",
+    "grad_norm": 0.002441355725750327,
+    "grad_mean": 4.510231299548195e-09,
+    "grad_std": 3.4118986604880774e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197770,
+    "global_step": 27,
+    "key": "gathers/0.2.14/103/1197770/27.npz",
+    "grad_norm": 0.0023723230697214603,
+    "grad_mean": -2.873810966974588e-09,
+    "grad_std": 3.3154242373711895e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197771,
+    "global_step": 28,
+    "key": "gathers/0.2.14/103/1197771/28.npz",
+    "grad_norm": 0.002294069156050682,
+    "grad_mean": -4.267211584085828e-10,
+    "grad_std": 3.206062274330179e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197772,
+    "global_step": 29,
+    "key": "gathers/0.2.14/103/1197772/29.npz",
+    "grad_norm": 0.0022233629133552313,
+    "grad_mean": 3.9354310921169144e-09,
+    "grad_std": 3.1072447654878488e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197773,
+    "global_step": 30,
+    "key": "gathers/0.2.14/103/1197773/30.npz",
+    "grad_norm": 0.0021611927077174187,
+    "grad_mean": -2.6838327116252003e-09,
+    "grad_std": 3.020360736627481e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197774,
+    "global_step": 31,
+    "key": "gathers/0.2.14/103/1197774/31.npz",
+    "grad_norm": 0.002154604298993945,
+    "grad_mean": -2.5526771807449222e-09,
+    "grad_std": 3.0111532396404073e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197775,
+    "global_step": 32,
+    "key": "gathers/0.2.14/103/1197775/32.npz",
+    "grad_norm": 0.0021076248958706856,
+    "grad_mean": -1.9222896607828943e-09,
+    "grad_std": 2.9454977266141213e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197776,
+    "global_step": 33,
+    "key": "gathers/0.2.14/103/1197776/33.npz",
+    "grad_norm": 0.0020396015606820583,
+    "grad_mean": -5.572650341179042e-09,
+    "grad_std": 2.8504273359430954e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197777,
+    "global_step": 34,
+    "key": "gathers/0.2.14/103/1197777/34.npz",
+    "grad_norm": 0.0019838251173496246,
+    "grad_mean": 3.5684786237055732e-09,
+    "grad_std": 2.7724800020223483e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197778,
+    "global_step": 35,
+    "key": "gathers/0.2.14/103/1197778/35.npz",
+    "grad_norm": 0.0019270565826445818,
+    "grad_mean": -2.3838098162087817e-09,
+    "grad_std": 2.6931450065603713e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197779,
+    "global_step": 36,
+    "key": "gathers/0.2.14/103/1197779/36.npz",
+    "grad_norm": 0.0019206678261980414,
+    "grad_mean": -5.069653585820788e-09,
+    "grad_std": 2.684212631720584e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197780,
+    "global_step": 37,
+    "key": "gathers/0.2.14/103/1197780/37.npz",
+    "grad_norm": 0.0018800700781866908,
+    "grad_mean": -1.7887799019788986e-09,
+    "grad_std": 2.6274799438397167e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197781,
+    "global_step": 38,
+    "key": "gathers/0.2.14/103/1197781/38.npz",
+    "grad_norm": 0.0018654860323294997,
+    "grad_mean": 7.7722576638517e-12,
+    "grad_std": 2.6070986223203363e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197782,
+    "global_step": 39,
+    "key": "gathers/0.2.14/103/1197782/39.npz",
+    "grad_norm": 0.0018104750197380781,
+    "grad_mean": 3.5807130593923375e-09,
+    "grad_std": 2.530215624574339e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197783,
+    "global_step": 40,
+    "key": "gathers/0.2.14/103/1197783/40.npz",
+    "grad_norm": 0.001765551627613604,
+    "grad_mean": -6.124052376321742e-10,
+    "grad_std": 2.4674357064213837e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197785,
+    "global_step": 42,
+    "key": "gathers/0.2.14/103/1197785/42.npz",
+    "grad_norm": 0.001689379452727735,
+    "grad_mean": -2.4272570620098577e-09,
+    "grad_std": 2.360980715820915e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197786,
+    "global_step": 43,
+    "key": "gathers/0.2.14/103/1197786/43.npz",
+    "grad_norm": 0.0016626875149086118,
+    "grad_mean": -1.7379322425625787e-09,
+    "grad_std": 2.3236782453750493e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197787,
+    "global_step": 44,
+    "key": "gathers/0.2.14/103/1197787/44.npz",
+    "grad_norm": 0.0016491347923874855,
+    "grad_mean": 2.5416202475980754e-09,
+    "grad_std": 2.3047371087159263e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197788,
+    "global_step": 45,
+    "key": "gathers/0.2.14/103/1197788/45.npz",
+    "grad_norm": 0.0016319042770192027,
+    "grad_mean": -7.475770558151851e-10,
+    "grad_std": 2.2806575543654617e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197790,
+    "global_step": 47,
+    "key": "gathers/0.2.14/103/1197790/47.npz",
+    "grad_norm": 0.001581331598572433,
+    "grad_mean": 3.443407115000241e-09,
+    "grad_std": 2.2099777652329067e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197791,
+    "global_step": 48,
+    "key": "gathers/0.2.14/103/1197791/48.npz",
+    "grad_norm": 0.0015493553364649415,
+    "grad_mean": 1.6867187646596449e-09,
+    "grad_std": 2.165291334677022e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197792,
+    "global_step": 49,
+    "key": "gathers/0.2.14/103/1197792/49.npz",
+    "grad_norm": 0.0015307581052184105,
+    "grad_mean": -2.061827819588302e-09,
+    "grad_std": 2.1393004772107815e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197794,
+    "global_step": 51,
+    "key": "gathers/0.2.14/103/1197794/51.npz",
+    "grad_norm": 0.0014716075966134667,
+    "grad_mean": 8.844253107653799e-10,
+    "grad_std": 2.056636049019289e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197795,
+    "global_step": 52,
+    "key": "gathers/0.2.14/103/1197795/52.npz",
+    "grad_norm": 0.0014428175054490566,
+    "grad_mean": -8.555821606748282e-10,
+    "grad_std": 2.016400685533881e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197796,
+    "global_step": 53,
+    "key": "gathers/0.2.14/103/1197796/53.npz",
+    "grad_norm": 0.0014083271380513906,
+    "grad_mean": 3.461796627135527e-09,
+    "grad_std": 1.9681956473505124e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197797,
+    "global_step": 54,
+    "key": "gathers/0.2.14/103/1197797/54.npz",
+    "grad_norm": 0.001377343898639083,
+    "grad_mean": 4.337021852762746e-09,
+    "grad_std": 1.924893467730726e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197798,
+    "global_step": 55,
+    "key": "gathers/0.2.14/103/1197798/55.npz",
+    "grad_norm": 0.0013470062986016273,
+    "grad_mean": -4.237127093631443e-09,
+    "grad_std": 1.8824955532181775e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197799,
+    "global_step": 56,
+    "key": "gathers/0.2.14/103/1197799/56.npz",
+    "grad_norm": 0.001318788155913353,
+    "grad_mean": 5.061676855433461e-09,
+    "grad_std": 1.8430572481520358e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197800,
+    "global_step": 57,
+    "key": "gathers/0.2.14/103/1197800/57.npz",
+    "grad_norm": 0.0012910871300846338,
+    "grad_mean": -2.1248391934847177e-09,
+    "grad_std": 1.804349494705093e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197801,
+    "global_step": 58,
+    "key": "gathers/0.2.14/103/1197801/58.npz",
+    "grad_norm": 0.0012752225156873465,
+    "grad_mean": -3.850749580314172e-11,
+    "grad_std": 1.7821794244810008e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "103",
+    "window": 1197806,
+    "global_step": 63,
+    "key": "gathers/0.2.14/103/1197806/63.npz",
+    "grad_norm": 0.0013379926094785333,
+    "grad_mean": 3.4716518548805197e-09,
+    "grad_std": 1.8699001884669997e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197768,
+    "global_step": 25,
+    "key": "gathers/0.2.14/106/1197768/25.npz",
+    "grad_norm": 0.002191700506955385,
+    "grad_mean": 1.727933462980502e-09,
+    "grad_std": 3.0629971661255695e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197769,
+    "global_step": 26,
+    "key": "gathers/0.2.14/106/1197769/26.npz",
+    "grad_norm": 0.002109895460307598,
+    "grad_mean": -6.452782308485894e-09,
+    "grad_std": 2.94866481453937e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197770,
+    "global_step": 27,
+    "key": "gathers/0.2.14/106/1197770/27.npz",
+    "grad_norm": 0.002063554944470525,
+    "grad_mean": -2.868424386903712e-09,
+    "grad_std": 2.8839072001574095e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197771,
+    "global_step": 28,
+    "key": "gathers/0.2.14/106/1197771/28.npz",
+    "grad_norm": 0.0019901515915989876,
+    "grad_mean": 4.223174698836374e-09,
+    "grad_std": 2.781320745270932e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197772,
+    "global_step": 29,
+    "key": "gathers/0.2.14/106/1197772/29.npz",
+    "grad_norm": 0.0019378154538571835,
+    "grad_mean": 4.4607086913117655e-09,
+    "grad_std": 2.708178499233327e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197773,
+    "global_step": 30,
+    "key": "gathers/0.2.14/106/1197773/30.npz",
+    "grad_norm": 0.0018881779396906495,
+    "grad_mean": -1.2785302816453736e-09,
+    "grad_std": 2.63881111095543e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197774,
+    "global_step": 31,
+    "key": "gathers/0.2.14/106/1197774/31.npz",
+    "grad_norm": 0.0019108904525637627,
+    "grad_mean": -8.93643647970066e-09,
+    "grad_std": 2.670538378879428e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197775,
+    "global_step": 32,
+    "key": "gathers/0.2.14/106/1197775/32.npz",
+    "grad_norm": 0.0018516377313062549,
+    "grad_mean": 9.244218168724672e-10,
+    "grad_std": 2.5877445750666084e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197776,
+    "global_step": 33,
+    "key": "gathers/0.2.14/106/1197776/33.npz",
+    "grad_norm": 0.0017899975646287203,
+    "grad_mean": 1.3240745166953616e-09,
+    "grad_std": 2.5015997380251065e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197777,
+    "global_step": 34,
+    "key": "gathers/0.2.14/106/1197777/34.npz",
+    "grad_norm": 0.001740763895213604,
+    "grad_mean": -8.130311979215321e-10,
+    "grad_std": 2.432793735351879e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197778,
+    "global_step": 35,
+    "key": "gathers/0.2.14/106/1197778/35.npz",
+    "grad_norm": 0.001693724188953638,
+    "grad_mean": 2.596848069913449e-09,
+    "grad_std": 2.3670522750762757e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197779,
+    "global_step": 36,
+    "key": "gathers/0.2.14/106/1197779/36.npz",
+    "grad_norm": 0.0017111856723204255,
+    "grad_mean": -1.634711477294104e-09,
+    "grad_std": 2.391456291661598e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197780,
+    "global_step": 37,
+    "key": "gathers/0.2.14/106/1197780/37.npz",
+    "grad_norm": 0.001676452811807394,
+    "grad_mean": 1.2965363227479543e-09,
+    "grad_std": 2.3429158773069503e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197781,
+    "global_step": 38,
+    "key": "gathers/0.2.14/106/1197781/38.npz",
+    "grad_norm": 0.001704246038571,
+    "grad_mean": -3.990471508785731e-09,
+    "grad_std": 2.3817553937988123e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197782,
+    "global_step": 39,
+    "key": "gathers/0.2.14/106/1197782/39.npz",
+    "grad_norm": 0.0016423796769231558,
+    "grad_mean": 2.2481232431204035e-09,
+    "grad_std": 2.2952965537115233e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197783,
+    "global_step": 40,
+    "key": "gathers/0.2.14/106/1197783/40.npz",
+    "grad_norm": 0.0016052679857239127,
+    "grad_mean": 9.902909742232069e-11,
+    "grad_std": 2.2434323909692466e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197784,
+    "global_step": 41,
+    "key": "gathers/0.2.14/106/1197784/41.npz",
+    "grad_norm": 0.001573104877024889,
+    "grad_mean": -1.0601305389101867e-09,
+    "grad_std": 2.198482889070874e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197785,
+    "global_step": 42,
+    "key": "gathers/0.2.14/106/1197785/42.npz",
+    "grad_norm": 0.0015444892924278975,
+    "grad_mean": -8.969584519569196e-10,
+    "grad_std": 2.158491270165541e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197786,
+    "global_step": 43,
+    "key": "gathers/0.2.14/106/1197786/43.npz",
+    "grad_norm": 0.0015311248134821653,
+    "grad_mean": 6.30393293121756e-09,
+    "grad_std": 2.139804564649239e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197787,
+    "global_step": 44,
+    "key": "gathers/0.2.14/106/1197787/44.npz",
+    "grad_norm": 0.0015306962886825204,
+    "grad_mean": 8.396788264697364e-10,
+    "grad_std": 2.139214984708815e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197788,
+    "global_step": 45,
+    "key": "gathers/0.2.14/106/1197788/45.npz",
+    "grad_norm": 0.0015092595713213086,
+    "grad_mean": -3.909420787095996e-09,
+    "grad_std": 2.1092530460009584e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197790,
+    "global_step": 47,
+    "key": "gathers/0.2.14/106/1197790/47.npz",
+    "grad_norm": 0.001470789429731667,
+    "grad_mean": -2.3576780527889696e-09,
+    "grad_std": 2.0554912225634325e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197791,
+    "global_step": 48,
+    "key": "gathers/0.2.14/106/1197791/48.npz",
+    "grad_norm": 0.0014561330899596214,
+    "grad_mean": 3.277446980476384e-09,
+    "grad_std": 2.035007355516427e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197792,
+    "global_step": 49,
+    "key": "gathers/0.2.14/106/1197792/49.npz",
+    "grad_norm": 0.0014383422676473856,
+    "grad_mean": -5.186682194846526e-09,
+    "grad_std": 2.0101397240068763e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197794,
+    "global_step": 51,
+    "key": "gathers/0.2.14/106/1197794/51.npz",
+    "grad_norm": 0.0013700893614441156,
+    "grad_mean": -2.609418514598616e-10,
+    "grad_std": 1.914759877763572e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197795,
+    "global_step": 52,
+    "key": "gathers/0.2.14/106/1197795/52.npz",
+    "grad_norm": 0.0013406750513240695,
+    "grad_mean": -4.406624398711756e-09,
+    "grad_std": 1.8736470792646287e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197796,
+    "global_step": 53,
+    "key": "gathers/0.2.14/106/1197796/53.npz",
+    "grad_norm": 0.0013121706433594227,
+    "grad_mean": 6.701280086396366e-10,
+    "grad_std": 1.8338159861741588e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197797,
+    "global_step": 54,
+    "key": "gathers/0.2.14/106/1197797/54.npz",
+    "grad_norm": 0.0012854619417339563,
+    "grad_mean": -3.7791966778222275e-10,
+    "grad_std": 1.796489414118696e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197799,
+    "global_step": 56,
+    "key": "gathers/0.2.14/106/1197799/56.npz",
+    "grad_norm": 0.0012346241855993867,
+    "grad_mean": -8.060371814444522e-10,
+    "grad_std": 1.725441279631923e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197800,
+    "global_step": 57,
+    "key": "gathers/0.2.14/106/1197800/57.npz",
+    "grad_norm": 0.0012097562430426478,
+    "grad_mean": -1.7302225208126742e-09,
+    "grad_std": 1.6906864175325609e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197801,
+    "global_step": 58,
+    "key": "gathers/0.2.14/106/1197801/58.npz",
+    "grad_norm": 0.0011958604445680976,
+    "grad_mean": 1.2018078754394423e-09,
+    "grad_std": 1.6712671140339808e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "106",
+    "window": 1197802,
+    "global_step": 59,
+    "key": "gathers/0.2.14/106/1197802/59.npz",
+    "grad_norm": 0.001193234696984291,
+    "grad_mean": -4.387318508491944e-09,
+    "grad_std": 1.6675920733177918e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197768,
+    "global_step": 25,
+    "key": "gathers/0.2.14/107/1197768/25.npz",
+    "grad_norm": 0.002954512368887663,
+    "grad_mean": 4.042349122101996e-09,
+    "grad_std": 4.129058652324602e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197769,
+    "global_step": 26,
+    "key": "gathers/0.2.14/107/1197769/26.npz",
+    "grad_norm": 0.0028458668384701014,
+    "grad_mean": -7.359051146238471e-09,
+    "grad_std": 3.977217147621559e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197770,
+    "global_step": 27,
+    "key": "gathers/0.2.14/107/1197770/27.npz",
+    "grad_norm": 0.0027783303521573544,
+    "grad_mean": 1.3361557416047276e-09,
+    "grad_std": 3.882838427671231e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197771,
+    "global_step": 28,
+    "key": "gathers/0.2.14/107/1197771/28.npz",
+    "grad_norm": 0.002690193708986044,
+    "grad_mean": 6.911379024643338e-09,
+    "grad_std": 3.7596571473841323e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197772,
+    "global_step": 29,
+    "key": "gathers/0.2.14/107/1197772/29.npz",
+    "grad_norm": 0.002608257345855236,
+    "grad_mean": 1.1796591481427754e-09,
+    "grad_std": 3.6451538107939996e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197773,
+    "global_step": 30,
+    "key": "gathers/0.2.14/107/1197773/30.npz",
+    "grad_norm": 0.0025438498705625534,
+    "grad_mean": 2.143302646473444e-09,
+    "grad_std": 3.555141120159533e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197774,
+    "global_step": 31,
+    "key": "gathers/0.2.14/107/1197774/31.npz",
+    "grad_norm": 0.002536971587687731,
+    "grad_mean": -2.1822439411067762e-09,
+    "grad_std": 3.545528215909144e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197775,
+    "global_step": 32,
+    "key": "gathers/0.2.14/107/1197775/32.npz",
+    "grad_norm": 0.0024700495414435863,
+    "grad_mean": 4.201730074981924e-09,
+    "grad_std": 3.452000328252325e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197776,
+    "global_step": 33,
+    "key": "gathers/0.2.14/107/1197776/33.npz",
+    "grad_norm": 0.002391260117292404,
+    "grad_mean": -4.2342680472984284e-09,
+    "grad_std": 3.3418882594560273e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197777,
+    "global_step": 34,
+    "key": "gathers/0.2.14/107/1197777/34.npz",
+    "grad_norm": 0.0023263883776962757,
+    "grad_mean": 6.035364208401006e-09,
+    "grad_std": 3.2512241432414157e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197778,
+    "global_step": 35,
+    "key": "gathers/0.2.14/107/1197778/35.npz",
+    "grad_norm": 0.0022677851375192404,
+    "grad_mean": 1.2265604087957627e-09,
+    "grad_std": 3.1693286928202724e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197779,
+    "global_step": 36,
+    "key": "gathers/0.2.14/107/1197779/36.npz",
+    "grad_norm": 0.0022677599918097258,
+    "grad_mean": -5.800083524576394e-09,
+    "grad_std": 3.1692886750533944e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197780,
+    "global_step": 37,
+    "key": "gathers/0.2.14/107/1197780/37.npz",
+    "grad_norm": 0.002216015011072159,
+    "grad_mean": 5.522233337273974e-09,
+    "grad_std": 3.0969731596997008e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197781,
+    "global_step": 38,
+    "key": "gathers/0.2.14/107/1197781/38.npz",
+    "grad_norm": 0.0022024281788617373,
+    "grad_mean": 2.0012782542266905e-09,
+    "grad_std": 3.0779892767895944e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197782,
+    "global_step": 39,
+    "key": "gathers/0.2.14/107/1197782/39.npz",
+    "grad_norm": 0.002134721726179123,
+    "grad_mean": -2.6918089979233173e-09,
+    "grad_std": 2.9833661301381653e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197783,
+    "global_step": 40,
+    "key": "gathers/0.2.14/107/1197783/40.npz",
+    "grad_norm": 0.0020813902374356985,
+    "grad_mean": -2.765148110484006e-09,
+    "grad_std": 2.9088332667015493e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197785,
+    "global_step": 42,
+    "key": "gathers/0.2.14/107/1197785/42.npz",
+    "grad_norm": 0.0019947795663028955,
+    "grad_mean": 2.3333117660229163e-09,
+    "grad_std": 2.78779111795302e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197786,
+    "global_step": 43,
+    "key": "gathers/0.2.14/107/1197786/43.npz",
+    "grad_norm": 0.0019596079364418983,
+    "grad_mean": 3.624727629158997e-09,
+    "grad_std": 2.738635885179974e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197787,
+    "global_step": 44,
+    "key": "gathers/0.2.14/107/1197787/44.npz",
+    "grad_norm": 0.0019329979550093412,
+    "grad_mean": 2.172822588519807e-09,
+    "grad_std": 2.7014484658138826e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197788,
+    "global_step": 45,
+    "key": "gathers/0.2.14/107/1197788/45.npz",
+    "grad_norm": 0.001919253496453166,
+    "grad_mean": -3.5078814852873563e-10,
+    "grad_std": 2.68224084720714e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197790,
+    "global_step": 47,
+    "key": "gathers/0.2.14/107/1197790/47.npz",
+    "grad_norm": 0.0018418513936921954,
+    "grad_mean": -3.2081648448922806e-09,
+    "grad_std": 2.5740662294992944e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197792,
+    "global_step": 49,
+    "key": "gathers/0.2.14/107/1197792/49.npz",
+    "grad_norm": 0.0017852486344054341,
+    "grad_mean": -1.2801056881173167e-09,
+    "grad_std": 2.494962927812594e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197794,
+    "global_step": 51,
+    "key": "gathers/0.2.14/107/1197794/51.npz",
+    "grad_norm": 0.0017154669621959329,
+    "grad_mean": -2.406004728783273e-09,
+    "grad_std": 2.3974391751835356e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197795,
+    "global_step": 52,
+    "key": "gathers/0.2.14/107/1197795/52.npz",
+    "grad_norm": 0.0016820825403556228,
+    "grad_mean": -5.762732069314325e-09,
+    "grad_std": 2.350776867388049e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197796,
+    "global_step": 53,
+    "key": "gathers/0.2.14/107/1197796/53.npz",
+    "grad_norm": 0.00164452672470361,
+    "grad_mean": 6.122336526637184e-10,
+    "grad_std": 2.2982981136010494e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197799,
+    "global_step": 56,
+    "key": "gathers/0.2.14/107/1197799/56.npz",
+    "grad_norm": 0.001542267040349543,
+    "grad_mean": -3.1042783898982407e-09,
+    "grad_std": 2.155383526769583e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197800,
+    "global_step": 57,
+    "key": "gathers/0.2.14/107/1197800/57.npz",
+    "grad_norm": 0.0015089531661942601,
+    "grad_mean": 4.3402145766258116e-10,
+    "grad_std": 2.108828084601555e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197801,
+    "global_step": 58,
+    "key": "gathers/0.2.14/107/1197801/58.npz",
+    "grad_norm": 0.0014947251183912158,
+    "grad_mean": 1.0466985056467593e-09,
+    "grad_std": 2.088943574563018e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197802,
+    "global_step": 59,
+    "key": "gathers/0.2.14/107/1197802/59.npz",
+    "grad_norm": 0.0014744598884135485,
+    "grad_mean": -5.01677988040683e-09,
+    "grad_std": 2.060616225207923e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "107",
+    "window": 1197806,
+    "global_step": 63,
+    "key": "gathers/0.2.14/107/1197806/63.npz",
+    "grad_norm": 0.0013637783704325557,
+    "grad_mean": 3.6682683557387463e-09,
+    "grad_std": 1.9059366422879975e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197768,
+    "global_step": 25,
+    "key": "gathers/0.2.14/108/1197768/25.npz",
+    "grad_norm": 0.001906709629110992,
+    "grad_mean": -5.454749429922856e-10,
+    "grad_std": 2.664710336830467e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197769,
+    "global_step": 26,
+    "key": "gathers/0.2.14/108/1197769/26.npz",
+    "grad_norm": 0.0018255909672006965,
+    "grad_mean": -4.749430626560525e-09,
+    "grad_std": 2.551339093770366e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197770,
+    "global_step": 27,
+    "key": "gathers/0.2.14/108/1197770/27.npz",
+    "grad_norm": 0.0018042169976979494,
+    "grad_mean": -3.482568677881659e-09,
+    "grad_std": 2.5214699235220905e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197771,
+    "global_step": 28,
+    "key": "gathers/0.2.14/108/1197771/28.npz",
+    "grad_norm": 0.0017355014570057392,
+    "grad_mean": 2.4431006107050734e-09,
+    "grad_std": 2.4254381969512906e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197772,
+    "global_step": 29,
+    "key": "gathers/0.2.14/108/1197772/29.npz",
+    "grad_norm": 0.0016793693648651242,
+    "grad_mean": 4.641334871990921e-09,
+    "grad_std": 2.3469876850867877e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197773,
+    "global_step": 30,
+    "key": "gathers/0.2.14/108/1197773/30.npz",
+    "grad_norm": 0.001628024154342711,
+    "grad_mean": -6.648299688549741e-10,
+    "grad_std": 2.275234919579816e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197774,
+    "global_step": 31,
+    "key": "gathers/0.2.14/108/1197774/31.npz",
+    "grad_norm": 0.0017151609063148499,
+    "grad_mean": -8.818467622795367e-10,
+    "grad_std": 2.3970123947947286e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197775,
+    "global_step": 32,
+    "key": "gathers/0.2.14/108/1197775/32.npz",
+    "grad_norm": 0.0016265774611383677,
+    "grad_mean": 8.795637551628488e-10,
+    "grad_std": 2.273213112857775e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197776,
+    "global_step": 33,
+    "key": "gathers/0.2.14/108/1197776/33.npz",
+    "grad_norm": 0.0015669215936213732,
+    "grad_mean": -1.7167625099290262e-09,
+    "grad_std": 2.189841097788303e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197777,
+    "global_step": 34,
+    "key": "gathers/0.2.14/108/1197777/34.npz",
+    "grad_norm": 0.0015209551202133298,
+    "grad_mean": 1.626640377949684e-09,
+    "grad_std": 2.125600758517976e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197778,
+    "global_step": 35,
+    "key": "gathers/0.2.14/108/1197778/35.npz",
+    "grad_norm": 0.0014818360796198249,
+    "grad_mean": -1.2833945017831638e-09,
+    "grad_std": 2.070930349873379e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197779,
+    "global_step": 36,
+    "key": "gathers/0.2.14/108/1197779/36.npz",
+    "grad_norm": 0.0015165278455242515,
+    "grad_mean": -2.247434682800531e-09,
+    "grad_std": 2.119413011314464e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197780,
+    "global_step": 37,
+    "key": "gathers/0.2.14/108/1197780/37.npz",
+    "grad_norm": 0.0014963647117838264,
+    "grad_mean": 4.6509240902992133e-10,
+    "grad_std": 2.091235046464135e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197781,
+    "global_step": 38,
+    "key": "gathers/0.2.14/108/1197781/38.npz",
+    "grad_norm": 0.0015197709435597062,
+    "grad_mean": -1.428606566378221e-09,
+    "grad_std": 2.1239461602817755e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197782,
+    "global_step": 39,
+    "key": "gathers/0.2.14/108/1197782/39.npz",
+    "grad_norm": 0.0014657515566796064,
+    "grad_mean": -4.470793180111343e-10,
+    "grad_std": 2.0484519609453855e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197783,
+    "global_step": 40,
+    "key": "gathers/0.2.14/108/1197783/40.npz",
+    "grad_norm": 0.0014312047278508544,
+    "grad_mean": -6.466050361808584e-09,
+    "grad_std": 2.0001607481390238e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197784,
+    "global_step": 41,
+    "key": "gathers/0.2.14/108/1197784/41.npz",
+    "grad_norm": 0.0014041000977158546,
+    "grad_mean": 2.764169448887799e-10,
+    "grad_std": 1.962291435120278e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197785,
+    "global_step": 42,
+    "key": "gathers/0.2.14/108/1197785/42.npz",
+    "grad_norm": 0.0013787915231660008,
+    "grad_mean": -4.984004875474568e-10,
+    "grad_std": 1.9269216409156797e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197786,
+    "global_step": 43,
+    "key": "gathers/0.2.14/108/1197786/43.npz",
+    "grad_norm": 0.0013660669792443514,
+    "grad_mean": 1.5494779903590938e-09,
+    "grad_std": 1.9091380636382382e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197787,
+    "global_step": 44,
+    "key": "gathers/0.2.14/108/1197787/44.npz",
+    "grad_norm": 0.001364692347124219,
+    "grad_mean": -1.7720872547144495e-09,
+    "grad_std": 1.9072165287070675e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197788,
+    "global_step": 45,
+    "key": "gathers/0.2.14/108/1197788/45.npz",
+    "grad_norm": 0.001374386134557426,
+    "grad_mean": -7.134779989037554e-10,
+    "grad_std": 1.920764816532028e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197790,
+    "global_step": 47,
+    "key": "gathers/0.2.14/108/1197790/47.npz",
+    "grad_norm": 0.0013404127676039934,
+    "grad_mean": 3.12167347527037e-10,
+    "grad_std": 1.8732854414338362e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197792,
+    "global_step": 49,
+    "key": "gathers/0.2.14/108/1197792/49.npz",
+    "grad_norm": 0.0013269963674247265,
+    "grad_mean": 1.7123193973844764e-09,
+    "grad_std": 1.8545348439147347e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197794,
+    "global_step": 51,
+    "key": "gathers/0.2.14/108/1197794/51.npz",
+    "grad_norm": 0.0012798468815162778,
+    "grad_mean": -9.991946159360054e-10,
+    "grad_std": 1.7886418390844483e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197795,
+    "global_step": 52,
+    "key": "gathers/0.2.14/108/1197795/52.npz",
+    "grad_norm": 0.0012585591757670045,
+    "grad_mean": -1.0706849851160882e-09,
+    "grad_std": 1.7588912442079163e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197796,
+    "global_step": 53,
+    "key": "gathers/0.2.14/108/1197796/53.npz",
+    "grad_norm": 0.0012296292698010802,
+    "grad_mean": 2.6357652171959955e-10,
+    "grad_std": 1.7184609077958157e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197797,
+    "global_step": 54,
+    "key": "gathers/0.2.14/108/1197797/54.npz",
+    "grad_norm": 0.0012031070655211806,
+    "grad_mean": 2.517050567973911e-09,
+    "grad_std": 1.6813929732961697e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197798,
+    "global_step": 55,
+    "key": "gathers/0.2.14/108/1197798/55.npz",
+    "grad_norm": 0.0011810529977083206,
+    "grad_mean": -1.87475013291305e-09,
+    "grad_std": 1.6505721305293264e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197799,
+    "global_step": 56,
+    "key": "gathers/0.2.14/108/1197799/56.npz",
+    "grad_norm": 0.0011619507567957044,
+    "grad_mean": -5.244359613243432e-09,
+    "grad_std": 1.6238687976510846e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197800,
+    "global_step": 57,
+    "key": "gathers/0.2.14/108/1197800/57.npz",
+    "grad_norm": 0.0011373244924470782,
+    "grad_mean": -9.873671880100687e-10,
+    "grad_std": 1.589460453033098e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197801,
+    "global_step": 58,
+    "key": "gathers/0.2.14/108/1197801/58.npz",
+    "grad_norm": 0.0011371056316420436,
+    "grad_mean": -3.1302904712759982e-09,
+    "grad_std": 1.5891519069555216e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197802,
+    "global_step": 59,
+    "key": "gathers/0.2.14/108/1197802/59.npz",
+    "grad_norm": 0.001138782943598926,
+    "grad_mean": -7.75555708543152e-09,
+    "grad_std": 1.591480327078898e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197804,
+    "global_step": 61,
+    "key": "gathers/0.2.14/108/1197804/61.npz",
+    "grad_norm": 0.0011130794882774353,
+    "grad_mean": -3.411854576640394e-09,
+    "grad_std": 1.5555735899397405e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "108",
+    "window": 1197805,
+    "global_step": 62,
+    "key": "gathers/0.2.14/108/1197805/62.npz",
+    "grad_norm": 0.0010871136328205466,
+    "grad_mean": 1.6432656346765384e-09,
+    "grad_std": 1.5192880482572946e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197768,
+    "global_step": 25,
+    "key": "gathers/0.2.14/109/1197768/25.npz",
+    "grad_norm": 0.002571648685261607,
+    "grad_mean": -1.5438806899581436e-09,
+    "grad_std": 3.593991550587816e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197769,
+    "global_step": 26,
+    "key": "gathers/0.2.14/109/1197769/26.npz",
+    "grad_norm": 0.0024780756793916225,
+    "grad_mean": -4.410397824727852e-09,
+    "grad_std": 3.4632166716619395e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197770,
+    "global_step": 27,
+    "key": "gathers/0.2.14/109/1197770/27.npz",
+    "grad_norm": 0.00243169441819191,
+    "grad_mean": -2.5148774174255095e-09,
+    "grad_std": 3.398398575882311e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197771,
+    "global_step": 28,
+    "key": "gathers/0.2.14/109/1197771/28.npz",
+    "grad_norm": 0.0023378704208880663,
+    "grad_mean": 1.0476793876890156e-09,
+    "grad_std": 3.267276269980357e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197772,
+    "global_step": 29,
+    "key": "gathers/0.2.14/109/1197772/29.npz",
+    "grad_norm": 0.0022609683219343424,
+    "grad_mean": -2.889630090763262e-09,
+    "grad_std": 3.1598010536981747e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197773,
+    "global_step": 30,
+    "key": "gathers/0.2.14/109/1197773/30.npz",
+    "grad_norm": 0.002192991552874446,
+    "grad_mean": -4.0568335357704655e-09,
+    "grad_std": 3.064799102503457e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197774,
+    "global_step": 31,
+    "key": "gathers/0.2.14/109/1197774/31.npz",
+    "grad_norm": 0.0022378324065357447,
+    "grad_mean": -9.865200212288983e-09,
+    "grad_std": 3.127453510387568e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197775,
+    "global_step": 32,
+    "key": "gathers/0.2.14/109/1197775/32.npz",
+    "grad_norm": 0.0021411955822259188,
+    "grad_mean": 6.481089276366703e-11,
+    "grad_std": 2.992414692926104e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197776,
+    "global_step": 33,
+    "key": "gathers/0.2.14/109/1197776/33.npz",
+    "grad_norm": 0.0020733093842864037,
+    "grad_mean": -1.7318425582502073e-09,
+    "grad_std": 2.897540070989635e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197777,
+    "global_step": 34,
+    "key": "gathers/0.2.14/109/1197777/34.npz",
+    "grad_norm": 0.0020280724857002497,
+    "grad_mean": -2.0714117088260764e-09,
+    "grad_std": 2.834319275279995e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197778,
+    "global_step": 35,
+    "key": "gathers/0.2.14/109/1197778/35.npz",
+    "grad_norm": 0.0019784586038440466,
+    "grad_mean": 5.415792259100272e-09,
+    "grad_std": 2.7649775802274235e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197779,
+    "global_step": 36,
+    "key": "gathers/0.2.14/109/1197779/36.npz",
+    "grad_norm": 0.001991673605516553,
+    "grad_mean": -4.074952819621558e-09,
+    "grad_std": 2.783448053378379e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197780,
+    "global_step": 37,
+    "key": "gathers/0.2.14/109/1197780/37.npz",
+    "grad_norm": 0.0019500802736729383,
+    "grad_mean": -8.534756790190556e-10,
+    "grad_std": 2.7253224743617466e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197781,
+    "global_step": 38,
+    "key": "gathers/0.2.14/109/1197781/38.npz",
+    "grad_norm": 0.0019395840354263783,
+    "grad_mean": -2.2881401218199926e-09,
+    "grad_std": 2.7106527795695e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197782,
+    "global_step": 39,
+    "key": "gathers/0.2.14/109/1197782/39.npz",
+    "grad_norm": 0.001877462025731802,
+    "grad_mean": -1.870298138584303e-09,
+    "grad_std": 2.6238349164486863e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197783,
+    "global_step": 40,
+    "key": "gathers/0.2.14/109/1197783/40.npz",
+    "grad_norm": 0.0018312901956960559,
+    "grad_mean": -2.8398050577749245e-10,
+    "grad_std": 2.5593085410946514e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197784,
+    "global_step": 41,
+    "key": "gathers/0.2.14/109/1197784/41.npz",
+    "grad_norm": 0.0017962456913664937,
+    "grad_mean": 6.541254204961433e-10,
+    "grad_std": 2.510332024030504e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197785,
+    "global_step": 42,
+    "key": "gathers/0.2.14/109/1197785/42.npz",
+    "grad_norm": 0.0017583135049790144,
+    "grad_mean": 5.006688397202197e-09,
+    "grad_std": 2.45731507675373e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197786,
+    "global_step": 43,
+    "key": "gathers/0.2.14/109/1197786/43.npz",
+    "grad_norm": 0.0017314323922619224,
+    "grad_mean": 4.532087594100176e-09,
+    "grad_std": 2.419748398096999e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197787,
+    "global_step": 44,
+    "key": "gathers/0.2.14/109/1197787/44.npz",
+    "grad_norm": 0.001725660520605743,
+    "grad_mean": 2.883724592450676e-09,
+    "grad_std": 2.411684590697405e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197788,
+    "global_step": 45,
+    "key": "gathers/0.2.14/109/1197788/45.npz",
+    "grad_norm": 0.0017212042585015297,
+    "grad_mean": -4.067181702538392e-09,
+    "grad_std": 2.405454779363936e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197790,
+    "global_step": 47,
+    "key": "gathers/0.2.14/109/1197790/47.npz",
+    "grad_norm": 0.0016603582771494985,
+    "grad_mean": -9.131665201778105e-09,
+    "grad_std": 2.3204054286907194e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197792,
+    "global_step": 49,
+    "key": "gathers/0.2.14/109/1197792/49.npz",
+    "grad_norm": 0.001625856733880937,
+    "grad_mean": 2.380278196767449e-10,
+    "grad_std": 2.272205620101886e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197794,
+    "global_step": 51,
+    "key": "gathers/0.2.14/109/1197794/51.npz",
+    "grad_norm": 0.0015688604908064008,
+    "grad_mean": 3.4823561811947457e-09,
+    "grad_std": 2.1925484361418057e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197795,
+    "global_step": 52,
+    "key": "gathers/0.2.14/109/1197795/52.npz",
+    "grad_norm": 0.0016138191567733884,
+    "grad_mean": 7.171190863353161e-10,
+    "grad_std": 2.255383151350543e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197796,
+    "global_step": 53,
+    "key": "gathers/0.2.14/109/1197796/53.npz",
+    "grad_norm": 0.0015401194104924798,
+    "grad_mean": -2.2708530611481592e-09,
+    "grad_std": 2.1523833311221097e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197797,
+    "global_step": 54,
+    "key": "gathers/0.2.14/109/1197797/54.npz",
+    "grad_norm": 0.0014975789235904813,
+    "grad_mean": 2.63324562155276e-09,
+    "grad_std": 2.092930571961915e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197798,
+    "global_step": 55,
+    "key": "gathers/0.2.14/109/1197798/55.npz",
+    "grad_norm": 0.001463928259909153,
+    "grad_mean": 1.2803513804726663e-09,
+    "grad_std": 2.0459033294173423e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197799,
+    "global_step": 56,
+    "key": "gathers/0.2.14/109/1197799/56.npz",
+    "grad_norm": 0.0014317024033516645,
+    "grad_mean": -5.3690460966038245e-09,
+    "grad_std": 2.0008596948173363e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197800,
+    "global_step": 57,
+    "key": "gathers/0.2.14/109/1197800/57.npz",
+    "grad_norm": 0.0013997838832437992,
+    "grad_mean": 2.2377479869106764e-09,
+    "grad_std": 1.956258074642392e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197801,
+    "global_step": 58,
+    "key": "gathers/0.2.14/109/1197801/58.npz",
+    "grad_norm": 0.0013903843937441707,
+    "grad_mean": -3.6622793686547084e-09,
+    "grad_std": 1.94311951418058e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "109",
+    "window": 1197802,
+    "global_step": 59,
+    "key": "gathers/0.2.14/109/1197802/59.npz",
+    "grad_norm": 0.0013729017227888107,
+    "grad_mean": -7.487563347119419e-10,
+    "grad_std": 1.918690259117284e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197768,
+    "global_step": 25,
+    "key": "gathers/0.2.14/110/1197768/25.npz",
+    "grad_norm": 0.0022688668686896563,
+    "grad_mean": 7.804851875903296e-09,
+    "grad_std": 3.1708311780676013e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197769,
+    "global_step": 26,
+    "key": "gathers/0.2.14/110/1197769/26.npz",
+    "grad_norm": 0.0021863365545868874,
+    "grad_mean": 5.911612310782743e-10,
+    "grad_std": 3.0555013381672325e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197770,
+    "global_step": 27,
+    "key": "gathers/0.2.14/110/1197770/27.npz",
+    "grad_norm": 0.002136271446943283,
+    "grad_mean": 4.671323328153676e-09,
+    "grad_std": 2.9855295906600077e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197771,
+    "global_step": 28,
+    "key": "gathers/0.2.14/110/1197771/28.npz",
+    "grad_norm": 0.0020600727293640375,
+    "grad_mean": -2.1260266880318568e-09,
+    "grad_std": 2.8790409487555735e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197772,
+    "global_step": 29,
+    "key": "gathers/0.2.14/110/1197772/29.npz",
+    "grad_norm": 0.001999292289838195,
+    "grad_mean": 1.3886757299630403e-09,
+    "grad_std": 2.7940984637098154e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197773,
+    "global_step": 30,
+    "key": "gathers/0.2.14/110/1197773/30.npz",
+    "grad_norm": 0.0019414175767451525,
+    "grad_mean": -1.42152367654802e-09,
+    "grad_std": 2.7132157356390962e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197774,
+    "global_step": 31,
+    "key": "gathers/0.2.14/110/1197774/31.npz",
+    "grad_norm": 0.001961379311978817,
+    "grad_mean": -3.381333213425819e-09,
+    "grad_std": 2.7411117571318755e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197775,
+    "global_step": 32,
+    "key": "gathers/0.2.14/110/1197775/32.npz",
+    "grad_norm": 0.0018783899722620845,
+    "grad_mean": 3.3152411926806735e-09,
+    "grad_std": 2.6251302642776864e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197776,
+    "global_step": 33,
+    "key": "gathers/0.2.14/110/1197776/33.npz",
+    "grad_norm": 0.0018214016454294324,
+    "grad_mean": 4.2416252732380144e-09,
+    "grad_std": 2.5454851311224047e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197777,
+    "global_step": 34,
+    "key": "gathers/0.2.14/110/1197777/34.npz",
+    "grad_norm": 0.0017702359473332763,
+    "grad_mean": -1.6866832375228569e-09,
+    "grad_std": 2.4739817945373943e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197778,
+    "global_step": 35,
+    "key": "gathers/0.2.14/110/1197778/35.npz",
+    "grad_norm": 0.0017229511868208647,
+    "grad_mean": -2.2336308358461565e-09,
+    "grad_std": 2.407898819001275e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197779,
+    "global_step": 36,
+    "key": "gathers/0.2.14/110/1197779/36.npz",
+    "grad_norm": 0.0017175914254039526,
+    "grad_mean": 2.025131173866157e-09,
+    "grad_std": 2.4004082206374733e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197780,
+    "global_step": 37,
+    "key": "gathers/0.2.14/110/1197780/37.npz",
+    "grad_norm": 0.0016832853434607387,
+    "grad_mean": -3.77715150823299e-11,
+    "grad_std": 2.352465116928215e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197781,
+    "global_step": 38,
+    "key": "gathers/0.2.14/110/1197781/38.npz",
+    "grad_norm": 0.0016827807994559407,
+    "grad_mean": -3.90090937330001e-09,
+    "grad_std": 2.3517568479292095e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197782,
+    "global_step": 39,
+    "key": "gathers/0.2.14/110/1197782/39.npz",
+    "grad_norm": 0.0016258818795904517,
+    "grad_mean": 9.002032008709193e-09,
+    "grad_std": 2.2722233552485704e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197783,
+    "global_step": 40,
+    "key": "gathers/0.2.14/110/1197783/40.npz",
+    "grad_norm": 0.0015866691246628761,
+    "grad_mean": 2.2939508070862757e-09,
+    "grad_std": 2.2174385776452255e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197785,
+    "global_step": 42,
+    "key": "gathers/0.2.14/110/1197785/42.npz",
+    "grad_norm": 0.0015161092160269618,
+    "grad_mean": -8.410470653252844e-10,
+    "grad_std": 2.11882888834225e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197786,
+    "global_step": 43,
+    "key": "gathers/0.2.14/110/1197786/43.npz",
+    "grad_norm": 0.001485099783167243,
+    "grad_mean": -3.3157052103938156e-10,
+    "grad_std": 2.0754921479237964e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197787,
+    "global_step": 44,
+    "key": "gathers/0.2.14/110/1197787/44.npz",
+    "grad_norm": 0.0014707627706229687,
+    "grad_mean": -1.0753530288454272e-09,
+    "grad_std": 2.055455070149037e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197788,
+    "global_step": 45,
+    "key": "gathers/0.2.14/110/1197788/45.npz",
+    "grad_norm": 0.001456609694287181,
+    "grad_mean": 2.0835080327685773e-09,
+    "grad_std": 2.0356749246275285e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197790,
+    "global_step": 47,
+    "key": "gathers/0.2.14/110/1197790/47.npz",
+    "grad_norm": 0.0014073802158236504,
+    "grad_mean": -2.6887465587321913e-09,
+    "grad_std": 1.9668736968014855e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197792,
+    "global_step": 49,
+    "key": "gathers/0.2.14/110/1197792/49.npz",
+    "grad_norm": 0.0013694223016500473,
+    "grad_mean": -4.79413841958376e-09,
+    "grad_std": 1.913821506605018e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197794,
+    "global_step": 51,
+    "key": "gathers/0.2.14/110/1197794/51.npz",
+    "grad_norm": 0.0013011798728257418,
+    "grad_mean": -3.2941347427595247e-09,
+    "grad_std": 1.8184529153586482e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197795,
+    "global_step": 52,
+    "key": "gathers/0.2.14/110/1197795/52.npz",
+    "grad_norm": 0.0012750800233334303,
+    "grad_mean": 2.221737238627952e-09,
+    "grad_std": 1.7819788808992598e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197796,
+    "global_step": 53,
+    "key": "gathers/0.2.14/110/1197796/53.npz",
+    "grad_norm": 0.0012461706064641476,
+    "grad_mean": 2.8342492797150953e-09,
+    "grad_std": 1.7415759430150501e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197797,
+    "global_step": 54,
+    "key": "gathers/0.2.14/110/1197797/54.npz",
+    "grad_norm": 0.0012208878761157393,
+    "grad_mean": -1.4287422356318302e-09,
+    "grad_std": 1.7062437791537377e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197798,
+    "global_step": 55,
+    "key": "gathers/0.2.14/110/1197798/55.npz",
+    "grad_norm": 0.0011964237783104181,
+    "grad_mean": 4.3033021590588305e-10,
+    "grad_std": 1.6720545090720407e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197799,
+    "global_step": 56,
+    "key": "gathers/0.2.14/110/1197799/56.npz",
+    "grad_norm": 0.0011708851670846343,
+    "grad_mean": -4.750092319483201e-09,
+    "grad_std": 1.6363563872801024e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197800,
+    "global_step": 57,
+    "key": "gathers/0.2.14/110/1197800/57.npz",
+    "grad_norm": 0.001148535986430943,
+    "grad_mean": 1.7366054150258492e-09,
+    "grad_std": 1.6051286593210534e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197801,
+    "global_step": 58,
+    "key": "gathers/0.2.14/110/1197801/58.npz",
+    "grad_norm": 0.00113740807864815,
+    "grad_mean": -3.998388287129728e-09,
+    "grad_std": 1.5895726619419293e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "110",
+    "window": 1197806,
+    "global_step": 63,
+    "key": "gathers/0.2.14/110/1197806/63.npz",
+    "grad_norm": 0.0010480390628799796,
+    "grad_mean": -9.17215525753079e-10,
+    "grad_std": 1.4646801673734444e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "127",
+    "window": 1197763,
+    "global_step": 20,
+    "key": "gathers/0.2.14/127/1197763/20.npz",
+    "grad_norm": 0.004919452592730522,
+    "grad_mean": -1.1495745466660878e-09,
+    "grad_std": 6.875150575069711e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "127",
+    "window": 1197764,
+    "global_step": 21,
+    "key": "gathers/0.2.14/127/1197764/21.npz",
+    "grad_norm": 0.00475677102804184,
+    "grad_mean": -4.797875874373858e-09,
+    "grad_std": 6.647794180025812e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "127",
+    "window": 1197765,
+    "global_step": 22,
+    "key": "gathers/0.2.14/127/1197765/22.npz",
+    "grad_norm": 0.004876379854977131,
+    "grad_mean": -2.156142070441902e-10,
+    "grad_std": 6.8149552134855185e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "127",
+    "window": 1197766,
+    "global_step": 23,
+    "key": "gathers/0.2.14/127/1197766/23.npz",
+    "grad_norm": 0.005587057676166296,
+    "grad_mean": -1.1633520813347786e-08,
+    "grad_std": 7.808150257915258e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "127",
+    "window": 1197767,
+    "global_step": 24,
+    "key": "gathers/0.2.14/127/1197767/24.npz",
+    "grad_norm": 0.005306929349899292,
+    "grad_mean": 8.287108776983132e-09,
+    "grad_std": 7.4166619015159085e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197768,
+    "global_step": 25,
+    "key": "gathers/0.2.14/132/1197768/25.npz",
+    "grad_norm": 0.0025156382471323013,
+    "grad_mean": 1.8920953692713738e-09,
+    "grad_std": 3.515714297464001e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197769,
+    "global_step": 26,
+    "key": "gathers/0.2.14/132/1197769/26.npz",
+    "grad_norm": 0.0024165522772818804,
+    "grad_mean": 6.3832596985946566e-09,
+    "grad_std": 3.377231678314274e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197770,
+    "global_step": 27,
+    "key": "gathers/0.2.14/132/1197770/27.npz",
+    "grad_norm": 0.0023786425590515137,
+    "grad_mean": -3.53464901792222e-09,
+    "grad_std": 3.3242554309254047e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197771,
+    "global_step": 28,
+    "key": "gathers/0.2.14/132/1197771/28.npz",
+    "grad_norm": 0.0022938589099794626,
+    "grad_mean": 6.373635841327996e-09,
+    "grad_std": 3.205762141078594e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197772,
+    "global_step": 29,
+    "key": "gathers/0.2.14/132/1197772/29.npz",
+    "grad_norm": 0.002222480485215783,
+    "grad_mean": -7.207986651991405e-09,
+    "grad_std": 3.1060053515830077e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197773,
+    "global_step": 30,
+    "key": "gathers/0.2.14/132/1197773/30.npz",
+    "grad_norm": 0.0021610634867101908,
+    "grad_mean": -2.5697568517557556e-09,
+    "grad_std": 3.0201799745555036e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197774,
+    "global_step": 31,
+    "key": "gathers/0.2.14/132/1197774/31.npz",
+    "grad_norm": 0.002238900400698185,
+    "grad_mean": -7.914981559054013e-09,
+    "grad_std": 3.128951448161388e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197775,
+    "global_step": 32,
+    "key": "gathers/0.2.14/132/1197775/32.npz",
+    "grad_norm": 0.0021402048878371716,
+    "grad_mean": -1.9044739119067344e-09,
+    "grad_std": 2.991029532495304e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197776,
+    "global_step": 33,
+    "key": "gathers/0.2.14/132/1197776/33.npz",
+    "grad_norm": 0.0020707121584564447,
+    "grad_mean": -4.9370214583177585e-09,
+    "grad_std": 2.893906639656052e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197777,
+    "global_step": 34,
+    "key": "gathers/0.2.14/132/1197777/34.npz",
+    "grad_norm": 0.002019827254116535,
+    "grad_mean": -1.2353867928638351e-09,
+    "grad_std": 2.8227971142769093e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197778,
+    "global_step": 35,
+    "key": "gathers/0.2.14/132/1197778/35.npz",
+    "grad_norm": 0.0019637313671410084,
+    "grad_mean": -3.575498785934883e-09,
+    "grad_std": 2.744398216236732e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197779,
+    "global_step": 36,
+    "key": "gathers/0.2.14/132/1197779/36.npz",
+    "grad_norm": 0.001987505005672574,
+    "grad_mean": -3.5460236968987147e-09,
+    "grad_std": 2.7776234219345497e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197780,
+    "global_step": 37,
+    "key": "gathers/0.2.14/132/1197780/37.npz",
+    "grad_norm": 0.0019457029411569238,
+    "grad_mean": -2.54113263764566e-09,
+    "grad_std": 2.719203848755569e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197781,
+    "global_step": 38,
+    "key": "gathers/0.2.14/132/1197781/38.npz",
+    "grad_norm": 0.0019518464105203748,
+    "grad_mean": 5.451106233067549e-09,
+    "grad_std": 2.7277853860141477e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197782,
+    "global_step": 39,
+    "key": "gathers/0.2.14/132/1197782/39.npz",
+    "grad_norm": 0.0018874015659093857,
+    "grad_mean": 4.303736034216854e-09,
+    "grad_std": 2.637722900544759e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197783,
+    "global_step": 40,
+    "key": "gathers/0.2.14/132/1197783/40.npz",
+    "grad_norm": 0.0018418702529743314,
+    "grad_mean": -6.286048903625385e-10,
+    "grad_std": 2.574094196461374e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197784,
+    "global_step": 41,
+    "key": "gathers/0.2.14/132/1197784/41.npz",
+    "grad_norm": 0.0018037138506770134,
+    "grad_mean": -1.7937655805155828e-09,
+    "grad_std": 2.520768475733348e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197785,
+    "global_step": 42,
+    "key": "gathers/0.2.14/132/1197785/42.npz",
+    "grad_norm": 0.001767571666277945,
+    "grad_mean": 4.468582393002407e-09,
+    "grad_std": 2.470254685249529e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197786,
+    "global_step": 43,
+    "key": "gathers/0.2.14/132/1197786/43.npz",
+    "grad_norm": 0.001746263005770743,
+    "grad_mean": 3.9605621005023295e-09,
+    "grad_std": 2.4404760097240796e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197787,
+    "global_step": 44,
+    "key": "gathers/0.2.14/132/1197787/44.npz",
+    "grad_norm": 0.00174702238291502,
+    "grad_mean": -2.9315712080091316e-09,
+    "grad_std": 2.4415387542831013e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197788,
+    "global_step": 45,
+    "key": "gathers/0.2.14/132/1197788/45.npz",
+    "grad_norm": 0.0017453108448535204,
+    "grad_mean": 1.8744141794257985e-09,
+    "grad_std": 2.4391476927121403e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197790,
+    "global_step": 47,
+    "key": "gathers/0.2.14/132/1197790/47.npz",
+    "grad_norm": 0.001681758789345622,
+    "grad_mean": -4.4694972722858495e-10,
+    "grad_std": 2.3503316697315313e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197792,
+    "global_step": 49,
+    "key": "gathers/0.2.14/132/1197792/49.npz",
+    "grad_norm": 0.001657722401432693,
+    "grad_mean": -4.682698229174775e-09,
+    "grad_std": 2.3167351628217148e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197794,
+    "global_step": 51,
+    "key": "gathers/0.2.14/132/1197794/51.npz",
+    "grad_norm": 0.0015960012096911669,
+    "grad_mean": -4.3347658795767074e-09,
+    "grad_std": 2.2304773210635176e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197795,
+    "global_step": 52,
+    "key": "gathers/0.2.14/132/1197795/52.npz",
+    "grad_norm": 0.0015671735163778067,
+    "grad_mean": -2.230465812047555e-09,
+    "grad_std": 2.1901926174905384e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197796,
+    "global_step": 53,
+    "key": "gathers/0.2.14/132/1197796/53.npz",
+    "grad_norm": 0.0015333148185163736,
+    "grad_mean": -2.9756053177010244e-10,
+    "grad_std": 2.142874791388749e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197797,
+    "global_step": 54,
+    "key": "gathers/0.2.14/132/1197797/54.npz",
+    "grad_norm": 0.0015013118973001838,
+    "grad_mean": -3.3166362989334175e-09,
+    "grad_std": 2.0981467514502583e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197798,
+    "global_step": 55,
+    "key": "gathers/0.2.14/132/1197798/55.npz",
+    "grad_norm": 0.0014697195729240775,
+    "grad_mean": -9.231037045864809e-10,
+    "grad_std": 2.0539973775157705e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197799,
+    "global_step": 56,
+    "key": "gathers/0.2.14/132/1197799/56.npz",
+    "grad_norm": 0.0014413100434467196,
+    "grad_mean": 3.539130322138817e-09,
+    "grad_std": 2.0142908851994434e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197800,
+    "global_step": 57,
+    "key": "gathers/0.2.14/132/1197800/57.npz",
+    "grad_norm": 0.0014127223985269666,
+    "grad_mean": 2.3745898580784797e-09,
+    "grad_std": 1.974339966182015e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197801,
+    "global_step": 58,
+    "key": "gathers/0.2.14/132/1197801/58.npz",
+    "grad_norm": 0.0014068253803998232,
+    "grad_mean": 2.567895895921879e-09,
+    "grad_std": 1.966098352568224e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197802,
+    "global_step": 59,
+    "key": "gathers/0.2.14/132/1197802/59.npz",
+    "grad_norm": 0.0013919114135205746,
+    "grad_mean": -1.4900016775953873e-09,
+    "grad_std": 1.945256599356071e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "132",
+    "window": 1197806,
+    "global_step": 63,
+    "key": "gathers/0.2.14/132/1197806/63.npz",
+    "grad_norm": 0.00129810837097466,
+    "grad_mean": -1.2665973825320975e-09,
+    "grad_std": 1.814162942537223e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197769,
+    "global_step": 26,
+    "key": "gathers/0.2.14/178/1197769/26.npz",
+    "grad_norm": 0.002447177655994892,
+    "grad_mean": 3.111140012279634e-09,
+    "grad_std": 3.4200363643321907e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197770,
+    "global_step": 27,
+    "key": "gathers/0.2.14/178/1197770/27.npz",
+    "grad_norm": 0.0024169052485376596,
+    "grad_mean": -7.831837400829045e-09,
+    "grad_std": 3.3777223507058807e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197771,
+    "global_step": 28,
+    "key": "gathers/0.2.14/178/1197771/28.npz",
+    "grad_norm": 0.002326476853340864,
+    "grad_mean": 7.357652709316653e-09,
+    "grad_std": 3.251344878663076e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197772,
+    "global_step": 29,
+    "key": "gathers/0.2.14/178/1197772/29.npz",
+    "grad_norm": 0.00226233690045774,
+    "grad_mean": 1.6585123274737157e-09,
+    "grad_std": 3.1617148579243803e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197773,
+    "global_step": 30,
+    "key": "gathers/0.2.14/178/1197773/30.npz",
+    "grad_norm": 0.0022059916518628597,
+    "grad_mean": 5.476799014303424e-09,
+    "grad_std": 3.0829653496766696e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197774,
+    "global_step": 31,
+    "key": "gathers/0.2.14/178/1197774/31.npz",
+    "grad_norm": 0.002276937710121274,
+    "grad_mean": 1.1392392584852473e-09,
+    "grad_std": 3.1821200536796823e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197775,
+    "global_step": 32,
+    "key": "gathers/0.2.14/178/1197775/32.npz",
+    "grad_norm": 0.002200159477069974,
+    "grad_mean": -6.024108989421961e-10,
+    "grad_std": 3.0748194603802403e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197776,
+    "global_step": 33,
+    "key": "gathers/0.2.14/178/1197776/33.npz",
+    "grad_norm": 0.0021233861334621906,
+    "grad_mean": 1.6522808676810996e-09,
+    "grad_std": 2.96752477879636e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197777,
+    "global_step": 34,
+    "key": "gathers/0.2.14/178/1197777/34.npz",
+    "grad_norm": 0.002071513095870614,
+    "grad_mean": 1.633328583494631e-09,
+    "grad_std": 2.8950298656127416e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197778,
+    "global_step": 35,
+    "key": "gathers/0.2.14/178/1197778/35.npz",
+    "grad_norm": 0.002012856537476182,
+    "grad_mean": -2.5353521504456467e-09,
+    "grad_std": 2.8130541522841668e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197780,
+    "global_step": 37,
+    "key": "gathers/0.2.14/178/1197780/37.npz",
+    "grad_norm": 0.0019784641917794943,
+    "grad_mean": -1.969457263939489e-09,
+    "grad_std": 2.764989176284871e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197781,
+    "global_step": 38,
+    "key": "gathers/0.2.14/178/1197781/38.npz",
+    "grad_norm": 0.0019899248145520687,
+    "grad_mean": -4.2126169219613985e-09,
+    "grad_std": 2.7810040137410397e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197782,
+    "global_step": 39,
+    "key": "gathers/0.2.14/178/1197782/39.npz",
+    "grad_norm": 0.001919710892252624,
+    "grad_mean": 4.902199202128088e-10,
+    "grad_std": 2.682879994608811e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197783,
+    "global_step": 40,
+    "key": "gathers/0.2.14/178/1197783/40.npz",
+    "grad_norm": 0.0018750193994492292,
+    "grad_mean": -1.6786292356130161e-09,
+    "grad_std": 2.620421355459257e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197784,
+    "global_step": 41,
+    "key": "gathers/0.2.14/178/1197784/41.npz",
+    "grad_norm": 0.0018380738329142332,
+    "grad_mean": -3.446769092363411e-09,
+    "grad_std": 2.568786385381827e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197785,
+    "global_step": 42,
+    "key": "gathers/0.2.14/178/1197785/42.npz",
+    "grad_norm": 0.0017998091643676162,
+    "grad_mean": -3.0374007753408705e-09,
+    "grad_std": 2.5153103706543334e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197786,
+    "global_step": 43,
+    "key": "gathers/0.2.14/178/1197786/43.npz",
+    "grad_norm": 0.001775137847289443,
+    "grad_mean": -2.2293755730373732e-09,
+    "grad_std": 2.480832108631148e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197787,
+    "global_step": 44,
+    "key": "gathers/0.2.14/178/1197787/44.npz",
+    "grad_norm": 0.0017765189986675978,
+    "grad_mean": -1.66466029849488e-09,
+    "grad_std": 2.482762511135661e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197788,
+    "global_step": 45,
+    "key": "gathers/0.2.14/178/1197788/45.npz",
+    "grad_norm": 0.001765040447935462,
+    "grad_mean": 3.431693373912026e-09,
+    "grad_std": 2.4667190245963866e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197790,
+    "global_step": 47,
+    "key": "gathers/0.2.14/178/1197790/47.npz",
+    "grad_norm": 0.001700480584986508,
+    "grad_mean": 2.1548482997957308e-09,
+    "grad_std": 2.3764948764437577e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197791,
+    "global_step": 48,
+    "key": "gathers/0.2.14/178/1197791/48.npz",
+    "grad_norm": 0.001681509893387556,
+    "grad_mean": -4.148621002286745e-09,
+    "grad_std": 2.349980150029296e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197792,
+    "global_step": 49,
+    "key": "gathers/0.2.14/178/1197792/49.npz",
+    "grad_norm": 0.0016709573101252317,
+    "grad_mean": -2.2552339995485227e-09,
+    "grad_std": 2.335235194550478e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197794,
+    "global_step": 51,
+    "key": "gathers/0.2.14/178/1197794/51.npz",
+    "grad_norm": 0.001589649124071002,
+    "grad_mean": -4.671248721166421e-09,
+    "grad_std": 2.221599288532161e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197795,
+    "global_step": 52,
+    "key": "gathers/0.2.14/178/1197795/52.npz",
+    "grad_norm": 0.0015605631051585078,
+    "grad_mean": -4.788082375029035e-09,
+    "grad_std": 2.1809501049574465e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197796,
+    "global_step": 53,
+    "key": "gathers/0.2.14/178/1197796/53.npz",
+    "grad_norm": 0.0015253477031365037,
+    "grad_mean": -3.2378191239246235e-09,
+    "grad_std": 2.131737801391864e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197797,
+    "global_step": 54,
+    "key": "gathers/0.2.14/178/1197797/54.npz",
+    "grad_norm": 0.0014922539703547955,
+    "grad_mean": 1.3856142622170609e-10,
+    "grad_std": 2.0854904505540617e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197798,
+    "global_step": 55,
+    "key": "gathers/0.2.14/178/1197798/55.npz",
+    "grad_norm": 0.0014630000805482268,
+    "grad_mean": -3.17215054224107e-09,
+    "grad_std": 2.0446045709832106e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197799,
+    "global_step": 56,
+    "key": "gathers/0.2.14/178/1197799/56.npz",
+    "grad_norm": 0.0014319809852167964,
+    "grad_mean": 1.9115860283580588e-10,
+    "grad_std": 2.0012562345073093e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197800,
+    "global_step": 57,
+    "key": "gathers/0.2.14/178/1197800/57.npz",
+    "grad_norm": 0.0014395759208127856,
+    "grad_mean": -2.891629602430612e-09,
+    "grad_std": 2.0118684460612712e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197804,
+    "global_step": 61,
+    "key": "gathers/0.2.14/178/1197804/61.npz",
+    "grad_norm": 0.0014193806564435363,
+    "grad_mean": -3.179679852749473e-09,
+    "grad_std": 1.983644096981152e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "178",
+    "window": 1197805,
+    "global_step": 62,
+    "key": "gathers/0.2.14/178/1197805/62.npz",
+    "grad_norm": 0.0013713613152503967,
+    "grad_mean": -3.595304720604986e-09,
+    "grad_std": 1.9165340745530557e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197763,
+    "global_step": 20,
+    "key": "gathers/0.2.14/184/1197763/20.npz",
+    "grad_norm": 0.0018877784023061395,
+    "grad_mean": -1.4768147593713365e-08,
+    "grad_std": 2.638211753946962e-06,
+    "grad_sparsity": 0.00800000037997961,
+    "anomalies": [
+      "grad_sparsity: 0.00800000037997961"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197764,
+    "global_step": 21,
+    "key": "gathers/0.2.14/184/1197764/21.npz",
+    "grad_norm": 0.003514454234391451,
+    "grad_mean": 1.8802662538064396e-08,
+    "grad_std": 4.9115678848465905e-06,
+    "grad_sparsity": 0.004000000189989805,
+    "anomalies": [
+      "grad_sparsity: 0.004000000189989805"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197765,
+    "global_step": 22,
+    "key": "gathers/0.2.14/184/1197765/22.npz",
+    "grad_norm": 0.0058975862339138985,
+    "grad_mean": 1.452102704746494e-08,
+    "grad_std": 8.242122930823825e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197766,
+    "global_step": 23,
+    "key": "gathers/0.2.14/184/1197766/23.npz",
+    "grad_norm": 0.005122600123286247,
+    "grad_mean": -1.0853912435493385e-08,
+    "grad_std": 7.159050255722832e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197768,
+    "global_step": 25,
+    "key": "gathers/0.2.14/184/1197768/25.npz",
+    "grad_norm": 0.001393333775922656,
+    "grad_mean": -1.1999574667242996e-08,
+    "grad_std": 1.9472081476124004e-06,
+    "grad_sparsity": 0.014000000432133675,
+    "anomalies": [
+      "grad_sparsity: 0.014000000432133675"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197769,
+    "global_step": 26,
+    "key": "gathers/0.2.14/184/1197769/26.npz",
+    "grad_norm": 0.0026620840653777122,
+    "grad_mean": -8.868081380342119e-09,
+    "grad_std": 3.72036856788327e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197770,
+    "global_step": 27,
+    "key": "gathers/0.2.14/184/1197770/27.npz",
+    "grad_norm": 0.0031789320055395365,
+    "grad_mean": -2.4728191050371606e-08,
+    "grad_std": 4.44262786913896e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197771,
+    "global_step": 28,
+    "key": "gathers/0.2.14/184/1197771/28.npz",
+    "grad_norm": 0.004746075253933668,
+    "grad_mean": -7.701356885547739e-09,
+    "grad_std": 6.632843906118069e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197772,
+    "global_step": 29,
+    "key": "gathers/0.2.14/184/1197772/29.npz",
+    "grad_norm": 0.006589346565306187,
+    "grad_mean": -4.008118636988911e-08,
+    "grad_std": 9.20881393540185e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197773,
+    "global_step": 30,
+    "key": "gathers/0.2.14/184/1197773/30.npz",
+    "grad_norm": 0.007688467390835285,
+    "grad_mean": 7.152145542477228e-08,
+    "grad_std": 1.07447322079679e-05,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197774,
+    "global_step": 31,
+    "key": "gathers/0.2.14/184/1197774/31.npz",
+    "grad_norm": 0.009366448037326336,
+    "grad_mean": -1.659274317944437e-08,
+    "grad_std": 1.3090011634631082e-05,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197776,
+    "global_step": 33,
+    "key": "gathers/0.2.14/184/1197776/33.npz",
+    "grad_norm": 0.006995613221079111,
+    "grad_mean": 1.4584613516888112e-08,
+    "grad_std": 9.776665137906093e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197777,
+    "global_step": 34,
+    "key": "gathers/0.2.14/184/1197777/34.npz",
+    "grad_norm": 0.0064432923682034016,
+    "grad_mean": 1.310479724736524e-08,
+    "grad_std": 9.004774256027304e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197778,
+    "global_step": 35,
+    "key": "gathers/0.2.14/184/1197778/35.npz",
+    "grad_norm": 0.006002962589263916,
+    "grad_mean": -1.7730567236640127e-08,
+    "grad_std": 8.38938467495609e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197779,
+    "global_step": 36,
+    "key": "gathers/0.2.14/184/1197779/36.npz",
+    "grad_norm": 0.0056596980430185795,
+    "grad_mean": -1.3695631295718158e-08,
+    "grad_std": 7.909663509053644e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197780,
+    "global_step": 37,
+    "key": "gathers/0.2.14/184/1197780/37.npz",
+    "grad_norm": 0.005383369978517294,
+    "grad_mean": -1.8534531687208755e-09,
+    "grad_std": 7.5234956966596656e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197781,
+    "global_step": 38,
+    "key": "gathers/0.2.14/184/1197781/38.npz",
+    "grad_norm": 0.005119544453918934,
+    "grad_mean": -2.3014887773342707e-08,
+    "grad_std": 7.1547506195202e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197782,
+    "global_step": 39,
+    "key": "gathers/0.2.14/184/1197782/39.npz",
+    "grad_norm": 0.0049016475677490234,
+    "grad_mean": -1.017705919537093e-08,
+    "grad_std": 6.85025997881894e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197783,
+    "global_step": 40,
+    "key": "gathers/0.2.14/184/1197783/40.npz",
+    "grad_norm": 0.004691918846219778,
+    "grad_mean": 3.4556240091632162e-09,
+    "grad_std": 6.557162123499438e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197785,
+    "global_step": 42,
+    "key": "gathers/0.2.14/184/1197785/42.npz",
+    "grad_norm": 0.004327978938817978,
+    "grad_mean": -1.3194576098385369e-08,
+    "grad_std": 6.048526756785577e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197786,
+    "global_step": 43,
+    "key": "gathers/0.2.14/184/1197786/43.npz",
+    "grad_norm": 0.004172446671873331,
+    "grad_mean": 5.097939848042188e-09,
+    "grad_std": 5.831175258208532e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197787,
+    "global_step": 44,
+    "key": "gathers/0.2.14/184/1197787/44.npz",
+    "grad_norm": 0.0040159584023058414,
+    "grad_mean": 6.186203993507888e-09,
+    "grad_std": 5.6124745242414065e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197788,
+    "global_step": 45,
+    "key": "gathers/0.2.14/184/1197788/45.npz",
+    "grad_norm": 0.0038993924390524626,
+    "grad_mean": 1.5097229022487113e-09,
+    "grad_std": 5.449572199722752e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197790,
+    "global_step": 47,
+    "key": "gathers/0.2.14/184/1197790/47.npz",
+    "grad_norm": 0.0036295156460255384,
+    "grad_mean": 1.2719757469525916e-09,
+    "grad_std": 5.072407020634273e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197791,
+    "global_step": 48,
+    "key": "gathers/0.2.14/184/1197791/48.npz",
+    "grad_norm": 0.003518560901284218,
+    "grad_mean": -5.3552615675300785e-09,
+    "grad_std": 4.917339992971392e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197792,
+    "global_step": 49,
+    "key": "gathers/0.2.14/184/1197792/49.npz",
+    "grad_norm": 0.003409317461773753,
+    "grad_mean": 2.5203322095990188e-08,
+    "grad_std": 4.764603545481805e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197793,
+    "global_step": 50,
+    "key": "gathers/0.2.14/184/1197793/50.npz",
+    "grad_norm": 0.0033167884685099125,
+    "grad_mean": 1.590115372707146e-09,
+    "grad_std": 4.6353570724022575e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197794,
+    "global_step": 51,
+    "key": "gathers/0.2.14/184/1197794/51.npz",
+    "grad_norm": 0.0032161055132746696,
+    "grad_mean": -6.421303933024092e-09,
+    "grad_std": 4.494644144870108e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197795,
+    "global_step": 52,
+    "key": "gathers/0.2.14/184/1197795/52.npz",
+    "grad_norm": 0.003127176547423005,
+    "grad_mean": 3.3086124950898466e-09,
+    "grad_std": 4.3703653318516444e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197796,
+    "global_step": 53,
+    "key": "gathers/0.2.14/184/1197796/53.npz",
+    "grad_norm": 0.0030412091873586178,
+    "grad_mean": 2.27400542840428e-09,
+    "grad_std": 4.250222900736844e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197797,
+    "global_step": 54,
+    "key": "gathers/0.2.14/184/1197797/54.npz",
+    "grad_norm": 0.0029707683715969324,
+    "grad_mean": 5.180526674308794e-09,
+    "grad_std": 4.151776010985486e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197798,
+    "global_step": 55,
+    "key": "gathers/0.2.14/184/1197798/55.npz",
+    "grad_norm": 0.002885171677917242,
+    "grad_mean": -5.8632156907378885e-09,
+    "grad_std": 4.032150172861293e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197799,
+    "global_step": 56,
+    "key": "gathers/0.2.14/184/1197799/56.npz",
+    "grad_norm": 0.0028091787826269865,
+    "grad_mean": -6.5398162440999386e-09,
+    "grad_std": 3.925944838556461e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197800,
+    "global_step": 57,
+    "key": "gathers/0.2.14/184/1197800/57.npz",
+    "grad_norm": 0.0027334783226251602,
+    "grad_mean": -1.1781116526776714e-08,
+    "grad_std": 3.820137408183655e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197801,
+    "global_step": 58,
+    "key": "gathers/0.2.14/184/1197801/58.npz",
+    "grad_norm": 0.0026659523136913776,
+    "grad_mean": -3.395315806287158e-09,
+    "grad_std": 3.725783699337626e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197802,
+    "global_step": 59,
+    "key": "gathers/0.2.14/184/1197802/59.npz",
+    "grad_norm": 0.002604577224701643,
+    "grad_mean": 8.391419115127974e-09,
+    "grad_std": 3.6400012959347805e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "184",
+    "window": 1197805,
+    "global_step": 62,
+    "key": "gathers/0.2.14/184/1197805/62.npz",
+    "grad_norm": 0.0024475164245814085,
+    "grad_mean": -4.661521724180773e-10,
+    "grad_std": 3.420511575313867e-06,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197768,
+    "global_step": 25,
+    "key": "gathers/0.2.14/214/1197768/25.npz",
+    "grad_norm": 6.111962193244835e-06,
+    "grad_mean": -5.2049364818174126e-11,
+    "grad_std": 8.541575446940897e-09,
+    "grad_sparsity": 0.010000000707805157,
+    "anomalies": [
+      "grad_std: 8.541575446940897e-09",
+      "grad_sparsity: 0.010000000707805157"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197769,
+    "global_step": 26,
+    "key": "gathers/0.2.14/214/1197769/26.npz",
+    "grad_norm": 9.0835674200207e-06,
+    "grad_mean": 4.394766668636141e-12,
+    "grad_std": 1.2694682638425547e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.2694682638425547e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197770,
+    "global_step": 27,
+    "key": "gathers/0.2.14/214/1197770/27.npz",
+    "grad_norm": 1.2642572073673364e-05,
+    "grad_mean": -4.681677615026025e-11,
+    "grad_std": 1.7668487117816767e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.7668487117816767e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197771,
+    "global_step": 28,
+    "key": "gathers/0.2.14/214/1197771/28.npz",
+    "grad_norm": 1.574005545990076e-05,
+    "grad_mean": 7.50856495035368e-12,
+    "grad_std": 2.1997415444729995e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 2.1997415444729995e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197772,
+    "global_step": 29,
+    "key": "gathers/0.2.14/214/1197772/29.npz",
+    "grad_norm": 1.0914907761616632e-05,
+    "grad_mean": -1.1758230500369393e-10,
+    "grad_std": 1.52536099307099e-08,
+    "grad_sparsity": 0.01600000075995922,
+    "anomalies": [
+      "grad_std: 1.52536099307099e-08",
+      "grad_sparsity: 0.01600000075995922"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197773,
+    "global_step": 30,
+    "key": "gathers/0.2.14/214/1197773/30.npz",
+    "grad_norm": 1.5949173757690005e-05,
+    "grad_mean": 1.351619927092429e-10,
+    "grad_std": 2.228926021530242e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 2.228926021530242e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197774,
+    "global_step": 31,
+    "key": "gathers/0.2.14/214/1197774/31.npz",
+    "grad_norm": 1.3182842849346343e-05,
+    "grad_mean": -1.4537330540742577e-11,
+    "grad_std": 1.842359509396374e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.842359509396374e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197775,
+    "global_step": 32,
+    "key": "gathers/0.2.14/214/1197775/32.npz",
+    "grad_norm": 1.2415434866852593e-05,
+    "grad_mean": -3.229497919088331e-11,
+    "grad_std": 1.735108590139589e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.735108590139589e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197776,
+    "global_step": 33,
+    "key": "gathers/0.2.14/214/1197776/33.npz",
+    "grad_norm": 1.193277603306342e-05,
+    "grad_mean": 2.5909425646619688e-11,
+    "grad_std": 1.667655702419779e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.667655702419779e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197777,
+    "global_step": 34,
+    "key": "gathers/0.2.14/214/1197777/34.npz",
+    "grad_norm": 1.1623292266449425e-05,
+    "grad_mean": -3.9001378515646223e-11,
+    "grad_std": 1.624401413380383e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.624401413380383e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197778,
+    "global_step": 35,
+    "key": "gathers/0.2.14/214/1197778/35.npz",
+    "grad_norm": 1.1089380677731242e-05,
+    "grad_mean": 1.2325663927004182e-11,
+    "grad_std": 1.5497890970550543e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.5497890970550543e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197779,
+    "global_step": 36,
+    "key": "gathers/0.2.14/214/1197779/36.npz",
+    "grad_norm": 1.07447322079679e-05,
+    "grad_mean": 2.6603688869919484e-12,
+    "grad_std": 1.5016233589904004e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.5016233589904004e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197780,
+    "global_step": 37,
+    "key": "gathers/0.2.14/214/1197780/37.npz",
+    "grad_norm": 1.041695213643834e-05,
+    "grad_mean": 2.402085301500545e-11,
+    "grad_std": 1.4558128036412654e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.4558128036412654e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197781,
+    "global_step": 38,
+    "key": "gathers/0.2.14/214/1197781/38.npz",
+    "grad_norm": 1.0245578778267372e-05,
+    "grad_mean": -2.2878227090572523e-11,
+    "grad_std": 1.4318626284648417e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.4318626284648417e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197782,
+    "global_step": 39,
+    "key": "gathers/0.2.14/214/1197782/39.npz",
+    "grad_norm": 9.716810382087715e-06,
+    "grad_mean": -8.03705019203349e-12,
+    "grad_std": 1.3579665392171592e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.3579665392171592e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197783,
+    "global_step": 40,
+    "key": "gathers/0.2.14/214/1197783/40.npz",
+    "grad_norm": 9.291553396906238e-06,
+    "grad_mean": -2.777859366143165e-11,
+    "grad_std": 1.2985323039060859e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.2985323039060859e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197785,
+    "global_step": 42,
+    "key": "gathers/0.2.14/214/1197785/42.npz",
+    "grad_norm": 8.643854016554542e-06,
+    "grad_mean": 1.1668899353722839e-11,
+    "grad_std": 1.2080160871619228e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.2080160871619228e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197786,
+    "global_step": 43,
+    "key": "gathers/0.2.14/214/1197786/43.npz",
+    "grad_norm": 8.369829629373271e-06,
+    "grad_mean": -4.284310753388532e-12,
+    "grad_std": 1.1697203206040285e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.1697203206040285e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197787,
+    "global_step": 44,
+    "key": "gathers/0.2.14/214/1197787/44.npz",
+    "grad_norm": 8.293030077766161e-06,
+    "grad_mean": -8.59177312628745e-13,
+    "grad_std": 1.1589873949446883e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.1589873949446883e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197788,
+    "global_step": 45,
+    "key": "gathers/0.2.14/214/1197788/45.npz",
+    "grad_norm": 8.135626558214426e-06,
+    "grad_mean": -1.1463030177849554e-11,
+    "grad_std": 1.1369888142098716e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.1369888142098716e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197790,
+    "global_step": 47,
+    "key": "gathers/0.2.14/214/1197790/47.npz",
+    "grad_norm": 7.966831617522985e-06,
+    "grad_mean": 4.8875465306907895e-12,
+    "grad_std": 1.113399594743214e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.113399594743214e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197791,
+    "global_step": 48,
+    "key": "gathers/0.2.14/214/1197791/48.npz",
+    "grad_norm": 8.06038315204205e-06,
+    "grad_mean": -1.311621731364676e-11,
+    "grad_std": 1.12647313699199e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.12647313699199e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197792,
+    "global_step": 49,
+    "key": "gathers/0.2.14/214/1197792/49.npz",
+    "grad_norm": 8.161562618624885e-06,
+    "grad_mean": 5.202693744571496e-12,
+    "grad_std": 1.1406140032477197e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.1406140032477197e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197794,
+    "global_step": 51,
+    "key": "gathers/0.2.14/214/1197794/51.npz",
+    "grad_norm": 8.29652799438918e-06,
+    "grad_mean": 2.6363746255531062e-11,
+    "grad_std": 1.1594733173581062e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.1594733173581062e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197795,
+    "global_step": 52,
+    "key": "gathers/0.2.14/214/1197795/52.npz",
+    "grad_norm": 9.259226317226421e-06,
+    "grad_mean": 1.052581286020704e-11,
+    "grad_std": 1.2940170712738563e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.2940170712738563e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197796,
+    "global_step": 53,
+    "key": "gathers/0.2.14/214/1197796/53.npz",
+    "grad_norm": 9.450079232919961e-06,
+    "grad_mean": 1.0667135577624443e-11,
+    "grad_std": 1.320689602124503e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.320689602124503e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197798,
+    "global_step": 55,
+    "key": "gathers/0.2.14/214/1197798/55.npz",
+    "grad_norm": 9.317938747699372e-06,
+    "grad_mean": -1.7959562656488792e-11,
+    "grad_std": 1.3022215306079943e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.3022215306079943e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197799,
+    "global_step": 56,
+    "key": "gathers/0.2.14/214/1197799/56.npz",
+    "grad_norm": 9.352967936138157e-06,
+    "grad_mean": 1.3816466200300415e-11,
+    "grad_std": 1.3071175253287493e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.3071175253287493e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197800,
+    "global_step": 57,
+    "key": "gathers/0.2.14/214/1197800/57.npz",
+    "grad_norm": 9.333928574051242e-06,
+    "grad_mean": -4.7213487459896175e-12,
+    "grad_std": 1.3044573421439054e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.3044573421439054e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197801,
+    "global_step": 58,
+    "key": "gathers/0.2.14/214/1197801/58.npz",
+    "grad_norm": 9.820636478252709e-06,
+    "grad_mean": -1.1266198043924369e-11,
+    "grad_std": 1.3724766212419581e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.3724766212419581e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197802,
+    "global_step": 59,
+    "key": "gathers/0.2.14/214/1197802/59.npz",
+    "grad_norm": 9.891231457004324e-06,
+    "grad_mean": 3.840506471869398e-13,
+    "grad_std": 1.382342951217197e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.382342951217197e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "214",
+    "window": 1197804,
+    "global_step": 61,
+    "key": "gathers/0.2.14/214/1197804/61.npz",
+    "grad_norm": 1.0484619451744948e-05,
+    "grad_mean": 9.326315761337689e-12,
+    "grad_std": 1.46527137090402e-08,
+    "grad_sparsity": 0.0020000000949949026,
+    "anomalies": [
+      "grad_std: 1.46527137090402e-08",
+      "grad_sparsity: 0.0020000000949949026"
+    ]
+  },
+  {
+    "uid": "4",
+    "window": 1197763,
+    "global_step": 20,
+    "key": "gathers/0.2.14/4/1197763/20.npz",
+    "grad_norm": 0.00016907189274206758,
+    "grad_mean": -1.6442783246084502e-10,
+    "grad_std": 2.3628533085684467e-07,
+    "grad_sparsity": 0.03200000151991844,
+    "anomalies": [
+      "grad_std: 2.3628533085684467e-07",
+      "grad_sparsity: 0.03200000151991844"
+    ]
+  },
+  {
+    "uid": "4",
+    "window": 1197764,
+    "global_step": 21,
+    "key": "gathers/0.2.14/4/1197764/21.npz",
+    "grad_norm": 0.00015915163385216147,
+    "grad_mean": -4.3739640381845746e-11,
+    "grad_std": 2.2242137731609546e-07,
+    "grad_sparsity": 0.03200000151991844,
+    "anomalies": [
+      "grad_std: 2.2242137731609546e-07",
+      "grad_sparsity: 0.03200000151991844"
+    ]
+  },
+  {
+    "uid": "4",
+    "window": 1197765,
+    "global_step": 22,
+    "key": "gathers/0.2.14/4/1197765/22.npz",
+    "grad_norm": 0.00015114220150280744,
+    "grad_mean": -1.0737967459650832e-10,
+    "grad_std": 2.11227828117444e-07,
+    "grad_sparsity": 0.03200000151991844,
+    "anomalies": [
+      "grad_std: 2.11227828117444e-07",
+      "grad_sparsity: 0.03200000151991844"
+    ]
+  },
+  {
+    "uid": "4",
+    "window": 1197766,
+    "global_step": 23,
+    "key": "gathers/0.2.14/4/1197766/23.npz",
+    "grad_norm": 0.00015139758761506528,
+    "grad_mean": 1.682629556520876e-11,
+    "grad_std": 2.1158477636618045e-07,
+    "grad_sparsity": 0.014000000432133675,
+    "anomalies": [
+      "grad_std: 2.1158477636618045e-07",
+      "grad_sparsity: 0.014000000432133675"
+    ]
+  },
+  {
+    "uid": "4",
+    "window": 1197767,
+    "global_step": 24,
+    "key": "gathers/0.2.14/4/1197767/24.npz",
+    "grad_norm": 0.00014804529200773686,
+    "grad_mean": 8.752303742864953e-11,
+    "grad_std": 2.0689977020538208e-07,
+    "grad_sparsity": 0.004000000189989805,
+    "anomalies": [
+      "grad_std: 2.0689977020538208e-07",
+      "grad_sparsity: 0.004000000189989805"
+    ]
+  }
+]

@@ -1,0 +1,93 @@
+{
+  "arb-goerli": {
+    "assetReserves": "0xb81B2575b0B34e76e56F2e35cD66b5Cd58c6C85F",
+    "bridgeFacet": "0xdCF3405188A3000B3D89f4c29Eff343042773AeB",
+    "chainId": 421613,
+    "diamondProxy": "0x25427539f8ba4f5E42cA8371f43bc0D34B8a089D",
+    "hyperlaneAdapter": "0xde09c9442F5452c9a0d6E2BDC66Aac9eBB1858ea",
+    "hyperlaneIGP": "0x1C869A436E48C34fB9CD74F79938D3542A93E999",
+    "kai": "0xf1a70163250ea483de2c5d599581650E7B3882F0",
+    "requestProcessorFacet": "0x233785fF995E94fEf8b695634E6bFbaFB02444A6",
+    "setterFacet": "0xb574419eDF8AB976A3F72723E58Aa57c90fF7a7c"
+  },
+  "bsctestnet": {
+    "assetReserves": "0x86D915757955E8ba9A5Cd9177A9184851B59bB7f",
+    "bridgeFacet": "0xa466F5cB1B655FB5a66F1eaD2F403FEd646fF3De",
+    "chainId": 97,
+    "diamondProxy": "0xD7b702A86A83D3766B38aB5e04Ae5C3d35356cBb",
+    "hyperlaneAdapter": "0x6007A3945eeE560c67071458996C0d899ED5D744",
+    "hyperlaneIGP": "0xC0A27ef2304753d49ec4349DAC38fD33F8D40256",
+    "kai": "0xdeea4146771a1eEcf20078DDe470a66917Bb4E9a",
+    "requestProcessorFacet": "0x1a7EBd17350dbc453830095d0E5cA07d51A8BDe9",
+    "setterFacet": "0xE175513929084AbeC6a1891dA28d4Ff8e7321f90"
+  },
+  "fuji": {
+    "assetReserves": "0xb574419eDF8AB976A3F72723E58Aa57c90fF7a7c",
+    "bridgeFacet": "0xc5D2C93ea4bB39da3d3D2532CC3c25437C4C9B33",
+    "chainId": 43113,
+    "diamondProxy": "0x74f7532b774e055B4F2f413ddb76AA30b4687bf0",
+    "hyperlaneAdapter": "0x6961012CB8bF6e6f93bF59a7F5dcfe0056104B44",
+    "hyperlaneIGP": "0x79dA7c2A9fC0539a1e4E076ef93DAA09Db191Bc3",
+    "kai": "0x513ECFd229De878AAC0fc3b6D01a97283F2B6E1d",
+    "requestProcessorFacet": "0x43FBcd4d935Ba6Ec38C57DD5D3E6d31864De47c3",
+    "setterFacet": "0x28C3361A37D2C4201118845c6E50F8d520E6dB8f"
+  },
+  "godwokentestnet": {
+    "assetReserves": "0xb8A5b3B512d1eEb4c7A96Da0A31B5a2D36175054",
+    "bridgeFacet": "0x7A59a2D8E2A42C73aaa99E809CFe7816F786A3F7",
+    "chainId": 71401,
+    "diamondProxy": "0x16CFB94143350Ee2B4E038ab312068E06884C2B8",
+    "hyperlaneAdapter": "0x0D8907264689635Be91d3dB316FFd594a0a1C681",
+    "hyperlaneIGP": "0xC2D1E226f087C1138AB0C6cE63E2F67B50B8a614",
+    "kai": "0x2e038b800126DA1a39defc1d2d7ffd5B88D977f1",
+    "requestProcessorFacet": "0x88aa6C2584b2095CFa0e0cD3234B738125F77354",
+    "setterFacet": "0xad13E123C194Cd3e58818679df46FB39F89bf09c"
+  },
+  "khalanitestnet": {
+    "bridgeFacet": "0xD6029DD31C94bfBCdb1820D67DdE02c61f4bab07",
+    "chainId": 10012,
+    "diamondProxy": "0x930D5879b62763921F3fCe5b20457133Af531225",
+    "hyperlaneAdapter": "0x305f14b18b794bc9729E31472CF2161Dcf55323f",
+    "hyperlaneIgp": "0xa7fb580ADbB6Bc3838e13129B2ED5BA37d89f293",
+    "interchainLiquidityHubWrapper": "0x60dF39C70D80A4ABDAdfcfCf13D20B38CfeCB440",
+    "kai": "0x477b4198Edd0ED573E900db7e9925FC7bbA35395",
+    "kaiLiquidityAggregator": "0x414EFC7F0b7834a49eAb51bC10809BD6F081B7EB",
+    "liquidityAggregator": "0x555d985AF856f6FE687ccD40dC066cB49EEBA3c1",
+    "liquidityProjector": "0x2E3Ca697cEb0FaeaaC755D2686d264C80038869e",
+    "requestProcessorFacet": "0x98EFB8273FDc4d0C837DDF128bD4f067bB9017aC",
+    "setterFacet": "0xaA8763a5A5E6E95Fb8C186d2ec2Ee202b1196Aba"
+  },
+  "mumbai": {
+    "assetReserves": "0xBA45a2A29e7E01689B8080Ef6799d2b2E1E8BF02",
+    "bridgeFacet": "0x294F78052AB6E5BCD26F104E78D44F29EE2B9700",
+    "chainId": 80001,
+    "diamondProxy": "0x86D915757955E8ba9A5Cd9177A9184851B59bB7f",
+    "hyperlaneAdapter": "0x7c0e615Cda34E27534f8018956d332568946259C",
+    "hyperlaneIGP": "0x81E1f972F7e9995efB3AdA1B4Fd2f5ce417D9aBe",
+    "kai": "0x5e036eCEF6C9285671765E3EaC51fBD9A76341fE",
+    "requestProcessorFacet": "0xA5F459F6Dc3C5a4E9DBAC501ffF927f1b54D142f",
+    "setterFacet": "0x709Df499E8dde26779f235638B6BFBFA4381d3F6"
+  },
+  "optimism-goerli": {
+    "assetReserves": "0x5e036eCEF6C9285671765E3EaC51fBD9A76341fE",
+    "bridgeFacet": "0xbACF930287855740fE274DCAdC51182988d55705",
+    "chainId": 420,
+    "diamondProxy": "0xdeea4146771a1eEcf20078DDe470a66917Bb4E9a",
+    "hyperlaneAdapter": "0xC0A27ef2304753d49ec4349DAC38fD33F8D40256",
+    "hyperlaneIGP": "0x831591C2f19A4fd5f28cC971d1E65bB6E131B461",
+    "kai": "0xB9e0acd20051723d739774f599EBe2685FF03D64",
+    "requestProcessorFacet": "0xa466F5cB1B655FB5a66F1eaD2F403FEd646fF3De",
+    "setterFacet": "0xfB4946aC2f744A69da84b395e547a715E41dC20A"
+  },
+  "sepolia": {
+    "assetReserves": "0x723C29118a1c4b91a0BF1a1c085AdAa920A1ec8a",
+    "bridgeFacet": "0x495a3bD94B35F7B0d65c1BA2C534c5CfBD64a599",
+    "chainId": 11155111,
+    "diamondProxy": "0x1089Fa8b3e08972e6ad149BA900c9dB6Ee984E90",
+    "hyperlaneAdapter": "0x8B4099086296cd7cAc0F834eBab5ad614Af36e49",
+    "hyperlaneIGP": "0x47e4F578Baa6A63891Ee5Ba2D08fcf0c5b8d8307",
+    "kai": "0x90a542C81D8A5fd397cbD543Cbe50a9D6EFC36F8",
+    "requestProcessorFacet": "0x8028524197f416Da23D9983dF1E51c72B348A689",
+    "setterFacet": "0xbFdEf0C51A3e7c446651d21f8DE23e9bA6001F0d"
+  }
+}

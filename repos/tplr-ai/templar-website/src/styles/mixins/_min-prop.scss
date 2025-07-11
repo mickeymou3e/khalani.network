@@ -1,0 +1,4 @@
+@mixin min-prop($cssProperty, $min-value, $max-value) {
+  #{$cssProperty}: $max-value; //fallback (MS Edge 18 and below)
+  #{$cssProperty}: unquote('min(#{$min-value},  #{$max-value})');
+}

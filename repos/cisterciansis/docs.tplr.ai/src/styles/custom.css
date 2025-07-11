@@ -1,0 +1,500 @@
+/* src/styles/custom.css */
+
+/* Import fonts - Assuming they will be placed in src/assets/fonts/ */
+@font-face {
+    font-family: 'AeonikFono';
+    src: url('/fonts/AeonikFono-Regular.woff2') format('woff2'),
+         url('/fonts/AeonikFono-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PPNeueMontreal';
+    src: url('/fonts/PPNeueMontreal-Book.woff2') format('woff2'),
+         url('/fonts/PPNeueMontreal-Book.woff') format('woff');
+    font-weight: normal; /* Book */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PPNeueMontreal';
+    src: url('/fonts/PPNeueMontreal-Medium.woff2') format('woff2'),
+         url('/fonts/PPNeueMontreal-Medium.woff') format('woff');
+    font-weight: 500; /* Medium */
+    font-style: normal;
+}
+
+:root {
+    /* TPLR.AI Color Palette Reference (actual values assigned below)
+    'templar-red': #ff3a3a
+    'black': #101010
+    'white': #f5f5f5
+    'grey-900': #171717
+    'grey-800': #2f2f2f
+    'grey-500': #828282
+    'grey-200': #ddd
+    'grey-100': #efefef
+    */
+
+    /* Accent Colors */
+    --sl-color-accent-low: rgba(255, 58, 58, 0.1);
+    --sl-color-accent: #ff3a3a;
+    --sl-color-accent-high: #ff6b6b; /* Lighter for hover */
+
+    /* Base Palette for Light Mode */
+    --tplr-white: #f5f5f5;
+    --tplr-black: #101010;
+    --tplr-grey-100: #efefef;
+    --tplr-grey-200: #ddd;
+    --tplr-grey-500: #828282;
+    --tplr-grey-800: #2f2f2f;
+    --tplr-grey-900: #171717;
+
+    /* Starlight Variables - Light Mode */
+    /* Text */
+    --sl-color-text-accent: var(--sl-color-accent);
+    --sl-color-text-base: var(--tplr-black); /* Stronger contrast */
+    --sl-color-text-headings: var(--tplr-black);
+    --sl-color-text-secondary: var(--tplr-grey-500);
+    
+    /* Backgrounds */
+    --sl-color-bg: var(--tplr-white);
+    --sl-color-bg-accent: var(--sl-color-accent-low);
+    --sl-color-bg-nav: var(--tplr-grey-100);
+    --sl-color-bg-sidebar: var(--tplr-grey-100);
+    --sl-color-bg-table-head: var(--tplr-grey-200);
+    --sl-color-bg-code: var(--tplr-grey-100);
+
+    /* Borders */
+    --sl-color-border: var(--tplr-grey-200);
+    --sl-color-border-accent: var(--sl-color-accent);
+
+    /* Starlight specific text overrides - Light Mode */
+    --sl-color-text-nav-idle: var(--tplr-grey-800);
+    --sl-color-text-nav-active: var(--sl-color-accent);
+    --sl-color-text-nav-hover: var(--sl-color-accent-high);
+    --sl-color-text-sidebar-active: var(--sl-color-accent);
+
+    /* Font Families */
+    --sl-font-default: 'PPNeueMontreal', sans-serif;
+    --sl-font-headings: 'PPNeueMontreal', sans-serif; /* Using PPNeueMontreal for headings as well, often a display font is different */
+    --sl-font-mono: 'AeonikFono', monospace;
+
+    /* Custom Aside Styles - Note - Light Mode */
+    /* --sl-color-asides-bg-note: var(--sl-color-accent-low); */     /* REMOVING */
+    /* --sl-color-asides-border-note: var(--sl-color-accent); */       /* REMOVING */
+    /* --sl-color-asides-text-note: var(--tplr-grey-900); */         /* REMOVING */
+}
+
+/* Dark Mode Overrides - Adjust as needed based on TPLR.AI dark theme if it exists */
+:root[data-theme="dark"] {
+    /* Accent Colors - Dark Mode (can be same or adjusted) */
+    --sl-color-accent-low: rgba(255, 58, 58, 0.15);
+    --sl-color-accent: #ff3a3a;
+    --sl-color-accent-high: #ff1f1f; /* Darker red for contrast on dark bg if needed, or brighter */
+
+    /* Starlight Variables - Dark Mode */
+    /* Text */
+    --sl-color-text-accent: var(--sl-color-accent);
+    --sl-color-text-base: var(--tplr-white); 
+    --sl-color-text-headings: var(--tplr-white);
+    --sl-color-text-secondary: var(--tplr-grey-500);
+
+    /* Backgrounds */
+    --sl-color-bg: var(--tplr-black); /* Main page background */
+    --sl-color-bg-accent: var(--sl-color-accent-low); /* Or a darker variant of accent low */
+    --sl-color-bg-nav: var(--tplr-grey-900);
+    --sl-color-bg-sidebar: var(--tplr-grey-900);
+    --sl-color-bg-table-head: var(--tplr-grey-800);
+    --sl-color-bg-code: var(--tplr-grey-900);
+
+    /* Borders */
+    --sl-color-border: var(--tplr-grey-800);
+    --sl-color-border-accent: var(--sl-color-accent);
+
+    /* Starlight specific text overrides - Dark Mode */
+    --sl-color-text-nav-idle: var(--tplr-grey-200); /* Lighter grey for readability on dark nav */
+    --sl-color-text-nav-active: var(--tplr-white);
+    --sl-color-text-nav-hover: var(--sl-color-accent);
+    --sl-color-text-sidebar-active: var(--tplr-white);
+
+    /* Custom Aside Styles - Note - Dark Mode */
+    /* --sl-color-asides-bg-note: rgba(255, 58, 58, 0.1); */ /* REMOVING */
+    /* --sl-color-asides-border-note: var(--sl-color-accent); */   /* REMOVING */
+    /* --sl-color-asides-text-note: var(--tplr-white); */           /* REMOVING */
+}
+
+/* Specific override for active sidebar links in dark mode */
+:root[data-theme="dark"] .sidebar a[aria-current="page"],
+:root[data-theme="dark"] .sidebar ul > li.active > a { /* Common Starlight active selectors */
+    background-color: var(--sl-color-accent) !important; /* Solid templar-red */
+    color: var(--tplr-white) !important; /* Ensure text is white */
+    font-weight: 600; /* Keep the font weight you saw */
+    /* border-left: 3px solid var(--sl-color-accent) !important; */
+    /* padding-left: calc(1rem - 3px); */
+}
+
+body {
+    font-family: var(--sl-font-default);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--sl-font-headings);
+    font-weight: 400; /* Changed from 500 to match Templar site's heading weight */
+}
+
+/* Ensure code blocks use the mono font */
+code, pre {
+    font-family: var(--sl-font-mono);
+}
+
+/* Further customizations can be added below */ 
+
+/* Style for the site title in the header */
+.site-title {
+    font-family: 'PPNeueMontreal', sans-serif;
+    font-weight: 400; /* Corresponds to PPNeueMontreal-Book */
+    color: var(--sl-color-accent) !important; /* Templar Red, !important to override potential specificity issues */
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    font-size: max(2rem, 3.25vw); /* Made a bit smaller */
+    line-height: 1;
+    margin: 0; /* Reset margins, helps bring closer to logo */
+    padding: 0; /* Reset padding */
+    border: 0; /* Reset border */
+    background-repeat: no-repeat;
+    box-sizing: inherit;
+}
+
+/* Reduce space between logo and site title text within the .site-title link */
+a.site-title.sl-flex {
+    gap: 0.5rem !important; /* Reduce the gap between items in the flex container */
+    align-items: center; /* Ensure vertical alignment */
+}
+
+/* Reset margins on the image and span within the site title link, if any */
+.site-title.sl-flex img,
+.site-title.sl-flex span {
+    margin: 0 !important;
+}
+
+/* Reduce the size of the logo */
+.site-title.sl-flex img {
+    height: 36px !important; /* New, smaller height */
+    width: auto !important;   /* Maintain aspect ratio */
+}
+
+/* === Custom Starlight Aside Styling === */
+
+/* Note Asides - Light Mode */
+.starlight-aside--note {
+    /* Override Starlight's default blue-themed variables for notes */
+    --sl-color-blue-low: var(--sl-color-accent-low);  /* Background */
+    --sl-color-blue: var(--sl-color-accent);          /* Border */
+    --sl-color-blue-high: var(--sl-color-accent);     /* Title/Icon Accent */
+    
+    /* Explicitly set main text color for the aside content */
+    color: var(--tplr-black);
+}
+
+/* Note Asides - Dark Mode */
+:root[data-theme="dark"] .starlight-aside--note {
+    /* Override Starlight's default blue-themed variables for notes */
+    --sl-color-blue-low: var(--sl-color-accent-low);  /* Background - using the same as light for a subtle red tint */
+    /* Consider a slightly more opaque version if too subtle: rgba(255, 58, 58, 0.2); */
+    --sl-color-blue: var(--sl-color-accent);          /* Border */
+    --sl-color-blue-high: var(--sl-color-accent);     /* Title/Icon Accent */
+
+    /* Explicitly set main text color for the aside content */
+    color: var(--tplr-white);
+}
+
+/* Optional: If the aside title needs different styling than the body text */
+.starlight-aside--note .__title {
+    color: var(--sl-color-accent); 
+}
+:root[data-theme="dark"] .starlight-aside--note .__title {
+    color: var(--sl-color-accent); 
+}
+
+/* === Mermaid Diagram Dark Mode Styling === */
+/* REMOVING - This is now handled by rehype-mermaid dark:true and mermaid-themer.js 
+:root[data-theme="dark"] .mermaid svg {
+    fill: var(--tplr-white) !important;
+    color: var(--tplr-white) !important; 
+}
+
+:root[data-theme="dark"] .mermaid svg .label {
+    fill: var(--tplr-black) !important; 
+    color: var(--tplr-black) !important;
+}
+
+:root[data-theme="dark"] .mermaid svg .node rect,
+:root[data-theme="dark"] .mermaid svg .node circle,
+:root[data-theme="dark"] .mermaid svg .node ellipse,
+:root[data-theme="dark"] .mermaid svg .node polygon {
+    fill: var(--tplr-grey-200) !important; 
+    stroke: var(--tplr-grey-500) !important; 
+}
+
+:root[data-theme="dark"] .mermaid svg .edgePath path {
+    stroke: var(--tplr-white) !important; 
+}
+
+:root[data-theme="dark"] .mermaid svg .arrowheadPath {
+    fill: var(--tplr-white) !important; 
+}
+
+
+:root[data-theme="dark"] .mermaid svg text {
+    fill: var(--tplr-white) !important;
+}
+
+
+:root[data-theme="dark"] .mermaid svg .actor,
+:root[data-theme="dark"] .mermaid svg .taskText {
+    fill: var(--tplr-black) !important; 
+}
+
+:root[data-theme="dark"] .mermaid svg .messageText {
+    fill: var(--tplr-white) !important; 
+}
+
+
+:root[data-theme="dark"] .mermaid svg .node.start-node rect {
+    fill: var(--sl-color-accent) !important;
+}
+:root[data-theme="dark"] .mermaid svg .node.start-node .label {
+    fill: var(--tplr-white) !important;
+}
+*/ 
+
+/* === Custom Table Styling === */
+table th,
+table td {
+    font-family: 'AeonikFono', 'AeonikFono Fallback', monospace; /* Added monospace as a generic fallback */
+    font-weight: 400;
+    text-transform: uppercase;
+    /* You might want to adjust padding or other properties for aesthetics */
+    /* For example, to ensure text doesn't feel too cramped: */
+    padding: 0.75em 1em; 
+}
+
+/* Optional: Style for table headers specifically if you want them to differ slightly */
+table th {
+    /* Example: A slightly different background for headers in light mode */
+    background-color: var(--tplr-grey-100); /* Matches code block bg for consistency */
+    /* color: var(--tplr-black); /* Ensure header text is clear */
+}
+
+/* Optional: Dark mode specific overrides for table headers if needed */
+:root[data-theme="dark"] table th {
+    background-color: var(--tplr-grey-900); /* Matches code block bg for dark mode */
+    /* color: var(--tplr-white); /* Ensure header text is clear */
+}
+
+/* Ensure table borders are consistent with the theme */
+table,
+table th,
+table td {
+    border-color: var(--sl-color-border);
+}
+
+/* === Specific Table Styling for Docker Env Vars === */
+.docker-env-table table {
+    /* You can adjust these values as needed */
+    font-size: 0.85em; /* Reduce font size for this specific table */
+    /* max-width: 80%; /* Example: make the table take up less horizontal space */
+    /* margin-left: auto; /* Center if max-width is used */
+    /* margin-right: auto; /* Center if max-width is used */
+}
+
+.docker-env-table table th,
+.docker-env-table table td {
+    padding: 0.5em 0.75em; /* Reduce padding within cells for this table */
+    /* Override general table text transform if needed, or ensure it inherits */
+    text-transform: uppercase; /* Ensure this is still applied if you want it */
+}
+
+/* Templar Paper Page Styles */
+.abstract-container {
+  padding: 2rem;
+  max-width: 800px; 
+  margin: 2rem auto; /* Added top/bottom margin */
+  text-align: justify;
+}
+
+.abstract-title {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-family: 'PPNeueMontreal', sans-serif; /* Explicitly set, though should inherit */
+  font-weight: 400; /* Changed from 500 */
+  color: var(--sl-color-text-headings);
+}
+
+.abstract-text {
+  line-height: 1.7;
+  font-family: 'AeonikFono', 'AeonikFono Fallback', monospace;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--sl-color-text-base);
+  font-size: 0.86em; /* Added to make text smaller */
+}
+
+.templar-incentive-highlight {
+  color: #ff3a3a; /* --color-templar-red */
+}
+
+.cta-section-starlight {
+  padding: 4rem 2rem; 
+  text-align: center;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+}
+
+.cta-link-starlight {
+  text-decoration: none;
+  display: inline-block;
+  position: relative; 
+  cursor: pointer;
+  padding: 2px;
+}
+
+/* Default (small) bracket state for .cta-link-starlight */
+.cta-link-starlight::before,
+.cta-link-starlight::after {
+  content: '';
+  position: absolute;
+  width: 2px; 
+  height: 2px; 
+  border-color: #828282; /* --color-grey-500 */
+  border-style: dashed;
+  border-width: 0;
+  transition: width 0.4s cubic-bezier(0.19, 1, 0.22, 1), height 0.4s cubic-bezier(0.19, 1, 0.22, 1); /* --ease-expo-out */
+}
+.cta-link-starlight::before {
+  top: -2px; left: -2px;
+  border-top-width: 2px;
+  border-left-width: 2px;
+}
+.cta-link-starlight::after {
+  bottom: -2px; right: -2px;
+  border-bottom-width: 2px;
+  border-right-width: 2px;
+}
+
+/* Extended bracket state for .cta-link-starlight when .brackets-extended-starlight is present */
+.cta-link-starlight.brackets-extended-starlight::before,
+.cta-link-starlight.brackets-extended-starlight::after {
+  width: 15px;
+  height: 15px;
+}
+
+/* Retracted bracket state for .cta-link-starlight on hover/focus (overrides extended if present) */
+.cta-link-starlight:hover::before, 
+.cta-link-starlight:hover::after,
+.cta-link-starlight:focus::before, 
+.cta-link-starlight:focus::after {
+  width: 2px;
+  height: 2px;
+}
+
+
+.cta-button-container-starlight {
+  position: relative;
+  display: inline-flex; 
+  align-items: center;
+  padding: 0.75rem 1.5rem; 
+  overflow: hidden; 
+}
+
+/* Default (small) bracket state for .cta-button-container-starlight */
+.cta-button-container-starlight::before,
+.cta-button-container-starlight::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-color: #828282; /* --color-grey-500 */
+  border-style: dashed;
+  border-width: 0;
+  transition: width 0.4s cubic-bezier(0.19, 1, 0.22, 1), height 0.4s cubic-bezier(0.19, 1, 0.22, 1); /* --ease-expo-out */
+}
+.cta-button-container-starlight::before {
+  top: -2px; right: -2px;
+  border-top-width: 2px;
+  border-right-width: 2px;
+}
+.cta-button-container-starlight::after {
+  bottom: -2px; left: -2px;
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+}
+
+/* Extended bracket state for .cta-button-container-starlight when .cta-link-starlight has .brackets-extended-starlight */
+.cta-link-starlight.brackets-extended-starlight .cta-button-container-starlight::before,
+.cta-link-starlight.brackets-extended-starlight .cta-button-container-starlight::after {
+  width: 15px;
+  height: 15px;
+}
+
+/* Retracted bracket state for .cta-button-container-starlight when .cta-link-starlight is hovered/focused */
+.cta-link-starlight:hover .cta-button-container-starlight::before,
+.cta-link-starlight:hover .cta-button-container-starlight::after,
+.cta-link-starlight:focus .cta-button-container-starlight::before,
+.cta-link-starlight:focus .cta-button-container-starlight::after {
+  width: 2px;
+  height: 2px;
+}
+
+
+.cta-text-starlight {
+  position: relative;
+  z-index: 2;
+  color: var(--sl-color-text-base); 
+  transition: color 0.3s ease;
+  text-transform: uppercase; 
+  font-size: 1.2rem;
+  font-family: var(--sl-font-default);
+}
+
+.cta-animated-box-starlight {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: #ff3a3a; /* --color-templar-red */
+  transform-origin: bottom right;
+  transform: scale(0);
+  transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1); /* --ease-expo-out */
+  z-index: 1;
+}
+
+.cta-link-starlight:hover .cta-animated-box-starlight,
+.cta-link-starlight:focus .cta-animated-box-starlight {
+  transform: scale(1);
+}
+
+.cta-link-starlight:hover .cta-text-starlight,
+.cta-link-starlight:focus .cta-text-starlight {
+  color: white;
+}
+
+/* Dark Mode Adjustments */
+:root[data-theme="dark"] .templar-incentive-highlight {
+  color: #ff3a3a;
+}
+:root[data-theme="dark"] .cta-link-starlight::before,
+:root[data-theme="dark"] .cta-link-starlight::after,
+:root[data-theme="dark"] .cta-button-container-starlight::before,
+:root[data-theme="dark"] .cta-button-container-starlight::after {
+  border-color: var(--tplr-grey-500);
+}
+:root[data-theme="dark"] .cta-text-starlight {
+  color: var(--sl-color-text-base); /* Will be white in dark mode */
+}
+:root[data-theme="dark"] .cta-link-starlight:hover .cta-text-starlight,
+:root[data-theme="dark"] .cta-link-starlight:focus .cta-text-starlight {
+  color: white;
+} 

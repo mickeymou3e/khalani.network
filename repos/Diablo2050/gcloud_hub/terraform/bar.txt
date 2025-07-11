@@ -1,0 +1,470 @@
+addonsConfig:
+  dnsCacheConfig:
+    enabled: true
+  gcePersistentDiskCsiDriverConfig:
+    enabled: true
+  gcpFilestoreCsiDriverConfig:
+    enabled: true
+  gcsFuseCsiDriverConfig:
+    enabled: true
+  kubernetesDashboard:
+    disabled: true
+  networkPolicyConfig:
+    disabled: true
+autopilot:
+  enabled: true
+autoscaling:
+  autoprovisioningNodePoolDefaults:
+    imageType: COS_CONTAINERD
+    management:
+      autoRepair: true
+      autoUpgrade: true
+    oauthScopes:
+    - https://www.googleapis.com/auth/devstorage.read_only
+    - https://www.googleapis.com/auth/logging.write
+    - https://www.googleapis.com/auth/monitoring
+    - https://www.googleapis.com/auth/service.management.readonly
+    - https://www.googleapis.com/auth/servicecontrol
+    - https://www.googleapis.com/auth/trace.append
+    serviceAccount: default
+    upgradeSettings:
+      maxSurge: 1
+      strategy: SURGE
+  autoscalingProfile: OPTIMIZE_UTILIZATION
+  enableNodeAutoprovisioning: true
+  resourceLimits:
+  - maximum: '1000000000'
+    resourceType: cpu
+  - maximum: '1000000000'
+    resourceType: memory
+  - maximum: '1000000000'
+    resourceType: nvidia-tesla-t4
+  - maximum: '1000000000'
+    resourceType: nvidia-tesla-a100
+binaryAuthorization: {}
+clusterIpv4Cidr: 10.101.0.0/17
+createTime: '2023-10-03T02:02:45+00:00'
+currentMasterVersion: 1.27.5-gke.200
+currentNodeCount: 2
+currentNodeVersion: 1.27.5-gke.200
+databaseEncryption:
+  state: DECRYPTED
+defaultMaxPodsConstraint:
+  maxPodsPerNode: '110'
+endpoint: 34.171.154.160
+etag: 1be08985-b356-4952-8aa2-795694503180
+id: c49e293008aa44d1a76611082bd3e3bd7c22782018534b779e4ce62748650166
+initialClusterVersion: 1.27.5-gke.200
+initialNodeCount: 1
+instanceGroupUrls:
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-b/instanceGroupManagers/gk3-hub-staging-default-pool-dbe91cfe-grp
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-b/instanceGroupManagers/gk3-hub-staging-pool-1-7ad3b738-grp
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-b/instanceGroupManagers/gk3-hub-staging-pool-2-95bec7e7-grp
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-b/instanceGroupManagers/gk3-hub-staging-pool-3-b2aa68ce-grp
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-b/instanceGroupManagers/gk3-hub-staging-pool-4-78f987c9-grp
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-b/instanceGroupManagers/gk3-hub-staging-pool-5-21541cb4-grp
+ipAllocationPolicy:
+  clusterIpv4Cidr: 10.101.0.0/17
+  clusterIpv4CidrBlock: 10.101.0.0/17
+  clusterSecondaryRangeName: gke-hub-staging-pods-c49e2930
+  defaultPodIpv4RangeUtilization: 0.0156
+  podCidrOverprovisionConfig: {}
+  servicesIpv4Cidr: 34.118.224.0/20
+  servicesIpv4CidrBlock: 34.118.224.0/20
+  stackType: IPV4
+  useIpAliases: true
+labelFingerprint: a9dc16a7
+legacyAbac: {}
+location: us-central1
+locations:
+- us-central1-b
+loggingConfig:
+  componentConfig:
+    enableComponents:
+    - SYSTEM_COMPONENTS
+    - WORKLOADS
+loggingService: logging.googleapis.com/kubernetes
+maintenancePolicy:
+  resourceVersion: e3b0c442
+masterAuth:
+  clusterCaCertificate: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVMVENDQXBXZ0F3SUJBZ0lSQUt5Y1UxTjZKREk5RTQyN2FYNEhndHN3RFFZSktvWklodmNOQVFFTEJRQXcKTHpFdE1Dc0dBMVVFQXhNa04yWXhPVFl3T1RrdFlqRXhOQzAwTVdSbUxXSTBObVl0TnpReU1XWXhaalZpWVRGawpNQ0FYRFRJek1UQXdNekF4TURJME5sb1lEekl3TlRNd09USTFNREl3TWpRMldqQXZNUzB3S3dZRFZRUURFeVEzClpqRTVOakE1T1MxaU1URTBMVFF4WkdZdFlqUTJaaTAzTkRJeFpqRm1OV0poTVdRd2dnR2lNQTBHQ1NxR1NJYjMKRFFFQkFRVUFBNElCandBd2dnR0tBb0lCZ1FEaG9DOEE5dlRJMkN1VWtzcjhYMnhrdlUxM25lVGFmVncydFNJRApDU2FMYklpVkIwUURmTjV6M1pSU0cwRGN6MmFrMlhYeDJNQkNIaHF0dE1zUytjRE92V09aZTNiNGdoNHF6eXpzCnBoOGsvcnJ0eWJNRC9OSHcvelUzaVFiRDlBb0p4UU82SDl6ODVFZ3ZEN21KRFhmRVhhdVllWUhCdkd5K0VpT00KUkdVeWJTSGNVZDlaTDZqY05FUzR1bXdUemtNc2RSRXAzQjY1aktXZFhwKzNBRVhqUjR5S3N3RVZsa2MwNVZJUwpMUk45eGRSaGtpcjFyU2pLM1crNXAwU0JHeXF2TVJQZVBwUVVZYnhSQnF1bXVrbnZQVjd2Qi83YVNjRU5WeXBGCk51a1FObUJhVjBPekpKV01FdE4zaEh3cS9hRjdnc25MM3E1SFhQd2JvY1pwbXdrUlAwQjAvZWRackZLQlVBcmEKRksrOVV4Q0N6U1d4UkVDWXFnblJRRDdSWlZUeFhJZDdIazY3WGpsQzJ5TGh5UXJJZWtrOEJEeG8zRGZPSXdkdwp2OCtVYVQrcm9XWnlGcnpZZUNNU2NzSWxoaXVkbHFKcXk2U09xZE9OeXBMTlNJZ0thbTZONjRCMzJvU0pSekcwCnRnN1hGR0pDN1AyeitwbTc2S0xtUGc1dTR1MENBd0VBQWFOQ01FQXdEZ1lEVlIwUEFRSC9CQVFEQWdJRU1BOEcKQTFVZEV3RUIvd1FGTUFNQkFmOHdIUVlEVlIwT0JCWUVGRlV2MmtlK2JnMTQ3aC9QNHoyR09UekdWREFmTUEwRwpDU3FHU0liM0RRRUJDd1VBQTRJQmdRQzZBZ3FNZXpXeng3VFE4WWt1VWVwNmNxTjgrdWplK3RhNG52TVhLOHFDCjc2WFRLR094cFAvbiswUUVWNDlhaFNRayt4cjRKRWRSQ2RDdjc3a2JoMnNlVERDak9nOVo5TWg0NnlTTmVNRnoKSWNKdXZRZDVDcWg3QWpueXdPZ1RqaFRxY20xc1E5ZjcxZGN3SmZhUTdBVnB3aU9WMTNPaGdDZnY3QlRwNjNjaApXeWpzRTZxR0FtUVVmS0NQUnZBYmRzczJFdnh0VmlNemw1YnlPWnNYSlZuTzlyZHo5aUNyWWhQS0x4NTFBNzZUCkg3dU11TUpTWkdxYlpwVXFDZVAxeUxyS2hyM2tZZTFmQUJGbGVOZ0haWEM2TDRxclJuejJRZlZSNHRaNFpOancKRGVrSU5YMEFxWGdheEZ2OTRTRHRoeXFNcitDd0VpMW9EU21GS2hkdy9FYTArcXBxTGtRVXBldkZrc0xONXJhUwpCSjU5TkJLdlQza2d6WEtVM1YySWVENm9hR2EyRW9JelRINHRVb3JwOXlWdm5FVWdoUXpKd09VR3RiOW8rY1N5ClpKZXNUM3pKSGZDR2dFeWVyUWpPTmwzb3kyMGwzTzJRL2pBSGlNaHpUekxOR0FhVFp3R2RLZmY3cGZ5em9ubDYKcmY5am54VXpBMlQ0VXl3TjBLVFBjWkk9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+masterAuthorizedNetworksConfig:
+  gcpPublicCidrsAccessEnabled: true
+monitoringConfig:
+  advancedDatapathObservabilityConfig:
+    enableMetrics: true
+    relayMode: DISABLED
+  componentConfig:
+    enableComponents:
+    - SYSTEM_COMPONENTS
+  managedPrometheusConfig:
+    enabled: true
+monitoringService: monitoring.googleapis.com/kubernetes
+name: hub-staging
+network: shared1
+networkConfig:
+  datapathProvider: ADVANCED_DATAPATH
+  defaultSnatStatus: {}
+  dnsConfig:
+    clusterDns: CLOUD_DNS
+    clusterDnsDomain: cluster.local
+    clusterDnsScope: CLUSTER_SCOPE
+  enableIntraNodeVisibility: true
+  gatewayApiConfig:
+    channel: CHANNEL_STANDARD
+  network: projects/civil-lambda-374300/global/networks/shared1
+  serviceExternalIpsConfig: {}
+  subnetwork: projects/civil-lambda-374300/regions/us-central1/subnetworks/shared1
+nodeConfig:
+  diskSizeGb: 100
+  diskType: pd-balanced
+  imageType: COS_CONTAINERD
+  machineType: e2-medium
+  metadata:
+    disable-legacy-endpoints: 'true'
+  oauthScopes:
+  - https://www.googleapis.com/auth/devstorage.read_only
+  - https://www.googleapis.com/auth/logging.write
+  - https://www.googleapis.com/auth/monitoring
+  - https://www.googleapis.com/auth/service.management.readonly
+  - https://www.googleapis.com/auth/servicecontrol
+  - https://www.googleapis.com/auth/trace.append
+  reservationAffinity:
+    consumeReservationType: NO_RESERVATION
+  serviceAccount: default
+  shieldedInstanceConfig:
+    enableIntegrityMonitoring: true
+    enableSecureBoot: true
+  windowsNodeConfig: {}
+  workloadMetadataConfig:
+    mode: GKE_METADATA
+nodePoolDefaults:
+  nodeConfigDefaults:
+    gcfsConfig:
+      enabled: true
+    loggingConfig:
+      variantConfig:
+        variant: DEFAULT
+nodePools:
+- autoscaling:
+    enabled: true
+    locationPolicy: BALANCED
+    maxNodeCount: 1000
+  config:
+    diskSizeGb: 100
+    diskType: pd-balanced
+    imageType: COS_CONTAINERD
+    machineType: e2-medium
+    metadata:
+      disable-legacy-endpoints: 'true'
+    oauthScopes:
+    - https://www.googleapis.com/auth/devstorage.read_only
+    - https://www.googleapis.com/auth/logging.write
+    - https://www.googleapis.com/auth/monitoring
+    - https://www.googleapis.com/auth/service.management.readonly
+    - https://www.googleapis.com/auth/servicecontrol
+    - https://www.googleapis.com/auth/trace.append
+    reservationAffinity:
+      consumeReservationType: NO_RESERVATION
+    serviceAccount: default
+    shieldedInstanceConfig:
+      enableIntegrityMonitoring: true
+      enableSecureBoot: true
+    windowsNodeConfig: {}
+    workloadMetadataConfig:
+      mode: GKE_METADATA
+  etag: aba2c9a0-2305-46c2-a6ac-82cf6c0d119f
+  initialNodeCount: 1
+  instanceGroupUrls:
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-b/instanceGroupManagers/gk3-hub-staging-default-pool-dbe91cfe-grp
+  locations:
+  - us-central1-b
+  management:
+    autoRepair: true
+    autoUpgrade: true
+  maxPodsConstraint:
+    maxPodsPerNode: '32'
+  name: default-pool
+  networkConfig:
+    enablePrivateNodes: false
+    podIpv4CidrBlock: 10.101.0.0/17
+    podIpv4RangeUtilization: 0.0156
+    podRange: gke-hub-staging-pods-c49e2930
+  podIpv4CidrSize: 26
+  selfLink: https://container.googleapis.com/v1/projects/civil-lambda-374300/locations/us-central1/clusters/hub-staging/nodePools/default-pool
+  status: RUNNING
+  upgradeSettings:
+    maxSurge: 1
+    strategy: SURGE
+  version: 1.27.5-gke.200
+- autoscaling:
+    enabled: true
+    locationPolicy: BALANCED
+    maxNodeCount: 1000
+  config:
+    diskSizeGb: 100
+    diskType: pd-balanced
+    imageType: COS_CONTAINERD
+    machineType: e2-standard-2
+    metadata:
+      disable-legacy-endpoints: 'true'
+    oauthScopes:
+    - https://www.googleapis.com/auth/devstorage.read_only
+    - https://www.googleapis.com/auth/logging.write
+    - https://www.googleapis.com/auth/monitoring
+    - https://www.googleapis.com/auth/service.management.readonly
+    - https://www.googleapis.com/auth/servicecontrol
+    - https://www.googleapis.com/auth/trace.append
+    reservationAffinity:
+      consumeReservationType: NO_RESERVATION
+    serviceAccount: default
+    shieldedInstanceConfig:
+      enableIntegrityMonitoring: true
+      enableSecureBoot: true
+    windowsNodeConfig: {}
+    workloadMetadataConfig:
+      mode: GKE_METADATA
+  etag: 807a6a18-71a0-4c37-ae74-95b3e71a954d
+  instanceGroupUrls:
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-b/instanceGroupManagers/gk3-hub-staging-pool-1-7ad3b738-grp
+  locations:
+  - us-central1-b
+  management:
+    autoRepair: true
+    autoUpgrade: true
+  maxPodsConstraint:
+    maxPodsPerNode: '32'
+  name: pool-1
+  networkConfig:
+    enablePrivateNodes: false
+    podIpv4CidrBlock: 10.101.0.0/17
+    podIpv4RangeUtilization: 0.0156
+    podRange: gke-hub-staging-pods-c49e2930
+  podIpv4CidrSize: 26
+  selfLink: https://container.googleapis.com/v1/projects/civil-lambda-374300/locations/us-central1/clusters/hub-staging/nodePools/pool-1
+  status: RUNNING
+  upgradeSettings:
+    maxSurge: 1
+    strategy: SURGE
+  version: 1.27.5-gke.200
+- autoscaling:
+    enabled: true
+    locationPolicy: BALANCED
+    maxNodeCount: 1000
+  config:
+    diskSizeGb: 100
+    diskType: pd-balanced
+    imageType: COS_CONTAINERD
+    machineType: e2-standard-4
+    metadata:
+      disable-legacy-endpoints: 'true'
+    oauthScopes:
+    - https://www.googleapis.com/auth/devstorage.read_only
+    - https://www.googleapis.com/auth/logging.write
+    - https://www.googleapis.com/auth/monitoring
+    - https://www.googleapis.com/auth/service.management.readonly
+    - https://www.googleapis.com/auth/servicecontrol
+    - https://www.googleapis.com/auth/trace.append
+    reservationAffinity:
+      consumeReservationType: NO_RESERVATION
+    serviceAccount: default
+    shieldedInstanceConfig:
+      enableIntegrityMonitoring: true
+      enableSecureBoot: true
+    windowsNodeConfig: {}
+    workloadMetadataConfig:
+      mode: GKE_METADATA
+  etag: a7f3b306-2870-4a48-b0f9-3da74686f6a5
+  instanceGroupUrls:
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-b/instanceGroupManagers/gk3-hub-staging-pool-2-95bec7e7-grp
+  locations:
+  - us-central1-b
+  management:
+    autoRepair: true
+    autoUpgrade: true
+  maxPodsConstraint:
+    maxPodsPerNode: '32'
+  name: pool-2
+  networkConfig:
+    enablePrivateNodes: false
+    podIpv4CidrBlock: 10.101.0.0/17
+    podIpv4RangeUtilization: 0.0156
+    podRange: gke-hub-staging-pods-c49e2930
+  podIpv4CidrSize: 26
+  selfLink: https://container.googleapis.com/v1/projects/civil-lambda-374300/locations/us-central1/clusters/hub-staging/nodePools/pool-2
+  status: RUNNING
+  upgradeSettings:
+    maxSurge: 1
+    strategy: SURGE
+  version: 1.27.5-gke.200
+- autoscaling:
+    enabled: true
+    locationPolicy: BALANCED
+    maxNodeCount: 1000
+  config:
+    diskSizeGb: 100
+    diskType: pd-balanced
+    imageType: COS_CONTAINERD
+    machineType: e2-standard-8
+    metadata:
+      disable-legacy-endpoints: 'true'
+    oauthScopes:
+    - https://www.googleapis.com/auth/devstorage.read_only
+    - https://www.googleapis.com/auth/logging.write
+    - https://www.googleapis.com/auth/monitoring
+    - https://www.googleapis.com/auth/service.management.readonly
+    - https://www.googleapis.com/auth/servicecontrol
+    - https://www.googleapis.com/auth/trace.append
+    reservationAffinity:
+      consumeReservationType: NO_RESERVATION
+    serviceAccount: default
+    shieldedInstanceConfig:
+      enableIntegrityMonitoring: true
+      enableSecureBoot: true
+    windowsNodeConfig: {}
+    workloadMetadataConfig:
+      mode: GKE_METADATA
+  etag: 9e1b082b-92ca-483a-a995-f199bd69659c
+  instanceGroupUrls:
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-b/instanceGroupManagers/gk3-hub-staging-pool-3-b2aa68ce-grp
+  locations:
+  - us-central1-b
+  management:
+    autoRepair: true
+    autoUpgrade: true
+  maxPodsConstraint:
+    maxPodsPerNode: '32'
+  name: pool-3
+  networkConfig:
+    enablePrivateNodes: false
+    podIpv4CidrBlock: 10.101.0.0/17
+    podIpv4RangeUtilization: 0.0156
+    podRange: gke-hub-staging-pods-c49e2930
+  podIpv4CidrSize: 26
+  selfLink: https://container.googleapis.com/v1/projects/civil-lambda-374300/locations/us-central1/clusters/hub-staging/nodePools/pool-3
+  status: RUNNING
+  upgradeSettings:
+    maxSurge: 1
+    strategy: SURGE
+  version: 1.27.5-gke.200
+- autoscaling:
+    enabled: true
+    locationPolicy: BALANCED
+    maxNodeCount: 1000
+  config:
+    diskSizeGb: 100
+    diskType: pd-balanced
+    imageType: COS_CONTAINERD
+    machineType: e2-standard-16
+    metadata:
+      disable-legacy-endpoints: 'true'
+    oauthScopes:
+    - https://www.googleapis.com/auth/devstorage.read_only
+    - https://www.googleapis.com/auth/logging.write
+    - https://www.googleapis.com/auth/monitoring
+    - https://www.googleapis.com/auth/service.management.readonly
+    - https://www.googleapis.com/auth/servicecontrol
+    - https://www.googleapis.com/auth/trace.append
+    reservationAffinity:
+      consumeReservationType: NO_RESERVATION
+    serviceAccount: default
+    shieldedInstanceConfig:
+      enableIntegrityMonitoring: true
+      enableSecureBoot: true
+    windowsNodeConfig: {}
+    workloadMetadataConfig:
+      mode: GKE_METADATA
+  etag: 22c92939-6d3f-426d-8fb4-53edaeafe8b3
+  instanceGroupUrls:
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-b/instanceGroupManagers/gk3-hub-staging-pool-4-78f987c9-grp
+  locations:
+  - us-central1-b
+  management:
+    autoRepair: true
+    autoUpgrade: true
+  maxPodsConstraint:
+    maxPodsPerNode: '32'
+  name: pool-4
+  networkConfig:
+    enablePrivateNodes: false
+    podIpv4CidrBlock: 10.101.0.0/17
+    podIpv4RangeUtilization: 0.0156
+    podRange: gke-hub-staging-pods-c49e2930
+  podIpv4CidrSize: 26
+  selfLink: https://container.googleapis.com/v1/projects/civil-lambda-374300/locations/us-central1/clusters/hub-staging/nodePools/pool-4
+  status: RUNNING
+  upgradeSettings:
+    maxSurge: 1
+    strategy: SURGE
+  version: 1.27.5-gke.200
+- autoscaling:
+    enabled: true
+    locationPolicy: BALANCED
+    maxNodeCount: 1000
+  config:
+    diskSizeGb: 100
+    diskType: pd-balanced
+    imageType: COS_CONTAINERD
+    machineType: e2-standard-32
+    metadata:
+      disable-legacy-endpoints: 'true'
+    oauthScopes:
+    - https://www.googleapis.com/auth/devstorage.read_only
+    - https://www.googleapis.com/auth/logging.write
+    - https://www.googleapis.com/auth/monitoring
+    - https://www.googleapis.com/auth/service.management.readonly
+    - https://www.googleapis.com/auth/servicecontrol
+    - https://www.googleapis.com/auth/trace.append
+    reservationAffinity:
+      consumeReservationType: NO_RESERVATION
+    serviceAccount: default
+    shieldedInstanceConfig:
+      enableIntegrityMonitoring: true
+      enableSecureBoot: true
+    windowsNodeConfig: {}
+    workloadMetadataConfig:
+      mode: GKE_METADATA
+  etag: 969fdd56-a041-4c03-9487-06ef018bb012
+  instanceGroupUrls:
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-b/instanceGroupManagers/gk3-hub-staging-pool-5-21541cb4-grp
+  locations:
+  - us-central1-b
+  management:
+    autoRepair: true
+    autoUpgrade: true
+  maxPodsConstraint:
+    maxPodsPerNode: '32'
+  name: pool-5
+  networkConfig:
+    enablePrivateNodes: false
+    podIpv4CidrBlock: 10.101.0.0/17
+    podIpv4RangeUtilization: 0.0156
+    podRange: gke-hub-staging-pods-c49e2930
+  podIpv4CidrSize: 26
+  selfLink: https://container.googleapis.com/v1/projects/civil-lambda-374300/locations/us-central1/clusters/hub-staging/nodePools/pool-5
+  status: RUNNING
+  upgradeSettings:
+    maxSurge: 1
+    strategy: SURGE
+  version: 1.27.5-gke.200
+notificationConfig:
+  pubsub: {}
+privateClusterConfig:
+  privateEndpoint: 10.128.0.12
+  publicEndpoint: 34.171.154.160
+releaseChannel:
+  channel: REGULAR
+securityPostureConfig:
+  mode: BASIC
+  vulnerabilityMode: VULNERABILITY_BASIC
+selfLink: https://container.googleapis.com/v1/projects/civil-lambda-374300/locations/us-central1/clusters/hub-staging
+servicesIpv4Cidr: 34.118.224.0/20
+shieldedNodes:
+  enabled: true
+status: RUNNING
+subnetwork: shared1
+verticalPodAutoscaling:
+  enabled: true
+workloadIdentityConfig:
+  workloadPool: civil-lambda-374300.svc.id.goog
+zone: us-central1

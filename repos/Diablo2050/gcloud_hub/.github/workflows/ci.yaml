@@ -1,0 +1,135 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  OIDC_PRIVATE_KEY:  ${{ secrets.OIDC_PRIVATE_KEY }}
+  GKE_CLUSTER: cluster-name  
+  GKE_ZONE: us-central1-a
+  GKE_REGION: us-central1    
+  IMAGE: gcr.io/${{ secrets.GKE_PROJECT }}/hube-kub:${{ github.sha }}
+
+jobs:
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
+    runs-on: ubuntu-latest
+
+    services:
+      rabbitmq:
+        image: rabbitmq:3-management
+        ports:
+          - 5672:5672
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: hub
+          
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set Up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11' 
+
+    # - name: Install dependencies
+    #   run: |
+    #     sudo apt-get update && sudo apt-get install -y wget
+    #     pip install poetry wheel
+    #     poetry config virtualenvs.create false
+    #     pip install --upgrade zipp
+
+    # # Install local deps if this action is being run locally. We use act to run these jobs locally
+    # - name: Install local dependencies
+    #   if: ${{ env.ACT }}
+    #   run: |
+    #         # npm i -g yarn
+    #         sudo apt-get update
+    #         sudo apt-get -yqq install libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm-dev libnss3-dev libxss-dev libasound2 libxshmfence-dev postgresql postgresql-contrib redis-server
+    #         sudo apt-get -yqq install rabbitmq-server
+
+    # - name: Boot local dependencies
+    #   if: ${{ env.ACT }}
+    #   run: |
+    #     sudo service postgresql start
+    #     sudo service redis-server start
+
+    # - name: Configure local dependencies
+    #   if: ${{ env.ACT }}
+    #   run: |
+    #     sudo -u postgres psql -U postgres -d postgres -c "alter user postgres with password 'postgres';"
+    #     sudo -u postgres psql -c "CREATE DATABASE hub;"
+        
+    # - name: Install application
+    #   working-directory: server
+    #   run: |
+    #     poetry install
+    #     poetry shell
+    #     ./get_ezkl.sh
+    #     flask db upgrade
+
+
+    # - name: Test application
+    #   working-directory: server
+    #   run: |
+    #     pytest
+
+    - name: Build Docker image
+      working-directory: server  
+      run: |
+        sudo docker build -t "${IMAGE}" -f Dockerfile .
+    
+
+    - id: auth
+      name: Authenticate into Google Cloud
+      uses: 'google-github-actions/auth@v1'
+      with:
+        token_format: access_token
+        credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+    # - name: Set up Cloud SDK
+    #   uses: google-github-actions/setup-gcloud@v1.1.1
+    #   with:
+    #     service_account_key: ${{ secrets.GCP_SA_KEY }}
+
+    # - name: Add runner user to docker group
+    #   run: sudo usermod -a -G docker runner
+
+    - name: Login to Artifact Registry
+      uses: docker/login-action@v2
+      with:
+        # registry: ${{ secrets.GAR_REGION }}-docker.pkg.dev
+        # registry: us-central1-docker.pkg.dev/civil-lambda-374300
+        registry: us-central1-docker.pkg.dev
+        username: oauth2accesstoken
+        password: ${{ steps.auth.outputs.access_token }} 
+
+    # - name: Configure Docker
+    #   run: |
+    #     gcloud auth configure-docker  --quiet
+
+    - name: Push Docker image
+      working-directory: server  
+      run: |
+       sudo docker push "${IMAGE}"
+
+    - name: Set up Kubernetes configuration
+      run: |
+        gcloud container clusters get-credentials "${GKE_CLUSTER}" --zone "${GKE_ZONE}"
+
+    - name: Install Helm
+      uses: azure/setup-helm@v1
+
+    - name: Deploy to GKE
+      run: |
+        helm upgrade --install hub-kube helm/ --set image.repository="${IMAGE}"

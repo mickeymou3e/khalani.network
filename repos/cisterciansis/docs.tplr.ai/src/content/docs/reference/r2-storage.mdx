@@ -1,0 +1,392 @@
+---
+title: R2 Storage
+---
+
+import SourceLink from '@components/SourceLink.astro';
+import { Aside, Card, CardGrid, Tabs, TabItem, Steps, FileTree, Code, LinkButton, Badge } from '@astrojs/starlight/components';
+import CollapsibleAside from '../../../components/CollapsibleAside.astro';
+
+<CollapsibleAside title="Relevant Source Files">
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/LICENSE" text="LICENSE" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/_metadata.yaml" text="_metadata.yaml" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/_shard_sizes.json" text="_shard_sizes.json" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/docs/r2_bucket_management.md" text="docs/r2_bucket_management.md" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/scripts/analyser.py" text="scripts/analyser.py" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/scripts/clean_versions.py" text="scripts/clean_versions.py" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/scripts/cleanup_bucket.py" text="scripts/cleanup_bucket.py" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/scripts/delete_gather.py" text="scripts/delete_gather.py" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/scripts/get_gradients.py" text="scripts/get_gradients.py" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/scripts/s3_manager.py" text="scripts/s3_manager.py" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/scripts/validate_r2_access.py" text="scripts/validate_r2_access.py" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/config.py" text="src/tplr/config.py" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/r2_dataset.py" text="src/tplr/r2_dataset.py" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/tests/test_r2_loader.py" text="tests/test_r2_loader.py" />
+</CollapsibleAside>
+
+
+
+This page documents the Cloudflare R2 storage system used in the Templar framework for distributed data exchange. R2 Storage provides reliable object storage that enables efficient sharing of gradients, datasets, checkpoints, and aggregated model data between distributed nodes in the network.
+
+## Overview of R2 Storage in Templar
+
+Templar uses Cloudflare R2 as its primary storage backend for several critical components of the distributed training ecosystem. R2 Storage serves as the communication medium for exchanging large volumes of data that cannot be efficiently transmitted through the blockchain directly.
+
+```mermaid
+flowchart TD
+    subgraph "R2 Storage System"
+        direction TB
+        R2["Cloudflare R2"]
+        
+        subgraph "R2 Buckets"
+            GradBucket["Gradients Bucket"]
+            DataBucket["Dataset Bucket"]
+            AggBucket["Aggregator Bucket"]
+        end
+        
+        R2 --- GradBucket
+        R2 --- DataBucket
+        R2 --- AggBucket
+    end
+    
+    subgraph "Network Nodes"
+        Miners["Miners"]
+        Validators["Validators"]
+        Aggregator["Aggregation Server"]
+    end
+    
+    Miners -- "Upload gradients" --> GradBucket
+    Miners -- "Download datasets" --> DataBucket
+    Validators -- "Download gradients" --> GradBucket
+    Validators -- "Download aggregated state" --> AggBucket
+    Aggregator -- "Upload aggregated state" --> AggBucket
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/config.py#L27-L135" text="src/tplr/config.py27-135" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/r2_dataset.py#L33-L45" text="src/tplr/r2_dataset.py33-45" />
+
+## Bucket Structure
+
+Templar uses three primary R2 buckets, each with distinct purposes:
+
+1. **Gradients Bucket**: Stores gradient updates computed by miners. These are compressed via DCT transform to minimize storage requirements and transmission overhead.
+
+2. **Dataset Bucket**: Contains training data in Parquet format, organized by collections and shards. Used by miners to load training data.
+
+3. **Aggregator Bucket**: Stores aggregated model states that are collected from multiple miners' contributions.
+
+Each bucket contains specific file organizations and naming patterns based on its purpose:
+
+```mermaid
+flowchart TD
+    subgraph "Gradients Bucket Contents"
+        direction TB
+        GradFiles["gradient-{window}-{step}-{version}.pt\n(Compressed gradient data)"]
+        CheckFiles["checkpoint-{version}-{step}.pt\n(Model checkpoints)"]
+        StartFiles["start_window-{uid}-{step}.json\n(Window initializations)"]
+    end
+    
+    subgraph "Dataset Bucket Contents"
+        direction TB
+        DataDir["HuggingFaceFW_fineweb-edu-score-2/"]
+        MetadataFile["_metadata.yaml\n(Dataset configuration)"]
+        ShardSizes["_shard_sizes.json\n(Row counts per shard)"]
+        ParquetFiles["{config_name}/{split}/train-{shard}.parquet\n(Actual training data)"]
+        
+        DataDir --> MetadataFile
+        DataDir --> ShardSizes
+        DataDir --> ParquetFiles
+    end
+    
+    subgraph "Aggregator Bucket Contents"
+        direction TB
+        AggFiles["gathers/{version}/{step}-{hash}.npz\n(Aggregated gradient data)"]
+    end
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/_metadata.yaml#L1-L453" text="_metadata.yaml1-453" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/_shard_sizes.json#L1-L467" text="_shard_sizes.json1-467" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/scripts/cleanup_bucket.py#L75-L81" text="scripts/cleanup_bucket.py75-81" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/scripts/delete_gather.py#L66-L87" text="scripts/delete_gather.py66-87" />
+
+## Configuration and Authentication
+
+Templar accesses R2 through environment variables that provide authentication credentials and bucket information. Each bucket has separate read and write credentials to enforce proper access control.
+
+### Environment Variable Structure
+
+```mermaid
+flowchart LR
+    subgraph "R2 Configuration Environment Variables"
+        direction TB
+        GradEnv["R2_GRADIENTS_*"]
+        DataEnv["R2_DATASET_*"]
+        AggEnv["R2_AGGREGATOR_*"]
+        
+        subgraph "Per-Bucket Variables"
+            AccID["ACCOUNT_ID\n(R2 account identifier)"]
+            BucketName["BUCKET_NAME\n(Bucket name)"]
+            ReadKey["READ_ACCESS_KEY_ID\n(Read-only credentials)"]
+            ReadSecret["READ_SECRET_ACCESS_KEY"]
+            WriteKey["WRITE_ACCESS_KEY_ID\n(Write credentials)"]
+            WriteSecret["WRITE_SECRET_ACCESS_KEY"]
+        end
+        
+        GradEnv --> AccID & BucketName & ReadKey & ReadSecret & WriteKey & WriteSecret
+        DataEnv --> AccID & BucketName & ReadKey & ReadSecret & WriteKey & WriteSecret
+        AggEnv --> AccID & BucketName & ReadKey & ReadSecret & WriteKey & WriteSecret
+    end
+```
+
+### Authentication Flow
+
+```mermaid
+sequenceDiagram
+    participant Node as "Templar Node"
+    participant Config as "BUCKET_SECRETS"
+    participant S3Client as "S3 Client"
+    participant R2 as "Cloudflare R2"
+    
+    Node->>Config: Request credentials for bucket type
+    Config->>Node: Return credentials based on operation type (read/write)
+    
+    Node->>S3Client: Initialize client with appropriate credentials
+    S3Client->>R2: Authenticate and establish connection
+    
+    Note over Node,R2: For read operations (e.g., dataset loading)
+    Node->>S3Client: Request object
+    S3Client->>R2: GET object with read credentials
+    R2->>S3Client: Return object data
+    S3Client->>Node: Deliver object data
+    
+    Note over Node,R2: For write operations (e.g., gradient uploads)
+    Node->>S3Client: Upload object
+    S3Client->>R2: PUT object with write credentials
+    R2->>S3Client: Confirm upload
+    S3Client->>Node: Return success status
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/config.py#L28-L134" text="src/tplr/config.py28-134" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/scripts/validate_r2_access.py#L27-L153" text="scripts/validate_r2_access.py27-153" />
+
+## Multiple Dataset Endpoints Support
+
+The R2 configuration system supports multiple dataset endpoints for load balancing and improved reliability. This feature enables Templar to distribute dataset access across multiple R2 locations.
+
+```mermaid
+flowchart TD
+    subgraph "R2DatasetLoader Multiple Endpoint Handling"
+        direction TB
+        Config["BUCKET_SECRETS['dataset']['multiple']"]
+        RoundRobin["Round Robin Selection (_round_robin_index)"]
+        FSCache["Filesystem Cache (_fs_cache)"]
+        
+        Config --> RoundRobin
+        RoundRobin --> |"Select endpoint"| FSCache
+        FSCache --> |"Cached connection"| S3FileSystem
+    end
+    
+    subgraph "Dataset Access"
+        DataNode1["Dataset Bucket 1"]
+        DataNode2["Dataset Bucket 2"]
+        DataNode3["Dataset Bucket 3"]
+    end
+    
+    S3FileSystem --> DataNode1
+    S3FileSystem --> DataNode2
+    S3FileSystem --> DataNode3
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/r2_dataset.py#L339-L369" text="src/tplr/r2_dataset.py339-369" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/config.py#L89-L109" text="src/tplr/config.py89-109" />
+
+## R2DatasetLoader
+
+The `R2DatasetLoader` class is a specialized component for loading training data from R2 storage. It's designed to efficiently load, cache, and process Parquet files containing training text data.
+
+### Dataset Loading Process
+
+```mermaid
+sequenceDiagram
+    participant App as "Templar Node"
+    participant Loader as "R2DatasetLoader"
+    participant Cache as "Local Cache"
+    participant R2 as "R2 Dataset Bucket"
+    
+    App->>Loader: Request pages with seed
+    Loader->>Loader: Generate random page selection
+    
+    Loader->>Cache: Check for cached metadata
+    alt Metadata not in cache
+        Loader->>R2: Fetch _metadata.yaml and _shard_sizes.json
+        R2->>Loader: Return metadata files
+        Loader->>Cache: Store metadata
+    end
+    
+    loop For each requested page
+        Loader->>Loader: Compute exact shard and offset
+        Loader->>Cache: Check for cached ParquetFile
+        
+        alt ParquetFile not in cache
+            Loader->>R2: Open Parquet file with retries
+            R2->>Loader: Return file handle
+            Loader->>Cache: Cache ParquetFile
+        end
+        
+        Loader->>R2: Read specific row group
+        R2->>Loader: Return row data
+        Loader->>Loader: Extract and tokenize text
+        Loader->>Cache: Cache tokenized result
+    end
+    
+    Loader->>App: Return processed text batches
+```
+
+### Performance Optimizations
+
+The `R2DatasetLoader` implements numerous optimizations to efficiently handle distributed dataset access:
+
+1. **Multi-level caching**:
+   - Filesystem instance caching
+   - Parquet file caching
+   - Tokenized result caching
+   - Metadata caching
+
+2. **Distributed load balancing**:
+   - Round-robin selection of multiple dataset endpoints
+   - Thread-safe access patterns
+
+3. **Resilient operation**:
+   - Retries with exponential backoff
+   - Connection pooling
+   - Error handling for transient failures
+
+4. **Memory and bandwidth efficiency**:
+   - Read specific row groups instead of entire files
+   - Parallel tokenization and processing
+   - Optimized buffer sizes
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/r2_dataset.py#L33-L594" text="src/tplr/r2_dataset.py33-594" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/tests/test_r2_loader.py#L64-L220" text="tests/test_r2_loader.py64-220" />
+
+## Storage Management and Maintenance
+
+Templar includes utility scripts for maintaining R2 storage:
+
+### Bucket Maintenance Tools
+
+1. **cleanup_bucket.py**: Deletes temporary files like checkpoints, gradients, and start window markers.
+
+2. **delete_gather.py**: Removes aggregated gradient data from specific versions.
+
+3. **s3_manager.py**: General-purpose R2 bucket management tool with features for:
+   - Deleting objects older than X hours
+   - Deleting objects with specific prefixes or suffixes
+   - Wiping buckets (with confirmation prompts)
+   - Supporting different credential sets for different buckets
+
+```mermaid
+flowchart TD
+    subgraph "R2 Storage Maintenance Tools"
+        direction TB
+        CleanupBucket["cleanup_bucket.py\n(Clean temporary files)"]
+        DeleteGather["delete_gather.py\n(Remove version-specific data)"]
+        S3Manager["s3_manager.py\n(General bucket management)"]
+        
+        S3Manager -->|"--delete-old"| DeleteOld["Delete objects older than X hours"]
+        S3Manager -->|"--prefix"| DeletePrefix["Delete objects with specific prefix"]
+        S3Manager -->|"--suffix"| DeleteSuffix["Delete objects with specific suffix"]
+        S3Manager -->|"--wipe-bucket"| Wipe["Delete ALL objects (dangerous)"]
+    end
+    
+    subgraph "Environment Configuration"
+        EnvVars["Environment Variables"]
+    end
+    
+    EnvVars --> CleanupBucket & DeleteGather & S3Manager
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/scripts/cleanup_bucket.py#L32-L114" text="scripts/cleanup_bucket.py32-114" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/scripts/s3_manager.py#L15-L441" text="scripts/s3_manager.py15-441" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/scripts/delete_gather.py#L31-L116" text="scripts/delete_gather.py31-116" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/scripts/clean_versions.py#L29-L120" text="scripts/clean_versions.py29-120" />
+
+## Integration with Templar Components
+
+The R2 storage system integrates closely with the core components of the Templar framework:
+
+```mermaid
+flowchart TD
+    subgraph "R2 Storage Integration"
+        direction TB
+        R2["Cloudflare R2"]
+        GradBucket["Gradients Bucket"]
+        DataBucket["Dataset Bucket"] 
+        AggBucket["Aggregator Bucket"]
+    end
+    
+    subgraph "Miner Operations"
+        MinerTrain["Model Training"]
+        GradComp["Gradient Computation"]
+        GradCompress["Gradient Compression"]
+        DataLoad["R2DatasetLoader"]
+    end
+    
+    subgraph "Validator Operations"
+        GradDecomp["Gradient Decompression"]
+        EvalGrad["Gradient Evaluation"]
+        SetWeights["Set Weights on Chain"]
+    end
+    
+    subgraph "Aggregator Operations"
+        Gather["Gather Gradients"]
+        Aggregate["Aggregate Updates"]
+        StoreAgg["Store Aggregated State"]
+    end
+    
+    DataBucket -->|"Load training data"| DataLoad
+    DataLoad -->|"Tokenized text"| MinerTrain
+    MinerTrain -->|"Model updates"| GradComp
+    GradComp -->|"Gradient tensors"| GradCompress
+    GradCompress -->|"Compressed gradients"| GradBucket
+    
+    GradBucket -->|"Download gradients"| GradDecomp
+    GradDecomp -->|"Reconstructed gradients"| EvalGrad
+    EvalGrad -->|"Quality score"| SetWeights
+    
+    GradBucket -->|"Download multiple gradients"| Gather
+    Gather -->|"Combined gradients"| Aggregate
+    Aggregate -->|"Aggregated state"| StoreAgg
+    StoreAgg -->|"Upload aggregated model"| AggBucket
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/config.py#L27-L135" text="src/tplr/config.py27-135" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/r2_dataset.py#L33-L45" text="src/tplr/r2_dataset.py33-45" />
+
+## Security Considerations
+
+The R2 storage system implements several security measures:
+
+1. **Separate read and write credentials**:
+   - Read-only credentials for operations that only need to fetch data
+   - Write credentials carefully restricted to components that need to modify data
+
+2. **Access validation**:
+   - The `validate_r2_access.py` script verifies access permissions
+   - Tests for correct isolation between read and write permissions
+
+3. **Environment variable management**:
+   - Credentials stored in environment variables, not hard-coded
+   - Required variables checked at startup
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/scripts/validate_r2_access.py#L25-L153" text="scripts/validate_r2_access.py25-153" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/config.py#L111-L133" text="src/tplr/config.py111-133" />
+
+## Troubleshooting and Maintenance
+
+Common R2 storage issues and their solutions:
+
+| Issue | Possible Cause | Solution |
+|-------|----------------|----------|
+| Missing data files | Incorrect bucket configuration | Verify environment variables are correctly set |
+| Access denied errors | Invalid or expired credentials | Update R2 tokens and verify with validate_r2_access.py |
+| Slow data loading | Network congestion or high latency | Implement additional caching or add more dataset endpoints |
+| Out of storage space | Accumulated gradient or checkpoint files | Run cleanup scripts to remove old objects |
+| Timeout errors | Connection issues | Increase retry attempts and backoff in config |
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/scripts/validate_r2_access.py#L25-L153" text="scripts/validate_r2_access.py25-153" />, [tests/test_r2_loader.py:311-438]()
+
+## Related Pages
+
+For information about how dataset loading works beyond just the R2 storage aspect, see [Data Management](/reference/data-management).
+
+For details on how gradient sharing occurs within the network, see [Gradient Processing](/reference/gradient-processing).
+
+For information on checkpoint management using R2 storage, see [Checkpoint Management](/reference/checkpoint-management).

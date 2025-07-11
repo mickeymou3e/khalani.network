@@ -1,0 +1,18 @@
+[package]
+name = "zksync_queued_job_processor"
+version = "1.0.0"
+edition = "2018"
+authors = ["The Matter Labs Team <hello@matterlabs.dev>"]
+homepage = "https://zksync.io/"
+repository = "https://github.com/matter-labs/zksync-era"
+license = "MIT OR Apache-2.0"
+keywords = ["blockchain", "zksync"]
+categories = ["cryptography"]
+
+
+[dependencies]
+async-trait = "0.1"
+tokio = { version = "1", features = ["time"] }
+
+zksync_utils = { path = "../../lib/utils", version = "1.0" }
+vlog = { path = "../../lib/vlog", version = "1.0" }

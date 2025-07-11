@@ -1,0 +1,202 @@
+@import '@/styles/shared-imports.scss';
+
+.lossChartSection {
+  padding: 0 var(--indent);
+  @include max-prop(margin-bottom, rem(54), vw(100));
+}
+
+.chart {
+  height: 80vh;
+  height: 80svh;
+  position: relative;
+
+  :global(.apexcharts-tooltip) {
+    background-color: var(--color-white);
+    color: var(--color-black);
+    box-shadow: none;
+    border-color: currentColor;
+  }
+}
+
+.loading {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: rem(20);
+
+  .loadingText {
+    color: var(--color-templar-red);
+  }
+
+  .spinner {
+    display: inline-block;
+    width: rem(50);
+    height: rem(50);
+    border: rem(3) solid rgba(255, 58, 58, 0.2); /* templar-red with opacity */
+    border-radius: 50%;
+    border-top-color: var(--color-templar-red);
+    animation: spin 1s ease-in-out infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+.intro {
+  @include max-prop(margin-bottom, rem(26), vw(24));
+  display: flex;
+  flex-direction: column;
+  @include max-prop(gap, rem(20), vw(20));
+
+  @include above('medium') {
+    position: relative;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+.themeSwitcher {
+  display: flex;
+  @include max-prop(--pV, rem(12), vw(12));
+  @include max-prop(--pH, rem(16), vw(16));
+  color: var(--color-templar-red);
+  gap: rem(2);
+  margin-bottom: rem(40);
+
+  @include above('medium') {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .themeSwitcherButton {
+    padding: var(--pV) var(--pH);
+    display: inline-flex;
+    align-items: center;
+    -webkit-tap-highlight-color: transparent;
+
+    .switcherLabel {
+      display: block;
+      transition: transform 0.65s var(--ease-expo-out);
+    }
+
+    &:not(.active) {
+      background-color: var(--color-grey-100);
+      outline: 1px solid var(--color-grey-100);
+
+      .switcherLabel {
+        transform: translateX(rem(-7));
+      }
+
+      &:before {
+        transition: opacity 0.2s;
+        opacity: 0;
+      }
+    }
+
+    .dark & {
+      background-color: var(--color-grey-900);
+      outline: 1px solid var(--color-grey-900);
+    }
+
+    &.active {
+      outline: 1px solid var(--color-templar-red);
+    }
+
+    &:before {
+      content: '';
+      display: inline-block;
+      height: rem(4);
+      width: rem(4);
+      background-color: currentColor;
+      margin-right: rem(7);
+      transition: opacity 0.4s;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    &:not(:has(.active)) {
+      .themeSwitcherButton:first-child {
+        outline: 1px solid var(--color-templar-red);
+
+        .switcherLabel {
+          transform: translateX(0);
+        }
+
+        &:before {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    &:not(:has(.active)) {
+      .themeSwitcherButton {
+        background-color: var(--color-grey-900);
+        outline: 1px solid var(--color-grey-900);
+
+        &:last-child {
+          outline: 1px solid var(--color-templar-red);
+
+          .switcherLabel {
+            transform: translateX(0);
+          }
+
+          &:before {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}
+
+.card {
+  @include above('medium') {
+    margin-bottom: 0;
+    width: calc(50% - var(--indent) * 0.5);
+  }
+}
+
+.chartVisual {
+  @include max-prop(width, rem(104), vw(104));
+  height: auto;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+  }
+
+  circle {
+    animation: fadeIn 1s backwards;
+
+    @for $i from 0 through 200 {
+      &:nth-child(#{$i}) {
+        animation-delay: random() + s;
+      }
+    }
+  }
+}
+
+.timeRangeSwitcher {
+  position: absolute;
+  top: 4px;
+  right: 10px;
+  display: flex;
+  gap: rem(10);
+
+  color: var(--color-grey-500);
+  & button:hover,
+  & button.active {
+    color: var(--color-grey-100);
+  }
+}

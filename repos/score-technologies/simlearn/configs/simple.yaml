@@ -1,0 +1,22 @@
+# Training configuration
+training:
+  seed: 42
+  batch_size: 256
+  learning_rate: 0.005
+  epochs: 500
+  train_split: 0.8
+  val_split: 0.1
+
+# Model configuration
+model:
+  type: 'simple'
+  name: 'ball_only'
+
+# Data configuration
+data:
+  data_dir: 'data'
+
+# Output configuration
+output:
+  base_dir: 'outputs'
+  save_frequency: 1  # Save visualization every N epochs 

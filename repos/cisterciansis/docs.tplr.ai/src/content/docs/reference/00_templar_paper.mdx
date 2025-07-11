@@ -1,0 +1,45 @@
+---
+title: Templar Paper
+description: Read the official Templar research paper.
+abstractHtml: |
+  We describe an incentive system for distributed deep learning of foundational models where peers are rewarded for contributions. The system, <span class="templar-incentive-highlight">GAUNTLET</span>, has been deployed on the bittensor blockchain and used to train a 1.2B LLM with completely permissionless contributions of pseudo-gradients: no control over the users that can register or their hardware. The <span class="templar-incentive-highlight">GAUNTLET</span> can be applied to any synchronous distributed training scheme that relies on aggregating updates or pseudo-gradients. We rely on a two-stage mechanism for fast filtering of peer uptime, reliability, and synchronization, combined with the core component that estimates the loss before and after individual pseudo-gradient contributions. We utilized an OpenSkill rating system to track competitiveness of pseudo-gradient scores across time. Finally, we introduce a novel mechanism to assure peers on the network perform unique computations. Our live 1.2B run, which has paid out real-valued tokens to participants based on the value of their contributions, yielded a competitive (on a per-iteration basis) 1.2B model that demonstrates the utility of our incentive system.
+---
+
+<div class="abstract-container">
+  <h2 class="abstract-title">Abstract</h2>
+
+  <p class="abstract-text" set:html={frontmatter.abstractHtml}></p>
+
+</div>
+
+<div class="cta-section-starlight">
+  <a 
+    href="/papers/templar_paper.pdf" 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    class="cta-link-starlight" 
+    id="templarPaperCta"
+  >
+    <div class="cta-button-container-starlight">
+      <span class="cta-text-starlight">READ THE REPORT</span>
+      <div class="cta-animated-box-starlight"></div> 
+    </div>
+  </a>
+</div>
+
+<script>
+  {`
+    // Script to trigger bracket animation
+    const ctaLink = document.getElementById('templarPaperCta');
+    if (ctaLink) {
+      setTimeout(() => {
+        ctaLink.classList.add('brackets-extended-starlight');
+      }, 500); // delay for animation start
+
+      // Optional: Remove class on mouse out to retract, re-add on mouse enter
+      // This makes the initial extend animation a one-time thing on load,
+      // but hover still works for the inner box and text color.
+      // If you want brackets to re-extend on every hover, this logic needs adjustment.
+    }
+  `}
+</script> 

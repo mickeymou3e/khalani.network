@@ -1,0 +1,268 @@
+name: Deploy Subtensor
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch"
+        required: true
+        default: "devnet"
+        type: choice
+        options:
+          - devnet
+          - devnet-ready
+          - testnet
+          - main
+      environment:
+        description: "Environment"
+        required: true
+        default: devnet
+        type: choice
+        options:
+          - devnet
+          - testnet
+          - finney
+          - mainnet-clone
+          - testnet-clone
+          - sam-vps
+
+jobs:
+  prepare:
+    runs-on: SubtensorCI
+
+    outputs:
+      WSS_URL: ${{ steps.prepare.outputs.WSS_URL }}
+      JOB_NAME: ${{ steps.prepare.outputs.JOB_NAME }}
+      SIGNATORIES: ${{ steps.prepare.outputs.SIGNATORIES }}
+
+    steps:
+      - name: Set Environment Specific Variables
+        id: prepare
+        run: |
+          export CARROT=5FPJHiZnj5wk2hGxer7xwBJi91WNwsssYeVspq7Sd9mhwyxt
+          export VUNE=5FyFcPnN8LrzFVtW1j8TPC3CpoK4DhuFYHCPtyffdgA7or29
+          export ALA=5GmX9ZESxY6b8N2LxWKnaYH3VmbmPRjM4iu5f8oRs78R2Hzi
+          export BOB=5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty
+          export ALICE=5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY
+          export CHARLIE=5FLSigC9HGRKVhB9FiEo4Y3koPsNmBmLJbpXg2mp1hXcS59Y
+          if [ "${{ github.event.inputs.environment }}" == "devnet" ]; then
+            echo "WSS_URL=wss://dev.chain.opentensor.ai:443" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.inputs.environment }}" == "testnet" ]; then
+            echo "WSS_URL=wss://test.finney.opentensor.ai:443" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.inputs.environment }}" == "testnet-clone" ]; then
+            echo "WSS_URL=wss://testclone.chain.opentensor.ai:443" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.inputs.environment }}" == "finney" ]; then
+            echo "WSS_URL=wss://private.chain.opentensor.ai:443" >> $GITHUB_OUTPUT
+            echo "SIGNATORIES=$CARROT,$VUNE,$ALA" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.inputs.environment }}" == "sam-vps" ]; then
+            echo "WSS_URL=wss://emergency-halt-lite.chain.opentensor.ai" >> $GITHUB_OUTPUT
+            echo "SIGNATORIES=$CARROT,$VUNE,$ALA" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.inputs.environment }}" == "mainnet-clone" ]; then
+            echo "WSS_URL=wss://main.mirror.test.opentensor.ai:443" >> $GITHUB_OUTPUT
+            echo "SIGNATORIES=$CARROT,$VUNE,$ALA" >> $GITHUB_OUTPUT
+          fi
+          echo "JOB_NAME=Deploy ${{ github.event.inputs.branch }} -> ${{ github.event.inputs.environment }}" >> $GITHUB_OUTPUT
+
+  try-runtime-check:
+    runs-on: SubtensorCI
+    needs: prepare
+
+    steps:
+      - name: Debug
+        run: |
+          echo "branch: ${{ github.event.inputs.branch }}"
+
+      - name: Install Rust Toolchain
+        run: curl https://sh.rustup.rs -sSf | sh -s -- -y
+
+      - name: Install Substrate Prerequisites
+        run: |
+          sudo apt-get update &&
+          sudo apt-get install -y clang curl libssl-dev llvm libudev-dev protobuf-compiler
+
+      - name: Clone opentensor/subtensor
+        uses: actions/checkout@v4
+        with:
+          repository: "opentensor/subtensor"
+          ref: ${{ github.event.inputs.branch }}
+
+      - name: Try-Runtime Check
+        uses: "paritytech/try-runtime-gha@v0.1.0"
+        with:
+          runtime-package: node-subtensor-runtime
+          node-uri: ${{ needs.prepare.outputs.WSS_URL }}
+          checks: pre-and-post
+          extra-args: --disable-spec-version-check --no-weight-warnings
+
+  spec-version-check:
+    runs-on: SubtensorCI
+    needs: prepare
+
+    steps:
+      - name: Debug
+        run: |
+          echo "branch: ${{ github.event.inputs.branch }}"
+
+      - name: Install Rust Toolchain
+        run: curl https://sh.rustup.rs -sSf | sh -s -- -y
+
+      - name: Install Substrate Prerequisites
+        run: |
+          sudo apt update &&
+          sudo apt-get install -y clang curl libssl-dev llvm libudev-dev protobuf-compiler
+
+      - name: Install substrate-spec-version
+        run: cargo install substrate-spec-version
+
+      - name: Clone opentensor/subtensor
+        uses: actions/checkout@v4
+        with:
+          repository: "opentensor/subtensor"
+          ref: ${{ github.event.inputs.branch }}
+
+      - name: Spec Version Bump Check
+        run: |
+          spec_version=$(PATH=$PATH:$HOME/.cargo/.bin substrate-spec-version ${{ needs.prepare.outputs.WSS_URL }} | tr -d '\n')
+          echo "network spec_version: $spec_version"
+          : ${spec_version:?bad spec version}
+          local_spec_version=$(cargo run -p node-subtensor-runtime --bin spec_version --profile=production | tr -d '\n')
+          echo "local spec_version: $local_spec_version"
+          echo "network spec_version: $spec_version"
+          if (( $(echo "$local_spec_version <= $spec_version" | bc -l) )); then echo "$local_spec_version ≯ $spec_version ❌"; exit 1; fi
+          echo "$local_spec_version > $spec_version ✅"
+
+  build-subtensor:
+    runs-on: SubtensorCI
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: "opentensor/subtensor"
+          ref: ${{ github.event.inputs.branch }}
+          fetch-depth: 0
+
+      - uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/runtime/node-subtensor
+          key: ${{ github.event.inputs.branch }}-${{ github.sha }}
+
+      - name: Debug
+        run: |
+          echo "branch: ${{ github.event.inputs.branch }}"
+
+      - name: Create Symbolic Link
+        run: |
+          cd runtime
+          if [ ! -L node-subtensor ]; then
+            ln -s . node-subtensor
+          fi
+          cd ..
+
+      - name: Srtool Build
+        run: |
+          docker build \
+            --build-arg RUSTC_VERSION="1.85.0" \
+            -t srtool \
+            https://github.com/paritytech/srtool.git#refs/tags/v0.17.0
+          docker run --rm --user root --platform=linux/amd64 \
+            -e PACKAGE=node-subtensor-runtime \
+            -e BUILD_OPTS="--features=metadata-hash" \
+            -e PROFILE=production \
+            -v /home/runner/.cargo:/cargo-home \
+            -v ${{ github.workspace }}:/build \
+            srtool \
+            bash -c "git config --global --add safe.directory /build && \
+                     /srtool/build --app > /build/runtime/node-subtensor/srtool-output.log; \
+                     BUILD_EXIT_CODE=\$?; \
+                     if [ \"\$BUILD_EXIT_CODE\" -ne 0 ]; then \
+                            cat /build/runtime/node-subtensor/srtool-output.log; \
+                            exit \$BUILD_EXIT_CODE; \
+                     fi && \
+                     tail -n 1 /build/runtime/node-subtensor/srtool-output.log > /build/runtime/node-subtensor/subtensor-digest.json"
+
+      - name: Check Artifacts
+        run: |
+          if [ ! -f runtime/node-subtensor/target/srtool/production/wbuild/node-subtensor-runtime/node_subtensor_runtime.compact.compressed.wasm ]; then
+            echo "Error: node_subtensor_runtime.compact.compressed.wasm not found"
+            exit 1
+          fi
+          if [ ! -f runtime/node-subtensor/subtensor-digest.json ]; then
+            echo "Error: subtensor-digest.json not found"
+            exit 1
+          fi
+          cd runtime/node-subtensor
+          sudo mv target/srtool/production/wbuild/node-subtensor-runtime/node_subtensor_runtime.compact.compressed.wasm ./subtensor.wasm
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: subtensor-wasm
+          path: |
+            ${{ github.workspace }}/runtime/node-subtensor/subtensor.wasm
+            ${{ github.workspace }}/runtime/node-subtensor/subtensor-digest.json
+
+  deploy:
+    name: ${{ needs.prepare.outputs.JOB_NAME }}
+    runs-on: SubtensorCI
+    needs: [prepare, spec-version-check, build-subtensor] #try-runtime-check]
+    if: ${{ success() }}
+
+    steps:
+      - name: Clone opentensor/subtensor-deploys
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4.1.0
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install Polkadot.js API
+        run: |
+          npm install
+
+      - name: Download WASM Blob
+        uses: actions/download-artifact@v4
+        with:
+          name: subtensor-wasm
+          path: ./wasm
+
+      - name: List WASM files
+        run: |
+          ls -l ./wasm
+
+      - name: Deploy WASM Blob
+        run: |
+          if [ ! -f ./wasm/subtensor.wasm ]; then
+            echo "Error: ./wasm/subtensor.wasm not found"
+            exit 1
+          fi
+          if [ "${{ github.event.inputs.environment }}" == "devnet" ]; then
+            export PASSPHRASE="${{ secrets.DEVNET_PASSPHRASE }}"
+          elif [ "${{ github.event.inputs.environment }}" == "testnet" ]; then
+            export PASSPHRASE="${{ secrets.TESTNET_PASSPHRASE }}"
+          elif [ "${{ github.event.inputs.environment }}" == "sam-vps" ]; then
+            export PASSPHRASE="${{ secrets.FINNEY_PASSPHRASE }}"
+          elif [ "${{ github.event.inputs.environment }}" == "finney" ]; then
+            export PASSPHRASE="${{ secrets.FINNEY_PASSPHRASE }}"
+          elif [ "${{ github.event.inputs.environment }}" == "mainnet-clone" ]; then
+            export PASSPHRASE="${{ secrets.FINNEY_PASSPHRASE }}"
+          fi
+          if [ -z "$PASSPHRASE" ]; then
+            echo "Error: PASSPHRASE is not set or is empty"
+            exit 1
+          fi
+          if [ -n "${{ needs.prepare.outputs.SIGNATORIES }}" ]; then
+            echo "submitting multisig runtime upgrade tx"
+            node deploy-wasm-multisig.js ${{ needs.prepare.outputs.WSS_URL }} "$PASSPHRASE" \
+              ./wasm/subtensor.wasm "5Dh49n29JDBHEbQjEN9nnR4sQkme8WUtE3Fpz2rFdAk8iD2K"
+          else
+            echo "deploying wasm via signed runtime upgrade tx"
+            node deploy-wasm.js ${{ needs.prepare.outputs.WSS_URL }} "$PASSPHRASE" ./wasm/subtensor.wasm
+          fi
+
+      - name: Upload TxBlob Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: multisig-calldata-hex
+          path: |
+            ${{ github.workspace }}/wasm/proxy_proxy_blob.hex

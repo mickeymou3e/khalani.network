@@ -1,0 +1,11 @@
+name: substrate-talpidae
+channels:
+  - defaults
+dependencies:
+  - python
+  - pip
+  - pip:
+      - substrate-interface
+      - diskcache
+      - xxhash
+      - matplotlib

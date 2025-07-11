@@ -1,0 +1,27 @@
+training:
+  seed: 42
+  batch_size: 256
+  learning_rate: 0.01
+  epochs: 500
+  train_split: 0.8
+  val_split: 0.1
+  scheduler:
+    type: 'ReduceLROnPlateau'
+    factor: 0.75
+    patience: 200
+    min_lr: 1e-6
+
+model:
+  type: 'shallow_spatial'
+  name: 'shallow_spatial'
+  grid_size: [50, 80]
+  initial_sigma_player: 5.0
+  initial_sigma_ball: 3.0
+  initial_delta_t: 1.0
+  initial_friction: 0.1
+
+data:
+  data_dir: 'data'
+
+output:
+  base_dir: 'outputs' 

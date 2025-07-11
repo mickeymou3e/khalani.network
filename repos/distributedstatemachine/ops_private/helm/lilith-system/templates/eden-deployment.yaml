@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.eden.name }}
+  labels:
+    app: {{ .Values.eden.name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.eden.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.eden.name }}
+    spec:
+      imagePullSecrets:
+      {{- range .Values.image.pullSecrets }}
+        - name: {{ .name }}
+      {{- end }}
+      containers:
+      - name: {{ .Values.eden.name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        command: ["eden", "start"]
+        ports:
+        - containerPort: {{ .Values.eden.service.port }}

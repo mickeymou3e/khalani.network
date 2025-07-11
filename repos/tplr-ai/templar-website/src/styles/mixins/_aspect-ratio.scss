@@ -1,0 +1,11 @@
+@mixin aspect-ratio($ratio: 1, $width: 100%) {
+  aspect-ratio: $ratio;
+
+  // Fallback (using padding hack)
+  @supports not (aspect-ratio: 1 / 1) {
+    padding-top: calc($width / $ratio);
+    height: 0;
+    position: relative;
+    overflow: hidden;
+  }
+}

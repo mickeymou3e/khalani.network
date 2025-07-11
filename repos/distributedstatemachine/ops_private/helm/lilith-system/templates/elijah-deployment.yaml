@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.elijah.name }}
+  labels:
+    app: {{ .Values.elijah.name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.elijah.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.elijah.name }}
+    spec:
+      imagePullSecrets:
+      {{- range .Values.image.pullSecrets }}
+        - name: {{ .name }}
+      {{- end }}
+      containers:
+      - name: {{ .Values.elijah.name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        command: ["elijah", "start"]
+        ports:
+        - containerPort: {{ .Values.elijah.service.port }}

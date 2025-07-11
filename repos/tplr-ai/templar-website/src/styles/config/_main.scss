@@ -1,0 +1,48 @@
+// MAIN CONFIG OBJECTS
+
+$baseConfig: (
+  vwBase: 1440,
+  remBase: 16,
+);
+
+$gridConfig: (
+  columns: 4,
+  gap: 10,
+);
+
+$responsiveConfig: (
+  medium: (
+    breakpoint: 600px,
+    columns: 12,
+  ),
+  desktop: (
+    breakpoint: 900px,
+    columns: 24,
+  ),
+  large: (
+    breakpoint: 1400px,
+    columns: 24,
+  ),
+);
+
+// CONFIG DERIVATIVES
+
+$breakpoints: ();
+@each $key, $value in $responsiveConfig {
+  $breakpoints: map-merge(
+    $breakpoints,
+    (
+      $key: map-get($value, breakpoint),
+    )
+  );
+}
+
+$columns: ();
+@each $key, $value in $responsiveConfig {
+  $columns: map-merge(
+    $columns,
+    (
+      $key: map-get($value, columns),
+    )
+  );
+}

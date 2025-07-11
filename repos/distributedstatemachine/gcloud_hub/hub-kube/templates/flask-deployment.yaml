@@ -1,0 +1,128 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-server-worker
+  # namespace: 
+  labels:
+    project: {{ .Chart.Name }}
+    app: flask-server
+
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.server.replicaCount }}
+  {{- end }}
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      project: {{ .Chart.Name }}
+      app: flask-server
+
+  template:
+    metadata:
+      name: flask-server-worker
+      labels:
+        project: {{ .Chart.Name }}
+        app: flask-server
+
+    spec:
+      containers:
+      - name: flask-app
+        image: us-central1-docker.pkg.dev/civil-lambda-374300/ezkl-hub/server:latest
+        command: ["poetry", "run", "gunicorn", "app:app", "-w", "4", "-b", "0.0.0.0:5000", "--timeout", "120"]
+        ports:
+        - containerPort: 5000
+
+
+        env:
+        - name: ENV
+          value: STAGING
+        # - name: CELERY_BROKER_URL
+        #   valueFrom:
+        #     configMapKeyRef:
+        #       name: flask-config
+        #       key: CELERY_BROKER_URL
+        # - name: CELERY_RESULT_URL
+        #   valueFrom:
+        #     configMapKeyRef:
+        #       name: flask-config
+        #       key: CELERY_BROKER_URL
+        - name: CELERY_RESULT_URL
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-broker-url
+              key: BROKER_URL
+        - name: CELERY_BROKER_URL
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-broker-url
+              key: BROKER_URL
+
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: flask-secrets
+              key: SECRET_KEY
+        - name: FERNET_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: flask-secrets
+              key: FERNET_SECRET
+        - name: GITHUB_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: flask-secrets
+              key: GITHUB_CLIENT_ID
+        - name: GITHUB_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: flask-secrets
+              key: GITHUB_CLIENT_SECRET
+        - name: SQLALCHEMY_DATABASE_URI
+          valueFrom:
+            secretKeyRef:
+              name: flask-secrets
+              key: SQLALCHEMY_DATABASE_URI
+
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: {{ .Values.env.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.env.livenessProbe.periodSeconds }}
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: {{ .Values.env.readinessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.env.readinessProbe.periodSeconds }}
+        volumeMounts:
+        - name: artifacts
+          mountPath: /server/artifact
+        # db sidecar
+      - name: cloud-sql-proxy
+        image: gcr.io/cloudsql-docker/gce-proxy:1.33
+        command: 
+          - "/cloud_sql_proxy"
+          - "-instances={{ .Values.env.dbInstance }}=tcp:5432"
+          - "-credential_file=/secrets/cloudsql/cloudsql-editor.json"
+        # lifecycle:
+        #   postStart:
+        #     exec:
+        #       command: ["/bin/sh", "-c", "download_srs_cluster.sh"]
+        volumeMounts:
+          - name: cloudsql-oauth-credentials
+            mountPath: /secrets/cloudsql
+            readOnly: true
+        securityContext:
+          runAsNonRoot: true
+
+      volumes:
+        - name: cloudsql-oauth-credentials
+          secret:
+            secretName: cloudsql-oauth-credentials
+        - name: cloudsql
+          emptyDir:
+        - name: artifacts
+          persistentVolumeClaim:
+            claimName: artifacts

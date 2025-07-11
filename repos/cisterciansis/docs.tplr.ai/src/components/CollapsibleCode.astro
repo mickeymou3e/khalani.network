@@ -1,0 +1,90 @@
+---
+// src/components/CollapsibleCode.astro
+export interface Props {
+  title: string;
+  lang?: string; // Language for syntax highlighting
+  isOpen?: boolean; // Optional prop to control initial open state
+}
+
+const { title, lang = 'plaintext', isOpen = false } = Astro.props;
+---
+
+<details class="collapsible-code" open={isOpen}>
+  <summary>
+    <span class="title">{title}</span>
+  </summary>
+  <div class="content">
+    <slot />
+  </div>
+</details>
+
+<style>
+  .collapsible-code {
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: var(--sl-radius-medium);
+    margin-block-start: 1.5rem;
+    margin-block-end: 1.5rem;
+    background-color: var(--sl-color-black); /* Default to dark background for code */
+    color: var(--sl-color-white); /* Default to light text for code */
+    padding: 0;
+    overflow: hidden; /* Ensures content within border-radius respects it */
+  }
+
+  /* Apply Starlight's code block variables for consistency */
+  :root[data-theme="light"] .collapsible-code {
+    background-color: var(--sl-color-gray-6);
+    color: var(--sl-color-text-1);
+    border-color: var(--sl-color-gray-5);
+  }
+  :root[data-theme="dark"] .collapsible-code {
+    background-color: var(--sl-color-black);
+    color: var(--sl-color-gray-2);
+    border-color: var(--sl-color-gray-4);
+  }
+
+
+  .collapsible-code summary {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.75rem 1.25rem;
+    gap: 0.75rem;
+    border-bottom: 1px solid var(--sl-color-gray-5);
+  }
+  
+  :root[data-theme="light"] .collapsible-code summary {
+     border-bottom-color: var(--sl-color-gray-5);
+  }
+  :root[data-theme="dark"] .collapsible-code summary {
+     border-bottom-color: var(--sl-color-gray-4);
+  }
+
+  .collapsible-code summary:hover {
+    background-color: var(--sl-color-gray-5);
+  }
+ :root[data-theme="light"] .collapsible-code summary:hover {
+    background-color: var(--sl-color-gray-5);
+  }
+  :root[data-theme="dark"] .collapsible-code summary:hover {
+    background-color: var(--sl-color-gray-5);
+  }
+
+
+  .collapsible-code .title {
+    font-weight: 500;
+    color: var(--sl-color-text-accent);
+  }
+
+  /* Style for the content area to ensure code block formatting is preserved */
+  .collapsible-code .content {
+    padding: 0; /* Remove padding if direct child is a pre/code block */
+    overflow-x: auto; /* Allow horizontal scrolling for wide code */
+  }
+
+  .collapsible-code .content :global(pre) {
+    margin: 0 !important; /* Remove default margin from pre tags */
+    border-radius: 0 0 var(--sl-radius-medium) var(--sl-radius-medium) !important; /* Round bottom corners */
+    border: none !important; /* Remove border from pre, as detail has one */
+    padding: 1rem 1.25rem !important; /* Add padding inside the pre block */
+  }
+</style> 

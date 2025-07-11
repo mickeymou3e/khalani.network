@@ -1,0 +1,203 @@
+@import '@/styles/shared-imports.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.mainContent {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.abstractSection {
+  padding: 2rem;
+  text-align: left;
+  max-width: 800px;
+  margin-bottom: 2rem;
+}
+
+.abstractTitle {
+  font-family: 'ppNeueMontreal', 'ppNeueMontreal Fallback', sans-serif;
+  text-align: center;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+  font-size: 2.25rem;
+  color: var(--color-text);
+}
+
+.abstractBody {
+  font-family: 'aeonikFono', 'aeonikFono Fallback', monospace;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  text-align: justify;
+  letter-spacing: 0em;
+  white-space: pre-wrap;
+
+  @media (max-width: 768px) {
+    text-align: left;
+  }
+}
+
+.templarRed {
+  color: var(--color-templar-red);
+}
+
+.ctaSection {
+  padding: 2rem;
+  text-align: center;
+  display: flex; 
+  justify-content: center;
+  align-items: center; // centering the link
+}
+
+// Keyframes borrowed and adapted
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.ctaLink {
+  text-decoration: none;
+  display: inline-block;
+  position: relative; 
+  cursor: pointer;
+  padding: 2px;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 2px; 
+    height: 2px; 
+    border-color: var(--color-grey-500);
+    border-style: dashed;
+    border-width: 0;
+    transition: width 0.4s var(--ease-expo-out), height 0.4s var(--ease-expo-out);
+  }
+
+  &::before {
+    top: -2px; 
+    left: -2px;
+    border-top-width: 2px;
+    border-left-width: 2px;
+  }
+
+  &::after {
+    bottom: -2px;
+    right: -2px;
+    border-bottom-width: 2px;
+    border-right-width: 2px;
+  }
+
+  // Retract on hover/focus for .ctaLink's own pseudo-elements
+  &:hover::before, &:hover::after,
+  &:focus::before, &:focus::after {
+    width: 2px;
+    height: 2px;
+  }
+}
+
+.ctaButtonContainer {
+  position: relative;
+  display: inline-flex; 
+  align-items: center;
+  padding: 0.75rem 1.5rem; 
+  overflow: hidden; 
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-color: var(--color-grey-500);
+    border-style: dashed;
+    border-width: 0;
+    transition: width 0.4s var(--ease-expo-out), height 0.4s var(--ease-expo-out);
+  }
+
+  &::before {
+    top: -2px;
+    right: -2px;
+    border-top-width: 2px;
+    border-right-width: 2px;
+  }
+
+  &::after {
+    bottom: -2px;
+    left: -2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+  }
+}
+
+// Class to trigger extension of brackets
+.bracketsExtended {
+  // Extend .ctaLink's own pseudo-elements
+  &::before, &::after {
+    width: 15px;
+    height: 15px;
+  }
+
+  // Extend .ctaButtonContainer's pseudo-elements when .ctaLink has .bracketsExtended
+  .ctaButtonContainer {
+    &::before, &::after {
+      width: 15px;
+      height: 15px;
+    }
+  }
+}
+
+// Retract .ctaButtonContainer's pseudo-elements on hover/focus of .ctaLink
+// Ensure these selectors correctly target and override when .bracketsExtended might also be present
+.ctaLink:hover .ctaButtonContainer::before,
+.ctaLink:hover .ctaButtonContainer::after,
+.ctaLink:focus .ctaButtonContainer::before,
+.ctaLink:focus .ctaButtonContainer::after {
+  width: 2px;
+  height: 2px;
+}
+
+.ctaText {
+  position: relative;
+  z-index: 2;
+  color: var(--color-text); 
+  transition: color 0.3s ease;
+  text-transform: uppercase; 
+  font-size: 1.2rem;
+}
+
+.ctaAnimatedBox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-templar-red);
+  transform-origin: bottom right; // Animation origin
+  transform: scale(0);
+  transition: transform 0.7s var(--ease-expo-out); 
+  z-index: 1;
+}
+
+.ctaLink:hover .ctaAnimatedBox,
+.ctaLink:focus .ctaAnimatedBox {
+  transform: scale(1);
+}
+
+.ctaLink:hover .ctaText,
+.ctaLink:focus .ctaText {
+  color: white;
+} 

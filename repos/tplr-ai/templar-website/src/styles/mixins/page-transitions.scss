@@ -1,0 +1,69 @@
+/**
+ * TRANSITION MIXINS
+ * Use this to set up the inital state of a transition
+ * IMPORTANT: use this or element might not be visible without Javascript
+ */
+@mixin transitionInitial {
+  @media (scripting: enabled) {
+    @content; // avoid FOUC if JS is supported
+  }
+  :global(.page-appear) &,
+  :global(.page-enter) & {
+    @content;
+  }
+}
+@mixin transitionEnter {
+  :global(.page-appear.page-appear-active) &,
+  :global(.page-appear-done) &,
+  :global(.page-enter.page-enter-active) &,
+  :global(.page-enter-done) & {
+    @content;
+  }
+}
+@mixin transitionExit {
+  :global(.page-exit) &,
+  :global(.page-exit-active) &,
+  :global(.page-exit-done) & {
+    @content;
+  }
+}
+
+/**
+ * ANIMATION MIXINS
+ * To be used with CSS animations such as:
+ * @kayframes fadeIn {
+ *   from: { opacity: 0 }
+ * }
+ *
+ * animation: fadeIn 1s backwards;
+ */
+@mixin animationEnter {
+  @media (scripting: enabled) {
+    @content; // avoid FOUC if JS is supported
+    animation-play-state: paused;
+  }
+  :global(.page-appear) &,
+  :global(.page-appear-active) &,
+  :global(.page-appear-done) &,
+  :global(.page-enter) &,
+  :global(.page-enter-active) &,
+  :global(.page-enter-done) & {
+    animation-play-state: running;
+  }
+}
+/**
+ * ANIMATION MIXINS
+ * To be used with CSS animations such as:
+ * @kayframes fadeIn {
+ *   to: { opacity: 0 }
+ * }
+ *
+ * animation: fadeIn 1s forwards;
+ */
+@mixin animationExit {
+  :global(.page-exit) &,
+  :global(.page-exit-active) &,
+  :global(.page-exit-done) & {
+    @content;
+  }
+}

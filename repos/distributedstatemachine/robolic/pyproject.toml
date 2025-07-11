@@ -1,0 +1,63 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tplr"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "bittensor==8.5.1",
+    "bt-decode==0.4.0",
+    "torch",
+    "boto3",
+    "einops",
+    "aiofiles",
+    "aioboto3",
+    "aiobotocore",
+    "transformers",
+    "pip",
+    "wandb",
+    "python-dotenv",
+    "zstandard",
+    "s3fs",
+    "pyarrow",
+    "scipy"
+
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-cov>=4.1.0",
+    "pytest-asyncio",
+    "ipykernel",
+    "ipython",
+    "pandas",
+    "matplotlib",
+    "seaborn",
+    "ruff",
+    "pytest-xdist"
+
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+addopts = "-v -s --capture=no --log-cli-level=INFO"
+asyncio_mode = "auto"
+markers = [
+    "asyncio: mark test as async",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::PendingDeprecationWarning",
+    "ignore::FutureWarning",
+    "ignore::pytest_asyncio.plugin.PytestDeprecationWarning",
+    # Keep other warnings
+    "default::RuntimeWarning",
+    "default::UserWarning",
+]

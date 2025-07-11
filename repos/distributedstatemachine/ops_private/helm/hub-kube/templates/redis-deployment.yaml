@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  # namespace: default
+  labels:
+    project: {{ .Chart.Name }}
+
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      project: {{ .Chart.Name }}
+      app: redis
+
+  template:
+    metadata:
+      name: redis
+      annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
+      labels:
+        project: {{ .Chart.Name }}
+        app: redis
+
+    spec:
+      containers:
+      - name: redis
+        image: redis:7-alpine
+        resources:
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        ports:
+        - containerPort: 6379

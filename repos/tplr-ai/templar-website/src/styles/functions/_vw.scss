@@ -1,0 +1,5 @@
+@use 'sass:math';
+
+@function vw($targetPx, $contextPx: map-get($baseConfig, vwBase)) {
+  @return #{math.div(strip-unit($targetPx), strip-unit($contextPx)) * 100}vw;
+}

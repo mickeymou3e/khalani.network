@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.lilith.name }}
+  labels:
+    app: {{ .Values.lilith.name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.lilith.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.lilith.name }}
+    spec:
+      imagePullSecrets:
+      {{- range .Values.image.pullSecrets }}
+        - name: {{ .name }}
+      {{- end }}
+      # initContainers:
+      #   - name: check-eden
+      #     image: busybox:1.28
+      #     command: ['sh', '-c', 'until nslookup eden; do echo waiting for eden; sleep 2; done;']
+      #   - name: check-elijah
+      #     image: busybox:1.28
+      #     command: ['sh', '-c', 'until nslookup elijah; do echo waiting for elijah; sleep 2; done;']
+      containers:
+      - name: {{ .Values.lilith.name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        command: ["lilith", "start"]
+        env:
+        - name: LILITH_SERVER_URL
+          value: "http://localhost:2004"
+        ports:
+        - containerPort: {{ .Values.lilith.service.port }}

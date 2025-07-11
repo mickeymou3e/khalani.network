@@ -1,0 +1,485 @@
+---
+title: Monitoring And Telemetry
+---
+import SourceLink from '@components/SourceLink.astro';
+import { Aside, Card, CardGrid, Tabs, TabItem, Steps, FileTree, Code, LinkButton, Badge } from '@astrojs/starlight/components';
+import CollapsibleAside from '../../../components/CollapsibleAside.astro';
+
+<CollapsibleAside title="Relevant Source Files">
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/hparams-local-run.json" text="hparams-local-run.json" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/dataset.py" text="src/tplr/dataset.py" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/hparams.py" text="src/tplr/hparams.py" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/logging.py" text="src/tplr/logging.py" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/metrics.py" text="src/tplr/metrics.py" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/schemas.py" text="src/tplr/schemas.py" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/wandb.py" text="src/tplr/wandb.py" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/host_vars/grafana_prod.yml" text="telemetry/ansible/host_vars/grafana_prod.yml" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/simulator/testing_metrics.py" text="telemetry/simulator/testing_metrics.py" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/tests/conftest.py" text="tests/conftest.py" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/tests/test_metrics_logger.py" text="tests/test_metrics_logger.py" />
+</CollapsibleAside>
+
+
+
+This document describes the monitoring and telemetry system implemented in the Templar framework. It covers the metrics collection, logging infrastructure, and visualization tools that provide observability into the distributed training process. For information about deploying the monitoring services, see [Deployment](/guides/deployment).
+
+## Overview
+
+Templar's monitoring and telemetry system provides comprehensive visibility into the distributed training process through three main components:
+
+1. **Metrics Logging** - Collection and storage of time-series metrics in InfluxDB
+2. **Experiment Tracking** - Tracking of training runs with Weights & Biases (WandB)
+3. **Structured Logging** - Centralized logging with Loki for operational visibility
+
+These components work together to provide a complete view of the training process, from model performance metrics to system resource utilization.
+
+```mermaid
+flowchart TD
+    subgraph "Templar Nodes"
+        M["Miners"]
+        V["Validators"]
+        A["Aggregator"]
+        E["Evaluator"]
+    end
+
+    subgraph "Telemetry Infrastructure"
+        I["InfluxDB"]
+        W["Weights & Biases"]
+        L["Loki"]
+        G["Grafana"]
+    end
+
+    M -->|"Performance & System Metrics"| I
+    V -->|"Performance & System Metrics"| I
+    A -->|"Performance & System Metrics"| I
+    E -->|"Performance & System Metrics"| I
+
+    M -->|"Experiment Tracking"| W
+    V -->|"Experiment Tracking"| W
+    A -->|"Experiment Tracking"| W
+    E -->|"Experiment Tracking"| W
+
+    M -->|"Structured Logs"| L
+    V -->|"Structured Logs"| L
+    A -->|"Structured Logs"| L
+    E -->|"Structured Logs"| L
+
+    I -->|"Data Source"| G
+    L -->|"Data Source"| G
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/metrics.py" text="src/tplr/metrics.py" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/wandb.py" text="src/tplr/wandb.py" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/logging.py" text="src/tplr/logging.py" />
+
+## Metrics Logging with InfluxDB
+
+Templar uses a custom `MetricsLogger` class to collect and store metrics in InfluxDB. This system provides insights into training performance, system resource utilization, and gradient processing efficiency.
+
+### Architecture
+
+The metrics logging system is designed to be asynchronous and non-blocking to minimize impact on the training process. It uses a queue-based architecture to buffer metrics before sending them to InfluxDB.
+
+```mermaid
+sequenceDiagram
+    participant Node as "Templar Node"
+    participant Logger as "MetricsLogger"
+    participant Queue as "Async Queue"
+    participant Thread as "Background Thread"
+    participant InfluxDB as "InfluxDB"
+
+    Node->>Logger: log(measurement, tags, fields)
+    Logger->>Logger: Process fields & add metadata
+    Logger->>Queue: Enqueue Point
+    Note over Queue,Thread: Non-blocking operation
+    Thread->>Queue: Dequeue Point
+    Thread->>InfluxDB: Write point (retry if needed)
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/metrics.py#L182-L226" text="src/tplr/metrics.py182-226" />
+
+### MetricsLogger Class
+
+The `MetricsLogger` class provides a simple interface for logging metrics while handling the complexity of asynchronous communication with InfluxDB.
+
+Key features:
+- Automatic collection of system and GPU metrics
+- Statistical processing of list values (mean, min, max, median)
+- Tagging with runtime information (version, node role, etc.)
+- Configurable batching and retry logic
+
+```mermaid
+classDiagram
+    class MetricsLogger {
+        +client: InfluxDBClient
+        +write_api: WriteApi
+        +prefix: str
+        +uid: str
+        +role: str
+        +version: str
+        +runtime_id: str
+        +log(measurement, tags, fields)
+        +process_value(value)
+        -_add_system_metrics(fields)
+        -_add_gpu_metrics(tags, fields)
+        -_add_standard_tags(point)
+        -_add_config_tags(point)
+        -_write_point(point)
+    }
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/metrics.py#L82-L321" text="src/tplr/metrics.py82-321" />
+
+### Configuration
+
+The `MetricsLogger` can be configured through environment variables and constructor parameters:
+
+| Parameter | Environment Variable | Default | Description |
+|-----------|---------------------|---------|-------------|
+| host | INFLUXDB_HOST | AWS InfluxDB endpoint | InfluxDB server hostname |
+| port | INFLUXDB_PORT | 8086 | InfluxDB server port |
+| database | INFLUXDB_DATABASE | "tplr" | InfluxDB bucket/database name |
+| token | INFLUXDB_TOKEN | Fallback token | Authentication token |
+| org | INFLUXDB_ORG | "tplr" | InfluxDB organization |
+| prefix | - | "" | Prefix for all metrics |
+| role | - | "" | Node role (miner, validator, etc.) |
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/metrics.py#L45-L59" text="src/tplr/metrics.py45-59" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/metrics.py#L88-L105" text="src/tplr/metrics.py88-105" />
+
+### System and GPU Metrics
+
+The metrics logging system automatically collects system and GPU metrics when requested:
+
+**System Metrics:**
+- CPU usage percentage
+- Memory usage (used and total)
+
+**GPU Metrics:**
+- GPU memory allocated
+- GPU memory cached/reserved
+- GPU memory segments
+- Total GPU memory used
+
+```python
+# Example usage
+metrics_logger.log(
+    measurement="training_step",
+    tags={"uid": 42},
+    fields={"loss": 0.75, "learning_rate": 0.001},
+    with_system_metrics=True,
+    with_gpu_metrics=True
+)
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/metrics.py#L324-L359" text="src/tplr/metrics.py324-359" />
+
+## Experiment Tracking with Weights & Biases
+
+Templar integrates with Weights & Biases (WandB) for experiment tracking and visualization. This integration provides a way to track training progress, compare different runs, and visualize model performance.
+
+### Integration Architecture
+
+The WandB integration is designed to handle versioning and run resumption, ensuring that training runs are properly tracked even if they span multiple sessions or software versions.
+
+```mermaid
+flowchart TD
+    subgraph "Templar Node"
+        Init["initialize_wandb()"]
+        Log["run.log()"]
+    end
+
+    subgraph "WandB"
+        API["WandB API"]
+        RunObj["Run Object"]
+        Storage["Cloud Storage"]
+    end
+
+    Init -->|"Create/Resume Run"| API
+    API -->|"Return Run Object"| RunObj
+    Log -->|"Log metrics with version prefix"| RunObj
+    RunObj -->|"Store metrics & artifacts"| Storage
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/wandb.py#L20-L125" text="src/tplr/wandb.py20-125" />
+
+### Version Tracking
+
+A unique feature of Templar's WandB integration is version tracking. Metrics are automatically prefixed with the current software version, allowing for easier comparison of performance across different software versions.
+
+```
+v0.1.0/loss
+v0.1.0/step
+latest/loss
+latest/step
+```
+
+The system also maintains a version history in the run configuration, enabling tracking of when a run was executed with different versions of the software.
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/wandb.py#L62-L68" text="src/tplr/wandb.py62-68" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/wandb.py#L104-L116" text="src/tplr/wandb.py104-116" />
+
+### Run Resumption
+
+The integration supports run resumption by maintaining a record of run IDs and checking for existing runs when initializing WandB. This allows for seamless continuation of training across multiple sessions.
+
+```python
+# Run ID is stored in a file
+run_id_file = os.path.join(wandb_dir, f"wandb_run_id_{run_prefix}{uid}.txt")
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/wandb.py#L28-L43" text="src/tplr/wandb.py28-43" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/wandb.py#L121-L123" text="src/tplr/wandb.py121-123" />
+
+## Structured Logging with Loki
+
+Templar uses a structured logging system with Loki integration for centralized log collection and analysis. This system provides operational visibility into the distributed training process.
+
+### Architecture
+
+The logging system is built on Python's standard logging module with enhancements for structured logging and Loki integration. It uses a queue-based architecture for asynchronous log transmission.
+
+```mermaid
+flowchart TD
+    subgraph "Templar Node"
+        Log["logger.info()"]
+        QH["QueueHandler"]
+        Rich["RichHandler"]
+    end
+
+    subgraph "Background Processing"
+        QL["QueueListener"]
+        LH["LokiHandler"]
+    end
+
+    subgraph "Infrastructure"
+        Loki["Loki Server"]
+        Console["Console Output"]
+    end
+
+    Log -->|"Log Record"| QH
+    Log -->|"Log Record"| Rich
+    QH -->|"Enqueue"| QL
+    QL -->|"Dequeue"| LH
+    Rich -->|"Format & Display"| Console
+    LH -->|"HTTP POST"| Loki
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/logging.py#L149-L287" text="src/tplr/logging.py149-287" />
+
+### Context-based Logging
+
+The logging system supports context-based logging, allowing additional metadata to be attached to log messages. This metadata can include information like trace IDs, batch identifiers, or custom metrics.
+
+```python
+# Example context-based logging
+log_with_context(
+    'info', 
+    'Processing batch', 
+    batch_size=32, 
+    batch_id='abc123'
+)
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/logging.py#L290-L309" text="src/tplr/logging.py290-309" />
+
+### Log Filtering
+
+The logging system includes custom filters to reduce noise and focus on relevant information. For example, it filters out common subtensor warnings that are not actionable.
+
+```python
+class NoSubtensorWarning(logging.Filter):
+    def filter(self, record: logging.LogRecord) -> bool:
+        # Return False if the record contains the undesired subtensor warning
+        return (
+            "Verify your local subtensor is running on port" not in record.getMessage()
+        )
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/logging.py#L91-L96" text="src/tplr/logging.py91-96" />
+
+## Dashboards and Visualization
+
+Templar uses Grafana for dashboard visualization of metrics stored in InfluxDB and logs stored in Loki. This provides a unified view of system performance and health.
+
+### Grafana Configuration
+
+Grafana is configured to connect to InfluxDB and Loki as data sources. The configuration is managed through Ansible for automated deployment.
+
+```mermaid
+flowchart TD
+    subgraph "Data Sources"
+        I["InfluxDB"]
+        L["Loki"]
+    end
+
+    subgraph "Grafana"
+        G["Grafana Server"]
+        D1["Training Metrics Dashboard"]
+        D2["System Metrics Dashboard"]
+        D3["Log Analytics Dashboard"]
+    end
+
+    I -->|"Time Series Data"| G
+    L -->|"Log Data"| G
+    G --- D1
+    G --- D2
+    G --- D3
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/host_vars/grafana_prod.yml" text="telemetry/ansible/host_vars/grafana_prod.yml" />
+
+### Available Metrics
+
+The monitoring system collects a wide range of metrics that can be visualized in Grafana:
+
+| Category | Metrics |
+|----------|---------|
+| Training | Loss, learning rate, gradient norms |
+| System | CPU usage, memory usage |
+| GPU | Memory allocated, memory cached |
+| Network | Active peers, sync status |
+| Performance | Gradient compression ratio, training throughput |
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/metrics.py#L182-L226" text="src/tplr/metrics.py182-226" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/tests/test_metrics_logger.py#L315-L331" text="tests/test_metrics_logger.py315-331" />
+
+## Integration in the Templar Ecosystem
+
+The monitoring and telemetry system is integrated throughout the Templar ecosystem, providing visibility into all components of the distributed training process.
+
+```mermaid
+flowchart TD
+    subgraph "Templar Framework"
+        M["Miner"]
+        V["Validator"]
+        A["Aggregator"]
+        C["Comms"]
+        E["Evaluator"]
+    end
+
+    subgraph "Metrics Collection"
+        ML["MetricsLogger"]
+        W["WandB Integration"]
+        Log["Structured Logger"]
+    end
+
+    subgraph "Infrastructure"
+        I["InfluxDB"]
+        WB["Weights & Biases"]
+        L["Loki"]
+        G["Grafana"]
+    end
+
+    M -->|"Training Metrics"| ML
+    V -->|"Validation Metrics"| ML
+    A -->|"Aggregation Metrics"| ML
+    C -->|"Communication Metrics"| ML
+    E -->|"Evaluation Metrics"| ML
+
+    M -->|"Experiment Data"| W
+    V -->|"Experiment Data"| W
+    A -->|"Experiment Data"| W
+    E -->|"Experiment Data"| W
+
+    M -->|"Operational Logs"| Log
+    V -->|"Operational Logs"| Log
+    A -->|"Operational Logs"| Log
+    C -->|"Operational Logs"| Log
+    E -->|"Operational Logs"| Log
+
+    ML -->|"Time Series Data"| I
+    W -->|"Run Data"| WB
+    Log -->|"Structured Logs"| L
+
+    I -->|"Data Source"| G
+    L -->|"Data Source"| G
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/metrics.py" text="src/tplr/metrics.py" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/wandb.py" text="src/tplr/wandb.py" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/logging.py" text="src/tplr/logging.py" />
+
+## Usage Examples
+
+### Logging Training Metrics
+
+```python
+# Initialize MetricsLogger
+metrics_logger = MetricsLogger(
+    prefix="miner",
+    uid="123",
+    role="miner",
+    group="finney",
+    job_type="training"
+)
+
+# Log training metrics
+metrics_logger.log(
+    measurement="training_step",
+    tags={"batch_id": batch_id},
+    fields={
+        "loss": loss.item(),
+        "learning_rate": current_lr,
+        "gradient_norm": gradient_norm
+    },
+    with_system_metrics=True,
+    with_gpu_metrics=True
+)
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/metrics.py#L88-L105" text="src/tplr/metrics.py88-105" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/metrics.py#L182-L226" text="src/tplr/metrics.py182-226" />
+
+### Initializing W&B for Experiment Tracking
+
+```python
+# Initialize W&B
+run = initialize_wandb(
+    run_prefix="miner_",
+    uid="123",
+    config=config,
+    group="finney",
+    job_type="training"
+)
+
+# Log metrics to W&B
+run.log({
+    "loss": loss.item(),
+    "learning_rate": current_lr,
+    "gradient_norm": gradient_norm
+})
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/wandb.py#L20-L125" text="src/tplr/wandb.py20-125" />
+
+### Setting Up Structured Logging
+
+```python
+# Setup Loki logger
+logger = setup_loki_logger(
+    service="miner",
+    uid="123",
+    version="0.1.0",
+    environment="finney"
+)
+
+# Log with context
+logger.log_with_context(
+    "info",
+    "Completed training step",
+    step=current_step,
+    loss=loss.item(),
+    duration=step_duration
+)
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/logging.py#L149-L287" text="src/tplr/logging.py149-287" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/logging.py#L290-L309" text="src/tplr/logging.py290-309" />
+
+## Troubleshooting
+
+If metrics are not appearing in Grafana dashboards:
+
+1. Check that the `INFLUXDB_TOKEN` environment variable is set correctly
+2. Verify that the InfluxDB host is reachable from the Templar nodes
+3. Check the console logs for any errors related to metrics logging
+4. Verify that Grafana is properly configured to connect to InfluxDB and Loki
+
+If W&B integration is not working:
+
+1. Check for the existence of a `wandb_run_id_*.txt` file in the `wandb` directory
+2. Verify that the W&B API can be reached from the Templar nodes
+3. Check that the project name is correctly configured
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/metrics.py#L254-L254" text="src/tplr/metrics.py254" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/src/tplr/wandb.py#L36-L43" text="src/tplr/wandb.py36-43" />

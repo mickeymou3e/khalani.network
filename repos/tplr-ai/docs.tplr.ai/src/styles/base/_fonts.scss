@@ -1,0 +1,75 @@
+$fontsFolder: '/fonts';
+
+// "BrilliantCutPro" - medium
+@font-face {
+  font-family: 'BrilliantCutPro';
+  src: url('#{$fontsFolder}/BrilliantCutPro-Medium.woff2') format('woff2'),
+    url('#{$fontsFolder}/BrilliantCutPro-Medium.woff') format('woff');
+  font-style: normal;
+  font-display: block;
+  font-weight: 500;
+}
+
+// "FancyCutCondPro" - regular
+@font-face {
+  font-family: 'FancyCutCondPro';
+  src: url('#{$fontsFolder}/FancyCutCondPro-Regular.woff2') format('woff2'),
+    url('#{$fontsFolder}/FancyCutCondPro-Regular.woff') format('woff');
+  font-style: normal;
+  font-display: block;
+  font-weight: 400;
+}
+// "FancyCutCondPro" - light
+@font-face {
+  font-family: 'FancyCutCondPro';
+  src: url('#{$fontsFolder}/FancyCutCondPro-Light.woff2') format('woff2'), url('#{$fontsFolder}/FancyCutCondPro-Light.woff') format('woff');
+  font-style: normal;
+  font-display: block;
+  font-weight: 300;
+}
+
+// "FancyCutCondPro" - light-italic
+@font-face {
+  font-family: 'FancyCutCondPro';
+  src: url('#{$fontsFolder}/FancyCutCondPro-LightItalic.woff2') format('woff2'),
+    url('#{$fontsFolder}/FancyCutCondPro-LightItalic.woff') format('woff');
+  font-style: italic;
+  font-display: block;
+  font-weight: 300;
+}
+
+// "FancyCutPro" - light
+@font-face {
+  font-family: 'FancyCutPro';
+  src: url('#{$fontsFolder}/FancyCutPro-Light.woff2') format('woff2'), url('#{$fontsFolder}/FancyCutPro-Light.woff') format('woff');
+  font-style: normal;
+  font-display: block;
+  font-weight: 300;
+}
+// "FancyCutPro" - light-italic
+@font-face {
+  font-family: 'FancyCutPro';
+  src: url('#{$fontsFolder}/FancyCutPro-LightItalic.woff2') format('woff2'),
+    url('#{$fontsFolder}/FancyCutPro-LightItalic.woff') format('woff');
+  font-style: italic;
+  font-display: block;
+  font-weight: 300;
+}
+
+// "FancyCutPro" - regular
+@font-face {
+  font-family: 'FancyCutPro';
+  src: url('#{$fontsFolder}/FancyCutPro-Regular.woff2') format('woff2'), url('#{$fontsFolder}/FancyCutPro-Regular.woff') format('woff');
+  font-style: normal;
+  font-display: block;
+  font-weight: 400;
+}
+// "FancyCutPro" - regular-italic
+@font-face {
+  font-family: 'FancyCutPro';
+  src: url('#{$fontsFolder}/FancyCutPro-RegularItalic.woff2') format('woff2'),
+    url('#{$fontsFolder}/FancyCutPro-RegularItalic.woff') format('woff');
+  font-style: italic;
+  font-display: block;
+  font-weight: 400;
+}

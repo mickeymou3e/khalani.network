@@ -1,0 +1,27 @@
+endpoint:
+  - wss://entrypoint-finney.opentensor.ai
+  - wss://archive.chain.opentensor.ai
+mock-signature-host: true
+block: ${env.BITTENSOR_BLOCK_NUMBER}
+db: ./db.sqlite
+runtime-log-level: 5
+
+import-storage:
+  Sudo:
+    Key: 5GpzQgpiAKHMWNSH3RN4GLf96GVTDct9QxYEFAY7LWcVzTbx
+  System:
+    Account:
+      -
+        -
+          - 5GpzQgpiAKHMWNSH3RN4GLf96GVTDct9QxYEFAY7LWcVzTbx
+        - providers: 1
+          data:
+            free: 100000000000
+        -
+          - 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY // Alice
+        - providers: 1
+          data:
+            free: 100000000000
+
+
+

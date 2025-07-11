@@ -1,0 +1,42 @@
+@import '@/styles/shared-imports.scss';
+
+.siteHeadline {
+  @include max-prop(font-size, rem(36), vw(54));
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.bigTitle {
+  @include max-prop(font-size, rem(36), vw(54));
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.mediumTitle {
+  @include max-prop(font-size, rem(36), vw(40));
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.bodyCopy {
+  @include max-prop(font-size, rem(18), vw(18));
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.techDetails {
+  font-size: rem(12);
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.smallTechDetails {
+  font-size: rem(10);
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}

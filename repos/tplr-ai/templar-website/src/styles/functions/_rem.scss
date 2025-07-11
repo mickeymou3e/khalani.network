@@ -1,0 +1,5 @@
+@use 'sass:math';
+
+@function rem($number, $base: map-get($baseConfig, remBase)) {
+  @return #{math.div(strip-unit($number), $base)}rem;
+}

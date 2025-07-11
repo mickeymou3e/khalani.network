@@ -1,0 +1,13 @@
+@import '@/styles/shared-imports.scss';
+
+.footer {
+  color: var(--color-templar-red);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: rem(20) var(--indent);
+
+  @include above('medium') {
+    padding: var(--indent);
+  }
+}

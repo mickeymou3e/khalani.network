@@ -1,0 +1,62 @@
+---
+// src/components/SourceLink.astro
+export interface Props {
+  href: string;
+  text: string;
+}
+
+const { href, text } = Astro.props;
+---
+<a href={href} target="_blank" rel="noopener noreferrer" class="source-link">
+  <svg class="source-link-icon" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+  </svg>
+  <span class="source-link-text">{text}</span>
+</a>
+
+<style>
+  .source-link {
+    display: inline-flex; /* Changed to inline-flex for icon alignment */
+    align-items: center; /* Vertically align icon and text */
+    gap: 0.35em; /* Space between icon and text */
+    padding: 0.25em 0.6em;
+    font-size: 0.85em;
+    font-weight: 500;
+    line-height: 1;
+    border-radius: 0.375rem;
+    text-decoration: none;
+    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+
+    /* Light mode / default styles */
+    color: var(--sl-color-accent-high, hsl(212, 100%, 40%)); /* Use a stronger accent for text */
+    background-color: var(--sl-color-accent-low, hsl(212, 100%, 95%)); /* Lighter accent for background */
+    border: 1px solid var(--sl-color-accent-high, hsl(212, 100%, 40%));
+  }
+
+  .source-link:hover {
+    /* Light mode / default hover */
+    color: var(--sl-color-white, #ffffff);
+    background-color: var(--sl-color-accent-high, hsl(212, 100%, 40%));
+    border-color: var(--sl-color-accent-high, hsl(212, 100%, 40%));
+  }
+
+  .source-link-icon {
+    width: 1em; /* Size relative to font-size */
+    height: 1em; /* Size relative to font-size */
+    fill: currentColor; /* Icon color inherits from text color */
+  }
+
+  /* Dark mode styles */
+  html.dark .source-link {
+    /* Try using Starlight's darker grays for background and lighter grays/accent for text */
+    color: var(--sl-color-accent-low-dark); /* Starlight might have specific dark accent */
+    background-color: var(--sl-color-gray-5); /* A common dark UI background in Starlight */
+    border-color: var(--sl-color-gray-4);   /* A slightly lighter border */
+  }
+
+  html.dark .source-link:hover {
+    color: var(--sl-color-white);
+    background-color: var(--sl-color-gray-4); /* Lighter gray on hover */
+    border-color: var(--sl-color-gray-3);
+  }
+</style> 

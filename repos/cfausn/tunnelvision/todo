@@ -1,0 +1,16 @@
+The application MUST
+    Be written in a modern front-end language/ framework (React, Next.js, Svelte) [x]
+    Efficiently utilize a database. [x]
+
+The application SHOULD
+    Provide real-time updates and allow users to drill into the compositions of 
+        Blocks
+        Transactions
+
+The application MAY
+    Provide advanced statistics on 
+    Token distributions
+    Gas Prices
+
+Bonus Points
+    Allow developers to connect to your application server via authorized APIs to access this information.

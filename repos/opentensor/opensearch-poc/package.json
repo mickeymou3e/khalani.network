@@ -1,0 +1,14 @@
+{
+  "name": "opensearch-poc",
+  "version": "1.0.0",
+  "description": "Node.js client for AWS OpenSearch",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "@opensearch-project/opensearch": "^1.0.0",
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2"
+  }
+}

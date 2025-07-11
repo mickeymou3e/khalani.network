@@ -1,0 +1,530 @@
+addonsConfig:
+  dnsCacheConfig:
+    enabled: true
+  gcePersistentDiskCsiDriverConfig:
+    enabled: true
+  gcpFilestoreCsiDriverConfig:
+    enabled: true
+  gcsFuseCsiDriverConfig:
+    enabled: true
+  horizontalPodAutoscaling: {}
+  httpLoadBalancing: {}
+  kubernetesDashboard:
+    disabled: true
+  networkPolicyConfig:
+    disabled: true
+authenticatorGroupsConfig: {}
+autopilot:
+  enabled: true
+autoscaling:
+  autoprovisioningNodePoolDefaults:
+    imageType: COS_CONTAINERD
+    management:
+      autoRepair: true
+      autoUpgrade: true
+    oauthScopes:
+    - https://www.googleapis.com/auth/devstorage.read_only
+    - https://www.googleapis.com/auth/logging.write
+    - https://www.googleapis.com/auth/monitoring
+    - https://www.googleapis.com/auth/service.management.readonly
+    - https://www.googleapis.com/auth/servicecontrol
+    - https://www.googleapis.com/auth/trace.append
+    serviceAccount: default
+    upgradeSettings:
+      maxSurge: 1
+      strategy: SURGE
+  autoscalingProfile: OPTIMIZE_UTILIZATION
+  enableNodeAutoprovisioning: true
+  resourceLimits:
+  - maximum: '1000000000'
+    resourceType: cpu
+  - maximum: '1000000000'
+    resourceType: memory
+  - maximum: '1000000000'
+    resourceType: nvidia-tesla-t4
+  - maximum: '1000000000'
+    resourceType: nvidia-tesla-a100
+binaryAuthorization:
+  evaluationMode: DISABLED
+clusterIpv4Cidr: 10.10.0.0/17
+createTime: '2023-09-20T18:13:04+00:00'
+currentMasterVersion: 1.27.3-gke.100
+currentNodeCount: 5
+currentNodeVersion: 1.27.3-gke.100
+databaseEncryption:
+  state: DECRYPTED
+defaultMaxPodsConstraint:
+  maxPodsPerNode: '110'
+endpoint: 104.155.175.201
+etag: 82427562-da95-4089-8181-3db31dc966dd
+id: d8d7b100239b4f5aaf0547daae6cf00d829f795d3f3f49b3a65c4c6915482c8f
+initialClusterVersion: 1.27.3-gke.100
+instanceGroupUrls:
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-c/instanceGroupManagers/gk3-ezkl-hub-cluster-default-pool-768a4d59-grp
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-f/instanceGroupManagers/gk3-ezkl-hub-cluster-default-pool-ba29cbb8-grp
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-a/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-1-63276208-grp
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-b/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-1-e03c8299-grp
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-c/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-1-b320d7c2-grp
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-f/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-1-040156d2-grp
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-a/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-2-41efe9cf-grp
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-b/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-2-936e7767-grp
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-c/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-2-e6c7199f-grp
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-f/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-2-87099ea4-grp
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-a/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-3-901bd8e6-grp
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-b/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-3-ad576984-grp
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-c/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-3-a1f99e08-grp
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-f/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-3-82208d24-grp
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-a/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-4-6a2fd8f9-grp
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-b/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-4-99aa6a5a-grp
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-c/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-4-1164a3c6-grp
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-f/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-4-d2b2e1d1-grp
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-a/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-5-39aa35b3-grp
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-b/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-5-54a7bbc1-grp
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-c/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-5-14463cc8-grp
+- https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-f/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-5-b23bbbd8-grp
+ipAllocationPolicy:
+  clusterIpv4Cidr: 10.10.0.0/17
+  clusterIpv4CidrBlock: 10.10.0.0/17
+  clusterSecondaryRangeName: gke-ezkl-hub-cluster-pods-d8d7b100
+  defaultPodIpv4RangeUtilization: 0.0391
+  podCidrOverprovisionConfig: {}
+  servicesIpv4Cidr: 34.118.224.0/20
+  servicesIpv4CidrBlock: 34.118.224.0/20
+  stackType: IPV4
+  useIpAliases: true
+labelFingerprint: a9dc16a7
+legacyAbac: {}
+location: us-central1
+locations:
+- us-central1-a
+- us-central1-b
+- us-central1-c
+- us-central1-f
+loggingConfig:
+  componentConfig:
+    enableComponents:
+    - SYSTEM_COMPONENTS
+    - WORKLOADS
+loggingService: logging.googleapis.com/kubernetes
+maintenancePolicy:
+  resourceVersion: e3b0c442
+masterAuth:
+  clusterCaCertificate: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVMRENDQXBTZ0F3SUJBZ0lRY1FqMDJtbmJpZ0JNamtxYmtMb3g0akFOQmdrcWhraUc5dzBCQVFzRkFEQXYKTVMwd0t3WURWUVFERXlSaE1EQmxZalkxTkMxaU56VmxMVFF3TW1NdFlqbGpNeTFrTnpReE5USmlOVFl5WmprdwpJQmNOTWpNd09USXdNVGN4TXpBMFdoZ1BNakExTXpBNU1USXhPREV6TURSYU1DOHhMVEFyQmdOVkJBTVRKR0V3Ck1HVmlOalUwTFdJM05XVXROREF5WXkxaU9XTXpMV1EzTkRFMU1tSTFOakptT1RDQ0FhSXdEUVlKS29aSWh2Y04KQVFFQkJRQURnZ0dQQURDQ0FZb0NnZ0dCQUsvZ0xIeUlVTzUva0h5KzYyMU9aSkdVanEwVUsvMkxxTGdlM2xwdgp6ZThkNEdLT2ZQYlVZeTZlU0pDQXl1cVVBS3QxZVJUcXBpd3BuV0JpLzNFdXZtdWplVGVlcTV5b0oxaWhxSUl0CnBIWHVZZU9CeGR3aHFJYk1uczlUNEk1WTE5YlEzenpqeU1SY1ZxR2VNcmdla0tGcGo3ZU5ya1RwbVhqcEt0VlMKQnhhU0ZUVm5FczZIcm56cCtFbmY0UksyeVBoUW0wbUdxamQ3bTV1c0NYT1IrdVAxMTZQUVJsT1dDVWg2VzhiaQpHZkdsU0R4Y3lpblRtUEpxY0tTOVJ3SXRQb3NaQ1pMbnNkVWVYM0RNRmVReGpGVHZ3dzJ1dVIvVXFaUzhrTXJUCnhpcTNiQzYzMm5vWUtZQ2dnb1NWUjRwYmg1dmFYUHp2QThnMm02WnppMklPZVFxU2MxVWxSVXR1Y0FxY1NjSUIKNmliTXQ3S25uODJ2YzlYMHl3ck1YQmhsUGJOR21xSGlTR0hlTUxUN0JqKzlNRGIwckEvNitBYS9qYkJxL25GVgpGS3dndTN1TStyNVUxT3ZwRmhnemFLMXIzcFQ4MnRlS0NWellPVU5FcDJMRlUxb2xWenl5NC9tOHJ3b0JIdHNnClNraVFMclNUajB6b1JpMFRYVHZsa2pDenJ3SURBUUFCbzBJd1FEQU9CZ05WSFE4QkFmOEVCQU1DQWdRd0R3WUQKVlIwVEFRSC9CQVV3QXdFQi96QWRCZ05WSFE0RUZnUVVnNXdlTG02b1Y5ZUZ1NjIrL0tZcitoOWVwM2N3RFFZSgpLb1pJaHZjTkFRRUxCUUFEZ2dHQkFDVC9JZmNyc0RuSTlMOVdFc2hRb25GalpqM2Vyd0Z3WXlDZ2NkLzdnMTlTCjBhUklHYi9uM29rWHBwVDRza29YcmNyYmV3S21YQW4zZFEwSU5ZaFBYQkJkQlpLekFKZFZjYk83ekNvcmlpcGoKWVNzd2pVMEw1aEZmekhJSkwyRnUvSGZKbmM5d1VzMEt0d0V3dUl4ZkNEbnc4Zm9qRmI2aElCTzZ1djNiNmFOZQp5bHc0bldjQUdBMlgvWi84bjlFTHJvQVNCMng2ZEhyTG5kSzBxZWRYYTdQK0M4MDZBNjBXMDQ1V21paGxjTVhKCnhyaGF6TGtMMGRHcERYWCtUeDVvTEFVM3JPcVRSei84dTJLRFd2a2VWNFdJSWF3K3FYMDZCcmllWFJrbzRpWmIKb1lJVU9INGRLTlRLVTZpbHNzMlV1bjhxbXMvQjl6RWs4cDh0S1dtT1hYbUJsSzZVRTRobHN2MDZOQWFuZC9CTQo3Zm5WQk1hRkNUNkhQbnhqcWxpdEFCdjQ0NkltSWt0c3Mzd1NWOXduNmswaE1RdnJERzM2M3ZxTTU3Z1A5OXk3CmltQ3RDeWdCQ1dnUWphQjcyeTB2bzB2RFlZSDRjb1A4S3I0dXVaUHhNaTlVeTM1dVI1V3AwK05iNkN3eVNDS3cKckV1MkpKTGxCSm1zc1NsZGpCWEJDQT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+masterAuthorizedNetworksConfig:
+  gcpPublicCidrsAccessEnabled: true
+monitoringConfig:
+  advancedDatapathObservabilityConfig:
+    enableMetrics: true
+    relayMode: DISABLED
+  componentConfig:
+    enableComponents:
+    - SYSTEM_COMPONENTS
+    - POD
+    - DEPLOYMENT
+    - HPA
+    - STATEFULSET
+    - DAEMONSET
+  managedPrometheusConfig:
+    enabled: true
+monitoringService: monitoring.googleapis.com/kubernetes
+name: ezkl-hub-cluster
+network: default
+networkConfig:
+  datapathProvider: ADVANCED_DATAPATH
+  defaultSnatStatus: {}
+  dnsConfig:
+    clusterDns: CLOUD_DNS
+    clusterDnsDomain: cluster.local
+    clusterDnsScope: CLUSTER_SCOPE
+  enableIntraNodeVisibility: true
+  gatewayApiConfig:
+    channel: CHANNEL_STANDARD
+  network: projects/civil-lambda-374300/global/networks/default
+  serviceExternalIpsConfig: {}
+  subnetwork: projects/civil-lambda-374300/regions/us-central1/subnetworks/default
+nodeConfig:
+  diskSizeGb: 100
+  diskType: pd-standard
+  imageType: COS_CONTAINERD
+  machineType: e2-medium
+  metadata:
+    disable-legacy-endpoints: 'true'
+  oauthScopes:
+  - https://www.googleapis.com/auth/devstorage.read_only
+  - https://www.googleapis.com/auth/logging.write
+  - https://www.googleapis.com/auth/monitoring
+  - https://www.googleapis.com/auth/service.management.readonly
+  - https://www.googleapis.com/auth/servicecontrol
+  - https://www.googleapis.com/auth/trace.append
+  reservationAffinity:
+    consumeReservationType: NO_RESERVATION
+  serviceAccount: default
+  shieldedInstanceConfig:
+    enableIntegrityMonitoring: true
+    enableSecureBoot: true
+  windowsNodeConfig: {}
+  workloadMetadataConfig:
+    mode: GKE_METADATA
+nodePoolAutoConfig: {}
+nodePoolDefaults:
+  nodeConfigDefaults:
+    gcfsConfig:
+      enabled: true
+    loggingConfig:
+      variantConfig:
+        variant: DEFAULT
+nodePools:
+- autoscaling:
+    enabled: true
+    locationPolicy: BALANCED
+    maxNodeCount: 1000
+  config:
+    diskSizeGb: 100
+    diskType: pd-standard
+    imageType: COS_CONTAINERD
+    machineType: e2-medium
+    metadata:
+      disable-legacy-endpoints: 'true'
+    oauthScopes:
+    - https://www.googleapis.com/auth/devstorage.read_only
+    - https://www.googleapis.com/auth/logging.write
+    - https://www.googleapis.com/auth/monitoring
+    - https://www.googleapis.com/auth/service.management.readonly
+    - https://www.googleapis.com/auth/servicecontrol
+    - https://www.googleapis.com/auth/trace.append
+    reservationAffinity:
+      consumeReservationType: NO_RESERVATION
+    serviceAccount: default
+    shieldedInstanceConfig:
+      enableIntegrityMonitoring: true
+      enableSecureBoot: true
+    windowsNodeConfig: {}
+    workloadMetadataConfig:
+      mode: GKE_METADATA
+  etag: 4e0d17f8-f7ab-4bbe-8a68-cb277d076acb
+  initialNodeCount: 1
+  instanceGroupUrls:
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-c/instanceGroupManagers/gk3-ezkl-hub-cluster-default-pool-768a4d59-grp
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-f/instanceGroupManagers/gk3-ezkl-hub-cluster-default-pool-ba29cbb8-grp
+  locations:
+  - us-central1-c
+  - us-central1-f
+  management:
+    autoRepair: true
+    autoUpgrade: true
+  maxPodsConstraint:
+    maxPodsPerNode: '32'
+  name: default-pool
+  networkConfig:
+    enablePrivateNodes: false
+    podIpv4CidrBlock: 10.10.0.0/17
+    podIpv4RangeUtilization: 0.0391
+    podRange: gke-ezkl-hub-cluster-pods-d8d7b100
+  podIpv4CidrSize: 26
+  selfLink: https://container.googleapis.com/v1/projects/civil-lambda-374300/locations/us-central1/clusters/ezkl-hub-cluster/nodePools/default-pool
+  status: RUNNING
+  upgradeSettings:
+    maxSurge: 1
+    strategy: SURGE
+  version: 1.27.3-gke.100
+- autoscaling:
+    enabled: true
+    locationPolicy: BALANCED
+    maxNodeCount: 1000
+  config:
+    diskSizeGb: 100
+    diskType: pd-standard
+    imageType: COS_CONTAINERD
+    machineType: e2-standard-2
+    metadata:
+      disable-legacy-endpoints: 'true'
+    oauthScopes:
+    - https://www.googleapis.com/auth/devstorage.read_only
+    - https://www.googleapis.com/auth/logging.write
+    - https://www.googleapis.com/auth/monitoring
+    - https://www.googleapis.com/auth/service.management.readonly
+    - https://www.googleapis.com/auth/servicecontrol
+    - https://www.googleapis.com/auth/trace.append
+    reservationAffinity:
+      consumeReservationType: NO_RESERVATION
+    serviceAccount: default
+    shieldedInstanceConfig:
+      enableIntegrityMonitoring: true
+      enableSecureBoot: true
+    windowsNodeConfig: {}
+    workloadMetadataConfig:
+      mode: GKE_METADATA
+  etag: 0ae6435f-b90c-4518-b83e-d7bb8d8a284e
+  instanceGroupUrls:
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-a/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-1-63276208-grp
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-b/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-1-e03c8299-grp
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-c/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-1-b320d7c2-grp
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-f/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-1-040156d2-grp
+  locations:
+  - us-central1-a
+  - us-central1-b
+  - us-central1-c
+  - us-central1-f
+  management:
+    autoRepair: true
+    autoUpgrade: true
+  maxPodsConstraint:
+    maxPodsPerNode: '32'
+  name: pool-1
+  networkConfig:
+    enablePrivateNodes: false
+    podIpv4CidrBlock: 10.10.0.0/17
+    podIpv4RangeUtilization: 0.0391
+    podRange: gke-ezkl-hub-cluster-pods-d8d7b100
+  podIpv4CidrSize: 26
+  selfLink: https://container.googleapis.com/v1/projects/civil-lambda-374300/locations/us-central1/clusters/ezkl-hub-cluster/nodePools/pool-1
+  status: RUNNING
+  upgradeSettings:
+    maxSurge: 1
+    strategy: SURGE
+  version: 1.27.3-gke.100
+- autoscaling:
+    enabled: true
+    locationPolicy: BALANCED
+    maxNodeCount: 1000
+  config:
+    diskSizeGb: 100
+    diskType: pd-standard
+    imageType: COS_CONTAINERD
+    machineType: e2-standard-4
+    metadata:
+      disable-legacy-endpoints: 'true'
+    oauthScopes:
+    - https://www.googleapis.com/auth/devstorage.read_only
+    - https://www.googleapis.com/auth/logging.write
+    - https://www.googleapis.com/auth/monitoring
+    - https://www.googleapis.com/auth/service.management.readonly
+    - https://www.googleapis.com/auth/servicecontrol
+    - https://www.googleapis.com/auth/trace.append
+    reservationAffinity:
+      consumeReservationType: NO_RESERVATION
+    serviceAccount: default
+    shieldedInstanceConfig:
+      enableIntegrityMonitoring: true
+      enableSecureBoot: true
+    windowsNodeConfig: {}
+    workloadMetadataConfig:
+      mode: GKE_METADATA
+  etag: 7483fc31-497c-404c-9726-f08e68f1c000
+  instanceGroupUrls:
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-a/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-2-41efe9cf-grp
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-b/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-2-936e7767-grp
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-c/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-2-e6c7199f-grp
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-f/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-2-87099ea4-grp
+  locations:
+  - us-central1-a
+  - us-central1-b
+  - us-central1-c
+  - us-central1-f
+  management:
+    autoRepair: true
+    autoUpgrade: true
+  maxPodsConstraint:
+    maxPodsPerNode: '32'
+  name: pool-2
+  networkConfig:
+    enablePrivateNodes: false
+    podIpv4CidrBlock: 10.10.0.0/17
+    podIpv4RangeUtilization: 0.0391
+    podRange: gke-ezkl-hub-cluster-pods-d8d7b100
+  podIpv4CidrSize: 26
+  selfLink: https://container.googleapis.com/v1/projects/civil-lambda-374300/locations/us-central1/clusters/ezkl-hub-cluster/nodePools/pool-2
+  status: RUNNING
+  upgradeSettings:
+    maxSurge: 1
+    strategy: SURGE
+  version: 1.27.3-gke.100
+- autoscaling:
+    enabled: true
+    locationPolicy: BALANCED
+    maxNodeCount: 1000
+  config:
+    diskSizeGb: 100
+    diskType: pd-standard
+    imageType: COS_CONTAINERD
+    machineType: e2-standard-8
+    metadata:
+      disable-legacy-endpoints: 'true'
+    oauthScopes:
+    - https://www.googleapis.com/auth/devstorage.read_only
+    - https://www.googleapis.com/auth/logging.write
+    - https://www.googleapis.com/auth/monitoring
+    - https://www.googleapis.com/auth/service.management.readonly
+    - https://www.googleapis.com/auth/servicecontrol
+    - https://www.googleapis.com/auth/trace.append
+    reservationAffinity:
+      consumeReservationType: NO_RESERVATION
+    serviceAccount: default
+    shieldedInstanceConfig:
+      enableIntegrityMonitoring: true
+      enableSecureBoot: true
+    windowsNodeConfig: {}
+    workloadMetadataConfig:
+      mode: GKE_METADATA
+  etag: a7e8ac6c-d60c-4a73-a10d-0f7ff3edddfc
+  instanceGroupUrls:
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-a/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-3-901bd8e6-grp
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-b/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-3-ad576984-grp
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-c/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-3-a1f99e08-grp
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-f/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-3-82208d24-grp
+  locations:
+  - us-central1-a
+  - us-central1-b
+  - us-central1-c
+  - us-central1-f
+  management:
+    autoRepair: true
+    autoUpgrade: true
+  maxPodsConstraint:
+    maxPodsPerNode: '32'
+  name: pool-3
+  networkConfig:
+    enablePrivateNodes: false
+    podIpv4CidrBlock: 10.10.0.0/17
+    podIpv4RangeUtilization: 0.0391
+    podRange: gke-ezkl-hub-cluster-pods-d8d7b100
+  podIpv4CidrSize: 26
+  selfLink: https://container.googleapis.com/v1/projects/civil-lambda-374300/locations/us-central1/clusters/ezkl-hub-cluster/nodePools/pool-3
+  status: RUNNING
+  upgradeSettings:
+    maxSurge: 1
+    strategy: SURGE
+  version: 1.27.3-gke.100
+- autoscaling:
+    enabled: true
+    locationPolicy: BALANCED
+    maxNodeCount: 1000
+  config:
+    diskSizeGb: 100
+    diskType: pd-standard
+    imageType: COS_CONTAINERD
+    machineType: e2-standard-16
+    metadata:
+      disable-legacy-endpoints: 'true'
+    oauthScopes:
+    - https://www.googleapis.com/auth/devstorage.read_only
+    - https://www.googleapis.com/auth/logging.write
+    - https://www.googleapis.com/auth/monitoring
+    - https://www.googleapis.com/auth/service.management.readonly
+    - https://www.googleapis.com/auth/servicecontrol
+    - https://www.googleapis.com/auth/trace.append
+    reservationAffinity:
+      consumeReservationType: NO_RESERVATION
+    serviceAccount: default
+    shieldedInstanceConfig:
+      enableIntegrityMonitoring: true
+      enableSecureBoot: true
+    windowsNodeConfig: {}
+    workloadMetadataConfig:
+      mode: GKE_METADATA
+  etag: 23d1ff49-343d-4c7c-9e52-dc854cd6b1b8
+  instanceGroupUrls:
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-a/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-4-6a2fd8f9-grp
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-b/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-4-99aa6a5a-grp
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-c/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-4-1164a3c6-grp
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-f/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-4-d2b2e1d1-grp
+  locations:
+  - us-central1-a
+  - us-central1-b
+  - us-central1-c
+  - us-central1-f
+  management:
+    autoRepair: true
+    autoUpgrade: true
+  maxPodsConstraint:
+    maxPodsPerNode: '32'
+  name: pool-4
+  networkConfig:
+    enablePrivateNodes: false
+    podIpv4CidrBlock: 10.10.0.0/17
+    podIpv4RangeUtilization: 0.0391
+    podRange: gke-ezkl-hub-cluster-pods-d8d7b100
+  podIpv4CidrSize: 26
+  selfLink: https://container.googleapis.com/v1/projects/civil-lambda-374300/locations/us-central1/clusters/ezkl-hub-cluster/nodePools/pool-4
+  status: RUNNING
+  upgradeSettings:
+    maxSurge: 1
+    strategy: SURGE
+  version: 1.27.3-gke.100
+- autoscaling:
+    enabled: true
+    locationPolicy: BALANCED
+    maxNodeCount: 1000
+  config:
+    diskSizeGb: 100
+    diskType: pd-standard
+    imageType: COS_CONTAINERD
+    machineType: e2-standard-32
+    metadata:
+      disable-legacy-endpoints: 'true'
+    oauthScopes:
+    - https://www.googleapis.com/auth/devstorage.read_only
+    - https://www.googleapis.com/auth/logging.write
+    - https://www.googleapis.com/auth/monitoring
+    - https://www.googleapis.com/auth/service.management.readonly
+    - https://www.googleapis.com/auth/servicecontrol
+    - https://www.googleapis.com/auth/trace.append
+    reservationAffinity:
+      consumeReservationType: NO_RESERVATION
+    serviceAccount: default
+    shieldedInstanceConfig:
+      enableIntegrityMonitoring: true
+      enableSecureBoot: true
+    windowsNodeConfig: {}
+    workloadMetadataConfig:
+      mode: GKE_METADATA
+  etag: 347ba98f-e250-48f6-9e0b-906bf5f45ea0
+  instanceGroupUrls:
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-a/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-5-39aa35b3-grp
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-b/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-5-54a7bbc1-grp
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-c/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-5-14463cc8-grp
+  - https://www.googleapis.com/compute/v1/projects/civil-lambda-374300/zones/us-central1-f/instanceGroupManagers/gk3-ezkl-hub-cluster-pool-5-b23bbbd8-grp
+  locations:
+  - us-central1-a
+  - us-central1-b
+  - us-central1-c
+  - us-central1-f
+  management:
+    autoRepair: true
+    autoUpgrade: true
+  maxPodsConstraint:
+    maxPodsPerNode: '32'
+  name: pool-5
+  networkConfig:
+    enablePrivateNodes: false
+    podIpv4CidrBlock: 10.10.0.0/17
+    podIpv4RangeUtilization: 0.0391
+    podRange: gke-ezkl-hub-cluster-pods-d8d7b100
+  podIpv4CidrSize: 26
+  selfLink: https://container.googleapis.com/v1/projects/civil-lambda-374300/locations/us-central1/clusters/ezkl-hub-cluster/nodePools/pool-5
+  status: RUNNING
+  upgradeSettings:
+    maxSurge: 1
+    strategy: SURGE
+  version: 1.27.3-gke.100
+notificationConfig:
+  pubsub: {}
+privateClusterConfig:
+  privateEndpoint: 10.128.0.3
+  publicEndpoint: 104.155.175.201
+releaseChannel:
+  channel: REGULAR
+securityPostureConfig:
+  mode: BASIC
+  vulnerabilityMode: VULNERABILITY_BASIC
+selfLink: https://container.googleapis.com/v1/projects/civil-lambda-374300/locations/us-central1/clusters/ezkl-hub-cluster
+servicesIpv4Cidr: 34.118.224.0/20
+shieldedNodes:
+  enabled: true
+status: RUNNING
+subnetwork: default
+verticalPodAutoscaling:
+  enabled: true
+workloadIdentityConfig:
+  workloadPool: civil-lambda-374300.svc.id.goog
+zone: us-central1

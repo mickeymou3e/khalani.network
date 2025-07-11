@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "uniswap-position"
+version = "0.1.0"
+description = ""
+authors = ["joshualyguessennd <joshualyguessennd@icloud.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.9.5"
+web3 = "^6.10.0"
+pytest = "^7.4.2"
+numpy = "^1.26.1"
+gql = "^3.4.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

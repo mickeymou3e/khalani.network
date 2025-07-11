@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: celery-worker
+  # namespace: test
+  labels:
+    project: {{ .Chart.Name }}
+    app: celery-worker
+
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.server.replicaCount }}
+  {{- end }}
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      project: {{ .Chart.Name }}
+      app: celery-worker
+
+  template:
+    metadata:
+      name: celery-worker
+      annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
+      labels:
+        project: {{ .Chart.Name }}
+        app: celery-worker
+
+    spec:
+      containers:
+      - name: celery-worker
+        image: ezklterhubstagingregistry.azurecr.io/celery:latest
+        imagePullPolicy: Always
+        command: ["/bin/sh", "-c", "sleep 15 && ./target/release/celery-service"]
+        resources:
+          requests:
+            cpu: "2000m"
+            memory: "10Gi"
+          limits:
+            cpu: "10000m"
+            memory: "50Gi"
+        env:
+        - name: ENV
+          value: STAGING
+        - name: RUST_ARTIFACT_PATH
+          valueFrom:
+            secretKeyRef:
+              name: ezkl-secrets
+              key: RUST_ARTIFACT_PATH
+        - name: RUST_EZKL_BINARY_PATH
+          valueFrom:
+            secretKeyRef:
+              name: ezkl-secrets
+              key: RUST_EZKL_BINARY_PATH
+        - name: RUST_POSTGRES_URI
+          valueFrom:
+            secretKeyRef:
+              name: ezkl-secrets
+              key: RUST_POSTGRES_URI
+        - name: RUST_CELERY_BROKER_URL
+          valueFrom:
+            secretKeyRef:
+              name: ezkl-secrets
+              key: CELERY_BROKER_URL
+        volumeMounts:
+        - name: artifacts
+          mountPath: /server/artifact
+      volumes:
+        - name: artifacts
+          persistentVolumeClaim:
+            claimName: artifacts

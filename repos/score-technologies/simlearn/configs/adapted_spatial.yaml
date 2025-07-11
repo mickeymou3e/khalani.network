@@ -1,0 +1,28 @@
+training:
+  seed: 42
+  batch_size: 1024
+  learning_rate: 0.004
+  epochs: 5000
+  train_split: 0.8
+  val_split: 0.1
+  scheduler:
+    type: 'ReduceLROnPlateau'
+    factor: 0.75
+    patience: 130
+    min_lr: 1e-6
+
+model:
+  type: 'adapted_spatial'
+  name: 'adapted_spatial'
+  grid_size: [25, 40]
+  initial_sigma_player: 2.5
+  initial_sigma_ball: 1.5
+  initial_delta_t: 1.0
+  initial_friction: 0.1
+  goal_importance_sigma: 10.0
+
+data:
+  data_dir: 'data'
+
+output:
+  base_dir: 'outputs' 

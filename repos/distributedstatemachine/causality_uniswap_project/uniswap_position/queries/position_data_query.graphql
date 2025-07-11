@@ -1,0 +1,43 @@
+query PositionData($id: ID!) {
+  positions(where: {id: $id}) {
+    id
+    tickLower {
+      tickIdx
+      feeGrowthOutside0X128
+      feeGrowthOutside1X128
+    }
+    tickUpper {
+      tickIdx
+      feeGrowthOutside0X128
+      feeGrowthOutside1X128
+    }
+    liquidity
+    feeGrowthInside0LastX128
+    feeGrowthInside1LastX128
+    token0 {
+      decimals
+      id
+    }
+    token1 {
+      decimals
+      id
+    }
+    pool {
+      id
+      totalValueLockedToken0
+      totalValueLockedToken1
+      feeGrowthGlobal0X128
+      feeGrowthGlobal1X128
+      tick
+      sqrtPrice
+      token0 {
+        decimals
+        id
+      }
+      token1 {
+        id
+        decimals
+      }
+    }
+  }
+}

@@ -1,0 +1,276 @@
+---
+title: Development Environment
+---
+
+import SourceLink from '@components/SourceLink.astro';
+import { Aside, Card, CardGrid, Tabs, TabItem, Steps, FileTree, Code, LinkButton, Badge } from '@astrojs/starlight/components';
+import CollapsibleAside from '../../../components/CollapsibleAside.astro';
+
+<CollapsibleAside title="Relevant Source Files">
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.gitignore" text=".gitignore" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/justfile" text="justfile" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/scripts/start.sh" text="scripts/start.sh" />
+</CollapsibleAside>
+
+
+
+This document provides comprehensive guidance for setting up and using the development environment for the Templar decentralized training framework. It covers environment setup, development tools, and common workflows for contributors. For information about testing specifically, see [Testing](/guides/testing). For deployment options, see [Deployment](/guides/deployment).
+
+## Environment Setup
+
+Setting up your development environment for Templar requires installing several dependencies and configuring your local environment.
+
+### Prerequisites
+
+- Python 3.10 or newer
+- UV (Python package manager)
+- PM2 (Process manager for Node.js)
+- Git
+
+### Development Installation
+
+Templar uses UV for dependency management. To set up your development environment:
+
+```bash
+# Clone the repository
+git clone https://github.com/tplr-ai/templar
+cd templar
+
+# Install development dependencies
+just dev
+```
+
+The `just dev` command runs `uv pip install --pre -e ".[dev]"` which installs the package in development mode with all development dependencies.
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/justfile#L22-L23" text="justfile22-23" />
+
+### Environment Files
+
+Templar uses `.env.yaml` and `.env` files for configuration, which are excluded from version control. You'll need to create these files based on your local setup.
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.gitignore#L1-L2" text=".gitignore1-2" />
+
+## Development Tools
+
+Templar uses several tools to streamline the development process.
+
+```mermaid
+flowchart TD
+    subgraph "Development Environment"
+        UV["UV Package Manager"]
+        Just["Just Command Runner"]
+        Ruff["Ruff Linter & Formatter"]
+        PyTest["PyTest Testing Framework"]
+        PM2["PM2 Process Manager"]
+    end
+
+    Just -->|"just dev"| UV
+    Just -->|"just lint"| Ruff
+    Just -->|"just test"| PyTest
+    Just -->|"just test-run"| TestRun["Test Run Script"]
+    Just -->|"just cov"| Coverage["Code Coverage"]
+    PM2 --- Start["scripts/start.sh"]
+    
+    TestRun --> PM2
+    
+    class UV,Just,Ruff,PyTest,PM2 interface;
+```
+
+### Just Command Runner
+
+Templar uses `just` as a command runner. The following commands are available:
+
+| Command | Description |
+|---------|-------------|
+| `just lint` | Run ruff check with auto-fix and format |
+| `just fix` | Alias for `just lint` |
+| `just test-run` | Run a development version with randomized version |
+| `just dev` | Install development dependencies |
+| `just test` | Run pytest |
+| `just cov` | Run pytest with coverage reporting |
+| `just bistro` | Check for zombie Bistro processes |
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/justfile#L5-L33" text="justfile5-33" />
+
+### UV Package Manager
+
+Templar uses UV for Python package management instead of pip. UV provides faster dependency resolution and installation.
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/justfile#L22-L23" text="justfile22-23" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.gitignore#L29-L34" text=".gitignore29-34" />
+
+### PM2 Process Manager
+
+Templar uses PM2 to manage its processes. The `scripts/start.sh` script manages the startup of all components using PM2:
+
+```mermaid
+flowchart LR
+    subgraph "Process Management"
+        Start["start.sh"]
+        PM2["PM2"]
+        Config["ecosystem.config.js"]
+        Processes["Templar Processes"]
+    end
+
+    Start -->|"pm2 delete all"| PM2
+    Start -->|"Check zombie processes"| ZombieCheck["ps aux | grep Bistro"]
+    Start -->|"pm2 start"| Config
+    Config --> PM2
+    PM2 --> Processes
+    Start -->|"pm2 log TM1"| Logs["Process Logs"]
+```
+
+The `ecosystem.config.js` file contains the configuration for all processes that need to be started.
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/scripts/start.sh#L1-L16" text="scripts/start.sh1-16" />
+
+## Directory Structure
+
+The Templar repository follows a standard Python package structure with some additional directories for specific purposes.
+
+```mermaid
+graph TD
+    subgraph "Repository Structure"
+        Root["templar/"]
+        Src["src/"]
+        Scripts["scripts/"]
+        Tests["tests/"]
+        Neurons["neurons/"]
+        Data["data/"]
+        Models["models/"]
+    end
+
+    Root --> Src
+    Root --> Scripts
+    Root --> Tests
+    Root --> Neurons
+    Root --> Data
+    Root --> Models
+
+    Src --> TPLR["tplr/"]
+    Scripts --> StartSh["start.sh"]
+    Scripts --> OtherScripts["Other utility scripts"]
+```
+
+### Ignored Files and Directories
+
+The `.gitignore` file lists files and directories that are excluded from version control. Notable exclusions include:
+
+- Environment files (`.env.yaml`, `.env`)
+- Python cache files (`__pycache__/`, `*.pyc`, etc.)
+- Virtual environment directories (`.venv/`, `venv/`, `.env/`)
+- Build artifacts (`build/`, `dist/`, `*.egg-info/`)
+- IDE-specific files (`.idea/`, `.vscode/`)
+- Node.js files (`node_modules/`, package lock files)
+- Project-specific files (`wandb`, model files, data directories)
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.gitignore#L1-L84" text=".gitignore1-84" />
+
+## Development Workflow
+
+The typical development workflow for Templar involves the following steps:
+
+```mermaid
+sequenceDiagram
+    participant Developer
+    participant Git as "Git Repository"
+    participant Local as "Local Environment"
+    participant PM2 as "PM2 Process Manager"
+    
+    Developer->>Git: Clone repository
+    Developer->>Local: just dev (Install dependencies)
+    Developer->>Local: Make code changes
+    Developer->>Local: just lint (Run code formatting)
+    Developer->>Local: just test (Run tests)
+    Developer->>PM2: just test-run (Test with PM2)
+    Developer->>Git: Commit and push changes
+```
+
+### Making Changes
+
+When making changes to the codebase:
+
+1. **Install dependencies**: Run `just dev` to ensure you have all required dependencies.
+2. **Make changes**: Edit code as needed.
+3. **Lint code**: Run `just lint` to automatically format and check code style.
+4. **Run tests**: Use `just test` to run tests or `just cov` to generate coverage reports.
+5. **Test locally**: Run `just test-run` to test your changes using PM2.
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/justfile#L5-L33" text="justfile5-33" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/scripts/start.sh#L1-L16" text="scripts/start.sh1-16" />
+
+### Running the Application
+
+To start all components locally:
+
+```bash
+./scripts/start.sh
+```
+
+This command:
+1. Stops any existing PM2 processes
+2. Checks for zombie Bistro processes
+3. Starts all applications defined in the ecosystem.config.js file
+4. Attaches to the logs of the TM1 process
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/scripts/start.sh#L1-L16" text="scripts/start.sh1-16" />
+
+## Code Quality Tools
+
+Templar uses several tools to maintain code quality:
+
+### Ruff
+
+Ruff is used for both linting and formatting Python code. Run:
+
+```bash
+just lint  # Or just fix
+```
+
+This runs `ruff check --fix .` and `ruff format .` to automatically fix issues and format code.
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/justfile#L5-L11" text="justfile5-11" />
+
+### Pytest
+
+Pytest is used for running tests. The project supports several test commands:
+
+```bash
+just test  # Run all tests
+just cov   # Run tests with coverage reporting
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/justfile#L25-L32" text="justfile25-32" />
+
+## Version Management
+
+During development, a temporary version string is generated for test runs:
+
+```bash
+just test-run
+```
+
+This command:
+1. Temporarily modifies the version string in `src/tplr/__init__.py`
+2. Runs the application
+3. Restores the original version
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/justfile#L13-L20" text="justfile13-20" />
+
+## Common Issues and Troubleshooting
+
+### Zombie Processes
+
+The project includes a command to check for zombie Bistro processes:
+
+```bash
+just bistro
+```
+
+This runs `ps aux | grep Bistro` to identify any lingering processes.
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/justfile#L28-L29" text="justfile28-29" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/scripts/start.sh#L5-L6" text="scripts/start.sh5-6" />
+
+### Environment File Issues
+
+If you encounter configuration errors, check that your `.env.yaml` and `.env` files are properly set up. These files are not included in version control and must be created manually.
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/.gitignore#L1-L2" text=".gitignore1-2" />

@@ -1,0 +1,18 @@
+query Pool($id: ID!) {
+  pools(where: {id: $id}) {
+    tick
+    token0 {
+      symbol
+      id
+      decimals
+    }
+    token1 {
+      symbol
+      id
+      decimals
+    }
+    feeTier
+    sqrtPrice
+    liquidity
+  }
+}

@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  executor:
+    container_name: executor
+    build:
+      context: ../.
+      dockerfile: ./docker/Dockerfile
+      args:
+        - EXECUTOR_VERSION=1.0.1
+    restart: unless-stopped
+    ports:
+      - "8090:8090"
+    command: ./executor start --loglevel debug --home /app
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "256m"
+  crdb:
+    container_name: crdb
+    image: cockroachdb/cockroach:v21.2.4
+    restart: unless-stopped
+    ports:
+      - "26257:26257"
+      - "8080:8080"
+    command: start-single-node --insecure
+    volumes:
+      - cockroach_volume:/cockroach/cockroach-data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "256m"
+
+volumes:
+  cockroach_volume:

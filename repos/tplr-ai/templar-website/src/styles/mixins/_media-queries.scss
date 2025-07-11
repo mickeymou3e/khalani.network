@@ -1,0 +1,112 @@
+/*
+* Breakpoint wider than breakpoint (INCLUSIVE)
+*
+* @example
+* @include above('desktop') { color: hotpink; }
+*
+*/
+@mixin above($breakpoint) {
+  @media (min-width: map-get($breakpoints, $breakpoint)) {
+    @content;
+  }
+}
+
+/*
+* Breakpoint more narrow than breakpoint (EXCLUSIVE)
+*
+* @example
+* @include under('desktop') { color: hotpink; }
+*
+*/
+@mixin under($breakpoint) {
+  @media (max-width: #{map-get($breakpoints, $breakpoint) - 1px}) {
+    @content;
+  }
+}
+
+/*
+* Breakpoint for pointer-enabled device
+*/
+@mixin isHoverable {
+  @media (any-hover: hover) {
+    @content;
+  }
+}
+
+/*
+* Breakpoint for touch-enabled device
+*/
+@mixin isTouchable {
+  @media (hover: none) and (pointer: coarse) {
+    @content;
+  }
+}
+
+/*
+* Breakpoint for portrait orientation
+*/
+@mixin isPortrait() {
+  @media (orientation: portrait) {
+    @content;
+  }
+}
+
+/*
+* Breakpoint for landscape orientation
+*/
+@mixin isLandscape() {
+  @media (orientation: landscape) {
+    @content;
+  }
+}
+
+/*
+* Breakpoint for minimum viewport aspect ratio
+* Note: $aspect needs to be passed as string:
+*   - `@include isMinAspect(${4/3}) { ... }`
+*   - `@include isMinAspect('4/3') { ... }`
+*/
+@mixin isMinAspect($aspect) {
+  @media (min-aspect-ratio: $aspect) {
+    @content;
+  }
+}
+
+/*
+* Breakpoint for maximum viewport aspect ratio
+* Note: $aspect needs to be passed as string:
+*   - `@include isMaxAspect(${4/3}) { ... }`
+*   - `@include isMaxAspect('4/3') { ... }`
+*/
+@mixin isMaxAspect($aspect) {
+  @media (max-aspect-ratio: $aspect) {
+    @content;
+  }
+}
+
+/*
+* Use nested styles only if reduced motion requested
+*/
+@mixin whenReducedMotion() {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}
+
+/*
+* Use nested styles unless reduced motion is requested
+*/
+@mixin unlessReducedMotion() {
+  @media not all and (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}
+
+/* 
+* Safari only 
+*/
+@mixin safariOnly() {
+  @supports (-webkit-hyphens: none) {
+    @content;
+  }
+}

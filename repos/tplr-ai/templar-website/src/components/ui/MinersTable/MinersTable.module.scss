@@ -1,0 +1,164 @@
+@import '@/styles/shared-imports.scss';
+
+.minersTable {
+  &.dark {
+    color: var(--color-white);
+  }
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  @include max-prop(gap, rem(20), vw(40));
+  margin: 0 var(--indent);
+  @include max-prop(margin-bottom, rem(20), vw(40));
+
+  @include above('medium') {
+    position: relative;
+    flex-direction: row;
+    gap: 0;
+  }
+
+  .visual {
+    display: flex;
+    align-items: center;
+    @include max-prop(height, rem(44), vw(44));
+    width: 100%;
+
+    @include above('medium') {
+      position: absolute;
+      right: 0;
+      top: 10%;
+      height: 80%;
+      width: auto;
+    }
+
+    @include above('desktop') {
+      width: calc(25% - var(--indent));
+    }
+
+    svg {
+      height: 100%;
+      width: auto;
+      color: var(--color-templar-red);
+    }
+  }
+
+  .status {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    @include max-prop(--pH, rem(14), vw(14));
+    padding: 0 var(--pH);
+    @include max-prop(gap, rem(30), vw(60));
+    color: var(--color-templar-red);
+    background-color: var(--bgColor);
+  }
+
+  .statusValue {
+    display: flex;
+    align-items: center;
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    &:before {
+      content: '';
+      display: inline-block;
+      height: rem(4);
+      width: rem(4);
+      background-color: currentColor;
+      margin-right: rem(7);
+      animation: blink 1s infinite;
+    }
+  }
+}
+
+.tableWrapper {
+  padding: 0 var(--indent);
+  overflow-x: scroll;
+  margin-bottom: rem(30);
+
+  @include above('medium') {
+    @include max-prop(margin-bottom, rem(54), vw(100));
+  }
+}
+
+.table {
+  width: 100%;
+
+  @include above('desktop') {
+    table-layout: fixed;
+  }
+
+  th,
+  td {
+    white-space: nowrap;
+    @include max-prop(min-width, 120px, 16vw);
+
+    @include above('desktop') {
+      min-width: 0;
+    }
+  }
+}
+
+.head {
+  th {
+    cursor: pointer;
+    text-align: left;
+    padding: rem(15) 0;
+    color: var(--color-grey-500);
+    border-bottom: 1px solid var(--lineColor);
+  }
+
+  .headLabel {
+    display: inline-flex;
+    align-items: center;
+    @include max-prop(gap, vw(10), rem(10));
+    @include max-prop(--pV, rem(7), vw(7));
+    @include max-prop(--pH, rem(10), vw(10));
+    padding: var(--pV) var(--pH);
+    @include max-prop(border-radius, rem(13), vw(13));
+    margin-left: calc(-1 * var(--pH));
+
+    .arrow {
+      display: inline-block;
+      @include max-prop(height, vw(5), rem(5));
+      @include max-prop(width, vw(7), rem(7));
+      position: relative;
+      transition: transform 0.3s var(--ease-expo-out);
+
+      svg {
+        position: absolute;
+      }
+
+      &.invert {
+        transform: scaleY(-1);
+      }
+    }
+  }
+
+  .active .headLabel {
+    color: var(--secondaryColor);
+    background-color: var(--primaryColor);
+    transition: background-color 0.8s var(--ease-expo-out);
+  }
+}
+
+.body {
+  overflow-x: scroll;
+
+  tr {
+    border-bottom: 1px solid var(--lineColor);
+  }
+
+  td {
+    @include max-prop(--pV, rem(15), vw(15));
+    padding: var(--pV) 0;
+  }
+}

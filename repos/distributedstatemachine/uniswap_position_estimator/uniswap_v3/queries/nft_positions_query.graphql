@@ -1,0 +1,39 @@
+query PositionData($owner: String!) {
+  positions(where: {owner: $owner}) {
+    id
+    liquidity
+    pool {
+      tick
+      feeGrowthGlobal0X128
+      feeGrowthGlobal1X128
+    }
+    tickLower {
+      poolAddress
+      tickIdx
+      feeGrowthOutside0X128
+      feeGrowthOutside1X128
+    }
+    tickUpper {
+      poolAddress
+      tickIdx
+      feeGrowthOutside0X128
+      feeGrowthOutside1X128
+    }
+    depositedToken0
+    depositedToken1
+    withdrawnToken0
+    withdrawnToken1
+    collectedFeesToken0
+    collectedFeesToken1
+    feeGrowthInside0LastX128
+    feeGrowthInside1LastX128
+    token0 {
+      id
+      name
+    }
+    token1 {
+      id
+      name
+    }
+  }
+}

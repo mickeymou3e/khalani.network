@@ -1,0 +1,170 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-server-worker
+  # namespace: 
+  labels:
+    project: {{ .Chart.Name }}
+    app: flask-server
+
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.server.replicaCount }}
+  {{- end }}
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      project: {{ .Chart.Name }}
+      app: flask-server
+
+  template:
+    metadata:
+      name: flask-server-worker
+      annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
+      labels:
+        project: {{ .Chart.Name }}
+        app: flask-server
+
+    spec:
+      containers:
+      - name: flask-app
+        image: ezklterhubstagingregistry.azurecr.io/server:latest
+        imagePullPolicy: Always
+        command: ["poetry", "run", "gunicorn", "app:app", "-w", "4", "-b", "0.0.0.0:5000", "--timeout", "120"]
+        resources:
+          requests:
+            cpu: "2000m"
+            memory: "10Gi"
+          limits:
+            cpu: "10000m"
+            memory: "50Gi"
+        ports:
+        - containerPort: 5000
+        env:
+        - name: ENV
+          value: STAGING
+        - name: CELERY_RESULT_URL
+          valueFrom:
+            secretKeyRef:
+              name: ezkl-secrets
+              key: CELERY_RESULT_BACKEND
+        - name: CELERY_BROKER_URL
+          valueFrom:
+            secretKeyRef:
+              name: ezkl-secrets
+              key: CELERY_BROKER_URL
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: ezkl-secrets
+              key: SECRET_KEY
+        - name: FERNET_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: ezkl-secrets
+              key: FERNET_SECRET
+        - name: GITHUB_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: ezkl-secrets
+              key: GITHUB_CLIENT_ID
+        - name: GITHUB_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: ezkl-secrets
+              key: GITHUB_CLIENT_SECRET
+        - name: SQLALCHEMY_DATABASE_URI
+          valueFrom:
+            secretKeyRef:
+              name: ezkl-secrets
+              key: SQLALCHEMY_DATABASE_URI
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: ezkl-secrets
+              key: REDIS_PASSWORD
+        - name: JWKS_PUBLIC_KTY
+          valueFrom:
+            secretKeyRef:
+              name: ezkl-secrets
+              key: JWKS_PUBLIC_KTY
+        - name: JWKS_PUBLIC_N
+          valueFrom:
+            secretKeyRef:
+              name: ezkl-secrets
+              key: JWKS_PUBLIC_N
+        - name: JWKS_PUBLIC_ALG
+          valueFrom:
+            secretKeyRef:
+              name: ezkl-secrets
+              key: JWKS_PUBLIC_ALG
+        - name: JWKS_PUBLIC_KID
+          valueFrom:
+            secretKeyRef:
+              name: ezkl-secrets
+              key: JWKS_PUBLIC_KID
+        - name: JWKS_PUBLIC_E
+          valueFrom:
+            secretKeyRef:
+              name: ezkl-secrets
+              key: JWKS_PUBLIC_E
+        - name: OIDC_PRIVATE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: ezkl-secrets
+              key: OIDC_PRIVATE_KEY
+        - name: PYTHONUNBUFFERED
+          valueFrom:
+            secretKeyRef:
+              name: ezkl-secrets
+              key: PYTHONUNBUFFERED
+        - name: AUTHLIB_INSECURE_TRANSPORT
+          valueFrom:
+            secretKeyRef:
+              name: ezkl-secrets
+              key: AUTHLIB_INSECURE_TRANSPORT
+        - name: DISCORD_HOOK_URL
+          valueFrom:
+            secretKeyRef:
+              name: ezkl-secrets
+              key: DISCORD_HOOK_URL
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: {{ .Values.env.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.env.livenessProbe.periodSeconds }}
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: {{ .Values.env.readinessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.env.readinessProbe.periodSeconds }}
+        volumeMounts:
+        - name: artifacts
+          mountPath: /server/artifact
+        # db sidecar
+      # - name: cloud-sql-proxy
+      #   image: gcr.io/cloudsql-docker/gce-proxy:1.33
+      #   command: 
+      #     - "/cloud_sql_proxy"
+      #     - "-instances={{ .Values.env.dbInstance }}=tcp:5432"
+      #     - "-credential_file=/secrets/cloudsql/cloudsql-editor.json"
+      #   volumeMounts:
+      #     - name: cloudsql-oauth-credentials
+      #       mountPath: /secrets/cloudsql
+      #       readOnly: true
+      #   securityContext:
+      #     runAsNonRoot: true
+
+      volumes:
+        # - name: cloudsql-oauth-credentials
+        #   secret:
+        #     secretName: cloudsql-oauth-credentials
+        # - name: cloudsql
+        #   emptyDir:
+        - name: artifacts
+          persistentVolumeClaim:
+            claimName: artifacts

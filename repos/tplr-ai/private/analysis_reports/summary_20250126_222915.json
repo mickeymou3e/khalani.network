@@ -1,0 +1,15 @@
+{
+  "total_gradients": 349,
+  "unique_uids": 15,
+  "total_anomalies": 334,
+  "steps_analyzed": "20 to 63",
+  "timestamp": "2025-01-26T22:29:15.948125",
+  "grad_norm_mean": 0.05459624331154355,
+  "grad_norm_std": 0.3972647956440164,
+  "grad_mean_mean": 1.2267508068989246e-07,
+  "grad_mean_std": 1.525016165383626e-06,
+  "grad_std_mean": 7.630045682103072e-05,
+  "grad_std_std": 0.0005551929004325069,
+  "grad_sparsity_mean": 0.01883447788826545,
+  "grad_sparsity_std": 0.08062731716979828
+}

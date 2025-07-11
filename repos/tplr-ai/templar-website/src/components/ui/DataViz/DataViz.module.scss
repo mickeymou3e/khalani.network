@@ -1,0 +1,57 @@
+@import '@/styles/shared-imports.scss';
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translate(-100%, 100%);
+  }
+}
+
+.mobile,
+.desktop {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-color: var(--color-white);
+
+  animation: fadeIn 1.5s var(--ease-quad-in-out) backwards;
+  animation-play-state: paused;
+  .canPlay & {
+    animation-play-state: running;
+  }
+}
+
+.mobile {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  object-position: 50% 70%;
+}
+
+.desktop {
+  object-fit: contain;
+  object-position: 66% 50%;
+}
+
+.lottie {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: vw(320);
+  height: auto;
+
+  & > * {
+    animation: slideIn 2s var(--ease-expo-out) 1s backwards;
+    animation-play-state: paused;
+    .canPlay & {
+      animation-play-state: running;
+    }
+  }
+}

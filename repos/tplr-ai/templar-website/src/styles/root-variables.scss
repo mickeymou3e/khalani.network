@@ -1,0 +1,45 @@
+@import 'utils/easing';
+@import 'functions/hex-to-rgb';
+
+:root {
+  // to be updated in javascript if accurate viewport units are needed,
+  --vw: 1vw;
+  --vh: 1vh;
+
+  // global padding / indentation
+  @include max-prop(--indent, rem($globalPaddingMobile), vw($globalPaddingDesktop));
+
+  // grid-related variables - start
+  --cols: #{map-get($gridConfig, columns)};
+  --gutters: calc(var(--cols) - 1);
+
+  @include above('medium') {
+    --cols: #{map-get(map-get($responsiveConfig, medium), columns)};
+  }
+
+  @include above('desktop') {
+    --cols: #{map-get(map-get($responsiveConfig, desktop), columns)};
+  }
+
+  @include above('large') {
+    --cols: #{map-get(map-get($responsiveConfig, large), columns)};
+  }
+
+  @include max-prop(--gutter, rem(map-get($gridConfig, gap)), vw(map-get($gridConfig, gap)));
+  --col: calc((100vw - var(--indent) * 2 - var(--gutter) * var(--gutters)) / var(--cols));
+  // grid-related variables - end
+
+  // global header/nav sizing
+  @include max-prop(--headerHeight, rem($headerHeightMobile), vw($headerHeightDesktop));
+
+  // breakpoints
+  @each $key, $value in $breakpoints {
+    --breakpoint-#{$key}: #{$value};
+  }
+
+  // colors
+  @each $key, $value in $colors {
+    --color-#{$key}: #{$value};
+    --color-#{$key}--rgb: #{hexToRgb($value)};
+  }
+}

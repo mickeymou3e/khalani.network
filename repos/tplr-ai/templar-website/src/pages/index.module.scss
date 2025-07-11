@@ -1,0 +1,14 @@
+@import '@/styles/shared-imports.scss';
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+.cover {
+  position: fixed;
+  inset: 0;
+  animation: fadeOut 1s forwards;
+  background-color: var(--color-white);
+}

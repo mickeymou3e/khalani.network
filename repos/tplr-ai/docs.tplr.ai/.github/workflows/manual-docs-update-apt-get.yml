@@ -1,0 +1,116 @@
+name: "Manual Docs Update from DeepWiki (apt-get)"
+
+on:
+  workflow_dispatch:
+    inputs:
+      git_commit_message:
+        description: "Commit message for documentation updates"
+        required: false
+        default: "docs: Update documentation from DeepWiki via apt-get method"
+      target_branch:
+        description: "Branch to commit updates to (if different from current)"
+        required: false
+        default: ""  # Empty means current branch
+
+jobs:
+  update-documentation:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch full history for accurate change detection
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install selenium beautifulsoup4
+
+      - name: Install Google Chrome & ChromeDriver via apt-get
+        id: setup_chromedriver
+        shell: bash
+        run: |
+          set -e
+          sudo apt-get update
+          # Install Chrome & Chromium driver. google-chrome-stable is provided by the Google repository on the GitHub runner image.
+          sudo apt-get install -y google-chrome-stable chromium-driver
+
+          # Attempt to locate chromedriver
+          CHROMEDRIVER_PATH="$(which chromedriver || true)"
+
+          if [[ -z "$CHROMEDRIVER_PATH" ]]; then
+            for p in /usr/lib/chromium-browser/chromedriver /opt/google/chrome/chromedriver; do
+              if [[ -x "$p" ]]; then
+                CHROMEDRIVER_PATH="$p"
+                break
+              fi
+            done
+          fi
+
+          if [[ -z "$CHROMEDRIVER_PATH" ]]; then
+            echo "chromedriver not found after installation." >&2
+            exit 1
+          fi
+
+          echo "Found chromedriver at: $CHROMEDRIVER_PATH"
+          # Export for subsequent steps
+          echo "CHROMEDRIVER_ACTUAL_PATH=$CHROMEDRIVER_PATH" >> "$GITHUB_ENV"
+
+      - name: Prepare config.py from template
+        shell: bash
+        env:
+          TARGET_DOCS_PATH_IN_REPO: "src/content/docs"
+        run: |
+          CONFIG_DIR="public/scripts/pipeline"
+          cp "$CONFIG_DIR/config.template.py" "$CONFIG_DIR/config.py"
+
+          ABS_TARGET_DOCS_PATH="${GITHUB_WORKSPACE}/${TARGET_DOCS_PATH_IN_REPO}"
+
+          # Replace placeholders in the copied config.py
+          sed -i "s|__CHROMEDRIVER_PATH_PLACEHOLDER__|${CHROMEDRIVER_ACTUAL_PATH}|g" "$CONFIG_DIR/config.py"
+          sed -i "s|__TARGET_DOCS_DIR_PLACEHOLDER__|${ABS_TARGET_DOCS_PATH}|g" "$CONFIG_DIR/config.py"
+
+          echo "Generated config.py for verification:"  
+          cat "$CONFIG_DIR/config.py"
+
+      - name: Run documentation pipeline scripts
+        working-directory: public/scripts/pipeline
+        shell: bash
+        run: |
+          python run_cdi.py
+          python run_spbcp.py
+          python run_remove_redundant_h1s.py
+          python run_fix_misplaced_imports.py
+          python run_convert_internal_anchors.py
+          python run_fix_source_links.py
+
+      - name: Commit and push documentation changes
+        shell: bash
+        env:
+          TARGET_DOCS_PATH_IN_REPO: "src/content/docs"
+          GIT_COMMIT_MESSAGE: "${{ github.event.inputs.git_commit_message }}"
+          TARGET_BRANCH_INPUT: "${{ github.event.inputs.target_branch }}"
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+          CHANGES="$(git status --porcelain "${TARGET_DOCS_PATH_IN_REPO}" public/scripts/pipeline/ingested_deepwiki_data.json)"
+
+          if [[ -n "$CHANGES" ]]; then
+            git add "${TARGET_DOCS_PATH_IN_REPO}" public/scripts/pipeline/ingested_deepwiki_data.json
+            COMMIT_MSG="${GIT_COMMIT_MESSAGE:-docs: Update documentation from DeepWiki via apt-get method}"
+            git commit -m "$COMMIT_MSG"
+
+            TARGET_BRANCH="${TARGET_BRANCH_INPUT:-${GITHUB_REF_NAME}}"
+            echo "Pushing changes to ${TARGET_BRANCH}..."
+            git push origin "HEAD:${TARGET_BRANCH}"
+          else
+            echo "No documentation changes detected; nothing to commit."
+          fi 

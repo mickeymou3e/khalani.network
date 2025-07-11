@@ -1,0 +1,77 @@
+@import '@/styles/shared-imports.scss';
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+.header {
+  position: relative;
+  animation: fadeIn 1s var(--ease-quad-in-out) 1 both;
+  height: rem(80);
+
+  @include above('medium') {
+    height: 20vh;
+  }
+
+  &.light {
+    color: var(--color-black);
+  }
+}
+
+.headline {
+  position: absolute;
+  top: rem(10);
+  left: rem(10);
+
+  @include above('medium') {
+    top: vw(14);
+    left: vw(14);
+  }
+
+  em {
+    color: var(--color-templar-red);
+
+    @media (prefers-color-scheme: dark) {
+      color: var(--color-white);
+    }
+
+    .dark & {
+      color: var(--color-white);
+    }
+
+    .light & {
+      color: var(--color-templar-red);
+    }
+  }
+}
+
+.wordmark {
+  display: block;
+
+  @include above('desktop') {
+    display: inline-block;
+  }
+
+  svg {
+    height: 0.8em;
+    display: inline-block;
+    margin-bottom: -0.05em;
+
+    path {
+      fill: var(--color-templar-red);
+
+      @media (prefers-color-scheme: dark) {
+        fill: var(--color-white);
+      }
+
+      .dark & {
+        fill: var(--color-white);
+      }
+
+      .light & {
+        fill: var(--color-templar-red);
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/zkonduit/lilith-system
+  tag: latest
+  pullSecrets:
+    - name: ghcr-secret
+
+lilith:
+  name: lilith
+  service:
+    port: 2004
+    type: "ClusterIP"
+
+elijah:
+  name: elijah
+  service:
+    port: 2002
+    type: "ClusterIP"
+
+eden:
+  name: eden
+  service:
+    port: 2006
+    type: "ClusterIP"
+
+ingress:
+  enabled: true
+  host: lilith.ezkl.xyz
+  tlsSecret: cloudflare-tls-secret
+
+autoscaling:
+  enabled: false
+
+serviceAccount:
+  create: false

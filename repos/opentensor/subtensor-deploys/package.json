@@ -1,0 +1,16 @@
+{
+  "name": "subtensor-deploys",
+  "version": "1.0.0",
+  "description": "",
+  "main": "deploy-wasm.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prod-approval": "node prod-approval.js",
+    "samvps-approval": "node samvps-approval.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@polkadot/api": "^12"
+  }
+}

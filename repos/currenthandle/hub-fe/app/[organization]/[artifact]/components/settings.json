@@ -1,0 +1,25 @@
+{
+  "run_args": {
+    "tolerance": { "val": 0.0, "scale": 1.0 },
+    "input_scale": 7,
+    "param_scale": 7,
+    "scale_rebase_multiplier": 1000,
+    "bits": 16,
+    "logrows": 11,
+    "variables": [["batch_size", 1]],
+    "input_visibility": {
+      "Hashed": { "hash_is_public": false, "outlets": [0] }
+    },
+    "output_visibility": "Fixed",
+    "param_visibility": "Public"
+  },
+  "num_constraints": 2624,
+  "total_const_size": 0,
+  "model_instance_shapes": [],
+  "model_output_scales": [63, 7],
+  "module_sizes": { "poseidon": [2624, [2]], "elgamal": [0, [0]] },
+  "required_lookups": [],
+  "check_mode": "UNSAFE",
+  "version": "1.27.0",
+  "num_blinding_factors": null
+}

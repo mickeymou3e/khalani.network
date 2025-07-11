@@ -1,0 +1,27 @@
+# Training configuration
+training:
+  seed: 42
+  batch_size: 512
+  learning_rate: 0.005
+  epochs: 500
+  train_split: 0.8
+  val_split: 0.1
+  scheduler:
+    type: 'ReduceLROnPlateau'
+    factor: 0.7
+    patience: 100
+    min_lr: 1e-6
+
+# Model configuration
+model:
+  type: 'ball_anticipation'
+  name: 'ball_anticipation'
+
+# Data configuration
+data:
+  data_dir: 'data'
+
+# Output configuration
+output:
+  base_dir: 'outputs'
+  save_frequency: 1  # Save visualization every N epochs 

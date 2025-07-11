@@ -1,0 +1,18 @@
+{
+	"extends": "../../tsconfig.base.json",
+	"compilerOptions": {
+		"rootDir": "src",
+		"emitDeclarationOnly": true,
+		"declarationDir": "dist/esm"
+	},
+	"include": ["src/**/*"],
+	"exclude": ["src/**/*.test.ts"],
+	"references": [{ "path": "../core/tsconfig.json" }, { "path": "../db/tsconfig.json" }],
+	"ts-node": {
+		"esm": true,
+		"swc": true,
+		"transpileOnly": true,
+		"files": true,
+		"experimentalSpecifierResolution": "node"
+	}
+}

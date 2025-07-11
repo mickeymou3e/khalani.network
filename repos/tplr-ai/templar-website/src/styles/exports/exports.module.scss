@@ -1,0 +1,15 @@
+@import '../config/main';
+@import '../config/colors';
+
+// Export for JS
+:export {
+  @each $key, $value in $breakpoints {
+    #{'breakpoint-'+$key}: $value;
+  }
+
+  @each $key, $value in $colors {
+    #{'color-'+$key+''}: $value;
+  }
+
+  #{'base-width'}: #{map-get($baseConfig, vwBase) px};
+}

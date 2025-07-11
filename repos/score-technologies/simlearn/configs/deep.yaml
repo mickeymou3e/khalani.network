@@ -1,0 +1,22 @@
+training:
+  seed: 42
+  batch_size: 256
+  learning_rate: 0.002
+  epochs: 500
+  train_split: 0.8
+  val_split: 0.1
+  scheduler:
+    type: 'ReduceLROnPlateau'
+    factor: 0.75
+    patience: 200
+    min_lr: 1e-6
+
+model:
+  type: 'deep'
+  name: 'deep'
+
+data:
+  data_dir: 'data'
+
+output:
+  base_dir: 'outputs' 

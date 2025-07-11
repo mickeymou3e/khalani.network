@@ -1,0 +1,78 @@
+
+validate:
+    #!/usr/bin/env bash
+    helm template ./hub-kube-azure | kubeconform -strict
+
+install-rabbitmq:
+    #!/usr/bin/env bash
+    helm install rabbitmq -f hub-kube/values_rabbitmq.yaml bitnami/rabbitmq
+
+uninstall-rabbitmq:
+    #!/usr/bin/env bash
+    helm uninstall rabbitmq
+
+upgrade-rabbitmq:
+    #!/usr/bin/env bash
+    helm upgrade rabbitmq -f hub-kube/values_rabbitmq.yaml bitnami/rabbitmq
+
+
+# Login to Azure
+az-login:
+    #!/usr/bin/env bash
+    az login
+
+# Login to Azure Container Registry
+acr-login:
+    #!/usr/bin/env bash
+    az acr login --name ezklterhubstagingregistry
+
+# Build Docker image
+docker-build:
+    #!/usr/bin/env bash
+    docker build -t ezklterhubstagingregistry.azurecr.io/server ./server
+    docker build -t ezklterhubstagingregistry.azurecr.io/celery ./celery
+    docker build --build-arg NEXT_PUBLIC_EZKL_HUB_URL=https://foo.ezkl.xyz -t ezklterhubstagingregistry.azurecr.io/frontend ./frontend
+
+# Tag Docker image
+docker-tag:
+    #!/usr/bin/env bash
+    docker tag ezklterhubstagingregistry.azurecr.io/server  ezklterhubstagingregistry.azurecr.io/server:latest
+    docker tag ezklterhubstagingregistry.azurecr.io/celery  ezklterhubstagingregistry.azurecr.io/celery:latest
+    docker tag ezklterhubstagingregistry.azurecr.io/frontend  ezklterhubstagingregistry.azurecr.io/frontend:latest
+
+
+
+# Push Docker image to Azure Container Registry
+docker-push: docker-build docker-tag
+    docker push ezklterhubstagingregistry.azurecr.io/server:latest
+    docker push ezklterhubstagingregistry.azurecr.io/celery:latest
+    docker push ezklterhubstagingregistry.azurecr.io/frontend:latest
+
+# Package Helm chart
+package-chart: docker-push
+    helm package hub-kube/
+
+# Push Helm chart
+push-chart: package-chart
+    helm push hub-kube-0.1.0.tgz oci://ezklterhubstagingregistry.azurecr.io/hub-kube
+    rm hub-kube-0.1.0.tgz
+
+# Install Helm chart
+install-hub-kube-azure namespace='default' version="0.1.0": push-chart
+    helm install ezklhub oci://ezklterhubstagingregistry.azurecr.io/hub-kube-azure/hub-kube --version {{version}} --namespace {{namespace}}
+
+# Upgrade Helm chart
+upgrade-chart namespace='default' version='0.1.0': push-chart
+    helm upgrade ezklhub oci://ezklterhubstagingregistry.azurecr.io/hub-kube/hub-kube --version {{version}} --namespace {{namespace}}
+
+install-lilith namespace='default' version='0.1.0':
+    #!/usr/bin/env bash
+    helm install lilith-system ./helm/lilith-system --version {{version}} --namespace {{namespace}}
+
+upgrade-lilith namespace='default' version='0.1.0':
+    #!/usr/bin/env bash
+    helm upgrade lilith-system ./helm/lilith-system --version {{version}} --namespace {{namespace}}
+
+uninstall-lilith:
+    #!/usr/bin/env bash
+    helm uninstall lilith-system

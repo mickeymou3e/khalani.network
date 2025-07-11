@@ -1,0 +1,24 @@
+[package]
+name = "merkleized_metadata"
+version = "0.0.1"
+edition = "2018"
+
+[lib]
+name = "merkleized_metadata"
+# "cdylib" is necessary to produce a shared library for Python to import from.
+#
+# Downstream Rust code (including code in `bin/`, `examples/`, and `tests/`) will not be able
+# to `use string_sum;` unless the "rlib" or "lib" crate type is also included, e.g.:
+# crate-type = ["cdylib", "rlib"]
+crate-type = ["cdylib"]
+
+[dependencies.pyo3]
+version = "0.22.2"
+features = ["extension-module"]
+
+[dependencies]
+merkleized-metadata = "0.1.0"
+frame-metadata = { version = "16.0.0", features = [ "current", "decode" ], default-features = false }
+scale-decode = { version = "0.13.0", default-features = false }
+codec = { package = "parity-scale-codec", version = "3.6.9", features = [ "derive" ], default-features = false }
+scale-info = { version = "2.0.0", default-features = false }

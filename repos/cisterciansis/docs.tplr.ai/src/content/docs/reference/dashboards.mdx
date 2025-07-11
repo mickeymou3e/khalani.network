@@ -1,0 +1,376 @@
+---
+title: Dashboards
+---
+
+import SourceLink from '@components/SourceLink.astro';
+import { Aside, Card, CardGrid, Tabs, TabItem, Steps, FileTree, Code, LinkButton, Badge } from '@astrojs/starlight/components';
+import CollapsibleAside from '../../../components/CollapsibleAside.astro';
+
+<CollapsibleAside title="Relevant Source Files">
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/group_vars/all.yml.example" text="telemetry/ansible/group_vars/all.yml.example" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/group_vars/vault.yml.example" text="telemetry/ansible/group_vars/vault.yml.example" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/roles/dashboards/files/eval-metrics.json" text="telemetry/ansible/roles/dashboards/files/eval-metrics.json" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/roles/dashboards/files/loki_logs.json" text="telemetry/ansible/roles/dashboards/files/loki_logs.json" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/roles/dashboards/files/templar_dev.json" text="telemetry/ansible/roles/dashboards/files/templar_dev.json" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/roles/dashboards/files/templar_metrics.json" text="telemetry/ansible/roles/dashboards/files/templar_metrics.json" />
+  <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/roles/loki/templates/loki-config.yaml.j2" text="telemetry/ansible/roles/loki/templates/loki-config.yaml.j2" />
+</CollapsibleAside>
+
+
+
+The Templar framework includes a comprehensive set of monitoring dashboards built with Grafana that provide real-time visibility into the distributed training process. These dashboards allow operators to track validator performance, model evaluation metrics, and system logs across the network.
+
+For information about metrics collection and logging implementation, see [Metrics Logging](/reference/metrics-logging) and [Experiment Tracking](/reference/experiment-tracking).
+
+## Dashboard Architecture
+
+The Templar monitoring system uses Grafana dashboards powered by InfluxDB for time-series metrics and Loki for logs. These dashboards are deployed through Ansible playbooks and provide visualizations for different aspects of the Templar system.
+
+```mermaid
+graph TD
+    subgraph "Data Collection"
+        VM["Validator Metrics"]
+        MM["Miner Metrics"]
+        EM["Evaluator Metrics"]
+        LG["System Logs"]
+    end
+
+    subgraph "Storage Layer"
+        IDB[(InfluxDB)]
+        LK[(Loki)]
+    end
+
+    subgraph "Visualization Layer"
+        TMD["Templar Metrics Dashboard"]
+        EMD["Evaluation Metrics Dashboard"]
+        LD["Logs Dashboard"]
+        DD["Development Dashboard"]
+    end
+
+    VM --> IDB
+    MM --> IDB
+    EM --> IDB
+    LG --> LK
+
+    IDB --> TMD
+    IDB --> EMD
+    IDB --> DD
+    LK --> LD
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/group_vars/all.yml.example" text="telemetry/ansible/group_vars/all.yml.example" />
+
+## Available Dashboards
+
+### Templar Metrics Dashboard
+
+The main metrics dashboard provides comprehensive visibility into validator performance and is defined in `templar_metrics.json`. It includes panels for:
+
+- Validator loss tracking (by training window)
+- Time-based performance metrics
+- Processing time breakdowns
+- Global state metrics
+
+```mermaid
+graph TD
+    subgraph "Validator Window Metrics"
+        VL["Loss Metrics"]
+        VPT["Peer Update Time"]
+        VMT["Model Update Time"]
+        VWT["Window Total Time"]
+    end
+
+    subgraph "Performance Metrics"
+        GT["Gather Time"]
+        ET["Evaluation Time"]
+        TS["Total Skipped"]
+    end
+
+    subgraph "State Metrics"
+        GS["Global Step"]
+        WN["Window Number"]
+    end
+
+    subgraph "Dashboard Panels"
+        LP["Loss Panels"]
+        TP["Timing Panels"]
+        SP["State Panels"]
+    end
+
+    VL --> LP
+    VPT --> TP
+    VMT --> TP
+    VWT --> TP
+    
+    GT --> TP
+    ET --> TP
+    TS --> TP
+    
+    GS --> SP
+    WN --> SP
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/roles/dashboards/files/templar_metrics.json#L66-L748" text="telemetry/ansible/roles/dashboards/files/templar_metrics.json66-748" />
+
+#### Key Features
+
+The Templar Metrics Dashboard includes:
+
+1. **Loss Tracking**: Visualizes validator loss by window with both window-axis and time-axis views
+2. **Performance Monitoring**: Tracks key timing metrics:
+   - Peer update time
+   - Model update time
+   - Window total time
+   - Gather time
+   - Evaluation time
+3. **State Monitoring**: Shows global step and window number information
+4. **Filtering**: Supports filtering by UID and version
+
+All metrics are tagged with version, UID, and configuration parameters, enabling precise filtering and correlation across different system components.
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/roles/dashboards/files/templar_metrics.json#L179-L198" text="telemetry/ansible/roles/dashboards/files/templar_metrics.json179-198" />
+
+### Evaluation Metrics Dashboard
+
+The evaluation dashboard (`eval-metrics.json`) focuses on model benchmark performance with trend charts for various benchmark tasks:
+
+- Hellaswag
+- MMLU
+- PIQA
+- ARC Challenge
+- ARC Easy
+- OpenBookQA
+- Winogrande
+
+```mermaid
+graph TD
+    subgraph "Benchmark Tasks"
+        HS["Hellaswag"]
+        MM["MMLU"]
+        PQ["PIQA"]
+        AC["ARC Challenge"]
+        AE["ARC Easy"]
+        OB["OpenBookQA"]
+        WG["Winogrande"]
+    end
+
+    subgraph "Visualization Types"
+        TC["Trend Charts"]
+        LS["Latest Scores"]
+    end
+
+    subgraph "Chart Components"
+        SA["Step Axis"]
+        TF["Timeline Filter"]
+        VF["Version Filter"]
+    end
+
+    HS --> TC
+    MM --> TC
+    PQ --> TC
+    AC --> TC
+    AE --> TC
+    OB --> TC
+    WG --> TC
+    
+    TC --> LS
+    
+    SA --> TC
+    TF --> TC
+    VF --> TC
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/roles/dashboards/files/eval-metrics.json#L117-L142" text="telemetry/ansible/roles/dashboards/files/eval-metrics.json117-142" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/roles/dashboards/files/eval-metrics.json#L204-L236" text="telemetry/ansible/roles/dashboards/files/eval-metrics.json204-236" />
+
+#### Key Features
+
+1. **Step-based Tracking**: Charts show model performance vs. training step
+2. **Multi-version Comparison**: Supports comparing multiple Templar versions
+3. **Benchmark Aggregation**: Displays all benchmark scores on a single panel
+4. **Time Range Selection**: Customizable time range for historical analysis
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/roles/dashboards/files/eval-metrics.json#L737-L773" text="telemetry/ansible/roles/dashboards/files/eval-metrics.json737-773" />
+
+### Logs Dashboard
+
+The Logs Dashboard (`loki_logs.json`) provides a centralized view of system logs from all Templar components:
+
+```mermaid
+graph TD
+    subgraph "Log Sources"
+        VM["Validator Logs"]
+        MM["Miner Logs"]
+        AG["Aggregator Logs"]
+        EV["Evaluator Logs"]
+    end
+
+    subgraph "Loki Storage System"
+        LK[(Loki)]
+        FT["Fluentd"]
+        R2["R2 Log Archival"]
+    end
+
+    subgraph "Dashboard Filters"
+        SF["Service Filter"]
+        VF["Version Filter"]
+        UF["UID Filter"]
+        LL["Log Level Filter"]
+        TS["Text Search"]
+    end
+
+    VM --> LK
+    MM --> LK
+    AG --> LK
+    EV --> LK
+    
+    LK <--> FT
+    FT --> R2
+    
+    LK --> SF
+    SF --> VF
+    VF --> UF
+    UF --> LL
+    LL --> TS
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/roles/dashboards/files/loki_logs.json#L87-L97" text="telemetry/ansible/roles/dashboards/files/loki_logs.json87-97" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/roles/loki/templates/loki-config.yaml.j2" text="telemetry/ansible/roles/loki/templates/loki-config.yaml.j2" />
+
+#### Key Features
+
+1. **Service Filtering**: Filter logs by service (validator, miner, etc.)
+2. **UID Filtering**: Focus on specific node UIDs
+3. **Log Level Filtering**: Filter by severity (error, warning, info, debug)
+4. **Text Search**: Full-text search capabilities
+5. **Real-time Updates**: Live streaming of new log entries
+6. **Integration**: Links to other dashboards for context
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/roles/dashboards/files/loki_logs.json#L94-L97" text="telemetry/ansible/roles/dashboards/files/loki_logs.json94-97" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/roles/dashboards/files/loki_logs.json#L110-L143" text="telemetry/ansible/roles/dashboards/files/loki_logs.json110-143" />
+
+### Development Dashboard
+
+The Development Dashboard (`templar_dev.json`) provides similar metrics to the main dashboard but is configured specifically for development environments:
+
+- Additional filtering parameters
+- Development-specific metrics
+- Customized for local testing
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/roles/dashboards/files/templar_dev.json#L192-L197" text="telemetry/ansible/roles/dashboards/files/templar_dev.json192-197" />
+
+## Dashboard Deployment and Configuration
+
+The dashboards are deployed and configured using Ansible playbooks within the telemetry subsystem:
+
+```mermaid
+graph TD
+    subgraph "Configuration Files"
+        TM["templar_metrics.json"]
+        EM["eval-metrics.json"]
+        LL["loki_logs.json"]
+        TD["templar_dev.json"]
+    end
+
+    subgraph "Ansible Deployment"
+        AP["Ansible Playbook"]
+        DT["Dashboard Templates"]
+        DS["Datasource Config"]
+    end
+
+    subgraph "Grafana"
+        GF["Grafana Server"]
+        PR["Provisioning"]
+        VA["Variables & Templates"]
+    end
+
+    TM --> DT
+    EM --> DT
+    LL --> DT
+    TD --> DT
+    
+    DT --> AP
+    DS --> AP
+    
+    AP --> PR
+    PR --> GF
+    GF --> VA
+```
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/group_vars/all.yml.example#L6-L69" text="telemetry/ansible/group_vars/all.yml.example6-69" />
+
+### Configuration Parameters
+
+Key configuration parameters for the dashboard deployment include:
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `grafana_version` | Grafana version to install | 10.4.0 |
+| `grafana_http_port` | HTTP port for Grafana | 3000 |
+| `grafana_auth_anonymous_enabled` | Enable anonymous access | true |
+| `grafana_influxdb_host` | InfluxDB host | localhost |
+| `grafana_influxdb_port` | InfluxDB port | 8086 |
+| `loki_http_listen_port` | Loki HTTP port | 3100 |
+| `loki_retention_period` | Log retention period | 720h (30 days) |
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/group_vars/all.yml.example#L7-L14" text="telemetry/ansible/group_vars/all.yml.example7-14" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/group_vars/all.yml.example#L95-L101" text="telemetry/ansible/group_vars/all.yml.example95-101" />
+
+### Vault Integration
+
+Sensitive configuration values such as API tokens and credentials are stored in an Ansible vault:
+
+- InfluxDB tokens
+- Grafana admin credentials
+- R2 storage credentials
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/group_vars/vault.yml.example" text="telemetry/ansible/group_vars/vault.yml.example" />
+
+## Using the Dashboards
+
+### Dashboard Variables
+
+All dashboards use template variables for filtering:
+
+1. **templar_version**: Filter by specific Templar version
+2. **uid**: Filter by specific node UID
+3. **config_netuid**: Filter by network UID (for dev dashboard)
+4. **log_level**: Filter logs by severity level
+
+Variables can be changed using the dropdown selectors at the top of each dashboard.
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/roles/dashboards/files/loki_logs.json#L111-L205" text="telemetry/ansible/roles/dashboards/files/loki_logs.json111-205" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/roles/dashboards/files/eval-metrics.json#L784-L813" text="telemetry/ansible/roles/dashboards/files/eval-metrics.json784-813" />
+
+### Interpreting Key Metrics
+
+#### Validator Performance
+
+The most important validator metrics to monitor are:
+
+1. **Loss Metrics**: Track how loss changes across training windows
+2. **Timing Metrics**: Monitor for processing bottlenecks
+3. **Skipped Updates**: High skip counts may indicate problems
+4. **Global Step**: Shows training progress
+
+#### Evaluation Benchmarks
+
+Evaluation charts show model performance on standard benchmarks:
+
+1. **Step-based Charts**: Track improvement over training steps
+2. **Latest Scores Panel**: Quick overview of current performance
+3. **Version Comparison**: Compare different model versions
+
+#### Log Analysis
+
+The logs dashboard helps with troubleshooting:
+
+1. **Error Investigation**: Filter for error/critical logs
+2. **Component Isolation**: Filter by service name
+3. **UID Correlation**: Track issues on specific nodes
+4. **Text Search**: Find specific error messages or patterns
+
+## Best Practices
+
+1. **Regular Monitoring**: Check dashboards regularly during training
+2. **Version Tagging**: Always use consistent version tagging
+3. **Custom Time Ranges**: Adjust time ranges for relevant views
+4. **Dashboard Links**: Use links between dashboards for context
+5. **Variable Combinations**: Combine multiple filters for precise analysis
+
+Sources: <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/roles/dashboards/files/templar_metrics.json#L27-L64" text="telemetry/ansible/roles/dashboards/files/templar_metrics.json27-64" />, <SourceLink href="https://github.com/tplr-ai/templar/blob/bb2fc2a9/telemetry/ansible/roles/dashboards/files/loki_logs.json#L28-L40" text="telemetry/ansible/roles/dashboards/files/loki_logs.json28-40" />

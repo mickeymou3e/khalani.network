@@ -1,0 +1,36 @@
+@import '@/styles/shared-imports.scss';
+
+.footerSocialIconsContainer {
+  display: flex;
+  align-items: center;
+  gap: rem(12);
+}
+
+.socialIconLink {
+  display: inline-block;
+  color: inherit;
+  transition: color 0.3s ease;
+
+  svg {
+    display: block;
+    width: rem(18);
+    height: rem(18);
+  }
+
+  &:hover {
+    color: var(--color-black);
+  }
+
+  // Dark mode hover states
+  @media (prefers-color-scheme: dark) {
+    &:hover {
+      color: var(--color-white);
+    }
+  }
+
+  :global(.dark) & {
+    &:hover {
+      color: var(--color-white);
+    }
+  }
+} 

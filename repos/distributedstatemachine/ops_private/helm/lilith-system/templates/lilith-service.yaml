@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.lilith.name }}
+  labels:
+    app: {{ .Values.lilith.name }}
+spec:
+  type: {{ .Values.lilith.service.type }}
+  ports:
+    - port: {{ .Values.lilith.service.port }}
+      targetPort: {{ .Values.lilith.service.port }}
+  selector:
+    app: {{ .Values.lilith.name }}

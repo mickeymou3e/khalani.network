@@ -1,0 +1,79 @@
+@import './base/lenis';
+// @import './base/fonts';
+@import './shared-imports.scss';
+@import './root-variables.scss';
+
+html {
+  height: 100%;
+  color: var(--primaryColor);
+  background-color: var(--secondaryColor);
+
+  --primaryColor: var(--color-black);
+  --secondaryColor: var(--color-white);
+  --bgColor: var(--color-grey-100);
+  --lineColor: var(--color-grey-200);
+  --gridColor: var(--color-grey-800);
+
+  @media (prefers-color-scheme: dark) {
+    --primaryColor: var(--color-white);
+    --secondaryColor: var(--color-black);
+    --bgColor: var(--color-grey-900);
+    --lineColor: var(--color-grey-800);
+    --gridColor: var(--color-grey-800);
+  }
+
+  &.light {
+    --primaryColor: var(--color-black);
+    --secondaryColor: var(--color-white);
+    --bgColor: var(--color-grey-100);
+    --lineColor: var(--color-grey-200);
+    --gridColor: var(--color-grey-200);
+  }
+
+  &.dark {
+    --primaryColor: var(--color-white);
+    --secondaryColor: var(--color-black);
+    --bgColor: var(--color-grey-900);
+    --lineColor: var(--color-grey-800);
+    --gridColor: var(--color-grey-800);
+  }
+}
+
+body {
+  overflow-x: hidden;
+  height: 100%;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-synthesis: none;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+.canvas {
+  z-index: z('canvas');
+  pointer-events: none;
+}
+
+.lenis-stopped {
+  pointer-events: none;
+  cursor: progress;
+}
+
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.apexcharts-tooltip {
+  background: var(--bgColor) !important;
+  color: var(--color-grey-500) !important;
+  border: 1px solid var(--color-grey-500) !important;
+}

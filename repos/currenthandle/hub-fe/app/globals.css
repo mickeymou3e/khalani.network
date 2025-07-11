@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #111111;
+}
+
+li.active {
+  color: white;
+}
+li.active a::after {
+  content: "";
+  display: block;
+  width: calc(100% - 2rem + 6px);
+  height: 2px;
+  background: white;
+  position: absolute;
+  bottom: calc(-0.5rem - 1px);
+  left: calc(1rem - 3px);
+}
+
+.bg-body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(to bottom, black 1%, #111111 99%);
+  z-index: -1;
+}
+
+.file-hidden::-webkit-file-upload-button,
+.file-hidden::file-selector-button {
+  display: none;
+}

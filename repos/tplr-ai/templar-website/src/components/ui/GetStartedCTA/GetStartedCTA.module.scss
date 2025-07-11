@@ -1,0 +1,89 @@
+@import '@/styles/shared-imports.scss';
+
+@keyframes slideIn {
+  from {
+    transform: translateY(calc(100% + vw(13)));
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+}
+
+.container {
+  position: absolute;
+  bottom: vw(13);
+  @include max-prop(bottom, rem(14), vw(14));
+  @include max-prop(right, rem(10), vw(14));
+
+  display: flex;
+  align-items: flex-end;
+  @include max-prop(padding-right, rem(55 + 9), vw(55 + 9));
+  text-transform: uppercase;
+}
+
+.ctaLabel {
+  display: grid;
+  grid-template-columns: 1fr;
+  cursor: pointer;
+}
+.ctas {
+  grid-area: 1/1;
+}
+
+.box {
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  background: var(--color-templar-red);
+  overflow: hidden;
+
+  transform-origin: bottom right;
+  animation: scaleIn 1.5s var(--ease-expo-out) 2s backwards;
+
+  @include max-prop(width, rem(55), vw(55));
+  @include max-prop(height, rem(55), vw(55));
+}
+
+.boxBtns {
+  position: absolute;
+  top: vw(3);
+  right: vw(3);
+  @include max-prop(width, rem(20), vw(20));
+  @include max-prop(height, rem(20), vw(20));
+  z-index: 1;
+  cursor: pointer;
+  display: grid;
+  overflow: hidden;
+}
+
+.btn {
+  grid-area: 1/1;
+  svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}
+.btnOpen {
+  transition: opacity 0.5s var(--ease-quad-in-out);
+
+  .btn:nth-child(1) {
+    .isAnimating & {
+      transform: translate(100%, -100%);
+      transition: transform 1s var(--ease-circ-in-out);
+    }
+  }
+  .btn:nth-child(2) {
+    transform: translate(-100%, 100%);
+    .isAnimating & {
+      transform: translate(0%, 0%);
+      transition: transform 1s var(--ease-circ-in-out);
+    }
+  }
+}

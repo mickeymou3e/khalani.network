@@ -1,0 +1,9 @@
+// fix safari bug /w filter animation
+.char:not(.space) {
+  padding: 0 0.25em;
+  margin: 0 -0.25em;
+}
+
+.img {
+  display: inline-block;
+}
